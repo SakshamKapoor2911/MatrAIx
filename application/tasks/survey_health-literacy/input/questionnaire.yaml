@@ -1,0 +1,777 @@
+schemaVersion: "1.0"
+id: health_literacy_v1
+title: "Health Literacy Survey"
+description: "How confident and comfortable people are finding, understanding, and using health information."
+questions:
+  - id: q0
+    prompt: "In general, how would you rate your ability to understand health information?"
+    type: single_choice
+    construct: general_would_rate_ability_understand
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent"
+      - id: "b"
+        label: "Very good"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Fair"
+      - id: "e"
+        label: "Poor"
+  - id: q1
+    prompt: "When you have a health question, where do you usually look first?"
+    type: single_choice
+    construct: when_have_health_question_where
+    required: true
+    options:
+      - id: "a"
+        label: "A doctor or health professional"
+      - id: "b"
+        label: "A general web search"
+      - id: "c"
+        label: "A trusted health website (Mayo Clinic, WebMD, MedlinePlus)"
+      - id: "d"
+        label: "Family or friends"
+      - id: "e"
+        label: "Social media or online videos"
+      - id: "f"
+        label: "A pharmacist"
+      - id: "g"
+        label: "Health apps or chatbots"
+  - id: q2
+    prompt: "How often do you look for health or medical information for yourself or others?"
+    type: single_choice
+    construct: often_look_health_medical_information
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "Weekly"
+      - id: "c"
+        label: "Monthly"
+      - id: "d"
+        label: "A few times a year"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q3
+    prompt: "Which sources have you used for health information in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: sources_have_used_health_information
+    required: true
+    options:
+      - id: "a"
+        label: "Doctor or health professional"
+      - id: "b"
+        label: "Pharmacist"
+      - id: "c"
+        label: "Health websites"
+      - id: "d"
+        label: "General search engines"
+      - id: "e"
+        label: "Social media"
+      - id: "f"
+        label: "Online videos (YouTube, etc.)"
+      - id: "g"
+        label: "Friends and family"
+      - id: "h"
+        label: "Printed materials or brochures"
+      - id: "i"
+        label: "Health apps or AI assistants"
+  - id: q4
+    prompt: "How confident are you filling out medical forms by yourself?"
+    type: single_choice
+    construct: confident_filling_out_medical_forms
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "A little confident"
+      - id: "c"
+        label: "Somewhat confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q5
+    prompt: "How confident are you understanding instructions on a prescription label?"
+    type: single_choice
+    construct: confident_understanding_instructions_pre
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "A little confident"
+      - id: "c"
+        label: "Somewhat confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q6
+    prompt: "How confident are you understanding your test results or lab reports?"
+    type: single_choice
+    construct: confident_understanding_test_results_lab
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "A little confident"
+      - id: "c"
+        label: "Somewhat confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q7
+    prompt: "How confident are you knowing which health information sources to trust?"
+    type: single_choice
+    construct: confident_knowing_health_information_sou
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "A little confident"
+      - id: "c"
+        label: "Somewhat confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q8
+    prompt: "How confident are you understanding how a health insurance plan works?"
+    type: single_choice
+    construct: confident_understanding_health_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "A little confident"
+      - id: "c"
+        label: "Somewhat confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q9
+    prompt: "How often do you find health information hard to understand: On medicine or drug labels."
+    type: single_choice
+    construct: often_find_health_information_hard
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q10
+    prompt: "How often do you find health information hard to understand: In written materials from a doctor's office."
+    type: single_choice
+    construct: often_find_health_information_hard
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q11
+    prompt: "How often do you find health information hard to understand: On health websites."
+    type: single_choice
+    construct: often_find_health_information_hard
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q12
+    prompt: "How often do you find health information hard to understand: About insurance or medical bills."
+    type: single_choice
+    construct: often_find_health_information_hard
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q13
+    prompt: "How often do you find health information hard to understand: About numbers, doses, or risk (for example, 1 in 100)."
+    type: single_choice
+    construct: often_find_health_information_hard
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q14
+    prompt: "When you get health information, how often do you need help from someone else to understand it?"
+    type: single_choice
+    construct: when_get_health_information_often
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q15
+    prompt: "How much do you agree or disagree: I have the skills to find the health information I need."
+    type: single_choice
+    construct: much_agree_disagree_i_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: I can tell whether a health website is trustworthy."
+    type: single_choice
+    construct: much_agree_disagree_i_can
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree or disagree: I feel confident making decisions about my own health."
+    type: single_choice
+    construct: much_agree_disagree_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree or disagree: There are so many conflicting health recommendations that it's hard to know what to do."
+    type: single_choice
+    construct: much_agree_disagree_there_so
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree or disagree: I feel comfortable asking a doctor to explain something again."
+    type: single_choice
+    construct: much_agree_disagree_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree or disagree: I know how and where to get medical care when I need it."
+    type: single_choice
+    construct: much_agree_disagree_i_know
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "When you read about a health study in the news, how confident are you evaluating whether it applies to you?"
+    type: single_choice
+    construct: when_read_health_study_news
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "A little confident"
+      - id: "c"
+        label: "Somewhat confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q22
+    prompt: "How do you usually check whether health information is reliable? (Select all that apply)"
+    type: multi_choice
+    construct: usually_check_whether_health_information
+    required: true
+    options:
+      - id: "a"
+        label: "Check who wrote or published it"
+      - id: "b"
+        label: "See if a doctor or expert is cited"
+      - id: "c"
+        label: "Compare across multiple sources"
+      - id: "d"
+        label: "Look at how recent it is"
+      - id: "e"
+        label: "Ask a health professional"
+      - id: "f"
+        label: "I usually don't check"
+  - id: q23
+    prompt: "When you don't understand health information, what do you do? (Select all that apply)"
+    type: multi_choice
+    construct: when_don_t_understand_health
+    required: true
+    options:
+      - id: "a"
+        label: "Ask a doctor, nurse, or pharmacist"
+      - id: "b"
+        label: "Search for a simpler explanation online"
+      - id: "c"
+        label: "Ask a family member or friend"
+      - id: "d"
+        label: "Use a health app or AI assistant"
+      - id: "e"
+        label: "Watch a video"
+      - id: "f"
+        label: "Give up or ignore it"
+  - id: q24
+    prompt: "How confident are you calculating things like medication doses or serving sizes?"
+    type: single_choice
+    construct: confident_calculating_things_like_medica
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "A little confident"
+      - id: "c"
+        label: "Somewhat confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q25
+    prompt: "Select your top 3 areas where you would most like to improve your health understanding. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_areas_where
+    required: true
+    options:
+      - id: "a"
+        label: "Understanding medicine labels and instructions"
+      - id: "b"
+        label: "Understanding test results"
+      - id: "c"
+        label: "Understanding insurance and costs"
+      - id: "d"
+        label: "Evaluating online health information"
+      - id: "e"
+        label: "Understanding nutrition information"
+      - id: "f"
+        label: "Understanding risks and statistics"
+      - id: "g"
+        label: "Knowing when and where to seek care"
+      - id: "h"
+        label: "Communicating with doctors"
+      - id: "i"
+        label: "I feel confident in all areas"
+  - id: q26
+    prompt: "Have you ever made a health decision you later felt was based on a misunderstanding?"
+    type: single_choice
+    construct: have_ever_made_health_decision
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, not that I know of"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q27
+    prompt: "How comfortable are you using online tools like patient portals to manage your health?"
+    type: single_choice
+    construct: comfortable_using_online_tools_like
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Somewhat uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat comfortable"
+      - id: "e"
+        label: "Very comfortable"
+  - id: q28
+    prompt: "Have you ever tried a health app or AI chatbot to help explain a health topic?"
+    type: single_choice
+    construct: have_ever_tried_health_app
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it helped"
+      - id: "b"
+        label: "Yes, but it didn't help much"
+      - id: "c"
+        label: "No, but I would try it"
+      - id: "d"
+        label: "No, and I would not"
+  - id: q29
+    prompt: "How much do you trust health information from each source: Your doctor."
+    type: single_choice
+    construct: much_trust_health_information_from
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+  - id: q30
+    prompt: "How much do you trust health information from each source: Government health agencies."
+    type: single_choice
+    construct: much_trust_health_information_from
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+  - id: q31
+    prompt: "How much do you trust health information from each source: Social media."
+    type: single_choice
+    construct: much_trust_health_information_from
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+  - id: q32
+    prompt: "In a typical month, about how many times do you search for health information online? Please enter a number."
+    type: free_text
+    construct: typical_month_many_times_search
+    required: true
+  - id: q33
+    prompt: "About how many years of formal education have you completed? Please enter a number."
+    type: free_text
+    construct: many_years_formal_education_have
+    required: true
+  - id: q34
+    prompt: "Overall, how satisfied are you with your ability to understand and use health information?"
+    type: single_choice
+    construct: overall_satisfied_ability_understand_use
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "How confident are you, overall, in your ability to take good care of your health?"
+    type: single_choice
+    construct: confident_overall_ability_take_good
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "A little confident"
+      - id: "c"
+        label: "Somewhat confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q36
+    prompt: "How interested would you be in resources or classes to help you understand health information better?"
+    type: single_choice
+    construct: interested_would_be_resources_classes
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all interested"
+      - id: "b"
+        label: "Slightly interested"
+      - id: "c"
+        label: "Moderately interested"
+      - id: "d"
+        label: "Very interested"
+      - id: "e"
+        label: "Extremely interested"
+  - id: q37
+    prompt: "What is the hardest part of understanding health information for you? (Optional)"
+    type: free_text
+    construct: hardest_part_understanding_health_inform
+    required: false
+  - id: q38
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 to 74"
+      - id: "g"
+        label: "75 or older"
+  - id: q39
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q44
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q45
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q46
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+  - id: q47
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q48
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q49
+    prompt: "What is your primary language spoken at home?"
+    type: single_choice
+    construct: primary_language_spoken_home
+    required: true
+    options:
+      - id: "a"
+        label: "English"
+      - id: "b"
+        label: "Spanish"
+      - id: "c"
+        label: "Another language"
+      - id: "d"
+        label: "Prefer not to say"

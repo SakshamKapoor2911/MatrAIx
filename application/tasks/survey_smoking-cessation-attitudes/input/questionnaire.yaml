@@ -1,0 +1,738 @@
+schemaVersion: "1.0"
+id: smoking_cessation_attitudes_v1
+title: "Smoking Cessation Attitudes Survey"
+description: "General public attitudes toward quit-smoking programs, tools, and support resources."
+questions:
+  - id: q0
+    prompt: "How would you describe your relationship to smoking or tobacco?"
+    type: single_choice
+    construct: would_describe_relationship_smoking_toba
+    required: true
+    options:
+      - id: "a"
+        label: "I have never smoked"
+      - id: "b"
+        label: "I used to smoke and have quit"
+      - id: "c"
+        label: "I currently smoke"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q1
+    prompt: "In general, how important do you think it is for society to support people who want to quit smoking?"
+    type: single_choice
+    construct: general_important_think_it_society
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q2
+    prompt: "How serious a public health issue do you consider smoking to be?"
+    type: single_choice
+    construct: serious_public_health_issue_consider
+    required: true
+    options:
+      - id: "a"
+        label: "Not serious at all"
+      - id: "b"
+        label: "Slightly serious"
+      - id: "c"
+        label: "Moderately serious"
+      - id: "d"
+        label: "Very serious"
+      - id: "e"
+        label: "Extremely serious"
+  - id: q3
+    prompt: "Which quit-smoking support options are you aware of? (Select all that apply)"
+    type: multi_choice
+    construct: quit_smoking_support_options_aware
+    required: true
+    options:
+      - id: "a"
+        label: "Nicotine patches, gum, or lozenges"
+      - id: "b"
+        label: "Prescription medications"
+      - id: "c"
+        label: "Quit-smoking phone lines"
+      - id: "d"
+        label: "Quit-smoking apps"
+      - id: "e"
+        label: "Support groups or counseling"
+      - id: "f"
+        label: "Advice from a doctor"
+      - id: "g"
+        label: "None of these"
+  - id: q4
+    prompt: "Which approaches have you heard are effective for quitting? (Select all that apply)"
+    type: multi_choice
+    construct: approaches_have_heard_effective_quitting
+    required: true
+    options:
+      - id: "a"
+        label: "Nicotine-replacement products"
+      - id: "b"
+        label: "Prescription medications"
+      - id: "c"
+        label: "Counseling or coaching"
+      - id: "d"
+        label: "Apps and digital programs"
+      - id: "e"
+        label: "Support from friends and family"
+      - id: "f"
+        label: "Going \"cold turkey\""
+      - id: "g"
+        label: "Not sure which are effective"
+  - id: q5
+    prompt: "About how many people you know personally have tried to quit smoking? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: many_people_know_personally_have
+    required: true
+  - id: q6
+    prompt: "Where do you think people are most likely to turn first for help quitting? (Select all that apply)"
+    type: multi_choice
+    construct: where_think_people_most_likely
+    required: true
+    options:
+      - id: "a"
+        label: "Their doctor"
+      - id: "b"
+        label: "A pharmacist"
+      - id: "c"
+        label: "Friends or family"
+      - id: "d"
+        label: "Online resources or apps"
+      - id: "e"
+        label: "A quit-line or hotline"
+      - id: "f"
+        label: "On their own without help"
+  - id: q7
+    prompt: "How effective do you believe quit-smoking apps and digital tools are?"
+    type: single_choice
+    construct: effective_believe_quit_smoking_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Not effective at all"
+      - id: "b"
+        label: "Slightly effective"
+      - id: "c"
+        label: "Moderately effective"
+      - id: "d"
+        label: "Very effective"
+      - id: "e"
+        label: "Not sure"
+  - id: q8
+    prompt: "How effective do you believe nicotine-replacement products are?"
+    type: single_choice
+    construct: effective_believe_nicotine_replacement_p
+    required: true
+    options:
+      - id: "a"
+        label: "Not effective at all"
+      - id: "b"
+        label: "Slightly effective"
+      - id: "c"
+        label: "Moderately effective"
+      - id: "d"
+        label: "Very effective"
+      - id: "e"
+        label: "Not sure"
+  - id: q9
+    prompt: "How helpful do you think employer- or insurance-sponsored quit programs are?"
+    type: single_choice
+    construct: helpful_think_employer_insurance_sponsor
+    required: true
+    options:
+      - id: "a"
+        label: "Not helpful at all"
+      - id: "b"
+        label: "Slightly helpful"
+      - id: "c"
+        label: "Moderately helpful"
+      - id: "d"
+        label: "Very helpful"
+      - id: "e"
+        label: "Not sure"
+  - id: q10
+    prompt: "Do you think health plans should cover quit-smoking programs and products?"
+    type: single_choice
+    construct: think_health_plans_should_cover
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, fully"
+      - id: "b"
+        label: "Yes, partially"
+      - id: "c"
+        label: "Not sure"
+      - id: "d"
+        label: "No"
+  - id: q11
+    prompt: "How much do you agree with the following statement: Quit-smoking resources are easy to find when someone wants them."
+    type: single_choice
+    construct: much_agree_following_statement_quit
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Quitting is mostly a matter of willpower."
+    type: single_choice
+    construct: much_agree_following_statement_quitting
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: Support and encouragement make a big difference in quitting."
+    type: single_choice
+    construct: much_agree_following_statement_support
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: Apps and digital tools can genuinely help people quit."
+    type: single_choice
+    construct: much_agree_following_statement_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: Workplaces should actively support employees who want to quit."
+    type: single_choice
+    construct: much_agree_following_statement_workplace
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: Public health campaigns about smoking are effective."
+    type: single_choice
+    construct: much_agree_following_statement_public
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: The cost of programs and products is a barrier for many people."
+    type: single_choice
+    construct: much_agree_following_statement_cost
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How important do you think the following is for helping people quit: Support from a doctor or counselor."
+    type: single_choice
+    construct: important_think_following_helping_people
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important do you think the following is for helping people quit: Nicotine-replacement products."
+    type: single_choice
+    construct: important_think_following_helping_people
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important do you think the following is for helping people quit: Apps and digital tools."
+    type: single_choice
+    construct: important_think_following_helping_people
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important do you think the following is for helping people quit: Support from family and friends."
+    type: single_choice
+    construct: important_think_following_helping_people
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important do you think the following is for helping people quit: Financial incentives."
+    type: single_choice
+    construct: important_think_following_helping_people
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important do you think the following is for helping people quit: Support at the workplace."
+    type: single_choice
+    construct: important_think_following_helping_people
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "Which factors do you think make it hardest for people to quit? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: factors_think_make_it_hardest
+    required: true
+    options:
+      - id: "a"
+        label: "Habit and routine"
+      - id: "b"
+        label: "Stress"
+      - id: "c"
+        label: "Social situations"
+      - id: "d"
+        label: "Lack of support"
+      - id: "e"
+        label: "Cost of programs or products"
+      - id: "f"
+        label: "Not knowing where to start"
+      - id: "g"
+        label: "Cravings"
+      - id: "h"
+        label: "Concern about weight gain"
+  - id: q25
+    prompt: "How much have public health campaigns influenced your views on smoking?"
+    type: single_choice
+    construct: much_have_public_health_campaigns
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Quite a bit"
+      - id: "e"
+        label: "A great deal"
+  - id: q26
+    prompt: "How comfortable would you feel encouraging a friend or family member who wanted to quit?"
+    type: single_choice
+    construct: comfortable_would_feel_encouraging_frien
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Somewhat uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat comfortable"
+      - id: "e"
+        label: "Very comfortable"
+  - id: q27
+    prompt: "In your opinion, which single approach is most helpful for someone trying to quit?"
+    type: single_choice
+    construct: opinion_single_approach_most_helpful
+    required: true
+    options:
+      - id: "a"
+        label: "Support from a doctor or counselor"
+      - id: "b"
+        label: "Nicotine-replacement products"
+      - id: "c"
+        label: "Apps and digital tools"
+      - id: "d"
+        label: "Support from friends and family"
+      - id: "e"
+        label: "A combination of approaches"
+      - id: "f"
+        label: "Not sure"
+  - id: q28
+    prompt: "How aware are you of free telephone quit-lines (for example, 1-800-QUIT-NOW)?"
+    type: single_choice
+    construct: aware_free_telephone_quit_lines
+    required: true
+    options:
+      - id: "a"
+        label: "Never heard of them"
+      - id: "b"
+        label: "Heard of them but know little"
+      - id: "c"
+        label: "Somewhat familiar"
+      - id: "d"
+        label: "Very familiar"
+  - id: q29
+    prompt: "Where have you noticed anti-smoking or quit-smoking messages recently? (Select all that apply)"
+    type: multi_choice
+    construct: where_have_noticed_anti_smoking
+    required: true
+    options:
+      - id: "a"
+        label: "Television or streaming ads"
+      - id: "b"
+        label: "Social media"
+      - id: "c"
+        label: "Billboards or posters"
+      - id: "d"
+        label: "At a pharmacy or clinic"
+      - id: "e"
+        label: "Product packaging or warnings"
+      - id: "f"
+        label: "I haven't noticed any"
+  - id: q30
+    prompt: "How likely would you be to recommend a quit-smoking app to someone who asked?"
+    type: single_choice
+    construct: likely_would_be_recommend_quit
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "Which of the following policies would you support? (Select all that apply)"
+    type: multi_choice
+    construct: following_policies_would_support_select
+    required: true
+    options:
+      - id: "a"
+        label: "Insurance coverage for quit programs"
+      - id: "b"
+        label: "Smoke-free public spaces"
+      - id: "c"
+        label: "Health warnings on packaging"
+      - id: "d"
+        label: "Restrictions on tobacco advertising"
+      - id: "e"
+        label: "Public funding for quit resources"
+      - id: "f"
+        label: "None of these"
+  - id: q32
+    prompt: "How much would you support workplaces being entirely smoke-free?"
+    type: single_choice
+    construct: much_would_support_workplaces_being
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly oppose"
+      - id: "b"
+        label: "Oppose"
+      - id: "c"
+        label: "Neither support nor oppose"
+      - id: "d"
+        label: "Support"
+      - id: "e"
+        label: "Strongly support"
+  - id: q33
+    prompt: "What do you think would most improve quit-smoking support for people who want it? Please describe briefly."
+    type: free_text
+    construct: think_would_most_improve_quit
+    required: true
+  - id: q34
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q35
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Which of the following best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Other"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college"
+      - id: "c"
+        label: "Associate's degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q39
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q40
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q41
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which region of the country do you live in?"
+    type: single_choice
+    construct: region_country_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q44
+    prompt: "What is your current health insurance status?"
+    type: single_choice
+    construct: current_health_insurance_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored insurance"
+      - id: "b"
+        label: "Plan purchased on my own or through the marketplace"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or VA coverage"
+      - id: "f"
+        label: "Uninsured"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "In general, would you say your health is…?"
+    type: single_choice
+    construct: general_would_say_health
+    required: true
+    options:
+      - id: "a"
+        label: "Poor"
+      - id: "b"
+        label: "Fair"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Very good"
+      - id: "e"
+        label: "Excellent"

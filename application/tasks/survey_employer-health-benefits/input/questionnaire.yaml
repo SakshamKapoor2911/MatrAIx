@@ -1,0 +1,704 @@
+schemaVersion: "1.0"
+id: employer_health_benefits_v1
+title: "Employer Health Benefits Survey"
+description: "How employees understand, use, and value the health benefits offered by their employer."
+questions:
+  - id: q0
+    prompt: "Does your current employer offer health insurance benefits?"
+    type: single_choice
+    construct: does_current_employer_offer_health
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I am enrolled"
+      - id: "b"
+        label: "Yes, but I am not enrolled"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I am not currently employed"
+      - id: "e"
+        label: "I am self-employed"
+  - id: q1
+    prompt: "How many health plan options does your employer offer?"
+    type: single_choice
+    construct: many_health_plan_options_does
+    required: true
+    options:
+      - id: "a"
+        label: "One"
+      - id: "b"
+        label: "Two"
+      - id: "c"
+        label: "Three"
+      - id: "d"
+        label: "Four or more"
+      - id: "e"
+        label: "I'm not sure"
+      - id: "f"
+        label: "Not applicable"
+  - id: q2
+    prompt: "Besides medical insurance, which benefits does your employer offer? (Select all that apply)"
+    type: multi_choice
+    construct: besides_medical_insurance_benefits_does
+    required: true
+    options:
+      - id: "a"
+        label: "Dental insurance"
+      - id: "b"
+        label: "Vision insurance"
+      - id: "c"
+        label: "A health savings account (HSA) or flexible spending account (FSA)"
+      - id: "d"
+        label: "An employee wellness program"
+      - id: "e"
+        label: "Mental or emotional wellness support"
+      - id: "f"
+        label: "Life or disability insurance"
+      - id: "g"
+        label: "Gym or fitness reimbursement"
+      - id: "h"
+        label: "Telehealth services"
+  - id: q3
+    prompt: "How do you usually enroll in or change your employer benefits?"
+    type: single_choice
+    construct: usually_enroll_change_employer_benefits
+    required: true
+    options:
+      - id: "a"
+        label: "Through an online benefits portal"
+      - id: "b"
+        label: "With help from HR"
+      - id: "c"
+        label: "On paper forms"
+      - id: "d"
+        label: "With a benefits counselor or broker"
+      - id: "e"
+        label: "I have not enrolled myself"
+  - id: q4
+    prompt: "Which resources do you use to understand your employer benefits during open enrollment? (Select all that apply)"
+    type: multi_choice
+    construct: resources_use_understand_employer_benefi
+    required: true
+    options:
+      - id: "a"
+        label: "Plan summary documents"
+      - id: "b"
+        label: "The HR or benefits team"
+      - id: "c"
+        label: "Online enrollment tools or calculators"
+      - id: "d"
+        label: "A benefits webinar or meeting"
+      - id: "e"
+        label: "Advice from coworkers"
+      - id: "f"
+        label: "Advice from family"
+      - id: "g"
+        label: "I do not use resources, I just re-enroll"
+  - id: q5
+    prompt: "About how much do you pay per month toward your share of your employer health premium, in dollars? Please enter a number."
+    type: free_text
+    construct: much_pay_per_month_toward
+    required: true
+  - id: q6
+    prompt: "How much of your premium does your employer cover, to your understanding?"
+    type: single_choice
+    construct: much_premium_does_employer_cover
+    required: true
+    options:
+      - id: "a"
+        label: "Almost all of it"
+      - id: "b"
+        label: "Most of it"
+      - id: "c"
+        label: "About half"
+      - id: "d"
+        label: "Less than half"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q7
+    prompt: "How well do you understand the benefits your employer offers?"
+    type: single_choice
+    construct: well_understand_benefits_employer_offers
+    required: true
+    options:
+      - id: "a"
+        label: "Very well"
+      - id: "b"
+        label: "Somewhat well"
+      - id: "c"
+        label: "Not very well"
+      - id: "d"
+        label: "Not at all"
+  - id: q8
+    prompt: "Which are the top 3 employer benefits you value most? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_employer_benefits_value
+    required: true
+    options:
+      - id: "a"
+        label: "Medical insurance"
+      - id: "b"
+        label: "Dental insurance"
+      - id: "c"
+        label: "Vision insurance"
+      - id: "d"
+        label: "HSA or FSA contributions"
+      - id: "e"
+        label: "Wellness programs"
+      - id: "f"
+        label: "Mental wellness support"
+      - id: "g"
+        label: "Fitness reimbursement"
+      - id: "h"
+        label: "Telehealth access"
+  - id: q9
+    prompt: "How satisfied are you with each of the following aspects of your employer benefits — The medical plan options offered"
+    type: single_choice
+    construct: satisfied_each_following_aspects_employe
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q10
+    prompt: "How satisfied are you with each of the following aspects of your employer benefits — The share of the premium your employer pays"
+    type: single_choice
+    construct: satisfied_each_following_aspects_employe
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q11
+    prompt: "How satisfied are you with each of the following aspects of your employer benefits — The dental and vision coverage"
+    type: single_choice
+    construct: satisfied_each_following_aspects_employe
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q12
+    prompt: "How satisfied are you with each of the following aspects of your employer benefits — The wellness and fitness benefits"
+    type: single_choice
+    construct: satisfied_each_following_aspects_employe
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q13
+    prompt: "How satisfied are you with each of the following aspects of your employer benefits — The clarity of benefit information"
+    type: single_choice
+    construct: satisfied_each_following_aspects_employe
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q14
+    prompt: "How satisfied are you with each of the following aspects of your employer benefits — The ease of the enrollment process"
+    type: single_choice
+    construct: satisfied_each_following_aspects_employe
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q15
+    prompt: "How much do you agree: My employer's health benefits are a major reason I stay in my job."
+    type: single_choice
+    construct: much_agree_my_employer_s
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: My employer's benefits are a good value compared with what I could buy on my own."
+    type: single_choice
+    construct: much_agree_my_employer_s
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: Open enrollment is confusing to me."
+    type: single_choice
+    construct: much_agree_open_enrollment_confusing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How often do you actively review and compare your options at open enrollment rather than keeping the same plan?"
+    type: single_choice
+    construct: often_actively_review_compare_options
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q19
+    prompt: "How important are health benefits to you when considering a job offer?"
+    type: single_choice
+    construct: important_health_benefits_when_consideri
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "Overall, how satisfied are you with your employer's health benefits?"
+    type: single_choice
+    construct: overall_satisfied_employer_s_health
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q21
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your employer's benefits to a friend considering a job there? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q22
+    prompt: "How likely are you to use your employer's wellness program in the next year?"
+    type: single_choice
+    construct: likely_use_employer_s_wellness
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q23
+    prompt: "How confident are you that you chose the best benefit options for your situation this year?"
+    type: single_choice
+    construct: confident_that_chose_best_benefit
+    required: true
+    options:
+      - id: "a"
+        label: "Very confident"
+      - id: "b"
+        label: "Somewhat confident"
+      - id: "c"
+        label: "Not very confident"
+      - id: "d"
+        label: "Not at all confident"
+  - id: q24
+    prompt: "How does your current employer's health benefits compare with those at previous jobs?"
+    type: single_choice
+    construct: does_current_employer_s_health
+    required: true
+    options:
+      - id: "a"
+        label: "Much better"
+      - id: "b"
+        label: "Somewhat better"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat worse"
+      - id: "e"
+        label: "Much worse"
+      - id: "f"
+        label: "I have no comparison"
+  - id: q25
+    prompt: "Did you contribute to an HSA or FSA through your employer this year?"
+    type: single_choice
+    construct: did_contribute_hsa_fsa_through
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, an HSA"
+      - id: "b"
+        label: "Yes, an FSA"
+      - id: "c"
+        label: "Yes, both"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "My employer does not offer these"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q26
+    prompt: "Which of the following would you most like your employer to add or improve? (Select all that apply)"
+    type: multi_choice
+    construct: following_would_most_like_employer
+    required: true
+    options:
+      - id: "a"
+        label: "Lower premium contributions"
+      - id: "b"
+        label: "Better dental or vision coverage"
+      - id: "c"
+        label: "More mental wellness support"
+      - id: "d"
+        label: "Fitness or gym benefits"
+      - id: "e"
+        label: "Better telehealth access"
+      - id: "f"
+        label: "More plan choices"
+      - id: "g"
+        label: "Clearer benefit information"
+  - id: q27
+    prompt: "How much do you agree: I understand how my HSA or FSA works."
+    type: single_choice
+    construct: much_agree_i_understand_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q28
+    prompt: "How much do you agree: My employer communicates benefit changes clearly."
+    type: single_choice
+    construct: much_agree_my_employer_communicates
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q29
+    prompt: "How often do you use the wellness or preventive benefits your employer offers?"
+    type: single_choice
+    construct: often_use_wellness_preventive_benefits
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q30
+    prompt: "How likely are you to recommend enrolling in your employer's plan to a new coworker?"
+    type: single_choice
+    construct: likely_recommend_enrolling_employer_s
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "What one change to your employer benefits would matter most to you? Please answer briefly."
+    type: free_text
+    construct: one_change_employer_benefits_would
+    required: true
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 to 74"
+      - id: "g"
+        label: "75 or older"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino/a"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Another race or ethnicity"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Homemaker or caregiver"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Widowed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I do not live in the United States"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

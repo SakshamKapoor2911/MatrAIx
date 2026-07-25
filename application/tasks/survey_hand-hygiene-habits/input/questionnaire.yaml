@@ -1,0 +1,610 @@
+schemaVersion: "1.0"
+id: hand_hygiene_habits_v1
+title: "Hand Hygiene Habits Survey"
+description: "Everyday hand-washing and hand-sanitizing habits, products, and attitudes."
+questions:
+  - id: q0
+    prompt: "On a typical day, about how many times do you wash your hands?"
+    type: single_choice
+    construct: typical_day_many_times_wash
+    required: true
+    options:
+      - id: "a"
+        label: "0 to 2 times"
+      - id: "b"
+        label: "3 to 5 times"
+      - id: "c"
+        label: "6 to 10 times"
+      - id: "d"
+        label: "More than 10 times"
+  - id: q1
+    prompt: "About how many times did you wash your hands yesterday? Please enter a number."
+    type: free_text
+    construct: many_times_did_wash_hands
+    required: true
+  - id: q2
+    prompt: "In which situations do you usually wash or sanitize your hands? (Select all that apply)"
+    type: multi_choice
+    construct: situations_usually_wash_sanitize_hands
+    required: true
+    options:
+      - id: "a"
+        label: "Before eating or preparing food"
+      - id: "b"
+        label: "After using the restroom"
+      - id: "c"
+        label: "After returning home from outside"
+      - id: "d"
+        label: "After touching shared surfaces"
+      - id: "e"
+        label: "Before touching my face"
+      - id: "f"
+        label: "After being around someone who is sick"
+      - id: "g"
+        label: "After handling money or packages"
+      - id: "h"
+        label: "When they look or feel dirty"
+  - id: q3
+    prompt: "What do you most often use to clean your hands?"
+    type: single_choice
+    construct: most_often_use_clean_hands
+    required: true
+    options:
+      - id: "a"
+        label: "Soap and water"
+      - id: "b"
+        label: "Hand sanitizer or gel"
+      - id: "c"
+        label: "Both, depending on the situation"
+      - id: "d"
+        label: "Wet wipes"
+  - id: q4
+    prompt: "About how long do you usually spend washing your hands?"
+    type: single_choice
+    construct: long_usually_spend_washing_hands
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 5 seconds"
+      - id: "b"
+        label: "5 to 10 seconds"
+      - id: "c"
+        label: "11 to 20 seconds"
+      - id: "d"
+        label: "More than 20 seconds"
+      - id: "e"
+        label: "Not sure"
+  - id: q5
+    prompt: "Do you carry hand sanitizer with you when you go out?"
+    type: single_choice
+    construct: carry_hand_sanitizer_when_go
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, always"
+      - id: "b"
+        label: "Usually"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely or never"
+  - id: q6
+    prompt: "Which hand-hygiene products do you keep at home or with you? (Select all that apply)"
+    type: multi_choice
+    construct: hand_hygiene_products_keep_home
+    required: true
+    options:
+      - id: "a"
+        label: "Bar or liquid soap"
+      - id: "b"
+        label: "Foaming soap"
+      - id: "c"
+        label: "Alcohol-based sanitizer gel"
+      - id: "d"
+        label: "Sanitizing wipes"
+      - id: "e"
+        label: "Moisturizing hand lotion"
+      - id: "f"
+        label: "Antibacterial soap"
+      - id: "g"
+        label: "None of these"
+  - id: q7
+    prompt: "What features do you look for when buying hand soap or sanitizer? (Select all that apply)"
+    type: multi_choice
+    construct: features_look_when_buying_hand
+    required: true
+    options:
+      - id: "a"
+        label: "Moisturizing or gentle on skin"
+      - id: "b"
+        label: "A pleasant scent or fragrance-free"
+      - id: "c"
+        label: "Antibacterial claim"
+      - id: "d"
+        label: "Natural or plant-based ingredients"
+      - id: "e"
+        label: "Low price"
+      - id: "f"
+        label: "A trusted brand"
+      - id: "g"
+        label: "I do not pay attention to features"
+  - id: q8
+    prompt: "How have your hand-hygiene habits changed over the past few years?"
+    type: single_choice
+    construct: have_hand_hygiene_habits_changed
+    required: true
+    options:
+      - id: "a"
+        label: "I wash or sanitize much more often"
+      - id: "b"
+        label: "Somewhat more often"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat less often"
+      - id: "e"
+        label: "Much less often"
+  - id: q9
+    prompt: "How important do you think hand hygiene is for staying healthy?"
+    type: single_choice
+    construct: important_think_hand_hygiene_staying
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q10
+    prompt: "How much do you agree with the following statement: I am careful about keeping my hands clean."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: Washing my hands helps me avoid getting sick."
+    type: single_choice
+    construct: much_agree_following_statement_washing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Frequent washing leaves my hands dry or irritated."
+    type: single_choice
+    construct: much_agree_following_statement_frequent
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: Hand sanitizer is a good substitute when I cannot wash with soap."
+    type: single_choice
+    construct: much_agree_following_statement_hand
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I notice when others do not wash their hands."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "Do you use hand lotion or moisturizer to deal with dryness from frequent washing?"
+    type: single_choice
+    construct: use_hand_lotion_moisturizer_deal
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but my hands get dry"
+      - id: "d"
+        label: "No, my hands do not get dry"
+  - id: q16
+    prompt: "How often do you wash your hands more carefully during cold and flu season?"
+    type: single_choice
+    construct: often_wash_hands_more_carefully
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q17
+    prompt: "What most often keeps you from washing your hands as often as you would like? (Select all that apply)"
+    type: multi_choice
+    construct: most_often_keeps_from_washing
+    required: true
+    options:
+      - id: "a"
+        label: "No sink or soap nearby"
+      - id: "b"
+        label: "Being in a hurry"
+      - id: "c"
+        label: "Dry or irritated skin"
+      - id: "d"
+        label: "Simply forgetting"
+      - id: "e"
+        label: "I wash as often as I want"
+      - id: "f"
+        label: "Nothing in particular"
+  - id: q18
+    prompt: "How do you feel about using public restrooms' hand-washing facilities?"
+    type: single_choice
+    construct: feel_using_public_restrooms_hand
+    required: true
+    options:
+      - id: "a"
+        label: "Comfortable"
+      - id: "b"
+        label: "Somewhat comfortable"
+      - id: "c"
+        label: "Somewhat uncomfortable"
+      - id: "d"
+        label: "Very uncomfortable"
+  - id: q19
+    prompt: "How do you usually dry your hands at home?"
+    type: single_choice
+    construct: usually_dry_hands_home
+    required: true
+    options:
+      - id: "a"
+        label: "Cloth or hand towel"
+      - id: "b"
+        label: "Paper towel"
+      - id: "c"
+        label: "Air dry"
+      - id: "d"
+        label: "It varies"
+  - id: q20
+    prompt: "In a public restroom, how do you prefer to dry your hands?"
+    type: single_choice
+    construct: public_restroom_prefer_dry_hands
+    required: true
+    options:
+      - id: "a"
+        label: "Paper towel"
+      - id: "b"
+        label: "Air dryer"
+      - id: "c"
+        label: "On my clothes"
+      - id: "d"
+        label: "No preference"
+  - id: q21
+    prompt: "Do you use any reminder, app, or device related to hand hygiene?"
+    type: single_choice
+    construct: use_any_reminder_app_device
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I would consider it"
+      - id: "c"
+        label: "No, and I would not"
+  - id: q22
+    prompt: "Which sources shape your beliefs about hand hygiene? (Select all that apply)"
+    type: multi_choice
+    construct: sources_shape_beliefs_hand_hygiene
+    required: true
+    options:
+      - id: "a"
+        label: "Public-health agencies (e.g., CDC)"
+      - id: "b"
+        label: "Doctors or pharmacists"
+      - id: "c"
+        label: "News or media"
+      - id: "d"
+        label: "Family upbringing"
+      - id: "e"
+        label: "Social media or videos"
+      - id: "f"
+        label: "Signs in workplaces or restrooms"
+      - id: "g"
+        label: "I have not thought much about it"
+  - id: q23
+    prompt: "Select your top 3 situations where you think hand-washing matters most. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_situations_where
+    required: true
+    options:
+      - id: "a"
+        label: "Before eating or preparing food"
+      - id: "b"
+        label: "After using the restroom"
+      - id: "c"
+        label: "After being around someone sick"
+      - id: "d"
+        label: "After returning home"
+      - id: "e"
+        label: "After touching shared surfaces"
+      - id: "f"
+        label: "Before touching my face"
+      - id: "g"
+        label: "After handling money or packages"
+  - id: q24
+    prompt: "Overall, how satisfied are you with your current hand-hygiene habits?"
+    type: single_choice
+    construct: overall_satisfied_current_hand_hygiene
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q25
+    prompt: "How likely are you to keep up your current hand-hygiene habits over the next year?"
+    type: single_choice
+    construct: likely_keep_up_current_hand
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Somewhat likely"
+      - id: "d"
+        label: "Very likely"
+  - id: q26
+    prompt: "In your own words, what would help you keep up good hand-hygiene habits?"
+    type: free_text
+    construct: own_words_would_help_keep
+    required: true
+  - id: q27
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q28
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe or not to say"
+  - id: q29
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q30
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q32
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+  - id: q33
+    prompt: "Which best describes your household?"
+    type: single_choice
+    construct: best_describes_household
+    required: true
+    options:
+      - id: "a"
+        label: "Live alone"
+      - id: "b"
+        label: "Live with a partner or spouse"
+      - id: "c"
+        label: "Live with children"
+      - id: "d"
+        label: "Live with roommates or extended family"
+  - id: q34
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q35
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q37
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q38
+    prompt: "Do any of your daily activities involve frequent hand-washing (e.g., healthcare, food service, childcare)?"
+    type: single_choice
+    construct: any_daily_activities_involve_frequent
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not applicable"
+  - id: q39
+    prompt: "How would you describe your overall attention to everyday health and hygiene?"
+    type: single_choice
+    construct: would_describe_overall_attention_everyda
+    required: true
+    options:
+      - id: "a"
+        label: "Not attentive"
+      - id: "b"
+        label: "Somewhat attentive"
+      - id: "c"
+        label: "Attentive"
+      - id: "d"
+        label: "Very attentive"

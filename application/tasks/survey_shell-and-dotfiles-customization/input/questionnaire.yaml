@@ -1,0 +1,903 @@
+schemaVersion: "1.0"
+id: shell_and_dotfiles_customization_v1
+title: "Shell and Dotfiles Customization Survey"
+description: "How technical users choose their shell and customize their dotfiles, prompt, and plugins."
+questions:
+  - id: q0
+    prompt: "How often do you work in a command-line shell?"
+    type: single_choice
+    construct: often_work_command_line_shell
+    required: true
+    options:
+      - id: "a"
+        label: "Constantly throughout the day"
+      - id: "b"
+        label: "A few times a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "I don't use a shell"
+  - id: q1
+    prompt: "How long have you been customizing your shell environment?"
+    type: single_choice
+    construct: long_have_been_customizing_shell
+    required: true
+    options:
+      - id: "a"
+        label: "I don't customize it"
+      - id: "b"
+        label: "Less than 1 year"
+      - id: "c"
+        label: "1 to 2 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "6 to 10 years"
+      - id: "f"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "Which shell do you use as your primary interactive shell?"
+    type: single_choice
+    construct: shell_use_as_primary_interactive
+    required: true
+    options:
+      - id: "a"
+        label: "bash"
+      - id: "b"
+        label: "zsh"
+      - id: "c"
+        label: "fish"
+      - id: "d"
+        label: "PowerShell"
+      - id: "e"
+        label: "Nushell"
+      - id: "f"
+        label: "Ksh or another shell"
+  - id: q3
+    prompt: "Which shells have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: shells_have_used_past_year
+    required: true
+    options:
+      - id: "a"
+        label: "bash"
+      - id: "b"
+        label: "zsh"
+      - id: "c"
+        label: "fish"
+      - id: "d"
+        label: "PowerShell"
+      - id: "e"
+        label: "Nushell"
+      - id: "f"
+        label: "dash or sh"
+      - id: "g"
+        label: "Ksh or tcsh"
+      - id: "h"
+        label: "Xonsh"
+  - id: q4
+    prompt: "Why did you choose your primary shell?"
+    type: single_choice
+    construct: why_did_choose_primary_shell
+    required: true
+    options:
+      - id: "a"
+        label: "It's the system default"
+      - id: "b"
+        label: "Better features out of the box"
+      - id: "c"
+        label: "A framework or plugin ecosystem I wanted"
+      - id: "d"
+        label: "A colleague or community recommended it"
+      - id: "e"
+        label: "Required by my work environment"
+      - id: "f"
+        label: "I haven't really chosen — I use the default"
+  - id: q5
+    prompt: "Which shell framework or prompt tool do you use? (Select all that apply)"
+    type: multi_choice
+    construct: shell_framework_prompt_tool_use
+    required: true
+    options:
+      - id: "a"
+        label: "Oh My Zsh"
+      - id: "b"
+        label: "Starship"
+      - id: "c"
+        label: "Powerlevel10k"
+      - id: "d"
+        label: "Oh My Posh"
+      - id: "e"
+        label: "Prezto or zinit"
+      - id: "f"
+        label: "Fish's built-in configuration"
+      - id: "g"
+        label: "A hand-written prompt"
+      - id: "h"
+        label: "None"
+  - id: q6
+    prompt: "How do you manage your dotfiles?"
+    type: single_choice
+    construct: manage_dotfiles
+    required: true
+    options:
+      - id: "a"
+        label: "A Git repository"
+      - id: "b"
+        label: "A Git repo with a bare-repo or symlink manager (GNU Stow, chezmoi, yadm)"
+      - id: "c"
+        label: "Cloud sync (Dropbox, iCloud, etc.)"
+      - id: "d"
+        label: "Manual copying between machines"
+      - id: "e"
+        label: "I don't manage my dotfiles"
+  - id: q7
+    prompt: "Which dotfiles do you actively maintain? (Select all that apply)"
+    type: multi_choice
+    construct: dotfiles_actively_maintain_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Shell config (.bashrc, .zshrc, config.fish)"
+      - id: "b"
+        label: "Git config (.gitconfig)"
+      - id: "c"
+        label: "Vim or Neovim config"
+      - id: "d"
+        label: "Tmux config"
+      - id: "e"
+        label: "Terminal emulator config"
+      - id: "f"
+        label: "SSH config"
+      - id: "g"
+        label: "Editor settings (VS Code, etc.)"
+      - id: "h"
+        label: "Window manager or OS config"
+  - id: q8
+    prompt: "About how many lines are in your main shell config file? Please enter a number."
+    type: free_text
+    construct: many_lines_main_shell_config
+    required: true
+  - id: q9
+    prompt: "About how many shell aliases do you have defined? Please enter a number."
+    type: free_text
+    construct: many_shell_aliases_have_defined
+    required: true
+  - id: q10
+    prompt: "Which shell customizations do you use? (Select all that apply)"
+    type: multi_choice
+    construct: shell_customizations_use_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Custom aliases"
+      - id: "b"
+        label: "Custom functions"
+      - id: "c"
+        label: "Syntax highlighting"
+      - id: "d"
+        label: "Autosuggestions"
+      - id: "e"
+        label: "Custom key bindings"
+      - id: "f"
+        label: "Directory jumping (z, autojump, zoxide)"
+      - id: "g"
+        label: "A custom prompt theme"
+      - id: "h"
+        label: "Git status in the prompt"
+      - id: "i"
+        label: "Vi mode"
+  - id: q11
+    prompt: "How is your shell prompt configured?"
+    type: single_choice
+    construct: shell_prompt_configured
+    required: true
+    options:
+      - id: "a"
+        label: "A prompt framework or generator (Starship, Powerlevel10k, etc.)"
+      - id: "b"
+        label: "A theme from a shell framework"
+      - id: "c"
+        label: "Hand-written prompt code"
+      - id: "d"
+        label: "The default prompt"
+  - id: q12
+    prompt: "Which information does your prompt display? (Select all that apply)"
+    type: multi_choice
+    construct: information_does_prompt_display_select
+    required: true
+    options:
+      - id: "a"
+        label: "Current directory"
+      - id: "b"
+        label: "Git branch and status"
+      - id: "c"
+        label: "Exit code of the last command"
+      - id: "d"
+        label: "Language or runtime version"
+      - id: "e"
+        label: "Time or command duration"
+      - id: "f"
+        label: "Username and hostname"
+      - id: "g"
+        label: "Cloud or Kubernetes context"
+      - id: "h"
+        label: "A minimal prompt with little info"
+  - id: q13
+    prompt: "Do you use a plugin manager for your shell?"
+    type: single_choice
+    construct: use_plugin_manager_shell
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for many plugins"
+      - id: "b"
+        label: "Yes, for a few plugins"
+      - id: "c"
+        label: "No, but I add plugins manually"
+      - id: "d"
+        label: "No plugins at all"
+  - id: q14
+    prompt: "About how many shell plugins do you have installed? Please enter a number."
+    type: free_text
+    construct: many_shell_plugins_have_installed
+    required: true
+  - id: q15
+    prompt: "How do you sync your dotfiles across machines?"
+    type: single_choice
+    construct: sync_dotfiles_across_machines
+    required: true
+    options:
+      - id: "a"
+        label: "Automatically via a Git repo and setup script"
+      - id: "b"
+        label: "Manually pulling a Git repo"
+      - id: "c"
+        label: "Cloud file sync"
+      - id: "d"
+        label: "I copy files by hand"
+      - id: "e"
+        label: "I only use one machine"
+  - id: q16
+    prompt: "Where does your shell configuration come from originally?"
+    type: single_choice
+    construct: where_does_shell_configuration_come
+    required: true
+    options:
+      - id: "a"
+        label: "I built it from scratch"
+      - id: "b"
+        label: "I started from someone else's dotfiles and modified them"
+      - id: "c"
+        label: "I use a popular framework's defaults"
+      - id: "d"
+        label: "I use the OS defaults"
+  - id: q17
+    prompt: "How much do you agree: A well-tuned shell noticeably improves my productivity."
+    type: single_choice
+    construct: much_agree_well_tuned_shell
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: I enjoy tinkering with my shell configuration."
+    type: single_choice
+    construct: much_agree_i_enjoy_tinkering
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: I prefer a minimal shell setup over a heavily customized one."
+    type: single_choice
+    construct: much_agree_i_prefer_minimal
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: Managing dotfiles in version control is worth the effort."
+    type: single_choice
+    construct: much_agree_managing_dotfiles_version
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: My shell configuration has grown hard to maintain."
+    type: single_choice
+    construct: much_agree_my_shell_configuration
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: A good prompt should show as little as possible."
+    type: single_choice
+    construct: much_agree_good_prompt_should
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "When customizing your shell, how important is startup speed?"
+    type: single_choice
+    construct: when_customizing_shell_important_startup
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When customizing your shell, how important is portability across machines?"
+    type: single_choice
+    construct: when_customizing_shell_important_portabi
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When customizing your shell, how important is an active plugin ecosystem?"
+    type: single_choice
+    construct: when_customizing_shell_important_active
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When customizing your shell, how important is prompt aesthetics?"
+    type: single_choice
+    construct: when_customizing_shell_important_prompt
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When customizing your shell, how important is ease of configuration?"
+    type: single_choice
+    construct: when_customizing_shell_important_ease
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When customizing your shell, how important are autosuggestions and completions?"
+    type: single_choice
+    construct: when_customizing_shell_important_autosug
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "Which are your top 3 priorities for your shell setup? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_priorities_shell_setup
+    required: true
+    options:
+      - id: "a"
+        label: "Startup speed"
+      - id: "b"
+        label: "Portability"
+      - id: "c"
+        label: "Plugin ecosystem"
+      - id: "d"
+        label: "Prompt aesthetics"
+      - id: "e"
+        label: "Ease of configuration"
+      - id: "f"
+        label: "Autosuggestions and completions"
+      - id: "g"
+        label: "Minimalism"
+      - id: "h"
+        label: "Familiarity"
+  - id: q30
+    prompt: "How often do you edit your shell or dotfiles configuration?"
+    type: single_choice
+    construct: often_edit_shell_dotfiles_configuration
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q31
+    prompt: "How often does your shell startup feel slow?"
+    type: single_choice
+    construct: often_does_shell_startup_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q32
+    prompt: "How often do you use command autosuggestions or history search?"
+    type: single_choice
+    construct: often_use_command_autosuggestions_histor
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q33
+    prompt: "Do you use a Nerd Font or patched font to display prompt icons?"
+    type: single_choice
+    construct: use_nerd_font_patched_font
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "I'm not sure"
+  - id: q34
+    prompt: "Have you published your dotfiles publicly (e.g., on GitHub)?"
+    type: single_choice
+    construct: have_published_dotfiles_publicly_e
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I keep them updated"
+      - id: "b"
+        label: "Yes, but they're outdated"
+      - id: "c"
+        label: "No, they're private"
+      - id: "d"
+        label: "No, I don't version them at all"
+  - id: q35
+    prompt: "How did you learn to customize your shell? (Select all that apply)"
+    type: multi_choice
+    construct: did_learn_customize_shell_select
+    required: true
+    options:
+      - id: "a"
+        label: "Blog posts and articles"
+      - id: "b"
+        label: "Other people's dotfiles repos"
+      - id: "c"
+        label: "Official documentation"
+      - id: "d"
+        label: "YouTube or video tutorials"
+      - id: "e"
+        label: "Colleagues or mentors"
+      - id: "f"
+        label: "Trial and error"
+  - id: q36
+    prompt: "Which best describes your overall shell setup?"
+    type: single_choice
+    construct: best_describes_overall_shell_setup
+    required: true
+    options:
+      - id: "a"
+        label: "Heavily customized and personalized"
+      - id: "b"
+        label: "Moderately customized"
+      - id: "c"
+        label: "Lightly tweaked from defaults"
+      - id: "d"
+        label: "Completely stock"
+  - id: q37
+    prompt: "How satisfied are you with your shell's speed and responsiveness?"
+    type: single_choice
+    construct: satisfied_shell_s_speed_responsiveness
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "How satisfied are you with how you manage your dotfiles?"
+    type: single_choice
+    construct: satisfied_manage_dotfiles
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q39
+    prompt: "Overall, how satisfied are you with your shell environment?"
+    type: single_choice
+    construct: overall_satisfied_shell_environment
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q40
+    prompt: "How likely are you to recommend your shell setup approach to another developer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_shell_setup_approach
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q41
+    prompt: "How likely are you to switch your primary shell within the next year?"
+    type: single_choice
+    construct: likely_switch_primary_shell_within
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What is one thing you would improve about your shell or dotfiles setup? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_shell
+    required: false
+  - id: q43
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "DevOps or platform engineer"
+      - id: "e"
+        label: "Systems or infrastructure engineer"
+      - id: "f"
+        label: "Data engineer or scientist"
+      - id: "g"
+        label: "Engineering manager"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q44
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q46
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q47
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q48
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q49
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q52
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

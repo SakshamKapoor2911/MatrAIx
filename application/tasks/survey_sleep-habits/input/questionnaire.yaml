@@ -1,0 +1,765 @@
+schemaVersion: "1.0"
+id: sleep_habits_v1
+title: "Sleep Habits Survey"
+description: "Everyday sleep habits, routines, and attitudes among adults."
+questions:
+  - id: q0
+    prompt: "On a typical weeknight, about how many hours of sleep do you get? Please enter a number of hours."
+    type: free_text
+    construct: typical_weeknight_many_hours_sleep
+    required: true
+  - id: q1
+    prompt: "On a typical weekend night, about how many hours of sleep do you get? Please enter a number of hours."
+    type: free_text
+    construct: typical_weekend_night_many_hours
+    required: true
+  - id: q2
+    prompt: "What time do you usually go to bed on a weeknight?"
+    type: single_choice
+    construct: time_usually_go_bed_weeknight
+    required: true
+    options:
+      - id: "a"
+        label: "Before 9 pm"
+      - id: "b"
+        label: "9 pm to 10 pm"
+      - id: "c"
+        label: "10 pm to 11 pm"
+      - id: "d"
+        label: "11 pm to midnight"
+      - id: "e"
+        label: "Midnight to 1 am"
+      - id: "f"
+        label: "After 1 am"
+  - id: q3
+    prompt: "What time do you usually wake up on a weekday?"
+    type: single_choice
+    construct: time_usually_wake_up_weekday
+    required: true
+    options:
+      - id: "a"
+        label: "Before 5 am"
+      - id: "b"
+        label: "5 am to 6 am"
+      - id: "c"
+        label: "6 am to 7 am"
+      - id: "d"
+        label: "7 am to 8 am"
+      - id: "e"
+        label: "8 am to 9 am"
+      - id: "f"
+        label: "After 9 am"
+  - id: q4
+    prompt: "How would you rate the quality of your sleep most nights?"
+    type: single_choice
+    construct: would_rate_quality_sleep_most
+    required: true
+    options:
+      - id: "a"
+        label: "Very poor"
+      - id: "b"
+        label: "Poor"
+      - id: "c"
+        label: "Fair"
+      - id: "d"
+        label: "Good"
+      - id: "e"
+        label: "Very good"
+  - id: q5
+    prompt: "How long does it usually take you to fall asleep?"
+    type: single_choice
+    construct: long_does_it_usually_take
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 10 minutes"
+      - id: "b"
+        label: "10 to 20 minutes"
+      - id: "c"
+        label: "20 to 40 minutes"
+      - id: "d"
+        label: "40 minutes to an hour"
+      - id: "e"
+        label: "More than an hour"
+  - id: q6
+    prompt: "How often do you wake up during the night?"
+    type: single_choice
+    construct: often_wake_up_during_night
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Almost every night"
+  - id: q7
+    prompt: "How often do you feel rested when you wake up?"
+    type: single_choice
+    construct: often_feel_rested_when_wake
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q8
+    prompt: "Do you keep a consistent sleep schedule?"
+    type: single_choice
+    construct: keep_consistent_sleep_schedule
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, very consistent every day"
+      - id: "b"
+        label: "Consistent on weekdays but different on weekends"
+      - id: "c"
+        label: "Somewhat irregular"
+      - id: "d"
+        label: "Very irregular"
+  - id: q9
+    prompt: "Which of the following are part of your wind-down routine before bed? (Select all that apply)"
+    type: multi_choice
+    construct: following_part_wind_down_routine
+    required: true
+    options:
+      - id: "a"
+        label: "Reading"
+      - id: "b"
+        label: "Watching TV or streaming"
+      - id: "c"
+        label: "Using my phone or scrolling"
+      - id: "d"
+        label: "A warm shower or bath"
+      - id: "e"
+        label: "Stretching or light yoga"
+      - id: "f"
+        label: "Meditation or breathing exercises"
+      - id: "g"
+        label: "Listening to music or a podcast"
+      - id: "h"
+        label: "I do not have a routine"
+  - id: q10
+    prompt: "Which factors most often disrupt your sleep? (Select all that apply)"
+    type: multi_choice
+    construct: factors_most_often_disrupt_sleep
+    required: true
+    options:
+      - id: "a"
+        label: "Stress or a busy mind"
+      - id: "b"
+        label: "Noise"
+      - id: "c"
+        label: "Light in the room"
+      - id: "d"
+        label: "Temperature"
+      - id: "e"
+        label: "Screens or devices"
+      - id: "f"
+        label: "Caffeine"
+      - id: "g"
+        label: "A partner, child, or pet"
+      - id: "h"
+        label: "An uncomfortable mattress or pillow"
+  - id: q11
+    prompt: "How often do you use your phone or a screen in bed before sleeping?"
+    type: single_choice
+    construct: often_use_phone_screen_bed
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Every night"
+  - id: q12
+    prompt: "How many caffeinated drinks do you typically have after noon? Please enter a number."
+    type: free_text
+    construct: many_caffeinated_drinks_typically_have
+    required: true
+  - id: q13
+    prompt: "How often do you take a daytime nap?"
+    type: single_choice
+    construct: often_take_daytime_nap
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "A few times a week"
+      - id: "e"
+        label: "Daily"
+  - id: q14
+    prompt: "Which of the following have you tried to improve your sleep? (Select all that apply)"
+    type: multi_choice
+    construct: following_have_tried_improve_sleep
+    required: true
+    options:
+      - id: "a"
+        label: "A consistent bedtime"
+      - id: "b"
+        label: "Limiting caffeine"
+      - id: "c"
+        label: "Reducing screen time before bed"
+      - id: "d"
+        label: "Blackout curtains or an eye mask"
+      - id: "e"
+        label: "White noise or earplugs"
+      - id: "f"
+        label: "A new mattress or pillow"
+      - id: "g"
+        label: "Melatonin or other sleep supplements"
+      - id: "h"
+        label: "Reading a book or a sleep app"
+      - id: "i"
+        label: "I have not tried anything"
+  - id: q15
+    prompt: "How much do you agree or disagree: Getting enough sleep is a high priority for me."
+    type: single_choice
+    construct: much_agree_disagree_getting_enough
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: My sleep affects how well my day goes."
+    type: single_choice
+    construct: much_agree_disagree_my_sleep
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree or disagree: I often sacrifice sleep to get other things done."
+    type: single_choice
+    construct: much_agree_disagree_i_often
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree or disagree: I feel well informed about how to sleep better."
+    type: single_choice
+    construct: much_agree_disagree_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree or disagree: My daily stress makes it harder to sleep."
+    type: single_choice
+    construct: much_agree_disagree_my_daily
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How often does poor sleep affect your mood during the day?"
+    type: single_choice
+    construct: often_does_poor_sleep_affect
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q21
+    prompt: "How often does poor sleep affect your energy or productivity?"
+    type: single_choice
+    construct: often_does_poor_sleep_affect
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "How often does poor sleep affect your focus or memory?"
+    type: single_choice
+    construct: often_does_poor_sleep_affect
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q23
+    prompt: "How often does poor sleep affect your appetite or eating?"
+    type: single_choice
+    construct: often_does_poor_sleep_affect
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q24
+    prompt: "How important is each factor for good sleep to you: a quiet room?"
+    type: single_choice
+    construct: important_each_factor_good_sleep
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is each factor for good sleep to you: a dark room?"
+    type: single_choice
+    construct: important_each_factor_good_sleep
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important is each factor for good sleep to you: a cool temperature?"
+    type: single_choice
+    construct: important_each_factor_good_sleep
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important is each factor for good sleep to you: a comfortable mattress and pillow?"
+    type: single_choice
+    construct: important_each_factor_good_sleep
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Do you use any sleep aids or supplements?"
+    type: single_choice
+    construct: use_any_sleep_aids_supplements
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I have in the past"
+      - id: "d"
+        label: "No, never"
+  - id: q29
+    prompt: "Which sleep environment describes your bedroom best?"
+    type: single_choice
+    construct: sleep_environment_describes_bedroom_best
+    required: true
+    options:
+      - id: "a"
+        label: "Quiet, dark, and cool"
+      - id: "b"
+        label: "Comfortable but with some light or noise"
+      - id: "c"
+        label: "Often noisy or bright"
+      - id: "d"
+        label: "It varies a lot"
+  - id: q30
+    prompt: "How consistent is your bedtime from night to night?"
+    type: single_choice
+    construct: consistent_bedtime_from_night_night
+    required: true
+    options:
+      - id: "a"
+        label: "Within 15 minutes most nights"
+      - id: "b"
+        label: "Within about an hour"
+      - id: "c"
+        label: "It varies by a couple of hours"
+      - id: "d"
+        label: "Very unpredictable"
+  - id: q31
+    prompt: "Have you talked to a doctor or professional about your sleep in the past year?"
+    type: single_choice
+    construct: have_talked_doctor_professional_sleep
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I have considered it"
+      - id: "c"
+        label: "No, I have not needed to"
+  - id: q32
+    prompt: "Overall, how satisfied are you with your sleep?"
+    type: single_choice
+    construct: overall_satisfied_sleep
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How likely are you to make a change to improve your sleep in the next few months?"
+    type: single_choice
+    construct: likely_make_change_improve_sleep
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "Which changes would most improve your sleep? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: changes_would_most_improve_sleep
+    required: true
+    options:
+      - id: "a"
+        label: "Going to bed earlier"
+      - id: "b"
+        label: "A more consistent schedule"
+      - id: "c"
+        label: "Less screen time before bed"
+      - id: "d"
+        label: "Less caffeine"
+      - id: "e"
+        label: "A quieter or darker room"
+      - id: "f"
+        label: "A better mattress or bedding"
+      - id: "g"
+        label: "Managing stress better"
+      - id: "h"
+        label: "More exercise during the day"
+  - id: q35
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65–74"
+      - id: "g"
+        label: "75 or older"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino/a"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your household's annual income before taxes?"
+    type: single_choice
+    construct: household_s_annual_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q40
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+      - id: "h"
+        label: "Unable to work"
+  - id: q41
+    prompt: "Do you work a night shift or rotating schedule?"
+    type: single_choice
+    construct: work_night_shift_rotating_schedule
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Sometimes"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q43
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Do you share a bed with a partner, child, or pet?"
+    type: single_choice
+    construct: share_bed_partner_child_pet
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a partner"
+      - id: "b"
+        label: "Yes, a child"
+      - id: "c"
+        label: "Yes, a pet"
+      - id: "d"
+        label: "No, I sleep alone"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q46
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q47
+    prompt: "In general, how would you rate your overall health?"
+    type: single_choice
+    construct: general_would_rate_overall_health
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent"
+      - id: "b"
+        label: "Very good"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Fair"
+      - id: "e"
+        label: "Poor"

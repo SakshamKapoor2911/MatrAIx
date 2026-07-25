@@ -1,0 +1,736 @@
+schemaVersion: "1.0"
+id: interest_rate_awareness_v1
+title: "Interest Rate Awareness Survey"
+description: "How aware people are of interest rates on their savings and loans and how rate changes shape their financial decisions."
+questions:
+  - id: q0
+    prompt: "How closely do you follow news about interest rates set by the Federal Reserve?"
+    type: single_choice
+    construct: closely_follow_news_interest_rates
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "Closely"
+      - id: "e"
+        label: "Very closely"
+  - id: q1
+    prompt: "Do you know roughly what direction the Federal Reserve has moved interest rates over the past year?"
+    type: single_choice
+    construct: know_roughly_direction_federal_reserve
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, they raised rates"
+      - id: "b"
+        label: "Yes, they lowered rates"
+      - id: "c"
+        label: "Yes, they held rates steady"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q2
+    prompt: "How would you rate your overall understanding of how interest rates work?"
+    type: single_choice
+    construct: would_rate_overall_understanding_interes
+    required: true
+    options:
+      - id: "a"
+        label: "Very poor"
+      - id: "b"
+        label: "Poor"
+      - id: "c"
+        label: "Fair"
+      - id: "d"
+        label: "Good"
+      - id: "e"
+        label: "Very good"
+  - id: q3
+    prompt: "Do you know the approximate interest rate (APY) on your main savings account?"
+    type: single_choice
+    construct: know_approximate_interest_rate_apy
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I know it precisely"
+      - id: "b"
+        label: "I know it roughly"
+      - id: "c"
+        label: "No, I have no idea"
+      - id: "d"
+        label: "I don't have a savings account"
+  - id: q4
+    prompt: "Do you know the approximate interest rate (APR) on your primary credit card?"
+    type: single_choice
+    construct: know_approximate_interest_rate_apr
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I know it precisely"
+      - id: "b"
+        label: "I know it roughly"
+      - id: "c"
+        label: "No, I have no idea"
+      - id: "d"
+        label: "I don't have a credit card"
+  - id: q5
+    prompt: "What is the approximate APY on your main savings account? Please enter a percentage (enter 0 if you don't know or don't have one)."
+    type: free_text
+    construct: approximate_apy_main_savings_account
+    required: true
+  - id: q6
+    prompt: "Which of the following do you currently have that are affected by interest rates? (Select all that apply)"
+    type: multi_choice
+    construct: following_currently_have_that_affected
+    required: true
+    options:
+      - id: "a"
+        label: "A savings account"
+      - id: "b"
+        label: "A checking account that pays interest"
+      - id: "c"
+        label: "A certificate of deposit (CD)"
+      - id: "d"
+        label: "A credit card balance"
+      - id: "e"
+        label: "A mortgage"
+      - id: "f"
+        label: "An auto loan"
+      - id: "g"
+        label: "A student loan"
+      - id: "h"
+        label: "A personal loan"
+      - id: "i"
+        label: "A home equity loan or HELOC"
+      - id: "j"
+        label: "None of these"
+  - id: q7
+    prompt: "When you last opened a savings account, how much did the interest rate influence your choice?"
+    type: single_choice
+    construct: when_last_opened_savings_account
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Slightly"
+      - id: "c"
+        label: "Moderately"
+      - id: "d"
+        label: "Quite a bit"
+      - id: "e"
+        label: "It was the main factor"
+  - id: q8
+    prompt: "In the past year, have you moved money to get a better interest rate?"
+    type: single_choice
+    construct: past_year_have_moved_money
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I considered it"
+      - id: "d"
+        label: "No, and I didn't consider it"
+  - id: q9
+    prompt: "Where do you usually get information about interest rates? (Select all that apply)"
+    type: multi_choice
+    construct: where_usually_get_information_interest
+    required: true
+    options:
+      - id: "a"
+        label: "News websites or TV"
+      - id: "b"
+        label: "My bank's website or app"
+      - id: "c"
+        label: "Comparison sites (e.g., NerdWallet, Bankrate)"
+      - id: "d"
+        label: "Social media"
+      - id: "e"
+        label: "Friends or family"
+      - id: "f"
+        label: "A financial advisor"
+      - id: "g"
+        label: "I don't actively seek this information"
+  - id: q10
+    prompt: "How confident are you in your ability to compare interest rates across banks or lenders?"
+    type: single_choice
+    construct: confident_ability_compare_interest_rates
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q11
+    prompt: "When rates on savings accounts rise, how quickly do you typically act to take advantage?"
+    type: single_choice
+    construct: when_rates_savings_accounts_rise
+    required: true
+    options:
+      - id: "a"
+        label: "Right away"
+      - id: "b"
+        label: "Within a few weeks"
+      - id: "c"
+        label: "Within a few months"
+      - id: "d"
+        label: "I rarely act"
+      - id: "e"
+        label: "I never act"
+  - id: q12
+    prompt: "How much do you agree or disagree: I understand the difference between APR and APY."
+    type: single_choice
+    construct: much_agree_disagree_i_understand
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: Rising interest rates make me more likely to save money."
+    type: single_choice
+    construct: much_agree_disagree_rising_interest
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I pay attention to interest rates before taking on new debt."
+    type: single_choice
+    construct: much_agree_disagree_i_pay
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: Interest rate news feels too complicated for me to follow."
+    type: single_choice
+    construct: much_agree_disagree_interest_rate
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: Interest rate changes have a real impact on my household budget."
+    type: single_choice
+    construct: much_agree_disagree_interest_rate
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How well do you understand how interest rates affect: Your savings account earnings"
+    type: single_choice
+    construct: well_understand_interest_rates_affect
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Slightly"
+      - id: "c"
+        label: "Moderately"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q18
+    prompt: "How well do you understand how interest rates affect: Credit card interest charges"
+    type: single_choice
+    construct: well_understand_interest_rates_affect
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Slightly"
+      - id: "c"
+        label: "Moderately"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q19
+    prompt: "How well do you understand how interest rates affect: Monthly payments on a mortgage or loan"
+    type: single_choice
+    construct: well_understand_interest_rates_affect
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Slightly"
+      - id: "c"
+        label: "Moderately"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q20
+    prompt: "How well do you understand how interest rates affect: The cost of borrowing to buy a car or home"
+    type: single_choice
+    construct: well_understand_interest_rates_affect
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Slightly"
+      - id: "c"
+        label: "Moderately"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q21
+    prompt: "How well do you understand how interest rates affect: The stock market and investment returns"
+    type: single_choice
+    construct: well_understand_interest_rates_affect
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Slightly"
+      - id: "c"
+        label: "Moderately"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q22
+    prompt: "How much have higher interest rates over the past couple of years affected your household?"
+    type: single_choice
+    construct: much_have_higher_interest_rates
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "Quite a bit"
+      - id: "e"
+        label: "A great deal"
+  - id: q23
+    prompt: "In response to interest rate changes in the past year, which actions have you taken? (Select all that apply)"
+    type: multi_choice
+    construct: response_interest_rate_changes_past
+    required: true
+    options:
+      - id: "a"
+        label: "Opened a higher-yield savings account or CD"
+      - id: "b"
+        label: "Paid down variable-rate debt faster"
+      - id: "c"
+        label: "Delayed a big purchase that needed a loan"
+      - id: "d"
+        label: "Refinanced or considered refinancing a loan"
+      - id: "e"
+        label: "Shifted money into or out of investments"
+      - id: "f"
+        label: "Shopped around for a better loan or card rate"
+      - id: "g"
+        label: "Locked in a fixed rate"
+      - id: "h"
+        label: "I have not taken any action"
+  - id: q24
+    prompt: "When you hear the Federal Reserve raised rates, what is usually your first reaction?"
+    type: single_choice
+    construct: when_hear_federal_reserve_raised
+    required: true
+    options:
+      - id: "a"
+        label: "I look for ways to earn more on savings"
+      - id: "b"
+        label: "I worry about my loan or card payments"
+      - id: "c"
+        label: "I think about the effect on the economy"
+      - id: "d"
+        label: "I don't pay much attention"
+      - id: "e"
+        label: "I'm not sure what it means for me"
+  - id: q25
+    prompt: "Do you currently have any variable-rate debt (a rate that can change over time)?"
+    type: single_choice
+    construct: currently_have_any_variable_rate
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I track how it changes"
+      - id: "b"
+        label: "Yes, but I don't track it closely"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q26
+    prompt: "How important is a high interest rate to you when choosing where to keep your savings?"
+    type: single_choice
+    construct: important_high_interest_rate_when
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How many different banks or apps do you use to try to get better rates? Please enter a number."
+    type: free_text
+    construct: many_different_banks_apps_use
+    required: true
+  - id: q28
+    prompt: "Select the top 3 financial decisions where interest rates matter most to you. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_financial_decisions
+    required: true
+    options:
+      - id: "a"
+        label: "Where I keep my savings"
+      - id: "b"
+        label: "Whether to pay off debt"
+      - id: "c"
+        label: "Buying a home"
+      - id: "d"
+        label: "Buying or leasing a car"
+      - id: "e"
+        label: "Carrying a credit card balance"
+      - id: "f"
+        label: "Investing in stocks or bonds"
+      - id: "g"
+        label: "Refinancing existing loans"
+      - id: "h"
+        label: "Taking out a new loan"
+  - id: q29
+    prompt: "How likely are you to switch banks in the next year to earn a better interest rate?"
+    type: single_choice
+    construct: likely_switch_banks_next_year
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Somewhat likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q30
+    prompt: "How well do you feel your current bank keeps you informed about rate changes?"
+    type: single_choice
+    construct: well_feel_current_bank_keeps
+    required: true
+    options:
+      - id: "a"
+        label: "Very poorly"
+      - id: "b"
+        label: "Poorly"
+      - id: "c"
+        label: "Adequately"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q31
+    prompt: "Overall, how satisfied are you with the interest rates you currently earn on your savings?"
+    type: single_choice
+    construct: overall_satisfied_interest_rates_current
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How would you rate your interest in learning more about how interest rates affect your money?"
+    type: single_choice
+    construct: would_rate_interest_learning_more
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all interested"
+      - id: "b"
+        label: "Slightly interested"
+      - id: "c"
+        label: "Moderately interested"
+      - id: "d"
+        label: "Very interested"
+      - id: "e"
+        label: "Extremely interested"
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q39
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+      - id: "h"
+        label: "Unable to work"
+  - id: q40
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q41
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q44
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own with a mortgage"
+      - id: "b"
+        label: "Own outright"
+      - id: "c"
+        label: "Rent"
+      - id: "d"
+        label: "Other arrangement"
+  - id: q45
+    prompt: "How would you describe your overall comfort with financial and money topics?"
+    type: single_choice
+    construct: would_describe_overall_comfort_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Somewhat uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat comfortable"
+      - id: "e"
+        label: "Very comfortable"

@@ -1,0 +1,753 @@
+schemaVersion: "1.0"
+id: glucose_monitoring_v1
+title: "Glucose Monitoring Survey"
+description: "Consumer awareness of, attitudes toward, and interest in glucose monitoring for wellness."
+questions:
+  - id: q0
+    prompt: "How familiar are you with glucose monitoring devices for tracking blood sugar?"
+    type: single_choice
+    construct: familiar_glucose_monitoring_devices_trac
+    required: true
+    options:
+      - id: "a"
+        label: "Very familiar"
+      - id: "b"
+        label: "Somewhat familiar"
+      - id: "c"
+        label: "I've heard of them but know little"
+      - id: "d"
+        label: "Not familiar at all"
+  - id: q1
+    prompt: "Have you ever used any kind of glucose monitoring device?"
+    type: single_choice
+    construct: have_ever_used_any_kind
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, currently"
+      - id: "b"
+        label: "Yes, in the past"
+      - id: "c"
+        label: "No, but I'm interested"
+      - id: "d"
+        label: "No, and I'm not interested"
+  - id: q2
+    prompt: "What type of glucose monitoring have you used or are you most interested in?"
+    type: single_choice
+    construct: type_glucose_monitoring_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "A continuous glucose monitor (a wearable sensor)"
+      - id: "b"
+        label: "A traditional finger-stick meter"
+      - id: "c"
+        label: "Both"
+      - id: "d"
+        label: "Neither"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q3
+    prompt: "Which best describes your reason for interest in glucose monitoring?"
+    type: single_choice
+    construct: best_describes_reason_interest_glucose
+    required: true
+    options:
+      - id: "a"
+        label: "General wellness and curiosity"
+      - id: "b"
+        label: "Managing weight or diet"
+      - id: "c"
+        label: "Optimizing fitness and energy"
+      - id: "d"
+        label: "Following a doctor's or dietitian's advice"
+      - id: "e"
+        label: "Family history awareness"
+      - id: "f"
+        label: "I'm not interested"
+  - id: q4
+    prompt: "Have you heard of any consumer glucose monitor brands? (Select all that apply)"
+    type: multi_choice
+    construct: have_heard_any_consumer_glucose
+    required: true
+    options:
+      - id: "a"
+        label: "Dexcom (Stelo)"
+      - id: "b"
+        label: "Abbott (Lingo or Libre)"
+      - id: "c"
+        label: "Levels"
+      - id: "d"
+        label: "Nutrisense"
+      - id: "e"
+        label: "Signos"
+      - id: "f"
+        label: "A traditional meter brand (OneTouch, Contour, etc.)"
+      - id: "g"
+        label: "None of these"
+  - id: q5
+    prompt: "How much do you think about your blood sugar or how food affects your energy?"
+    type: single_choice
+    construct: much_think_blood_sugar_food
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "All the time"
+  - id: q6
+    prompt: "Which wellness goals are most relevant to your interest in glucose data? (Select all that apply)"
+    type: multi_choice
+    construct: wellness_goals_most_relevant_interest
+    required: true
+    options:
+      - id: "a"
+        label: "Understanding how food affects me"
+      - id: "b"
+        label: "Managing my weight"
+      - id: "c"
+        label: "Boosting energy and reducing crashes"
+      - id: "d"
+        label: "Improving my diet quality"
+      - id: "e"
+        label: "Enhancing exercise performance"
+      - id: "f"
+        label: "General preventive health"
+      - id: "g"
+        label: "None of these"
+  - id: q7
+    prompt: "Where do you get information about glucose and blood sugar? (Select all that apply)"
+    type: multi_choice
+    construct: where_get_information_glucose_blood
+    required: true
+    options:
+      - id: "a"
+        label: "A doctor or dietitian"
+      - id: "b"
+        label: "Health websites"
+      - id: "c"
+        label: "Social media or influencers"
+      - id: "d"
+        label: "Podcasts or videos"
+      - id: "e"
+        label: "Friends or family"
+      - id: "f"
+        label: "Device or app companies"
+      - id: "g"
+        label: "I don't look for this information"
+  - id: q8
+    prompt: "If you use or have used a glucose monitor, how often do you check your readings?"
+    type: single_choice
+    construct: if_use_have_used_glucose
+    required: true
+    options:
+      - id: "a"
+        label: "Many times a day"
+      - id: "b"
+        label: "A few times a day"
+      - id: "c"
+        label: "About once a day"
+      - id: "d"
+        label: "Occasionally"
+      - id: "e"
+        label: "I don't use one"
+  - id: q9
+    prompt: "How much do you agree or disagree: Tracking glucose would help me understand my body better."
+    type: single_choice
+    construct: much_agree_disagree_tracking_glucose
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree or disagree: Glucose data would help me make better food choices."
+    type: single_choice
+    construct: much_agree_disagree_glucose_data
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree: Wearing a glucose sensor sounds appealing to me."
+    type: single_choice
+    construct: much_agree_disagree_wearing_glucose
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: Glucose monitoring for wellness seems worth the cost."
+    type: single_choice
+    construct: much_agree_disagree_glucose_monitoring
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I might find constant glucose data overwhelming or stressful."
+    type: single_choice
+    construct: much_agree_disagree_i_might
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I trust the accuracy of consumer glucose monitors."
+    type: single_choice
+    construct: much_agree_disagree_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How important is each factor when considering a glucose monitor: Accuracy of readings."
+    type: single_choice
+    construct: important_each_factor_when_considering
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "How important is each factor when considering a glucose monitor: Cost and subscription price."
+    type: single_choice
+    construct: important_each_factor_when_considering
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "How important is each factor when considering a glucose monitor: Comfort of wearing a sensor."
+    type: single_choice
+    construct: important_each_factor_when_considering
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each factor when considering a glucose monitor: An easy-to-understand app."
+    type: single_choice
+    construct: important_each_factor_when_considering
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is each factor when considering a glucose monitor: Actionable diet and lifestyle tips."
+    type: single_choice
+    construct: important_each_factor_when_considering
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How willing would you be to wear a small sensor on your arm for two weeks?"
+    type: single_choice
+    construct: willing_would_be_wear_small
+    required: true
+    options:
+      - id: "a"
+        label: "Very unwilling"
+      - id: "b"
+        label: "Unwilling"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Willing"
+      - id: "e"
+        label: "Very willing"
+  - id: q21
+    prompt: "How much would you be willing to pay per month for a wellness glucose monitoring service?"
+    type: single_choice
+    construct: much_would_be_willing_pay
+    required: true
+    options:
+      - id: "a"
+        label: "Nothing"
+      - id: "b"
+        label: "Under $25"
+      - id: "c"
+        label: "$25 to $49"
+      - id: "d"
+        label: "$50 to $99"
+      - id: "e"
+        label: "$100 or more"
+  - id: q22
+    prompt: "Select your top 3 things you would most want from glucose monitoring. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_would
+    required: true
+    options:
+      - id: "a"
+        label: "Understanding how specific foods affect me"
+      - id: "b"
+        label: "Support for weight management"
+      - id: "c"
+        label: "More stable energy throughout the day"
+      - id: "d"
+        label: "Personalized diet recommendations"
+      - id: "e"
+        label: "Better exercise performance"
+      - id: "f"
+        label: "Early awareness of health risks"
+      - id: "g"
+        label: "Simple, clear insights"
+      - id: "h"
+        label: "Motivation to eat healthier"
+  - id: q23
+    prompt: "How do you currently try to manage your energy and diet? (Select all that apply)"
+    type: multi_choice
+    construct: currently_try_manage_energy_diet
+    required: true
+    options:
+      - id: "a"
+        label: "Watching portion sizes"
+      - id: "b"
+        label: "Limiting sugar or refined carbs"
+      - id: "c"
+        label: "Eating regular meals"
+      - id: "d"
+        label: "Tracking food in an app"
+      - id: "e"
+        label: "Exercising regularly"
+      - id: "f"
+        label: "Following a specific diet plan"
+      - id: "g"
+        label: "I don't do anything specific"
+  - id: q24
+    prompt: "Do you currently use any other health or nutrition tracking tools? (Select all that apply)"
+    type: multi_choice
+    construct: currently_use_any_other_health
+    required: true
+    options:
+      - id: "a"
+        label: "A calorie or food-tracking app"
+      - id: "b"
+        label: "A fitness tracker or smartwatch"
+      - id: "c"
+        label: "A weight scale app"
+      - id: "d"
+        label: "A meal planning app"
+      - id: "e"
+        label: "None of these"
+  - id: q25
+    prompt: "How concerned are you about the privacy of health data from a glucose monitoring app?"
+    type: single_choice
+    construct: concerned_privacy_health_data_from
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q26
+    prompt: "Would you want to share glucose or wellness data with a doctor or dietitian?"
+    type: single_choice
+    construct: would_want_share_glucose_wellness
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, definitely"
+      - id: "b"
+        label: "Probably"
+      - id: "c"
+        label: "Probably not"
+      - id: "d"
+        label: "Definitely not"
+  - id: q27
+    prompt: "How likely are you to try a consumer glucose monitor in the next year?"
+    type: single_choice
+    construct: likely_try_consumer_glucose_monitor
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q28
+    prompt: "What is the biggest barrier to you trying glucose monitoring?"
+    type: single_choice
+    construct: biggest_barrier_trying_glucose_monitorin
+    required: true
+    options:
+      - id: "a"
+        label: "Cost"
+      - id: "b"
+        label: "Not sure it's useful for me"
+      - id: "c"
+        label: "Don't want to wear a sensor"
+      - id: "d"
+        label: "Privacy concerns"
+      - id: "e"
+        label: "Prefer to consult a doctor first"
+      - id: "f"
+        label: "No barriers, I'm interested"
+  - id: q29
+    prompt: "In a typical week, about how many meals do you prepare at home? Please enter a number."
+    type: free_text
+    construct: typical_week_many_meals_prepare
+    required: true
+  - id: q30
+    prompt: "About how much would you be willing to spend to try a glucose monitor for one month, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_would_be_willing_spend
+    required: true
+  - id: q31
+    prompt: "Overall, how interested are you in glucose monitoring for wellness?"
+    type: single_choice
+    construct: overall_interested_glucose_monitoring_we
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all interested"
+      - id: "b"
+        label: "Slightly interested"
+      - id: "c"
+        label: "Moderately interested"
+      - id: "d"
+        label: "Very interested"
+      - id: "e"
+        label: "Extremely interested"
+  - id: q32
+    prompt: "On a scale of 0 to 10, how likely are you to recommend glucose monitoring to a health-conscious friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q33
+    prompt: "What would most make you want to try glucose monitoring? (Optional)"
+    type: free_text
+    construct: would_most_make_want_try
+    required: false
+  - id: q34
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 to 74"
+      - id: "g"
+        label: "75 or older"
+  - id: q35
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q40
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q41
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q42
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+  - id: q43
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q44
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q45
+    prompt: "How would you describe your overall interest in nutrition and healthy eating?"
+    type: single_choice
+    construct: would_describe_overall_interest_nutritio
+    required: true
+    options:
+      - id: "a"
+        label: "Very low"
+      - id: "b"
+        label: "Low"
+      - id: "c"
+        label: "Moderate"
+      - id: "d"
+        label: "High"
+      - id: "e"
+        label: "Very high"
+  - id: q46
+    prompt: "What is your health insurance status?"
+    type: single_choice
+    construct: health_insurance_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored insurance"
+      - id: "b"
+        label: "Marketplace or individually purchased plan"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Other coverage"
+      - id: "f"
+        label: "No insurance"
+      - id: "g"
+        label: "Prefer not to say"

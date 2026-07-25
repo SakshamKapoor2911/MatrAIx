@@ -1,0 +1,622 @@
+schemaVersion: "1.0"
+id: small_business_finance_v1
+title: "Small Business Finance Survey"
+description: "How small-business owners fund, manage, and feel about their business finances."
+questions:
+  - id: q0
+    prompt: "Do you currently own or operate a small business?"
+    type: single_choice
+    construct: currently_own_operate_small_business
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, full-time"
+      - id: "b"
+        label: "Yes, part-time or as a side business"
+      - id: "c"
+        label: "I did in the past but not now"
+      - id: "d"
+        label: "No, but I'm planning to start one"
+      - id: "e"
+        label: "No"
+  - id: q1
+    prompt: "How is your business structured?"
+    type: single_choice
+    construct: business_structured
+    required: true
+    options:
+      - id: "a"
+        label: "Sole proprietorship"
+      - id: "b"
+        label: "LLC"
+      - id: "c"
+        label: "S-corporation or C-corporation"
+      - id: "d"
+        label: "Partnership"
+      - id: "e"
+        label: "Not formally registered"
+      - id: "f"
+        label: "I don't know"
+  - id: q2
+    prompt: "How many employees does your business have (not counting owners)?"
+    type: single_choice
+    construct: many_employees_does_business_have
+    required: true
+    options:
+      - id: "a"
+        label: "None (just me)"
+      - id: "b"
+        label: "1 to 4"
+      - id: "c"
+        label: "5 to 9"
+      - id: "d"
+        label: "10 to 24"
+      - id: "e"
+        label: "25 or more"
+  - id: q3
+    prompt: "How long has your business been operating?"
+    type: single_choice
+    construct: long_has_business_been_operating
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 9 years"
+      - id: "d"
+        label: "10 years or more"
+  - id: q4
+    prompt: "Approximately what was your business's annual revenue last year? Enter a dollar amount."
+    type: free_text
+    construct: approximately_was_business_s_annual
+    required: true
+  - id: q5
+    prompt: "How did you fund the startup or growth of your business? (Select all that apply)"
+    type: multi_choice
+    construct: did_fund_startup_growth_business
+    required: true
+    options:
+      - id: "a"
+        label: "Personal savings"
+      - id: "b"
+        label: "A bank or SBA loan"
+      - id: "c"
+        label: "Credit cards"
+      - id: "d"
+        label: "Friends and family"
+      - id: "e"
+        label: "Investors or venture capital"
+      - id: "f"
+        label: "Crowdfunding"
+      - id: "g"
+        label: "Grants"
+      - id: "h"
+        label: "Revenue from the business itself"
+  - id: q6
+    prompt: "Do you keep your business and personal finances in separate accounts?"
+    type: single_choice
+    construct: keep_business_personal_finances_separate
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, fully separate"
+      - id: "b"
+        label: "Mostly separate"
+      - id: "c"
+        label: "No, they're mixed together"
+      - id: "d"
+        label: "I don't have a business account"
+  - id: q7
+    prompt: "Who handles the bookkeeping and accounting for your business?"
+    type: single_choice
+    construct: who_handles_bookkeeping_accounting_busin
+    required: true
+    options:
+      - id: "a"
+        label: "I do it myself with software"
+      - id: "b"
+        label: "I do it myself manually"
+      - id: "c"
+        label: "A bookkeeper or accountant"
+      - id: "d"
+        label: "A family member or partner"
+      - id: "e"
+        label: "No one keeps formal books"
+  - id: q8
+    prompt: "Which accounting or finance tools does your business use? (Select all that apply)"
+    type: multi_choice
+    construct: accounting_finance_tools_does_business
+    required: true
+    options:
+      - id: "a"
+        label: "QuickBooks"
+      - id: "b"
+        label: "Xero or FreshBooks"
+      - id: "c"
+        label: "Spreadsheets"
+      - id: "d"
+        label: "A point-of-sale system (Square, Toast, Clover)"
+      - id: "e"
+        label: "A payroll service (Gusto, ADP)"
+      - id: "f"
+        label: "A business bank's app"
+      - id: "g"
+        label: "None of these"
+  - id: q9
+    prompt: "How do you currently access financing when the business needs it? (Select all that apply)"
+    type: multi_choice
+    construct: currently_access_financing_when_business
+    required: true
+    options:
+      - id: "a"
+        label: "Business line of credit"
+      - id: "b"
+        label: "Business credit card"
+      - id: "c"
+        label: "SBA or bank term loan"
+      - id: "d"
+        label: "Online or fintech lender"
+      - id: "e"
+        label: "Personal funds"
+      - id: "f"
+        label: "Merchant cash advance"
+      - id: "g"
+        label: "I don't use outside financing"
+  - id: q10
+    prompt: "How much do you agree with the following statement: My business has healthy, steady cash flow."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: I have a clear picture of my business's finances at any time."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Access to affordable financing is a challenge for my business."
+    type: single_choice
+    construct: much_agree_following_statement_access
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: Managing business finances takes too much of my time."
+    type: single_choice
+    construct: much_agree_following_statement_managing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I feel confident making financial decisions for my business."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How predictable is your business's monthly cash flow?"
+    type: single_choice
+    construct: predictable_business_s_monthly_cash
+    required: true
+    options:
+      - id: "a"
+        label: "Very predictable"
+      - id: "b"
+        label: "Somewhat predictable"
+      - id: "c"
+        label: "Somewhat unpredictable"
+      - id: "d"
+        label: "Very unpredictable"
+  - id: q16
+    prompt: "Which are the top 3 financial priorities for your business right now? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_financial_priorities_business
+    required: true
+    options:
+      - id: "a"
+        label: "Increasing revenue"
+      - id: "b"
+        label: "Improving cash flow"
+      - id: "c"
+        label: "Cutting costs"
+      - id: "d"
+        label: "Paying down business debt"
+      - id: "e"
+        label: "Securing financing"
+      - id: "f"
+        label: "Hiring or payroll"
+      - id: "g"
+        label: "Investing in growth"
+      - id: "h"
+        label: "Building a cash reserve"
+      - id: "i"
+        label: "Tax planning"
+  - id: q17
+    prompt: "How many months could your business cover expenses with cash on hand if revenue stopped?"
+    type: single_choice
+    construct: many_months_could_business_cover
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 month"
+      - id: "b"
+        label: "1 to 3 months"
+      - id: "c"
+        label: "4 to 6 months"
+      - id: "d"
+        label: "More than 6 months"
+      - id: "e"
+        label: "I don't know"
+  - id: q18
+    prompt: "How do you handle business taxes?"
+    type: single_choice
+    construct: handle_business_taxes
+    required: true
+    options:
+      - id: "a"
+        label: "An accountant or CPA handles them"
+      - id: "b"
+        label: "I use tax software myself"
+      - id: "c"
+        label: "A bookkeeper prepares them"
+      - id: "d"
+        label: "I handle them manually"
+      - id: "e"
+        label: "I'm behind or unsure on business taxes"
+  - id: q19
+    prompt: "Have you applied for a business loan or line of credit in the past 12 months?"
+    type: single_choice
+    construct: have_applied_business_loan_line
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I was approved"
+      - id: "b"
+        label: "Yes, but I was denied"
+      - id: "c"
+        label: "No, but I considered it"
+      - id: "d"
+        label: "No"
+  - id: q20
+    prompt: "How much business debt does your company currently carry? Enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_business_debt_does_company
+    required: true
+  - id: q21
+    prompt: "Where do you turn for financial advice about your business? (Select all that apply)"
+    type: multi_choice
+    construct: where_turn_financial_advice_business
+    required: true
+    options:
+      - id: "a"
+        label: "An accountant or CPA"
+      - id: "b"
+        label: "A bank or lender"
+      - id: "c"
+        label: "A business mentor or peers"
+      - id: "d"
+        label: "Online resources and courses"
+      - id: "e"
+        label: "A financial advisor"
+      - id: "f"
+        label: "Government resources (SBA, SCORE)"
+      - id: "g"
+        label: "I don't seek advice"
+  - id: q22
+    prompt: "How much do you agree: Rising costs are squeezing my business's profitability."
+    type: single_choice
+    construct: much_agree_rising_costs_squeezing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How financially healthy is your business overall right now?"
+    type: single_choice
+    construct: financially_healthy_business_overall_rig
+    required: true
+    options:
+      - id: "a"
+        label: "Very healthy"
+      - id: "b"
+        label: "Somewhat healthy"
+      - id: "c"
+        label: "Struggling"
+      - id: "d"
+        label: "In serious trouble"
+      - id: "e"
+        label: "Too early to tell"
+  - id: q24
+    prompt: "How satisfied are you with your business's current financial situation?"
+    type: single_choice
+    construct: satisfied_business_s_current_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q25
+    prompt: "How optimistic are you about your business's financial prospects over the next 12 months?"
+    type: single_choice
+    construct: optimistic_business_s_financial_prospect
+    required: true
+    options:
+      - id: "a"
+        label: "Very pessimistic"
+      - id: "b"
+        label: "Somewhat pessimistic"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat optimistic"
+      - id: "e"
+        label: "Very optimistic"
+  - id: q26
+    prompt: "If you have any final thoughts about managing your small business's finances, please share them here (optional)."
+    type: free_text
+    construct: if_have_any_final_thoughts
+    required: false
+  - id: q27
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q28
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q29
+    prompt: "Which of the following best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q30
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000–$199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q32
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force (student, homemaker)"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Unable to work"
+  - id: q33
+    prompt: "Including yourself, how many people live in your household? Enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q34
+    prompt: "How many children under 18 live in your household? Enter a number."
+    type: free_text
+    construct: many_children_under_18_live
+    required: true
+  - id: q35
+    prompt: "What is your marital status?"
+    type: single_choice
+    construct: marital_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q36
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q37
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q38
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"
+  - id: q39
+    prompt: "What is your role in the business?"
+    type: single_choice
+    construct: role_business
+    required: true
+    options:
+      - id: "a"
+        label: "Sole owner / founder"
+      - id: "b"
+        label: "Co-owner or partner"
+      - id: "c"
+        label: "Owner who also manages finances"
+      - id: "d"
+        label: "Owner with a hired bookkeeper or CFO"
+      - id: "e"
+        label: "Not a business owner"

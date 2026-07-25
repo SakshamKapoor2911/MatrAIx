@@ -1,0 +1,813 @@
+schemaVersion: "1.0"
+id: saas_subscription_management_v1
+title: "SaaS & App Subscription Management Survey"
+description: "How people sign up for, track, pay for, review, and cancel their software and app subscriptions."
+questions:
+  - id: q0
+    prompt: "Do you currently pay for any software or app subscriptions?"
+    type: single_choice
+    construct: currently_pay_any_software_app
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several"
+      - id: "b"
+        label: "Yes, a few"
+      - id: "c"
+        label: "Yes, just one"
+      - id: "d"
+        label: "No, but I have in the past"
+      - id: "e"
+        label: "No, never"
+  - id: q1
+    prompt: "Which categories of software or app subscriptions do you currently pay for? (Select all that apply)"
+    type: multi_choice
+    construct: categories_software_app_subscriptions_cu
+    required: true
+    options:
+      - id: "a"
+        label: "Video streaming (Netflix, Disney+, etc.)"
+      - id: "b"
+        label: "Music streaming (Spotify, Apple Music, etc.)"
+      - id: "c"
+        label: "Cloud storage (iCloud, Google One, Dropbox, etc.)"
+      - id: "d"
+        label: "Productivity / office (Microsoft 365, Google Workspace, etc.)"
+      - id: "e"
+        label: "Creative tools (Adobe, Canva Pro, etc.)"
+      - id: "f"
+        label: "Password manager (1Password, Dashlane, etc.)"
+      - id: "g"
+        label: "VPN or security services"
+      - id: "h"
+        label: "AI tools (ChatGPT Plus, etc.)"
+      - id: "i"
+        label: "Note-taking / knowledge (Notion, Evernote, etc.)"
+      - id: "j"
+        label: "Gaming subscriptions (Game Pass, PS Plus, etc.)"
+      - id: "k"
+        label: "News or reading apps"
+      - id: "l"
+        label: "Fitness or wellness apps"
+      - id: "m"
+        label: "None of these"
+  - id: q2
+    prompt: "About how many paid software/app subscriptions do you have in total right now?"
+    type: single_choice
+    construct: many_paid_software_app_subscriptions
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1-2"
+      - id: "c"
+        label: "3-5"
+      - id: "d"
+        label: "6-10"
+      - id: "e"
+        label: "11-15"
+      - id: "f"
+        label: "More than 15"
+  - id: q3
+    prompt: "Roughly how much do you spend on all software/app subscriptions combined per month?"
+    type: single_choice
+    construct: roughly_much_spend_all_software
+    required: true
+    options:
+      - id: "a"
+        label: "$0"
+      - id: "b"
+        label: "Under $10"
+      - id: "c"
+        label: "$10-$29"
+      - id: "d"
+        label: "$30-$59"
+      - id: "e"
+        label: "$60-$99"
+      - id: "f"
+        label: "$100-$199"
+      - id: "g"
+        label: "$200 or more"
+  - id: q4
+    prompt: "How do you keep track of your subscriptions? (Select all that apply)"
+    type: multi_choice
+    construct: keep_track_subscriptions_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "I keep a mental note"
+      - id: "b"
+        label: "A spreadsheet or note"
+      - id: "c"
+        label: "A dedicated subscription-tracking app"
+      - id: "d"
+        label: "My bank or credit card app"
+      - id: "e"
+        label: "My phone's app store subscription page"
+      - id: "f"
+        label: "Email receipts"
+      - id: "g"
+        label: "I don't really track them"
+  - id: q5
+    prompt: "Which billing cycles do most of your subscriptions use? (Select all that apply)"
+    type: multi_choice
+    construct: billing_cycles_most_subscriptions_use
+    required: true
+    options:
+      - id: "a"
+        label: "Monthly"
+      - id: "b"
+        label: "Annual"
+      - id: "c"
+        label: "Quarterly"
+      - id: "d"
+        label: "Lifetime / one-time"
+      - id: "e"
+        label: "Free trial not yet converted"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q6
+    prompt: "How do you usually pay for your subscriptions? (Select all that apply)"
+    type: multi_choice
+    construct: usually_pay_subscriptions_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Credit card"
+      - id: "b"
+        label: "Debit card"
+      - id: "c"
+        label: "PayPal"
+      - id: "d"
+        label: "Apple / Google in-app billing"
+      - id: "e"
+        label: "Gift cards or store credit"
+      - id: "f"
+        label: "Employer or shared/family plan"
+      - id: "g"
+        label: "Other"
+  - id: q7
+    prompt: "Do you share any subscriptions with family or friends (family plans, shared logins)?"
+    type: single_choice
+    construct: share_any_subscriptions_family_friends
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several"
+      - id: "b"
+        label: "Yes, one or two"
+      - id: "c"
+        label: "No, but I'd like to"
+      - id: "d"
+        label: "No"
+  - id: q8
+    prompt: "How often do you review your subscriptions to decide what to keep or cancel?"
+    type: single_choice
+    construct: often_review_subscriptions_decide_keep
+    required: true
+    options:
+      - id: "a"
+        label: "Monthly or more often"
+      - id: "b"
+        label: "Every few months"
+      - id: "c"
+        label: "Once or twice a year"
+      - id: "d"
+        label: "Only when I notice a charge"
+      - id: "e"
+        label: "Almost never"
+  - id: q9
+    prompt: "Have you ever forgotten about a subscription and kept paying for something you didn't use?"
+    type: single_choice
+    construct: have_ever_forgotten_subscription_kept
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, never"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q10
+    prompt: "What usually prompts you to cancel a subscription? (Select all that apply)"
+    type: multi_choice
+    construct: usually_prompts_cancel_subscription_sele
+    required: true
+    options:
+      - id: "a"
+        label: "I stopped using it"
+      - id: "b"
+        label: "Price increase"
+      - id: "c"
+        label: "Found a cheaper alternative"
+      - id: "d"
+        label: "Free trial was ending"
+      - id: "e"
+        label: "Budget tightening"
+      - id: "f"
+        label: "Poor quality or bad experience"
+      - id: "g"
+        label: "Only needed it temporarily"
+      - id: "h"
+        label: "I rarely cancel"
+  - id: q11
+    prompt: "How easy or difficult do you generally find it to cancel a subscription?"
+    type: single_choice
+    construct: easy_difficult_generally_find_it
+    required: true
+    options:
+      - id: "a"
+        label: "Very easy"
+      - id: "b"
+        label: "Somewhat easy"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat difficult"
+      - id: "e"
+        label: "Very difficult"
+  - id: q12
+    prompt: "How do you feel about free trials that require a credit card up front?"
+    type: single_choice
+    construct: feel_free_trials_that_require
+    required: true
+    options:
+      - id: "a"
+        label: "Fine — I use them and cancel in time"
+      - id: "b"
+        label: "I use them but worry about forgetting to cancel"
+      - id: "c"
+        label: "I avoid them"
+      - id: "d"
+        label: "I don't have a strong opinion"
+  - id: q13
+    prompt: "Approximately how much do you estimate you spend on all subscriptions per year (in US dollars)?"
+    type: free_text
+    construct: approximately_much_estimate_spend_all
+    required: true
+  - id: q14
+    prompt: "In the past year, about how many subscriptions did you cancel?"
+    type: free_text
+    construct: past_year_many_subscriptions_did
+    required: true
+  - id: q15
+    prompt: "How much do you agree with the following statement: I have a good handle on all the subscriptions I'm paying for."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: Subscription costs add up to more than I'd like."
+    type: single_choice
+    construct: much_agree_following_statement_subscript
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: I prefer subscriptions over paying a large one-time price."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement: Companies make it deliberately hard to cancel."
+    type: single_choice
+    construct: much_agree_following_statement_companies
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement: I feel \"subscription fatigue\" from having too many services."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement: I would rather own software outright than rent it via subscription."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How important is the following when deciding whether to subscribe to a service: monthly price?"
+    type: single_choice
+    construct: important_following_when_deciding_whethe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is the following when deciding whether to subscribe to a service: ease of cancellation?"
+    type: single_choice
+    construct: important_following_when_deciding_whethe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is the following when deciding whether to subscribe to a service: availability of a free trial?"
+    type: single_choice
+    construct: important_following_when_deciding_whethe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is the following when deciding whether to subscribe to a service: an annual discount option?"
+    type: single_choice
+    construct: important_following_when_deciding_whethe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is the following when deciding whether to subscribe to a service: no ads or lower-tier limitations?"
+    type: single_choice
+    construct: important_following_when_deciding_whethe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "Do you use any tool or app specifically to manage or cancel subscriptions (e.g., Rocket Money, bank features)?"
+    type: single_choice
+    construct: use_any_tool_app_specifically
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "I've tried one but stopped"
+      - id: "d"
+        label: "No, but I'm interested"
+      - id: "e"
+        label: "No, and I'm not interested"
+  - id: q27
+    prompt: "When a subscription price increases, what do you usually do?"
+    type: single_choice
+    construct: when_subscription_price_increases_usuall
+    required: true
+    options:
+      - id: "a"
+        label: "Cancel immediately"
+      - id: "b"
+        label: "Look for a cheaper plan or alternative"
+      - id: "c"
+        label: "Consider it, then usually keep it"
+      - id: "d"
+        label: "Keep it without much thought"
+      - id: "e"
+        label: "I don't notice price increases"
+  - id: q28
+    prompt: "Have you ever been surprised by an automatic renewal charge?"
+    type: single_choice
+    construct: have_ever_been_surprised_by
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, never"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q29
+    prompt: "How do you typically discover new subscription services you sign up for? (Select all that apply)"
+    type: multi_choice
+    construct: typically_discover_new_subscription_serv
+    required: true
+    options:
+      - id: "a"
+        label: "Ads (online, TV, podcast)"
+      - id: "b"
+        label: "Friends, family, or coworkers"
+      - id: "c"
+        label: "Social media influencers"
+      - id: "d"
+        label: "App store recommendations"
+      - id: "e"
+        label: "Reviews or comparison articles"
+      - id: "f"
+        label: "Free trial offers"
+      - id: "g"
+        label: "Bundled with another product"
+      - id: "h"
+        label: "I rarely sign up for new services"
+  - id: q30
+    prompt: "Do you take advantage of bundles (e.g., streaming + music, or telecom perks)?"
+    type: single_choice
+    construct: take_advantage_bundles_e_g
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, actively"
+      - id: "b"
+        label: "Sometimes"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "Never"
+  - id: q31
+    prompt: "Which best describes your overall approach to subscriptions?"
+    type: single_choice
+    construct: best_describes_overall_approach_subscrip
+    required: true
+    options:
+      - id: "a"
+        label: "Minimalist — I keep as few as possible"
+      - id: "b"
+        label: "Careful — I track and prune regularly"
+      - id: "c"
+        label: "Relaxed — I keep what's convenient"
+      - id: "d"
+        label: "Accumulator — they tend to pile up"
+  - id: q32
+    prompt: "Select your top 3 priorities when managing your subscriptions. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_priorities_when
+    required: true
+    options:
+      - id: "a"
+        label: "Keeping total cost down"
+      - id: "b"
+        label: "Only paying for what I actually use"
+      - id: "c"
+        label: "Avoiding surprise charges"
+      - id: "d"
+        label: "Getting the best features"
+      - id: "e"
+        label: "Convenience of one place to manage everything"
+      - id: "f"
+        label: "Sharing costs with others"
+      - id: "g"
+        label: "Locking in annual discounts"
+      - id: "h"
+        label: "Being able to cancel easily"
+  - id: q33
+    prompt: "Overall, how satisfied are you with how you currently manage your subscriptions?"
+    type: single_choice
+    construct: overall_satisfied_currently_manage_subsc
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How likely are you to reduce the number of subscriptions you pay for over the next year?"
+    type: single_choice
+    construct: likely_reduce_number_subscriptions_pay
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q35
+    prompt: "On a scale of 0 to 10, how much control do you feel you have over your subscription spending? (0 = no control, 10 = complete control)"
+    type: single_choice
+    construct: scale_0_10_much_control
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q36
+    prompt: "What would most help you manage your subscriptions better?"
+    type: free_text
+    construct: would_most_help_manage_subscriptions
+    required: true
+  - id: q37
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18 years old"
+      - id: "b"
+        label: "18-24 years old"
+      - id: "c"
+        label: "25-34 years old"
+      - id: "d"
+        label: "35-44 years old"
+      - id: "e"
+        label: "45-54 years old"
+      - id: "f"
+        label: "55-64 years old"
+      - id: "g"
+        label: "65 years or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Unemployed, looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Homemaker or caregiver"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q44
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship, not married"
+      - id: "c"
+        label: "Married or domestic partnership"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "How would you describe your general approach to personal budgeting?"
+    type: single_choice
+    construct: would_describe_general_approach_personal
+    required: true
+    options:
+      - id: "a"
+        label: "I track every expense closely"
+      - id: "b"
+        label: "I have a rough budget"
+      - id: "c"
+        label: "I keep a loose eye on spending"
+      - id: "d"
+        label: "I don't budget much"
+      - id: "e"
+        label: "Prefer not to say"

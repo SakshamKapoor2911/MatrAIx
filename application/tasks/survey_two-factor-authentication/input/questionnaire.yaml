@@ -1,0 +1,780 @@
+schemaVersion: "1.0"
+id: two_factor_authentication_v1
+title: "Two-Factor Authentication Survey"
+description: "How people adopt and use two-factor and multi-factor authentication to protect their online accounts."
+questions:
+  - id: q0
+    prompt: "Do you use two-factor authentication (2FA), also called two-step verification, on any of your online accounts?"
+    type: single_choice
+    construct: use_two_factor_authentication_2fa
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, on most or all of my important accounts"
+      - id: "b"
+        label: "Yes, on a few accounts"
+      - id: "c"
+        label: "No, but I know what it is"
+      - id: "d"
+        label: "No, and I'm not sure what it is"
+  - id: q1
+    prompt: "How long ago did you first start using two-factor authentication?"
+    type: single_choice
+    construct: long_ago_did_first_start
+    required: true
+    options:
+      - id: "a"
+        label: "Within the last 6 months"
+      - id: "b"
+        label: "6 months to 1 year ago"
+      - id: "c"
+        label: "1 to 3 years ago"
+      - id: "d"
+        label: "More than 3 years ago"
+      - id: "e"
+        label: "I don't use it"
+  - id: q2
+    prompt: "What first made you turn on two-factor authentication? (Select all that apply)"
+    type: multi_choice
+    construct: first_made_turn_two_factor
+    required: true
+    options:
+      - id: "a"
+        label: "An account of mine was hacked or breached"
+      - id: "b"
+        label: "A service required or strongly prompted me to"
+      - id: "c"
+        label: "My employer or school required it"
+      - id: "d"
+        label: "A friend or family member recommended it"
+      - id: "e"
+        label: "I read or watched something about security"
+      - id: "f"
+        label: "I wanted extra peace of mind"
+      - id: "g"
+        label: "I have never turned it on"
+  - id: q3
+    prompt: "Which two-factor authentication methods do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: two_factor_authentication_methods_curren
+    required: true
+    options:
+      - id: "a"
+        label: "Text message (SMS) codes"
+      - id: "b"
+        label: "Authenticator app codes (e.g., Google Authenticator, Authy, Microsoft Authenticator)"
+      - id: "c"
+        label: "Push approval prompts (e.g., \"Approve sign-in?\")"
+      - id: "d"
+        label: "Hardware security key (e.g., YubiKey)"
+      - id: "e"
+        label: "Biometrics (fingerprint or face)"
+      - id: "f"
+        label: "Email codes"
+      - id: "g"
+        label: "Backup codes"
+      - id: "h"
+        label: "Passkeys"
+      - id: "i"
+        label: "Phone-call codes"
+      - id: "j"
+        label: "I don't use two-factor authentication"
+  - id: q4
+    prompt: "Which authenticator app do you primarily use, if any?"
+    type: single_choice
+    construct: authenticator_app_primarily_use_if
+    required: true
+    options:
+      - id: "a"
+        label: "Google Authenticator"
+      - id: "b"
+        label: "Microsoft Authenticator"
+      - id: "c"
+        label: "Authy"
+      - id: "d"
+        label: "Duo Mobile"
+      - id: "e"
+        label: "Apple Passwords / iCloud built-in codes"
+      - id: "f"
+        label: "A password manager's built-in code generator"
+      - id: "g"
+        label: "Another authenticator app"
+      - id: "h"
+        label: "I don't use an authenticator app"
+  - id: q5
+    prompt: "On which types of accounts do you use two-factor authentication? (Select all that apply)"
+    type: multi_choice
+    construct: types_accounts_use_two_factor
+    required: true
+    options:
+      - id: "a"
+        label: "Email"
+      - id: "b"
+        label: "Banking or financial apps"
+      - id: "c"
+        label: "Social media"
+      - id: "d"
+        label: "Shopping or retail accounts"
+      - id: "e"
+        label: "Work or school accounts"
+      - id: "f"
+        label: "Cloud storage"
+      - id: "g"
+        label: "Gaming accounts"
+      - id: "h"
+        label: "Cryptocurrency or investing"
+      - id: "i"
+        label: "Password manager"
+      - id: "j"
+        label: "I don't use it anywhere"
+  - id: q6
+    prompt: "Roughly how many of your online accounts have two-factor authentication turned on? Enter a whole number."
+    type: free_text
+    construct: roughly_many_online_accounts_have
+    required: true
+  - id: q7
+    prompt: "How often does entering a second verification code or approval feel like a hassle?"
+    type: single_choice
+    construct: often_does_entering_second_verification
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q8
+    prompt: "Have you set up and saved backup or recovery codes for your important accounts?"
+    type: single_choice
+    construct: have_set_up_saved_backup
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for most of them"
+      - id: "b"
+        label: "Yes, for a few"
+      - id: "c"
+        label: "No, but I know I should"
+      - id: "d"
+        label: "No, and I hadn't thought about it"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q9
+    prompt: "Where do you store your two-factor backup codes? (Select all that apply)"
+    type: multi_choice
+    construct: where_store_two_factor_backup
+    required: true
+    options:
+      - id: "a"
+        label: "In my password manager"
+      - id: "b"
+        label: "Written on paper in a safe place"
+      - id: "c"
+        label: "In a notes app or document"
+      - id: "d"
+        label: "Printed and stored with important papers"
+      - id: "e"
+        label: "I take a screenshot and keep it"
+      - id: "f"
+        label: "I don't store them anywhere"
+      - id: "g"
+        label: "Not applicable"
+  - id: q10
+    prompt: "Please rate your agreement: Two-factor authentication makes my accounts significantly more secure."
+    type: single_choice
+    construct: please_rate_agreement_two_factor
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "Please rate your agreement: The extra step of two-factor authentication is worth the added protection."
+    type: single_choice
+    construct: please_rate_agreement_extra_step
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "Please rate your agreement: I worry about getting locked out of an account if I lose my phone."
+    type: single_choice
+    construct: please_rate_agreement_i_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "Please rate your agreement: Setting up two-factor authentication is confusing."
+    type: single_choice
+    construct: please_rate_agreement_setting_up
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "Please rate your agreement: I wish more of the services I use offered two-factor authentication."
+    type: single_choice
+    construct: please_rate_agreement_i_wish
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "Please rate your agreement: Text-message (SMS) codes are secure enough for my needs."
+    type: single_choice
+    construct: please_rate_agreement_text_message
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How secure do you consider this method: Text message (SMS) codes"
+    type: single_choice
+    construct: secure_consider_this_method_text
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all secure"
+      - id: "b"
+        label: "Slightly secure"
+      - id: "c"
+        label: "Moderately secure"
+      - id: "d"
+        label: "Very secure"
+      - id: "e"
+        label: "Extremely secure"
+  - id: q17
+    prompt: "How secure do you consider this method: Authenticator app codes"
+    type: single_choice
+    construct: secure_consider_this_method_authenticato
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all secure"
+      - id: "b"
+        label: "Slightly secure"
+      - id: "c"
+        label: "Moderately secure"
+      - id: "d"
+        label: "Very secure"
+      - id: "e"
+        label: "Extremely secure"
+  - id: q18
+    prompt: "How secure do you consider this method: Push approval prompts"
+    type: single_choice
+    construct: secure_consider_this_method_push
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all secure"
+      - id: "b"
+        label: "Slightly secure"
+      - id: "c"
+        label: "Moderately secure"
+      - id: "d"
+        label: "Very secure"
+      - id: "e"
+        label: "Extremely secure"
+  - id: q19
+    prompt: "How secure do you consider this method: Hardware security keys"
+    type: single_choice
+    construct: secure_consider_this_method_hardware
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all secure"
+      - id: "b"
+        label: "Slightly secure"
+      - id: "c"
+        label: "Moderately secure"
+      - id: "d"
+        label: "Very secure"
+      - id: "e"
+        label: "Extremely secure"
+  - id: q20
+    prompt: "How secure do you consider this method: Biometrics (fingerprint or face)"
+    type: single_choice
+    construct: secure_consider_this_method_biometrics
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all secure"
+      - id: "b"
+        label: "Slightly secure"
+      - id: "c"
+        label: "Moderately secure"
+      - id: "d"
+        label: "Very secure"
+      - id: "e"
+        label: "Extremely secure"
+  - id: q21
+    prompt: "How secure do you consider this method: Email codes"
+    type: single_choice
+    construct: secure_consider_this_method_email
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all secure"
+      - id: "b"
+        label: "Slightly secure"
+      - id: "c"
+        label: "Moderately secure"
+      - id: "d"
+        label: "Very secure"
+      - id: "e"
+        label: "Extremely secure"
+  - id: q22
+    prompt: "Have you ever turned off two-factor authentication on an account after enabling it?"
+    type: single_choice
+    construct: have_ever_turned_off_two
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, because it was too inconvenient"
+      - id: "b"
+        label: "Yes, because I got locked out or had trouble"
+      - id: "c"
+        label: "Yes, for another reason"
+      - id: "d"
+        label: "No, I've kept it on"
+      - id: "e"
+        label: "Not applicable"
+  - id: q23
+    prompt: "Have you ever been locked out of an account because of a two-factor authentication problem?"
+    type: single_choice
+    construct: have_ever_been_locked_out
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I couldn't recover it"
+      - id: "b"
+        label: "Yes, but I eventually recovered it"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q24
+    prompt: "Do you own a hardware security key (such as a YubiKey)?"
+    type: single_choice
+    construct: own_hardware_security_key_such
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I use it regularly"
+      - id: "b"
+        label: "Yes, but I rarely use it"
+      - id: "c"
+        label: "No, but I'm interested"
+      - id: "d"
+        label: "No, and I'm not interested"
+      - id: "e"
+        label: "I don't know what that is"
+  - id: q25
+    prompt: "Have you started using passkeys (passwordless sign-in) as an alternative to passwords plus 2FA?"
+    type: single_choice
+    construct: have_started_using_passkeys_passwordless
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for several accounts"
+      - id: "b"
+        label: "Yes, for one or two accounts"
+      - id: "c"
+        label: "No, but I plan to"
+      - id: "d"
+        label: "No, and I have no plans to"
+      - id: "e"
+        label: "I don't know what passkeys are"
+  - id: q26
+    prompt: "What are the main reasons you don't use two-factor authentication more widely? (Select all that apply)"
+    type: multi_choice
+    construct: main_reasons_don_t_use
+    required: true
+    options:
+      - id: "a"
+        label: "It's inconvenient or slows me down"
+      - id: "b"
+        label: "I'm afraid of getting locked out"
+      - id: "c"
+        label: "I don't think my accounts are worth targeting"
+      - id: "d"
+        label: "It's confusing to set up"
+      - id: "e"
+        label: "Not all my services offer it"
+      - id: "f"
+        label: "I just haven't gotten around to it"
+      - id: "g"
+        label: "I already use it everywhere I can"
+      - id: "h"
+        label: "Other"
+  - id: q27
+    prompt: "At work, is two-factor authentication required for the systems you use?"
+    type: single_choice
+    construct: work_two_factor_authentication_required
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for most or all systems"
+      - id: "b"
+        label: "Yes, for some systems"
+      - id: "c"
+        label: "No, it's optional"
+      - id: "d"
+        label: "No, it's not offered"
+      - id: "e"
+        label: "Not applicable — I don't work"
+  - id: q28
+    prompt: "Select your top 3 things you value most about two-factor authentication. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_value
+    required: true
+    options:
+      - id: "a"
+        label: "Protection even if my password is stolen"
+      - id: "b"
+        label: "Peace of mind"
+      - id: "c"
+        label: "Alerts me to unauthorized login attempts"
+      - id: "d"
+        label: "Required for accounts I care about"
+      - id: "e"
+        label: "Easy to use with my phone"
+      - id: "f"
+        label: "Works across many services"
+      - id: "g"
+        label: "Options like biometrics and push are fast"
+      - id: "h"
+        label: "Recommended by security experts"
+  - id: q29
+    prompt: "Overall, how satisfied are you with your current approach to account security?"
+    type: single_choice
+    construct: overall_satisfied_current_approach_accou
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "On a scale of 0 to 10, how likely are you to recommend two-factor authentication to a friend or family member? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "How likely are you to enable two-factor authentication on more accounts in the next year?"
+    type: single_choice
+    construct: likely_enable_two_factor_authentication
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q32
+    prompt: "If you could improve one thing about two-factor authentication, what would it be? (Optional)"
+    type: free_text
+    construct: if_could_improve_one_thing
+    required: false
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18 years old"
+      - id: "b"
+        label: "18-24 years old"
+      - id: "c"
+        label: "25-34 years old"
+      - id: "d"
+        label: "35-44 years old"
+      - id: "e"
+        label: "45-54 years old"
+      - id: "f"
+        label: "55-64 years old"
+      - id: "g"
+        label: "65 years or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed, looking for work"
+      - id: "f"
+        label: "Not employed, not looking for work"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "How many people live in your household, including you? Enter a whole number."
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q40
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or domestic partnership"
+      - id: "c"
+        label: "In a relationship, not living together"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "In which U.S. region do you live?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "How would you rate your overall comfort with technology?"
+    type: single_choice
+    construct: would_rate_overall_comfort_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Extremely comfortable — I'm the person others ask for help"
+  - id: q44
+    prompt: "Which best describes your relationship to technology work?"
+    type: single_choice
+    construct: best_describes_relationship_technology_w
+    required: true
+    options:
+      - id: "a"
+        label: "I work in an IT, software, or cybersecurity role"
+      - id: "b"
+        label: "I work in tech but not in a technical role"
+      - id: "c"
+        label: "I work outside the tech industry"
+      - id: "d"
+        label: "I'm a student"
+      - id: "e"
+        label: "I'm not currently working"
+      - id: "f"
+        label: "Prefer not to say"

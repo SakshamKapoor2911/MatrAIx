@@ -1,0 +1,748 @@
+schemaVersion: "1.0"
+id: gadget_upgrade_cycle_v1
+title: "Gadget Upgrade Cycle Survey"
+description: "How often people replace their personal tech devices — phones, laptops, tablets, wearables, and audio gear — and what drives those upgrade decisions."
+questions:
+  - id: q0
+    prompt: "In general, how quickly do you replace your personal tech devices?"
+    type: single_choice
+    construct: general_quickly_replace_personal_tech
+    required: true
+    options:
+      - id: "a"
+        label: "As soon as a new model comes out"
+      - id: "b"
+        label: "Every couple of years"
+      - id: "c"
+        label: "Only when the old one slows down or wears out"
+      - id: "d"
+        label: "Only when the old one completely stops working"
+      - id: "e"
+        label: "I keep devices as long as humanly possible"
+  - id: q1
+    prompt: "Which personal tech devices do you currently own? (Select all that apply)"
+    type: multi_choice
+    construct: personal_tech_devices_currently_own
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "Laptop"
+      - id: "c"
+        label: "Desktop computer"
+      - id: "d"
+        label: "Tablet"
+      - id: "e"
+        label: "Smartwatch or fitness tracker"
+      - id: "f"
+        label: "Wireless earbuds or headphones"
+      - id: "g"
+        label: "Smart speaker"
+      - id: "h"
+        label: "E-reader"
+      - id: "i"
+        label: "Gaming console"
+      - id: "j"
+        label: "Camera"
+  - id: q2
+    prompt: "How old is your current primary smartphone?"
+    type: single_choice
+    construct: old_current_primary_smartphone
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1–2 years"
+      - id: "c"
+        label: "2–3 years"
+      - id: "d"
+        label: "3–4 years"
+      - id: "e"
+        label: "More than 4 years"
+      - id: "f"
+        label: "I do not own a smartphone"
+  - id: q3
+    prompt: "How often do you typically replace your smartphone?"
+    type: single_choice
+    construct: often_typically_replace_smartphone
+    required: true
+    options:
+      - id: "a"
+        label: "Every year"
+      - id: "b"
+        label: "Every 2 years"
+      - id: "c"
+        label: "Every 3 years"
+      - id: "d"
+        label: "Every 4 years"
+      - id: "e"
+        label: "Every 5+ years"
+      - id: "f"
+        label: "Not applicable"
+  - id: q4
+    prompt: "How often do you typically replace your laptop?"
+    type: single_choice
+    construct: often_typically_replace_laptop
+    required: true
+    options:
+      - id: "a"
+        label: "Every 1–2 years"
+      - id: "b"
+        label: "Every 3 years"
+      - id: "c"
+        label: "Every 4–5 years"
+      - id: "d"
+        label: "Every 6+ years"
+      - id: "e"
+        label: "Not applicable"
+  - id: q5
+    prompt: "How often do you typically replace your tablet?"
+    type: single_choice
+    construct: often_typically_replace_tablet
+    required: true
+    options:
+      - id: "a"
+        label: "Every 1–2 years"
+      - id: "b"
+        label: "Every 3 years"
+      - id: "c"
+        label: "Every 4–5 years"
+      - id: "d"
+        label: "Every 6+ years"
+      - id: "e"
+        label: "Not applicable"
+  - id: q6
+    prompt: "How often do you typically replace your headphones or earbuds?"
+    type: single_choice
+    construct: often_typically_replace_headphones_earbu
+    required: true
+    options:
+      - id: "a"
+        label: "Every year"
+      - id: "b"
+        label: "Every 2 years"
+      - id: "c"
+        label: "Every 3–4 years"
+      - id: "d"
+        label: "Every 5+ years"
+      - id: "e"
+        label: "Not applicable"
+  - id: q7
+    prompt: "How often do you typically replace your smartwatch or fitness tracker?"
+    type: single_choice
+    construct: often_typically_replace_smartwatch_fitne
+    required: true
+    options:
+      - id: "a"
+        label: "Every year"
+      - id: "b"
+        label: "Every 2 years"
+      - id: "c"
+        label: "Every 3–4 years"
+      - id: "d"
+        label: "Every 5+ years"
+      - id: "e"
+        label: "Not applicable"
+  - id: q8
+    prompt: "What usually triggers you to upgrade a device? (Select all that apply)"
+    type: multi_choice
+    construct: usually_triggers_upgrade_device_select
+    required: true
+    options:
+      - id: "a"
+        label: "It stopped working or broke"
+      - id: "b"
+        label: "It became too slow"
+      - id: "c"
+        label: "Battery life degraded"
+      - id: "d"
+        label: "Storage filled up"
+      - id: "e"
+        label: "It no longer gets software updates"
+      - id: "f"
+        label: "A compelling new feature appeared"
+      - id: "g"
+        label: "A good deal or trade-in offer"
+      - id: "h"
+        label: "My contract or plan made it cheap to upgrade"
+      - id: "i"
+        label: "I just wanted something new"
+  - id: q9
+    prompt: "When you decide to upgrade, how do you usually research the purchase? (Select all that apply)"
+    type: multi_choice
+    construct: when_decide_upgrade_usually_research
+    required: true
+    options:
+      - id: "a"
+        label: "Read reviews on tech sites"
+      - id: "b"
+        label: "Watch YouTube reviews"
+      - id: "c"
+        label: "Compare specs and prices online"
+      - id: "d"
+        label: "Ask friends or family"
+      - id: "e"
+        label: "Visit a physical store"
+      - id: "f"
+        label: "Follow a brand I already trust"
+      - id: "g"
+        label: "I do minimal research"
+  - id: q10
+    prompt: "Where do you usually buy new devices?"
+    type: single_choice
+    construct: where_usually_buy_new_devices
+    required: true
+    options:
+      - id: "a"
+        label: "Directly from the manufacturer (online or store)"
+      - id: "b"
+        label: "Amazon or another online retailer"
+      - id: "c"
+        label: "A big-box electronics store"
+      - id: "d"
+        label: "A carrier or phone provider"
+      - id: "e"
+        label: "A warehouse club or discount retailer"
+      - id: "f"
+        label: "Second-hand / refurbished sellers"
+  - id: q11
+    prompt: "Select your top 3 factors when deciding whether to upgrade a device. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_when
+    required: true
+    options:
+      - id: "a"
+        label: "Price / cost"
+      - id: "b"
+        label: "Performance improvement"
+      - id: "c"
+        label: "Battery life"
+      - id: "d"
+        label: "New features"
+      - id: "e"
+        label: "Camera quality"
+      - id: "f"
+        label: "Brand loyalty"
+      - id: "g"
+        label: "Environmental impact"
+      - id: "h"
+        label: "Trade-in or resale value"
+  - id: q12
+    prompt: "How much do you agree: I like to have the latest technology."
+    type: single_choice
+    construct: much_agree_i_like_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree: I only upgrade when I truly need to."
+    type: single_choice
+    construct: much_agree_i_only_upgrade
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: The environmental impact of e-waste affects my upgrade decisions."
+    type: single_choice
+    construct: much_agree_environmental_impact_e
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: New devices rarely feel worth the money to me."
+    type: single_choice
+    construct: much_agree_new_devices_rarely
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: I feel pressure to upgrade when friends or family get new devices."
+    type: single_choice
+    construct: much_agree_i_feel_pressure
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How important is each factor in a new-device purchase: Price."
+    type: single_choice
+    construct: important_each_factor_new_device
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each factor in a new-device purchase: Long-term durability."
+    type: single_choice
+    construct: important_each_factor_new_device
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is each factor in a new-device purchase: Length of software / update support."
+    type: single_choice
+    construct: important_each_factor_new_device
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is each factor in a new-device purchase: Repairability."
+    type: single_choice
+    construct: important_each_factor_new_device
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each factor in a new-device purchase: Trade-in or resale value."
+    type: single_choice
+    construct: important_each_factor_new_device
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "What do you usually do with your old devices? (Select all that apply)"
+    type: multi_choice
+    construct: usually_old_devices_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Trade them in"
+      - id: "b"
+        label: "Sell them"
+      - id: "c"
+        label: "Give them to family or friends"
+      - id: "d"
+        label: "Keep them as backups"
+      - id: "e"
+        label: "Recycle them properly"
+      - id: "f"
+        label: "Let them pile up in a drawer"
+      - id: "g"
+        label: "Throw them away"
+  - id: q23
+    prompt: "Do you try to repair a device before replacing it?"
+    type: single_choice
+    construct: try_repair_device_before_replacing
+    required: true
+    options:
+      - id: "a"
+        label: "Always, if it is repairable"
+      - id: "b"
+        label: "Usually"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never — I just replace it"
+  - id: q24
+    prompt: "Do you buy extended warranties or device insurance?"
+    type: single_choice
+    construct: buy_extended_warranties_device_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, on most devices"
+      - id: "b"
+        label: "Yes, on expensive devices only"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "Never"
+  - id: q25
+    prompt: "How do you usually pay for a new phone?"
+    type: single_choice
+    construct: usually_pay_new_phone
+    required: true
+    options:
+      - id: "a"
+        label: "Pay the full price up front"
+      - id: "b"
+        label: "Monthly installments through a carrier"
+      - id: "c"
+        label: "Monthly installments through the manufacturer"
+      - id: "d"
+        label: "On a credit card and pay over time"
+      - id: "e"
+        label: "Not applicable"
+  - id: q26
+    prompt: "How often do you buy a brand-new device on release day or pre-order it?"
+    type: single_choice
+    construct: often_buy_brand_new_device
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Almost every time for devices I want"
+  - id: q27
+    prompt: "Roughly how much do you spend on personal tech devices in a typical year (USD)? Enter a number."
+    type: free_text
+    construct: roughly_much_spend_personal_tech
+    required: true
+  - id: q28
+    prompt: "In months, how long do you ideally like to keep a smartphone before upgrading? Enter a number."
+    type: free_text
+    construct: months_long_ideally_like_keep
+    required: true
+  - id: q29
+    prompt: "Overall, how satisfied are you with your current set of personal devices?"
+    type: single_choice
+    construct: overall_satisfied_current_set_personal
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How likely are you to upgrade at least one major device in the next 12 months? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: likely_upgrade_least_one_major
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "Over the next few years, how do you expect your upgrade frequency to change?"
+    type: single_choice
+    construct: over_next_few_years_expect
+    required: true
+    options:
+      - id: "a"
+        label: "Upgrade much less often"
+      - id: "b"
+        label: "Upgrade somewhat less often"
+      - id: "c"
+        label: "Stay about the same"
+      - id: "d"
+        label: "Upgrade somewhat more often"
+      - id: "e"
+        label: "Upgrade much more often"
+  - id: q32
+    prompt: "What would make you hold on to your devices longer? Please describe."
+    type: free_text
+    construct: would_make_hold_devices_longer
+    required: true
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Which best describes your current employment status?"
+    type: single_choice
+    construct: best_describes_current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "How would you describe yourself as a tech consumer?"
+    type: single_choice
+    construct: would_describe_yourself_as_tech
+    required: true
+    options:
+      - id: "a"
+        label: "Early adopter — I get new things first"
+      - id: "b"
+        label: "Enthusiast — I follow tech closely"
+      - id: "c"
+        label: "Mainstream — I upgrade when it makes sense"
+      - id: "d"
+        label: "Late adopter — I wait until things are proven"
+      - id: "e"
+        label: "Minimalist — I use as little tech as I can"
+  - id: q39
+    prompt: "What is your approximate annual household income (USD)?"
+    type: single_choice
+    construct: approximate_annual_household_income_usd
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000–$199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "How many people live in your household, including yourself?"
+    type: single_choice
+    construct: many_people_live_household_including
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q41
+    prompt: "What is your relationship status?"
+    type: single_choice
+    construct: relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "In a domestic partnership or living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

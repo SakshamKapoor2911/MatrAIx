@@ -1,0 +1,806 @@
+schemaVersion: "1.0"
+id: auto_loan_financing_v1
+title: "Auto Loan & Vehicle Financing Survey"
+description: "How consumers shop for, take on, and manage auto loans and vehicle leases."
+questions:
+  - id: q0
+    prompt: "Do you currently have an auto loan or vehicle lease?"
+    type: single_choice
+    construct: currently_have_auto_loan_vehicle
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, an auto loan I am paying off"
+      - id: "b"
+        label: "Yes, a vehicle lease"
+      - id: "c"
+        label: "Yes, both a loan and a lease (different vehicles)"
+      - id: "d"
+        label: "No, I own my vehicle(s) outright"
+      - id: "e"
+        label: "No, I do not own or lease any vehicle"
+  - id: q1
+    prompt: "In the past 5 years, how have you acquired vehicles? (Select all that apply)"
+    type: multi_choice
+    construct: past_5_years_have_acquired
+    required: true
+    options:
+      - id: "a"
+        label: "Bought new with a loan"
+      - id: "b"
+        label: "Bought used with a loan"
+      - id: "c"
+        label: "Paid cash (new or used)"
+      - id: "d"
+        label: "Leased"
+      - id: "e"
+        label: "Received a vehicle as a gift or hand-me-down"
+      - id: "f"
+        label: "Have not acquired a vehicle in the past 5 years"
+  - id: q2
+    prompt: "For your most recent financed vehicle, was it new or used?"
+    type: single_choice
+    construct: most_recent_financed_vehicle_was
+    required: true
+    options:
+      - id: "a"
+        label: "New"
+      - id: "b"
+        label: "Used, certified pre-owned"
+      - id: "c"
+        label: "Used, private party or non-certified"
+      - id: "d"
+        label: "Not applicable"
+  - id: q3
+    prompt: "What type of vehicle did you most recently finance?"
+    type: single_choice
+    construct: type_vehicle_did_most_recently
+    required: true
+    options:
+      - id: "a"
+        label: "Sedan or hatchback"
+      - id: "b"
+        label: "SUV or crossover"
+      - id: "c"
+        label: "Pickup truck"
+      - id: "d"
+        label: "Minivan"
+      - id: "e"
+        label: "Electric or plug-in hybrid vehicle"
+      - id: "f"
+        label: "Motorcycle or other"
+      - id: "g"
+        label: "Not applicable"
+  - id: q4
+    prompt: "When did you take out your most recent auto loan?"
+    type: single_choice
+    construct: when_did_take_out_most
+    required: true
+    options:
+      - id: "a"
+        label: "Within the past 12 months"
+      - id: "b"
+        label: "1 to 2 years ago"
+      - id: "c"
+        label: "3 to 5 years ago"
+      - id: "d"
+        label: "More than 5 years ago"
+      - id: "e"
+        label: "I have never taken out an auto loan"
+  - id: q5
+    prompt: "How many vehicles does your household currently own or lease?"
+    type: single_choice
+    construct: many_vehicles_does_household_currently
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4 or more"
+  - id: q6
+    prompt: "For your most recent auto loan, about how much did you finance (the amount borrowed)? Please enter a dollar amount."
+    type: free_text
+    construct: most_recent_auto_loan_much
+    required: true
+  - id: q7
+    prompt: "What was the term (length) of your most recent auto loan?"
+    type: single_choice
+    construct: was_term_length_most_recent
+    required: true
+    options:
+      - id: "a"
+        label: "36 months or less"
+      - id: "b"
+        label: "37 to 48 months"
+      - id: "c"
+        label: "49 to 60 months"
+      - id: "d"
+        label: "61 to 72 months"
+      - id: "e"
+        label: "73 to 84 months"
+      - id: "f"
+        label: "More than 84 months"
+      - id: "g"
+        label: "Don't know / not applicable"
+  - id: q8
+    prompt: "What was the approximate annual percentage rate (APR) on your most recent auto loan?"
+    type: single_choice
+    construct: was_approximate_annual_percentage_rate
+    required: true
+    options:
+      - id: "a"
+        label: "0% to 2.9%"
+      - id: "b"
+        label: "3% to 4.9%"
+      - id: "c"
+        label: "5% to 6.9%"
+      - id: "d"
+        label: "7% to 9.9%"
+      - id: "e"
+        label: "10% to 14.9%"
+      - id: "f"
+        label: "15% or higher"
+      - id: "g"
+        label: "Don't know"
+  - id: q9
+    prompt: "About how much is your current monthly auto loan or lease payment? Please enter a dollar amount."
+    type: free_text
+    construct: much_current_monthly_auto_loan
+    required: true
+  - id: q10
+    prompt: "About how much did you put down (down payment plus trade-in value) on your most recent financed vehicle? Please enter a dollar amount."
+    type: free_text
+    construct: much_did_put_down_down
+    required: true
+  - id: q11
+    prompt: "Where did you get the financing for your most recent auto loan?"
+    type: single_choice
+    construct: where_did_get_financing_most
+    required: true
+    options:
+      - id: "a"
+        label: "Bank"
+      - id: "b"
+        label: "Credit union"
+      - id: "c"
+        label: "The dealership's own financing (captive lender, e.g., Ford Credit, Toyota Financial)"
+      - id: "d"
+        label: "Online lender or fintech (e.g., Carvana, LightStream)"
+      - id: "e"
+        label: "Family or personal loan"
+      - id: "f"
+        label: "Don't know / not applicable"
+  - id: q12
+    prompt: "Did you get pre-approved for financing before you went shopping for the vehicle?"
+    type: single_choice
+    construct: did_get_pre_approved_financing
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I had a pre-approval in hand"
+      - id: "b"
+        label: "No, I arranged financing at the dealership"
+      - id: "c"
+        label: "No, I paid cash or did not need financing"
+      - id: "d"
+        label: "Don't remember"
+  - id: q13
+    prompt: "How many lenders or financing offers did you compare before choosing?"
+    type: single_choice
+    construct: many_lenders_financing_offers_did
+    required: true
+    options:
+      - id: "a"
+        label: "Only one (took the first offer)"
+      - id: "b"
+        label: "2 offers"
+      - id: "c"
+        label: "3 to 4 offers"
+      - id: "d"
+        label: "5 or more offers"
+      - id: "e"
+        label: "Don't remember"
+  - id: q14
+    prompt: "Which add-on products, if any, did you purchase with your most recent vehicle financing? (Select all that apply)"
+    type: multi_choice
+    construct: add_products_if_any_did
+    required: true
+    options:
+      - id: "a"
+        label: "Extended warranty or service contract"
+      - id: "b"
+        label: "GAP insurance"
+      - id: "c"
+        label: "Tire and wheel protection"
+      - id: "d"
+        label: "Paint or fabric protection"
+      - id: "e"
+        label: "Credit life or disability insurance"
+      - id: "f"
+        label: "None of these"
+  - id: q15
+    prompt: "Did you trade in a vehicle as part of your most recent purchase?"
+    type: single_choice
+    construct: did_trade_vehicle_as_part
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I still owed money on it"
+      - id: "b"
+        label: "Yes, and it was paid off"
+      - id: "c"
+        label: "No trade-in"
+      - id: "d"
+        label: "Not applicable"
+  - id: q16
+    prompt: "At the time of your most recent auto loan, which best describes your credit score range?"
+    type: single_choice
+    construct: time_most_recent_auto_loan
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent (740+)"
+      - id: "b"
+        label: "Good (670–739)"
+      - id: "c"
+        label: "Fair (580–669)"
+      - id: "d"
+        label: "Poor (below 580)"
+      - id: "e"
+        label: "Don't know"
+  - id: q17
+    prompt: "Thinking about your most recent auto loan, how much do you agree: I fully understood all the terms of the loan before signing."
+    type: single_choice
+    construct: thinking_most_recent_auto_loan
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "Thinking about your most recent auto loan, how much do you agree: The monthly payment fits comfortably within my budget."
+    type: single_choice
+    construct: thinking_most_recent_auto_loan
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "Thinking about your most recent auto loan, how much do you agree: I feel confident I got a competitive interest rate."
+    type: single_choice
+    construct: thinking_most_recent_auto_loan
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Thinking about your most recent auto loan, how much do you agree: I felt pressured by the dealer or lender during the process."
+    type: single_choice
+    construct: thinking_most_recent_auto_loan
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "Thinking about your most recent auto loan, how much do you agree: The total cost of the vehicle ended up higher than I expected."
+    type: single_choice
+    construct: thinking_most_recent_auto_loan
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "Thinking about your most recent auto loan, how much do you agree: I would shop around more carefully next time."
+    type: single_choice
+    construct: thinking_most_recent_auto_loan
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "When choosing an auto loan, how important was each of the following: a low monthly payment."
+    type: single_choice
+    construct: when_choosing_auto_loan_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing an auto loan, how important was each of the following: a low interest rate (APR)."
+    type: single_choice
+    construct: when_choosing_auto_loan_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing an auto loan, how important was each of the following: a short loan term to pay it off quickly."
+    type: single_choice
+    construct: when_choosing_auto_loan_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing an auto loan, how important was each of the following: fast and easy approval."
+    type: single_choice
+    construct: when_choosing_auto_loan_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing an auto loan, how important was each of the following: borrowing from a lender I already trust."
+    type: single_choice
+    construct: when_choosing_auto_loan_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Which of the following were your top 3 priorities when financing your most recent vehicle? (Select all that apply — choose up to 3)"
+    type: single_choice
+    construct: following_were_top_3_priorities
+    required: true
+    options:
+      - id: "a"
+        label: "Lowest monthly payment"
+      - id: "b"
+        label: "Lowest total interest cost"
+      - id: "c"
+        label: "Paying it off as fast as possible"
+      - id: "d"
+        label: "Getting a specific vehicle regardless of cost"
+      - id: "e"
+        label: "Fast, convenient approval"
+      - id: "f"
+        label: "Minimizing the down payment"
+      - id: "g"
+        label: "Working with a trusted lender or dealer"
+  - id: q29
+    prompt: "Have you ever refinanced an auto loan to get a better rate or payment?"
+    type: single_choice
+    construct: have_ever_refinanced_auto_loan
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, once"
+      - id: "b"
+        label: "Yes, more than once"
+      - id: "c"
+        label: "No, but I have considered it"
+      - id: "d"
+        label: "No, and I have not considered it"
+  - id: q30
+    prompt: "Have you ever owed more on a vehicle than it was worth (been \"underwater\" or \"upside down\")?"
+    type: single_choice
+    construct: have_ever_owed_more_vehicle
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, currently"
+      - id: "b"
+        label: "Yes, in the past"
+      - id: "c"
+        label: "No, never"
+      - id: "d"
+        label: "Don't know"
+  - id: q31
+    prompt: "In the past 2 years, how often have you made a late or missed auto loan payment?"
+    type: single_choice
+    construct: past_2_years_often_have
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Not applicable"
+  - id: q32
+    prompt: "How do you typically make your auto loan payments?"
+    type: single_choice
+    construct: typically_make_auto_loan_payments
+    required: true
+    options:
+      - id: "a"
+        label: "Automatic payment (autopay) set up with the lender"
+      - id: "b"
+        label: "Manual online payment each month"
+      - id: "c"
+        label: "By phone or mail"
+      - id: "d"
+        label: "In person"
+      - id: "e"
+        label: "Not applicable"
+  - id: q33
+    prompt: "How often do you check your auto loan balance or statement?"
+    type: single_choice
+    construct: often_check_auto_loan_balance
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "A few times a year"
+      - id: "d"
+        label: "Monthly"
+      - id: "e"
+        label: "More than once a month"
+  - id: q34
+    prompt: "How likely are you to finance (rather than pay cash for) your next vehicle?"
+    type: single_choice
+    construct: likely_finance_rather_than_pay
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q35
+    prompt: "How likely are you to seriously consider an electric or hybrid vehicle for your next purchase?"
+    type: single_choice
+    construct: likely_seriously_consider_electric_hybri
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q36
+    prompt: "Overall, how satisfied are you with your current auto lender or financing company?"
+    type: single_choice
+    construct: overall_satisfied_current_auto_lender
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q37
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your auto lender to a friend or family member? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q38
+    prompt: "What is the primary way you use your main vehicle?"
+    type: single_choice
+    construct: primary_way_use_main_vehicle
+    required: true
+    options:
+      - id: "a"
+        label: "Commuting to work or school"
+      - id: "b"
+        label: "Family and errands"
+      - id: "c"
+        label: "Business or work (rideshare, deliveries, trades)"
+      - id: "d"
+        label: "Leisure and recreation"
+      - id: "e"
+        label: "Not applicable"
+  - id: q39
+    prompt: "If you could change one thing about your auto financing experience, what would it be? (Optional — you may leave a short comment.)"
+    type: free_text
+    construct: if_could_change_one_thing
+    required: false
+  - id: q40
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which best describes your race or ethnicity?"
+    type: single_choice
+    construct: best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Two or more races"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree or trade certificate"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q46
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q47
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q49
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q50
+    prompt: "Do you own or rent your primary residence?"
+    type: single_choice
+    construct: own_rent_primary_residence
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"
+      - id: "d"
+        label: "Prefer not to say"

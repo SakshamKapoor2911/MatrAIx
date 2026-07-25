@@ -1,0 +1,611 @@
+schemaVersion: "1.0"
+id: immune_support_habits_v1
+title: "Immune Support Habits Survey"
+description: "Everyday habits, foods, and products people use to support their general immune health."
+questions:
+  - id: q0
+    prompt: "How much do you think about supporting your immune health day to day?"
+    type: single_choice
+    construct: much_think_supporting_immune_health
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A great deal"
+  - id: q1
+    prompt: "Which habits do you follow to support your general immune health? (Select all that apply)"
+    type: multi_choice
+    construct: habits_follow_support_general_immune
+    required: true
+    options:
+      - id: "a"
+        label: "Eating fruits and vegetables"
+      - id: "b"
+        label: "Getting enough sleep"
+      - id: "c"
+        label: "Regular exercise"
+      - id: "d"
+        label: "Staying hydrated"
+      - id: "e"
+        label: "Managing stress"
+      - id: "f"
+        label: "Washing hands regularly"
+      - id: "g"
+        label: "Taking supplements"
+      - id: "h"
+        label: "Getting seasonal vaccinations"
+      - id: "i"
+        label: "None of these"
+  - id: q2
+    prompt: "Do you take any supplements you associate with immune support?"
+    type: single_choice
+    construct: take_any_supplements_associate_immune
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, daily"
+      - id: "b"
+        label: "Yes, occasionally or seasonally"
+      - id: "c"
+        label: "No, but I have before"
+      - id: "d"
+        label: "No, never"
+  - id: q3
+    prompt: "Which immune-associated supplements or products do you use? (Select all that apply)"
+    type: multi_choice
+    construct: immune_associated_supplements_products_u
+    required: true
+    options:
+      - id: "a"
+        label: "Vitamin C"
+      - id: "b"
+        label: "Vitamin D"
+      - id: "c"
+        label: "Zinc"
+      - id: "d"
+        label: "A multivitamin"
+      - id: "e"
+        label: "Probiotics"
+      - id: "f"
+        label: "Elderberry"
+      - id: "g"
+        label: "Herbal or plant-based products"
+      - id: "h"
+        label: "None of these"
+  - id: q4
+    prompt: "In what forms do you take immune-support products? (Select all that apply)"
+    type: multi_choice
+    construct: forms_take_immune_support_products
+    required: true
+    options:
+      - id: "a"
+        label: "Pills or capsules"
+      - id: "b"
+        label: "Gummies"
+      - id: "c"
+        label: "Powders or drink mixes"
+      - id: "d"
+        label: "Liquids or drops"
+      - id: "e"
+        label: "Teas"
+      - id: "f"
+        label: "Foods or drinks marketed for immunity"
+      - id: "g"
+        label: "I do not take any"
+  - id: q5
+    prompt: "How often do you eat foods you consider good for immune health?"
+    type: single_choice
+    construct: often_eat_foods_consider_good
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "About once a week"
+      - id: "d"
+        label: "Occasionally"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q6
+    prompt: "About how many servings of fruits and vegetables do you eat on a typical day? Please enter a number."
+    type: free_text
+    construct: many_servings_fruits_vegetables_eat
+    required: true
+  - id: q7
+    prompt: "Do your immune-support habits change with the seasons?"
+    type: single_choice
+    construct: immune_support_habits_change_seasons
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I do more in cold and flu season"
+      - id: "b"
+        label: "Yes, but only slightly"
+      - id: "c"
+        label: "No, they stay about the same"
+      - id: "d"
+        label: "Not sure"
+  - id: q8
+    prompt: "Where do you get most of your information about immune health? (Select all that apply)"
+    type: multi_choice
+    construct: where_get_most_information_immune
+    required: true
+    options:
+      - id: "a"
+        label: "Doctors or pharmacists"
+      - id: "b"
+        label: "Health websites or search engines"
+      - id: "c"
+        label: "Social media or videos"
+      - id: "d"
+        label: "Friends or family"
+      - id: "e"
+        label: "Product labels or advertising"
+      - id: "f"
+        label: "Podcasts or newsletters"
+      - id: "g"
+        label: "I do not seek out this information"
+  - id: q9
+    prompt: "How much do you agree with the following statement: The everyday habits I follow help support my immune health."
+    type: single_choice
+    construct: much_agree_following_statement_everyday
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree with the following statement: Supplements make a real difference for my immune health."
+    type: single_choice
+    construct: much_agree_following_statement_supplemen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: A healthy diet matters more than supplements for immunity."
+    type: single_choice
+    construct: much_agree_following_statement_healthy
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: It is hard to know which immune-support claims to believe."
+    type: single_choice
+    construct: much_agree_following_statement_it
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: I feel in control of my immune health through my habits."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you trust the claims made by immune-support product brands?"
+    type: single_choice
+    construct: much_trust_claims_made_by
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A great deal"
+  - id: q15
+    prompt: "Have you talked with a doctor or pharmacist before taking an immune-support supplement?"
+    type: single_choice
+    construct: have_talked_doctor_pharmacist_before
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I plan to"
+      - id: "c"
+        label: "No, and I do not plan to"
+      - id: "d"
+        label: "Not applicable"
+  - id: q16
+    prompt: "About how much do you spend per month on immune-support supplements or products?"
+    type: single_choice
+    construct: much_spend_per_month_immune
+    required: true
+    options:
+      - id: "a"
+        label: "Nothing"
+      - id: "b"
+        label: "Less than $10"
+      - id: "c"
+        label: "$10–$25"
+      - id: "d"
+        label: "$26–$50"
+      - id: "e"
+        label: "More than $50"
+  - id: q17
+    prompt: "About how much do you spend per month on immune-support products, in dollars? Please enter a number."
+    type: free_text
+    construct: much_spend_per_month_immune
+    required: true
+  - id: q18
+    prompt: "Which habit do you think matters most for immune health?"
+    type: single_choice
+    construct: habit_think_matters_most_immune
+    required: true
+    options:
+      - id: "a"
+        label: "Sleep"
+      - id: "b"
+        label: "Diet and nutrition"
+      - id: "c"
+        label: "Exercise"
+      - id: "d"
+        label: "Stress management"
+      - id: "e"
+        label: "Supplements"
+      - id: "f"
+        label: "Not sure"
+  - id: q19
+    prompt: "Select your top 3 habits you rely on most for immune support. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_habits_rely
+    required: true
+    options:
+      - id: "a"
+        label: "Eating well"
+      - id: "b"
+        label: "Sleeping enough"
+      - id: "c"
+        label: "Exercising"
+      - id: "d"
+        label: "Staying hydrated"
+      - id: "e"
+        label: "Managing stress"
+      - id: "f"
+        label: "Hand hygiene"
+      - id: "g"
+        label: "Taking supplements"
+  - id: q20
+    prompt: "How important is supporting your immune health to you overall?"
+    type: single_choice
+    construct: important_supporting_immune_health_overa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "What gets in the way of keeping up immune-support habits? (Select all that apply)"
+    type: multi_choice
+    construct: gets_way_keeping_up_immune
+    required: true
+    options:
+      - id: "a"
+        label: "Lack of time"
+      - id: "b"
+        label: "Cost"
+      - id: "c"
+        label: "Not sure what actually works"
+      - id: "d"
+        label: "Hard to stay consistent"
+      - id: "e"
+        label: "I do not find it a priority"
+      - id: "f"
+        label: "Nothing in particular"
+  - id: q22
+    prompt: "Do you use any app or tracker for habits related to immune health (sleep, diet, activity)?"
+    type: single_choice
+    construct: use_any_app_tracker_habits
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No, and I would not"
+  - id: q23
+    prompt: "How often do you get sick with colds or similar illnesses in a typical year?"
+    type: single_choice
+    construct: often_get_sick_colds_similar
+    required: true
+    options:
+      - id: "a"
+        label: "Rarely or never"
+      - id: "b"
+        label: "Once a year"
+      - id: "c"
+        label: "2 to 3 times a year"
+      - id: "d"
+        label: "4 or more times a year"
+  - id: q24
+    prompt: "Overall, how satisfied are you with your current immune-support habits?"
+    type: single_choice
+    construct: overall_satisfied_current_immune_support
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q25
+    prompt: "How likely are you to keep up or improve your immune-support habits over the next year?"
+    type: single_choice
+    construct: likely_keep_up_improve_immune
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Somewhat likely"
+      - id: "d"
+        label: "Very likely"
+  - id: q26
+    prompt: "In your own words, what does supporting your immune health mean to you?"
+    type: free_text
+    construct: own_words_does_supporting_immune
+    required: true
+  - id: q27
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q28
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe or not to say"
+  - id: q29
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q30
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q32
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+  - id: q33
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q36
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q37
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q38
+    prompt: "How would you describe your overall interest in health and wellness?"
+    type: single_choice
+    construct: would_describe_overall_interest_health
+    required: true
+    options:
+      - id: "a"
+        label: "Not interested"
+      - id: "b"
+        label: "Somewhat interested"
+      - id: "c"
+        label: "Interested"
+      - id: "d"
+        label: "Very interested"
+  - id: q39
+    prompt: "Do you have any children under 18 in your household?"
+    type: single_choice
+    construct: have_any_children_under_18
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"

@@ -1,0 +1,820 @@
+schemaVersion: "1.0"
+id: antivirus_software_v1
+title: "Antivirus Software Survey"
+description: "How people choose, pay for, and use antivirus and security software to protect their personal devices."
+questions:
+  - id: q0
+    prompt: "How do you currently protect your main computer from viruses and malware?"
+    type: single_choice
+    construct: currently_protect_main_computer_from
+    required: true
+    options:
+      - id: "a"
+        label: "I use a third-party antivirus product I installed"
+      - id: "b"
+        label: "I rely on the protection built into my operating system"
+      - id: "c"
+        label: "I use antivirus that came pre-installed on my device"
+      - id: "d"
+        label: "I use free antivirus software"
+      - id: "e"
+        label: "I don't use any antivirus protection"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q1
+    prompt: "Do you currently have any antivirus or internet security software installed?"
+    type: single_choice
+    construct: currently_have_any_antivirus_internet
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a paid product"
+      - id: "b"
+        label: "Yes, a free product"
+      - id: "c"
+        label: "Only the built-in protection from my operating system"
+      - id: "d"
+        label: "No antivirus at all"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q2
+    prompt: "How long have you used your current antivirus solution?"
+    type: single_choice
+    construct: long_have_used_current_antivirus
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+      - id: "f"
+        label: "Not applicable"
+  - id: q3
+    prompt: "Which antivirus or security products do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: antivirus_security_products_currently_us
+    required: true
+    options:
+      - id: "a"
+        label: "Microsoft Defender (built into Windows)"
+      - id: "b"
+        label: "Norton"
+      - id: "c"
+        label: "McAfee"
+      - id: "d"
+        label: "Bitdefender"
+      - id: "e"
+        label: "Malwarebytes"
+      - id: "f"
+        label: "Kaspersky"
+      - id: "g"
+        label: "Avast"
+      - id: "h"
+        label: "AVG"
+      - id: "i"
+        label: "ESET"
+      - id: "j"
+        label: "Trend Micro"
+      - id: "k"
+        label: "Apple's built-in protection (XProtect / macOS)"
+      - id: "l"
+        label: "Other"
+      - id: "m"
+        label: "None"
+  - id: q4
+    prompt: "Which product do you consider your primary antivirus protection?"
+    type: single_choice
+    construct: product_consider_primary_antivirus_prote
+    required: true
+    options:
+      - id: "a"
+        label: "Microsoft Defender"
+      - id: "b"
+        label: "Norton"
+      - id: "c"
+        label: "McAfee"
+      - id: "d"
+        label: "Bitdefender"
+      - id: "e"
+        label: "Malwarebytes"
+      - id: "f"
+        label: "Kaspersky"
+      - id: "g"
+        label: "Avast or AVG"
+      - id: "h"
+        label: "ESET or Trend Micro"
+      - id: "i"
+        label: "Apple's built-in protection"
+      - id: "j"
+        label: "Other"
+      - id: "k"
+        label: "None"
+  - id: q5
+    prompt: "Which devices do you protect with antivirus or security software? (Select all that apply)"
+    type: multi_choice
+    construct: devices_protect_antivirus_security_softw
+    required: true
+    options:
+      - id: "a"
+        label: "Windows PC"
+      - id: "b"
+        label: "Mac"
+      - id: "c"
+        label: "Android phone"
+      - id: "d"
+        label: "iPhone"
+      - id: "e"
+        label: "Android or iPad tablet"
+      - id: "f"
+        label: "I don't protect any devices"
+      - id: "g"
+        label: "Not applicable"
+  - id: q6
+    prompt: "How did you get your current antivirus software?"
+    type: single_choice
+    construct: did_get_current_antivirus_software
+    required: true
+    options:
+      - id: "a"
+        label: "It came pre-installed on my device"
+      - id: "b"
+        label: "I downloaded a free version"
+      - id: "c"
+        label: "I bought a subscription directly from the vendor"
+      - id: "d"
+        label: "It came bundled with my internet or bank service"
+      - id: "e"
+        label: "I bought a boxed or retail version"
+      - id: "f"
+        label: "It's built into my operating system"
+      - id: "g"
+        label: "I'm not sure"
+  - id: q7
+    prompt: "Approximately how much do you pay per year for antivirus or security software, in U.S. dollars? Enter 0 if you pay nothing."
+    type: free_text
+    construct: approximately_much_pay_per_year
+    required: true
+  - id: q8
+    prompt: "How often does your antivirus software run a full scan of your device?"
+    type: single_choice
+    construct: often_does_antivirus_software_run
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "Weekly"
+      - id: "c"
+        label: "Monthly"
+      - id: "d"
+        label: "Only when I run it manually"
+      - id: "e"
+        label: "I don't know"
+      - id: "f"
+        label: "Not applicable"
+  - id: q9
+    prompt: "Which security features do you actually use? (Select all that apply)"
+    type: multi_choice
+    construct: security_features_actually_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Real-time virus scanning"
+      - id: "b"
+        label: "Scheduled full scans"
+      - id: "c"
+        label: "Web or phishing protection"
+      - id: "d"
+        label: "Firewall"
+      - id: "e"
+        label: "Built-in VPN"
+      - id: "f"
+        label: "Password manager"
+      - id: "g"
+        label: "Identity or dark-web monitoring"
+      - id: "h"
+        label: "Parental controls"
+      - id: "i"
+        label: "Ransomware protection"
+      - id: "j"
+        label: "I don't use any extra features"
+  - id: q10
+    prompt: "In the past two years, has malware, a virus, or ransomware infected any of your devices?"
+    type: single_choice
+    construct: past_two_years_has_malware
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q11
+    prompt: "Please rate your agreement: The built-in protection in modern operating systems is good enough for most people."
+    type: single_choice
+    construct: please_rate_agreement_built_protection
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "Please rate your agreement: Paid antivirus software is worth the money."
+    type: single_choice
+    construct: please_rate_agreement_paid_antivirus
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "Please rate your agreement: My antivirus software slows down my device."
+    type: single_choice
+    construct: please_rate_agreement_my_antivirus
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "Please rate your agreement: I trust my antivirus vendor with my data."
+    type: single_choice
+    construct: please_rate_agreement_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "Please rate your agreement: I feel safe from online threats with my current setup."
+    type: single_choice
+    construct: please_rate_agreement_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "Please rate your agreement: Antivirus pop-ups and upgrade prompts are annoying."
+    type: single_choice
+    construct: please_rate_agreement_antivirus_pop
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How important is this when choosing antivirus software: Protection effectiveness against threats"
+    type: single_choice
+    construct: important_this_when_choosing_antivirus
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is this when choosing antivirus software: Low impact on device speed"
+    type: single_choice
+    construct: important_this_when_choosing_antivirus
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is this when choosing antivirus software: Price and value"
+    type: single_choice
+    construct: important_this_when_choosing_antivirus
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is this when choosing antivirus software: Ease of use"
+    type: single_choice
+    construct: important_this_when_choosing_antivirus
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is this when choosing antivirus software: Extra bundled features (VPN, password manager, etc.)"
+    type: single_choice
+    construct: important_this_when_choosing_antivirus
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is this when choosing antivirus software: Brand reputation and trust"
+    type: single_choice
+    construct: important_this_when_choosing_antivirus
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How worried are you about malware and viruses infecting your devices?"
+    type: single_choice
+    construct: worried_malware_viruses_infecting_device
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+  - id: q24
+    prompt: "How often do you see alerts or notifications from your antivirus software?"
+    type: single_choice
+    construct: often_see_alerts_notifications_from
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q25
+    prompt: "When your antivirus flags something, how do you usually respond?"
+    type: single_choice
+    construct: when_antivirus_flags_something_usually
+    required: true
+    options:
+      - id: "a"
+        label: "I read it carefully and act on it"
+      - id: "b"
+        label: "I usually follow its recommended action"
+      - id: "c"
+        label: "I sometimes ignore it"
+      - id: "d"
+        label: "I usually dismiss it"
+      - id: "e"
+        label: "I don't get such alerts"
+  - id: q26
+    prompt: "Where do you go to research or compare antivirus products? (Select all that apply)"
+    type: multi_choice
+    construct: where_go_research_compare_antivirus
+    required: true
+    options:
+      - id: "a"
+        label: "Independent testing labs (e.g., AV-TEST, AV-Comparatives)"
+      - id: "b"
+        label: "Tech review websites"
+      - id: "c"
+        label: "YouTube reviews"
+      - id: "d"
+        label: "Friends or family recommendations"
+      - id: "e"
+        label: "App store ratings"
+      - id: "f"
+        label: "Vendor websites"
+      - id: "g"
+        label: "I don't research antivirus products"
+      - id: "h"
+        label: "Other"
+  - id: q27
+    prompt: "What are the main reasons you might go without paid antivirus software? (Select all that apply)"
+    type: multi_choice
+    construct: main_reasons_might_go_without
+    required: true
+    options:
+      - id: "a"
+        label: "Built-in protection is enough"
+      - id: "b"
+        label: "Paid options are too expensive"
+      - id: "c"
+        label: "They slow down my device"
+      - id: "d"
+        label: "I practice safe browsing habits"
+      - id: "e"
+        label: "I don't think I'm a target"
+      - id: "f"
+        label: "Too many pop-ups and upsells"
+      - id: "g"
+        label: "None of these — I use paid antivirus"
+      - id: "h"
+        label: "Other"
+  - id: q28
+    prompt: "Select your top 3 things you value most in security software. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_value
+    required: true
+    options:
+      - id: "a"
+        label: "Strong protection against threats"
+      - id: "b"
+        label: "Runs quietly without slowing my device"
+      - id: "c"
+        label: "Affordable price"
+      - id: "d"
+        label: "Simple, easy-to-use interface"
+      - id: "e"
+        label: "Useful extra features"
+      - id: "f"
+        label: "Trusted brand"
+      - id: "g"
+        label: "Good customer support"
+      - id: "h"
+        label: "Regular updates"
+  - id: q29
+    prompt: "Overall, how satisfied are you with your current antivirus solution?"
+    type: single_choice
+    construct: overall_satisfied_current_antivirus_solu
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your antivirus solution to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "How likely are you to keep or renew your current antivirus setup next year?"
+    type: single_choice
+    construct: likely_keep_renew_current_antivirus
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q32
+    prompt: "Are you considering switching to a different antivirus product?"
+    type: single_choice
+    construct: considering_switching_different_antiviru
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I'm actively looking"
+      - id: "b"
+        label: "Maybe, I'm somewhat interested"
+      - id: "c"
+        label: "No, I'm satisfied"
+      - id: "d"
+        label: "Not applicable"
+  - id: q33
+    prompt: "If you could change one thing about your antivirus software, what would it be? (Optional)"
+    type: free_text
+    construct: if_could_change_one_thing
+    required: false
+  - id: q34
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18 years old"
+      - id: "b"
+        label: "18-24 years old"
+      - id: "c"
+        label: "25-34 years old"
+      - id: "d"
+        label: "35-44 years old"
+      - id: "e"
+        label: "45-54 years old"
+      - id: "f"
+        label: "55-64 years old"
+      - id: "g"
+        label: "65 years or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed, looking for work"
+      - id: "f"
+        label: "Not employed, not looking for work"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "How many people live in your household, including you? Enter a whole number."
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q41
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or domestic partnership"
+      - id: "c"
+        label: "In a relationship, not living together"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "In which U.S. region do you live?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "How would you rate your overall comfort with technology?"
+    type: single_choice
+    construct: would_rate_overall_comfort_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Extremely comfortable — I'm the person others ask for help"
+  - id: q45
+    prompt: "Which best describes your relationship to technology work?"
+    type: single_choice
+    construct: best_describes_relationship_technology_w
+    required: true
+    options:
+      - id: "a"
+        label: "I work in an IT, software, or cybersecurity role"
+      - id: "b"
+        label: "I work in tech but not in a technical role"
+      - id: "c"
+        label: "I work outside the tech industry"
+      - id: "d"
+        label: "I'm a student"
+      - id: "e"
+        label: "I'm not currently working"
+      - id: "f"
+        label: "Prefer not to say"

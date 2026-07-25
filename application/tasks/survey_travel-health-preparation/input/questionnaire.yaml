@@ -1,0 +1,713 @@
+schemaVersion: "1.0"
+id: travel_health_preparation_v1
+title: "Travel Health Preparation Survey"
+description: "How travelers prepare for and manage their health before and during trips."
+questions:
+  - id: q0
+    prompt: "How often do you travel away from home for leisure or business?"
+    type: single_choice
+    construct: often_travel_away_from_home
+    required: true
+    options:
+      - id: "a"
+        label: "Very frequently (monthly or more)"
+      - id: "b"
+        label: "Frequently (several times a year)"
+      - id: "c"
+        label: "Occasionally (once or twice a year)"
+      - id: "d"
+        label: "Rarely (less than once a year)"
+      - id: "e"
+        label: "Almost never"
+  - id: q1
+    prompt: "What type of travel do you do most often? (Select all that apply)"
+    type: multi_choice
+    construct: type_travel_most_often_select
+    required: true
+    options:
+      - id: "a"
+        label: "Domestic leisure trips"
+      - id: "b"
+        label: "International leisure trips"
+      - id: "c"
+        label: "Business travel"
+      - id: "d"
+        label: "Visiting family or friends"
+      - id: "e"
+        label: "Outdoor or adventure travel"
+      - id: "f"
+        label: "Cruises"
+      - id: "g"
+        label: "Road trips"
+  - id: q2
+    prompt: "In the past two years, have you traveled internationally?"
+    type: single_choice
+    construct: past_two_years_have_traveled
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, multiple times"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I plan to"
+      - id: "d"
+        label: "No"
+  - id: q3
+    prompt: "Before a trip, how much do you prepare for health-related needs?"
+    type: single_choice
+    construct: before_trip_much_prepare_health
+    required: true
+    options:
+      - id: "a"
+        label: "A great deal"
+      - id: "b"
+        label: "Quite a bit"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A little"
+      - id: "e"
+        label: "Not at all"
+  - id: q4
+    prompt: "Which health-related preparations do you typically make before traveling? (Select all that apply)"
+    type: multi_choice
+    construct: health_related_preparations_typically_ma
+    required: true
+    options:
+      - id: "a"
+        label: "Pack a personal medicine kit"
+      - id: "b"
+        label: "Bring enough prescription medications"
+      - id: "c"
+        label: "Research health risks at the destination"
+      - id: "d"
+        label: "Check that vaccinations are up to date"
+      - id: "e"
+        label: "Buy travel or medical insurance"
+      - id: "f"
+        label: "Locate clinics or hospitals at the destination"
+      - id: "g"
+        label: "Pack motion sickness or stomach remedies"
+      - id: "h"
+        label: "Bring sunscreen and insect repellent"
+      - id: "i"
+        label: "I don't usually make health preparations"
+  - id: q5
+    prompt: "What do you typically pack in a travel health or medicine kit? (Select all that apply)"
+    type: multi_choice
+    construct: typically_pack_travel_health_medicine
+    required: true
+    options:
+      - id: "a"
+        label: "Pain relievers"
+      - id: "b"
+        label: "Bandages and antiseptic"
+      - id: "c"
+        label: "Stomach or anti-diarrheal remedies"
+      - id: "d"
+        label: "Allergy medication"
+      - id: "e"
+        label: "Prescription medications"
+      - id: "f"
+        label: "Motion sickness remedies"
+      - id: "g"
+        label: "Hand sanitizer"
+      - id: "h"
+        label: "Sunscreen"
+      - id: "i"
+        label: "Insect repellent"
+      - id: "j"
+        label: "None of these"
+  - id: q6
+    prompt: "Where do you get information about staying healthy while traveling? (Select all that apply)"
+    type: multi_choice
+    construct: where_get_information_staying_healthy
+    required: true
+    options:
+      - id: "a"
+        label: "CDC or government travel health websites"
+      - id: "b"
+        label: "A doctor or travel clinic"
+      - id: "c"
+        label: "General web searches"
+      - id: "d"
+        label: "Travel guides or blogs"
+      - id: "e"
+        label: "Friends or family"
+      - id: "f"
+        label: "Airline or tour operator materials"
+      - id: "g"
+        label: "Social media"
+      - id: "h"
+        label: "I don't look for this information"
+  - id: q7
+    prompt: "Have you ever visited a doctor or travel clinic specifically to prepare for a trip?"
+    type: single_choice
+    construct: have_ever_visited_doctor_travel
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No, and I would not"
+  - id: q8
+    prompt: "Do you purchase travel insurance that includes medical coverage?"
+    type: single_choice
+    construct: purchase_travel_insurance_that_includes
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Usually"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q9
+    prompt: "How confident are you managing a minor illness while traveling?"
+    type: single_choice
+    construct: confident_managing_minor_illness_while
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "A little confident"
+      - id: "c"
+        label: "Somewhat confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q10
+    prompt: "How confident are you finding medical care in an unfamiliar place?"
+    type: single_choice
+    construct: confident_finding_medical_care_unfamilia
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "A little confident"
+      - id: "c"
+        label: "Somewhat confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q11
+    prompt: "How much do you agree or disagree: I take health preparation seriously when I travel."
+    type: single_choice
+    construct: much_agree_disagree_i_take
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: I worry about getting sick while traveling."
+    type: single_choice
+    construct: much_agree_disagree_i_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I know how to access my prescriptions if I run out while traveling."
+    type: single_choice
+    construct: much_agree_disagree_i_know
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: Travel health preparation is worth the time and cost."
+    type: single_choice
+    construct: much_agree_disagree_travel_health
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: I usually maintain healthy habits (sleep, diet, activity) while traveling."
+    type: single_choice
+    construct: much_agree_disagree_i_usually
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How concerned are you about each travel health issue: Food or water safety."
+    type: single_choice
+    construct: concerned_each_travel_health_issue
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q17
+    prompt: "How concerned are you about each travel health issue: Catching a contagious illness."
+    type: single_choice
+    construct: concerned_each_travel_health_issue
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q18
+    prompt: "How concerned are you about each travel health issue: Insect bites or sun exposure."
+    type: single_choice
+    construct: concerned_each_travel_health_issue
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q19
+    prompt: "How concerned are you about each travel health issue: Access to medical care if needed."
+    type: single_choice
+    construct: concerned_each_travel_health_issue
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q20
+    prompt: "How concerned are you about each travel health issue: Motion sickness or jet lag."
+    type: single_choice
+    construct: concerned_each_travel_health_issue
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q21
+    prompt: "How often do you check whether your destination has any health advisories?"
+    type: single_choice
+    construct: often_check_whether_destination_has
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "How do you usually carry your medications when traveling?"
+    type: single_choice
+    construct: usually_carry_medications_when_traveling
+    required: true
+    options:
+      - id: "a"
+        label: "In original labeled containers"
+      - id: "b"
+        label: "In a pill organizer"
+      - id: "c"
+        label: "A mix of both"
+      - id: "d"
+        label: "I don't travel with medications"
+  - id: q23
+    prompt: "Have you ever gotten sick or injured while traveling and needed care?"
+    type: single_choice
+    construct: have_ever_gotten_sick_injured
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, needed a doctor or hospital"
+      - id: "b"
+        label: "Yes, but handled it myself"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q24
+    prompt: "Select your top 3 most important travel health preparations to you. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_most_important
+    required: true
+    options:
+      - id: "a"
+        label: "Packing enough prescription medication"
+      - id: "b"
+        label: "Bringing a personal medicine kit"
+      - id: "c"
+        label: "Having travel medical insurance"
+      - id: "d"
+        label: "Researching destination health risks"
+      - id: "e"
+        label: "Staying up to date on vaccinations"
+      - id: "f"
+        label: "Knowing where to find care abroad"
+      - id: "g"
+        label: "Packing sunscreen and insect repellent"
+      - id: "h"
+        label: "Maintaining healthy habits while away"
+  - id: q25
+    prompt: "Do you use any travel or health apps to help prepare for trips? (Select all that apply)"
+    type: multi_choice
+    construct: use_any_travel_health_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Airline or travel apps"
+      - id: "b"
+        label: "Insurance provider apps"
+      - id: "c"
+        label: "Health or medication reminder apps"
+      - id: "d"
+        label: "Government travel health apps"
+      - id: "e"
+        label: "Translation apps for medical needs"
+      - id: "f"
+        label: "I don't use any apps for this"
+  - id: q26
+    prompt: "About how many days in advance do you usually start preparing for a trip's health needs? Please enter a number."
+    type: free_text
+    construct: many_days_advance_usually_start
+    required: true
+  - id: q27
+    prompt: "In the past two years, about how many trips did you take that lasted overnight or longer? Please enter a number."
+    type: free_text
+    construct: past_two_years_many_trips
+    required: true
+  - id: q28
+    prompt: "Overall, how satisfied are you with how you prepare for health while traveling?"
+    type: single_choice
+    construct: overall_satisfied_prepare_health_while
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "How prepared do you feel for health issues on your next trip?"
+    type: single_choice
+    construct: prepared_feel_health_issues_next
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all prepared"
+      - id: "b"
+        label: "Slightly prepared"
+      - id: "c"
+        label: "Moderately prepared"
+      - id: "d"
+        label: "Very prepared"
+      - id: "e"
+        label: "Extremely prepared"
+  - id: q30
+    prompt: "How likely are you to make more health preparations for future trips?"
+    type: single_choice
+    construct: likely_make_more_health_preparations
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "What is the biggest challenge you face preparing for health while traveling? (Optional)"
+    type: free_text
+    construct: biggest_challenge_face_preparing_health
+    required: false
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 to 74"
+      - id: "g"
+        label: "75 or older"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q39
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q40
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+  - id: q41
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q43
+    prompt: "Do you take prescription medications that you must bring when traveling?"
+    type: single_choice
+    construct: take_prescription_medications_that_must
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, daily medications"
+      - id: "b"
+        label: "Yes, as-needed medications"
+      - id: "c"
+        label: "No"
+  - id: q44
+    prompt: "What is your health insurance status?"
+    type: single_choice
+    construct: health_insurance_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored insurance"
+      - id: "b"
+        label: "Marketplace or individually purchased plan"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Other coverage"
+      - id: "f"
+        label: "No insurance"
+      - id: "g"
+        label: "Prefer not to say"

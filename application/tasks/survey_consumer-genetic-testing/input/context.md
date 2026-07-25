@@ -1,0 +1,7 @@
+# Consumer Genetic Testing
+
+Consumer use of and attitudes toward at-home DNA and genetic testing kits.
+
+## About this survey
+
+This survey covers whether respondents have taken an at-home DNA test, which companies they used or considered (AncestryDNA, 23andMe, MyHeritage), what they wanted to learn, what prompted them, how much they paid, when they tested, and which results or features they received (ancestry, relative matches, health predisposition, carrier status, traits, wellness reports). It measures perceived accuracy, whether and with whom they shared results, actions taken on health findings, and prior understanding of what results can tell them. It runs Likert batteries on attitudes (result clarity, usefulness, data-use concern, trust in security, value for money, professional review of health results), a concern battery about specific data risks (third-party sharing, research use, law enforcement, insurance and employment, breaches), and an importance battery on test-selection factors, plus a top-3 ranking of those factors, privacy-setting and data-deletion behaviors, comfort with research use, confidence understanding results, satisfaction, intent to test again, a 0–10 recommendation score, and an open comment. Question types include single-choice, multi-select, Likert scales, matrix batteries split per item, a top-3 ranking, and numeric free-text. Demographics captured: age, gender, race/ethnicity, household income, education, employment, household size, marital status, region, urban/rural, and interest in genealogy.

@@ -1,0 +1,729 @@
+schemaVersion: "1.0"
+id: financial_fraud_experience_v1
+title: "Financial Fraud Experience Survey"
+description: "People's real-world experiences with financial scams and fraud, the losses and responses involved, and how they protect themselves."
+questions:
+  - id: q0
+    prompt: "In the past 3 years, have you personally been targeted by a financial scam or fraud attempt (whether or not you lost money)?"
+    type: single_choice
+    construct: past_3_years_have_personally
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, many times"
+      - id: "b"
+        label: "Yes, a few times"
+      - id: "c"
+        label: "Yes, once"
+      - id: "d"
+        label: "No, never"
+      - id: "e"
+        label: "Not sure"
+  - id: q1
+    prompt: "In the past 3 years, did you actually lose money to a financial scam or fraud?"
+    type: single_choice
+    construct: past_3_years_did_actually
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, I was targeted but did not lose money"
+      - id: "d"
+        label: "No, I was never targeted"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q2
+    prompt: "Which types of scams or fraud have you encountered? (Select all that apply)"
+    type: multi_choice
+    construct: types_scams_fraud_have_encountered
+    required: true
+    options:
+      - id: "a"
+        label: "Phishing emails or texts"
+      - id: "b"
+        label: "Fake bank or credit card fraud alerts"
+      - id: "c"
+        label: "Imposter scams (IRS, Social Security, government)"
+      - id: "d"
+        label: "Tech support scams"
+      - id: "e"
+        label: "Romance or relationship scams"
+      - id: "f"
+        label: "Investment or crypto scams"
+      - id: "g"
+        label: "Online shopping or marketplace fraud"
+      - id: "h"
+        label: "Unauthorized charges on a card or account"
+      - id: "i"
+        label: "Check or wire fraud"
+      - id: "j"
+        label: "Job or employment scams"
+      - id: "k"
+        label: "None of these"
+  - id: q3
+    prompt: "Through which channels have scammers contacted you? (Select all that apply)"
+    type: multi_choice
+    construct: through_channels_have_scammers_contacted
+    required: true
+    options:
+      - id: "a"
+        label: "Email"
+      - id: "b"
+        label: "Text message (SMS)"
+      - id: "c"
+        label: "Phone call"
+      - id: "d"
+        label: "Social media"
+      - id: "e"
+        label: "Dating or messaging apps"
+      - id: "f"
+        label: "Mail"
+      - id: "g"
+        label: "In person"
+      - id: "h"
+        label: "Pop-up or website"
+      - id: "i"
+        label: "None of these"
+  - id: q4
+    prompt: "Thinking of the most significant fraud incident that affected you, roughly how much money did you lose? Enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: thinking_most_significant_fraud_incident
+    required: true
+  - id: q5
+    prompt: "In that most significant incident, what payment method did the scammer have you use?"
+    type: single_choice
+    construct: that_most_significant_incident_payment
+    required: true
+    options:
+      - id: "a"
+        label: "Credit card"
+      - id: "b"
+        label: "Debit card or bank transfer"
+      - id: "c"
+        label: "Wire transfer"
+      - id: "d"
+        label: "Peer-to-peer app (Zelle, Venmo, Cash App)"
+      - id: "e"
+        label: "Gift cards"
+      - id: "f"
+        label: "Cryptocurrency"
+      - id: "g"
+        label: "Cash"
+      - id: "h"
+        label: "No money was sent"
+      - id: "i"
+        label: "Not applicable"
+  - id: q6
+    prompt: "How did that most significant incident ultimately resolve?"
+    type: single_choice
+    construct: did_that_most_significant_incident
+    required: true
+    options:
+      - id: "a"
+        label: "I recovered all of the money"
+      - id: "b"
+        label: "I recovered some of the money"
+      - id: "c"
+        label: "I recovered none of the money"
+      - id: "d"
+        label: "No money was lost"
+      - id: "e"
+        label: "Still unresolved"
+      - id: "f"
+        label: "Not applicable"
+  - id: q7
+    prompt: "After a fraud incident or attempt, which of the following did you do? (Select all that apply)"
+    type: multi_choice
+    construct: after_fraud_incident_attempt_following
+    required: true
+    options:
+      - id: "a"
+        label: "Contacted my bank or card issuer"
+      - id: "b"
+        label: "Disputed the charge"
+      - id: "c"
+        label: "Changed passwords or security settings"
+      - id: "d"
+        label: "Placed a fraud alert or credit freeze"
+      - id: "e"
+        label: "Reported it to the FTC or a government agency"
+      - id: "f"
+        label: "Filed a police report"
+      - id: "g"
+        label: "Told family or friends"
+      - id: "h"
+        label: "Did nothing"
+      - id: "i"
+        label: "Not applicable"
+  - id: q8
+    prompt: "How confident are you that you can recognize a scam before falling for it?"
+    type: single_choice
+    construct: confident_that_can_recognize_scam
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q9
+    prompt: "Which protective measures do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: protective_measures_currently_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Transaction alerts on my accounts"
+      - id: "b"
+        label: "Two-factor authentication"
+      - id: "c"
+        label: "A password manager"
+      - id: "d"
+        label: "Credit monitoring service"
+      - id: "e"
+        label: "Credit freeze on my reports"
+      - id: "f"
+        label: "Identity theft protection service"
+      - id: "g"
+        label: "Spam-call blocking app"
+      - id: "h"
+        label: "None of these"
+  - id: q10
+    prompt: "How often do you check your bank and card statements for suspicious activity?"
+    type: single_choice
+    construct: often_check_bank_card_statements
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Weekly"
+      - id: "d"
+        label: "Monthly"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q11
+    prompt: "How much do you agree with the following statement: I worry about becoming a victim of financial fraud."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Scams have become harder to detect in the last few years."
+    type: single_choice
+    construct: much_agree_following_statement_scams
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: My bank does a good job protecting me from fraud."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I know what steps to take if I am defrauded."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: I feel embarrassed to report when I have been scammed."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: New technology like AI-generated voices and messages makes me more worried about fraud."
+    type: single_choice
+    construct: much_agree_following_statement_new
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How concerned are you about: Phishing emails and texts?"
+    type: single_choice
+    construct: concerned_phishing_emails_texts
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q18
+    prompt: "How concerned are you about: Imposter phone calls (fake government or bank)?"
+    type: single_choice
+    construct: concerned_imposter_phone_calls_fake
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q19
+    prompt: "How concerned are you about: Investment or cryptocurrency scams?"
+    type: single_choice
+    construct: concerned_investment_cryptocurrency_scam
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q20
+    prompt: "How concerned are you about: Data breaches exposing your account information?"
+    type: single_choice
+    construct: concerned_data_breaches_exposing_account
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q21
+    prompt: "How concerned are you about: A family member (such as an elderly parent) being scammed?"
+    type: single_choice
+    construct: concerned_family_member_such_as
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q22
+    prompt: "How likely do you think you are to be targeted by a scam in the next 12 months?"
+    type: single_choice
+    construct: likely_think_be_targeted_by
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q23
+    prompt: "Select the top 3 warning signs you rely on to spot a scam. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_warning_signs
+    required: true
+    options:
+      - id: "a"
+        label: "Requests for urgent or immediate action"
+      - id: "b"
+        label: "Requests for gift cards, wire transfers, or crypto"
+      - id: "c"
+        label: "Unsolicited contact from an unknown sender"
+      - id: "d"
+        label: "Poor grammar or spelling"
+      - id: "e"
+        label: "Requests for passwords or account numbers"
+      - id: "f"
+        label: "Offers that seem too good to be true"
+      - id: "g"
+        label: "Suspicious or mismatched sender addresses or links"
+      - id: "h"
+        label: "Threats of arrest, fines, or account closure"
+  - id: q24
+    prompt: "Have you ever received training or education on how to avoid scams?"
+    type: single_choice
+    construct: have_ever_received_training_education
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, from my employer"
+      - id: "b"
+        label: "Yes, from my bank or financial institution"
+      - id: "c"
+        label: "Yes, from a community or senior organization"
+      - id: "d"
+        label: "Yes, on my own (articles, videos)"
+      - id: "e"
+        label: "No, never"
+  - id: q25
+    prompt: "Who do you think is most responsible for protecting consumers from financial fraud?"
+    type: single_choice
+    construct: who_think_most_responsible_protecting
+    required: true
+    options:
+      - id: "a"
+        label: "Banks and financial institutions"
+      - id: "b"
+        label: "The government and regulators"
+      - id: "c"
+        label: "Technology and telecom companies"
+      - id: "d"
+        label: "Consumers themselves"
+      - id: "e"
+        label: "Shared responsibility across all"
+  - id: q26
+    prompt: "In the past 3 years, has the number of scam attempts you receive changed?"
+    type: single_choice
+    construct: past_3_years_has_number
+    required: true
+    options:
+      - id: "a"
+        label: "Increased a lot"
+      - id: "b"
+        label: "Increased somewhat"
+      - id: "c"
+        label: "Stayed about the same"
+      - id: "d"
+        label: "Decreased somewhat"
+      - id: "e"
+        label: "Decreased a lot"
+  - id: q27
+    prompt: "About how many scam calls, texts, or emails do you receive in a typical week? Enter a number."
+    type: free_text
+    construct: many_scam_calls_texts_emails
+    required: true
+  - id: q28
+    prompt: "How much did your most significant fraud experience affect your emotional well-being or stress?"
+    type: single_choice
+    construct: much_did_most_significant_fraud
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Not applicable"
+  - id: q29
+    prompt: "After your experiences, how has your trust in digital banking and online payments changed?"
+    type: single_choice
+    construct: after_experiences_has_trust_digital
+    required: true
+    options:
+      - id: "a"
+        label: "Much less trusting"
+      - id: "b"
+        label: "Somewhat less trusting"
+      - id: "c"
+        label: "No change"
+      - id: "d"
+        label: "Somewhat more trusting"
+      - id: "e"
+        label: "Not applicable"
+  - id: q30
+    prompt: "How satisfied were you with how your bank or card issuer handled your fraud situation?"
+    type: single_choice
+    construct: satisfied_were_bank_card_issuer
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q31
+    prompt: "How likely are you to add new fraud protections (such as a credit freeze or new alerts) in the next 12 months?"
+    type: single_choice
+    construct: likely_add_new_fraud_protections
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q32
+    prompt: "Is there anything else you want to share about your experience with financial fraud or scams? (Optional)"
+    type: free_text
+    construct: there_anything_else_want_share
+    required: false
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Another race or ethnicity"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your approximate annual household income before taxes?"
+    type: single_choice
+    construct: approximate_annual_household_income_befo
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $30,000"
+      - id: "b"
+        label: "$30,000 – $49,999"
+      - id: "c"
+        label: "$50,000 – $74,999"
+      - id: "d"
+        label: "$75,000 – $99,999"
+      - id: "e"
+        label: "$100,000 – $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school graduate or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+  - id: q39
+    prompt: "Including yourself, how many people live in your household? Enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q40
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q41
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q43
+    prompt: "How would you rate your overall comfort with technology and online tools?"
+    type: single_choice
+    construct: would_rate_overall_comfort_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Extremely comfortable"

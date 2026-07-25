@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0",
+  "sources": [],
+  "defaultMode": "stratified",
+  "dimensionFilters": {
+    "age_bracket": [
+      "18-24",
+      "25-34",
+      "35-44",
+      "45-54",
+      "55-64",
+      "65+"
+    ],
+    "tech_savviness": [
+      "Digital native",
+      "Comfortable",
+      "Cautious adopter",
+      "Reluctant",
+      "Avoidant"
+    ],
+    "socioeconomic_band": [
+      "Low income",
+      "Lower-middle",
+      "Middle",
+      "Upper-middle",
+      "High income"
+    ]
+  },
+  "stratifyFields": [
+    "age_bracket",
+    "tech_savviness"
+  ],
+  "sampleSize": 25
+}

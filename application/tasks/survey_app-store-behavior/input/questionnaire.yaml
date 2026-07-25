@@ -1,0 +1,741 @@
+schemaVersion: "1.0"
+id: app_store_behavior_v1
+title: "App Store Behavior Survey"
+description: "How people discover, evaluate, download, pay for, and remove mobile apps."
+questions:
+  - id: q0
+    prompt: "Which app store do you use most often?"
+    type: single_choice
+    construct: app_store_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Apple App Store"
+      - id: "b"
+        label: "Google Play Store"
+      - id: "c"
+        label: "Samsung Galaxy Store"
+      - id: "d"
+        label: "Amazon Appstore"
+      - id: "e"
+        label: "A third-party or alternative store"
+      - id: "f"
+        label: "I rarely download apps"
+  - id: q1
+    prompt: "About how many apps do you currently have installed on your phone? Enter a whole number."
+    type: free_text
+    construct: many_apps_currently_have_installed
+    required: true
+  - id: q2
+    prompt: "How often do you download a new app?"
+    type: single_choice
+    construct: often_download_new_app
+    required: true
+    options:
+      - id: "a"
+        label: "Several times a week"
+      - id: "b"
+        label: "About once a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "About once a month"
+      - id: "e"
+        label: "A few times a year"
+      - id: "f"
+        label: "Rarely or never"
+  - id: q3
+    prompt: "How do you usually discover new apps? (Select all that apply)"
+    type: multi_choice
+    construct: usually_discover_new_apps_select
+    required: true
+    options:
+      - id: "a"
+        label: "Browsing the app store's charts or categories"
+      - id: "b"
+        label: "App store search"
+      - id: "c"
+        label: "Recommendations from friends or family"
+      - id: "d"
+        label: "Social media"
+      - id: "e"
+        label: "Ads (in apps, on websites, or on TV)"
+      - id: "f"
+        label: "Articles, blogs, or review sites"
+      - id: "g"
+        label: "YouTube or influencer videos"
+      - id: "h"
+        label: "App store \"featured\" or editorial picks"
+      - id: "i"
+        label: "Word of mouth at work or school"
+  - id: q4
+    prompt: "When you search for a specific type of app, what do you look at first? (Select all that apply)"
+    type: multi_choice
+    construct: when_search_specific_type_app
+    required: true
+    options:
+      - id: "a"
+        label: "Star rating"
+      - id: "b"
+        label: "Number of reviews"
+      - id: "c"
+        label: "Written reviews"
+      - id: "d"
+        label: "Screenshots"
+      - id: "e"
+        label: "App description"
+      - id: "f"
+        label: "Whether it's free or paid"
+      - id: "g"
+        label: "The developer's name or reputation"
+      - id: "h"
+        label: "How many downloads it has"
+      - id: "i"
+        label: "Whether friends use it"
+  - id: q5
+    prompt: "How much do star ratings influence your decision to download an app?"
+    type: single_choice
+    construct: much_star_ratings_influence_decision
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Slightly"
+      - id: "c"
+        label: "Moderately"
+      - id: "d"
+        label: "Very much"
+      - id: "e"
+        label: "Extremely — I won't download low-rated apps"
+  - id: q6
+    prompt: "What is the lowest star rating (out of 5) you'd typically accept before downloading an app?"
+    type: single_choice
+    construct: lowest_star_rating_out_5
+    required: true
+    options:
+      - id: "a"
+        label: "I don't check ratings"
+      - id: "b"
+        label: "Any rating is fine"
+      - id: "c"
+        label: "At least 3 stars"
+      - id: "d"
+        label: "At least 4 stars"
+      - id: "e"
+        label: "At least 4.5 stars"
+  - id: q7
+    prompt: "How often do you read written reviews before downloading?"
+    type: single_choice
+    construct: often_read_written_reviews_before
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q8
+    prompt: "How do you feel about paying for apps?"
+    type: single_choice
+    construct: feel_paying_apps
+    required: true
+    options:
+      - id: "a"
+        label: "I'll happily pay for good apps"
+      - id: "b"
+        label: "I'll pay if there's no good free option"
+      - id: "c"
+        label: "I only pay for apps I use a lot"
+      - id: "d"
+        label: "I avoid paying for apps"
+      - id: "e"
+        label: "I never pay for apps"
+  - id: q9
+    prompt: "In the past year, how much have you spent on paid apps (not counting subscriptions), in U.S. dollars? Enter a whole number."
+    type: free_text
+    construct: past_year_much_have_spent
+    required: true
+  - id: q10
+    prompt: "Which have you paid for in the last year? (Select all that apply)"
+    type: multi_choice
+    construct: have_paid_last_year_select
+    required: true
+    options:
+      - id: "a"
+        label: "Upfront paid apps"
+      - id: "b"
+        label: "In-app purchases in free apps"
+      - id: "c"
+        label: "App subscriptions"
+      - id: "d"
+        label: "Removing ads from a free app"
+      - id: "e"
+        label: "In-game currency or items"
+      - id: "f"
+        label: "Nothing — I only use free apps"
+  - id: q11
+    prompt: "How do you feel about ads in free apps?"
+    type: single_choice
+    construct: feel_ads_free_apps
+    required: true
+    options:
+      - id: "a"
+        label: "I don't mind them"
+      - id: "b"
+        label: "I tolerate them"
+      - id: "c"
+        label: "They annoy me but I keep using the app"
+      - id: "d"
+        label: "I'll pay to remove them"
+      - id: "e"
+        label: "I delete apps with too many ads"
+  - id: q12
+    prompt: "Please rate your agreement: I trust the ratings and reviews in app stores."
+    type: single_choice
+    construct: please_rate_agreement_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "Please rate your agreement: I worry about the privacy and data collection of apps I download."
+    type: single_choice
+    construct: please_rate_agreement_i_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "Please rate your agreement: I download apps impulsively without much research."
+    type: single_choice
+    construct: please_rate_agreement_i_download
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "Please rate your agreement: Free apps with in-app purchases feel like a trap."
+    type: single_choice
+    construct: please_rate_agreement_free_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "Please rate your agreement: I regularly delete apps I no longer use."
+    type: single_choice
+    construct: please_rate_agreement_i_regularly
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How important is this when deciding to download an app: High star rating"
+    type: single_choice
+    construct: important_this_when_deciding_download
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is this when deciding to download an app: Being free or low cost"
+    type: single_choice
+    construct: important_this_when_deciding_download
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is this when deciding to download an app: Privacy and data practices"
+    type: single_choice
+    construct: important_this_when_deciding_download
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is this when deciding to download an app: Screenshots and how it looks"
+    type: single_choice
+    construct: important_this_when_deciding_download
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is this when deciding to download an app: Recommendation from someone I trust"
+    type: single_choice
+    construct: important_this_when_deciding_download
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is this when deciding to download an app: Developer reputation"
+    type: single_choice
+    construct: important_this_when_deciding_download
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How often do you check what data or permissions an app requests before installing it?"
+    type: single_choice
+    construct: often_check_data_permissions_app
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q24
+    prompt: "Have you ever left a review or rating for an app?"
+    type: single_choice
+    construct: have_ever_left_review_rating
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, many times"
+      - id: "b"
+        label: "Yes, a few times"
+      - id: "c"
+        label: "Yes, once"
+      - id: "d"
+        label: "No, never"
+  - id: q25
+    prompt: "What most often makes you delete an app? (Select all that apply)"
+    type: multi_choice
+    construct: most_often_makes_delete_app
+    required: true
+    options:
+      - id: "a"
+        label: "I stopped using it"
+      - id: "b"
+        label: "Too many ads"
+      - id: "c"
+        label: "It asked me to pay or subscribe"
+      - id: "d"
+        label: "Privacy or permission concerns"
+      - id: "e"
+        label: "It took up too much storage"
+      - id: "f"
+        label: "Too many notifications"
+      - id: "g"
+        label: "It didn't work well"
+      - id: "h"
+        label: "I found a better alternative"
+  - id: q26
+    prompt: "How often do you abandon a download or delete an app right after opening it because it asked you to create an account or pay?"
+    type: single_choice
+    construct: often_abandon_download_delete_app
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q27
+    prompt: "Select the top 3 factors that most influence whether you download an app. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_that
+    required: true
+    options:
+      - id: "a"
+        label: "Star rating and reviews"
+      - id: "b"
+        label: "Price (free or cheap)"
+      - id: "c"
+        label: "Recommendation from someone I trust"
+      - id: "d"
+        label: "Privacy and data practices"
+      - id: "e"
+        label: "Screenshots and design"
+      - id: "f"
+        label: "Popularity / number of downloads"
+      - id: "g"
+        label: "Developer reputation"
+      - id: "h"
+        label: "Featured or editorial placement"
+  - id: q28
+    prompt: "Overall, how satisfied are you with your app store experience?"
+    type: single_choice
+    construct: overall_satisfied_app_store_experience
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "On a scale of 0 to 10, how confident are you at telling good apps from bad ones? (0 = Not at all confident, 10 = Extremely confident)"
+    type: single_choice
+    construct: scale_0_10_confident_telling
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q30
+    prompt: "How likely are you to try a brand-new app from a developer you've never heard of?"
+    type: single_choice
+    construct: likely_try_brand_new_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "If you could change one thing about app stores, what would it be? (Optional)"
+    type: free_text
+    construct: if_could_change_one_thing
+    required: false
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18 years old"
+      - id: "b"
+        label: "18-24 years old"
+      - id: "c"
+        label: "25-34 years old"
+      - id: "d"
+        label: "35-44 years old"
+      - id: "e"
+        label: "45-54 years old"
+      - id: "f"
+        label: "55-64 years old"
+      - id: "g"
+        label: "65 years or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed, looking for work"
+      - id: "f"
+        label: "Not employed, not looking for work"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "How many people live in your household, including you? Enter a whole number."
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or domestic partnership"
+      - id: "c"
+        label: "In a relationship, not living together"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "In which U.S. region do you live?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which mobile platform do you primarily use?"
+    type: single_choice
+    construct: mobile_platform_primarily_use
+    required: true
+    options:
+      - id: "a"
+        label: "iPhone (iOS)"
+      - id: "b"
+        label: "Android"
+      - id: "c"
+        label: "Both about equally"
+      - id: "d"
+        label: "Other"
+      - id: "e"
+        label: "Not applicable"
+  - id: q43
+    prompt: "How would you rate your overall comfort with technology?"
+    type: single_choice
+    construct: would_rate_overall_comfort_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Extremely comfortable — I'm the person others ask for help"

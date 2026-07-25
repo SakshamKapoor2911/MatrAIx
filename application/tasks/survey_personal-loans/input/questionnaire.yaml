@@ -1,0 +1,747 @@
+schemaVersion: "1.0"
+id: personal_loans_v1
+title: "Personal Loans Survey"
+description: "How consumers use, shop for, and manage unsecured personal installment loans."
+questions:
+  - id: q0
+    prompt: "Have you ever taken out a personal loan (an installment loan not tied to a specific purchase like a car or home)?"
+    type: single_choice
+    construct: have_ever_taken_out_personal
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I currently have one or more"
+      - id: "b"
+        label: "Yes, in the past but not currently"
+      - id: "c"
+        label: "No, but I have applied or considered it"
+      - id: "d"
+        label: "No, never"
+  - id: q1
+    prompt: "How many personal loans do you currently have outstanding?"
+    type: single_choice
+    construct: many_personal_loans_currently_have
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3 or more"
+  - id: q2
+    prompt: "For what purposes have you used personal loans? (Select all that apply)"
+    type: multi_choice
+    construct: purposes_have_used_personal_loans
+    required: true
+    options:
+      - id: "a"
+        label: "Consolidating or paying off credit card debt"
+      - id: "b"
+        label: "Home improvement or repairs"
+      - id: "c"
+        label: "A major purchase (appliance, furniture, electronics)"
+      - id: "d"
+        label: "Medical or dental expenses"
+      - id: "e"
+        label: "A wedding, vacation, or other event"
+      - id: "f"
+        label: "Covering an emergency or unexpected bill"
+      - id: "g"
+        label: "Moving or relocation costs"
+      - id: "h"
+        label: "I have never taken a personal loan"
+  - id: q3
+    prompt: "Where did you get (or would you get) your most recent personal loan?"
+    type: single_choice
+    construct: where_did_get_would_get
+    required: true
+    options:
+      - id: "a"
+        label: "Traditional bank"
+      - id: "b"
+        label: "Credit union"
+      - id: "c"
+        label: "Online lender or fintech (e.g., SoFi, LendingClub, Upstart, Marcus)"
+      - id: "d"
+        label: "Buy now, pay later or point-of-sale lender"
+      - id: "e"
+        label: "Family or friend"
+      - id: "f"
+        label: "Not applicable"
+  - id: q4
+    prompt: "About how much was your most recent personal loan? Please enter a dollar amount."
+    type: free_text
+    construct: much_was_most_recent_personal
+    required: true
+  - id: q5
+    prompt: "What was the term (length) of your most recent personal loan?"
+    type: single_choice
+    construct: was_term_length_most_recent
+    required: true
+    options:
+      - id: "a"
+        label: "12 months or less"
+      - id: "b"
+        label: "13 to 24 months"
+      - id: "c"
+        label: "25 to 36 months"
+      - id: "d"
+        label: "37 to 60 months"
+      - id: "e"
+        label: "More than 60 months"
+      - id: "f"
+        label: "Not applicable"
+  - id: q6
+    prompt: "What was the approximate annual percentage rate (APR) on your most recent personal loan?"
+    type: single_choice
+    construct: was_approximate_annual_percentage_rate
+    required: true
+    options:
+      - id: "a"
+        label: "Under 8%"
+      - id: "b"
+        label: "8% to 11.9%"
+      - id: "c"
+        label: "12% to 17.9%"
+      - id: "d"
+        label: "18% to 24.9%"
+      - id: "e"
+        label: "25% to 35.9%"
+      - id: "f"
+        label: "36% or higher"
+      - id: "g"
+        label: "Don't know"
+  - id: q7
+    prompt: "About how much is your current monthly personal loan payment? Please enter a dollar amount."
+    type: free_text
+    construct: much_current_monthly_personal_loan
+    required: true
+  - id: q8
+    prompt: "Was your most recent personal loan secured or unsecured?"
+    type: single_choice
+    construct: was_most_recent_personal_loan
+    required: true
+    options:
+      - id: "a"
+        label: "Unsecured (no collateral)"
+      - id: "b"
+        label: "Secured (backed by savings, a vehicle, or other collateral)"
+      - id: "c"
+        label: "Don't know"
+      - id: "d"
+        label: "Not applicable"
+  - id: q9
+    prompt: "How did you first find or research the lender for your most recent personal loan?"
+    type: single_choice
+    construct: did_first_find_research_lender
+    required: true
+    options:
+      - id: "a"
+        label: "Existing relationship with my bank or credit union"
+      - id: "b"
+        label: "Online search or comparison site"
+      - id: "c"
+        label: "A prequalification offer I received in the mail or email"
+      - id: "d"
+        label: "Recommendation from friends or family"
+      - id: "e"
+        label: "At the point of sale for a purchase"
+      - id: "f"
+        label: "Not applicable"
+  - id: q10
+    prompt: "Did you check your rate through prequalification before formally applying?"
+    type: single_choice
+    construct: did_check_rate_through_prequalification
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Don't remember"
+      - id: "d"
+        label: "Not applicable"
+  - id: q11
+    prompt: "How many lenders did you compare before choosing?"
+    type: single_choice
+    construct: many_lenders_did_compare_before
+    required: true
+    options:
+      - id: "a"
+        label: "Only one"
+      - id: "b"
+        label: "2 lenders"
+      - id: "c"
+        label: "3 to 4 lenders"
+      - id: "d"
+        label: "5 or more lenders"
+      - id: "e"
+        label: "Not applicable"
+  - id: q12
+    prompt: "At the time of your most recent personal loan, which best describes your credit score range?"
+    type: single_choice
+    construct: time_most_recent_personal_loan
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent (740+)"
+      - id: "b"
+        label: "Good (670–739)"
+      - id: "c"
+        label: "Fair (580–669)"
+      - id: "d"
+        label: "Poor (below 580)"
+      - id: "e"
+        label: "Don't know"
+  - id: q13
+    prompt: "Before choosing a personal loan, which alternatives did you consider? (Select all that apply)"
+    type: multi_choice
+    construct: before_choosing_personal_loan_alternativ
+    required: true
+    options:
+      - id: "a"
+        label: "Putting the expense on a credit card"
+      - id: "b"
+        label: "A 0% APR balance transfer offer"
+      - id: "c"
+        label: "Borrowing from friends or family"
+      - id: "d"
+        label: "Using savings instead"
+      - id: "e"
+        label: "A home equity loan or line of credit"
+      - id: "f"
+        label: "I did not consider any alternatives"
+  - id: q14
+    prompt: "How do you typically make your personal loan payments?"
+    type: single_choice
+    construct: typically_make_personal_loan_payments
+    required: true
+    options:
+      - id: "a"
+        label: "Automatic payment (autopay)"
+      - id: "b"
+        label: "Manual online payment each month"
+      - id: "c"
+        label: "By phone or mail"
+      - id: "d"
+        label: "Not applicable"
+  - id: q15
+    prompt: "In the past 2 years, how often have you made a late or missed personal loan payment?"
+    type: single_choice
+    construct: past_2_years_often_have
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Not applicable"
+  - id: q16
+    prompt: "Have you ever paid off a personal loan early to save on interest?"
+    type: single_choice
+    construct: have_ever_paid_off_personal
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not applicable"
+  - id: q17
+    prompt: "How much do you agree: Taking out a personal loan was the right financial decision for me."
+    type: single_choice
+    construct: much_agree_taking_out_personal
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: I fully understood the interest rate and fees before borrowing."
+    type: single_choice
+    construct: much_agree_i_fully_understood
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: The application and approval process was fast and easy."
+    type: single_choice
+    construct: much_agree_application_approval_process
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: My monthly payment is manageable within my budget."
+    type: single_choice
+    construct: much_agree_my_monthly_payment
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: The loan helped improve my overall financial situation."
+    type: single_choice
+    construct: much_agree_loan_helped_improve
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: I worry about being able to repay this loan."
+    type: single_choice
+    construct: much_agree_i_worry_being
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "When choosing a personal loan, how important is each factor: the lowest possible interest rate."
+    type: single_choice
+    construct: when_choosing_personal_loan_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a personal loan, how important is each factor: a low monthly payment."
+    type: single_choice
+    construct: when_choosing_personal_loan_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a personal loan, how important is each factor: no origination or prepayment fees."
+    type: single_choice
+    construct: when_choosing_personal_loan_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a personal loan, how important is each factor: fast funding of the money."
+    type: single_choice
+    construct: when_choosing_personal_loan_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a personal loan, how important is each factor: a trusted, well-known lender."
+    type: single_choice
+    construct: when_choosing_personal_loan_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Which factors were your top 3 in choosing your most recent personal loan? (Select all that apply — choose up to 3)"
+    type: single_choice
+    construct: factors_were_top_3_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Lowest interest rate"
+      - id: "b"
+        label: "Lowest monthly payment"
+      - id: "c"
+        label: "No fees"
+      - id: "d"
+        label: "How fast I could get the money"
+      - id: "e"
+        label: "Loan amount I could qualify for"
+      - id: "f"
+        label: "Reputation of the lender"
+      - id: "g"
+        label: "Flexible repayment terms"
+  - id: q29
+    prompt: "If you used a personal loan to consolidate debt, what was the result?"
+    type: single_choice
+    construct: if_used_personal_loan_consolidate
+    required: true
+    options:
+      - id: "a"
+        label: "It lowered my overall interest costs"
+      - id: "b"
+        label: "It simplified my payments but did not save much"
+      - id: "c"
+        label: "It made my situation worse"
+      - id: "d"
+        label: "I have not used a personal loan for consolidation"
+  - id: q30
+    prompt: "How likely are you to take out another personal loan in the next few years?"
+    type: single_choice
+    construct: likely_take_out_another_personal
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "How often do you receive prequalified personal loan offers (mail, email, or app)?"
+    type: single_choice
+    construct: often_receive_prequalified_personal_loan
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q32
+    prompt: "Overall, how satisfied are you with your most recent personal loan experience?"
+    type: single_choice
+    construct: overall_satisfied_most_recent_personal
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q33
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your personal loan lender to someone else? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q34
+    prompt: "How confident are you in your ability to manage installment debt responsibly?"
+    type: single_choice
+    construct: confident_ability_manage_installment_deb
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q35
+    prompt: "Is there anything else you would like to share about your experience with personal loans? (Optional — you may leave a short comment.)"
+    type: free_text
+    construct: there_anything_else_would_like
+    required: false
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which best describes your race or ethnicity?"
+    type: single_choice
+    construct: best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Two or more races"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree or trade certificate"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q42
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q43
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q45
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q46
+    prompt: "Do you own or rent your primary residence?"
+    type: single_choice
+    construct: own_rent_primary_residence
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"
+      - id: "d"
+        label: "Prefer not to say"

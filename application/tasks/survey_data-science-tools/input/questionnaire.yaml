@@ -1,0 +1,835 @@
+schemaVersion: "1.0"
+id: data_science_tools_v1
+title: "Data Science & Machine Learning Tools Survey"
+description: "The languages, libraries, platforms, and workflows people use for data science and machine learning, and their satisfaction with them."
+questions:
+  - id: q0
+    prompt: "Which best describes your role in data science or machine learning?"
+    type: single_choice
+    construct: best_describes_role_data_science
+    required: true
+    options:
+      - id: "a"
+        label: "Data scientist"
+      - id: "b"
+        label: "Machine learning / AI engineer"
+      - id: "c"
+        label: "Data analyst"
+      - id: "d"
+        label: "Data engineer"
+      - id: "e"
+        label: "Researcher / academic"
+      - id: "f"
+        label: "Software engineer who does some ML"
+      - id: "g"
+        label: "Student learning data science"
+      - id: "h"
+        label: "I don't work with data science / ML"
+  - id: q1
+    prompt: "How many years have you worked with data science or machine learning?"
+    type: free_text
+    construct: many_years_have_worked_data
+    required: true
+  - id: q2
+    prompt: "Which programming languages do you use for data work? (Select all that apply)"
+    type: multi_choice
+    construct: programming_languages_use_data_work
+    required: true
+    options:
+      - id: "a"
+        label: "Python"
+      - id: "b"
+        label: "R"
+      - id: "c"
+        label: "SQL"
+      - id: "d"
+        label: "Julia"
+      - id: "e"
+        label: "Scala"
+      - id: "f"
+        label: "Java"
+      - id: "g"
+        label: "MATLAB"
+      - id: "h"
+        label: "SAS"
+      - id: "i"
+        label: "JavaScript"
+      - id: "j"
+        label: "Other"
+  - id: q3
+    prompt: "Which language do you use most for data work?"
+    type: single_choice
+    construct: language_use_most_data_work
+    required: true
+    options:
+      - id: "a"
+        label: "Python"
+      - id: "b"
+        label: "R"
+      - id: "c"
+        label: "SQL"
+      - id: "d"
+        label: "Julia"
+      - id: "e"
+        label: "Other"
+  - id: q4
+    prompt: "Which data manipulation / analysis libraries do you use? (Select all that apply)"
+    type: multi_choice
+    construct: data_manipulation_analysis_libraries_use
+    required: true
+    options:
+      - id: "a"
+        label: "pandas"
+      - id: "b"
+        label: "NumPy"
+      - id: "c"
+        label: "Polars"
+      - id: "d"
+        label: "dplyr / tidyverse"
+      - id: "e"
+        label: "Apache Spark / PySpark"
+      - id: "f"
+        label: "Dask"
+      - id: "g"
+        label: "DuckDB"
+      - id: "h"
+        label: "Other"
+  - id: q5
+    prompt: "Which machine learning or deep learning frameworks do you use? (Select all that apply)"
+    type: multi_choice
+    construct: machine_learning_deep_learning_framework
+    required: true
+    options:
+      - id: "a"
+        label: "scikit-learn"
+      - id: "b"
+        label: "PyTorch"
+      - id: "c"
+        label: "TensorFlow / Keras"
+      - id: "d"
+        label: "XGBoost / LightGBM"
+      - id: "e"
+        label: "Hugging Face Transformers"
+      - id: "f"
+        label: "JAX"
+      - id: "g"
+        label: "statsmodels"
+      - id: "h"
+        label: "I don't use ML frameworks"
+  - id: q6
+    prompt: "Which environments do you write and run code in? (Select all that apply)"
+    type: multi_choice
+    construct: environments_write_run_code_select
+    required: true
+    options:
+      - id: "a"
+        label: "Jupyter Notebook / JupyterLab"
+      - id: "b"
+        label: "Google Colab"
+      - id: "c"
+        label: "VS Code"
+      - id: "d"
+        label: "Cursor"
+      - id: "e"
+        label: "RStudio / Posit"
+      - id: "f"
+        label: "Databricks notebooks"
+      - id: "g"
+        label: "PyCharm"
+      - id: "h"
+        label: "A terminal / plain scripts"
+      - id: "i"
+        label: "Other"
+  - id: q7
+    prompt: "Which do you use for data visualization? (Select all that apply)"
+    type: multi_choice
+    construct: use_data_visualization_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Matplotlib"
+      - id: "b"
+        label: "seaborn"
+      - id: "c"
+        label: "Plotly"
+      - id: "d"
+        label: "ggplot2"
+      - id: "e"
+        label: "Tableau / Power BI"
+      - id: "f"
+        label: "Altair / Vega"
+      - id: "g"
+        label: "D3.js"
+      - id: "h"
+        label: "I don't do much visualization"
+  - id: q8
+    prompt: "Where do you primarily do your compute-heavy work?"
+    type: single_choice
+    construct: where_primarily_compute_heavy_work
+    required: true
+    options:
+      - id: "a"
+        label: "My own laptop / desktop"
+      - id: "b"
+        label: "A workstation with a GPU"
+      - id: "c"
+        label: "On-prem cluster / HPC"
+      - id: "d"
+        label: "Cloud (AWS, GCP, Azure)"
+      - id: "e"
+        label: "Managed platform (Databricks, SageMaker, Vertex AI)"
+      - id: "f"
+        label: "Free hosted notebooks (Colab, Kaggle)"
+  - id: q9
+    prompt: "Which cloud or ML platforms do you use? (Select all that apply)"
+    type: multi_choice
+    construct: cloud_ml_platforms_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "AWS (SageMaker, EC2, etc.)"
+      - id: "b"
+        label: "Google Cloud (Vertex AI, BigQuery)"
+      - id: "c"
+        label: "Microsoft Azure ML"
+      - id: "d"
+        label: "Databricks"
+      - id: "e"
+        label: "Snowflake"
+      - id: "f"
+        label: "Hugging Face"
+      - id: "g"
+        label: "Kaggle"
+      - id: "h"
+        label: "None / local only"
+  - id: q10
+    prompt: "Which experiment tracking or MLOps tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: experiment_tracking_mlops_tools_use
+    required: true
+    options:
+      - id: "a"
+        label: "MLflow"
+      - id: "b"
+        label: "Weights & Biases"
+      - id: "c"
+        label: "TensorBoard"
+      - id: "d"
+        label: "DVC"
+      - id: "e"
+        label: "Kubeflow"
+      - id: "f"
+        label: "A homegrown / internal system"
+      - id: "g"
+        label: "None"
+  - id: q11
+    prompt: "How do you typically deploy models into production? (Select all that apply)"
+    type: multi_choice
+    construct: typically_deploy_models_into_production
+    required: true
+    options:
+      - id: "a"
+        label: "REST API / microservice"
+      - id: "b"
+        label: "Batch jobs"
+      - id: "c"
+        label: "Embedded in an application"
+      - id: "d"
+        label: "Managed endpoint (SageMaker, Vertex, etc.)"
+      - id: "e"
+        label: "Notebooks / dashboards only"
+      - id: "f"
+        label: "I don't deploy models"
+      - id: "g"
+        label: "Other"
+  - id: q12
+    prompt: "What types of problems do you work on most? (Select all that apply)"
+    type: multi_choice
+    construct: types_problems_work_most_select
+    required: true
+    options:
+      - id: "a"
+        label: "Classification / regression (tabular)"
+      - id: "b"
+        label: "Time series / forecasting"
+      - id: "c"
+        label: "Natural language processing"
+      - id: "d"
+        label: "Computer vision"
+      - id: "e"
+        label: "Recommendation systems"
+      - id: "f"
+        label: "Generative AI / LLMs"
+      - id: "g"
+        label: "Clustering / unsupervised"
+      - id: "h"
+        label: "Business analytics / reporting"
+  - id: q13
+    prompt: "How do you use large language models in your data work? (Select all that apply)"
+    type: multi_choice
+    construct: use_large_language_models_data
+    required: true
+    options:
+      - id: "a"
+        label: "Writing / debugging code"
+      - id: "b"
+        label: "Building LLM-powered features or apps"
+      - id: "c"
+        label: "Fine-tuning or training models"
+      - id: "d"
+        label: "Exploratory data analysis assistance"
+      - id: "e"
+        label: "Writing documentation / reports"
+      - id: "f"
+        label: "RAG / embeddings pipelines"
+      - id: "g"
+        label: "I don't use LLMs in my work"
+  - id: q14
+    prompt: "About what share of your time is spent on data cleaning and preparation?"
+    type: free_text
+    construct: share_time_spent_data_cleaning
+    required: true
+  - id: q15
+    prompt: "How much do you agree with the following statement? — Python is the right primary language for my work."
+    type: single_choice
+    construct: much_agree_following_statement_python
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement? — I spend too much time on data wrangling versus modeling."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement? — My organization has good data infrastructure."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement? — Getting models into production is difficult."
+    type: single_choice
+    construct: much_agree_following_statement_getting
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement? — LLMs have meaningfully changed how I work."
+    type: single_choice
+    construct: much_agree_following_statement_llms
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How often do you use each of the following? — Jupyter / notebooks"
+    type: single_choice
+    construct: often_use_each_following_jupyter
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q21
+    prompt: "How often do you use each of the following? — SQL / databases"
+    type: single_choice
+    construct: often_use_each_following_sql
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "How often do you use each of the following? — Cloud compute"
+    type: single_choice
+    construct: often_use_each_following_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q23
+    prompt: "How often do you use each of the following? — AI coding assistants"
+    type: single_choice
+    construct: often_use_each_following_ai
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q24
+    prompt: "How satisfied are you with each of the following? — Your primary language and libraries"
+    type: single_choice
+    construct: satisfied_each_following_primary_languag
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q25
+    prompt: "How satisfied are you with each of the following? — Your compute resources"
+    type: single_choice
+    construct: satisfied_each_following_compute_resourc
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q26
+    prompt: "How satisfied are you with each of the following? — Your data quality and access"
+    type: single_choice
+    construct: satisfied_each_following_data_quality
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q27
+    prompt: "How satisfied are you with each of the following? — Your deployment / MLOps tooling"
+    type: single_choice
+    construct: satisfied_each_following_deployment_mlop
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q28
+    prompt: "Select the top 3 biggest challenges in your data science work. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_biggest_challenges
+    required: true
+    options:
+      - id: "a"
+        label: "Data quality / access"
+      - id: "b"
+        label: "Compute cost or availability"
+      - id: "c"
+        label: "Deploying and maintaining models"
+      - id: "d"
+        label: "Reproducibility"
+      - id: "e"
+        label: "Communicating results to stakeholders"
+      - id: "f"
+        label: "Keeping up with new methods and tools"
+      - id: "g"
+        label: "Data privacy and governance"
+      - id: "h"
+        label: "Hiring / team skills"
+      - id: "i"
+        label: "Measuring model impact"
+      - id: "j"
+        label: "Technical debt"
+  - id: q29
+    prompt: "How do you keep your data science skills current? (Select all that apply)"
+    type: multi_choice
+    construct: keep_data_science_skills_current
+    required: true
+    options:
+      - id: "a"
+        label: "Research papers / arXiv"
+      - id: "b"
+        label: "Online courses"
+      - id: "c"
+        label: "Kaggle competitions"
+      - id: "d"
+        label: "Blogs and newsletters"
+      - id: "e"
+        label: "YouTube / conference talks"
+      - id: "f"
+        label: "Documentation"
+      - id: "g"
+        label: "Communities (Reddit, Discord, Slack)"
+      - id: "h"
+        label: "On the job"
+  - id: q30
+    prompt: "Which best describes how central AI/ML is to your organization's products?"
+    type: single_choice
+    construct: best_describes_central_ai_ml
+    required: true
+    options:
+      - id: "a"
+        label: "Core to the product"
+      - id: "b"
+        label: "An important feature"
+      - id: "c"
+        label: "Used internally for analytics only"
+      - id: "d"
+        label: "Experimental / exploratory"
+      - id: "e"
+        label: "Not really used"
+      - id: "f"
+        label: "Not applicable"
+  - id: q31
+    prompt: "How likely are you to recommend data science as a career to a newcomer today? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_data_science_as
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "Overall, how satisfied are you with your data science tools and workflow?"
+    type: single_choice
+    construct: overall_satisfied_data_science_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How likely are you to adopt a major new tool or framework in the next 12 months?"
+    type: single_choice
+    construct: likely_adopt_major_new_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "What is the single biggest thing that would improve your data science workflow?"
+    type: free_text
+    construct: single_biggest_thing_that_would
+    required: true
+  - id: q35
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 25"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your annual household income (US dollars)?"
+    type: single_choice
+    construct: annual_household_income_us_dollars
+    required: true
+    options:
+      - id: "a"
+        label: "Under $50,000"
+      - id: "b"
+        label: "$50,000–$99,999"
+      - id: "c"
+        label: "$100,000–$149,999"
+      - id: "d"
+        label: "$150,000–$249,999"
+      - id: "e"
+        label: "$250,000 or more"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Bachelor's degree"
+      - id: "d"
+        label: "Master's degree"
+      - id: "e"
+        label: "Professional or doctoral degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed / freelancer"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+  - id: q41
+    prompt: "How many years of professional work experience do you have overall?"
+    type: free_text
+    construct: many_years_professional_work_experience
+    required: true
+  - id: q42
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Technology / software"
+      - id: "b"
+        label: "Finance / banking / insurance"
+      - id: "c"
+        label: "Healthcare / pharma"
+      - id: "d"
+        label: "Retail / e-commerce"
+      - id: "e"
+        label: "Government / non-profit"
+      - id: "f"
+        label: "Education / research"
+      - id: "g"
+        label: "Manufacturing / energy"
+      - id: "h"
+        label: "Other"
+  - id: q43
+    prompt: "How large is the company or organization you work for?"
+    type: single_choice
+    construct: large_company_organization_work
+    required: true
+    options:
+      - id: "a"
+        label: "Just me / freelance"
+      - id: "b"
+        label: "2–49"
+      - id: "c"
+        label: "50–249"
+      - id: "d"
+        label: "250–999"
+      - id: "e"
+        label: "1,000–4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q44
+    prompt: "What is your work arrangement?"
+    type: single_choice
+    construct: work_arrangement
+    required: true
+    options:
+      - id: "a"
+        label: "Fully remote"
+      - id: "b"
+        label: "Hybrid"
+      - id: "c"
+        label: "Fully in person"
+      - id: "d"
+        label: "Not currently working"
+  - id: q45
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q46
+    prompt: "How would you describe where you live?"
+    type: single_choice
+    construct: would_describe_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

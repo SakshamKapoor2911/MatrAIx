@@ -1,0 +1,647 @@
+schemaVersion: "1.0"
+id: coupon_usage_v1
+title: "Coupon Usage Survey"
+description: "How consumers find, choose, and use coupons and promo codes, and how they feel about the effort and savings involved."
+questions:
+  - id: q0
+    prompt: "How often do you use coupons or promo codes when shopping?"
+    type: single_choice
+    construct: often_use_coupons_promo_codes
+    required: true
+    options:
+      - id: "a"
+        label: "Almost every purchase"
+      - id: "b"
+        label: "Frequently"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q1
+    prompt: "Over the past year, has your use of coupons and promo codes..."
+    type: single_choice
+    construct: over_past_year_has_use
+    required: true
+    options:
+      - id: "a"
+        label: "Increased a lot"
+      - id: "b"
+        label: "Increased somewhat"
+      - id: "c"
+        label: "Stayed about the same"
+      - id: "d"
+        label: "Decreased somewhat"
+      - id: "e"
+        label: "Decreased a lot"
+  - id: q2
+    prompt: "Where do you find coupons or promo codes? (Select all that apply)"
+    type: multi_choice
+    construct: where_find_coupons_promo_codes
+    required: true
+    options:
+      - id: "a"
+        label: "Store or brand mobile apps"
+      - id: "b"
+        label: "Coupon websites (e.g., RetailMeNot, Coupons.com)"
+      - id: "c"
+        label: "Browser extensions (e.g., Honey, Capital One Shopping)"
+      - id: "d"
+        label: "Email newsletters from retailers"
+      - id: "e"
+        label: "Printed circulars or newspaper inserts"
+      - id: "f"
+        label: "Social media or influencers"
+      - id: "g"
+        label: "Cash-back apps (e.g., Rakuten, Ibotta)"
+      - id: "h"
+        label: "Text message alerts from stores"
+  - id: q3
+    prompt: "Which types of coupons do you use most often? (Select all that apply)"
+    type: multi_choice
+    construct: types_coupons_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Digital promo codes at online checkout"
+      - id: "b"
+        label: "Store-app or loyalty-linked coupons"
+      - id: "c"
+        label: "Paper coupons in stores"
+      - id: "d"
+        label: "Manufacturer coupons"
+      - id: "e"
+        label: "Cash-back rebates"
+      - id: "f"
+        label: "Buy-one-get-one offers"
+      - id: "g"
+        label: "Percentage-off or dollar-off codes"
+      - id: "h"
+        label: "I don't use coupons"
+  - id: q4
+    prompt: "In which categories do you use coupons most? (Select all that apply)"
+    type: multi_choice
+    construct: categories_use_coupons_most_select
+    required: true
+    options:
+      - id: "a"
+        label: "Groceries"
+      - id: "b"
+        label: "Restaurants and food delivery"
+      - id: "c"
+        label: "Clothing and apparel"
+      - id: "d"
+        label: "Electronics"
+      - id: "e"
+        label: "Household and cleaning supplies"
+      - id: "f"
+        label: "Health and beauty"
+      - id: "g"
+        label: "Travel and hotels"
+      - id: "h"
+        label: "Online subscriptions or software"
+  - id: q5
+    prompt: "About how many coupons or promo codes do you use in a typical month? Please enter a number."
+    type: free_text
+    construct: many_coupons_promo_codes_use
+    required: true
+  - id: q6
+    prompt: "About how much money do you estimate you save with coupons in a typical month? Please enter a number of dollars."
+    type: free_text
+    construct: much_money_estimate_save_coupons
+    required: true
+  - id: q7
+    prompt: "How much time do you typically spend looking for coupons before a purchase?"
+    type: single_choice
+    construct: much_time_typically_spend_looking
+    required: true
+    options:
+      - id: "a"
+        label: "None, I use whatever pops up"
+      - id: "b"
+        label: "Less than 2 minutes"
+      - id: "c"
+        label: "2 to 5 minutes"
+      - id: "d"
+        label: "6 to 15 minutes"
+      - id: "e"
+        label: "More than 15 minutes"
+  - id: q8
+    prompt: "When shopping online, how often do you search for a promo code before completing a purchase?"
+    type: single_choice
+    construct: when_shopping_online_often_search
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q9
+    prompt: "Have you ever abandoned or delayed a purchase because you couldn't find a working coupon?"
+    type: single_choice
+    construct: have_ever_abandoned_delayed_purchase
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, often"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "Never"
+  - id: q10
+    prompt: "How much do you agree with the following statement: Using coupons makes me feel like a smart shopper."
+    type: single_choice
+    construct: much_agree_following_statement_using
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: Coupons tempt me to buy things I don't really need."
+    type: single_choice
+    construct: much_agree_following_statement_coupons
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Finding coupons is often more trouble than it's worth."
+    type: single_choice
+    construct: much_agree_following_statement_finding
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: I will switch brands or stores to use a coupon."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I trust browser extensions and apps to find me the best deals."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How important is each factor when you decide to use a coupon: the size of the discount?"
+    type: single_choice
+    construct: important_each_factor_when_decide
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "How important is each factor when you decide to use a coupon: how easy the coupon is to redeem?"
+    type: single_choice
+    construct: important_each_factor_when_decide
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "How important is each factor when you decide to use a coupon: whether it applies to something you already planned to buy?"
+    type: single_choice
+    construct: important_each_factor_when_decide
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each factor when you decide to use a coupon: whether the coupon requires sharing personal information?"
+    type: single_choice
+    construct: important_each_factor_when_decide
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is each factor when you decide to use a coupon: the expiration date or time pressure?"
+    type: single_choice
+    construct: important_each_factor_when_decide
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "What most often frustrates you about coupons? (Select all that apply)"
+    type: multi_choice
+    construct: most_often_frustrates_coupons_select
+    required: true
+    options:
+      - id: "a"
+        label: "Codes that don't work at checkout"
+      - id: "b"
+        label: "Minimum purchase requirements"
+      - id: "c"
+        label: "Exclusions and fine print"
+      - id: "d"
+        label: "Expired offers"
+      - id: "e"
+        label: "Having to sign up or share data"
+      - id: "f"
+        label: "Too much time to find them"
+      - id: "g"
+        label: "Nothing really frustrates me"
+  - id: q21
+    prompt: "Do you use a loyalty or rewards program that automatically applies discounts?"
+    type: single_choice
+    construct: use_loyalty_rewards_program_that
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several"
+      - id: "b"
+        label: "Yes, one or two"
+      - id: "c"
+        label: "No, but I'm interested"
+      - id: "d"
+        label: "No"
+  - id: q22
+    prompt: "Select the top 3 things that would make you use coupons more. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_that
+    required: true
+    options:
+      - id: "a"
+        label: "Bigger discounts"
+      - id: "b"
+        label: "Automatic application at checkout"
+      - id: "c"
+        label: "No minimum purchase"
+      - id: "d"
+        label: "Personalized offers on things I buy"
+      - id: "e"
+        label: "Fewer restrictions or exclusions"
+      - id: "f"
+        label: "Not having to share personal data"
+      - id: "g"
+        label: "Easier-to-find codes"
+      - id: "h"
+        label: "Longer expiration windows"
+  - id: q23
+    prompt: "Compared with two years ago, how motivated are you to hunt for deals and coupons?"
+    type: single_choice
+    construct: compared_two_years_ago_motivated
+    required: true
+    options:
+      - id: "a"
+        label: "Much less motivated"
+      - id: "b"
+        label: "Somewhat less motivated"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat more motivated"
+      - id: "e"
+        label: "Much more motivated"
+  - id: q24
+    prompt: "How satisfied are you with the savings you get from coupons and promo codes?"
+    type: single_choice
+    construct: satisfied_savings_get_from_coupons
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q25
+    prompt: "How likely are you to recommend a favorite coupon app or site to a friend?"
+    type: single_choice
+    construct: likely_recommend_favorite_coupon_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q26
+    prompt: "On a scale of 0 to 10, how likely are you to look for a coupon before your next purchase? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_look
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q27
+    prompt: "Please share any thoughts about how and why you use (or avoid) coupons."
+    type: free_text
+    construct: please_share_any_thoughts_why
+    required: true
+  - id: q28
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18-24"
+      - id: "b"
+        label: "25-34"
+      - id: "c"
+        label: "35-44"
+      - id: "d"
+        label: "45-54"
+      - id: "e"
+        label: "55-64"
+      - id: "f"
+        label: "65 or older"
+  - id: q29
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q30
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is your total annual household income (before taxes)?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q33
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Homemaker or caregiver"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Unable to work"
+  - id: q34
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q35
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q36
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q37
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q38
+    prompt: "How would you describe your household's primary shopping style?"
+    type: single_choice
+    construct: would_describe_household_s_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly online"
+      - id: "b"
+        label: "Mostly in-store"
+      - id: "c"
+        label: "A roughly even mix of both"
+  - id: q39
+    prompt: "How would you describe your current financial situation?"
+    type: single_choice
+    construct: would_describe_current_financial_situati
+    required: true
+    options:
+      - id: "a"
+        label: "Comfortable, with money left over"
+      - id: "b"
+        label: "Getting by, breaking even"
+      - id: "c"
+        label: "Stretched, but managing"
+      - id: "d"
+        label: "Struggling to make ends meet"

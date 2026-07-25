@@ -1,0 +1,747 @@
+schemaVersion: "1.0"
+id: crypto_trading_behavior_v1
+title: "Cryptocurrency Trading Behavior Survey"
+description: "How active cryptocurrency traders behave — their trading frequency, styles, tools, risk management, and the psychological patterns that shape their decisions."
+questions:
+  - id: q0
+    prompt: "Do you actively trade cryptocurrency (buying and selling, beyond simple buy-and-hold)?"
+    type: single_choice
+    construct: actively_trade_cryptocurrency_buying_sel
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I trade regularly"
+      - id: "b"
+        label: "Yes, I trade occasionally"
+      - id: "c"
+        label: "I used to trade but stopped"
+      - id: "d"
+        label: "No, I only buy and hold"
+      - id: "e"
+        label: "No, I do not own cryptocurrency at all"
+  - id: q1
+    prompt: "How long have you been trading cryptocurrency?"
+    type: single_choice
+    construct: long_have_been_trading_cryptocurrency
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "4 to 6 years"
+      - id: "e"
+        label: "More than 6 years"
+      - id: "f"
+        label: "I do not trade cryptocurrency"
+  - id: q2
+    prompt: "About how often do you place cryptocurrency trades?"
+    type: single_choice
+    construct: often_place_cryptocurrency_trades
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "About once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Less than once a month"
+  - id: q3
+    prompt: "Which platforms do you use for crypto trading? (Select all that apply)"
+    type: multi_choice
+    construct: platforms_use_crypto_trading_select
+    required: true
+    options:
+      - id: "a"
+        label: "Coinbase / Coinbase Advanced"
+      - id: "b"
+        label: "Binance / Binance.US"
+      - id: "c"
+        label: "Kraken"
+      - id: "d"
+        label: "Robinhood"
+      - id: "e"
+        label: "Crypto.com"
+      - id: "f"
+        label: "A decentralized exchange (e.g., Uniswap)"
+      - id: "g"
+        label: "Cash App"
+      - id: "h"
+        label: "Another platform"
+  - id: q4
+    prompt: "Which types of crypto trades or products do you use? (Select all that apply)"
+    type: multi_choice
+    construct: types_crypto_trades_products_use
+    required: true
+    options:
+      - id: "a"
+        label: "Spot buying and selling"
+      - id: "b"
+        label: "Margin trading"
+      - id: "c"
+        label: "Futures or perpetual contracts"
+      - id: "d"
+        label: "Options"
+      - id: "e"
+        label: "Leveraged tokens"
+      - id: "f"
+        label: "Automated bots or copy trading"
+      - id: "g"
+        label: "I only do simple spot trades"
+  - id: q5
+    prompt: "Which best describes your primary trading style?"
+    type: single_choice
+    construct: best_describes_primary_trading_style
+    required: true
+    options:
+      - id: "a"
+        label: "Day trading (positions closed within a day)"
+      - id: "b"
+        label: "Swing trading (days to weeks)"
+      - id: "c"
+        label: "Position trading (weeks to months)"
+      - id: "d"
+        label: "Scalping (very short-term, many small trades)"
+      - id: "e"
+        label: "Opportunistic, no fixed style"
+  - id: q6
+    prompt: "Roughly what is the total value of cryptocurrency you actively trade with, in U.S. dollars? Please enter a whole number."
+    type: free_text
+    construct: roughly_total_value_cryptocurrency_activ
+    required: true
+  - id: q7
+    prompt: "About how many separate trades do you make in a typical month? Please enter a whole number."
+    type: free_text
+    construct: many_separate_trades_make_typical
+    required: true
+  - id: q8
+    prompt: "Do you use leverage (borrowed funds) when trading crypto?"
+    type: single_choice
+    construct: use_leverage_borrowed_funds_when
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "Never"
+      - id: "e"
+        label: "Not sure what that means"
+  - id: q9
+    prompt: "What is the highest amount of leverage you have used on a single crypto trade?"
+    type: single_choice
+    construct: highest_amount_leverage_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "No leverage"
+      - id: "b"
+        label: "Up to 2x"
+      - id: "c"
+        label: "3x to 5x"
+      - id: "d"
+        label: "6x to 20x"
+      - id: "e"
+        label: "More than 20x"
+  - id: q10
+    prompt: "What do you rely on most when deciding to enter or exit a trade? (Select all that apply)"
+    type: multi_choice
+    construct: rely_most_when_deciding_enter
+    required: true
+    options:
+      - id: "a"
+        label: "Technical analysis / charts"
+      - id: "b"
+        label: "Project fundamentals"
+      - id: "c"
+        label: "Social media sentiment"
+      - id: "d"
+        label: "News and events"
+      - id: "e"
+        label: "Tips from influencers or friends"
+      - id: "f"
+        label: "Automated signals or bots"
+      - id: "g"
+        label: "Gut feeling"
+  - id: q11
+    prompt: "Do you use stop-loss orders to manage risk?"
+    type: single_choice
+    construct: use_stop_loss_orders_manage
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, on almost every trade"
+      - id: "b"
+        label: "Yes, on some trades"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "Never"
+      - id: "e"
+        label: "I don't know what a stop-loss is"
+  - id: q12
+    prompt: "What are your main reasons for trading crypto rather than just holding? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: main_reasons_trading_crypto_rather
+    required: true
+    options:
+      - id: "a"
+        label: "To earn short-term profits"
+      - id: "b"
+        label: "I enjoy the excitement"
+      - id: "c"
+        label: "To take advantage of volatility"
+      - id: "d"
+        label: "To grow a small account quickly"
+      - id: "e"
+        label: "To generate income"
+      - id: "f"
+        label: "I don't trust holding long term"
+      - id: "g"
+        label: "Curiosity and learning"
+      - id: "h"
+        label: "Social or community involvement"
+  - id: q13
+    prompt: "How much do you agree with the following statement: I have a clear trading strategy that I follow consistently."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: My emotions often influence my trading decisions."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: I sometimes trade more than I intended to."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I only trade with money I can afford to lose."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: Trading crypto feels similar to gambling."
+    type: single_choice
+    construct: much_agree_following_statement_trading
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How often do you experience each of the following while trading? — Checking prices when you should be doing something else"
+    type: single_choice
+    construct: often_experience_each_following_while
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q19
+    prompt: "How often do you experience each of the following while trading? — Chasing a trade after missing a big move (FOMO)"
+    type: single_choice
+    construct: often_experience_each_following_while
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q20
+    prompt: "How often do you experience each of the following while trading? — Selling in a panic during a price drop"
+    type: single_choice
+    construct: often_experience_each_following_while
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q21
+    prompt: "How often do you experience each of the following while trading? — Feeling stressed or anxious about open positions"
+    type: single_choice
+    construct: often_experience_each_following_while
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "How often do you experience each of the following while trading? — Trading late at night or losing sleep over trades"
+    type: single_choice
+    construct: often_experience_each_following_while
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q23
+    prompt: "Over the past 12 months, how would you describe your overall trading results?"
+    type: single_choice
+    construct: over_past_12_months_would
+    required: true
+    options:
+      - id: "a"
+        label: "Significant losses"
+      - id: "b"
+        label: "Small losses"
+      - id: "c"
+        label: "Roughly broke even"
+      - id: "d"
+        label: "Small gains"
+      - id: "e"
+        label: "Significant gains"
+      - id: "f"
+        label: "Not sure"
+  - id: q24
+    prompt: "Do you keep records of your trades for performance or tax purposes?"
+    type: single_choice
+    construct: keep_records_trades_performance_tax
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, detailed records"
+      - id: "b"
+        label: "Yes, but only rough records"
+      - id: "c"
+        label: "No, but I plan to start"
+      - id: "d"
+        label: "No, I do not track my trades"
+  - id: q25
+    prompt: "How much time do you spend on crypto trading and research in a typical week?"
+    type: single_choice
+    construct: much_time_spend_crypto_trading
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 hour"
+      - id: "b"
+        label: "1 to 5 hours"
+      - id: "c"
+        label: "6 to 15 hours"
+      - id: "d"
+        label: "16 to 30 hours"
+      - id: "e"
+        label: "More than 30 hours"
+  - id: q26
+    prompt: "Where do you get trading ideas and information? (Select all that apply)"
+    type: multi_choice
+    construct: where_get_trading_ideas_information
+    required: true
+    options:
+      - id: "a"
+        label: "X/Twitter crypto accounts"
+      - id: "b"
+        label: "Reddit or Discord communities"
+      - id: "c"
+        label: "YouTube traders"
+      - id: "d"
+        label: "Telegram groups"
+      - id: "e"
+        label: "Crypto news sites"
+      - id: "f"
+        label: "Trading platforms' own charts and tools"
+      - id: "g"
+        label: "Friends or coworkers"
+  - id: q27
+    prompt: "Have you ever taken any of the following actions related to your trading? (Select all that apply)"
+    type: multi_choice
+    construct: have_ever_taken_any_following
+    required: true
+    options:
+      - id: "a"
+        label: "Set limits on how much I trade"
+      - id: "b"
+        label: "Taken a break from trading"
+      - id: "c"
+        label: "Moved funds off an exchange to reduce temptation"
+      - id: "d"
+        label: "Talked to someone about my trading habits"
+      - id: "e"
+        label: "Closed a trading account entirely"
+      - id: "f"
+        label: "None of these"
+  - id: q28
+    prompt: "How confident are you in your ability to trade crypto profitably over the long run?"
+    type: single_choice
+    construct: confident_ability_trade_crypto_profitabl
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q29
+    prompt: "How satisfied are you overall with your crypto trading experience?"
+    type: single_choice
+    construct: satisfied_overall_crypto_trading_experie
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How likely are you to continue trading crypto over the next 12 months?"
+    type: single_choice
+    construct: likely_continue_trading_crypto_over
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "On a scale of 0 to 10, how likely are you to recommend crypto trading to a friend or family member (0 = not at all likely, 10 = extremely likely)?"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "What is the most important lesson you have learned from trading crypto? (Optional open response)"
+    type: free_text
+    construct: most_important_lesson_have_learned
+    required: false
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic, Latino, or Spanish origin"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Some other race or origin"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q39
+    prompt: "Including yourself, how many people live in your household? Please enter a whole number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q40
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Widowed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "In which U.S. region do you live?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q43
+    prompt: "Which best describes your overall investment risk tolerance?"
+    type: single_choice
+    construct: best_describes_overall_investment_risk
+    required: true
+    options:
+      - id: "a"
+        label: "Very conservative"
+      - id: "b"
+        label: "Conservative"
+      - id: "c"
+        label: "Moderate"
+      - id: "d"
+        label: "Aggressive"
+      - id: "e"
+        label: "Very aggressive"
+  - id: q44
+    prompt: "Besides crypto, do you also actively trade stocks, options, or other assets?"
+    type: single_choice
+    construct: besides_crypto_also_actively_trade
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, only crypto"
+      - id: "d"
+        label: "No, I do not actively trade anything else"

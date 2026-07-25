@@ -1,0 +1,709 @@
+schemaVersion: "1.0"
+id: financial_influencer_trust_v1
+title: "Financial Influencer Trust Survey"
+description: "How people follow and trust financial influencers (\"finfluencers\") on social media and how their content affects money decisions."
+questions:
+  - id: q0
+    prompt: "Do you follow any financial influencers or creators who share money, investing, or budgeting advice online?"
+    type: single_choice
+    construct: follow_any_financial_influencers_creator
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several"
+      - id: "b"
+        label: "Yes, a few"
+      - id: "c"
+        label: "No, but I sometimes see their content"
+      - id: "d"
+        label: "No, and I actively avoid it"
+      - id: "e"
+        label: "I'm not sure what a financial influencer is"
+  - id: q1
+    prompt: "How often do you see financial advice content on social media?"
+    type: single_choice
+    construct: often_see_financial_advice_content
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Constantly"
+  - id: q2
+    prompt: "On which platforms do you come across financial influencer content? (Select all that apply)"
+    type: multi_choice
+    construct: platforms_come_across_financial_influenc
+    required: true
+    options:
+      - id: "a"
+        label: "YouTube"
+      - id: "b"
+        label: "TikTok"
+      - id: "c"
+        label: "Instagram"
+      - id: "d"
+        label: "X (Twitter)"
+      - id: "e"
+        label: "Reddit"
+      - id: "f"
+        label: "Facebook"
+      - id: "g"
+        label: "Podcasts"
+      - id: "h"
+        label: "I don't come across it anywhere"
+  - id: q3
+    prompt: "About how many financial influencers or creators do you actively follow? Please enter a number."
+    type: free_text
+    construct: many_financial_influencers_creators_acti
+    required: true
+  - id: q4
+    prompt: "What kinds of financial content do you engage with most? (Select all that apply)"
+    type: multi_choice
+    construct: kinds_financial_content_engage_most
+    required: true
+    options:
+      - id: "a"
+        label: "Budgeting and saving tips"
+      - id: "b"
+        label: "Stock or ETF investing ideas"
+      - id: "c"
+        label: "Cryptocurrency"
+      - id: "d"
+        label: "Real estate investing"
+      - id: "e"
+        label: "Side hustles and making money"
+      - id: "f"
+        label: "Getting out of debt"
+      - id: "g"
+        label: "Retirement and long-term planning"
+      - id: "h"
+        label: "Deals, coupons, and frugal living"
+      - id: "i"
+        label: "I don't engage with financial content"
+  - id: q5
+    prompt: "How long have you been following financial influencers?"
+    type: single_choice
+    construct: long_have_been_following_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "More than 3 years"
+      - id: "e"
+        label: "I don't follow any"
+  - id: q6
+    prompt: "Have you ever taken a financial action based on advice from an influencer?"
+    type: single_choice
+    construct: have_ever_taken_financial_action
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several times"
+      - id: "b"
+        label: "Yes, once or twice"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No, never"
+  - id: q7
+    prompt: "Which actions have you taken because of a financial influencer? (Select all that apply)"
+    type: multi_choice
+    construct: actions_have_taken_because_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Started budgeting or tracking spending"
+      - id: "b"
+        label: "Opened a new savings or investment account"
+      - id: "c"
+        label: "Bought a specific stock, ETF, or crypto"
+      - id: "d"
+        label: "Signed up for an app or product they promoted"
+      - id: "e"
+        label: "Started a side hustle"
+      - id: "f"
+        label: "Changed how I pay off debt"
+      - id: "g"
+        label: "Bought a course, book, or paid content"
+      - id: "h"
+        label: "I have not taken any action"
+  - id: q8
+    prompt: "In general, how much do you trust the financial advice you see from influencers?"
+    type: single_choice
+    construct: general_much_trust_financial_advice
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q9
+    prompt: "How much do you agree or disagree: Financial influencers make money topics easier to understand."
+    type: single_choice
+    construct: much_agree_disagree_financial_influencer
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree or disagree: Most financial influencers are mainly trying to sell something."
+    type: single_choice
+    construct: much_agree_disagree_most_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree: I have learned useful financial skills from influencers."
+    type: single_choice
+    construct: much_agree_disagree_i_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: Financial influencer content sometimes makes me feel behind or anxious about money."
+    type: single_choice
+    construct: much_agree_disagree_financial_influencer
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I can usually tell when an influencer's advice is bad or misleading."
+    type: single_choice
+    construct: much_agree_disagree_i_can
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How important is each factor when deciding whether to trust a financial influencer: Their professional credentials or expertise"
+    type: single_choice
+    construct: important_each_factor_when_deciding
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q15
+    prompt: "How important is each factor when deciding whether to trust a financial influencer: Whether they disclose sponsorships or paid promotions"
+    type: single_choice
+    construct: important_each_factor_when_deciding
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "How important is each factor when deciding whether to trust a financial influencer: Their track record and past results"
+    type: single_choice
+    construct: important_each_factor_when_deciding
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "How important is each factor when deciding whether to trust a financial influencer: How relatable or authentic they seem"
+    type: single_choice
+    construct: important_each_factor_when_deciding
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each factor when deciding whether to trust a financial influencer: Number of followers or popularity"
+    type: single_choice
+    construct: important_each_factor_when_deciding
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is each factor when deciding whether to trust a financial influencer: Whether their advice matches other sources"
+    type: single_choice
+    construct: important_each_factor_when_deciding
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "When an influencer recommends a specific investment, how do you usually respond?"
+    type: single_choice
+    construct: when_influencer_recommends_specific_inve
+    required: true
+    options:
+      - id: "a"
+        label: "I invest based on their recommendation"
+      - id: "b"
+        label: "I research it myself before deciding"
+      - id: "c"
+        label: "I take note but rarely act"
+      - id: "d"
+        label: "I ignore individual investment tips"
+      - id: "e"
+        label: "I distrust specific investment tips"
+  - id: q21
+    prompt: "How often do you verify an influencer's financial claims with another source?"
+    type: single_choice
+    construct: often_verify_influencer_s_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "How concerned are you about financial influencers promoting scams or bad products?"
+    type: single_choice
+    construct: concerned_financial_influencers_promotin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q23
+    prompt: "Have you ever lost money or been misled by following an influencer's financial advice?"
+    type: single_choice
+    construct: have_ever_lost_money_been
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a significant amount"
+      - id: "b"
+        label: "Yes, a small amount"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q24
+    prompt: "Compared with traditional sources (a bank, advisor, or news outlet), how much do you trust financial influencers?"
+    type: single_choice
+    construct: compared_traditional_sources_bank_adviso
+    required: true
+    options:
+      - id: "a"
+        label: "Much less"
+      - id: "b"
+        label: "Somewhat less"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat more"
+      - id: "e"
+        label: "Much more"
+  - id: q25
+    prompt: "Who do you trust MOST for financial guidance?"
+    type: single_choice
+    construct: who_trust_most_financial_guidance
+    required: true
+    options:
+      - id: "a"
+        label: "A certified financial advisor or planner"
+      - id: "b"
+        label: "Financial news outlets"
+      - id: "c"
+        label: "Financial influencers and creators"
+      - id: "d"
+        label: "Friends and family"
+      - id: "e"
+        label: "My bank or brokerage"
+      - id: "f"
+        label: "I mostly rely on my own research"
+  - id: q26
+    prompt: "Select the top 3 things that would make you trust a financial influencer more. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_that
+    required: true
+    options:
+      - id: "a"
+        label: "Clear professional credentials"
+      - id: "b"
+        label: "Transparent disclosure of paid promotions"
+      - id: "c"
+        label: "A long, consistent track record"
+      - id: "d"
+        label: "Advice backed by data or research"
+      - id: "e"
+        label: "Not selling their own products or courses"
+      - id: "f"
+        label: "Endorsements from experts I trust"
+      - id: "g"
+        label: "Realistic, non-hyped claims"
+      - id: "h"
+        label: "Content free of get-rich-quick promises"
+  - id: q27
+    prompt: "How likely are you to follow a new financial influencer in the next year?"
+    type: single_choice
+    construct: likely_follow_new_financial_influencer
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Somewhat likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q28
+    prompt: "Overall, how helpful has financial influencer content been for your personal finances?"
+    type: single_choice
+    construct: overall_helpful_has_financial_influencer
+    required: true
+    options:
+      - id: "a"
+        label: "Very unhelpful"
+      - id: "b"
+        label: "Unhelpful"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Helpful"
+      - id: "e"
+        label: "Very helpful"
+  - id: q29
+    prompt: "Overall, how satisfied are you with the quality of financial advice available from influencers?"
+    type: single_choice
+    construct: overall_satisfied_quality_financial_advi
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q36
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+      - id: "h"
+        label: "Unable to work"
+  - id: q37
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q38
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q41
+    prompt: "How many hours per day do you spend on social media overall?"
+    type: single_choice
+    construct: many_hours_per_day_spend
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 hour"
+      - id: "b"
+        label: "1–2 hours"
+      - id: "c"
+        label: "3–4 hours"
+      - id: "d"
+        label: "5 or more hours"
+      - id: "e"
+        label: "I don't use social media"
+  - id: q42
+    prompt: "How would you rate your overall financial knowledge?"
+    type: single_choice
+    construct: would_rate_overall_financial_knowledge
+    required: true
+    options:
+      - id: "a"
+        label: "Very low"
+      - id: "b"
+        label: "Low"
+      - id: "c"
+        label: "Moderate"
+      - id: "d"
+        label: "High"
+      - id: "e"
+        label: "Very high"

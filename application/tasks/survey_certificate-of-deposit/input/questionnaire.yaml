@@ -1,0 +1,675 @@
+schemaVersion: "1.0"
+id: certificate_of_deposit_v1
+title: "Certificate of Deposit Survey"
+description: "How people understand and use certificates of deposit (CDs) as a safe, fixed-term savings vehicle."
+questions:
+  - id: q0
+    prompt: "How familiar are you with certificates of deposit (CDs)?"
+    type: single_choice
+    construct: familiar_certificates_deposit_cds
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all familiar"
+      - id: "b"
+        label: "Slightly familiar"
+      - id: "c"
+        label: "Moderately familiar"
+      - id: "d"
+        label: "Very familiar"
+  - id: q1
+    prompt: "Do you currently own one or more certificates of deposit (CDs)?"
+    type: single_choice
+    construct: currently_own_one_more_certificates
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one"
+      - id: "b"
+        label: "Yes, more than one"
+      - id: "c"
+        label: "No, but I've owned one before"
+      - id: "d"
+        label: "No, and I never have"
+  - id: q2
+    prompt: "Have you opened a new CD in the past 12 months?"
+    type: single_choice
+    construct: have_opened_new_cd_past
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "I don't own any CDs"
+  - id: q3
+    prompt: "Where do you (or would you) open a CD? (Select all that apply)"
+    type: multi_choice
+    construct: where_would_open_cd_select
+    required: true
+    options:
+      - id: "a"
+        label: "A traditional bank (e.g., Chase, Bank of America, Wells Fargo)"
+      - id: "b"
+        label: "An online bank (e.g., Ally, Marcus by Goldman Sachs, Capital One 360)"
+      - id: "c"
+        label: "A credit union"
+      - id: "d"
+        label: "A brokerage firm (a brokered CD)"
+      - id: "e"
+        label: "I don't own or plan to own a CD"
+  - id: q4
+    prompt: "What term length CDs do you currently hold or most prefer? (Select all that apply)"
+    type: multi_choice
+    construct: term_length_cds_currently_hold
+    required: true
+    options:
+      - id: "a"
+        label: "3 months or less"
+      - id: "b"
+        label: "6 months"
+      - id: "c"
+        label: "1 year"
+      - id: "d"
+        label: "2 years"
+      - id: "e"
+        label: "3 to 5 years"
+      - id: "f"
+        label: "More than 5 years"
+      - id: "g"
+        label: "I don't hold any CDs"
+  - id: q5
+    prompt: "What is the main reason you use (or would use) a CD?"
+    type: single_choice
+    construct: main_reason_use_would_use
+    required: true
+    options:
+      - id: "a"
+        label: "Higher interest than a regular savings account"
+      - id: "b"
+        label: "Guaranteed, predictable returns"
+      - id: "c"
+        label: "Safety of my principal"
+      - id: "d"
+        label: "To avoid the temptation to spend the money"
+      - id: "e"
+        label: "Saving for a specific future goal"
+      - id: "f"
+        label: "I don't use CDs"
+  - id: q6
+    prompt: "Roughly how much do you currently have invested across all your CDs? Please enter a dollar amount."
+    type: free_text
+    construct: roughly_much_currently_have_invested
+    required: true
+  - id: q7
+    prompt: "What is the highest CD annual percentage yield (APY) you've seen recently? Please enter a percentage."
+    type: free_text
+    construct: highest_cd_annual_percentage_yield
+    required: true
+  - id: q8
+    prompt: "Which CD-related concepts are you familiar with? (Select all that apply)"
+    type: multi_choice
+    construct: cd_related_concepts_familiar_select
+    required: true
+    options:
+      - id: "a"
+        label: "Early withdrawal penalties"
+      - id: "b"
+        label: "CD laddering"
+      - id: "c"
+        label: "No-penalty CDs"
+      - id: "d"
+        label: "Bump-up or step-up CDs"
+      - id: "e"
+        label: "Brokered CDs"
+      - id: "f"
+        label: "FDIC / NCUA insurance limits"
+      - id: "g"
+        label: "Automatic renewal at maturity"
+      - id: "h"
+        label: "I'm not familiar with any of these"
+  - id: q9
+    prompt: "Do you use a \"CD ladder\" strategy (spreading money across CDs with staggered maturity dates)?"
+    type: single_choice
+    construct: use_cd_ladder_strategy_spreading
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, currently"
+      - id: "b"
+        label: "I have in the past"
+      - id: "c"
+        label: "No, but I'm interested"
+      - id: "d"
+        label: "No, and I'm not interested"
+      - id: "e"
+        label: "I'm not sure what that is"
+  - id: q10
+    prompt: "How do you typically decide where to open a CD?"
+    type: single_choice
+    construct: typically_decide_where_open_cd
+    required: true
+    options:
+      - id: "a"
+        label: "I compare rates across many institutions"
+      - id: "b"
+        label: "I use my existing bank for convenience"
+      - id: "c"
+        label: "I follow a recommendation from an advisor or friend"
+      - id: "d"
+        label: "I look for the highest advertised rate"
+      - id: "e"
+        label: "I don't open CDs"
+  - id: q11
+    prompt: "How much do you agree or disagree: CDs are a safe place to keep my money."
+    type: single_choice
+    construct: much_agree_disagree_cds_safe
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: The early withdrawal penalty makes me hesitant to use CDs."
+    type: single_choice
+    construct: much_agree_disagree_early_withdrawal
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I could get better returns investing in stocks or bonds instead of CDs."
+    type: single_choice
+    construct: much_agree_disagree_i_could
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: Locking up my money for a fixed term is a downside of CDs."
+    type: single_choice
+    construct: much_agree_disagree_locking_up
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: Current CD rates are attractive enough for me to open one."
+    type: single_choice
+    construct: much_agree_disagree_current_cd
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How important is each factor when choosing a CD: The interest rate (APY)."
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "How important is each factor when choosing a CD: The term length."
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each factor when choosing a CD: The size of the early withdrawal penalty."
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is each factor when choosing a CD: The minimum deposit required."
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is each factor when choosing a CD: FDIC or NCUA insurance protection."
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "Select your top 3 reasons you would choose a CD over other savings options. (Select all that apply — choose up to 3)"
+    type: single_choice
+    construct: select_top_3_reasons_would
+    required: true
+    options:
+      - id: "a"
+        label: "Higher guaranteed rate than savings accounts"
+      - id: "b"
+        label: "Principal is safe and insured"
+      - id: "c"
+        label: "Predictable returns"
+      - id: "d"
+        label: "It stops me from spending the money"
+      - id: "e"
+        label: "Good for a known future expense"
+      - id: "f"
+        label: "Diversifying where I keep my money"
+      - id: "g"
+        label: "No exposure to stock market swings"
+  - id: q22
+    prompt: "What has kept you from using CDs, or concerns you about them? (Select all that apply)"
+    type: multi_choice
+    construct: has_kept_from_using_cds
+    required: true
+    options:
+      - id: "a"
+        label: "My money is locked up for the term"
+      - id: "b"
+        label: "Early withdrawal penalties"
+      - id: "c"
+        label: "Rates are too low"
+      - id: "d"
+        label: "I can earn more elsewhere"
+      - id: "e"
+        label: "I might need the money unexpectedly"
+      - id: "f"
+        label: "Minimum deposit is too high"
+      - id: "g"
+        label: "I don't understand how they work"
+      - id: "h"
+        label: "Nothing — I have no concerns"
+  - id: q23
+    prompt: "When your CD matures, what do you usually do (or plan to do)?"
+    type: single_choice
+    construct: when_cd_matures_usually_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Renew it into a new CD"
+      - id: "b"
+        label: "Move the money to a savings account"
+      - id: "c"
+        label: "Reinvest in stocks, bonds, or funds"
+      - id: "d"
+        label: "Spend it on a planned expense"
+      - id: "e"
+        label: "It depends on rates at the time"
+      - id: "f"
+        label: "Not applicable"
+  - id: q24
+    prompt: "How do current CD rates compare to what you could get in a high-yield savings account, in your view?"
+    type: single_choice
+    construct: current_cd_rates_compare_could
+    required: true
+    options:
+      - id: "a"
+        label: "CDs are clearly higher"
+      - id: "b"
+        label: "About the same"
+      - id: "c"
+        label: "High-yield savings is higher"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q25
+    prompt: "Compared with 2 years ago, how attractive do you find CD rates today?"
+    type: single_choice
+    construct: compared_2_years_ago_attractive
+    required: true
+    options:
+      - id: "a"
+        label: "Much less attractive"
+      - id: "b"
+        label: "Somewhat less attractive"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat more attractive"
+      - id: "e"
+        label: "Much more attractive"
+  - id: q26
+    prompt: "Where do you learn about CD rates and options? (Select all that apply)"
+    type: multi_choice
+    construct: where_learn_cd_rates_options
+    required: true
+    options:
+      - id: "a"
+        label: "Bank or credit union websites"
+      - id: "b"
+        label: "Rate comparison sites (e.g., Bankrate, NerdWallet)"
+      - id: "c"
+        label: "My financial advisor"
+      - id: "d"
+        label: "Friends or family"
+      - id: "e"
+        label: "Financial news or newsletters"
+      - id: "f"
+        label: "Social media"
+      - id: "g"
+        label: "I don't research CD rates"
+  - id: q27
+    prompt: "What is the largest single CD deposit you would feel comfortable making? Please enter a dollar amount."
+    type: free_text
+    construct: largest_single_cd_deposit_would
+    required: true
+  - id: q28
+    prompt: "How likely are you to open a new CD in the next 12 months?"
+    type: single_choice
+    construct: likely_open_new_cd_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q29
+    prompt: "Overall, how satisfied are you with CDs as part of your savings strategy?"
+    type: single_choice
+    construct: overall_satisfied_cds_as_part
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I don't use CDs"
+  - id: q30
+    prompt: "On a scale of 0 to 10, how likely are you to recommend CDs to a friend looking for a safe place to save? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "In a few words, what would make CDs more appealing to you? (Optional)"
+    type: free_text
+    construct: few_words_would_make_cds
+    required: false
+  - id: q32
+    prompt: "What is your age? Please enter a number (years old)."
+    type: free_text
+    construct: age_please_enter_number_years
+    required: true
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q38
+    prompt: "What is your annual household income before taxes?"
+    type: single_choice
+    construct: annual_household_income_before_taxes
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+  - id: q40
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q41
+    prompt: "Which best describes your stage of life?"
+    type: single_choice
+    construct: best_describes_stage_life
+    required: true
+    options:
+      - id: "a"
+        label: "Early career / building savings"
+      - id: "b"
+        label: "Mid-career"
+      - id: "c"
+        label: "Approaching retirement"
+      - id: "d"
+        label: "Retired"
+  - id: q42
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

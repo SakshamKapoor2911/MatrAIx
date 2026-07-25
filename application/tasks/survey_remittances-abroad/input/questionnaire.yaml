@@ -1,0 +1,661 @@
+schemaVersion: "1.0"
+id: remittances_abroad_v1
+title: "Sending Money Abroad Survey"
+description: "How people send remittances abroad, and how they choose and feel about transfer services."
+questions:
+  - id: q0
+    prompt: "Do you send money to family or friends in another country?"
+    type: single_choice
+    construct: send_money_family_friends_another
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "I did in the past but not now"
+      - id: "d"
+        label: "No, never"
+  - id: q1
+    prompt: "Which region do you most often send money to?"
+    type: single_choice
+    construct: region_most_often_send_money
+    required: true
+    options:
+      - id: "a"
+        label: "Latin America or the Caribbean"
+      - id: "b"
+        label: "Asia"
+      - id: "c"
+        label: "Africa"
+      - id: "d"
+        label: "Europe"
+      - id: "e"
+        label: "The Middle East"
+      - id: "f"
+        label: "Elsewhere"
+  - id: q2
+    prompt: "How long have you been sending money abroad?"
+    type: single_choice
+    construct: long_have_been_sending_money
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 9 years"
+      - id: "d"
+        label: "10 years or more"
+  - id: q3
+    prompt: "How often do you send money abroad?"
+    type: single_choice
+    construct: often_send_money_abroad
+    required: true
+    options:
+      - id: "a"
+        label: "Weekly"
+      - id: "b"
+        label: "Every two weeks"
+      - id: "c"
+        label: "Monthly"
+      - id: "d"
+        label: "A few times a year"
+      - id: "e"
+        label: "Once a year or less"
+  - id: q4
+    prompt: "Approximately how much do you send in a typical transfer? Enter a dollar amount."
+    type: free_text
+    construct: approximately_much_send_typical_transfer
+    required: true
+  - id: q5
+    prompt: "Approximately how much do you send abroad in total over a year? Enter a dollar amount."
+    type: free_text
+    construct: approximately_much_send_abroad_total
+    required: true
+  - id: q6
+    prompt: "Which services do you use to send money abroad? (Select all that apply)"
+    type: multi_choice
+    construct: services_use_send_money_abroad
+    required: true
+    options:
+      - id: "a"
+        label: "Western Union"
+      - id: "b"
+        label: "MoneyGram"
+      - id: "c"
+        label: "Wise (formerly TransferWise)"
+      - id: "d"
+        label: "Remitly"
+      - id: "e"
+        label: "Xoom / PayPal"
+      - id: "f"
+        label: "My bank's wire transfer"
+      - id: "g"
+        label: "A mobile money or crypto service"
+      - id: "h"
+        label: "Cash carried or sent informally"
+  - id: q7
+    prompt: "How do you usually fund your transfers?"
+    type: single_choice
+    construct: usually_fund_transfers
+    required: true
+    options:
+      - id: "a"
+        label: "Bank account transfer"
+      - id: "b"
+        label: "Debit card"
+      - id: "c"
+        label: "Credit card"
+      - id: "d"
+        label: "Cash at an agent location"
+      - id: "e"
+        label: "A payment app balance"
+      - id: "f"
+        label: "Cryptocurrency"
+  - id: q8
+    prompt: "How does the recipient usually receive the money?"
+    type: single_choice
+    construct: does_recipient_usually_receive_money
+    required: true
+    options:
+      - id: "a"
+        label: "Bank deposit"
+      - id: "b"
+        label: "Cash pickup at an agent"
+      - id: "c"
+        label: "Mobile wallet or mobile money"
+      - id: "d"
+        label: "Home delivery"
+      - id: "e"
+        label: "Debit or prepaid card"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q9
+    prompt: "What do the funds you send abroad mainly go toward? (Select all that apply)"
+    type: multi_choice
+    construct: funds_send_abroad_mainly_go
+    required: true
+    options:
+      - id: "a"
+        label: "Everyday living expenses"
+      - id: "b"
+        label: "Housing or rent"
+      - id: "c"
+        label: "Medical costs"
+      - id: "d"
+        label: "Education or school fees"
+      - id: "e"
+        label: "A family emergency"
+      - id: "f"
+        label: "A special occasion or gift"
+      - id: "g"
+        label: "Savings or investment"
+      - id: "h"
+        label: "A business back home"
+  - id: q10
+    prompt: "How much do you typically pay in fees for a transfer? Enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_typically_pay_fees_transfer
+    required: true
+  - id: q11
+    prompt: "How much do you agree with the following statement: The fees I pay to send money abroad are too high."
+    type: single_choice
+    construct: much_agree_following_statement_fees
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: The exchange rate I get is fair."
+    type: single_choice
+    construct: much_agree_following_statement_exchange
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: My transfers arrive quickly enough."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: The people I support depend on the money I send."
+    type: single_choice
+    construct: much_agree_following_statement_people
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: I trust my money-transfer service to deliver the funds safely."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How important is each of the following when you choose a money-transfer service — low fees?"
+    type: single_choice
+    construct: important_each_following_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "How important is each of the following when you choose a money-transfer service — a good exchange rate?"
+    type: single_choice
+    construct: important_each_following_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each of the following when you choose a money-transfer service — speed of delivery?"
+    type: single_choice
+    construct: important_each_following_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is each of the following when you choose a money-transfer service — convenience for the recipient?"
+    type: single_choice
+    construct: important_each_following_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "Which are the top 3 factors that matter most when you choose how to send money abroad? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_that_matter
+    required: true
+    options:
+      - id: "a"
+        label: "Lowest total cost"
+      - id: "b"
+        label: "Best exchange rate"
+      - id: "c"
+        label: "Speed of delivery"
+      - id: "d"
+        label: "Reliability and safety"
+      - id: "e"
+        label: "Ease of use"
+      - id: "f"
+        label: "Convenient pickup for recipient"
+      - id: "g"
+        label: "Good customer service"
+      - id: "h"
+        label: "Ability to track the transfer"
+      - id: "i"
+        label: "A brand I trust"
+  - id: q21
+    prompt: "How do you usually compare fees and exchange rates before sending?"
+    type: single_choice
+    construct: usually_compare_fees_exchange_rates
+    required: true
+    options:
+      - id: "a"
+        label: "I compare several services each time"
+      - id: "b"
+        label: "I use a comparison app or website"
+      - id: "c"
+        label: "I stick with one service I trust"
+      - id: "d"
+        label: "I don't compare — I just send"
+  - id: q22
+    prompt: "Have you switched money-transfer services in the past two years?"
+    type: single_choice
+    construct: have_switched_money_transfer_services
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, to save on fees or rates"
+      - id: "b"
+        label: "Yes, for faster or easier service"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No"
+  - id: q23
+    prompt: "How often does a transfer arrive later than you expected?"
+    type: single_choice
+    construct: often_does_transfer_arrive_later
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q24
+    prompt: "Have you ever had a problem with a transfer (delay, wrong amount, blocked funds)?"
+    type: single_choice
+    construct: have_ever_had_problem_transfer
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q25
+    prompt: "How much of a financial strain is sending money abroad on your own budget?"
+    type: single_choice
+    construct: much_financial_strain_sending_money
+    required: true
+    options:
+      - id: "a"
+        label: "No strain at all"
+      - id: "b"
+        label: "A slight strain"
+      - id: "c"
+        label: "A moderate strain"
+      - id: "d"
+        label: "A significant strain"
+  - id: q26
+    prompt: "How satisfied are you with your main money-transfer service overall?"
+    type: single_choice
+    construct: satisfied_main_money_transfer_service
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q27
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your money-transfer service to a friend (0 = not at all likely, 10 = extremely likely)?"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q28
+    prompt: "How likely are you to keep sending money abroad over the next 12 months?"
+    type: single_choice
+    construct: likely_keep_sending_money_abroad
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q29
+    prompt: "If you have any final thoughts about sending money abroad, please share them here (optional)."
+    type: free_text
+    construct: if_have_any_final_thoughts
+    required: false
+  - id: q30
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q31
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "Which of the following best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000–$199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q35
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force (student, homemaker)"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Unable to work"
+  - id: q36
+    prompt: "Including yourself, how many people live in your household? Enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q37
+    prompt: "How many children under 18 live in your household? Enter a number."
+    type: free_text
+    construct: many_children_under_18_live
+    required: true
+  - id: q38
+    prompt: "What is your marital status?"
+    type: single_choice
+    construct: marital_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q39
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q40
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q41
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"
+  - id: q42
+    prompt: "Were you born in the United States or another country?"
+    type: single_choice
+    construct: were_born_united_states_another
+    required: true
+    options:
+      - id: "a"
+        label: "Born in the United States"
+      - id: "b"
+        label: "Born in another country"
+      - id: "c"
+        label: "Prefer not to say"

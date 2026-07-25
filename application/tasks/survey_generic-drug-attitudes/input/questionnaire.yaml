@@ -1,0 +1,656 @@
+schemaVersion: "1.0"
+id: generic_drug_attitudes_v1
+title: "Generic Drug Attitudes Survey"
+description: "Consumers' beliefs about, comfort with, and use of generic versus brand-name medications."
+questions:
+  - id: q0
+    prompt: "Do you currently take any prescription or over-the-counter medications regularly?"
+    type: single_choice
+    construct: currently_take_any_prescription_over
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, prescription only"
+      - id: "b"
+        label: "Yes, over-the-counter only"
+      - id: "c"
+        label: "Yes, both"
+      - id: "d"
+        label: "No, not regularly"
+  - id: q1
+    prompt: "When filling a prescription, which do you usually get?"
+    type: single_choice
+    construct: when_filling_prescription_usually_get
+    required: true
+    options:
+      - id: "a"
+        label: "Generic whenever it's available"
+      - id: "b"
+        label: "Brand name whenever possible"
+      - id: "c"
+        label: "Whatever the pharmacist gives me"
+      - id: "d"
+        label: "It depends on the medication"
+      - id: "e"
+        label: "I don't take prescriptions"
+  - id: q2
+    prompt: "About what share of your medications are generic? Please enter a number from 0 to 100 (percent)."
+    type: free_text
+    construct: share_medications_generic_please_enter
+    required: true
+  - id: q3
+    prompt: "How familiar are you with what a \"generic\" medication is?"
+    type: single_choice
+    construct: familiar_generic_medication
+    required: true
+    options:
+      - id: "a"
+        label: "Very familiar"
+      - id: "b"
+        label: "Somewhat familiar"
+      - id: "c"
+        label: "A little familiar"
+      - id: "d"
+        label: "Not familiar at all"
+  - id: q4
+    prompt: "In general, how do you feel about generic medications?"
+    type: single_choice
+    construct: general_feel_generic_medications
+    required: true
+    options:
+      - id: "a"
+        label: "Very positive"
+      - id: "b"
+        label: "Somewhat positive"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat negative"
+      - id: "e"
+        label: "Very negative"
+  - id: q5
+    prompt: "Which of these do you believe about generic drugs? (Select all that apply)"
+    type: multi_choice
+    construct: these_believe_generic_drugs_select
+    required: true
+    options:
+      - id: "a"
+        label: "They contain the same active ingredient as brand names"
+      - id: "b"
+        label: "They are just as safe as brand names"
+      - id: "c"
+        label: "They are less effective than brand names"
+      - id: "d"
+        label: "They are lower quality"
+      - id: "e"
+        label: "They are cheaper for the same result"
+      - id: "f"
+        label: "They can have different fillers or coatings"
+      - id: "g"
+        label: "I'm not sure what to believe"
+  - id: q6
+    prompt: "Where do you get most of your information about generic drugs? (Select all that apply)"
+    type: multi_choice
+    construct: where_get_most_information_generic
+    required: true
+    options:
+      - id: "a"
+        label: "My doctor"
+      - id: "b"
+        label: "My pharmacist"
+      - id: "c"
+        label: "Insurance materials"
+      - id: "d"
+        label: "Friends or family"
+      - id: "e"
+        label: "Online searches or websites"
+      - id: "f"
+        label: "Advertising"
+      - id: "g"
+        label: "I don't seek out information"
+  - id: q7
+    prompt: "Have you ever asked your doctor or pharmacist for a generic instead of a brand name?"
+    type: single_choice
+    construct: have_ever_asked_doctor_pharmacist
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, often"
+      - id: "b"
+        label: "Yes, once or twice"
+      - id: "c"
+        label: "No, but I would"
+      - id: "d"
+        label: "No, and I wouldn't"
+  - id: q8
+    prompt: "Have you ever specifically requested a brand name even when a generic was available?"
+    type: single_choice
+    construct: have_ever_specifically_requested_brand
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, never"
+  - id: q9
+    prompt: "How much do you agree or disagree: Generic drugs work just as well as brand-name drugs."
+    type: single_choice
+    construct: much_agree_disagree_generic_drugs
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree or disagree: Generic drugs are just as safe as brand-name drugs."
+    type: single_choice
+    construct: much_agree_disagree_generic_drugs
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree: I would rather pay more for a brand name I recognize."
+    type: single_choice
+    construct: much_agree_disagree_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: Generic drugs are a good way to save money."
+    type: single_choice
+    construct: much_agree_disagree_generic_drugs
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I trust the government agency that approves generic drugs."
+    type: single_choice
+    construct: much_agree_disagree_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I notice a difference when I switch between a brand and its generic."
+    type: single_choice
+    construct: much_agree_disagree_i_notice
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: For serious conditions, I would prefer a brand name."
+    type: single_choice
+    construct: much_agree_disagree_serious_conditions
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How comfortable are you taking a generic version of a medication you take regularly?"
+    type: single_choice
+    construct: comfortable_taking_generic_version_medic
+    required: true
+    options:
+      - id: "a"
+        label: "Very comfortable"
+      - id: "b"
+        label: "Somewhat comfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat uncomfortable"
+      - id: "e"
+        label: "Very uncomfortable"
+  - id: q17
+    prompt: "How comfortable would you be if your pharmacy substituted a generic without telling you?"
+    type: single_choice
+    construct: comfortable_would_be_if_pharmacy
+    required: true
+    options:
+      - id: "a"
+        label: "Very comfortable"
+      - id: "b"
+        label: "Somewhat comfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat uncomfortable"
+      - id: "e"
+        label: "Very uncomfortable"
+  - id: q18
+    prompt: "Does the type of medication change how you feel about generics?"
+    type: single_choice
+    construct: does_type_medication_change_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I'm fine with generics for anything"
+      - id: "b"
+        label: "I prefer brand names for certain conditions only"
+      - id: "c"
+        label: "I prefer brand names for most things"
+      - id: "d"
+        label: "It makes no difference to me"
+  - id: q19
+    prompt: "For which situations would you prefer a brand name over a generic? (Select all that apply)"
+    type: multi_choice
+    construct: situations_would_prefer_brand_name
+    required: true
+    options:
+      - id: "a"
+        label: "Heart or blood pressure medication"
+      - id: "b"
+        label: "Mental health medication"
+      - id: "c"
+        label: "Pain relief"
+      - id: "d"
+        label: "Allergy or cold medicine"
+      - id: "e"
+        label: "Medication for a child"
+      - id: "f"
+        label: "A medication I've taken for years"
+      - id: "g"
+        label: "I would use generics for all of these"
+  - id: q20
+    prompt: "When deciding between a generic and a brand name, how important is price?"
+    type: single_choice
+    construct: when_deciding_between_generic_brand
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "When deciding between a generic and a brand name, how important is your doctor's recommendation?"
+    type: single_choice
+    construct: when_deciding_between_generic_brand
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When deciding between a generic and a brand name, how important is your pharmacist's advice?"
+    type: single_choice
+    construct: when_deciding_between_generic_brand
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When deciding between a generic and a brand name, how important is brand familiarity?"
+    type: single_choice
+    construct: when_deciding_between_generic_brand
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How much would a generic need to save you before you'd switch from a brand name? Please enter a dollar amount per month (enter 0 if you'd always choose the cheaper option)."
+    type: free_text
+    construct: much_would_generic_need_save
+    required: true
+  - id: q25
+    prompt: "Have you ever stopped taking a generic because you felt it wasn't working as well?"
+    type: single_choice
+    construct: have_ever_stopped_taking_generic
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, never"
+      - id: "d"
+        label: "I've never taken a generic"
+  - id: q26
+    prompt: "How often do you check whether a medication is generic or brand name when you pick it up?"
+    type: single_choice
+    construct: often_check_whether_medication_generic
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q27
+    prompt: "Do you feel you know enough to make informed choices about generics?"
+    type: single_choice
+    construct: feel_know_enough_make_informed
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, definitely"
+      - id: "b"
+        label: "Mostly"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Not really"
+  - id: q28
+    prompt: "Select your top 3 things that would make you more comfortable using generics. (Select up to 3)"
+    type: single_choice
+    construct: select_top_3_things_that
+    required: true
+    options:
+      - id: "a"
+        label: "A clear explanation from my doctor"
+      - id: "b"
+        label: "Reassurance from my pharmacist"
+      - id: "c"
+        label: "Evidence they are equally effective"
+      - id: "d"
+        label: "Bigger cost savings"
+      - id: "e"
+        label: "Knowing the approval standards"
+      - id: "f"
+        label: "Better labeling and information"
+      - id: "g"
+        label: "Positive experiences from people I know"
+      - id: "h"
+        label: "Nothing, I'm already comfortable"
+  - id: q29
+    prompt: "Overall, how satisfied are you with the generic medications you've used?"
+    type: single_choice
+    construct: overall_satisfied_generic_medications_ve
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I haven't used any"
+  - id: q30
+    prompt: "On a scale of 0 to 10, how likely are you to recommend choosing generics to a friend to save money? Please enter a number from 0 (not at all likely) to 10 (extremely likely)."
+    type: free_text
+    construct: scale_0_10_likely_recommend
+    required: true
+  - id: q31
+    prompt: "Is there one thing that would make you trust generic medications more? Please describe briefly (or enter \"none\")."
+    type: free_text
+    construct: there_one_thing_that_would
+    required: true
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Which best describes your race or ethnicity?"
+    type: single_choice
+    construct: best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian or Asian American"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Two or more races or another background"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+  - id: q40
+    prompt: "Which region of the country do you live in?"
+    type: single_choice
+    construct: region_country_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q42
+    prompt: "What is your primary source of health insurance?"
+    type: single_choice
+    construct: primary_source_health_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored plan"
+      - id: "b"
+        label: "Plan purchased on the marketplace or directly"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or veterans coverage (TRICARE / VA)"
+      - id: "f"
+        label: "I don't have health insurance"
+      - id: "g"
+        label: "Prefer not to say"

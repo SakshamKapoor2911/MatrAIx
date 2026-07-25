@@ -1,0 +1,703 @@
+schemaVersion: "1.0"
+id: remote_work_tools_v1
+title: "Remote Work Tools & Setup Survey"
+description: "The tools, software, and home-office setup people use to work remotely or hybrid — what they rely on, how well it works, and how they feel about remote work."
+questions:
+  - id: q0
+    prompt: "What is your current work arrangement?"
+    type: single_choice
+    construct: current_work_arrangement
+    required: true
+    options:
+      - id: "a"
+        label: "Fully remote"
+      - id: "b"
+        label: "Hybrid (some days remote, some in office)"
+      - id: "c"
+        label: "Fully in-person"
+      - id: "d"
+        label: "Not currently working"
+  - id: q1
+    prompt: "How many days per week do you typically work remotely? Enter a whole number (0 to 7)."
+    type: free_text
+    construct: many_days_per_week_typically
+    required: true
+  - id: q2
+    prompt: "How long have you been working remotely at least part of the time?"
+    type: single_choice
+    construct: long_have_been_working_remotely
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "More than 5 years"
+      - id: "e"
+        label: "I don't work remotely"
+  - id: q3
+    prompt: "Where do you primarily work when working remotely?"
+    type: single_choice
+    construct: where_primarily_work_when_working
+    required: true
+    options:
+      - id: "a"
+        label: "A dedicated home office"
+      - id: "b"
+        label: "A shared space at home (e.g., bedroom, living room)"
+      - id: "c"
+        label: "A coworking space"
+      - id: "d"
+        label: "Cafes or public spaces"
+      - id: "e"
+        label: "I move around frequently"
+  - id: q4
+    prompt: "Which categories of tools do you use regularly for remote work? (Select all that apply)"
+    type: multi_choice
+    construct: categories_tools_use_regularly_remote
+    required: true
+    options:
+      - id: "a"
+        label: "Team chat (e.g., Slack, Teams)"
+      - id: "b"
+        label: "Video conferencing (e.g., Zoom, Meet)"
+      - id: "c"
+        label: "Cloud storage and file sharing"
+      - id: "d"
+        label: "Project or task management"
+      - id: "e"
+        label: "Document collaboration (e.g., Google Docs)"
+      - id: "f"
+        label: "Virtual whiteboards (e.g., Miro, FigJam)"
+      - id: "g"
+        label: "VPN or remote access"
+      - id: "h"
+        label: "Password manager"
+      - id: "i"
+        label: "Time tracking"
+      - id: "j"
+        label: "Note-taking apps"
+  - id: q5
+    prompt: "Which collaboration suite does your organization primarily use?"
+    type: single_choice
+    construct: collaboration_suite_does_organization_pr
+    required: true
+    options:
+      - id: "a"
+        label: "Google Workspace"
+      - id: "b"
+        label: "Microsoft 365"
+      - id: "c"
+        label: "A mix of both"
+      - id: "d"
+        label: "Neither / something else"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q6
+    prompt: "Which tools do you consider essential to your remote workday? (Select all that apply)"
+    type: multi_choice
+    construct: tools_consider_essential_remote_workday
+    required: true
+    options:
+      - id: "a"
+        label: "Slack"
+      - id: "b"
+        label: "Microsoft Teams"
+      - id: "c"
+        label: "Zoom"
+      - id: "d"
+        label: "Google Meet"
+      - id: "e"
+        label: "Google Drive / Docs"
+      - id: "f"
+        label: "Microsoft OneDrive / SharePoint"
+      - id: "g"
+        label: "Notion"
+      - id: "h"
+        label: "A project management tool"
+      - id: "i"
+        label: "A VPN"
+      - id: "j"
+        label: "A password manager"
+      - id: "k"
+        label: "Other (please specify)"
+  - id: q7
+    prompt: "Which equipment do you use in your remote setup? (Select all that apply)"
+    type: multi_choice
+    construct: equipment_use_remote_setup_select
+    required: true
+    options:
+      - id: "a"
+        label: "Laptop"
+      - id: "b"
+        label: "External monitor(s)"
+      - id: "c"
+        label: "External keyboard and mouse"
+      - id: "d"
+        label: "Webcam"
+      - id: "e"
+        label: "Headset or earbuds"
+      - id: "f"
+        label: "Standing or adjustable desk"
+      - id: "g"
+        label: "Ergonomic chair"
+      - id: "h"
+        label: "Dedicated microphone"
+      - id: "i"
+        label: "Docking station"
+      - id: "j"
+        label: "Good lighting"
+  - id: q8
+    prompt: "Who provided most of your remote work equipment?"
+    type: single_choice
+    construct: who_provided_most_remote_work
+    required: true
+    options:
+      - id: "a"
+        label: "My employer provided it"
+      - id: "b"
+        label: "My employer gave me a stipend"
+      - id: "c"
+        label: "I bought it myself"
+      - id: "d"
+        label: "A mix of employer and personal"
+      - id: "e"
+        label: "Not applicable"
+  - id: q9
+    prompt: "Approximately how much have you personally spent on your remote work setup, in US dollars? Enter a whole number (enter 0 if none)."
+    type: free_text
+    construct: approximately_much_have_personally_spent
+    required: true
+  - id: q10
+    prompt: "What type of internet connection do you use for remote work?"
+    type: single_choice
+    construct: type_internet_connection_use_remote
+    required: true
+    options:
+      - id: "a"
+        label: "Fiber"
+      - id: "b"
+        label: "Cable"
+      - id: "c"
+        label: "DSL"
+      - id: "d"
+        label: "Fixed wireless or 5G home internet"
+      - id: "e"
+        label: "Mobile hotspot"
+      - id: "f"
+        label: "Satellite"
+      - id: "g"
+        label: "I'm not sure"
+  - id: q11
+    prompt: "Do you use a VPN or other secure remote access for work?"
+    type: single_choice
+    construct: use_vpn_other_secure_remote
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, always"
+      - id: "b"
+        label: "Yes, sometimes"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q12
+    prompt: "How much do you agree with the following statement? — I have the tools I need to do my job effectively while remote."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement? — I am more productive when working remotely than in an office."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement? — It is easy to collaborate with my team while remote."
+    type: single_choice
+    construct: much_agree_following_statement_it
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement? — I find it hard to separate work from personal life while remote."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement? — Technical issues regularly disrupt my remote workday."
+    type: single_choice
+    construct: much_agree_following_statement_technical
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How satisfied are you with each aspect of your remote work experience? — Your collaboration tools"
+    type: single_choice
+    construct: satisfied_each_aspect_remote_work
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q18
+    prompt: "How satisfied are you with each aspect of your remote work experience? — Your home office setup and equipment"
+    type: single_choice
+    construct: satisfied_each_aspect_remote_work
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q19
+    prompt: "How satisfied are you with each aspect of your remote work experience? — Your internet connection"
+    type: single_choice
+    construct: satisfied_each_aspect_remote_work
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q20
+    prompt: "How satisfied are you with each aspect of your remote work experience? — Work-life balance"
+    type: single_choice
+    construct: satisfied_each_aspect_remote_work
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q21
+    prompt: "How satisfied are you with each aspect of your remote work experience? — Staying connected with coworkers"
+    type: single_choice
+    construct: satisfied_each_aspect_remote_work
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q22
+    prompt: "Select your top 3 biggest challenges of remote work. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_biggest_challenges
+    required: true
+    options:
+      - id: "a"
+        label: "Loneliness or isolation"
+      - id: "b"
+        label: "Distractions at home"
+      - id: "c"
+        label: "Communication and collaboration"
+      - id: "d"
+        label: "Work-life boundaries"
+      - id: "e"
+        label: "Technical or connectivity issues"
+      - id: "f"
+        label: "Feeling overlooked for opportunities"
+      - id: "g"
+        label: "Time zone differences"
+      - id: "h"
+        label: "Staying motivated"
+  - id: q23
+    prompt: "What do you value most about remote work? (Select all that apply)"
+    type: multi_choice
+    construct: value_most_remote_work_select
+    required: true
+    options:
+      - id: "a"
+        label: "No commute"
+      - id: "b"
+        label: "Flexible schedule"
+      - id: "c"
+        label: "Better work-life balance"
+      - id: "d"
+        label: "Fewer distractions than the office"
+      - id: "e"
+        label: "Cost savings"
+      - id: "f"
+        label: "Ability to live anywhere"
+      - id: "g"
+        label: "More time with family"
+      - id: "h"
+        label: "Comfort of my own space"
+  - id: q24
+    prompt: "How well does your organization support remote work with tools and policies?"
+    type: single_choice
+    construct: well_does_organization_support_remote
+    required: true
+    options:
+      - id: "a"
+        label: "Very poorly"
+      - id: "b"
+        label: "Poorly"
+      - id: "c"
+        label: "Adequately"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q25
+    prompt: "If you could choose, what work arrangement would you prefer?"
+    type: single_choice
+    construct: if_could_choose_work_arrangement
+    required: true
+    options:
+      - id: "a"
+        label: "Fully remote"
+      - id: "b"
+        label: "Mostly remote with occasional office days"
+      - id: "c"
+        label: "Balanced hybrid"
+      - id: "d"
+        label: "Mostly in office with occasional remote days"
+      - id: "e"
+        label: "Fully in person"
+  - id: q26
+    prompt: "How satisfied are you overall with your ability to work remotely?"
+    type: single_choice
+    construct: satisfied_overall_ability_work_remotely
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q27
+    prompt: "How likely are you to recommend remote work to others? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_remote_work_others
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q28
+    prompt: "Compared with today, how do you expect your amount of remote work to change over the next year?"
+    type: single_choice
+    construct: compared_today_expect_amount_remote
+    required: true
+    options:
+      - id: "a"
+        label: "Decrease a lot"
+      - id: "b"
+        label: "Decrease a little"
+      - id: "c"
+        label: "Stay about the same"
+      - id: "d"
+        label: "Increase a little"
+      - id: "e"
+        label: "Increase a lot"
+  - id: q29
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q30
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your role?"
+    type: single_choice
+    construct: best_describes_role
+    required: true
+    options:
+      - id: "a"
+        label: "Individual contributor"
+      - id: "b"
+        label: "Team lead or supervisor"
+      - id: "c"
+        label: "Manager"
+      - id: "d"
+        label: "Executive or business owner"
+      - id: "e"
+        label: "Other"
+  - id: q36
+    prompt: "In which industry do you work?"
+    type: single_choice
+    construct: industry_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Financial services"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Retail or e-commerce"
+      - id: "f"
+        label: "Manufacturing"
+      - id: "g"
+        label: "Media or marketing"
+      - id: "h"
+        label: "Government or nonprofit"
+      - id: "i"
+        label: "Other"
+  - id: q37
+    prompt: "How many people are in your household, including yourself? Enter a whole number."
+    type: free_text
+    construct: many_people_household_including_yourself
+    required: true
+  - id: q38
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q39
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q40
+    prompt: "Is there anything else you would like to share about your remote work tools or setup?"
+    type: free_text
+    construct: there_anything_else_would_like
+    required: false

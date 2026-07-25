@@ -1,0 +1,759 @@
+schemaVersion: "1.0"
+id: tech_support_experience_v1
+title: "Tech Support Experience Survey"
+description: "People's experiences seeking and receiving technical support for their devices, software, and services."
+questions:
+  - id: q0
+    prompt: "In the past 12 months, have you contacted technical support for a device, app, or service?"
+    type: single_choice
+    construct: past_12_months_have_contacted
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several times"
+      - id: "b"
+        label: "Yes, a few times"
+      - id: "c"
+        label: "Yes, once"
+      - id: "d"
+        label: "No, but I've needed help"
+      - id: "e"
+        label: "No, I haven't needed any"
+  - id: q1
+    prompt: "Which of the following have you contacted for tech support in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: following_have_contacted_tech_support
+    required: true
+    options:
+      - id: "a"
+        label: "Phone or device manufacturer"
+      - id: "b"
+        label: "Internet or mobile carrier"
+      - id: "c"
+        label: "Software or app company"
+      - id: "d"
+        label: "Retailer where I bought the product"
+      - id: "e"
+        label: "Streaming or subscription service"
+      - id: "f"
+        label: "Bank or financial app support"
+      - id: "g"
+        label: "My workplace IT / help desk"
+      - id: "h"
+        label: "A friend or family member"
+      - id: "i"
+        label: "A local repair shop or technician"
+      - id: "j"
+        label: "I haven't contacted any"
+  - id: q2
+    prompt: "Which channels have you used to get tech support? (Select all that apply)"
+    type: multi_choice
+    construct: channels_have_used_get_tech
+    required: true
+    options:
+      - id: "a"
+        label: "Phone call"
+      - id: "b"
+        label: "Live chat"
+      - id: "c"
+        label: "Email or support ticket"
+      - id: "d"
+        label: "In-app help / chatbot"
+      - id: "e"
+        label: "In-person / store visit"
+      - id: "f"
+        label: "Social media / direct message"
+      - id: "g"
+        label: "Community forums"
+      - id: "h"
+        label: "Video call / screen share"
+      - id: "i"
+        label: "Self-service help articles"
+      - id: "j"
+        label: "I haven't used any"
+  - id: q3
+    prompt: "When you have a tech problem, where do you usually turn FIRST?"
+    type: single_choice
+    construct: when_have_tech_problem_where
+    required: true
+    options:
+      - id: "a"
+        label: "Search the web"
+      - id: "b"
+        label: "Official help articles or FAQs"
+      - id: "c"
+        label: "Ask an AI chatbot"
+      - id: "d"
+        label: "Contact the company's support"
+      - id: "e"
+        label: "Ask a friend or family member"
+      - id: "f"
+        label: "Community forums or Reddit"
+      - id: "g"
+        label: "YouTube tutorials"
+      - id: "h"
+        label: "I try to fix it myself first"
+  - id: q4
+    prompt: "How often do you try to solve a tech problem yourself before contacting support?"
+    type: single_choice
+    construct: often_try_solve_tech_problem
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q5
+    prompt: "For your most recent support experience, what was the issue about?"
+    type: single_choice
+    construct: most_recent_support_experience_was
+    required: true
+    options:
+      - id: "a"
+        label: "Device not working / hardware"
+      - id: "b"
+        label: "Software bug or crash"
+      - id: "c"
+        label: "Account or login problem"
+      - id: "d"
+        label: "Billing or subscription issue"
+      - id: "e"
+        label: "Internet / connectivity"
+      - id: "f"
+        label: "Setup or installation"
+      - id: "g"
+        label: "Security concern (hacking, scam, etc.)"
+      - id: "h"
+        label: "How to use a feature"
+      - id: "i"
+        label: "Not applicable"
+  - id: q6
+    prompt: "For your most recent support experience, how was the issue ultimately resolved?"
+    type: single_choice
+    construct: most_recent_support_experience_was
+    required: true
+    options:
+      - id: "a"
+        label: "Fully resolved by support"
+      - id: "b"
+        label: "Partially resolved"
+      - id: "c"
+        label: "I resolved it myself"
+      - id: "d"
+        label: "Not resolved"
+      - id: "e"
+        label: "I gave up"
+      - id: "f"
+        label: "Not applicable"
+  - id: q7
+    prompt: "About how long did it take to get your most recent issue resolved?"
+    type: single_choice
+    construct: long_did_it_take_get
+    required: true
+    options:
+      - id: "a"
+        label: "Minutes"
+      - id: "b"
+        label: "A few hours"
+      - id: "c"
+        label: "About a day"
+      - id: "d"
+        label: "A few days"
+      - id: "e"
+        label: "More than a week"
+      - id: "f"
+        label: "It was never resolved"
+      - id: "g"
+        label: "Not applicable"
+  - id: q8
+    prompt: "How many times did you have to contact support before your most recent issue was addressed?"
+    type: free_text
+    construct: many_times_did_have_contact
+    required: true
+  - id: q9
+    prompt: "In a typical year, about how many times do you seek technical support of any kind?"
+    type: free_text
+    construct: typical_year_many_times_seek
+    required: true
+  - id: q10
+    prompt: "Which of the following have frustrated you during tech support experiences? (Select all that apply)"
+    type: multi_choice
+    construct: following_have_frustrated_during_tech
+    required: true
+    options:
+      - id: "a"
+        label: "Long wait times or hold"
+      - id: "b"
+        label: "Being transferred repeatedly"
+      - id: "c"
+        label: "Having to repeat my problem"
+      - id: "d"
+        label: "Scripted, unhelpful responses"
+      - id: "e"
+        label: "Language or communication barriers"
+      - id: "f"
+        label: "Chatbots that couldn't help"
+      - id: "g"
+        label: "Being told to try steps I'd already tried"
+      - id: "h"
+        label: "Difficulty reaching a human"
+      - id: "i"
+        label: "Unclear or confusing instructions"
+      - id: "j"
+        label: "None of these"
+  - id: q11
+    prompt: "How do you feel about automated chatbots for tech support?"
+    type: single_choice
+    construct: feel_automated_chatbots_tech_support
+    required: true
+    options:
+      - id: "a"
+        label: "I like them — often faster"
+      - id: "b"
+        label: "They're fine for simple issues"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "I dislike them but tolerate them"
+      - id: "e"
+        label: "I avoid them and want a human"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Getting good tech support is usually harder than it should be."
+    type: single_choice
+    construct: much_agree_following_statement_getting
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: I prefer to solve tech problems myself rather than contact support."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: Support agents are usually knowledgeable and helpful."
+    type: single_choice
+    construct: much_agree_following_statement_support
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: Companies make it deliberately hard to reach a real person."
+    type: single_choice
+    construct: much_agree_following_statement_companies
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I would pay more for a product with better support."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How important is the following to you in a good support experience: quick response time?"
+    type: single_choice
+    construct: important_following_good_support_experie
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is the following to you in a good support experience: reaching a knowledgeable human?"
+    type: single_choice
+    construct: important_following_good_support_experie
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is the following to you in a good support experience: resolving the issue on the first contact?"
+    type: single_choice
+    construct: important_following_good_support_experie
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is the following to you in a good support experience: clear, easy-to-follow instructions?"
+    type: single_choice
+    construct: important_following_good_support_experie
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is the following to you in a good support experience: good self-service help resources?"
+    type: single_choice
+    construct: important_following_good_support_experie
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How satisfied were you with your most recent tech support experience?"
+    type: single_choice
+    construct: satisfied_were_most_recent_tech
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q23
+    prompt: "Are you often the person friends or family turn to for tech help?"
+    type: single_choice
+    construct: often_person_friends_family_turn
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I'm the \"go-to\" person"
+      - id: "b"
+        label: "Sometimes"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "No, I'm usually the one asking"
+  - id: q24
+    prompt: "How confident are you in troubleshooting your own tech problems?"
+    type: single_choice
+    construct: confident_troubleshooting_own_tech_probl
+    required: true
+    options:
+      - id: "a"
+        label: "Very confident"
+      - id: "b"
+        label: "Somewhat confident"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Not very confident"
+      - id: "e"
+        label: "Not confident at all"
+  - id: q25
+    prompt: "Have you ever paid out of pocket for tech support or repair?"
+    type: single_choice
+    construct: have_ever_paid_out_pocket
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, never"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q26
+    prompt: "Do you use any paid support plans or extended warranties (e.g., AppleCare, Geek Squad)?"
+    type: single_choice
+    construct: use_any_paid_support_plans
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, currently"
+      - id: "b"
+        label: "I have in the past"
+      - id: "c"
+        label: "No, but I'd consider it"
+      - id: "d"
+        label: "No, and I wouldn't"
+  - id: q27
+    prompt: "Have you ever left a review or complaint about a support experience?"
+    type: single_choice
+    construct: have_ever_left_review_complaint
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a positive one"
+      - id: "b"
+        label: "Yes, a negative one"
+      - id: "c"
+        label: "Both"
+      - id: "d"
+        label: "No, never"
+  - id: q28
+    prompt: "Has a bad support experience ever made you stop using a product or brand?"
+    type: single_choice
+    construct: has_bad_support_experience_ever
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I considered it"
+      - id: "d"
+        label: "No, never"
+  - id: q29
+    prompt: "Select your top 3 things you most want from tech support. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_most
+    required: true
+    options:
+      - id: "a"
+        label: "Fast resolution"
+      - id: "b"
+        label: "Reaching a real person easily"
+      - id: "c"
+        label: "Knowledgeable agents"
+      - id: "d"
+        label: "Not having to repeat myself"
+      - id: "e"
+        label: "Clear instructions"
+      - id: "f"
+        label: "Friendly, respectful service"
+      - id: "g"
+        label: "Good self-service options"
+      - id: "h"
+        label: "Follow-up until it's fixed"
+      - id: "i"
+        label: "Support in my preferred language"
+  - id: q30
+    prompt: "Overall, how satisfied are you with the quality of tech support you generally receive?"
+    type: single_choice
+    construct: overall_satisfied_quality_tech_support
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q31
+    prompt: "On a scale of 0 to 10, how likely are you to recommend the support of the company you dealt with most recently? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "What would most improve your tech support experiences?"
+    type: free_text
+    construct: would_most_improve_tech_support
+    required: true
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18 years old"
+      - id: "b"
+        label: "18-24 years old"
+      - id: "c"
+        label: "25-34 years old"
+      - id: "d"
+        label: "35-44 years old"
+      - id: "e"
+        label: "45-54 years old"
+      - id: "f"
+        label: "55-64 years old"
+      - id: "g"
+        label: "65 years or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Unemployed, looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Homemaker or caregiver"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q40
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship, not married"
+      - id: "c"
+        label: "Married or domestic partnership"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "How would you rate your overall level of technology skill?"
+    type: single_choice
+    construct: would_rate_overall_level_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert / I work in technology"

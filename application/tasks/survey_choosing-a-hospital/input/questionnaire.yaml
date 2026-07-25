@@ -1,0 +1,746 @@
+schemaVersion: "1.0"
+id: choosing_a_hospital_v1
+title: "Choosing a Hospital Survey"
+description: "How consumers research, weigh factors, and decide when choosing a hospital for planned care."
+questions:
+  - id: q0
+    prompt: "In the past 3 years, have you needed to choose a hospital for planned care (not an emergency)?"
+    type: single_choice
+    construct: past_3_years_have_needed
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I have chosen one before"
+      - id: "d"
+        label: "No, I have never chosen a hospital"
+  - id: q1
+    prompt: "The most recent time you needed hospital care, how was the hospital chosen?"
+    type: single_choice
+    construct: most_recent_time_needed_hospital
+    required: true
+    options:
+      - id: "a"
+        label: "I chose it myself"
+      - id: "b"
+        label: "My doctor referred or chose it"
+      - id: "c"
+        label: "My insurance network decided it"
+      - id: "d"
+        label: "A family member helped decide"
+      - id: "e"
+        label: "It was the closest option"
+      - id: "f"
+        label: "I have not needed hospital care"
+  - id: q2
+    prompt: "For what type of care did you most recently choose or use a hospital?"
+    type: single_choice
+    construct: type_care_did_most_recently
+    required: true
+    options:
+      - id: "a"
+        label: "A planned surgery or procedure"
+      - id: "b"
+        label: "Childbirth or maternity care"
+      - id: "c"
+        label: "A diagnostic test or imaging"
+      - id: "d"
+        label: "Specialist or outpatient care"
+      - id: "e"
+        label: "An overnight stay for an illness"
+      - id: "f"
+        label: "I have not used a hospital recently"
+  - id: q3
+    prompt: "How far did you travel, or would you travel, for a hospital with better quality?"
+    type: single_choice
+    construct: far_did_travel_would_travel
+    required: true
+    options:
+      - id: "a"
+        label: "I would stay within a few miles"
+      - id: "b"
+        label: "Up to 30 minutes away"
+      - id: "c"
+        label: "Up to an hour away"
+      - id: "d"
+        label: "More than an hour if needed"
+      - id: "e"
+        label: "I would travel to another city or state"
+  - id: q4
+    prompt: "Which sources did you use to research hospitals? (Select all that apply)"
+    type: multi_choice
+    construct: sources_did_use_research_hospitals
+    required: true
+    options:
+      - id: "a"
+        label: "My doctor's recommendation"
+      - id: "b"
+        label: "Friends or family"
+      - id: "c"
+        label: "Online reviews or ratings"
+      - id: "d"
+        label: "Hospital quality rating sites (for example, Medicare Care Compare, Leapfrog)"
+      - id: "e"
+        label: "The hospital's own website"
+      - id: "f"
+        label: "My insurance company's directory"
+      - id: "g"
+        label: "News or magazine hospital rankings"
+      - id: "h"
+        label: "I did not research hospitals"
+  - id: q5
+    prompt: "How much research did you do before choosing a hospital?"
+    type: single_choice
+    construct: much_research_did_before_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "A great deal"
+      - id: "b"
+        label: "A fair amount"
+      - id: "c"
+        label: "A little"
+      - id: "d"
+        label: "None at all"
+  - id: q6
+    prompt: "Did you check whether the hospital was in your insurance network?"
+    type: single_choice
+    construct: did_check_whether_hospital_was
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, before deciding"
+      - id: "b"
+        label: "Yes, but after choosing"
+      - id: "c"
+        label: "No, I did not check"
+      - id: "d"
+        label: "I do not have insurance"
+  - id: q7
+    prompt: "Did you compare more than one hospital before deciding?"
+    type: single_choice
+    construct: did_compare_more_than_one
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, three or more"
+      - id: "b"
+        label: "Yes, two"
+      - id: "c"
+        label: "No, I considered only one"
+      - id: "d"
+        label: "I did not get to choose"
+  - id: q8
+    prompt: "How important was each factor in choosing a hospital: Quality and safety ratings."
+    type: single_choice
+    construct: important_was_each_factor_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q9
+    prompt: "How important was each factor in choosing a hospital: Distance and convenience."
+    type: single_choice
+    construct: important_was_each_factor_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q10
+    prompt: "How important was each factor in choosing a hospital: Whether it was in my insurance network."
+    type: single_choice
+    construct: important_was_each_factor_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q11
+    prompt: "How important was each factor in choosing a hospital: My doctor's recommendation."
+    type: single_choice
+    construct: important_was_each_factor_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q12
+    prompt: "How important was each factor in choosing a hospital: The hospital's reputation."
+    type: single_choice
+    construct: important_was_each_factor_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q13
+    prompt: "How important was each factor in choosing a hospital: Expected out-of-pocket cost."
+    type: single_choice
+    construct: important_was_each_factor_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q14
+    prompt: "How important was each factor in choosing a hospital: Experience with a specific condition or procedure."
+    type: single_choice
+    construct: important_was_each_factor_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q15
+    prompt: "Which of these hospital features matter most to you? (Select all that apply)"
+    type: multi_choice
+    construct: these_hospital_features_matter_most
+    required: true
+    options:
+      - id: "a"
+        label: "Highly rated specialists"
+      - id: "b"
+        label: "Modern facilities and equipment"
+      - id: "c"
+        label: "Short wait times"
+      - id: "d"
+        label: "Clean and comfortable environment"
+      - id: "e"
+        label: "Good communication from staff"
+      - id: "f"
+        label: "Strong safety record"
+      - id: "g"
+        label: "Convenient location"
+      - id: "h"
+        label: "Teaching or research hospital"
+  - id: q16
+    prompt: "Which type of hospital would you prefer for a serious condition?"
+    type: single_choice
+    construct: type_hospital_would_prefer_serious
+    required: true
+    options:
+      - id: "a"
+        label: "A large academic or teaching hospital"
+      - id: "b"
+        label: "A well-known specialty hospital"
+      - id: "c"
+        label: "A community hospital close to home"
+      - id: "d"
+        label: "Whichever my doctor recommends"
+      - id: "e"
+        label: "No preference"
+  - id: q17
+    prompt: "How much do you agree with the following statement: Hospital quality ratings are trustworthy and useful."
+    type: single_choice
+    construct: much_agree_following_statement_hospital
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement: I would travel farther to reach a higher-quality hospital."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement: It is hard to compare hospitals on quality."
+    type: single_choice
+    construct: much_agree_following_statement_it
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement: Cost is a major factor in which hospital I choose."
+    type: single_choice
+    construct: much_agree_following_statement_cost
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree with the following statement: I mostly rely on my doctor to choose the hospital for me."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How confident are you in your ability to judge hospital quality?"
+    type: single_choice
+    construct: confident_ability_judge_hospital_quality
+    required: true
+    options:
+      - id: "a"
+        label: "Very confident"
+      - id: "b"
+        label: "Somewhat confident"
+      - id: "c"
+        label: "Neither confident nor unconfident"
+      - id: "d"
+        label: "Somewhat unconfident"
+      - id: "e"
+        label: "Not at all confident"
+  - id: q23
+    prompt: "How useful did you find online hospital ratings, if you used them?"
+    type: single_choice
+    construct: useful_did_find_online_hospital
+    required: true
+    options:
+      - id: "a"
+        label: "Very useful"
+      - id: "b"
+        label: "Somewhat useful"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Not very useful"
+      - id: "e"
+        label: "I did not use them"
+  - id: q24
+    prompt: "Which barriers made choosing a hospital difficult? (Select all that apply)"
+    type: multi_choice
+    construct: barriers_made_choosing_hospital_difficul
+    required: true
+    options:
+      - id: "a"
+        label: "Hard to find quality information"
+      - id: "b"
+        label: "Confusing insurance rules"
+      - id: "c"
+        label: "Unclear costs"
+      - id: "d"
+        label: "Limited options nearby"
+      - id: "e"
+        label: "Not enough time to decide"
+      - id: "f"
+        label: "Conflicting recommendations"
+      - id: "g"
+        label: "I did not face barriers"
+  - id: q25
+    prompt: "Have you ever switched hospitals because of a poor prior experience?"
+    type: single_choice
+    construct: have_ever_switched_hospitals_because
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I have considered it"
+      - id: "d"
+        label: "No, never"
+  - id: q26
+    prompt: "How much does a hospital's reputation for a specific procedure influence you?"
+    type: single_choice
+    construct: much_does_hospital_s_reputation
+    required: true
+    options:
+      - id: "a"
+        label: "A great deal"
+      - id: "b"
+        label: "A lot"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A little"
+      - id: "e"
+        label: "Not at all"
+  - id: q27
+    prompt: "Select your top 3 factors that matter most when choosing a hospital. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_that
+    required: true
+    options:
+      - id: "a"
+        label: "Quality and safety record"
+      - id: "b"
+        label: "Distance and convenience"
+      - id: "c"
+        label: "Insurance network"
+      - id: "d"
+        label: "Doctor's recommendation"
+      - id: "e"
+        label: "Reputation"
+      - id: "f"
+        label: "Out-of-pocket cost"
+      - id: "g"
+        label: "Experience with my condition"
+      - id: "h"
+        label: "Facilities and comfort"
+  - id: q28
+    prompt: "Overall, how satisfied were you with your most recent hospital choice?"
+    type: single_choice
+    construct: overall_satisfied_were_most_recent
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I have not chosen a hospital"
+  - id: q29
+    prompt: "On a scale of 0 to 10, how likely are you to recommend the hospital you most recently used? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q30
+    prompt: "If you needed to choose a hospital again, how would you approach it?"
+    type: single_choice
+    construct: if_needed_choose_hospital_again
+    required: true
+    options:
+      - id: "a"
+        label: "Do more research than before"
+      - id: "b"
+        label: "Do about the same amount of research"
+      - id: "c"
+        label: "Rely more on my doctor"
+      - id: "d"
+        label: "Choose based mostly on convenience"
+      - id: "e"
+        label: "Not sure"
+  - id: q31
+    prompt: "About how many hospitals did you compare the last time you chose one? Please enter a number."
+    type: free_text
+    construct: many_hospitals_did_compare_last
+    required: true
+  - id: q32
+    prompt: "About how many miles is the nearest hospital to your home? Please enter a number of miles."
+    type: free_text
+    construct: many_miles_nearest_hospital_home
+    required: true
+  - id: q33
+    prompt: "About how many minutes would you be willing to travel for a higher-quality hospital? Please enter a number of minutes."
+    type: free_text
+    construct: many_minutes_would_be_willing
+    required: true
+  - id: q34
+    prompt: "In your own words, what matters most to you when choosing a hospital? (Optional)"
+    type: free_text
+    construct: own_words_matters_most_when
+    required: false
+  - id: q35
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe or not to say"
+  - id: q37
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q40
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q41
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q43
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q44
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q45
+    prompt: "What type of health insurance do you primarily have?"
+    type: single_choice
+    construct: type_health_insurance_primarily_have
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored plan"
+      - id: "b"
+        label: "Plan bought on the marketplace or directly"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or veterans coverage"
+      - id: "f"
+        label: "I do not have health insurance"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "How is your overall health?"
+    type: single_choice
+    construct: overall_health
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent"
+      - id: "b"
+        label: "Very good"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Fair"
+      - id: "e"
+        label: "Poor"

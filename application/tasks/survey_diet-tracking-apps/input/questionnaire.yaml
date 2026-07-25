@@ -1,0 +1,787 @@
+schemaVersion: "1.0"
+id: diet_tracking_apps_v1
+title: "Diet Tracking Apps Survey"
+description: "Consumer use of smartphone apps to log food, calories, and nutrition."
+questions:
+  - id: q0
+    prompt: "Do you currently use an app to track your food, calories, or nutrition?"
+    type: single_choice
+    construct: currently_use_app_track_food
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I use one regularly"
+      - id: "b"
+        label: "Yes, but only occasionally"
+      - id: "c"
+        label: "No, but I used one in the past"
+      - id: "d"
+        label: "No, I have never used one"
+  - id: q1
+    prompt: "How long have you been using a diet-tracking app? Please enter a number of months."
+    type: free_text
+    construct: long_have_been_using_diet
+    required: true
+  - id: q2
+    prompt: "Which diet-tracking apps have you used? (Select all that apply)"
+    type: multi_choice
+    construct: diet_tracking_apps_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "MyFitnessPal"
+      - id: "b"
+        label: "Lose It!"
+      - id: "c"
+        label: "Cronometer"
+      - id: "d"
+        label: "Noom"
+      - id: "e"
+        label: "WeightWatchers (WW) app"
+      - id: "f"
+        label: "MyNetDiary"
+      - id: "g"
+        label: "A free app that came with my phone or wearable"
+      - id: "h"
+        label: "Another diet-tracking app"
+  - id: q3
+    prompt: "Which app do you use most?"
+    type: single_choice
+    construct: app_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "MyFitnessPal"
+      - id: "b"
+        label: "Lose It!"
+      - id: "c"
+        label: "Cronometer"
+      - id: "d"
+        label: "Noom"
+      - id: "e"
+        label: "WeightWatchers (WW) app"
+      - id: "f"
+        label: "Another app"
+  - id: q4
+    prompt: "What is your main goal for tracking your diet? (Select all that apply)"
+    type: multi_choice
+    construct: main_goal_tracking_diet_select
+    required: true
+    options:
+      - id: "a"
+        label: "Lose weight"
+      - id: "b"
+        label: "Maintain my weight"
+      - id: "c"
+        label: "Gain weight or build muscle"
+      - id: "d"
+        label: "Hit protein or macro targets"
+      - id: "e"
+        label: "Eat more balanced meals"
+      - id: "f"
+        label: "Manage a health condition"
+      - id: "g"
+        label: "General awareness of what I eat"
+  - id: q5
+    prompt: "How do you usually log your food? (Select all that apply)"
+    type: multi_choice
+    construct: usually_log_food_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Searching the food database"
+      - id: "b"
+        label: "Scanning a barcode"
+      - id: "c"
+        label: "Using saved meals or recipes"
+      - id: "d"
+        label: "Photographing my food"
+      - id: "e"
+        label: "Manually entering nutrition info"
+      - id: "f"
+        label: "Voice or AI assistant"
+  - id: q6
+    prompt: "On days that you track, how many meals or snacks do you usually log? Please enter a number."
+    type: free_text
+    construct: days_that_track_many_meals
+    required: true
+  - id: q7
+    prompt: "How many days per week do you typically log your food?"
+    type: single_choice
+    construct: many_days_per_week_typically
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 day"
+      - id: "b"
+        label: "1 to 2 days"
+      - id: "c"
+        label: "3 to 4 days"
+      - id: "d"
+        label: "5 to 6 days"
+      - id: "e"
+        label: "Every day"
+  - id: q8
+    prompt: "Which metrics do you pay attention to in the app? (Select all that apply)"
+    type: multi_choice
+    construct: metrics_pay_attention_app_select
+    required: true
+    options:
+      - id: "a"
+        label: "Total calories"
+      - id: "b"
+        label: "Protein"
+      - id: "c"
+        label: "Carbohydrates"
+      - id: "d"
+        label: "Fat"
+      - id: "e"
+        label: "Sugar"
+      - id: "f"
+        label: "Fiber"
+      - id: "g"
+        label: "Sodium"
+      - id: "h"
+        label: "Water intake"
+  - id: q9
+    prompt: "Do you pay for a premium version of a diet-tracking app?"
+    type: single_choice
+    construct: pay_premium_version_diet_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I use a free version"
+      - id: "c"
+        label: "I used to pay but no longer do"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q10
+    prompt: "About how much do you spend on diet-tracking apps per month? Please enter a number in dollars."
+    type: free_text
+    construct: much_spend_diet_tracking_apps
+    required: true
+  - id: q11
+    prompt: "How much do you agree or disagree: The app has helped me reach my goals."
+    type: single_choice
+    construct: much_agree_disagree_app_has
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: Logging food is quick and easy in the app."
+    type: single_choice
+    construct: much_agree_disagree_logging_food
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: The food database is accurate and complete."
+    type: single_choice
+    construct: much_agree_disagree_food_database
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: Tracking has made me more aware of what I eat."
+    type: single_choice
+    construct: much_agree_disagree_tracking_has
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: Logging every meal feels like a chore."
+    type: single_choice
+    construct: much_agree_disagree_logging_every
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: I sometimes feel too focused on numbers when I track."
+    type: single_choice
+    construct: much_agree_disagree_i_sometimes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree or disagree: I am concerned about the privacy of the health data I enter."
+    type: single_choice
+    construct: much_agree_disagree_i_am
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How satisfied are you with the accuracy of the food database?"
+    type: single_choice
+    construct: satisfied_accuracy_food_database
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q19
+    prompt: "How satisfied are you with how easy it is to log food?"
+    type: single_choice
+    construct: satisfied_easy_it_log_food
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q20
+    prompt: "How satisfied are you with the app's insights and reports?"
+    type: single_choice
+    construct: satisfied_app_s_insights_reports
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q21
+    prompt: "How satisfied are you with the barcode scanner?"
+    type: single_choice
+    construct: satisfied_barcode_scanner
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I do not use it"
+  - id: q22
+    prompt: "How satisfied are you with the value for the money?"
+    type: single_choice
+    construct: satisfied_value_money
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable, I use a free version"
+  - id: q23
+    prompt: "How important is each feature to you: a large, accurate food database?"
+    type: single_choice
+    construct: important_each_feature_large_accurate
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each feature to you: a fast barcode scanner?"
+    type: single_choice
+    construct: important_each_feature_fast_barcode
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is each feature to you: macro and nutrient breakdowns?"
+    type: single_choice
+    construct: important_each_feature_macro_nutrient
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important is each feature to you: integration with a fitness tracker or wearable?"
+    type: single_choice
+    construct: important_each_feature_integration_fitne
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important is each feature to you: coaching, reminders, or encouragement?"
+    type: single_choice
+    construct: important_each_feature_coaching_reminder
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Does your diet-tracking app connect to a fitness tracker or another health app?"
+    type: single_choice
+    construct: does_diet_tracking_app_connect
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, to a wearable or fitness tracker"
+      - id: "b"
+        label: "Yes, to Apple Health or Google Fit"
+      - id: "c"
+        label: "Yes, to both"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q29
+    prompt: "How often do you log food for a full day without missing anything?"
+    type: single_choice
+    construct: often_log_food_full_day
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Almost always"
+  - id: q30
+    prompt: "Which have made you track less than you intended? (Select all that apply)"
+    type: multi_choice
+    construct: have_made_track_less_than
+    required: true
+    options:
+      - id: "a"
+        label: "It takes too much time"
+      - id: "b"
+        label: "I forget to log"
+      - id: "c"
+        label: "Foods are hard to find in the database"
+      - id: "d"
+        label: "It feels stressful or obsessive"
+      - id: "e"
+        label: "Too many ads or upsells"
+      - id: "f"
+        label: "Privacy concerns"
+      - id: "g"
+        label: "I reached my goal and stopped"
+      - id: "h"
+        label: "Nothing, I track as much as I want"
+  - id: q31
+    prompt: "Have you ever stopped using a diet-tracking app after using it regularly?"
+    type: single_choice
+    construct: have_ever_stopped_using_diet
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I did not replace it"
+      - id: "b"
+        label: "Yes, and I switched to a different app"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable"
+  - id: q32
+    prompt: "How likely are you to keep using a diet-tracking app over the next year?"
+    type: single_choice
+    construct: likely_keep_using_diet_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q33
+    prompt: "Overall, how satisfied are you with your main diet-tracking app?"
+    type: single_choice
+    construct: overall_satisfied_main_diet_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your app to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "Which improvements would most improve your diet-tracking app experience? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: improvements_would_most_improve_diet
+    required: true
+    options:
+      - id: "a"
+        label: "Faster or easier logging"
+      - id: "b"
+        label: "A more accurate food database"
+      - id: "c"
+        label: "Better barcode or photo recognition"
+      - id: "d"
+        label: "Clearer insights and reports"
+      - id: "e"
+        label: "Lower price or more free features"
+      - id: "f"
+        label: "Better device integration"
+      - id: "g"
+        label: "Stronger privacy protections"
+      - id: "h"
+        label: "A less number-focused, healthier approach"
+  - id: q36
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65–74"
+      - id: "g"
+        label: "75 or older"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino/a"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your household's annual income before taxes?"
+    type: single_choice
+    construct: household_s_annual_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+      - id: "h"
+        label: "Unable to work"
+  - id: q42
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q43
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q45
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q46
+    prompt: "Do you own a smartwatch or fitness wearable?"
+    type: single_choice
+    construct: own_smartwatch_fitness_wearable
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "In general, how would you rate your overall health?"
+    type: single_choice
+    construct: general_would_rate_overall_health
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent"
+      - id: "b"
+        label: "Very good"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Fair"
+      - id: "e"
+        label: "Poor"

@@ -1,0 +1,766 @@
+schemaVersion: "1.0"
+id: cybersecurity_awareness_v1
+title: "Personal Cybersecurity Awareness & Habits Survey"
+description: "Everyday cybersecurity awareness, protective habits, experiences, and attitudes among ordinary technology users."
+questions:
+  - id: q0
+    prompt: "How would you rate your own cybersecurity knowledge?"
+    type: single_choice
+    construct: would_rate_own_cybersecurity_knowledge
+    required: true
+    options:
+      - id: "a"
+        label: "Expert / I work in security or IT"
+      - id: "b"
+        label: "Advanced"
+      - id: "c"
+        label: "Moderate"
+      - id: "d"
+        label: "Basic"
+      - id: "e"
+        label: "Little to none"
+  - id: q1
+    prompt: "How concerned are you about your personal online security and privacy?"
+    type: single_choice
+    construct: concerned_personal_online_security_priva
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q2
+    prompt: "How do you typically manage your passwords?"
+    type: single_choice
+    construct: typically_manage_passwords
+    required: true
+    options:
+      - id: "a"
+        label: "A dedicated password manager"
+      - id: "b"
+        label: "My browser's built-in password saving"
+      - id: "c"
+        label: "I memorize them"
+      - id: "d"
+        label: "I write them down (paper or a note file)"
+      - id: "e"
+        label: "I reuse a few passwords everywhere"
+      - id: "f"
+        label: "A mix of methods"
+  - id: q3
+    prompt: "Which password managers, if any, do you use? (Select all that apply)"
+    type: multi_choice
+    construct: password_managers_if_any_use
+    required: true
+    options:
+      - id: "a"
+        label: "1Password"
+      - id: "b"
+        label: "Bitwarden"
+      - id: "c"
+        label: "LastPass"
+      - id: "d"
+        label: "Dashlane"
+      - id: "e"
+        label: "Apple Passwords / iCloud Keychain"
+      - id: "f"
+        label: "Google Password Manager"
+      - id: "g"
+        label: "Microsoft Authenticator / Edge"
+      - id: "h"
+        label: "I don't use a password manager"
+  - id: q4
+    prompt: "How often do you reuse the same password across multiple accounts?"
+    type: single_choice
+    construct: often_reuse_same_password_across
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always / almost always"
+  - id: q5
+    prompt: "Where do you use two-factor authentication (2FA)? (Select all that apply)"
+    type: multi_choice
+    construct: where_use_two_factor_authentication
+    required: true
+    options:
+      - id: "a"
+        label: "Email accounts"
+      - id: "b"
+        label: "Banking / financial accounts"
+      - id: "c"
+        label: "Social media"
+      - id: "d"
+        label: "Work accounts"
+      - id: "e"
+        label: "Shopping accounts"
+      - id: "f"
+        label: "Everywhere it's offered"
+      - id: "g"
+        label: "I don't use 2FA"
+  - id: q6
+    prompt: "Which second-factor methods do you use? (Select all that apply)"
+    type: multi_choice
+    construct: second_factor_methods_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Text message (SMS) codes"
+      - id: "b"
+        label: "Authenticator app (Google Authenticator, Authy, etc.)"
+      - id: "c"
+        label: "Hardware security key (YubiKey, etc.)"
+      - id: "d"
+        label: "Push notifications"
+      - id: "e"
+        label: "Biometrics (fingerprint / face)"
+      - id: "f"
+        label: "Passkeys"
+      - id: "g"
+        label: "I don't use any second factor"
+  - id: q7
+    prompt: "How quickly do you install software and security updates on your devices?"
+    type: single_choice
+    construct: quickly_install_software_security_update
+    required: true
+    options:
+      - id: "a"
+        label: "Automatically / as soon as they're available"
+      - id: "b"
+        label: "Within a few days"
+      - id: "c"
+        label: "Within a couple of weeks"
+      - id: "d"
+        label: "I often delay them a long time"
+      - id: "e"
+        label: "I rarely or never update"
+  - id: q8
+    prompt: "Which security tools or protections do you use? (Select all that apply)"
+    type: multi_choice
+    construct: security_tools_protections_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Antivirus / anti-malware software"
+      - id: "b"
+        label: "A VPN"
+      - id: "c"
+        label: "An ad blocker"
+      - id: "d"
+        label: "A firewall"
+      - id: "e"
+        label: "Device encryption"
+      - id: "f"
+        label: "A privacy-focused browser"
+      - id: "g"
+        label: "Identity theft / credit monitoring"
+      - id: "h"
+        label: "None of these"
+  - id: q9
+    prompt: "How do you back up your important data? (Select all that apply)"
+    type: multi_choice
+    construct: back_up_important_data_select
+    required: true
+    options:
+      - id: "a"
+        label: "Cloud backup (iCloud, Google, OneDrive, etc.)"
+      - id: "b"
+        label: "An external drive"
+      - id: "c"
+        label: "A dedicated backup service (Backblaze, etc.)"
+      - id: "d"
+        label: "A network-attached storage (NAS) device"
+      - id: "e"
+        label: "I don't back up my data"
+  - id: q10
+    prompt: "How do you feel about using public Wi-Fi for sensitive activities (banking, shopping)?"
+    type: single_choice
+    construct: feel_using_public_wi_fi
+    required: true
+    options:
+      - id: "a"
+        label: "I avoid it entirely"
+      - id: "b"
+        label: "I only use it with a VPN"
+      - id: "c"
+        label: "I use it but I'm cautious"
+      - id: "d"
+        label: "I use it without much concern"
+      - id: "e"
+        label: "I never thought about it"
+  - id: q11
+    prompt: "How do you secure the screen lock on your primary phone?"
+    type: single_choice
+    construct: secure_screen_lock_primary_phone
+    required: true
+    options:
+      - id: "a"
+        label: "Biometrics (face / fingerprint) plus a strong PIN or password"
+      - id: "b"
+        label: "Biometrics with a simple PIN"
+      - id: "c"
+        label: "A PIN or pattern only"
+      - id: "d"
+        label: "A swipe with no real lock"
+      - id: "e"
+        label: "No lock at all"
+  - id: q12
+    prompt: "Have you experienced any of the following? (Select all that apply)"
+    type: multi_choice
+    construct: have_experienced_any_following_select
+    required: true
+    options:
+      - id: "a"
+        label: "Had an account hacked or taken over"
+      - id: "b"
+        label: "Been notified my data was in a breach"
+      - id: "c"
+        label: "Had a credit or debit card compromised"
+      - id: "d"
+        label: "Had a device infected with malware"
+      - id: "e"
+        label: "Lost money to an online scam"
+      - id: "f"
+        label: "None of these"
+  - id: q13
+    prompt: "Roughly how many online accounts do you have that require a password?"
+    type: free_text
+    construct: roughly_many_online_accounts_have
+    required: true
+  - id: q14
+    prompt: "How often do you check whether your accounts or passwords have been part of a data breach?"
+    type: single_choice
+    construct: often_check_whether_accounts_passwords
+    required: true
+    options:
+      - id: "a"
+        label: "Regularly / I get alerts"
+      - id: "b"
+        label: "Occasionally"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "Never"
+      - id: "e"
+        label: "I don't know how"
+  - id: q15
+    prompt: "How much do you agree with the following statement? — Keeping myself secure online feels overwhelming."
+    type: single_choice
+    construct: much_agree_following_statement_keeping
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement? — I trust big tech companies to protect my data."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement? — I know how to tell if a website or email is legitimate."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement? — Security measures like 2FA are worth the extra hassle."
+    type: single_choice
+    construct: much_agree_following_statement_security
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement? — I feel in control of my personal data online."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How concerned are you about each of the following? — Identity theft"
+    type: single_choice
+    construct: concerned_each_following_identity_theft
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q21
+    prompt: "How concerned are you about each of the following? — Financial fraud"
+    type: single_choice
+    construct: concerned_each_following_financial_fraud
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q22
+    prompt: "How concerned are you about each of the following? — Companies collecting and selling your data"
+    type: single_choice
+    construct: concerned_each_following_companies_colle
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q23
+    prompt: "How concerned are you about each of the following? — Being tracked or surveilled online"
+    type: single_choice
+    construct: concerned_each_following_being_tracked
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q24
+    prompt: "How concerned are you about each of the following? — AI-enabled scams or deepfakes"
+    type: single_choice
+    construct: concerned_each_following_ai_enabled
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q25
+    prompt: "Which privacy-protective habits do you practice? (Select all that apply)"
+    type: multi_choice
+    construct: privacy_protective_habits_practice_selec
+    required: true
+    options:
+      - id: "a"
+        label: "Reviewing app permissions"
+      - id: "b"
+        label: "Declining cookies / limiting tracking"
+      - id: "c"
+        label: "Using private / incognito browsing"
+      - id: "d"
+        label: "Limiting what I share on social media"
+      - id: "e"
+        label: "Using an alias email or masked emails"
+      - id: "f"
+        label: "Reading privacy policies"
+      - id: "g"
+        label: "Freezing my credit"
+      - id: "h"
+        label: "None of these"
+  - id: q26
+    prompt: "How often do you review the privacy or security settings on your accounts and devices?"
+    type: single_choice
+    construct: often_review_privacy_security_settings
+    required: true
+    options:
+      - id: "a"
+        label: "Regularly"
+      - id: "b"
+        label: "A few times a year"
+      - id: "c"
+        label: "About once a year"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q27
+    prompt: "Where do you get information about staying safe online? (Select all that apply)"
+    type: multi_choice
+    construct: where_get_information_staying_safe
+    required: true
+    options:
+      - id: "a"
+        label: "News media"
+      - id: "b"
+        label: "Friends or family"
+      - id: "c"
+        label: "Employer / workplace training"
+      - id: "d"
+        label: "Tech websites or YouTube"
+      - id: "e"
+        label: "Social media"
+      - id: "f"
+        label: "Government or official resources"
+      - id: "g"
+        label: "I don't actively seek it out"
+  - id: q28
+    prompt: "Have you completed cybersecurity awareness training (at work or elsewhere) in the past year?"
+    type: single_choice
+    construct: have_completed_cybersecurity_awareness_t
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, required by my employer"
+      - id: "b"
+        label: "Yes, voluntarily"
+      - id: "c"
+        label: "No, but it's available"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "Not applicable"
+  - id: q29
+    prompt: "Select the top 3 actions you think are most important for staying secure online. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_actions_think
+    required: true
+    options:
+      - id: "a"
+        label: "Using strong, unique passwords"
+      - id: "b"
+        label: "Enabling two-factor authentication"
+      - id: "c"
+        label: "Keeping software updated"
+      - id: "d"
+        label: "Backing up data"
+      - id: "e"
+        label: "Being cautious with links and emails"
+      - id: "f"
+        label: "Using a password manager"
+      - id: "g"
+        label: "Using antivirus software"
+      - id: "h"
+        label: "Using a VPN"
+      - id: "i"
+        label: "Limiting personal info shared online"
+      - id: "j"
+        label: "Monitoring accounts and credit"
+  - id: q30
+    prompt: "How confident are you that you could recover if one of your important accounts were hacked?"
+    type: single_choice
+    construct: confident_that_could_recover_if
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+  - id: q31
+    prompt: "How likely are you to adopt stronger security habits in the next year?"
+    type: single_choice
+    construct: likely_adopt_stronger_security_habits
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q32
+    prompt: "What is your biggest barrier to being more secure online?"
+    type: single_choice
+    construct: biggest_barrier_being_more_secure
+    required: true
+    options:
+      - id: "a"
+        label: "It's too complicated"
+      - id: "b"
+        label: "It's inconvenient"
+      - id: "c"
+        label: "I don't know what to do"
+      - id: "d"
+        label: "It costs money"
+      - id: "e"
+        label: "I don't think I'm a target"
+      - id: "f"
+        label: "No barrier — I'm already careful"
+  - id: q33
+    prompt: "What one change would most improve your online security? Describe in your own words."
+    type: free_text
+    construct: one_change_would_most_improve
+    required: true
+  - id: q34
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 25"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your annual household income (US dollars)?"
+    type: single_choice
+    construct: annual_household_income_us_dollars
+    required: true
+    options:
+      - id: "a"
+        label: "Under $35,000"
+      - id: "b"
+        label: "$35,000–$74,999"
+      - id: "c"
+        label: "$75,000–$124,999"
+      - id: "d"
+        label: "$125,000–$199,999"
+      - id: "e"
+        label: "$200,000 or more"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Professional or doctoral degree"
+  - id: q39
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+  - id: q40
+    prompt: "Do you work in an IT, technology, or security field?"
+    type: single_choice
+    construct: work_it_technology_security_field
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, in security specifically"
+      - id: "b"
+        label: "Yes, in IT or technology more broadly"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "How many people live in your household?"
+    type: free_text
+    construct: many_people_live_household
+    required: true
+  - id: q42
+    prompt: "What is your relationship status?"
+    type: single_choice
+    construct: relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "How many internet-connected devices do you personally use regularly?"
+    type: single_choice
+    construct: many_internet_connected_devices_personal
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2–3"
+      - id: "c"
+        label: "4–6"
+      - id: "d"
+        label: "7–10"
+      - id: "e"
+        label: "More than 10"
+  - id: q44
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q45
+    prompt: "How would you describe where you live?"
+    type: single_choice
+    construct: would_describe_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

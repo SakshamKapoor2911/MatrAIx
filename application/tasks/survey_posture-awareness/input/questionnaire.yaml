@@ -1,0 +1,613 @@
+schemaVersion: "1.0"
+id: posture_awareness_v1
+title: "Posture Awareness Survey"
+description: "Consumer awareness of posture and the habits, tools, and products used to maintain it."
+questions:
+  - id: q0
+    prompt: "How often do you consciously think about your posture during the day?"
+    type: single_choice
+    construct: often_consciously_think_posture_during
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Almost constantly"
+  - id: q1
+    prompt: "How would you rate your typical posture?"
+    type: single_choice
+    construct: would_rate_typical_posture
+    required: true
+    options:
+      - id: "a"
+        label: "Poor"
+      - id: "b"
+        label: "Fair"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Very good"
+      - id: "e"
+        label: "Excellent"
+  - id: q2
+    prompt: "In which situations do you most often notice poor posture? (Select all that apply)"
+    type: multi_choice
+    construct: situations_most_often_notice_poor
+    required: true
+    options:
+      - id: "a"
+        label: "Sitting at a desk or computer"
+      - id: "b"
+        label: "Looking at a phone or tablet"
+      - id: "c"
+        label: "Watching TV or relaxing"
+      - id: "d"
+        label: "Driving"
+      - id: "e"
+        label: "Standing for long periods"
+      - id: "f"
+        label: "Carrying bags or lifting"
+      - id: "g"
+        label: "I do not notice poor posture"
+  - id: q3
+    prompt: "About how many hours a day do you spend sitting?"
+    type: single_choice
+    construct: many_hours_day_spend_sitting
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 3 hours"
+      - id: "b"
+        label: "3 to 5 hours"
+      - id: "c"
+        label: "6 to 8 hours"
+      - id: "d"
+        label: "9 to 11 hours"
+      - id: "e"
+        label: "12 or more hours"
+  - id: q4
+    prompt: "About how many hours a day do you spend looking down at a phone or tablet? Please enter a number."
+    type: free_text
+    construct: many_hours_day_spend_looking
+    required: true
+  - id: q5
+    prompt: "Which habits or tools do you use to support good posture? (Select all that apply)"
+    type: multi_choice
+    construct: habits_tools_use_support_good
+    required: true
+    options:
+      - id: "a"
+        label: "An ergonomic chair"
+      - id: "b"
+        label: "A standing desk or adjustable desk"
+      - id: "c"
+        label: "Regular stretching or movement breaks"
+      - id: "d"
+        label: "Posture-strengthening exercises"
+      - id: "e"
+        label: "A lumbar cushion or back support"
+      - id: "f"
+        label: "A posture-reminder app or wearable"
+      - id: "g"
+        label: "A posture-correcting brace or band"
+      - id: "h"
+        label: "None of these"
+  - id: q6
+    prompt: "Do you use any app or wearable device that reminds you about posture?"
+    type: single_choice
+    construct: use_any_app_wearable_device
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No, and I would not"
+  - id: q7
+    prompt: "Do you practice any activities that you feel help your posture? (Select all that apply)"
+    type: multi_choice
+    construct: practice_any_activities_that_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Yoga"
+      - id: "b"
+        label: "Pilates"
+      - id: "c"
+        label: "Stretching routines"
+      - id: "d"
+        label: "Strength training"
+      - id: "e"
+        label: "Walking or running"
+      - id: "f"
+        label: "Physical therapy exercises"
+      - id: "g"
+        label: "None of these"
+  - id: q8
+    prompt: "Have you experienced discomfort you think is related to posture?"
+    type: single_choice
+    construct: have_experienced_discomfort_think_relate
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, often"
+      - id: "b"
+        label: "Yes, sometimes"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "Never"
+  - id: q9
+    prompt: "Which areas do you feel posture-related discomfort? (Select all that apply)"
+    type: multi_choice
+    construct: areas_feel_posture_related_discomfort
+    required: true
+    options:
+      - id: "a"
+        label: "Neck"
+      - id: "b"
+        label: "Upper back or shoulders"
+      - id: "c"
+        label: "Lower back"
+      - id: "d"
+        label: "Hips"
+      - id: "e"
+        label: "Wrists or arms"
+      - id: "f"
+        label: "Headaches"
+      - id: "g"
+        label: "I do not feel posture-related discomfort"
+  - id: q10
+    prompt: "How much do you agree with the following statement: I make an effort to maintain good posture."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: My daily work or devices lead me into poor posture."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Good posture is important for my long-term health."
+    type: single_choice
+    construct: much_agree_following_statement_good
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: I know what good posture should feel like."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: It is hard to maintain good posture throughout the day."
+    type: single_choice
+    construct: much_agree_following_statement_it
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How often do you take breaks to move or stretch during long sitting sessions?"
+    type: single_choice
+    construct: often_take_breaks_move_stretch
+    required: true
+    options:
+      - id: "a"
+        label: "Every 30 minutes or so"
+      - id: "b"
+        label: "About once an hour"
+      - id: "c"
+        label: "Every few hours"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Almost never"
+  - id: q16
+    prompt: "About how many movement or stretch breaks do you take on a typical workday? Please enter a number."
+    type: free_text
+    construct: many_movement_stretch_breaks_take
+    required: true
+  - id: q17
+    prompt: "Where have you learned about good posture? (Select all that apply)"
+    type: multi_choice
+    construct: where_have_learned_good_posture
+    required: true
+    options:
+      - id: "a"
+        label: "A doctor or physical therapist"
+      - id: "b"
+        label: "Websites or search engines"
+      - id: "c"
+        label: "Social media or videos"
+      - id: "d"
+        label: "Fitness classes or trainers"
+      - id: "e"
+        label: "Friends or family"
+      - id: "f"
+        label: "I have not sought out this information"
+  - id: q18
+    prompt: "Has anyone (a professional or otherwise) advised you about your posture?"
+    type: single_choice
+    construct: has_anyone_professional_otherwise_advise
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a health professional"
+      - id: "b"
+        label: "Yes, someone else"
+      - id: "c"
+        label: "No"
+  - id: q19
+    prompt: "What makes it hard to maintain good posture? (Select all that apply)"
+    type: multi_choice
+    construct: makes_it_hard_maintain_good
+    required: true
+    options:
+      - id: "a"
+        label: "Long hours sitting or on devices"
+      - id: "b"
+        label: "Forgetting to check myself"
+      - id: "c"
+        label: "Uncomfortable furniture or setup"
+      - id: "d"
+        label: "Habit or muscle memory"
+      - id: "e"
+        label: "Lack of core or back strength"
+      - id: "f"
+        label: "I do not find it difficult"
+      - id: "g"
+        label: "Nothing in particular"
+  - id: q20
+    prompt: "Select your top 3 things you believe would most improve your posture. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_believe
+    required: true
+    options:
+      - id: "a"
+        label: "More movement breaks"
+      - id: "b"
+        label: "A better chair or desk setup"
+      - id: "c"
+        label: "Strengthening exercises"
+      - id: "d"
+        label: "Reminders or a wearable"
+      - id: "e"
+        label: "Less time on my phone"
+      - id: "f"
+        label: "Professional guidance"
+      - id: "g"
+        label: "Being more mindful of it"
+  - id: q21
+    prompt: "How motivated are you to improve your posture?"
+    type: single_choice
+    construct: motivated_improve_posture
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all motivated"
+      - id: "b"
+        label: "Slightly motivated"
+      - id: "c"
+        label: "Moderately motivated"
+      - id: "d"
+        label: "Very motivated"
+  - id: q22
+    prompt: "How important is good posture to you overall?"
+    type: single_choice
+    construct: important_good_posture_overall
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "About how much would you be willing to spend on posture-related products or tools? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_would_be_willing_spend
+    required: true
+  - id: q24
+    prompt: "Overall, how satisfied are you with your current posture habits?"
+    type: single_choice
+    construct: overall_satisfied_current_posture_habits
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q25
+    prompt: "How likely are you to take steps to improve your posture over the next year?"
+    type: single_choice
+    construct: likely_take_steps_improve_posture
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Somewhat likely"
+      - id: "d"
+        label: "Very likely"
+  - id: q26
+    prompt: "In your own words, what would help you maintain better posture?"
+    type: free_text
+    construct: own_words_would_help_maintain
+    required: true
+  - id: q27
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q28
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe or not to say"
+  - id: q29
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q30
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q32
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+  - id: q33
+    prompt: "Which best describes your typical daily activity?"
+    type: single_choice
+    construct: best_describes_typical_daily_activity
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly seated (desk or driving)"
+      - id: "b"
+        label: "Mix of sitting and standing"
+      - id: "c"
+        label: "Mostly on my feet or active"
+      - id: "d"
+        label: "Varies widely"
+  - id: q34
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q36
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q37
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Do you use a wearable device (such as a smartwatch or fitness tracker)?"
+    type: single_choice
+    construct: use_wearable_device_such_as
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, daily"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No, and I would not"
+  - id: q39
+    prompt: "How would you describe your overall interest in health and wellness?"
+    type: single_choice
+    construct: would_describe_overall_interest_health
+    required: true
+    options:
+      - id: "a"
+        label: "Not interested"
+      - id: "b"
+        label: "Somewhat interested"
+      - id: "c"
+        label: "Interested"
+      - id: "d"
+        label: "Very interested"

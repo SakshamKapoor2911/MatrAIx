@@ -1,0 +1,795 @@
+schemaVersion: "1.0"
+id: learning_to_code_v1
+title: "Learning to Code Survey"
+description: "People's experiences, methods, motivations, and challenges in learning to program and develop software."
+questions:
+  - id: q0
+    prompt: "Which best describes your relationship with coding?"
+    type: single_choice
+    construct: best_describes_relationship_coding
+    required: true
+    options:
+      - id: "a"
+        label: "I'm currently learning to code"
+      - id: "b"
+        label: "I code professionally"
+      - id: "c"
+        label: "I code as a hobby"
+      - id: "d"
+        label: "I've learned some coding in the past"
+      - id: "e"
+        label: "I'm interested but haven't started"
+      - id: "f"
+        label: "I have no interest in coding"
+  - id: q1
+    prompt: "How long have you been learning or working with code?"
+    type: single_choice
+    construct: long_have_been_learning_working
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1-2 years"
+      - id: "d"
+        label: "3-5 years"
+      - id: "e"
+        label: "6-10 years"
+      - id: "f"
+        label: "More than 10 years"
+      - id: "g"
+        label: "I haven't started"
+  - id: q2
+    prompt: "What is your main motivation for learning to code? (Select all that apply)"
+    type: multi_choice
+    construct: main_motivation_learning_code_select
+    required: true
+    options:
+      - id: "a"
+        label: "Career change into tech"
+      - id: "b"
+        label: "Advancing in my current career"
+      - id: "c"
+        label: "Building my own projects or startup"
+      - id: "d"
+        label: "Personal interest / curiosity"
+      - id: "e"
+        label: "School or degree requirement"
+      - id: "f"
+        label: "Automating tasks or hobbies"
+      - id: "g"
+        label: "Job security or higher pay"
+      - id: "h"
+        label: "I'm not learning to code"
+  - id: q3
+    prompt: "Which methods have you used to learn to code? (Select all that apply)"
+    type: multi_choice
+    construct: methods_have_used_learn_code
+    required: true
+    options:
+      - id: "a"
+        label: "Online courses (Coursera, Udemy, etc.)"
+      - id: "b"
+        label: "Interactive platforms (freeCodeCamp, Codecademy, etc.)"
+      - id: "c"
+        label: "University or college classes"
+      - id: "d"
+        label: "Coding bootcamp"
+      - id: "e"
+        label: "Books"
+      - id: "f"
+        label: "YouTube videos"
+      - id: "g"
+        label: "Documentation and tutorials"
+      - id: "h"
+        label: "Building projects on my own"
+      - id: "i"
+        label: "Mentorship or a coding buddy"
+      - id: "j"
+        label: "AI coding assistants or chatbots"
+      - id: "k"
+        label: "On-the-job training"
+      - id: "l"
+        label: "I haven't learned to code"
+  - id: q4
+    prompt: "Which programming languages have you learned or are you learning? (Select all that apply)"
+    type: multi_choice
+    construct: programming_languages_have_learned_learn
+    required: true
+    options:
+      - id: "a"
+        label: "Python"
+      - id: "b"
+        label: "JavaScript"
+      - id: "c"
+        label: "HTML/CSS"
+      - id: "d"
+        label: "Java"
+      - id: "e"
+        label: "C or C++"
+      - id: "f"
+        label: "C#"
+      - id: "g"
+        label: "SQL"
+      - id: "h"
+        label: "Go"
+      - id: "i"
+        label: "Rust"
+      - id: "j"
+        label: "Swift or Kotlin"
+      - id: "k"
+        label: "PHP or Ruby"
+      - id: "l"
+        label: "R or MATLAB"
+      - id: "m"
+        label: "None yet"
+  - id: q5
+    prompt: "Which best describes your current coding skill level?"
+    type: single_choice
+    construct: best_describes_current_coding_skill
+    required: true
+    options:
+      - id: "a"
+        label: "Complete beginner"
+      - id: "b"
+        label: "Novice — I know the basics"
+      - id: "c"
+        label: "Intermediate — I can build small projects"
+      - id: "d"
+        label: "Advanced — I build complex applications"
+      - id: "e"
+        label: "Professional / expert"
+  - id: q6
+    prompt: "About how many hours per week do you currently spend learning or practicing coding?"
+    type: single_choice
+    construct: many_hours_per_week_currently
+    required: true
+    options:
+      - id: "a"
+        label: "None right now"
+      - id: "b"
+        label: "Less than 2 hours"
+      - id: "c"
+        label: "2-5 hours"
+      - id: "d"
+        label: "6-10 hours"
+      - id: "e"
+        label: "11-20 hours"
+      - id: "f"
+        label: "More than 20 hours"
+  - id: q7
+    prompt: "How do you primarily practice coding? (Select all that apply)"
+    type: multi_choice
+    construct: primarily_practice_coding_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Personal projects"
+      - id: "b"
+        label: "Coding challenges (LeetCode, HackerRank, etc.)"
+      - id: "c"
+        label: "Following along with tutorials"
+      - id: "d"
+        label: "Contributing to open source"
+      - id: "e"
+        label: "Course exercises and assignments"
+      - id: "f"
+        label: "Work or client projects"
+      - id: "g"
+        label: "Pair programming or study groups"
+      - id: "h"
+        label: "I don't practice regularly"
+  - id: q8
+    prompt: "Which online resources do you rely on most when you get stuck? (Select all that apply)"
+    type: multi_choice
+    construct: online_resources_rely_most_when
+    required: true
+    options:
+      - id: "a"
+        label: "Stack Overflow"
+      - id: "b"
+        label: "Official documentation"
+      - id: "c"
+        label: "AI chatbot (ChatGPT, Claude, etc.)"
+      - id: "d"
+        label: "YouTube"
+      - id: "e"
+        label: "Reddit or forums"
+      - id: "f"
+        label: "Discord or Slack communities"
+      - id: "g"
+        label: "Blog posts and articles"
+      - id: "h"
+        label: "A mentor or peer"
+      - id: "i"
+        label: "I rarely get stuck"
+  - id: q9
+    prompt: "How many years have you been coding in total, including any education?"
+    type: free_text
+    construct: many_years_have_been_coding
+    required: true
+  - id: q10
+    prompt: "About how much money have you spent on coding education so far (courses, bootcamps, books) in US dollars?"
+    type: free_text
+    construct: much_money_have_spent_coding
+    required: true
+  - id: q11
+    prompt: "How much do you agree with the following statement: Learning to code is harder than I expected."
+    type: single_choice
+    construct: much_agree_following_statement_learning
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: I'm confident I can reach my coding goals."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: AI tools have made learning to code easier for me."
+    type: single_choice
+    construct: much_agree_following_statement_ai
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I often feel overwhelmed by how much there is to learn."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: Free resources are enough to learn to code well."
+    type: single_choice
+    construct: much_agree_following_statement_free
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I sometimes doubt whether I'm cut out for coding."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much of a challenge is the following in your learning: staying motivated and consistent?"
+    type: single_choice
+    construct: much_challenge_following_learning_stayin
+    required: true
+    options:
+      - id: "a"
+        label: "Not a challenge at all"
+      - id: "b"
+        label: "A slight challenge"
+      - id: "c"
+        label: "A moderate challenge"
+      - id: "d"
+        label: "A significant challenge"
+      - id: "e"
+        label: "A major challenge"
+  - id: q18
+    prompt: "How much of a challenge is the following in your learning: understanding difficult concepts?"
+    type: single_choice
+    construct: much_challenge_following_learning_unders
+    required: true
+    options:
+      - id: "a"
+        label: "Not a challenge at all"
+      - id: "b"
+        label: "A slight challenge"
+      - id: "c"
+        label: "A moderate challenge"
+      - id: "d"
+        label: "A significant challenge"
+      - id: "e"
+        label: "A major challenge"
+  - id: q19
+    prompt: "How much of a challenge is the following in your learning: finding time to practice?"
+    type: single_choice
+    construct: much_challenge_following_learning_findin
+    required: true
+    options:
+      - id: "a"
+        label: "Not a challenge at all"
+      - id: "b"
+        label: "A slight challenge"
+      - id: "c"
+        label: "A moderate challenge"
+      - id: "d"
+        label: "A significant challenge"
+      - id: "e"
+        label: "A major challenge"
+  - id: q20
+    prompt: "How much of a challenge is the following in your learning: debugging and fixing errors?"
+    type: single_choice
+    construct: much_challenge_following_learning_debugg
+    required: true
+    options:
+      - id: "a"
+        label: "Not a challenge at all"
+      - id: "b"
+        label: "A slight challenge"
+      - id: "c"
+        label: "A moderate challenge"
+      - id: "d"
+        label: "A significant challenge"
+      - id: "e"
+        label: "A major challenge"
+  - id: q21
+    prompt: "How much of a challenge is the following in your learning: knowing what to learn next?"
+    type: single_choice
+    construct: much_challenge_following_learning_knowin
+    required: true
+    options:
+      - id: "a"
+        label: "Not a challenge at all"
+      - id: "b"
+        label: "A slight challenge"
+      - id: "c"
+        label: "A moderate challenge"
+      - id: "d"
+        label: "A significant challenge"
+      - id: "e"
+        label: "A major challenge"
+  - id: q22
+    prompt: "How much of a challenge is the following in your learning: applying skills to real projects?"
+    type: single_choice
+    construct: much_challenge_following_learning_applyi
+    required: true
+    options:
+      - id: "a"
+        label: "Not a challenge at all"
+      - id: "b"
+        label: "A slight challenge"
+      - id: "c"
+        label: "A moderate challenge"
+      - id: "d"
+        label: "A significant challenge"
+      - id: "e"
+        label: "A major challenge"
+  - id: q23
+    prompt: "Have you ever taken a break from learning to code and then returned?"
+    type: single_choice
+    construct: have_ever_taken_break_from
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, I've been continuous"
+      - id: "d"
+        label: "I'm still on my first attempt"
+  - id: q24
+    prompt: "How do you use AI coding assistants while learning?"
+    type: single_choice
+    construct: use_ai_coding_assistants_while
+    required: true
+    options:
+      - id: "a"
+        label: "To explain concepts and code"
+      - id: "b"
+        label: "To generate code I then study"
+      - id: "c"
+        label: "To debug and fix errors"
+      - id: "d"
+        label: "I use them for everything"
+      - id: "e"
+        label: "I avoid them to learn fundamentals"
+      - id: "f"
+        label: "I don't use AI assistants"
+  - id: q25
+    prompt: "Which area of software are you most interested in? (Select all that apply)"
+    type: multi_choice
+    construct: area_software_most_interested_select
+    required: true
+    options:
+      - id: "a"
+        label: "Web development"
+      - id: "b"
+        label: "Mobile app development"
+      - id: "c"
+        label: "Data science / machine learning"
+      - id: "d"
+        label: "Game development"
+      - id: "e"
+        label: "Cybersecurity"
+      - id: "f"
+        label: "Automation / scripting"
+      - id: "g"
+        label: "Cloud / DevOps"
+      - id: "h"
+        label: "Embedded / hardware"
+      - id: "i"
+        label: "I'm not sure yet"
+  - id: q26
+    prompt: "What is your ultimate goal with coding?"
+    type: single_choice
+    construct: ultimate_goal_coding
+    required: true
+    options:
+      - id: "a"
+        label: "Land a job as a developer"
+      - id: "b"
+        label: "Advance or pivot within my current job"
+      - id: "c"
+        label: "Build my own product or business"
+      - id: "d"
+        label: "Freelance or contract work"
+      - id: "e"
+        label: "Personal projects and hobbies only"
+      - id: "f"
+        label: "Just to understand technology better"
+      - id: "g"
+        label: "I'm not sure yet"
+  - id: q27
+    prompt: "Do you participate in any coding communities? (Select all that apply)"
+    type: multi_choice
+    construct: participate_any_coding_communities_selec
+    required: true
+    options:
+      - id: "a"
+        label: "Discord or Slack servers"
+      - id: "b"
+        label: "Reddit programming communities"
+      - id: "c"
+        label: "Local meetups or clubs"
+      - id: "d"
+        label: "Online forums"
+      - id: "e"
+        label: "GitHub / open source"
+      - id: "f"
+        label: "Study groups or cohorts"
+      - id: "g"
+        label: "Social media (X, LinkedIn, etc.)"
+      - id: "h"
+        label: "I don't participate in any"
+  - id: q28
+    prompt: "Select your top 3 things that help you learn best. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_that
+    required: true
+    options:
+      - id: "a"
+        label: "Building real projects"
+      - id: "b"
+        label: "Video lessons"
+      - id: "c"
+        label: "Reading documentation"
+      - id: "d"
+        label: "Interactive exercises"
+      - id: "e"
+        label: "Getting help from others"
+      - id: "f"
+        label: "AI explanations"
+      - id: "g"
+        label: "Structured courses"
+      - id: "h"
+        label: "Coding challenges"
+      - id: "i"
+        label: "A mentor or teacher"
+  - id: q29
+    prompt: "Overall, how satisfied are you with your progress in learning to code?"
+    type: single_choice
+    construct: overall_satisfied_progress_learning_code
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How likely are you to still be actively coding or learning a year from now?"
+    type: single_choice
+    construct: likely_still_be_actively_coding
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "On a scale of 0 to 10, how likely are you to recommend learning to code to someone else? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "What has been the biggest obstacle in your journey to learn coding?"
+    type: free_text
+    construct: has_been_biggest_obstacle_journey
+    required: true
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18 years old"
+      - id: "b"
+        label: "18-24 years old"
+      - id: "c"
+        label: "25-34 years old"
+      - id: "d"
+        label: "35-44 years old"
+      - id: "e"
+        label: "45-54 years old"
+      - id: "f"
+        label: "55-64 years old"
+      - id: "g"
+        label: "65 years or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Unemployed, looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Homemaker or caregiver"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q40
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship, not married"
+      - id: "c"
+        label: "Married or domestic partnership"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "Do you currently work or study in a field related to technology?"
+    type: single_choice
+    construct: currently_work_study_field_related
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I work in tech"
+      - id: "b"
+        label: "Yes, I'm studying a tech field"
+      - id: "c"
+        label: "No, an unrelated field"
+      - id: "d"
+        label: "I'm not currently working or studying"
+      - id: "e"
+        label: "Prefer not to say"

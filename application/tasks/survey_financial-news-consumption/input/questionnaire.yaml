@@ -1,0 +1,720 @@
+schemaVersion: "1.0"
+id: financial_news_consumption_v1
+title: "Financial News Consumption Survey"
+description: "How people follow financial and economic news and how it informs their money decisions."
+questions:
+  - id: q0
+    prompt: "How often do you read, watch, or listen to financial or economic news?"
+    type: single_choice
+    construct: often_read_watch_listen_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "A few times a month"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "About once a day"
+      - id: "e"
+        label: "Several times a day"
+  - id: q1
+    prompt: "How closely do you follow financial news compared with other kinds of news?"
+    type: single_choice
+    construct: closely_follow_financial_news_compared
+    required: true
+    options:
+      - id: "a"
+        label: "Much less closely"
+      - id: "b"
+        label: "Somewhat less closely"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat more closely"
+      - id: "e"
+        label: "Much more closely"
+  - id: q2
+    prompt: "On a typical day, about how many minutes do you spend on financial or economic news? Please enter a number of minutes."
+    type: free_text
+    construct: typical_day_many_minutes_spend
+    required: true
+  - id: q3
+    prompt: "Which formats do you use to consume financial news? (Select all that apply)"
+    type: multi_choice
+    construct: formats_use_consume_financial_news
+    required: true
+    options:
+      - id: "a"
+        label: "News websites or apps"
+      - id: "b"
+        label: "Television"
+      - id: "c"
+        label: "Print newspapers or magazines"
+      - id: "d"
+        label: "Podcasts"
+      - id: "e"
+        label: "YouTube or video"
+      - id: "f"
+        label: "Social media feeds"
+      - id: "g"
+        label: "Email newsletters"
+      - id: "h"
+        label: "Radio"
+  - id: q4
+    prompt: "Which of these sources do you regularly rely on for financial news? (Select all that apply)"
+    type: multi_choice
+    construct: these_sources_regularly_rely_financial
+    required: true
+    options:
+      - id: "a"
+        label: "CNBC"
+      - id: "b"
+        label: "The Wall Street Journal"
+      - id: "c"
+        label: "Bloomberg"
+      - id: "d"
+        label: "Yahoo Finance"
+      - id: "e"
+        label: "The New York Times or Washington Post"
+      - id: "f"
+        label: "Reddit (e.g., r/personalfinance, r/investing)"
+      - id: "g"
+        label: "YouTube finance channels"
+      - id: "h"
+        label: "TikTok or Instagram"
+      - id: "i"
+        label: "My bank or brokerage's content"
+      - id: "j"
+        label: "None of these"
+  - id: q5
+    prompt: "What is your main source for financial news?"
+    type: single_choice
+    construct: main_source_financial_news
+    required: true
+    options:
+      - id: "a"
+        label: "A major news website or app"
+      - id: "b"
+        label: "Television"
+      - id: "c"
+        label: "Social media"
+      - id: "d"
+        label: "Podcasts or YouTube"
+      - id: "e"
+        label: "A newsletter or email"
+      - id: "f"
+        label: "Friends, family, or coworkers"
+      - id: "g"
+        label: "I don't have a main source"
+  - id: q6
+    prompt: "Do you pay for any financial news subscriptions?"
+    type: single_choice
+    construct: pay_any_financial_news_subscriptions
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one"
+      - id: "b"
+        label: "Yes, more than one"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No"
+  - id: q7
+    prompt: "Which financial topics do you follow most? (Select all that apply)"
+    type: multi_choice
+    construct: financial_topics_follow_most_select
+    required: true
+    options:
+      - id: "a"
+        label: "Stock market and investing"
+      - id: "b"
+        label: "Interest rates and the Federal Reserve"
+      - id: "c"
+        label: "Inflation and cost of living"
+      - id: "d"
+        label: "Jobs and the economy"
+      - id: "e"
+        label: "Cryptocurrency"
+      - id: "f"
+        label: "Real estate and housing"
+      - id: "g"
+        label: "Personal finance tips (budgeting, saving)"
+      - id: "h"
+        label: "Retirement planning"
+      - id: "i"
+        label: "Company earnings and business news"
+  - id: q8
+    prompt: "When there is major financial news (e.g., a market drop), how do you usually react?"
+    type: single_choice
+    construct: when_there_major_financial_news
+    required: true
+    options:
+      - id: "a"
+        label: "I seek out more information right away"
+      - id: "b"
+        label: "I check but don't do anything"
+      - id: "c"
+        label: "I mostly ignore it"
+      - id: "d"
+        label: "I feel stressed but don't act"
+      - id: "e"
+        label: "I make a financial move in response"
+  - id: q9
+    prompt: "In the past year, have you made a money decision based on something you saw in financial news?"
+    type: single_choice
+    construct: past_year_have_made_money
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several times"
+      - id: "b"
+        label: "Yes, once or twice"
+      - id: "c"
+        label: "No, but it influenced my thinking"
+      - id: "d"
+        label: "No"
+  - id: q10
+    prompt: "How much do you agree or disagree: Following financial news helps me make better money decisions."
+    type: single_choice
+    construct: much_agree_disagree_following_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree: Financial news often makes me anxious about money."
+    type: single_choice
+    construct: much_agree_disagree_financial_news
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: A lot of financial news is sensationalized or hyped."
+    type: single_choice
+    construct: much_agree_disagree_lot_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I find most financial news easy to understand."
+    type: single_choice
+    construct: much_agree_disagree_i_find
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I can usually tell reliable financial news from unreliable sources."
+    type: single_choice
+    construct: much_agree_disagree_i_can
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you trust financial news from: Established financial news outlets (e.g., WSJ, Bloomberg)"
+    type: single_choice
+    construct: much_trust_financial_news_from
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q16
+    prompt: "How much do you trust financial news from: Television business channels"
+    type: single_choice
+    construct: much_trust_financial_news_from
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q17
+    prompt: "How much do you trust financial news from: Social media posts and influencers"
+    type: single_choice
+    construct: much_trust_financial_news_from
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q18
+    prompt: "How much do you trust financial news from: Podcasts and YouTube creators"
+    type: single_choice
+    construct: much_trust_financial_news_from
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q19
+    prompt: "How much do you trust financial news from: Your bank or brokerage's own content"
+    type: single_choice
+    construct: much_trust_financial_news_from
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q20
+    prompt: "How much do you trust financial news from: Friends, family, or coworkers"
+    type: single_choice
+    construct: much_trust_financial_news_from
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q21
+    prompt: "When do you most often consume financial news?"
+    type: single_choice
+    construct: when_most_often_consume_financial
+    required: true
+    options:
+      - id: "a"
+        label: "First thing in the morning"
+      - id: "b"
+        label: "During the workday"
+      - id: "c"
+        label: "In the evening"
+      - id: "d"
+        label: "On weekends"
+      - id: "e"
+        label: "Only when something big happens"
+  - id: q22
+    prompt: "How often do you check on the stock market or your investments?"
+    type: single_choice
+    construct: often_check_stock_market_investments
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "A few times a year"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "Daily"
+      - id: "e"
+        label: "Multiple times a day"
+  - id: q23
+    prompt: "Do you use any of the following to track financial news or markets? (Select all that apply)"
+    type: multi_choice
+    construct: use_any_following_track_financial
+    required: true
+    options:
+      - id: "a"
+        label: "A brokerage or investing app"
+      - id: "b"
+        label: "A news app with alerts"
+      - id: "c"
+        label: "Stock or market widgets"
+      - id: "d"
+        label: "Email newsletters"
+      - id: "e"
+        label: "Social media accounts I follow"
+      - id: "f"
+        label: "None of these"
+  - id: q24
+    prompt: "How much do you feel financial news is aimed at people like you?"
+    type: single_choice
+    construct: much_feel_financial_news_aimed
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Mostly"
+      - id: "e"
+        label: "Completely"
+  - id: q25
+    prompt: "How often do you fact-check or read a second source before acting on financial news?"
+    type: single_choice
+    construct: often_fact_check_read_second
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q26
+    prompt: "Select the top 3 things you most want from financial news. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_most
+    required: true
+    options:
+      - id: "a"
+        label: "Clear explanations I can understand"
+      - id: "b"
+        label: "Actionable advice for my own money"
+      - id: "c"
+        label: "Fast breaking updates"
+      - id: "d"
+        label: "In-depth analysis"
+      - id: "e"
+        label: "Trustworthy, unbiased reporting"
+      - id: "f"
+        label: "Coverage of topics relevant to me"
+      - id: "g"
+        label: "Entertaining or engaging delivery"
+      - id: "h"
+        label: "Expert opinions and forecasts"
+  - id: q27
+    prompt: "How has your financial news consumption changed over the past 2 years?"
+    type: single_choice
+    construct: has_financial_news_consumption_changed
+    required: true
+    options:
+      - id: "a"
+        label: "I consume much less than before"
+      - id: "b"
+        label: "I consume a little less"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "I consume a little more"
+      - id: "e"
+        label: "I consume much more"
+  - id: q28
+    prompt: "How likely are you to recommend your main financial news source to a friend?"
+    type: single_choice
+    construct: likely_recommend_main_financial_news
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Somewhat likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q29
+    prompt: "Overall, how satisfied are you with the quality of financial news available to you?"
+    type: single_choice
+    construct: overall_satisfied_quality_financial_news
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How many different financial news sources do you regularly follow? Please enter a number."
+    type: free_text
+    construct: many_different_financial_news_sources
+    required: true
+  - id: q31
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+      - id: "h"
+        label: "Unable to work"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q42
+    prompt: "Do you currently invest in the stock market (including through a retirement account)?"
+    type: single_choice
+    construct: currently_invest_stock_market_including
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, actively"
+      - id: "b"
+        label: "Yes, but only passively"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not sure"
+  - id: q43
+    prompt: "How would you describe your overall interest in money and finance topics?"
+    type: single_choice
+    construct: would_describe_overall_interest_money
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all interested"
+      - id: "b"
+        label: "Slightly interested"
+      - id: "c"
+        label: "Moderately interested"
+      - id: "d"
+        label: "Very interested"
+      - id: "e"
+        label: "Extremely interested"

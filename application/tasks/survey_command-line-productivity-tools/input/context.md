@@ -1,0 +1,7 @@
+# Command-Line Productivity Tools
+
+How developers and technical users adopt and use modern command-line productivity tools.
+
+## About this survey
+
+This survey profiles use of modern command-line tools such as ripgrep, fzf, tmux, jq, bat, eza, and zoxide, starting with a screener on usage frequency, tenure, operating system, and the respondent's most-used search or navigation tool. It records which tools have been used, which have replaced classic Unix commands, which the respondent wants to adopt, how tools are installed and updated, and the tasks they support, along with fzf and jq usage and custom aliases. Attitudes are captured through an agreement Likert battery on speed, the sufficiency of classic tools, experimentation, and portability, an importance matrix over tool-adoption criteria, and frequency scales for learning tools, scripting, and fuzzy history search, plus a top-three ranking of adoption criteria. Later sections cover discovery channels, configuration depth, adoption style, AI command assistance, satisfaction with speed and interoperability, overall satisfaction, recommendation likelihood, adoption intent, and an optional open comment. Question types include single-choice, multi-select, several Likert scales, an importance matrix, a ranking item, an NPS-style 0–10 scale, and numeric free-text. The survey concludes with a demographic block covering role, professional experience, employment, company size, industry, age, gender, race and ethnicity, education, U.S. region, and urbanicity.

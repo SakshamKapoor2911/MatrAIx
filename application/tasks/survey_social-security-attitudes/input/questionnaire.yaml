@@ -1,0 +1,687 @@
+schemaVersion: "1.0"
+id: social_security_attitudes_v1
+title: "Social Security Attitudes Survey"
+description: "Attitudes toward Social Security — knowledge of the program, reliance on it, claiming decisions, and views on its future."
+questions:
+  - id: q0
+    prompt: "Which best describes your current relationship to Social Security?"
+    type: single_choice
+    construct: best_describes_current_relationship_soci
+    required: true
+    options:
+      - id: "a"
+        label: "I currently receive Social Security benefits"
+      - id: "b"
+        label: "I'm eligible but haven't claimed yet"
+      - id: "c"
+        label: "I'm years away from claiming"
+      - id: "d"
+        label: "I'm decades away from claiming"
+      - id: "e"
+        label: "I don't expect to qualify"
+  - id: q1
+    prompt: "How much do you feel you understand how Social Security works?"
+    type: single_choice
+    construct: much_feel_understand_social_security
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q2
+    prompt: "How important do you expect Social Security to be (or how important is it) to your retirement income?"
+    type: single_choice
+    construct: important_expect_social_security_be
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important — it's my main source"
+  - id: q3
+    prompt: "How much of your retirement income do you expect Social Security to provide?"
+    type: single_choice
+    construct: much_retirement_income_expect_social
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "Less than a quarter"
+      - id: "c"
+        label: "About half"
+      - id: "d"
+        label: "Most of it"
+      - id: "e"
+        label: "Nearly all of it"
+      - id: "f"
+        label: "Not sure"
+  - id: q4
+    prompt: "Do you know your approximate expected monthly Social Security benefit?"
+    type: single_choice
+    construct: know_approximate_expected_monthly_social
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I know it precisely"
+      - id: "b"
+        label: "Yes, roughly"
+      - id: "c"
+        label: "No, I have no idea"
+      - id: "d"
+        label: "Not applicable"
+  - id: q5
+    prompt: "Have you ever checked your Social Security statement or created an account on ssa.gov?"
+    type: single_choice
+    construct: have_ever_checked_social_security
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I check it regularly"
+      - id: "b"
+        label: "Yes, once or twice"
+      - id: "c"
+        label: "No, but I know about it"
+      - id: "d"
+        label: "No, I didn't know I could"
+  - id: q6
+    prompt: "At what age do you think you will (or did you) claim Social Security? Please enter a number (age in years)."
+    type: free_text
+    construct: age_think_will_did_claim
+    required: true
+  - id: q7
+    prompt: "When it comes to claiming Social Security, what is your plan?"
+    type: single_choice
+    construct: when_it_comes_claiming_social
+    required: true
+    options:
+      - id: "a"
+        label: "Claim as early as possible (age 62)"
+      - id: "b"
+        label: "Claim at full retirement age"
+      - id: "c"
+        label: "Delay to increase my monthly benefit"
+      - id: "d"
+        label: "I'm not sure yet"
+      - id: "e"
+        label: "Already claiming"
+  - id: q8
+    prompt: "What factors matter most in deciding when to claim? (Select all that apply)"
+    type: multi_choice
+    construct: factors_matter_most_deciding_when
+    required: true
+    options:
+      - id: "a"
+        label: "Needing the income right away"
+      - id: "b"
+        label: "Maximizing my lifetime benefit"
+      - id: "c"
+        label: "My health and life expectancy"
+      - id: "d"
+        label: "Whether I'm still working"
+      - id: "e"
+        label: "My spouse's benefits"
+      - id: "f"
+        label: "Uncertainty about the program's future"
+      - id: "g"
+        label: "Advice from an advisor or family"
+      - id: "h"
+        label: "I haven't thought about it"
+  - id: q9
+    prompt: "How confident are you that Social Security will still pay full benefits when you need it?"
+    type: single_choice
+    construct: confident_that_social_security_will
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q10
+    prompt: "How much do you agree or disagree: Social Security is a promise the government must keep."
+    type: single_choice
+    construct: much_agree_disagree_social_security
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree: I worry Social Security won't be there for me."
+    type: single_choice
+    construct: much_agree_disagree_i_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: I could not maintain my standard of living without Social Security."
+    type: single_choice
+    construct: much_agree_disagree_i_could
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: Social Security benefits should be increased."
+    type: single_choice
+    construct: much_agree_disagree_social_security
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I feel I understand my claiming options well enough to make a good decision."
+    type: single_choice
+    construct: much_agree_disagree_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much would you support or oppose each option to strengthen Social Security: Raising the payroll tax"
+    type: single_choice
+    construct: much_would_support_oppose_each
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly oppose"
+      - id: "b"
+        label: "Oppose"
+      - id: "c"
+        label: "Neither support nor oppose"
+      - id: "d"
+        label: "Support"
+      - id: "e"
+        label: "Strongly support"
+  - id: q16
+    prompt: "How much would you support or oppose each option to strengthen Social Security: Raising the retirement age"
+    type: single_choice
+    construct: much_would_support_oppose_each
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly oppose"
+      - id: "b"
+        label: "Oppose"
+      - id: "c"
+        label: "Neither support nor oppose"
+      - id: "d"
+        label: "Support"
+      - id: "e"
+        label: "Strongly support"
+  - id: q17
+    prompt: "How much would you support or oppose each option to strengthen Social Security: Raising or removing the cap on taxable earnings"
+    type: single_choice
+    construct: much_would_support_oppose_each
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly oppose"
+      - id: "b"
+        label: "Oppose"
+      - id: "c"
+        label: "Neither support nor oppose"
+      - id: "d"
+        label: "Support"
+      - id: "e"
+        label: "Strongly support"
+  - id: q18
+    prompt: "How much would you support or oppose each option to strengthen Social Security: Reducing benefits for higher earners"
+    type: single_choice
+    construct: much_would_support_oppose_each
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly oppose"
+      - id: "b"
+        label: "Oppose"
+      - id: "c"
+        label: "Neither support nor oppose"
+      - id: "d"
+        label: "Support"
+      - id: "e"
+        label: "Strongly support"
+  - id: q19
+    prompt: "How much would you support or oppose each option to strengthen Social Security: Reducing future benefits across the board"
+    type: single_choice
+    construct: much_would_support_oppose_each
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly oppose"
+      - id: "b"
+        label: "Oppose"
+      - id: "c"
+        label: "Neither support nor oppose"
+      - id: "d"
+        label: "Support"
+      - id: "e"
+        label: "Strongly support"
+  - id: q20
+    prompt: "How much do you trust the federal government to manage Social Security responsibly?"
+    type: single_choice
+    construct: much_trust_federal_government_manage
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q21
+    prompt: "How worried are you about the long-term financial health of the Social Security program?"
+    type: single_choice
+    construct: worried_long_term_financial_health
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+  - id: q22
+    prompt: "In addition to Social Security, which other retirement income sources do you have or expect? (Select all that apply)"
+    type: multi_choice
+    construct: addition_social_security_other_retiremen
+    required: true
+    options:
+      - id: "a"
+        label: "A pension"
+      - id: "b"
+        label: "A 401(k) or similar"
+      - id: "c"
+        label: "An IRA"
+      - id: "d"
+        label: "Personal savings or investments"
+      - id: "e"
+        label: "Real estate or rental income"
+      - id: "f"
+        label: "Continued work"
+      - id: "g"
+        label: "Support from family"
+      - id: "h"
+        label: "None — Social Security only"
+  - id: q23
+    prompt: "How much have concerns about Social Security's future affected your own retirement saving?"
+    type: single_choice
+    construct: much_have_concerns_social_security
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "Quite a bit"
+      - id: "e"
+        label: "A great deal"
+  - id: q24
+    prompt: "Where do you mainly get information about Social Security? (Select all that apply)"
+    type: multi_choice
+    construct: where_mainly_get_information_social
+    required: true
+    options:
+      - id: "a"
+        label: "The Social Security Administration (ssa.gov)"
+      - id: "b"
+        label: "News media"
+      - id: "c"
+        label: "A financial advisor"
+      - id: "d"
+        label: "Friends and family"
+      - id: "e"
+        label: "Social media"
+      - id: "f"
+        label: "My employer"
+      - id: "g"
+        label: "I don't actively seek information"
+  - id: q25
+    prompt: "Do you think younger generations will receive the same Social Security benefits as retirees today?"
+    type: single_choice
+    construct: think_younger_generations_will_receive
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, the same"
+      - id: "b"
+        label: "Yes, but reduced"
+      - id: "c"
+        label: "No, much less"
+      - id: "d"
+        label: "No benefits at all"
+      - id: "e"
+        label: "Not sure"
+  - id: q26
+    prompt: "Select the top 3 things you most want from Social Security. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_most
+    required: true
+    options:
+      - id: "a"
+        label: "Reliable, guaranteed income"
+      - id: "b"
+        label: "Benefits that keep up with inflation"
+      - id: "c"
+        label: "A clear understanding of what I'll get"
+      - id: "d"
+        label: "Confidence the program will last"
+      - id: "e"
+        label: "Higher benefit amounts"
+      - id: "f"
+        label: "Flexibility in when to claim"
+      - id: "g"
+        label: "Fair treatment across income levels"
+      - id: "h"
+        label: "Protection from cuts"
+  - id: q27
+    prompt: "How important is Social Security to older Americans' financial security in general?"
+    type: single_choice
+    construct: important_social_security_older_american
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Overall, how satisfied are you with the Social Security program?"
+    type: single_choice
+    construct: overall_satisfied_social_security_progra
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "How likely are you to seek professional advice about your Social Security claiming decision?"
+    type: single_choice
+    construct: likely_seek_professional_advice_social
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Somewhat likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q30
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–29"
+      - id: "b"
+        label: "30–44"
+      - id: "c"
+        label: "45–54"
+      - id: "d"
+        label: "55–64"
+      - id: "e"
+        label: "65–74"
+      - id: "f"
+        label: "75 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q36
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Homemaker or caregiver"
+      - id: "g"
+        label: "Unable to work"
+  - id: q37
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q38
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q41
+    prompt: "Thinking about politics, how would you describe your general views?"
+    type: single_choice
+    construct: thinking_politics_would_describe_general
+    required: true
+    options:
+      - id: "a"
+        label: "Liberal"
+      - id: "b"
+        label: "Moderate"
+      - id: "c"
+        label: "Conservative"
+      - id: "d"
+        label: "Other or none"
+      - id: "e"
+        label: "Prefer not to say"

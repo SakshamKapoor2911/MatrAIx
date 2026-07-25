@@ -1,0 +1,750 @@
+schemaVersion: "1.0"
+id: high_yield_savings_v1
+title: "High-Yield Savings Accounts Survey"
+description: "How people use high-yield savings accounts to earn interest on their cash."
+questions:
+  - id: q0
+    prompt: "Do you currently have a high-yield savings account (HYSA)?"
+    type: single_choice
+    construct: currently_have_high_yield_savings
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one high-yield savings account"
+      - id: "b"
+        label: "Yes, more than one"
+      - id: "c"
+        label: "No, but I'm considering opening one"
+      - id: "d"
+        label: "No, and I'm not considering one"
+      - id: "e"
+        label: "I'm not familiar with high-yield savings accounts"
+  - id: q1
+    prompt: "How long have you had a high-yield savings account?"
+    type: single_choice
+    construct: long_have_had_high_yield
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "More than 3 years"
+      - id: "e"
+        label: "I don't have one"
+  - id: q2
+    prompt: "Which provider holds your primary high-yield savings account?"
+    type: single_choice
+    construct: provider_holds_primary_high_yield
+    required: true
+    options:
+      - id: "a"
+        label: "Ally Bank"
+      - id: "b"
+        label: "Marcus by Goldman Sachs"
+      - id: "c"
+        label: "SoFi"
+      - id: "d"
+        label: "American Express"
+      - id: "e"
+        label: "Capital One (360 Performance Savings)"
+      - id: "f"
+        label: "Discover"
+      - id: "g"
+        label: "A credit union or local bank"
+      - id: "h"
+        label: "Another online bank"
+      - id: "i"
+        label: "I don't have one"
+  - id: q3
+    prompt: "Roughly what annual percentage yield (APY) does your account currently earn?"
+    type: single_choice
+    construct: roughly_annual_percentage_yield_apy
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 2%"
+      - id: "b"
+        label: "2% to 3.49%"
+      - id: "c"
+        label: "3.5% to 4.49%"
+      - id: "d"
+        label: "4.5% or more"
+      - id: "e"
+        label: "I'm not sure"
+      - id: "f"
+        label: "I don't have a high-yield account"
+  - id: q4
+    prompt: "What do you primarily use your high-yield savings account for?"
+    type: single_choice
+    construct: primarily_use_high_yield_savings
+    required: true
+    options:
+      - id: "a"
+        label: "Emergency fund"
+      - id: "b"
+        label: "Saving for a specific goal (home, car, trip)"
+      - id: "c"
+        label: "Parking cash I don't need right away"
+      - id: "d"
+        label: "General savings with no specific purpose"
+      - id: "e"
+        label: "Business or tax reserves"
+  - id: q5
+    prompt: "What goals are you saving toward in high-yield accounts? (Select all that apply)"
+    type: multi_choice
+    construct: goals_saving_toward_high_yield
+    required: true
+    options:
+      - id: "a"
+        label: "Emergency fund"
+      - id: "b"
+        label: "Home down payment"
+      - id: "c"
+        label: "A car"
+      - id: "d"
+        label: "Vacation or travel"
+      - id: "e"
+        label: "Wedding or major event"
+      - id: "f"
+        label: "Taxes or business reserves"
+      - id: "g"
+        label: "General wealth building"
+      - id: "h"
+        label: "No specific goal"
+  - id: q6
+    prompt: "How did you first learn about high-yield savings accounts? (Select all that apply)"
+    type: multi_choice
+    construct: did_first_learn_high_yield
+    required: true
+    options:
+      - id: "a"
+        label: "Friends or family"
+      - id: "b"
+        label: "Financial blogs or websites"
+      - id: "c"
+        label: "Social media (Reddit, TikTok, YouTube)"
+      - id: "d"
+        label: "News coverage of interest rates"
+      - id: "e"
+        label: "A bank or advisor"
+      - id: "f"
+        label: "Comparison sites (NerdWallet, Bankrate)"
+      - id: "g"
+        label: "I don't remember"
+  - id: q7
+    prompt: "How did you choose your current high-yield savings provider? (Select all that apply)"
+    type: multi_choice
+    construct: did_choose_current_high_yield
+    required: true
+    options:
+      - id: "a"
+        label: "Highest APY available"
+      - id: "b"
+        label: "No fees or minimums"
+      - id: "c"
+        label: "Trusted brand name"
+      - id: "d"
+        label: "Easy online sign-up"
+      - id: "e"
+        label: "Good mobile app"
+      - id: "f"
+        label: "Sign-up bonus"
+      - id: "g"
+        label: "Already banked there"
+      - id: "h"
+        label: "FDIC insurance"
+  - id: q8
+    prompt: "How often do you compare your account's APY against other banks?"
+    type: single_choice
+    construct: often_compare_account_s_apy
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "A few times a year"
+      - id: "d"
+        label: "Monthly"
+      - id: "e"
+        label: "Whenever rates change in the news"
+  - id: q9
+    prompt: "How often do you deposit money into your high-yield savings account?"
+    type: single_choice
+    construct: often_deposit_money_into_high
+    required: true
+    options:
+      - id: "a"
+        label: "Every paycheck"
+      - id: "b"
+        label: "Monthly"
+      - id: "c"
+        label: "A few times a year"
+      - id: "d"
+        label: "Only occasionally"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q10
+    prompt: "Do you use automatic transfers to fund your high-yield savings account?"
+    type: single_choice
+    construct: use_automatic_transfers_fund_high
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a recurring automatic transfer"
+      - id: "b"
+        label: "No, I transfer manually"
+      - id: "c"
+        label: "No, I'm not currently adding to it"
+  - id: q11
+    prompt: "How often do you withdraw money from your high-yield savings account?"
+    type: single_choice
+    construct: often_withdraw_money_from_high
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "A few times a year"
+      - id: "c"
+        label: "About monthly"
+      - id: "d"
+        label: "Multiple times a month"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Earning a competitive interest rate on my savings is important to me."
+    type: single_choice
+    construct: much_agree_following_statement_earning
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: I trust online-only banks with my savings."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: Keeping savings in a traditional bank means leaving money on the table."
+    type: single_choice
+    construct: much_agree_following_statement_keeping
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: I would move my money to chase a higher rate elsewhere."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: The difference in interest between banks is too small to bother switching."
+    type: single_choice
+    construct: much_agree_following_statement_differenc
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How important is each of the following when choosing a savings account: A high APY."
+    type: single_choice
+    construct: important_each_following_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each of the following when choosing a savings account: No monthly fees or minimum balance."
+    type: single_choice
+    construct: important_each_following_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is each of the following when choosing a savings account: FDIC or NCUA insurance."
+    type: single_choice
+    construct: important_each_following_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is each of the following when choosing a savings account: Easy, fast access to your money."
+    type: single_choice
+    construct: important_each_following_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each of the following when choosing a savings account: A well-known, trusted brand."
+    type: single_choice
+    construct: important_each_following_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "Where is your high-yield savings account held relative to your main checking account?"
+    type: single_choice
+    construct: where_high_yield_savings_account
+    required: true
+    options:
+      - id: "a"
+        label: "At the same bank as my checking account"
+      - id: "b"
+        label: "At a different bank than my checking account"
+      - id: "c"
+        label: "I have several at different banks"
+      - id: "d"
+        label: "Not applicable"
+  - id: q23
+    prompt: "How long does it typically take to move money from your high-yield savings to your checking?"
+    type: single_choice
+    construct: long_does_it_typically_take
+    required: true
+    options:
+      - id: "a"
+        label: "Same day / instantly"
+      - id: "b"
+        label: "1 business day"
+      - id: "c"
+        label: "2 to 3 business days"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q24
+    prompt: "Have you ever hit a limit on the number of monthly withdrawals from a savings account?"
+    type: single_choice
+    construct: have_ever_hit_limit_number
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "I'm not sure"
+  - id: q25
+    prompt: "What has kept you from putting more money into high-yield savings? (Select all that apply)"
+    type: multi_choice
+    construct: has_kept_from_putting_more
+    required: true
+    options:
+      - id: "a"
+        label: "I don't have extra cash to save"
+      - id: "b"
+        label: "I prefer to invest it instead"
+      - id: "c"
+        label: "I'd rather keep it in checking for easy access"
+      - id: "d"
+        label: "Concerns about online-only banks"
+      - id: "e"
+        label: "The rates aren't high enough to bother"
+      - id: "f"
+        label: "I'm paying down debt first"
+      - id: "g"
+        label: "Nothing — I save as much as I can"
+  - id: q26
+    prompt: "Which other cash or savings products do you also use? (Select all that apply)"
+    type: multi_choice
+    construct: other_cash_savings_products_also
+    required: true
+    options:
+      - id: "a"
+        label: "Certificates of deposit (CDs)"
+      - id: "b"
+        label: "Money market accounts"
+      - id: "c"
+        label: "Treasury bills or bonds"
+      - id: "d"
+        label: "A traditional savings account"
+      - id: "e"
+        label: "A brokerage cash/sweep account"
+      - id: "f"
+        label: "Money market mutual funds"
+      - id: "g"
+        label: "None of these"
+  - id: q27
+    prompt: "Select your top 3 factors when choosing where to keep your savings. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_when
+    required: true
+    options:
+      - id: "a"
+        label: "Interest rate (APY)"
+      - id: "b"
+        label: "No fees"
+      - id: "c"
+        label: "Easy access to funds"
+      - id: "d"
+        label: "Trusted brand"
+      - id: "e"
+        label: "Good mobile app"
+      - id: "f"
+        label: "FDIC/NCUA insurance"
+      - id: "g"
+        label: "Sign-up bonus"
+      - id: "h"
+        label: "Same bank as my other accounts"
+  - id: q28
+    prompt: "How confident are you that you're getting a competitive rate on your savings?"
+    type: single_choice
+    construct: confident_that_re_getting_competitive
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q29
+    prompt: "Overall, how satisfied are you with your high-yield savings account?"
+    type: single_choice
+    construct: overall_satisfied_high_yield_savings
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How likely are you to open an additional high-yield savings account in the next year?"
+    type: single_choice
+    construct: likely_open_additional_high_yield
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "On a scale from 0 to 10, how likely are you to recommend a high-yield savings account to a friend, where 0 is not at all likely and 10 is extremely likely?"
+    type: single_choice
+    construct: scale_from_0_10_likely
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "Approximately how much do you currently keep in high-yield savings? Please enter a dollar amount."
+    type: free_text
+    construct: approximately_much_currently_keep_high
+    required: true
+  - id: q33
+    prompt: "About how much do you deposit into high-yield savings in a typical month? Please enter a dollar amount."
+    type: free_text
+    construct: much_deposit_into_high_yield
+    required: true
+  - id: q34
+    prompt: "What is your approximate total annual household income before taxes? Please enter a dollar amount."
+    type: free_text
+    construct: approximate_total_annual_household_incom
+    required: true
+  - id: q35
+    prompt: "If there is anything else you'd like to share about how you use savings accounts, please describe it briefly."
+    type: free_text
+    construct: if_there_anything_else_d
+    required: false
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Another race or ethnicity"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your annual household income before taxes?"
+    type: single_choice
+    construct: annual_household_income_before_taxes
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school graduate or equivalent"
+      - id: "c"
+        label: "Some college or associate's degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q41
+    prompt: "Which best describes your current employment status?"
+    type: single_choice
+    construct: best_describes_current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelance"
+      - id: "d"
+        label: "Not employed, looking for work"
+      - id: "e"
+        label: "Not employed, not looking for work"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q42
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q43
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q45
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q46
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"

@@ -1,0 +1,810 @@
+schemaVersion: "1.0"
+id: gift_card_usage_v1
+title: "Gift Card Usage Survey"
+description: "How people buy, use, give, manage, and resell gift cards."
+questions:
+  - id: q0
+    prompt: "How often do you buy or receive gift cards?"
+    type: single_choice
+    construct: often_buy_receive_gift_cards
+    required: true
+    options:
+      - id: "a"
+        label: "Very often"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q1
+    prompt: "In the past year, have you purchased a gift card for yourself or someone else?"
+    type: single_choice
+    construct: past_year_have_purchased_gift
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several"
+      - id: "b"
+        label: "Yes, one or two"
+      - id: "c"
+        label: "No, but I received some"
+      - id: "d"
+        label: "No, not at all"
+  - id: q2
+    prompt: "Who do you most often buy gift cards for?"
+    type: single_choice
+    construct: who_most_often_buy_gift
+    required: true
+    options:
+      - id: "a"
+        label: "Myself"
+      - id: "b"
+        label: "Family members"
+      - id: "c"
+        label: "Friends"
+      - id: "d"
+        label: "Coworkers or colleagues"
+      - id: "e"
+        label: "Teachers or service providers"
+      - id: "f"
+        label: "I don't buy gift cards"
+  - id: q3
+    prompt: "Which types of gift cards have you bought or received in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: types_gift_cards_have_bought
+    required: true
+    options:
+      - id: "a"
+        label: "Amazon"
+      - id: "b"
+        label: "Visa, Mastercard, or Amex (open-loop)"
+      - id: "c"
+        label: "Target"
+      - id: "d"
+        label: "Walmart"
+      - id: "e"
+        label: "Starbucks"
+      - id: "f"
+        label: "Apple / App Store or iTunes"
+      - id: "g"
+        label: "A restaurant chain"
+      - id: "h"
+        label: "A clothing or department store"
+      - id: "i"
+        label: "A gaming platform (Xbox, PlayStation, Steam)"
+      - id: "j"
+        label: "A streaming service"
+      - id: "k"
+        label: "None"
+  - id: q4
+    prompt: "Where do you usually buy gift cards? (Select all that apply)"
+    type: multi_choice
+    construct: where_usually_buy_gift_cards
+    required: true
+    options:
+      - id: "a"
+        label: "A grocery store gift card rack"
+      - id: "b"
+        label: "A big-box store (Target, Walmart)"
+      - id: "c"
+        label: "The retailer's own website or app"
+      - id: "d"
+        label: "Amazon"
+      - id: "e"
+        label: "A pharmacy (CVS, Walgreens)"
+      - id: "f"
+        label: "A warehouse club (Costco, Sam's Club)"
+      - id: "g"
+        label: "A gift card marketplace or reseller"
+      - id: "h"
+        label: "A bank or credit card rewards portal"
+  - id: q5
+    prompt: "For what occasions do you give gift cards? (Select all that apply)"
+    type: multi_choice
+    construct: occasions_give_gift_cards_select
+    required: true
+    options:
+      - id: "a"
+        label: "Birthdays"
+      - id: "b"
+        label: "Winter holidays"
+      - id: "c"
+        label: "Weddings"
+      - id: "d"
+        label: "Graduations"
+      - id: "e"
+        label: "Thank-you gifts"
+      - id: "f"
+        label: "Teacher or coach appreciation"
+      - id: "g"
+        label: "Just because"
+      - id: "h"
+        label: "I don't give gift cards"
+  - id: q6
+    prompt: "Why do you choose to give gift cards instead of other gifts? (Select all that apply)"
+    type: multi_choice
+    construct: why_choose_give_gift_cards
+    required: true
+    options:
+      - id: "a"
+        label: "They're convenient"
+      - id: "b"
+        label: "The recipient can choose what they want"
+      - id: "c"
+        label: "I'm unsure what to buy"
+      - id: "d"
+        label: "They're easy to mail or send digitally"
+      - id: "e"
+        label: "They fit any budget"
+      - id: "f"
+        label: "I can earn rewards buying them"
+      - id: "g"
+        label: "I don't give gift cards"
+  - id: q7
+    prompt: "Do you prefer physical or digital (e-gift) cards?"
+    type: single_choice
+    construct: prefer_physical_digital_e_gift
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly prefer physical"
+      - id: "b"
+        label: "Slightly prefer physical"
+      - id: "c"
+        label: "No preference"
+      - id: "d"
+        label: "Slightly prefer digital"
+      - id: "e"
+        label: "Strongly prefer digital"
+  - id: q8
+    prompt: "About how much do you spend on gift cards in a typical year, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_spend_gift_cards_typical
+    required: true
+  - id: q9
+    prompt: "About how much total value do you currently have sitting on unused or partially used gift cards, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_total_value_currently_have
+    required: true
+  - id: q10
+    prompt: "How many unused or partially used gift cards do you currently have?"
+    type: single_choice
+    construct: many_unused_partially_used_gift
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1 to 2"
+      - id: "c"
+        label: "3 to 5"
+      - id: "d"
+        label: "6 to 10"
+      - id: "e"
+        label: "More than 10"
+  - id: q11
+    prompt: "What usually happens to gift cards you receive?"
+    type: single_choice
+    construct: usually_happens_gift_cards_receive
+    required: true
+    options:
+      - id: "a"
+        label: "I use the full balance promptly"
+      - id: "b"
+        label: "I use most of it but leave small balances"
+      - id: "c"
+        label: "I let them sit for a long time"
+      - id: "d"
+        label: "I often forget about them"
+      - id: "e"
+        label: "I sometimes lose them entirely"
+  - id: q12
+    prompt: "Have you ever let a gift card go completely unused?"
+    type: single_choice
+    construct: have_ever_let_gift_card
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several"
+      - id: "b"
+        label: "Yes, once or twice"
+      - id: "c"
+        label: "No, but I've left small balances"
+      - id: "d"
+        label: "No, I always use them fully"
+  - id: q13
+    prompt: "Have you ever sold or exchanged a gift card you didn't want?"
+    type: single_choice
+    construct: have_ever_sold_exchanged_gift
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, on a gift card marketplace"
+      - id: "b"
+        label: "Yes, to a friend or family member"
+      - id: "c"
+        label: "Yes, at a kiosk (like a Coinstar Exchange)"
+      - id: "d"
+        label: "No, but I've considered it"
+      - id: "e"
+        label: "No, never"
+  - id: q14
+    prompt: "Which gift card resale or exchange services have you used or heard of? (Select all that apply)"
+    type: multi_choice
+    construct: gift_card_resale_exchange_services
+    required: true
+    options:
+      - id: "a"
+        label: "CardCash"
+      - id: "b"
+        label: "Raise"
+      - id: "c"
+        label: "GiftCash"
+      - id: "d"
+        label: "CoinStar / Exchange kiosks"
+      - id: "e"
+        label: "Facebook Marketplace or similar"
+      - id: "f"
+        label: "I've used none of these"
+      - id: "g"
+        label: "I've never heard of any"
+  - id: q15
+    prompt: "How much do you agree: Gift cards are a thoughtful gift to give."
+    type: single_choice
+    construct: much_agree_gift_cards_thoughtful
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: Gift cards feel impersonal compared to a real gift."
+    type: single_choice
+    construct: much_agree_gift_cards_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: I often forget to use the gift cards I have."
+    type: single_choice
+    construct: much_agree_i_often_forget
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Gift cards make me spend more than the card's value."
+    type: single_choice
+    construct: much_agree_gift_cards_make
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: I worry about gift card scams or fraud."
+    type: single_choice
+    construct: much_agree_i_worry_gift
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: I would rather receive cash than a gift card."
+    type: single_choice
+    construct: much_agree_i_would_rather
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "When choosing which gift card to give, how important is each factor: matching the recipient's interests."
+    type: single_choice
+    construct: when_choosing_gift_card_give
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When choosing which gift card to give, how important is each factor: the retailer's popularity."
+    type: single_choice
+    construct: when_choosing_gift_card_give
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing which gift card to give, how important is each factor: no expiration or fees."
+    type: single_choice
+    construct: when_choosing_gift_card_give
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing which gift card to give, how important is each factor: being able to send it digitally."
+    type: single_choice
+    construct: when_choosing_gift_card_give
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing which gift card to give, how important is each factor: earning rewards on the purchase."
+    type: single_choice
+    construct: when_choosing_gift_card_give
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How often do you buy gift cards to earn credit card rewards or take advantage of promotions?"
+    type: single_choice
+    construct: often_buy_gift_cards_earn
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q27
+    prompt: "How often do you check the balance on your gift cards?"
+    type: single_choice
+    construct: often_check_balance_gift_cards
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q28
+    prompt: "Have you ever been the target of a gift card scam (asked to pay someone with gift cards)?"
+    type: single_choice
+    construct: have_ever_been_target_gift
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I lost money"
+      - id: "b"
+        label: "Yes, but I recognized it in time"
+      - id: "c"
+        label: "No, never"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q29
+    prompt: "Do you keep track of your gift cards in any organized way?"
+    type: single_choice
+    construct: keep_track_gift_cards_any
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, in an app or digital wallet"
+      - id: "b"
+        label: "Yes, in a spreadsheet or note"
+      - id: "c"
+        label: "Yes, in a physical spot"
+      - id: "d"
+        label: "No, I keep them wherever"
+      - id: "e"
+        label: "No, I don't track them"
+  - id: q30
+    prompt: "Which are your top 3 reasons you like receiving gift cards? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_reasons_like_receiving
+    required: true
+    options:
+      - id: "a"
+        label: "Freedom to choose what I want"
+      - id: "b"
+        label: "Treating myself to something I wouldn't buy otherwise"
+      - id: "c"
+        label: "Saving them for a specific purchase"
+      - id: "d"
+        label: "They feel like free money"
+      - id: "e"
+        label: "Using them at favorite stores"
+      - id: "f"
+        label: "Combining them with sales"
+      - id: "g"
+        label: "I don't like receiving them"
+      - id: "h"
+        label: "Regifting when needed"
+  - id: q31
+    prompt: "Which frustrations have you had with gift cards? (Select all that apply)"
+    type: multi_choice
+    construct: frustrations_have_had_gift_cards
+    required: true
+    options:
+      - id: "a"
+        label: "Small leftover balances I can't use"
+      - id: "b"
+        label: "Losing or misplacing them"
+      - id: "c"
+        label: "Expiration dates or inactivity fees"
+      - id: "d"
+        label: "A store closing before I used the card"
+      - id: "e"
+        label: "Not shopping at that retailer"
+      - id: "f"
+        label: "Trouble redeeming online"
+      - id: "g"
+        label: "I've had no frustrations"
+  - id: q32
+    prompt: "How satisfied are you with gift cards as a way to give gifts?"
+    type: single_choice
+    construct: satisfied_gift_cards_as_way
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How satisfied are you with how you manage the gift cards you receive?"
+    type: single_choice
+    construct: satisfied_manage_gift_cards_receive
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How likely are you to recommend giving gift cards as gifts to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_giving_gift_cards
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "How likely are you to buy gift cards as gifts this coming holiday season?"
+    type: single_choice
+    construct: likely_buy_gift_cards_as
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q36
+    prompt: "How likely are you to sell an unwanted gift card in the next year?"
+    type: single_choice
+    construct: likely_sell_unwanted_gift_card
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q37
+    prompt: "What would make gift cards more useful to you? (Optional short answer)"
+    type: free_text
+    construct: would_make_gift_cards_more
+    required: false
+  - id: q38
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q39
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Homemaker or caregiver"
+      - id: "f"
+        label: "Not currently employed"
+      - id: "g"
+        label: "Retired"
+  - id: q44
+    prompt: "How many people live in your household, including yourself?"
+    type: single_choice
+    construct: many_people_live_household_including
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q45
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q47
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

@@ -1,0 +1,772 @@
+schemaVersion: "1.0"
+id: alternative_medicine_v1
+title: "Alternative and Complementary Medicine Survey"
+description: "Consumer use of and attitudes toward complementary and alternative health approaches."
+questions:
+  - id: q0
+    prompt: "Have you ever used any complementary or alternative health approaches?"
+    type: single_choice
+    construct: have_ever_used_any_complementary
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I use them regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Yes, but not anymore"
+      - id: "d"
+        label: "No, but I'm curious"
+      - id: "e"
+        label: "No, and I'm not interested"
+  - id: q1
+    prompt: "Which approaches have you tried? (Select all that apply)"
+    type: multi_choice
+    construct: approaches_have_tried_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Herbal or botanical supplements"
+      - id: "b"
+        label: "Vitamins and minerals"
+      - id: "c"
+        label: "Acupuncture"
+      - id: "d"
+        label: "Massage therapy"
+      - id: "e"
+        label: "Yoga or tai chi"
+      - id: "f"
+        label: "Meditation or mindfulness"
+      - id: "g"
+        label: "Chiropractic care"
+      - id: "h"
+        label: "Aromatherapy or essential oils"
+      - id: "i"
+        label: "None of these"
+  - id: q2
+    prompt: "Which do you currently use on a regular basis? (Select all that apply)"
+    type: multi_choice
+    construct: currently_use_regular_basis_select
+    required: true
+    options:
+      - id: "a"
+        label: "Herbal or botanical supplements"
+      - id: "b"
+        label: "Vitamins and minerals"
+      - id: "c"
+        label: "Acupuncture"
+      - id: "d"
+        label: "Massage therapy"
+      - id: "e"
+        label: "Yoga or tai chi"
+      - id: "f"
+        label: "Meditation or mindfulness"
+      - id: "g"
+        label: "Chiropractic care"
+      - id: "h"
+        label: "Aromatherapy or essential oils"
+      - id: "i"
+        label: "None currently"
+  - id: q3
+    prompt: "What do you mainly use these approaches for? (Select all that apply)"
+    type: multi_choice
+    construct: mainly_use_these_approaches_select
+    required: true
+    options:
+      - id: "a"
+        label: "General wellness and prevention"
+      - id: "b"
+        label: "Stress and relaxation"
+      - id: "c"
+        label: "Sleep"
+      - id: "d"
+        label: "Muscle or joint discomfort"
+      - id: "e"
+        label: "Digestion"
+      - id: "f"
+        label: "Energy and vitality"
+      - id: "g"
+        label: "Immune support"
+      - id: "h"
+        label: "Other"
+  - id: q4
+    prompt: "How long have you been using complementary or alternative approaches?"
+    type: single_choice
+    construct: long_have_been_using_complementary
+    required: true
+    options:
+      - id: "a"
+        label: "Less than a year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "3 to 10 years"
+      - id: "d"
+        label: "More than 10 years"
+      - id: "e"
+        label: "Not applicable"
+  - id: q5
+    prompt: "How often do you use these approaches?"
+    type: single_choice
+    construct: often_use_these_approaches
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Weekly"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Occasionally"
+  - id: q6
+    prompt: "About how much do you spend on these approaches in a typical month? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_spend_these_approaches_typical
+    required: true
+  - id: q7
+    prompt: "Where do you buy supplements or products, if you use them? (Select all that apply)"
+    type: multi_choice
+    construct: where_buy_supplements_products_if
+    required: true
+    options:
+      - id: "a"
+        label: "Pharmacy or drugstore"
+      - id: "b"
+        label: "Grocery or big-box store"
+      - id: "c"
+        label: "Health food or specialty store"
+      - id: "d"
+        label: "Online retailer"
+      - id: "e"
+        label: "Directly from a practitioner"
+      - id: "f"
+        label: "I don't buy supplements"
+  - id: q8
+    prompt: "How do you usually decide which approaches or products to try? (Select all that apply)"
+    type: multi_choice
+    construct: usually_decide_approaches_products_try
+    required: true
+    options:
+      - id: "a"
+        label: "Recommendation from a doctor"
+      - id: "b"
+        label: "Recommendation from a practitioner"
+      - id: "c"
+        label: "Advice from family or friends"
+      - id: "d"
+        label: "Online research or reviews"
+      - id: "e"
+        label: "Social media or influencers"
+      - id: "f"
+        label: "Books, podcasts, or articles"
+      - id: "g"
+        label: "Trial and error"
+  - id: q9
+    prompt: "Do you tell your regular doctor about the complementary approaches you use?"
+    type: single_choice
+    construct: tell_regular_doctor_complementary_approa
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, always"
+      - id: "b"
+        label: "Yes, sometimes"
+      - id: "c"
+        label: "No, but I would if asked"
+      - id: "d"
+        label: "No, I don't"
+      - id: "e"
+        label: "I don't have a regular doctor"
+  - id: q10
+    prompt: "How do you view complementary approaches relative to conventional medicine?"
+    type: single_choice
+    construct: view_complementary_approaches_relative_c
+    required: true
+    options:
+      - id: "a"
+        label: "Mainly as a replacement for conventional care"
+      - id: "b"
+        label: "Mainly alongside conventional care"
+      - id: "c"
+        label: "Only for minor or wellness needs"
+      - id: "d"
+        label: "I rarely use conventional care"
+      - id: "e"
+        label: "Not sure"
+  - id: q11
+    prompt: "How much do you agree with the following statement: Complementary approaches improve my overall well-being."
+    type: single_choice
+    construct: much_agree_following_statement_complemen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: I prefer natural approaches when I can."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: I trust conventional medicine for serious health issues."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: It's hard to know which supplements or products actually work."
+    type: single_choice
+    construct: much_agree_following_statement_it
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: I worry about the quality or safety of some products."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I wish insurance covered more of these approaches."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: These approaches are worth what I spend on them."
+    type: single_choice
+    construct: much_agree_following_statement_these
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How important is the following when trying a complementary approach: Scientific evidence it works."
+    type: single_choice
+    construct: important_following_when_trying_compleme
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is the following when trying a complementary approach: Recommendation from a health professional."
+    type: single_choice
+    construct: important_following_when_trying_compleme
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is the following when trying a complementary approach: Being natural or drug-free."
+    type: single_choice
+    construct: important_following_when_trying_compleme
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is the following when trying a complementary approach: Cost."
+    type: single_choice
+    construct: important_following_when_trying_compleme
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is the following when trying a complementary approach: Safety and few side effects."
+    type: single_choice
+    construct: important_following_when_trying_compleme
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is the following when trying a complementary approach: Positive reviews or word of mouth."
+    type: single_choice
+    construct: important_following_when_trying_compleme
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "Which factors most influence whether you try a new approach? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: factors_most_influence_whether_try
+    required: true
+    options:
+      - id: "a"
+        label: "Scientific evidence"
+      - id: "b"
+        label: "A professional's recommendation"
+      - id: "c"
+        label: "Being natural or drug-free"
+      - id: "d"
+        label: "Low cost"
+      - id: "e"
+        label: "Safety and side-effect profile"
+      - id: "f"
+        label: "Reviews and word of mouth"
+      - id: "g"
+        label: "Ease of use"
+      - id: "h"
+        label: "Personal past experience"
+  - id: q25
+    prompt: "Which practitioners have you seen for complementary care? (Select all that apply)"
+    type: multi_choice
+    construct: practitioners_have_seen_complementary_ca
+    required: true
+    options:
+      - id: "a"
+        label: "Acupuncturist"
+      - id: "b"
+        label: "Massage therapist"
+      - id: "c"
+        label: "Chiropractor"
+      - id: "d"
+        label: "Naturopath"
+      - id: "e"
+        label: "Yoga or meditation instructor"
+      - id: "f"
+        label: "Nutritionist or herbalist"
+      - id: "g"
+        label: "None of these"
+  - id: q26
+    prompt: "How do you check whether a supplement or product is trustworthy? (Select all that apply)"
+    type: multi_choice
+    construct: check_whether_supplement_product_trustwo
+    required: true
+    options:
+      - id: "a"
+        label: "Look for third-party testing or seals"
+      - id: "b"
+        label: "Read reviews"
+      - id: "c"
+        label: "Ask a pharmacist or doctor"
+      - id: "d"
+        label: "Research the ingredients"
+      - id: "e"
+        label: "Stick to known brands"
+      - id: "f"
+        label: "I don't check"
+  - id: q27
+    prompt: "How satisfied are you with the results you get from these approaches?"
+    type: single_choice
+    construct: satisfied_results_get_from_these
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q28
+    prompt: "How confident are you in choosing safe, effective complementary approaches?"
+    type: single_choice
+    construct: confident_choosing_safe_effective_comple
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+  - id: q29
+    prompt: "How well do these approaches meet your health and wellness goals?"
+    type: single_choice
+    construct: well_these_approaches_meet_health
+    required: true
+    options:
+      - id: "a"
+        label: "Very poorly"
+      - id: "b"
+        label: "Poorly"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q30
+    prompt: "Overall, how satisfied are you with how you use complementary approaches?"
+    type: single_choice
+    construct: overall_satisfied_use_complementary_appr
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q31
+    prompt: "How likely are you to try a new complementary approach in the next year?"
+    type: single_choice
+    construct: likely_try_new_complementary_approach
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q32
+    prompt: "On a scale of 0 to 10, how likely are you to recommend a complementary approach that worked for you to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q33
+    prompt: "What would help you make better choices about complementary approaches? Please describe briefly."
+    type: free_text
+    construct: would_help_make_better_choices
+    required: true
+  - id: q34
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q35
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Which of the following best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Other"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college"
+      - id: "c"
+        label: "Associate's degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q39
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q40
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q41
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which region of the country do you live in?"
+    type: single_choice
+    construct: region_country_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q44
+    prompt: "What is your current health insurance status?"
+    type: single_choice
+    construct: current_health_insurance_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored insurance"
+      - id: "b"
+        label: "Plan purchased on my own or through the marketplace"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or VA coverage"
+      - id: "f"
+        label: "Uninsured"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "How would you describe your overall approach to health?"
+    type: single_choice
+    construct: would_describe_overall_approach_health
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly conventional"
+      - id: "b"
+        label: "Balanced between conventional and natural"
+      - id: "c"
+        label: "Mostly natural or holistic"
+      - id: "d"
+        label: "Not sure"

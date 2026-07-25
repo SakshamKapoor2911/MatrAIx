@@ -1,0 +1,7 @@
+# Angel and Startup Investing
+
+How individuals invest in early-stage startups as angels or through equity crowdfunding, and their risk tolerance.
+
+## About this survey
+
+This survey profiles early-stage startup investing, opening with a screener on investing history, tenure, and approach before mapping behaviors: the platforms and channels used, sectors invested in, primary motivations, and how respondents source deals. Attitudes are captured through an agreement Likert battery on the power-law of returns, affordability of loss, due diligence, and team-versus-idea, a concern scale over capital loss, time horizon, dilution, information, and fraud, and a per-item importance matrix on startup-evaluation criteria, plus a top-three ranking of decision factors. Additional sections drill into amounts invested, portfolio size, check size, net-worth share, accreditation, exits, involvement level, investment cadence, time horizon, taxes, and satisfaction with returns and deal access, followed by recommendation likelihood and forward-looking intent. Question types include single-choice, multi-select, several Likert scales, agreement and importance matrices, a ranking item, and numeric free-text. The survey concludes with a demographic block covering age, gender, race and ethnicity, household income, investable net worth, education, employment, household size, marital status, U.S. region, and urbanicity.

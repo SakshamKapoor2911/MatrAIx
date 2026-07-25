@@ -1,0 +1,858 @@
+schemaVersion: "1.0"
+id: social_media_platform_usage_v1
+title: "Social Media Platform Usage Survey"
+description: "How people use social media platforms, including which platforms they favor, how they engage, and their attitudes toward time, privacy, and wellbeing."
+questions:
+  - id: q0
+    prompt: "Do you use social media?"
+    type: single_choice
+    construct: use_social_media
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, every day"
+      - id: "b"
+        label: "Yes, a few times a week"
+      - id: "c"
+        label: "Yes, but only occasionally"
+      - id: "d"
+        label: "No, I do not use social media"
+  - id: q1
+    prompt: "About how many years have you been using social media?"
+    type: single_choice
+    construct: many_years_have_been_using
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 7 years"
+      - id: "d"
+        label: "8 to 12 years"
+      - id: "e"
+        label: "More than 12 years"
+  - id: q2
+    prompt: "Which social media platforms do you currently have an account on? (Select all that apply)"
+    type: multi_choice
+    construct: social_media_platforms_currently_have
+    required: true
+    options:
+      - id: "a"
+        label: "Facebook"
+      - id: "b"
+        label: "Instagram"
+      - id: "c"
+        label: "YouTube"
+      - id: "d"
+        label: "TikTok"
+      - id: "e"
+        label: "X (formerly Twitter)"
+      - id: "f"
+        label: "Snapchat"
+      - id: "g"
+        label: "LinkedIn"
+      - id: "h"
+        label: "Pinterest"
+      - id: "i"
+        label: "Reddit"
+      - id: "j"
+        label: "WhatsApp"
+      - id: "k"
+        label: "Threads"
+      - id: "l"
+        label: "BeReal"
+      - id: "m"
+        label: "Discord"
+      - id: "n"
+        label: "Twitch"
+      - id: "o"
+        label: "Other"
+  - id: q3
+    prompt: "Which platforms do you use at least once a day? (Select all that apply)"
+    type: multi_choice
+    construct: platforms_use_least_once_day
+    required: true
+    options:
+      - id: "a"
+        label: "Facebook"
+      - id: "b"
+        label: "Instagram"
+      - id: "c"
+        label: "YouTube"
+      - id: "d"
+        label: "TikTok"
+      - id: "e"
+        label: "X (formerly Twitter)"
+      - id: "f"
+        label: "Snapchat"
+      - id: "g"
+        label: "LinkedIn"
+      - id: "h"
+        label: "Pinterest"
+      - id: "i"
+        label: "Reddit"
+      - id: "j"
+        label: "WhatsApp"
+      - id: "k"
+        label: "Threads"
+      - id: "l"
+        label: "Discord"
+      - id: "m"
+        label: "Twitch"
+      - id: "n"
+        label: "None of these"
+  - id: q4
+    prompt: "Which single platform do you use the most?"
+    type: single_choice
+    construct: single_platform_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Facebook"
+      - id: "b"
+        label: "Instagram"
+      - id: "c"
+        label: "YouTube"
+      - id: "d"
+        label: "TikTok"
+      - id: "e"
+        label: "X (formerly Twitter)"
+      - id: "f"
+        label: "Snapchat"
+      - id: "g"
+        label: "LinkedIn"
+      - id: "h"
+        label: "Pinterest"
+      - id: "i"
+        label: "Reddit"
+      - id: "j"
+        label: "Other"
+  - id: q5
+    prompt: "On a typical day, about how much total time do you spend on social media?"
+    type: single_choice
+    construct: typical_day_much_total_time
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 15 minutes"
+      - id: "b"
+        label: "15 to 30 minutes"
+      - id: "c"
+        label: "31 to 60 minutes"
+      - id: "d"
+        label: "1 to 2 hours"
+      - id: "e"
+        label: "2 to 4 hours"
+      - id: "f"
+        label: "More than 4 hours"
+  - id: q6
+    prompt: "Roughly how many times per day do you open a social media app?"
+    type: free_text
+    construct: roughly_many_times_per_day
+    required: true
+  - id: q7
+    prompt: "Which device do you use most often for social media?"
+    type: single_choice
+    construct: device_use_most_often_social
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "Tablet"
+      - id: "c"
+        label: "Laptop"
+      - id: "d"
+        label: "Desktop computer"
+      - id: "e"
+        label: "Smart TV or streaming device"
+  - id: q8
+    prompt: "What do you mainly use social media for? (Select all that apply)"
+    type: multi_choice
+    construct: mainly_use_social_media_select
+    required: true
+    options:
+      - id: "a"
+        label: "Keeping up with friends and family"
+      - id: "b"
+        label: "Entertainment and passing time"
+      - id: "c"
+        label: "Following news and current events"
+      - id: "d"
+        label: "Following brands, celebrities, or influencers"
+      - id: "e"
+        label: "Discovering products to buy"
+      - id: "f"
+        label: "Learning new skills or information"
+      - id: "g"
+        label: "Professional networking or job hunting"
+      - id: "h"
+        label: "Sharing my own posts, photos, or videos"
+      - id: "i"
+        label: "Messaging and direct communication"
+      - id: "j"
+        label: "Following hobbies and interests"
+      - id: "k"
+        label: "Running or promoting a business"
+  - id: q9
+    prompt: "How would you describe your typical activity on social media?"
+    type: single_choice
+    construct: would_describe_typical_activity_social
+    required: true
+    options:
+      - id: "a"
+        label: "I mostly scroll and view without posting"
+      - id: "b"
+        label: "I view often and comment or react sometimes"
+      - id: "c"
+        label: "I regularly post and interact"
+      - id: "d"
+        label: "I create original content frequently"
+  - id: q10
+    prompt: "How often do you post your own content (photos, videos, status updates)?"
+    type: single_choice
+    construct: often_post_own_content_photos
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "A few times a year"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "A few times a week"
+      - id: "e"
+        label: "Daily or more"
+  - id: q11
+    prompt: "How often do you do the following — Like or react to posts"
+    type: single_choice
+    construct: often_following_like_react_posts
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q12
+    prompt: "How often do you do the following — Comment on posts"
+    type: single_choice
+    construct: often_following_comment_posts
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q13
+    prompt: "How often do you do the following — Share or repost content"
+    type: single_choice
+    construct: often_following_share_repost_content
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q14
+    prompt: "How often do you do the following — Send direct messages"
+    type: single_choice
+    construct: often_following_send_direct_messages
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q15
+    prompt: "How often do you do the following — Watch short-form videos (Reels, Shorts, TikToks)"
+    type: single_choice
+    construct: often_following_watch_short_form
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q16
+    prompt: "Please rate your agreement — Social media helps me stay connected to people I care about"
+    type: single_choice
+    construct: please_rate_agreement_social_media
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "Please rate your agreement — I spend more time on social media than I would like to"
+    type: single_choice
+    construct: please_rate_agreement_i_spend
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "Please rate your agreement — Social media has a mostly positive effect on my mood"
+    type: single_choice
+    construct: please_rate_agreement_social_media
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "Please rate your agreement — I worry about how social media companies use my personal data"
+    type: single_choice
+    construct: please_rate_agreement_i_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Please rate your agreement — I often compare myself to others based on what I see on social media"
+    type: single_choice
+    construct: please_rate_agreement_i_often
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "Please rate your agreement — I trust the information I see on social media"
+    type: single_choice
+    construct: please_rate_agreement_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How concerned are you about seeing misinformation or fake news on social media?"
+    type: single_choice
+    construct: concerned_seeing_misinformation_fake_new
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q23
+    prompt: "Which of the following privacy actions have you taken? (Select all that apply)"
+    type: multi_choice
+    construct: following_privacy_actions_have_taken
+    required: true
+    options:
+      - id: "a"
+        label: "Set my account to private"
+      - id: "b"
+        label: "Reviewed or changed my privacy settings"
+      - id: "c"
+        label: "Limited ad personalization or tracking"
+      - id: "d"
+        label: "Blocked or muted specific accounts"
+      - id: "e"
+        label: "Deleted or deactivated an account"
+      - id: "f"
+        label: "Removed old posts"
+      - id: "g"
+        label: "Turned off location sharing"
+      - id: "h"
+        label: "None of these"
+  - id: q24
+    prompt: "Have you ever taken a deliberate break from social media?"
+    type: single_choice
+    construct: have_ever_taken_deliberate_break
+    required: true
+    options:
+      - id: "a"
+        label: "No, never"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "Yes, a few times"
+      - id: "d"
+        label: "Yes, I do this regularly"
+  - id: q25
+    prompt: "Which tools or habits do you use to manage your social media time? (Select all that apply)"
+    type: multi_choice
+    construct: tools_habits_use_manage_social
+    required: true
+    options:
+      - id: "a"
+        label: "Screen time or app time limits"
+      - id: "b"
+        label: "Turning off notifications"
+      - id: "c"
+        label: "Removing apps from my home screen"
+      - id: "d"
+        label: "Deleting apps periodically"
+      - id: "e"
+        label: "Grayscale or focus modes"
+      - id: "f"
+        label: "Unfollowing or muting accounts"
+      - id: "g"
+        label: "I don't do anything to manage it"
+  - id: q26
+    prompt: "How do you mainly get news through social media?"
+    type: single_choice
+    construct: mainly_get_news_through_social
+    required: true
+    options:
+      - id: "a"
+        label: "Posts from friends and family"
+      - id: "b"
+        label: "Posts from news organizations I follow"
+      - id: "c"
+        label: "Posts from influencers or commentators"
+      - id: "d"
+        label: "Whatever the algorithm shows me"
+      - id: "e"
+        label: "I don't get news from social media"
+  - id: q27
+    prompt: "Have you ever bought a product after seeing it on social media?"
+    type: single_choice
+    construct: have_ever_bought_product_after
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, many times"
+      - id: "b"
+        label: "Yes, a few times"
+      - id: "c"
+        label: "Yes, once"
+      - id: "d"
+        label: "No, never"
+  - id: q28
+    prompt: "How often do the ads you see on social media feel relevant to you?"
+    type: single_choice
+    construct: often_ads_see_social_media
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q29
+    prompt: "Do you follow any influencers or content creators?"
+    type: single_choice
+    construct: follow_any_influencers_content_creators
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, many"
+      - id: "b"
+        label: "Yes, a few"
+      - id: "c"
+        label: "Yes, just one or two"
+      - id: "d"
+        label: "No"
+  - id: q30
+    prompt: "Which types of content do you engage with most? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: types_content_engage_most_select
+    required: true
+    options:
+      - id: "a"
+        label: "Friends' and family updates"
+      - id: "b"
+        label: "Memes and humor"
+      - id: "c"
+        label: "News and politics"
+      - id: "d"
+        label: "Sports"
+      - id: "e"
+        label: "Fashion and beauty"
+      - id: "f"
+        label: "Food and cooking"
+      - id: "g"
+        label: "Travel"
+      - id: "h"
+        label: "Fitness and health"
+      - id: "i"
+        label: "Music and entertainment"
+      - id: "j"
+        label: "Technology and gaming"
+      - id: "k"
+        label: "Educational or how-to content"
+      - id: "l"
+        label: "Business and finance"
+  - id: q31
+    prompt: "Do you use social media for any work or professional purpose?"
+    type: single_choice
+    construct: use_social_media_any_work
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, it's a central part of my work"
+      - id: "b"
+        label: "Yes, occasionally for work"
+      - id: "c"
+        label: "No, purely personal use"
+      - id: "d"
+        label: "I run a business or brand account"
+  - id: q32
+    prompt: "How important is social media to your daily life?"
+    type: single_choice
+    construct: important_social_media_daily_life
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q33
+    prompt: "Compared with a year ago, how has your overall social media use changed?"
+    type: single_choice
+    construct: compared_year_ago_has_overall
+    required: true
+    options:
+      - id: "a"
+        label: "Decreased a lot"
+      - id: "b"
+        label: "Decreased somewhat"
+      - id: "c"
+        label: "Stayed about the same"
+      - id: "d"
+        label: "Increased somewhat"
+      - id: "e"
+        label: "Increased a lot"
+  - id: q34
+    prompt: "Over the next year, how do you expect your social media use to change?"
+    type: single_choice
+    construct: over_next_year_expect_social
+    required: true
+    options:
+      - id: "a"
+        label: "Decrease a lot"
+      - id: "b"
+        label: "Decrease somewhat"
+      - id: "c"
+        label: "Stay about the same"
+      - id: "d"
+        label: "Increase somewhat"
+      - id: "e"
+        label: "Increase a lot"
+  - id: q35
+    prompt: "Which emerging or newer platform are you most interested in using more? (Select all that apply)"
+    type: multi_choice
+    construct: emerging_newer_platform_most_interested
+    required: true
+    options:
+      - id: "a"
+        label: "Threads"
+      - id: "b"
+        label: "BeReal"
+      - id: "c"
+        label: "Bluesky"
+      - id: "d"
+        label: "Mastodon"
+      - id: "e"
+        label: "Substack"
+      - id: "f"
+        label: "Discord"
+      - id: "g"
+        label: "None of these"
+  - id: q36
+    prompt: "Overall, how satisfied are you with your social media experience?"
+    type: single_choice
+    construct: overall_satisfied_social_media_experienc
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "All things considered, do you think social media has been positive or negative for you personally?"
+    type: single_choice
+    construct: all_things_considered_think_social
+    required: true
+    options:
+      - id: "a"
+        label: "Very negative"
+      - id: "b"
+        label: "Somewhat negative"
+      - id: "c"
+        label: "Neither positive nor negative"
+      - id: "d"
+        label: "Somewhat positive"
+      - id: "e"
+        label: "Very positive"
+  - id: q38
+    prompt: "What is the main reason you keep using your favorite platform?"
+    type: free_text
+    construct: main_reason_keep_using_favorite
+    required: true
+  - id: q39
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+  - id: q44
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelance"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed, looking for work"
+      - id: "f"
+        label: "Not employed, not looking"
+      - id: "g"
+        label: "Retired"
+  - id: q45
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q46
+    prompt: "What is your relationship status?"
+    type: single_choice
+    construct: relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship"
+      - id: "c"
+        label: "Married or domestic partnership"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q48
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

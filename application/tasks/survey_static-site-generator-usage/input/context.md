@@ -1,0 +1,7 @@
+# Static Site Generator Usage
+
+How developers choose and use static site generators such as Hugo, Jekyll, Astro, Eleventy, Next.js, and Gatsby.
+
+## About this survey
+
+This survey profiles static site generator usage, starting with a screener on usage frequency, tenure, and the respondent's primary generator along with generators used and wanted. It records the kinds of sites built, reasons for the choice, how many sites have been built, where they are hosted, how content is authored, headless CMS usage, deployment method, build times, the features that matter, and styling approaches. Attitudes are captured through an agreement Likert battery on static-site benefits, build speed, framework preference, ecosystem churn, and portability, an importance matrix over generator-selection criteria, and frequency scales for launching sites, hitting build errors, and updating versions, plus a top-three ranking of decision factors. Later sections cover serverless functions, front-end background, discovery channels, satisfaction with build performance and documentation, overall satisfaction, recommendation likelihood, switching intent, and an optional open comment. Question types include single-choice, multi-select, several Likert scales, an importance matrix, a ranking item, an NPS-style 0–10 scale, and numeric free-text. The survey concludes with a demographic block covering role, professional experience, employment, company size, industry, age, gender, race and ethnicity, education, U.S. region, and urbanicity.

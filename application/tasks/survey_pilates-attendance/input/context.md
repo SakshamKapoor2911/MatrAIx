@@ -1,0 +1,7 @@
+# Pilates Practice
+
+How people practice Pilates and attend classes, including mat versus reformer, studios, and attitudes.
+
+## About this survey
+
+This survey profiles Pilates practitioners, starting with a screener on whether and how long they have practiced, how often, session length, and their main format. It records where they practice, motivation, formats used in the past year, studios and brands such as Club Pilates, [solidcore], and Pilates Anytime, apps, home equipment, payment model, how they started, and numeric items on session length, monthly spend, and monthly class count. Attitudes are captured through an agreement Likert battery on routine, core strength, posture, reformer value, and cost, an importance matrix over criteria for choosing a studio or class, and a barrier matrix rating cost, scheduling, location, and intimidation, plus a top-three ranking of reasons. Additional sections cover studio-versus-home frequency, paired activities, and satisfaction with practice, instruction, and value, followed by an overall satisfaction rating, a recommendation-likelihood scale, and intent to practice more, try reformer, or continue. Question types include single-choice, multi-select, several Likert scales, two matrix batteries, a ranking item, and numeric free-text. The survey concludes with a demographic block covering experience level, age, gender, race and ethnicity, income, education, employment, household size, marital status, U.S. region, and urbanicity.

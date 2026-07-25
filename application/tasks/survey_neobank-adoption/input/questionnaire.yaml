@@ -1,0 +1,660 @@
+schemaVersion: "1.0"
+id: neobank_adoption_v1
+title: "Neobank Adoption Survey"
+description: "Adoption and use of neobanks and digital-only banking apps such as Chime, SoFi, Cash App, Varo, and Current."
+questions:
+  - id: q0
+    prompt: "A neobank is a digital-only bank with no physical branches (for example, Chime, SoFi, Cash App, Varo, or Current). Have you heard of neobanks?"
+    type: single_choice
+    construct: neobank_digital_only_bank_no
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I understand what they are"
+      - id: "b"
+        label: "Yes, but I'm not sure exactly what they are"
+      - id: "c"
+        label: "No, I've never heard of them"
+  - id: q1
+    prompt: "Do you currently use a neobank or digital-only banking app?"
+    type: single_choice
+    construct: currently_use_neobank_digital_only
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, as my primary bank"
+      - id: "b"
+        label: "Yes, as a secondary account"
+      - id: "c"
+        label: "No, but I've used one before"
+      - id: "d"
+        label: "No, and I never have"
+  - id: q2
+    prompt: "Which neobanks or digital banking apps do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: neobanks_digital_banking_apps_currently
+    required: true
+    options:
+      - id: "a"
+        label: "Chime"
+      - id: "b"
+        label: "SoFi"
+      - id: "c"
+        label: "Cash App"
+      - id: "d"
+        label: "Varo"
+      - id: "e"
+        label: "Current"
+      - id: "f"
+        label: "Ally"
+      - id: "g"
+        label: "Another digital-only bank"
+      - id: "h"
+        label: "I don't use any"
+  - id: q3
+    prompt: "How long have you been using a neobank?"
+    type: single_choice
+    construct: long_have_been_using_neobank
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "More than 3 years"
+      - id: "e"
+        label: "I don't use one"
+  - id: q4
+    prompt: "What made you first try a neobank? (Select all that apply)"
+    type: multi_choice
+    construct: made_first_try_neobank_select
+    required: true
+    options:
+      - id: "a"
+        label: "No monthly fees"
+      - id: "b"
+        label: "Higher savings interest rates"
+      - id: "c"
+        label: "Early access to paycheck / direct deposit"
+      - id: "d"
+        label: "A sign-up bonus"
+      - id: "e"
+        label: "The mobile app experience"
+      - id: "f"
+        label: "A friend or family recommendation"
+      - id: "g"
+        label: "Frustration with my traditional bank"
+      - id: "h"
+        label: "I don't use a neobank"
+  - id: q5
+    prompt: "What do you primarily use your neobank for?"
+    type: single_choice
+    construct: primarily_use_neobank
+    required: true
+    options:
+      - id: "a"
+        label: "Everyday spending and checking"
+      - id: "b"
+        label: "Saving money"
+      - id: "c"
+        label: "Getting paid early via direct deposit"
+      - id: "d"
+        label: "Sending money to friends"
+      - id: "e"
+        label: "A backup or secondary account"
+      - id: "f"
+        label: "I don't use a neobank"
+  - id: q6
+    prompt: "Which features of your neobank do you value most? (Select all that apply)"
+    type: multi_choice
+    construct: features_neobank_value_most_select
+    required: true
+    options:
+      - id: "a"
+        label: "No or low fees"
+      - id: "b"
+        label: "Early direct deposit"
+      - id: "c"
+        label: "High-yield savings"
+      - id: "d"
+        label: "Automatic savings or round-ups"
+      - id: "e"
+        label: "Fee-free overdraft or overdraft protection"
+      - id: "f"
+        label: "Budgeting and spending insights"
+      - id: "g"
+        label: "Instant transaction notifications"
+      - id: "h"
+        label: "Fee-free ATM network"
+  - id: q7
+    prompt: "Roughly how much of your monthly spending goes through your neobank? Please enter a percentage."
+    type: free_text
+    construct: roughly_much_monthly_spending_goes
+    required: true
+  - id: q8
+    prompt: "Do you still keep an account at a traditional bank or credit union?"
+    type: single_choice
+    construct: still_keep_account_traditional_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, as my primary account"
+      - id: "b"
+        label: "Yes, as a secondary account"
+      - id: "c"
+        label: "No, I've moved entirely to a neobank"
+      - id: "d"
+        label: "I don't use a neobank"
+  - id: q9
+    prompt: "How much do you agree or disagree: My neobank saves me money compared with a traditional bank."
+    type: single_choice
+    construct: much_agree_disagree_my_neobank
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree or disagree: The mobile app experience is better than my traditional bank's."
+    type: single_choice
+    construct: much_agree_disagree_mobile_app
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree: I trust my neobank to keep my money safe."
+    type: single_choice
+    construct: much_agree_disagree_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: The lack of physical branches is a drawback for me."
+    type: single_choice
+    construct: much_agree_disagree_lack_physical
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I worry about customer service if something goes wrong."
+    type: single_choice
+    construct: much_agree_disagree_i_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How important is each factor in choosing a neobank: No monthly fees."
+    type: single_choice
+    construct: important_each_factor_choosing_neobank
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q15
+    prompt: "How important is each factor in choosing a neobank: A high savings interest rate."
+    type: single_choice
+    construct: important_each_factor_choosing_neobank
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "How important is each factor in choosing a neobank: Early access to direct deposit."
+    type: single_choice
+    construct: important_each_factor_choosing_neobank
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "How important is each factor in choosing a neobank: FDIC insurance on my deposits."
+    type: single_choice
+    construct: important_each_factor_choosing_neobank
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each factor in choosing a neobank: Quality of the mobile app."
+    type: single_choice
+    construct: important_each_factor_choosing_neobank
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "Select your top 3 reasons for using (or being interested in) a neobank. (Select all that apply — choose up to 3)"
+    type: single_choice
+    construct: select_top_3_reasons_using
+    required: true
+    options:
+      - id: "a"
+        label: "Lower fees"
+      - id: "b"
+        label: "Higher savings rates"
+      - id: "c"
+        label: "Getting paid early"
+      - id: "d"
+        label: "A better app experience"
+      - id: "e"
+        label: "Easy to open and use"
+      - id: "f"
+        label: "Sign-up bonuses or rewards"
+      - id: "g"
+        label: "Automatic savings features"
+      - id: "h"
+        label: "No overdraft fees"
+  - id: q20
+    prompt: "What concerns you most about neobanks? (Select all that apply)"
+    type: multi_choice
+    construct: concerns_most_neobanks_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "No physical branches to visit"
+      - id: "b"
+        label: "Customer service quality"
+      - id: "c"
+        label: "Whether my money is really safe"
+      - id: "d"
+        label: "Data privacy and security"
+      - id: "e"
+        label: "Limited product range (loans, mortgages)"
+      - id: "f"
+        label: "Reliability of the app or service"
+      - id: "g"
+        label: "Difficulty depositing cash"
+      - id: "h"
+        label: "I have no concerns"
+  - id: q21
+    prompt: "Are you aware that neobank deposits are typically FDIC-insured through a partner bank?"
+    type: single_choice
+    construct: aware_that_neobank_deposits_typically
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it reassures me"
+      - id: "b"
+        label: "Yes, but I'm still unsure about safety"
+      - id: "c"
+        label: "No, I wasn't aware"
+      - id: "d"
+        label: "Not applicable"
+  - id: q22
+    prompt: "Have you ever had a problem with a neobank (e.g., locked account, delayed funds, hard-to-reach support)?"
+    type: single_choice
+    construct: have_ever_had_problem_neobank
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it was resolved well"
+      - id: "b"
+        label: "Yes, and it was frustrating to resolve"
+      - id: "c"
+        label: "No problems"
+      - id: "d"
+        label: "I don't use a neobank"
+  - id: q23
+    prompt: "How do you typically deposit money into your neobank? (Select all that apply)"
+    type: multi_choice
+    construct: typically_deposit_money_into_neobank
+    required: true
+    options:
+      - id: "a"
+        label: "Direct deposit from my employer"
+      - id: "b"
+        label: "Transfer from another bank"
+      - id: "c"
+        label: "Mobile check deposit"
+      - id: "d"
+        label: "Cash deposit at a retailer or ATM"
+      - id: "e"
+        label: "Peer-to-peer transfer (e.g., Venmo, PayPal)"
+      - id: "f"
+        label: "I don't use a neobank"
+  - id: q24
+    prompt: "How would you compare your neobank's fees to your previous or current traditional bank?"
+    type: single_choice
+    construct: would_compare_neobank_s_fees
+    required: true
+    options:
+      - id: "a"
+        label: "Neobank fees are much lower"
+      - id: "b"
+        label: "Somewhat lower"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Higher"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q25
+    prompt: "About how much do you earn in interest or save in fees per year by using a neobank? Please enter a dollar amount."
+    type: free_text
+    construct: much_earn_interest_save_fees
+    required: true
+  - id: q26
+    prompt: "How likely are you to make (or keep) a neobank your primary bank in the next year?"
+    type: single_choice
+    construct: likely_make_keep_neobank_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q27
+    prompt: "Overall, how satisfied are you with your neobank experience?"
+    type: single_choice
+    construct: overall_satisfied_neobank_experience
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I don't use a neobank"
+  - id: q28
+    prompt: "On a scale of 0 to 10, how likely are you to recommend a neobank to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q29
+    prompt: "In a few words, what would make you use a neobank more (or at all)? (Optional)"
+    type: free_text
+    construct: few_words_would_make_use
+    required: false
+  - id: q30
+    prompt: "What is your age? Please enter a number (years old)."
+    type: free_text
+    construct: age_please_enter_number_years
+    required: true
+  - id: q31
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q35
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q36
+    prompt: "What is your annual household income before taxes?"
+    type: single_choice
+    construct: annual_household_income_before_taxes
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q40
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q41
+    prompt: "How would you describe your comfort with using financial technology (apps, digital wallets, online banking)?"
+    type: single_choice
+    construct: would_describe_comfort_using_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Somewhat uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat comfortable"
+      - id: "e"
+        label: "Very comfortable"

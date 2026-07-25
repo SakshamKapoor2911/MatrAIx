@@ -1,0 +1,7 @@
+# Managing an Ongoing Health Condition
+
+The everyday logistics, tools, and support people use to manage an ongoing health condition.
+
+## About this survey
+
+This survey screens for whether respondents manage a long-term condition for themselves or someone they care for, how long they have done so, and how manageable it feels, then inventories the day-to-day tasks involved and how people track appointments, medications, and measurements. It captures check-up frequency, the number of providers involved, confidence between visits, obstacles, and the apps and devices used along with their helpfulness. Attitudinal Likert batteries cover information adequacy, provider coordination, time burden, cost burden, and support, and a rated matrix battery scores how challenging medications, appointments, lifestyle recommendations, costs, and coordination are. Later sections cover sources of support, feeling overwhelmed, cost-driven delays, daily time spent, a top-3 ranking of helpful supports, satisfaction, forward-looking confidence, and an optional open comment. The content stays focused on organization and consumer experience rather than clinical detail. It uses single-choice, multi-select, Likert and challenge scales, a matrix battery, and numeric free-text, and closes with demographics covering age, gender, race and ethnicity, education, insurance status, employment, household size, region, urbanicity, and income.

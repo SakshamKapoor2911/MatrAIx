@@ -1,0 +1,948 @@
+schemaVersion: "1.0"
+id: testing_framework_usage_v1
+title: "Testing Framework Usage Survey"
+description: "How developers choose and use automated testing frameworks and manage test coverage across languages."
+questions:
+  - id: q0
+    prompt: "How often do you write automated tests?"
+    type: single_choice
+    construct: often_write_automated_tests
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "I am just learning to write tests"
+      - id: "e"
+        label: "I rarely write tests"
+  - id: q1
+    prompt: "How long have you been writing automated tests?"
+    type: single_choice
+    construct: long_have_been_writing_automated
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "What best describes your primary role?"
+    type: single_choice
+    construct: best_describes_primary_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "QA or test engineer"
+      - id: "e"
+        label: "DevOps or platform engineer"
+      - id: "f"
+        label: "I write tests occasionally"
+  - id: q3
+    prompt: "Which type of testing do you do most often?"
+    type: single_choice
+    construct: type_testing_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Unit testing"
+      - id: "b"
+        label: "Integration testing"
+      - id: "c"
+        label: "End-to-end testing"
+      - id: "d"
+        label: "Component testing"
+      - id: "e"
+        label: "Manual testing"
+  - id: q4
+    prompt: "Which JavaScript or TypeScript test frameworks have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: javascript_typescript_test_frameworks_ha
+    required: true
+    options:
+      - id: "a"
+        label: "Jest"
+      - id: "b"
+        label: "Vitest"
+      - id: "c"
+        label: "Mocha"
+      - id: "d"
+        label: "Jasmine"
+      - id: "e"
+        label: "AVA"
+      - id: "f"
+        label: "node:test"
+      - id: "g"
+        label: "None"
+  - id: q5
+    prompt: "Which end-to-end or browser testing tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: end_end_browser_testing_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Playwright"
+      - id: "b"
+        label: "Cypress"
+      - id: "c"
+        label: "Selenium"
+      - id: "d"
+        label: "Puppeteer"
+      - id: "e"
+        label: "WebdriverIO"
+      - id: "f"
+        label: "TestCafe"
+      - id: "g"
+        label: "None"
+  - id: q6
+    prompt: "Which Python testing frameworks have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: python_testing_frameworks_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "pytest"
+      - id: "b"
+        label: "unittest"
+      - id: "c"
+        label: "nose2"
+      - id: "d"
+        label: "Hypothesis"
+      - id: "e"
+        label: "None"
+  - id: q7
+    prompt: "Which other-language testing frameworks have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: other_language_testing_frameworks_have
+    required: true
+    options:
+      - id: "a"
+        label: "JUnit (Java)"
+      - id: "b"
+        label: "TestNG (Java)"
+      - id: "c"
+        label: "RSpec (Ruby)"
+      - id: "d"
+        label: "Go testing package"
+      - id: "e"
+        label: "xUnit / NUnit (.NET)"
+      - id: "f"
+        label: "PHPUnit"
+      - id: "g"
+        label: "None"
+  - id: q8
+    prompt: "Which testing framework do you use most often overall?"
+    type: single_choice
+    construct: testing_framework_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Jest"
+      - id: "b"
+        label: "Vitest"
+      - id: "c"
+        label: "pytest"
+      - id: "d"
+        label: "Playwright"
+      - id: "e"
+        label: "Cypress"
+      - id: "f"
+        label: "JUnit"
+      - id: "g"
+        label: "Other"
+  - id: q9
+    prompt: "Which kinds of tests do you write? (Select all that apply)"
+    type: multi_choice
+    construct: kinds_tests_write_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Unit tests"
+      - id: "b"
+        label: "Integration tests"
+      - id: "c"
+        label: "End-to-end tests"
+      - id: "d"
+        label: "Component tests"
+      - id: "e"
+        label: "Visual regression tests"
+      - id: "f"
+        label: "Load or performance tests"
+      - id: "g"
+        label: "Contract tests"
+  - id: q10
+    prompt: "Which mocking or assertion libraries do you use? (Select all that apply)"
+    type: multi_choice
+    construct: mocking_assertion_libraries_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Sinon"
+      - id: "b"
+        label: "Testing Library"
+      - id: "c"
+        label: "Mock Service Worker (MSW)"
+      - id: "d"
+        label: "Mockito"
+      - id: "e"
+        label: "Faker"
+      - id: "f"
+        label: "Chai"
+      - id: "g"
+        label: "None"
+  - id: q11
+    prompt: "Which code-coverage tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: code_coverage_tools_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Istanbul / nyc"
+      - id: "b"
+        label: "coverage.py"
+      - id: "c"
+        label: "Codecov"
+      - id: "d"
+        label: "Coveralls"
+      - id: "e"
+        label: "Built-in framework coverage"
+      - id: "f"
+        label: "None"
+  - id: q12
+    prompt: "Where do your tests primarily run?"
+    type: single_choice
+    construct: where_tests_primarily_run
+    required: true
+    options:
+      - id: "a"
+        label: "Only locally"
+      - id: "b"
+        label: "Only in CI"
+      - id: "c"
+        label: "Both locally and in CI"
+      - id: "d"
+        label: "I don't run automated tests"
+  - id: q13
+    prompt: "Do you have a code-coverage target?"
+    type: single_choice
+    construct: have_code_coverage_target
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and we enforce it"
+      - id: "b"
+        label: "Yes, but it's a soft goal"
+      - id: "c"
+        label: "We track coverage but have no target"
+      - id: "d"
+        label: "No coverage target"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q14
+    prompt: "How would you describe your use of test-driven development (TDD)?"
+    type: single_choice
+    construct: would_describe_use_test_driven
+    required: true
+    options:
+      - id: "a"
+        label: "I practice TDD consistently"
+      - id: "b"
+        label: "I practice TDD sometimes"
+      - id: "c"
+        label: "I write tests after the code"
+      - id: "d"
+        label: "I rarely write tests"
+      - id: "e"
+        label: "I'm not familiar with TDD"
+  - id: q15
+    prompt: "What code-coverage percentage do you aim for? Please enter a number from 0 to 100."
+    type: free_text
+    construct: code_coverage_percentage_aim_please
+    required: true
+  - id: q16
+    prompt: "About how many tests are in the largest test suite you maintain? Please enter a number."
+    type: free_text
+    construct: many_tests_largest_test_suite
+    required: true
+  - id: q17
+    prompt: "How did you learn to write automated tests? (Select all that apply)"
+    type: multi_choice
+    construct: did_learn_write_automated_tests
+    required: true
+    options:
+      - id: "a"
+        label: "On the job"
+      - id: "b"
+        label: "Online courses or documentation"
+      - id: "c"
+        label: "A course or bootcamp"
+      - id: "d"
+        label: "School or university"
+      - id: "e"
+        label: "A colleague or mentor"
+      - id: "f"
+        label: "Trial and error"
+  - id: q18
+    prompt: "How would you rate your proficiency with automated testing?"
+    type: single_choice
+    construct: would_rate_proficiency_automated_testing
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert"
+  - id: q19
+    prompt: "Thinking about your primary test framework, how much do you agree: it runs tests quickly."
+    type: single_choice
+    construct: thinking_primary_test_framework_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Thinking about your primary test framework, how much do you agree: tests are easy to write in it."
+    type: single_choice
+    construct: thinking_primary_test_framework_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "Thinking about your primary test framework, how much do you agree: it gives clear error messages."
+    type: single_choice
+    construct: thinking_primary_test_framework_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "Thinking about your primary test framework, how much do you agree: its watch or reload mode is helpful."
+    type: single_choice
+    construct: thinking_primary_test_framework_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "Thinking about your primary test framework, how much do you agree: it integrates well with CI."
+    type: single_choice
+    construct: thinking_primary_test_framework_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "Thinking about your primary test framework, how much do you agree: it has a strong plugin ecosystem."
+    type: single_choice
+    construct: thinking_primary_test_framework_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "Thinking about your primary test framework, how much do you agree: it is easy to configure."
+    type: single_choice
+    construct: thinking_primary_test_framework_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q26
+    prompt: "When choosing a test framework, how important is execution speed?"
+    type: single_choice
+    construct: when_choosing_test_framework_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a test framework, how important is ease of writing tests?"
+    type: single_choice
+    construct: when_choosing_test_framework_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing a test framework, how important is the plugin ecosystem?"
+    type: single_choice
+    construct: when_choosing_test_framework_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "When choosing a test framework, how important is CI integration?"
+    type: single_choice
+    construct: when_choosing_test_framework_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "When choosing a test framework, how important is coverage reporting?"
+    type: single_choice
+    construct: when_choosing_test_framework_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q31
+    prompt: "When choosing a test framework, how important is parallel test execution?"
+    type: single_choice
+    construct: when_choosing_test_framework_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q32
+    prompt: "When choosing a test framework, how important is community and documentation?"
+    type: single_choice
+    construct: when_choosing_test_framework_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q33
+    prompt: "How often do you practice test-driven development?"
+    type: single_choice
+    construct: often_practice_test_driven_development
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q34
+    prompt: "How much do you agree: high code coverage is worth the effort it takes."
+    type: single_choice
+    construct: much_agree_high_code_coverage
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q35
+    prompt: "How much do you agree: Vitest is a strong replacement for Jest."
+    type: single_choice
+    construct: much_agree_vitest_strong_replacement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q36
+    prompt: "How much do you agree: end-to-end tests are too flaky to rely on."
+    type: single_choice
+    construct: much_agree_end_end_tests
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q37
+    prompt: "Which are your top 3 factors when choosing a test framework? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Execution speed"
+      - id: "b"
+        label: "Ease of writing tests"
+      - id: "c"
+        label: "Plugin ecosystem"
+      - id: "d"
+        label: "CI integration"
+      - id: "e"
+        label: "Coverage reporting"
+      - id: "f"
+        label: "Parallelization"
+      - id: "g"
+        label: "Community and docs"
+      - id: "h"
+        label: "Team or company standard"
+  - id: q38
+    prompt: "Which testing challenges do you face most? (Select all that apply)"
+    type: multi_choice
+    construct: testing_challenges_face_most_select
+    required: true
+    options:
+      - id: "a"
+        label: "Flaky tests"
+      - id: "b"
+        label: "Slow test suites"
+      - id: "c"
+        label: "Hard-to-test code"
+      - id: "d"
+        label: "Test maintenance burden"
+      - id: "e"
+        label: "Mocking and test setup"
+      - id: "f"
+        label: "Low team buy-in"
+      - id: "g"
+        label: "No major challenges"
+  - id: q39
+    prompt: "How satisfied are you with your primary test framework?"
+    type: single_choice
+    construct: satisfied_primary_test_framework
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q40
+    prompt: "How satisfied are you with the speed of your test suite?"
+    type: single_choice
+    construct: satisfied_speed_test_suite
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q41
+    prompt: "How likely are you to recommend your primary test framework to another developer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_test_framework
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q42
+    prompt: "How likely are you to adopt a new test framework within the next year?"
+    type: single_choice
+    construct: likely_adopt_new_test_framework
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q43
+    prompt: "How likely are you to switch your primary test framework within the next year?"
+    type: single_choice
+    construct: likely_switch_primary_test_framework
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q44
+    prompt: "What is one thing you would improve about the testing tools you use? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_testing
+    required: false
+  - id: q45
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "QA or test engineer"
+      - id: "e"
+        label: "DevOps or platform engineer"
+      - id: "f"
+        label: "Engineering manager"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Other"
+  - id: q46
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q47
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q48
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q49
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q50
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q51
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q52
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q53
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q54
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q55
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

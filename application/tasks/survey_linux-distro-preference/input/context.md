@@ -1,0 +1,7 @@
+# Linux Distribution Preference
+
+Which Linux distributions people choose and how they feel about them, across Ubuntu, Debian, Arch, Fedora, Mint, and others.
+
+## About this survey
+
+This survey profiles Linux distribution preference, opening with a screener on usage frequency, tenure, and how Linux is used. It records the primary distribution alongside distributions used and wanted, desktop environments, package managers, primary uses, preferred release model, software-install methods, and init system. Attitudes are captured with an agreement Likert battery covering stability, customization enjoyment, community, rolling releases, Flatpak and Snap, gaming, and recommendability, plus a per-item importance matrix over distribution-selection criteria, a top-three ranking of decision factors, and a multi-select of reasons for not switching. Further sections examine hardware-compatibility issues, dual-booting, command-line comfort, distro-hopping, and update problems, followed by satisfaction, a recommendation scale, and intent to try or switch distributions. Question types include single-choice, multi-select, several Likert scales, an importance matrix, a ranking item, a 0–10 recommendation scale, and numeric free-text. The survey ends with a demographic block covering occupation, technology experience, employment, company size, industry, age, gender, race and ethnicity, education, U.S. region, and urbanicity.

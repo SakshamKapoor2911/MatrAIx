@@ -1,0 +1,875 @@
+schemaVersion: "1.0"
+id: protein_supplement_usage_v1
+title: "Protein Supplement Usage Survey"
+description: "How people use protein powders, shakes, and bars, including their brands, goals, and attitudes."
+questions:
+  - id: q0
+    prompt: "Do you currently use any protein supplements (powders, ready-to-drink shakes, or protein bars)?"
+    type: single_choice
+    construct: currently_use_any_protein_supplements
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I used to"
+      - id: "d"
+        label: "No, and I never have"
+  - id: q1
+    prompt: "How long have you been using protein supplements?"
+    type: single_choice
+    construct: long_have_been_using_protein
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+      - id: "f"
+        label: "I don't use them"
+  - id: q2
+    prompt: "How often do you consume a protein supplement?"
+    type: single_choice
+    construct: often_consume_protein_supplement
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "Once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "About once a week"
+      - id: "e"
+        label: "Less than once a week"
+  - id: q3
+    prompt: "Which form of protein supplement do you use most often?"
+    type: single_choice
+    construct: form_protein_supplement_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Protein powder mixed at home"
+      - id: "b"
+        label: "Ready-to-drink bottled shake"
+      - id: "c"
+        label: "Protein bar"
+      - id: "d"
+        label: "Protein-fortified snack (chips, cereal, etc.)"
+      - id: "e"
+        label: "Single-serve powder packets"
+  - id: q4
+    prompt: "Which types of protein do you use? (Select all that apply)"
+    type: multi_choice
+    construct: types_protein_use_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Whey protein (concentrate or isolate)"
+      - id: "b"
+        label: "Casein protein"
+      - id: "c"
+        label: "Plant-based (pea, soy, rice, hemp)"
+      - id: "d"
+        label: "Collagen peptides"
+      - id: "e"
+        label: "Egg white protein"
+      - id: "f"
+        label: "Beef or bone broth protein"
+      - id: "g"
+        label: "Blended (multiple sources)"
+      - id: "h"
+        label: "I'm not sure"
+  - id: q5
+    prompt: "Which protein supplement brands have you bought in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: protein_supplement_brands_have_bought
+    required: true
+    options:
+      - id: "a"
+        label: "Optimum Nutrition"
+      - id: "b"
+        label: "Premier Protein"
+      - id: "c"
+        label: "Fairlife Core Power"
+      - id: "d"
+        label: "Vega"
+      - id: "e"
+        label: "Orgain"
+      - id: "f"
+        label: "Garden of Life"
+      - id: "g"
+        label: "Ghost"
+      - id: "h"
+        label: "Quest"
+      - id: "i"
+        label: "Gatorade / Muscle Milk"
+      - id: "j"
+        label: "A store or generic brand"
+      - id: "k"
+        label: "Other"
+  - id: q6
+    prompt: "Where do you usually buy your protein supplements? (Select all that apply)"
+    type: multi_choice
+    construct: where_usually_buy_protein_supplements
+    required: true
+    options:
+      - id: "a"
+        label: "Amazon or another online retailer"
+      - id: "b"
+        label: "A warehouse club (Costco, Sam's Club)"
+      - id: "c"
+        label: "A grocery store"
+      - id: "d"
+        label: "A supplement specialty store (GNC, Vitamin Shoppe)"
+      - id: "e"
+        label: "Directly from the brand's website"
+      - id: "f"
+        label: "A gym or fitness studio"
+      - id: "g"
+        label: "A big-box retailer (Walmart, Target)"
+  - id: q7
+    prompt: "What are your main goals for using protein supplements? (Select all that apply)"
+    type: multi_choice
+    construct: main_goals_using_protein_supplements
+    required: true
+    options:
+      - id: "a"
+        label: "Building or maintaining muscle"
+      - id: "b"
+        label: "Recovering after workouts"
+      - id: "c"
+        label: "Losing weight or managing appetite"
+      - id: "d"
+        label: "Meeting daily protein targets"
+      - id: "e"
+        label: "Convenient meal replacement"
+      - id: "f"
+        label: "General health and wellness"
+      - id: "g"
+        label: "Supporting an active or athletic lifestyle"
+      - id: "h"
+        label: "Aging and maintaining strength"
+  - id: q8
+    prompt: "When do you most often consume protein supplements? (Select all that apply)"
+    type: multi_choice
+    construct: when_most_often_consume_protein
+    required: true
+    options:
+      - id: "a"
+        label: "First thing in the morning"
+      - id: "b"
+        label: "Before a workout"
+      - id: "c"
+        label: "After a workout"
+      - id: "d"
+        label: "As a meal replacement"
+      - id: "e"
+        label: "As a between-meal snack"
+      - id: "f"
+        label: "Before bed"
+      - id: "g"
+        label: "No consistent time"
+  - id: q9
+    prompt: "Which flavors do you typically choose? (Select all that apply)"
+    type: multi_choice
+    construct: flavors_typically_choose_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Chocolate"
+      - id: "b"
+        label: "Vanilla"
+      - id: "c"
+        label: "Strawberry or berry"
+      - id: "d"
+        label: "Cookies and cream"
+      - id: "e"
+        label: "Coffee or mocha"
+      - id: "f"
+        label: "Unflavored"
+      - id: "g"
+        label: "Seasonal or specialty flavors"
+  - id: q10
+    prompt: "About how much do you spend on protein supplements in a typical month, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_spend_protein_supplements_typical
+    required: true
+  - id: q11
+    prompt: "About how many grams of protein do you aim to get from supplements on a typical day? Please enter a number."
+    type: free_text
+    construct: many_grams_protein_aim_get
+    required: true
+  - id: q12
+    prompt: "How do you usually decide which protein product to buy?"
+    type: single_choice
+    construct: usually_decide_protein_product_buy
+    required: true
+    options:
+      - id: "a"
+        label: "Price per serving"
+      - id: "b"
+        label: "Protein content per serving"
+      - id: "c"
+        label: "Brand reputation"
+      - id: "d"
+        label: "Taste and mixability"
+      - id: "e"
+        label: "Ingredients and cleanliness of the label"
+      - id: "f"
+        label: "Recommendation from a friend, trainer, or influencer"
+  - id: q13
+    prompt: "Thinking about protein supplements, how much do you agree: They are an important part of my routine."
+    type: single_choice
+    construct: thinking_protein_supplements_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "Thinking about protein supplements, how much do you agree: They help me reach my health or fitness goals."
+    type: single_choice
+    construct: thinking_protein_supplements_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "Thinking about protein supplements, how much do you agree: They are a convenient way to get protein."
+    type: single_choice
+    construct: thinking_protein_supplements_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "Thinking about protein supplements, how much do you agree: They are worth the money I spend on them."
+    type: single_choice
+    construct: thinking_protein_supplements_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "Thinking about protein supplements, how much do you agree: I trust that the labels accurately reflect what's inside."
+    type: single_choice
+    construct: thinking_protein_supplements_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "Thinking about protein supplements, how much do you agree: I worry about artificial sweeteners in the products I use."
+    type: single_choice
+    construct: thinking_protein_supplements_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "When choosing a protein supplement, how important is protein content per serving?"
+    type: single_choice
+    construct: when_choosing_protein_supplement_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "When choosing a protein supplement, how important is taste?"
+    type: single_choice
+    construct: when_choosing_protein_supplement_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "When choosing a protein supplement, how important is price per serving?"
+    type: single_choice
+    construct: when_choosing_protein_supplement_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When choosing a protein supplement, how important is low sugar content?"
+    type: single_choice
+    construct: when_choosing_protein_supplement_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing a protein supplement, how important is third-party testing or certification?"
+    type: single_choice
+    construct: when_choosing_protein_supplement_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a protein supplement, how important is the brand being well known?"
+    type: single_choice
+    construct: when_choosing_protein_supplement_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "Which are your top 3 factors when buying a protein supplement? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_buying
+    required: true
+    options:
+      - id: "a"
+        label: "Protein content per serving"
+      - id: "b"
+        label: "Taste and mixability"
+      - id: "c"
+        label: "Price per serving"
+      - id: "d"
+        label: "Low sugar or calories"
+      - id: "e"
+        label: "Clean ingredient list"
+      - id: "f"
+        label: "Brand reputation"
+      - id: "g"
+        label: "Third-party testing"
+      - id: "h"
+        label: "Dietary fit (vegan, lactose-free, etc.)"
+  - id: q26
+    prompt: "How often do you experience digestive discomfort from protein supplements?"
+    type: single_choice
+    construct: often_experience_digestive_discomfort_fr
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q27
+    prompt: "How often do you research a protein product online before buying it?"
+    type: single_choice
+    construct: often_research_protein_product_online
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q28
+    prompt: "Do you have any dietary preferences or restrictions that affect your protein choices? (Select all that apply)"
+    type: multi_choice
+    construct: have_any_dietary_preferences_restriction
+    required: true
+    options:
+      - id: "a"
+        label: "Vegetarian"
+      - id: "b"
+        label: "Vegan"
+      - id: "c"
+        label: "Lactose-intolerant or dairy-free"
+      - id: "d"
+        label: "Gluten-free"
+      - id: "e"
+        label: "Keto or low-carb"
+      - id: "f"
+        label: "No added sugar"
+      - id: "g"
+        label: "No specific restrictions"
+  - id: q29
+    prompt: "Which other supplements do you take alongside protein? (Select all that apply)"
+    type: multi_choice
+    construct: other_supplements_take_alongside_protein
+    required: true
+    options:
+      - id: "a"
+        label: "Creatine"
+      - id: "b"
+        label: "Pre-workout"
+      - id: "c"
+        label: "BCAAs or amino acids"
+      - id: "d"
+        label: "Multivitamin"
+      - id: "e"
+        label: "Fish oil or omega-3"
+      - id: "f"
+        label: "Electrolyte or hydration mix"
+      - id: "g"
+        label: "None"
+  - id: q30
+    prompt: "How do you usually prepare your protein powder? (Select all that apply)"
+    type: multi_choice
+    construct: usually_prepare_protein_powder_select
+    required: true
+    options:
+      - id: "a"
+        label: "Shaken with water"
+      - id: "b"
+        label: "Shaken with milk or a milk alternative"
+      - id: "c"
+        label: "Blended in a smoothie"
+      - id: "d"
+        label: "Mixed into oatmeal, yogurt, or baking"
+      - id: "e"
+        label: "Blender bottle at the gym"
+      - id: "f"
+        label: "I don't use powder"
+  - id: q31
+    prompt: "How satisfied are you with the taste of the protein products you currently use?"
+    type: single_choice
+    construct: satisfied_taste_protein_products_current
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How satisfied are you with the value for money of your protein products?"
+    type: single_choice
+    construct: satisfied_value_money_protein_products
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How satisfied are you with how the products fit your dietary needs?"
+    type: single_choice
+    construct: satisfied_products_fit_dietary_needs
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "Overall, how satisfied are you with your current protein supplement routine?"
+    type: single_choice
+    construct: overall_satisfied_current_protein_supple
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "How likely are you to recommend your main protein brand to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_main_protein_brand
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q36
+    prompt: "How likely are you to try a new protein brand in the next year?"
+    type: single_choice
+    construct: likely_try_new_protein_brand
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q37
+    prompt: "How likely are you to switch from animal-based to plant-based protein in the next year?"
+    type: single_choice
+    construct: likely_switch_from_animal_based
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "How likely are you to keep using protein supplements a year from now?"
+    type: single_choice
+    construct: likely_keep_using_protein_supplements
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q39
+    prompt: "What is one thing you would improve about the protein products you use? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_protein
+    required: false
+  - id: q40
+    prompt: "How would you describe your overall physical activity level?"
+    type: single_choice
+    construct: would_describe_overall_physical_activity
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly sedentary"
+      - id: "b"
+        label: "Lightly active"
+      - id: "c"
+        label: "Moderately active"
+      - id: "d"
+        label: "Very active"
+      - id: "e"
+        label: "Athlete or competitive training"
+  - id: q41
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q42
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q46
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q47
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q48
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship or partnered"
+      - id: "c"
+        label: "Married"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q50
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q51
+    prompt: "Do you belong to a gym or fitness studio?"
+    type: single_choice
+    construct: belong_gym_fitness_studio
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I go regularly"
+      - id: "b"
+        label: "Yes, but I go rarely"
+      - id: "c"
+        label: "No, I exercise at home or outdoors"
+      - id: "d"
+        label: "No, I don't exercise regularly"

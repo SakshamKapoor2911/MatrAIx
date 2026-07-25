@@ -1,0 +1,865 @@
+schemaVersion: "1.0"
+id: open_source_usage_v1
+title: "Open-Source Software Usage Survey"
+description: "How people use, evaluate, and participate in open-source software, and their attitudes toward it."
+questions:
+  - id: q0
+    prompt: "How familiar are you with the concept of open-source software?"
+    type: single_choice
+    construct: familiar_concept_open_source_software
+    required: true
+    options:
+      - id: "a"
+        label: "Very familiar — I understand licenses and communities well"
+      - id: "b"
+        label: "Somewhat familiar — I know the general idea"
+      - id: "c"
+        label: "I've heard the term but don't really know what it means"
+      - id: "d"
+        label: "Not familiar at all"
+  - id: q1
+    prompt: "Do you currently use any open-source software?"
+    type: single_choice
+    construct: currently_use_any_open_source
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, extensively"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "I'm not sure whether I do"
+      - id: "d"
+        label: "No, not that I know of"
+  - id: q2
+    prompt: "Which of the following open-source applications do you personally use? (Select all that apply)"
+    type: multi_choice
+    construct: following_open_source_applications_perso
+    required: true
+    options:
+      - id: "a"
+        label: "Firefox web browser"
+      - id: "b"
+        label: "VLC media player"
+      - id: "c"
+        label: "LibreOffice or OpenOffice"
+      - id: "d"
+        label: "GIMP or Inkscape"
+      - id: "e"
+        label: "Linux (any distribution)"
+      - id: "f"
+        label: "Blender"
+      - id: "g"
+        label: "Audacity"
+      - id: "h"
+        label: "Signal messenger"
+      - id: "i"
+        label: "Thunderbird"
+      - id: "j"
+        label: "Krita or Darktable"
+      - id: "k"
+        label: "OBS Studio"
+      - id: "l"
+        label: "None of these"
+  - id: q3
+    prompt: "In which contexts do you use open-source software? (Select all that apply)"
+    type: multi_choice
+    construct: contexts_use_open_source_software
+    required: true
+    options:
+      - id: "a"
+        label: "Personal / home use"
+      - id: "b"
+        label: "Work or professional projects"
+      - id: "c"
+        label: "School or academic work"
+      - id: "d"
+        label: "Hobby or side projects"
+      - id: "e"
+        label: "Running a server or website"
+      - id: "f"
+        label: "Software development"
+      - id: "g"
+        label: "I don't knowingly use open-source software"
+  - id: q4
+    prompt: "How did you first start using open-source software? (Select all that apply)"
+    type: multi_choice
+    construct: did_first_start_using_open
+    required: true
+    options:
+      - id: "a"
+        label: "It came pre-installed on a device"
+      - id: "b"
+        label: "Recommended by a friend, family member, or colleague"
+      - id: "c"
+        label: "Recommended online (article, forum, video)"
+      - id: "d"
+        label: "I wanted a free alternative to paid software"
+      - id: "e"
+        label: "Required for a job, class, or project"
+      - id: "f"
+        label: "I sought out software I could inspect or modify"
+      - id: "g"
+        label: "I don't remember"
+  - id: q5
+    prompt: "What are the main reasons you choose open-source software? (Select all that apply)"
+    type: multi_choice
+    construct: main_reasons_choose_open_source
+    required: true
+    options:
+      - id: "a"
+        label: "It's free of cost"
+      - id: "b"
+        label: "Freedom to inspect and modify the code"
+      - id: "c"
+        label: "Privacy and lack of tracking"
+      - id: "d"
+        label: "Security through transparency"
+      - id: "e"
+        label: "No vendor lock-in"
+      - id: "f"
+        label: "Community support"
+      - id: "g"
+        label: "Ethical or philosophical reasons"
+      - id: "h"
+        label: "It's simply the best tool for the job"
+      - id: "i"
+        label: "I don't specifically choose open-source"
+  - id: q6
+    prompt: "What concerns you most about relying on open-source software? (Select all that apply)"
+    type: multi_choice
+    construct: concerns_most_relying_open_source
+    required: true
+    options:
+      - id: "a"
+        label: "Lack of official/paid support"
+      - id: "b"
+        label: "Steeper learning curve"
+      - id: "c"
+        label: "Uncertain long-term maintenance"
+      - id: "d"
+        label: "Fewer features than commercial alternatives"
+      - id: "e"
+        label: "Compatibility with other software or files"
+      - id: "f"
+        label: "Security vulnerabilities"
+      - id: "g"
+        label: "Confusing licensing terms"
+      - id: "h"
+        label: "I have no concerns"
+  - id: q7
+    prompt: "How often do you deliberately look for an open-source option before choosing software?"
+    type: single_choice
+    construct: often_deliberately_look_open_source
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q8
+    prompt: "Which desktop operating system do you primarily use?"
+    type: single_choice
+    construct: desktop_operating_system_primarily_use
+    required: true
+    options:
+      - id: "a"
+        label: "Windows"
+      - id: "b"
+        label: "macOS"
+      - id: "c"
+        label: "A Linux distribution"
+      - id: "d"
+        label: "ChromeOS"
+      - id: "e"
+        label: "I mainly use a phone or tablet"
+  - id: q9
+    prompt: "Which Linux distribution, if any, do you use most?"
+    type: single_choice
+    construct: linux_distribution_if_any_use
+    required: true
+    options:
+      - id: "a"
+        label: "Ubuntu"
+      - id: "b"
+        label: "Debian"
+      - id: "c"
+        label: "Fedora"
+      - id: "d"
+        label: "Linux Mint"
+      - id: "e"
+        label: "Arch or Manjaro"
+      - id: "f"
+        label: "Another distribution"
+      - id: "g"
+        label: "I don't use Linux"
+  - id: q10
+    prompt: "How would you describe your understanding of open-source licenses (MIT, GPL, Apache, etc.)?"
+    type: single_choice
+    construct: would_describe_understanding_open_source
+    required: true
+    options:
+      - id: "a"
+        label: "I understand the differences well"
+      - id: "b"
+        label: "I know a few of them"
+      - id: "c"
+        label: "I've heard the names but don't know the details"
+      - id: "d"
+        label: "I'm not aware of open-source licenses"
+  - id: q11
+    prompt: "Have you ever contributed to an open-source project in any way?"
+    type: single_choice
+    construct: have_ever_contributed_open_source
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I contribute regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Once or twice"
+      - id: "d"
+        label: "No, but I'd like to"
+      - id: "e"
+        label: "No, and I have no plans to"
+  - id: q12
+    prompt: "In what ways have you contributed to open-source projects? (Select all that apply)"
+    type: multi_choice
+    construct: ways_have_contributed_open_source
+    required: true
+    options:
+      - id: "a"
+        label: "Submitted code / pull requests"
+      - id: "b"
+        label: "Reported bugs or issues"
+      - id: "c"
+        label: "Wrote or improved documentation"
+      - id: "d"
+        label: "Helped others in forums or chat"
+      - id: "e"
+        label: "Translated or localized"
+      - id: "f"
+        label: "Tested pre-release versions"
+      - id: "g"
+        label: "Donated money"
+      - id: "h"
+        label: "Promoted or shared projects"
+      - id: "i"
+        label: "I have never contributed"
+  - id: q13
+    prompt: "Have you ever donated money to, or sponsored, an open-source project or maintainer?"
+    type: single_choice
+    construct: have_ever_donated_money_sponsored
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, on a recurring basis"
+      - id: "b"
+        label: "Yes, a one-time donation"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No, and I wouldn't"
+  - id: q14
+    prompt: "Approximately how many open-source applications do you use regularly?"
+    type: free_text
+    construct: approximately_many_open_source_applicati
+    required: true
+  - id: q15
+    prompt: "In the past year, roughly how much money did you donate or contribute to open-source projects (in US dollars)?"
+    type: free_text
+    construct: past_year_roughly_much_money
+    required: true
+  - id: q16
+    prompt: "How much do you agree with the following statement: Open-source software is generally as good as or better than commercial alternatives."
+    type: single_choice
+    construct: much_agree_following_statement_open
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: Open-source software is more secure because anyone can inspect the code."
+    type: single_choice
+    construct: much_agree_following_statement_open
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement: I am willing to accept fewer features in exchange for open-source freedom."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement: Companies that profit from open-source software should give back to it."
+    type: single_choice
+    construct: much_agree_following_statement_companies
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement: Lack of professional support makes me hesitant to rely on open-source tools."
+    type: single_choice
+    construct: much_agree_following_statement_lack
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How important is the following when you evaluate open-source software: an active and responsive community?"
+    type: single_choice
+    construct: important_following_when_evaluate_open
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is the following when you evaluate open-source software: frequent updates and active maintenance?"
+    type: single_choice
+    construct: important_following_when_evaluate_open
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is the following when you evaluate open-source software: quality of documentation?"
+    type: single_choice
+    construct: important_following_when_evaluate_open
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is the following when you evaluate open-source software: the specific license it uses?"
+    type: single_choice
+    construct: important_following_when_evaluate_open
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is the following when you evaluate open-source software: compatibility with commercial tools and file formats?"
+    type: single_choice
+    construct: important_following_when_evaluate_open
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "Where do you go for help when you have trouble with open-source software? (Select all that apply)"
+    type: multi_choice
+    construct: where_go_help_when_have
+    required: true
+    options:
+      - id: "a"
+        label: "Official documentation"
+      - id: "b"
+        label: "GitHub / GitLab issues"
+      - id: "c"
+        label: "Community forums"
+      - id: "d"
+        label: "Reddit or social media"
+      - id: "e"
+        label: "Stack Overflow"
+      - id: "f"
+        label: "Chat channels (Discord, Matrix, IRC, etc.)"
+      - id: "g"
+        label: "YouTube tutorials"
+      - id: "h"
+        label: "AI chatbots"
+      - id: "i"
+        label: "Friends or colleagues"
+      - id: "j"
+        label: "I rarely need help"
+  - id: q27
+    prompt: "Do you have an account on a code-hosting platform (e.g., GitHub, GitLab)?"
+    type: single_choice
+    construct: have_account_code_hosting_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I use it actively"
+      - id: "b"
+        label: "Yes, but I rarely use it"
+      - id: "c"
+        label: "No, but I know what they are"
+      - id: "d"
+        label: "No, and I'm not familiar with them"
+  - id: q28
+    prompt: "How do you feel about \"freemium\" or \"open-core\" models, where a free open-source core is paired with paid features?"
+    type: single_choice
+    construct: feel_freemium_open_core_models
+    required: true
+    options:
+      - id: "a"
+        label: "I support it — it's a fair way to fund development"
+      - id: "b"
+        label: "I'm neutral about it"
+      - id: "c"
+        label: "I dislike it but understand why it exists"
+      - id: "d"
+        label: "I strongly oppose it"
+      - id: "e"
+        label: "I don't have an opinion"
+  - id: q29
+    prompt: "Have you ever switched from a commercial product to an open-source alternative?"
+    type: single_choice
+    construct: have_ever_switched_from_commercial
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I stuck with the open-source option"
+      - id: "b"
+        label: "Yes, but I switched back"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No, never"
+  - id: q30
+    prompt: "Have you ever switched from an open-source product back to a commercial one?"
+    type: single_choice
+    construct: have_ever_switched_from_open
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not applicable"
+  - id: q31
+    prompt: "How comfortable are you installing and configuring open-source software yourself?"
+    type: single_choice
+    construct: comfortable_installing_configuring_open_
+    required: true
+    options:
+      - id: "a"
+        label: "Very comfortable"
+      - id: "b"
+        label: "Somewhat comfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat uncomfortable"
+      - id: "e"
+        label: "Very uncomfortable"
+  - id: q32
+    prompt: "In which categories do you prefer open-source over commercial tools? (Select all that apply)"
+    type: multi_choice
+    construct: categories_prefer_open_source_over
+    required: true
+    options:
+      - id: "a"
+        label: "Web browsers"
+      - id: "b"
+        label: "Operating systems"
+      - id: "c"
+        label: "Office / productivity"
+      - id: "d"
+        label: "Photo and image editing"
+      - id: "e"
+        label: "Audio / video editing"
+      - id: "f"
+        label: "Development tools"
+      - id: "g"
+        label: "Security and privacy tools"
+      - id: "h"
+        label: "Server and infrastructure software"
+      - id: "i"
+        label: "I don't prefer open-source in any category"
+  - id: q33
+    prompt: "Select your top 3 reasons open-source software matters to you. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_open
+    required: true
+    options:
+      - id: "a"
+        label: "Cost savings"
+      - id: "b"
+        label: "Privacy"
+      - id: "c"
+        label: "Freedom to modify"
+      - id: "d"
+        label: "Security transparency"
+      - id: "e"
+        label: "Community and collaboration"
+      - id: "f"
+        label: "Avoiding vendor lock-in"
+      - id: "g"
+        label: "Ethical / philosophical values"
+      - id: "h"
+        label: "Learning opportunities"
+      - id: "i"
+        label: "Open-source doesn't particularly matter to me"
+  - id: q34
+    prompt: "Overall, how satisfied are you with the open-source software you use?"
+    type: single_choice
+    construct: overall_satisfied_open_source_software
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "How likely are you to increase your use of open-source software over the next year?"
+    type: single_choice
+    construct: likely_increase_use_open_source
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q36
+    prompt: "On a scale of 0 to 10, how likely are you to recommend open-source software to a friend or colleague? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q37
+    prompt: "What would most encourage you to use (or contribute to) open-source software more?"
+    type: free_text
+    construct: would_most_encourage_use_contribute
+    required: true
+  - id: q38
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18 years old"
+      - id: "b"
+        label: "18-24 years old"
+      - id: "c"
+        label: "25-34 years old"
+      - id: "d"
+        label: "35-44 years old"
+      - id: "e"
+        label: "45-54 years old"
+      - id: "f"
+        label: "55-64 years old"
+      - id: "g"
+        label: "65 years or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Unemployed, looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Homemaker or caregiver"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q45
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship, not married"
+      - id: "c"
+        label: "Married or domestic partnership"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "Which best describes your role in technology?"
+    type: single_choice
+    construct: best_describes_role_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Software developer or engineer"
+      - id: "b"
+        label: "Other IT or technical professional"
+      - id: "c"
+        label: "Student in a technical field"
+      - id: "d"
+        label: "Technology hobbyist / enthusiast"
+      - id: "e"
+        label: "General user, not technical"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "How would you rate your overall level of technology skill?"
+    type: single_choice
+    construct: would_rate_overall_level_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert / I work in technology"

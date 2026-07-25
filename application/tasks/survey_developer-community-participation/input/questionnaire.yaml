@@ -1,0 +1,756 @@
+schemaVersion: "1.0"
+id: developer_community_participation_v1
+title: "Developer Community Participation Survey"
+description: "How developers engage with online and in-person technical communities, from lurking and asking questions to answering, contributing, and organizing."
+questions:
+  - id: q0
+    prompt: "Do you take part in any developer or technical communities (online or in person)?"
+    type: single_choice
+    construct: take_part_any_developer_technical
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, actively"
+      - id: "b"
+        label: "Yes, but mostly I just read / lurk"
+      - id: "c"
+        label: "No, not at all"
+  - id: q1
+    prompt: "How many years have you been writing code, including any time spent learning?"
+    type: single_choice
+    construct: many_years_have_been_writing
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1–2 years"
+      - id: "c"
+        label: "3–5 years"
+      - id: "d"
+        label: "6–10 years"
+      - id: "e"
+        label: "11–20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q2
+    prompt: "Which developer communities or platforms do you use? (Select all that apply)"
+    type: multi_choice
+    construct: developer_communities_platforms_use_sele
+    required: true
+    options:
+      - id: "a"
+        label: "Stack Overflow / Stack Exchange"
+      - id: "b"
+        label: "GitHub (issues, discussions, PRs)"
+      - id: "c"
+        label: "Reddit (r/programming, language subreddits, etc.)"
+      - id: "d"
+        label: "Discord servers"
+      - id: "e"
+        label: "Slack communities"
+      - id: "f"
+        label: "Dev.to / Hashnode / Medium"
+      - id: "g"
+        label: "Hacker News"
+      - id: "h"
+        label: "Twitter / X tech community"
+      - id: "i"
+        label: "Mastodon or Bluesky"
+      - id: "j"
+        label: "Local meetups or user groups"
+      - id: "k"
+        label: "Conferences"
+      - id: "l"
+        label: "Official project forums or mailing lists"
+  - id: q3
+    prompt: "Which platform do you consider your primary developer community?"
+    type: single_choice
+    construct: platform_consider_primary_developer_comm
+    required: true
+    options:
+      - id: "a"
+        label: "Stack Overflow"
+      - id: "b"
+        label: "GitHub"
+      - id: "c"
+        label: "Reddit"
+      - id: "d"
+        label: "Discord"
+      - id: "e"
+        label: "Hacker News"
+      - id: "f"
+        label: "Dev.to or a blogging platform"
+      - id: "g"
+        label: "A language- or framework-specific forum"
+      - id: "h"
+        label: "Local / in-person groups"
+      - id: "i"
+        label: "I do not have a primary one"
+  - id: q4
+    prompt: "How often do you visit or read your primary developer community?"
+    type: single_choice
+    construct: often_visit_read_primary_developer
+    required: true
+    options:
+      - id: "a"
+        label: "Less than once a month"
+      - id: "b"
+        label: "A few times a month"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Daily or almost daily"
+      - id: "e"
+        label: "Multiple times a day"
+  - id: q5
+    prompt: "Which activities do you regularly do in developer communities? (Select all that apply)"
+    type: multi_choice
+    construct: activities_regularly_developer_communiti
+    required: true
+    options:
+      - id: "a"
+        label: "Read questions, answers, or posts"
+      - id: "b"
+        label: "Ask questions"
+      - id: "c"
+        label: "Answer questions"
+      - id: "d"
+        label: "Vote or react"
+      - id: "e"
+        label: "Comment on posts or threads"
+      - id: "f"
+        label: "Write blog posts or tutorials"
+      - id: "g"
+        label: "Report bugs or open issues"
+      - id: "h"
+        label: "Submit pull requests"
+      - id: "i"
+        label: "Moderate or maintain a community"
+      - id: "j"
+        label: "Organize or speak at events"
+      - id: "k"
+        label: "Mentor or help newcomers"
+  - id: q6
+    prompt: "How often do you post your own content (questions, answers, posts, PRs), rather than just reading?"
+    type: single_choice
+    construct: often_post_own_content_questions
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very frequently"
+  - id: q7
+    prompt: "Do you contribute to open-source projects?"
+    type: single_choice
+    construct: contribute_open_source_projects
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I maintain one or more projects"
+      - id: "b"
+        label: "Yes, I contribute regularly"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "Once or twice"
+      - id: "e"
+        label: "Never"
+  - id: q8
+    prompt: "What motivates you to participate in developer communities? (Select all that apply)"
+    type: multi_choice
+    construct: motivates_participate_developer_communit
+    required: true
+    options:
+      - id: "a"
+        label: "Getting help with my own problems"
+      - id: "b"
+        label: "Helping others"
+      - id: "c"
+        label: "Learning new things"
+      - id: "d"
+        label: "Building reputation or a portfolio"
+      - id: "e"
+        label: "Networking and career opportunities"
+      - id: "f"
+        label: "Staying current with trends"
+      - id: "g"
+        label: "Giving back to projects I use"
+      - id: "h"
+        label: "Enjoyment / sense of belonging"
+      - id: "i"
+        label: "Promoting my own project or product"
+  - id: q9
+    prompt: "Select your top 3 reasons for participating in developer communities. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_participating
+    required: true
+    options:
+      - id: "a"
+        label: "Getting help"
+      - id: "b"
+        label: "Helping others"
+      - id: "c"
+        label: "Learning"
+      - id: "d"
+        label: "Reputation / portfolio"
+      - id: "e"
+        label: "Networking and career"
+      - id: "f"
+        label: "Staying current"
+      - id: "g"
+        label: "Giving back"
+      - id: "h"
+        label: "Sense of belonging"
+  - id: q10
+    prompt: "How much do you agree: I feel like a genuine member of at least one developer community."
+    type: single_choice
+    construct: much_agree_i_feel_like
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree: The communities I use are welcoming to newcomers."
+    type: single_choice
+    construct: much_agree_communities_i_use
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree: I have hesitated to ask a question for fear of a negative reaction."
+    type: single_choice
+    construct: much_agree_i_have_hesitated
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree: Participating in communities has helped my career."
+    type: single_choice
+    construct: much_agree_participating_communities_has
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: AI assistants have reduced how often I need to ask communities for help."
+    type: single_choice
+    construct: much_agree_ai_assistants_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How often do you experience the following in developer communities: Getting a helpful, high-quality answer."
+    type: single_choice
+    construct: often_experience_following_developer_com
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q16
+    prompt: "How often do you experience the following in developer communities: Rude, dismissive, or gatekeeping responses."
+    type: single_choice
+    construct: often_experience_following_developer_com
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q17
+    prompt: "How often do you experience the following in developer communities: Your question closed, downvoted, or marked duplicate."
+    type: single_choice
+    construct: often_experience_following_developer_com
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q18
+    prompt: "How often do you experience the following in developer communities: Meeting people who became useful contacts."
+    type: single_choice
+    construct: often_experience_following_developer_com
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q19
+    prompt: "How has your community participation changed over the past two years?"
+    type: single_choice
+    construct: has_community_participation_changed_over
+    required: true
+    options:
+      - id: "a"
+        label: "Increased a lot"
+      - id: "b"
+        label: "Increased somewhat"
+      - id: "c"
+        label: "Stayed about the same"
+      - id: "d"
+        label: "Decreased somewhat"
+      - id: "e"
+        label: "Decreased a lot"
+  - id: q20
+    prompt: "If your participation has decreased, what are the reasons? (Select all that apply)"
+    type: multi_choice
+    construct: if_participation_has_decreased_reasons
+    required: true
+    options:
+      - id: "a"
+        label: "AI assistants answer my questions now"
+      - id: "b"
+        label: "Less free time"
+      - id: "c"
+        label: "Negative or toxic interactions"
+      - id: "d"
+        label: "Communities feel less active than before"
+      - id: "e"
+        label: "I switched platforms"
+      - id: "f"
+        label: "I feel I have less to contribute"
+      - id: "g"
+        label: "Not applicable — it has not decreased"
+  - id: q21
+    prompt: "When you need a technical answer today, where do you go first?"
+    type: single_choice
+    construct: when_need_technical_answer_today
+    required: true
+    options:
+      - id: "a"
+        label: "An AI assistant"
+      - id: "b"
+        label: "A general search engine"
+      - id: "c"
+        label: "Stack Overflow"
+      - id: "d"
+        label: "Official docs"
+      - id: "e"
+        label: "A community chat (Discord, Slack, forum)"
+      - id: "f"
+        label: "Ask a colleague"
+  - id: q22
+    prompt: "Do you maintain any public developer profile or reputation (Stack Overflow rep, GitHub stars, blog following)?"
+    type: single_choice
+    construct: maintain_any_public_developer_profile
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I actively grow it"
+      - id: "b"
+        label: "Yes, but I do not focus on it"
+      - id: "c"
+        label: "I have profiles but little activity"
+      - id: "d"
+        label: "No public profile"
+  - id: q23
+    prompt: "Which best describes your GitHub activity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_github_activity_select
+    required: true
+    options:
+      - id: "a"
+        label: "I star and follow projects"
+      - id: "b"
+        label: "I open issues"
+      - id: "c"
+        label: "I comment on issues / discussions"
+      - id: "d"
+        label: "I submit pull requests"
+      - id: "e"
+        label: "I review others' pull requests"
+      - id: "f"
+        label: "I maintain my own public repositories"
+      - id: "g"
+        label: "I do not use GitHub"
+  - id: q24
+    prompt: "How important is it to you that a project has an active, healthy community when you decide to adopt it?"
+    type: single_choice
+    construct: important_it_that_project_has
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "Have you attended a tech conference or meetup in the past year?"
+    type: single_choice
+    construct: have_attended_tech_conference_meetup
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, in person"
+      - id: "b"
+        label: "Yes, virtually"
+      - id: "c"
+        label: "Both in person and virtually"
+      - id: "d"
+        label: "No"
+  - id: q26
+    prompt: "Roughly how many hours per week do you spend participating in developer communities? Enter a number."
+    type: free_text
+    construct: roughly_many_hours_per_week
+    required: true
+  - id: q27
+    prompt: "About how many years have you been part of your primary developer community? Enter a number."
+    type: free_text
+    construct: many_years_have_been_part
+    required: true
+  - id: q28
+    prompt: "Overall, how satisfied are you with the developer communities you take part in?"
+    type: single_choice
+    construct: overall_satisfied_developer_communities_
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "How likely are you to recommend your primary community to a fellow developer? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_community_fello
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q30
+    prompt: "Over the next year, how do you expect your community participation to change?"
+    type: single_choice
+    construct: over_next_year_expect_community
+    required: true
+    options:
+      - id: "a"
+        label: "Decrease a lot"
+      - id: "b"
+        label: "Decrease somewhat"
+      - id: "c"
+        label: "Stay about the same"
+      - id: "d"
+        label: "Increase somewhat"
+      - id: "e"
+        label: "Increase a lot"
+  - id: q31
+    prompt: "What would most improve your experience in developer communities? Please describe."
+    type: free_text
+    construct: would_most_improve_experience_developer
+    required: true
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+      - id: "g"
+        label: "Coding bootcamp or vocational certificate"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Which best describes your current employment status?"
+    type: single_choice
+    construct: best_describes_current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Which best describes your primary role?"
+    type: single_choice
+    construct: best_describes_primary_role
+    required: true
+    options:
+      - id: "a"
+        label: "Professional software developer / engineer"
+      - id: "b"
+        label: "Data scientist / ML engineer"
+      - id: "c"
+        label: "DevOps / SRE / platform engineer"
+      - id: "d"
+        label: "Engineering manager or lead"
+      - id: "e"
+        label: "Student learning to code"
+      - id: "f"
+        label: "Hobbyist / self-taught coder"
+      - id: "g"
+        label: "Open-source maintainer"
+      - id: "h"
+        label: "Other technical role"
+  - id: q38
+    prompt: "What is your approximate annual household income (USD)?"
+    type: single_choice
+    construct: approximate_annual_household_income_usd
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000–$199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "How many people live in your household, including yourself?"
+    type: single_choice
+    construct: many_people_live_household_including
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q40
+    prompt: "What is your relationship status?"
+    type: single_choice
+    construct: relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "In a domestic partnership or living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

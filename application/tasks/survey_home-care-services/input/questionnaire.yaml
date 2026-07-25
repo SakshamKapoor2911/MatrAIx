@@ -1,0 +1,767 @@
+schemaVersion: "1.0"
+id: home_care_services_v1
+title: "Home Care Services Survey"
+description: "Consumer experiences with and attitudes toward in-home care and helper services."
+questions:
+  - id: q0
+    prompt: "Does your household currently use, or has it recently used, any in-home care or helper services?"
+    type: single_choice
+    construct: does_household_currently_use_has
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, currently using"
+      - id: "b"
+        label: "Used in the past, not currently"
+      - id: "c"
+        label: "Looking into it now"
+      - id: "d"
+        label: "No, but I expect to need it"
+      - id: "e"
+        label: "No, and I don't expect to need it"
+  - id: q1
+    prompt: "Who is (or would be) the main person the home care is for?"
+    type: single_choice
+    construct: who_would_be_main_person
+    required: true
+    options:
+      - id: "a"
+        label: "Myself"
+      - id: "b"
+        label: "A parent or older relative"
+      - id: "c"
+        label: "A spouse or partner"
+      - id: "d"
+        label: "Another family member"
+      - id: "e"
+        label: "No one specific yet"
+  - id: q2
+    prompt: "Which types of in-home services have you used or considered? (Select all that apply)"
+    type: multi_choice
+    construct: types_home_services_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Personal care (bathing, dressing, grooming help)"
+      - id: "b"
+        label: "Homemaking (cleaning, laundry, cooking)"
+      - id: "c"
+        label: "Companion or check-in visits"
+      - id: "d"
+        label: "Transportation and errands"
+      - id: "e"
+        label: "Skilled nursing or therapy at home"
+      - id: "f"
+        label: "Overnight or live-in help"
+      - id: "g"
+        label: "None of these"
+  - id: q3
+    prompt: "How did you find or arrange the home care service? (Select all that apply)"
+    type: multi_choice
+    construct: did_find_arrange_home_care
+    required: true
+    options:
+      - id: "a"
+        label: "Home care agency"
+      - id: "b"
+        label: "Referral from a doctor or hospital"
+      - id: "c"
+        label: "Hired an independent caregiver directly"
+      - id: "d"
+        label: "Recommendation from family or friends"
+      - id: "e"
+        label: "Online directory or platform"
+      - id: "f"
+        label: "Through insurance or a benefit program"
+      - id: "g"
+        label: "Not applicable"
+  - id: q4
+    prompt: "How many hours of home care are used in a typical week? Please enter a number of hours (enter 0 if none)."
+    type: free_text
+    construct: many_hours_home_care_used
+    required: true
+  - id: q5
+    prompt: "How is the home care mostly paid for?"
+    type: single_choice
+    construct: home_care_mostly_paid
+    required: true
+    options:
+      - id: "a"
+        label: "Out of pocket"
+      - id: "b"
+        label: "Long-term care insurance"
+      - id: "c"
+        label: "Medicare or Medicaid"
+      - id: "d"
+        label: "Veterans benefits"
+      - id: "e"
+        label: "A mix of sources"
+      - id: "f"
+        label: "Not applicable"
+  - id: q6
+    prompt: "About how much does your household spend on home care in a typical month? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_does_household_spend_home
+    required: true
+  - id: q7
+    prompt: "How long have you been using home care services?"
+    type: single_choice
+    construct: long_have_been_using_home
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 3 months"
+      - id: "b"
+        label: "3 to 12 months"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "More than 3 years"
+      - id: "e"
+        label: "Not applicable"
+  - id: q8
+    prompt: "How often do the same caregivers come, versus different people each time?"
+    type: single_choice
+    construct: often_same_caregivers_come_versus
+    required: true
+    options:
+      - id: "a"
+        label: "Almost always the same caregiver"
+      - id: "b"
+        label: "Usually the same few caregivers"
+      - id: "c"
+        label: "A mix of familiar and new caregivers"
+      - id: "d"
+        label: "Often different people"
+      - id: "e"
+        label: "Not applicable"
+  - id: q9
+    prompt: "Which tasks are most valuable in the home care received? (Select all that apply)"
+    type: multi_choice
+    construct: tasks_most_valuable_home_care
+    required: true
+    options:
+      - id: "a"
+        label: "Help with bathing and dressing"
+      - id: "b"
+        label: "Meal preparation"
+      - id: "c"
+        label: "Housekeeping and laundry"
+      - id: "d"
+        label: "Medication reminders"
+      - id: "e"
+        label: "Companionship and conversation"
+      - id: "f"
+        label: "Transportation to appointments"
+      - id: "g"
+        label: "Mobility and moving safely around the home"
+      - id: "h"
+        label: "Not applicable"
+  - id: q10
+    prompt: "How is the home care service usually scheduled or coordinated?"
+    type: single_choice
+    construct: home_care_service_usually_scheduled
+    required: true
+    options:
+      - id: "a"
+        label: "Set weekly schedule through an agency"
+      - id: "b"
+        label: "Arranged flexibly as needed"
+      - id: "c"
+        label: "Through an app or online portal"
+      - id: "d"
+        label: "By phone with a coordinator"
+      - id: "e"
+        label: "Directly with the caregiver"
+      - id: "f"
+        label: "Not applicable"
+  - id: q11
+    prompt: "How reliable is the home care service in showing up as scheduled?"
+    type: single_choice
+    construct: reliable_home_care_service_showing
+    required: true
+    options:
+      - id: "a"
+        label: "Very unreliable"
+      - id: "b"
+        label: "Unreliable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Reliable"
+      - id: "e"
+        label: "Very reliable"
+  - id: q12
+    prompt: "How much do you agree with the following statement: The caregivers are well trained for the tasks."
+    type: single_choice
+    construct: much_agree_following_statement_caregiver
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: I trust the caregivers in my home."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: The cost of home care is a strain on the budget."
+    type: single_choice
+    construct: much_agree_following_statement_cost
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: The service communicates well about scheduling and changes."
+    type: single_choice
+    construct: much_agree_following_statement_service
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: Home care makes it possible to stay at home rather than move."
+    type: single_choice
+    construct: much_agree_following_statement_home
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: It was hard to find a home care service I felt good about."
+    type: single_choice
+    construct: much_agree_following_statement_it
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How important is the following when choosing a home care service: Caregiver reliability."
+    type: single_choice
+    construct: important_following_when_choosing_home
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is the following when choosing a home care service: Consistency of the same caregiver."
+    type: single_choice
+    construct: important_following_when_choosing_home
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is the following when choosing a home care service: Caregiver training and background checks."
+    type: single_choice
+    construct: important_following_when_choosing_home
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is the following when choosing a home care service: Cost and payment options."
+    type: single_choice
+    construct: important_following_when_choosing_home
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is the following when choosing a home care service: Scheduling flexibility."
+    type: single_choice
+    construct: important_following_when_choosing_home
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is the following when choosing a home care service: Good communication and coordination."
+    type: single_choice
+    construct: important_following_when_choosing_home
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "Which factors matter most when choosing a home care service? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: factors_matter_most_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Reliability and showing up"
+      - id: "b"
+        label: "Same caregiver each time"
+      - id: "c"
+        label: "Trained and vetted caregivers"
+      - id: "d"
+        label: "Affordable cost"
+      - id: "e"
+        label: "Flexible scheduling"
+      - id: "f"
+        label: "Kindness and personality of caregivers"
+      - id: "g"
+        label: "Clear communication"
+      - id: "h"
+        label: "Range of tasks covered"
+  - id: q25
+    prompt: "What has been the biggest challenge with home care? (Select all that apply)"
+    type: multi_choice
+    construct: has_been_biggest_challenge_home
+    required: true
+    options:
+      - id: "a"
+        label: "Cost"
+      - id: "b"
+        label: "Finding reliable caregivers"
+      - id: "c"
+        label: "Caregiver turnover"
+      - id: "d"
+        label: "Scheduling around needs"
+      - id: "e"
+        label: "Communication issues"
+      - id: "f"
+        label: "Quality of care"
+      - id: "g"
+        label: "No major challenges"
+  - id: q26
+    prompt: "How involved are you (or family) in overseeing the care day to day?"
+    type: single_choice
+    construct: involved_family_overseeing_care_day
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all involved"
+      - id: "b"
+        label: "Slightly involved"
+      - id: "c"
+        label: "Moderately involved"
+      - id: "d"
+        label: "Very involved"
+      - id: "e"
+        label: "Managing almost everything"
+  - id: q27
+    prompt: "How has using home care affected the family's overall stress?"
+    type: single_choice
+    construct: has_using_home_care_affected
+    required: true
+    options:
+      - id: "a"
+        label: "Made it much worse"
+      - id: "b"
+        label: "Made it somewhat worse"
+      - id: "c"
+        label: "No change"
+      - id: "d"
+        label: "Made it somewhat better"
+      - id: "e"
+        label: "Made it much better"
+  - id: q28
+    prompt: "How often do scheduling or staffing problems come up?"
+    type: single_choice
+    construct: often_scheduling_staffing_problems_come
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q29
+    prompt: "How confident are you in evaluating whether a home care service is good quality?"
+    type: single_choice
+    construct: confident_evaluating_whether_home_care
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+  - id: q30
+    prompt: "How well does the home care service currently meet the household's needs?"
+    type: single_choice
+    construct: well_does_home_care_service
+    required: true
+    options:
+      - id: "a"
+        label: "Very poorly"
+      - id: "b"
+        label: "Poorly"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q31
+    prompt: "Overall, how satisfied are you with the home care service?"
+    type: single_choice
+    construct: overall_satisfied_home_care_service
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How likely are you to continue using or expand home care in the next year?"
+    type: single_choice
+    construct: likely_continue_using_expand_home
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q33
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your home care service to others? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q34
+    prompt: "What would most improve your home care experience? Please describe briefly."
+    type: free_text
+    construct: would_most_improve_home_care
+    required: true
+  - id: q35
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Which of the following best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Other"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college"
+      - id: "c"
+        label: "Associate's degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q40
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q41
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q42
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "Which region of the country do you live in?"
+    type: single_choice
+    construct: region_country_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q44
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q45
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Live with family"
+      - id: "d"
+        label: "Other"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "What is your current health insurance status?"
+    type: single_choice
+    construct: current_health_insurance_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored insurance"
+      - id: "b"
+        label: "Plan purchased on my own or through the marketplace"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or VA coverage"
+      - id: "f"
+        label: "Uninsured"
+      - id: "g"
+        label: "Prefer not to say"

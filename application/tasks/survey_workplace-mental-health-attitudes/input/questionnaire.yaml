@@ -1,0 +1,904 @@
+schemaVersion: "1.0"
+id: workplace_mental_health_attitudes_v1
+title: "Workplace Mental Health Attitudes Survey"
+description: "Attitudes toward mental-health support and stigma at work, including the resources employers offer and how comfortable people feel using them."
+questions:
+  - id: q0
+    prompt: "Are you currently employed?"
+    type: single_choice
+    construct: currently_employed
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, full-time"
+      - id: "b"
+        label: "Yes, part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+  - id: q1
+    prompt: "How would you describe your current work arrangement?"
+    type: single_choice
+    construct: would_describe_current_work_arrangement
+    required: true
+    options:
+      - id: "a"
+        label: "Fully in person"
+      - id: "b"
+        label: "Mostly in person"
+      - id: "c"
+        label: "Hybrid"
+      - id: "d"
+        label: "Mostly remote"
+      - id: "e"
+        label: "Fully remote"
+  - id: q2
+    prompt: "Does your employer offer any mental-health support or benefits?"
+    type: single_choice
+    construct: does_employer_offer_any_mental
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I know the details"
+      - id: "b"
+        label: "Yes, but I am not sure of the details"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I am not sure"
+      - id: "e"
+        label: "Not applicable"
+  - id: q3
+    prompt: "Which mental-health resources does your workplace offer? (Select all that apply)"
+    type: multi_choice
+    construct: mental_health_resources_does_workplace
+    required: true
+    options:
+      - id: "a"
+        label: "Employee assistance program (EAP)"
+      - id: "b"
+        label: "Mental-health app subscription (Calm, Headspace, etc.)"
+      - id: "c"
+        label: "Therapy or counseling coverage through insurance"
+      - id: "d"
+        label: "Mental-health days or flexible time off"
+      - id: "e"
+        label: "Manager or peer support programs"
+      - id: "f"
+        label: "Workshops or training"
+      - id: "g"
+        label: "On-site or virtual counselors"
+      - id: "h"
+        label: "None that I know of"
+  - id: q4
+    prompt: "Which of these have you personally used at work? (Select all that apply)"
+    type: multi_choice
+    construct: these_have_personally_used_work
+    required: true
+    options:
+      - id: "a"
+        label: "Employee assistance program"
+      - id: "b"
+        label: "A wellness or meditation app"
+      - id: "c"
+        label: "Counseling covered by my benefits"
+      - id: "d"
+        label: "A mental-health or flexible day off"
+      - id: "e"
+        label: "A manager or HR conversation"
+      - id: "f"
+        label: "A workshop or training"
+      - id: "g"
+        label: "None of these"
+  - id: q5
+    prompt: "How comfortable would you feel telling your manager you were struggling with stress or burnout?"
+    type: single_choice
+    construct: comfortable_would_feel_telling_manager
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Somewhat uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat comfortable"
+      - id: "e"
+        label: "Very comfortable"
+  - id: q6
+    prompt: "How often do you feel stressed at work?"
+    type: single_choice
+    construct: often_feel_stressed_work
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q7
+    prompt: "How would you rate your current work-life balance?"
+    type: single_choice
+    construct: would_rate_current_work_life
+    required: true
+    options:
+      - id: "a"
+        label: "Very poor"
+      - id: "b"
+        label: "Poor"
+      - id: "c"
+        label: "Fair"
+      - id: "d"
+        label: "Good"
+      - id: "e"
+        label: "Excellent"
+  - id: q8
+    prompt: "In the past year, have you taken time off primarily to protect your wellbeing?"
+    type: single_choice
+    construct: past_year_have_taken_time
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I wanted to"
+      - id: "d"
+        label: "No, I did not need to"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q9
+    prompt: "About how many days per month do you feel your workload is unmanageable? Please enter a number."
+    type: free_text
+    construct: many_days_per_month_feel
+    required: true
+  - id: q10
+    prompt: "Which factors most affect your wellbeing at work? (Select all that apply)"
+    type: multi_choice
+    construct: factors_most_affect_wellbeing_work
+    required: true
+    options:
+      - id: "a"
+        label: "Workload and deadlines"
+      - id: "b"
+        label: "Relationship with my manager"
+      - id: "c"
+        label: "Job security"
+      - id: "d"
+        label: "Pay and benefits"
+      - id: "e"
+        label: "Commute or work arrangement"
+      - id: "f"
+        label: "Company culture"
+      - id: "g"
+        label: "Recognition and growth"
+      - id: "h"
+        label: "Coworker relationships"
+  - id: q11
+    prompt: "How much do you agree: My workplace genuinely cares about employee mental health."
+    type: single_choice
+    construct: much_agree_my_workplace_genuinely
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree: There is stigma around discussing mental health at my workplace."
+    type: single_choice
+    construct: much_agree_there_stigma_around
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree: I would worry about my career if I used mental-health benefits."
+    type: single_choice
+    construct: much_agree_i_would_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: My manager is supportive of employees' wellbeing."
+    type: single_choice
+    construct: much_agree_my_manager_supportive
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: My workplace makes it easy to take time off for wellbeing."
+    type: single_choice
+    construct: much_agree_my_workplace_makes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: Employers have a responsibility to support employee mental health."
+    type: single_choice
+    construct: much_agree_employers_have_responsibility
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "Thinking about stigma at work, how much do you agree that people are judged for taking a mental-health day?"
+    type: single_choice
+    construct: thinking_stigma_work_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "Thinking about stigma at work, how much do you agree that admitting stress is seen as a weakness?"
+    type: single_choice
+    construct: thinking_stigma_work_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "Thinking about stigma at work, how much do you agree that leaders talk openly about wellbeing?"
+    type: single_choice
+    construct: thinking_stigma_work_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Thinking about stigma at work, how much do you agree that coworkers support each other's wellbeing?"
+    type: single_choice
+    construct: thinking_stigma_work_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "Thinking about stigma at work, how much do you agree that using benefits would stay confidential?"
+    type: single_choice
+    construct: thinking_stigma_work_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How important to you is it that an employer offers an employee assistance program?"
+    type: single_choice
+    construct: important_it_that_employer_offers
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important to you is it that an employer offers flexible or mental-health days?"
+    type: single_choice
+    construct: important_it_that_employer_offers
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important to you is it that an employer offers therapy coverage through insurance?"
+    type: single_choice
+    construct: important_it_that_employer_offers
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important to you is it that an employer offers a supportive manager culture?"
+    type: single_choice
+    construct: important_it_that_employer_offers
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important to you is it that an employer offers wellness apps or programs?"
+    type: single_choice
+    construct: important_it_that_employer_offers
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important to you is it that an employer offers manageable workloads?"
+    type: single_choice
+    construct: important_it_that_employer_offers
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Which are your top 3 workplace mental-health supports? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_workplace_mental_health
+    required: true
+    options:
+      - id: "a"
+        label: "Employee assistance program"
+      - id: "b"
+        label: "Flexible or mental-health days"
+      - id: "c"
+        label: "Therapy coverage through insurance"
+      - id: "d"
+        label: "Supportive manager culture"
+      - id: "e"
+        label: "Wellness apps or programs"
+      - id: "f"
+        label: "Manageable workloads"
+      - id: "g"
+        label: "Open conversations from leadership"
+      - id: "h"
+        label: "Peer support groups"
+  - id: q29
+    prompt: "How often does work stress affect your life outside of work?"
+    type: single_choice
+    construct: often_does_work_stress_affect
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q30
+    prompt: "Which strategies do you personally use to manage work stress? (Select all that apply)"
+    type: multi_choice
+    construct: strategies_personally_use_manage_work
+    required: true
+    options:
+      - id: "a"
+        label: "Exercise or physical activity"
+      - id: "b"
+        label: "Talking with friends or family"
+      - id: "c"
+        label: "Meditation or mindfulness"
+      - id: "d"
+        label: "Taking breaks during the day"
+      - id: "e"
+        label: "Setting boundaries on work hours"
+      - id: "f"
+        label: "Hobbies outside of work"
+      - id: "g"
+        label: "Professional counseling"
+      - id: "h"
+        label: "None of these"
+  - id: q31
+    prompt: "How well do you feel your employer communicates about available mental-health resources?"
+    type: single_choice
+    construct: well_feel_employer_communicates_availabl
+    required: true
+    options:
+      - id: "a"
+        label: "Very poorly"
+      - id: "b"
+        label: "Poorly"
+      - id: "c"
+        label: "Adequately"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q32
+    prompt: "In the past year, how has your workplace's attention to mental health changed?"
+    type: single_choice
+    construct: past_year_has_workplace_s
+    required: true
+    options:
+      - id: "a"
+        label: "Much worse"
+      - id: "b"
+        label: "Somewhat worse"
+      - id: "c"
+        label: "No change"
+      - id: "d"
+        label: "Somewhat better"
+      - id: "e"
+        label: "Much better"
+  - id: q33
+    prompt: "How comfortable are you discussing mental health with coworkers?"
+    type: single_choice
+    construct: comfortable_discussing_mental_health_cow
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Somewhat uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat comfortable"
+      - id: "e"
+        label: "Very comfortable"
+  - id: q34
+    prompt: "Where do you turn first when you feel overwhelmed by work? (Select all that apply)"
+    type: multi_choice
+    construct: where_turn_first_when_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Friends or family"
+      - id: "b"
+        label: "My manager"
+      - id: "c"
+        label: "Human resources"
+      - id: "d"
+        label: "A professional counselor or therapist"
+      - id: "e"
+        label: "A wellness app"
+      - id: "f"
+        label: "I handle it on my own"
+      - id: "g"
+        label: "I am not sure"
+  - id: q35
+    prompt: "How satisfied are you with the mental-health support your employer provides?"
+    type: single_choice
+    construct: satisfied_mental_health_support_employer
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "My employer provides none"
+  - id: q36
+    prompt: "How satisfied are you with your manager's support for your wellbeing?"
+    type: single_choice
+    construct: satisfied_manager_s_support_wellbeing
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "Overall, how satisfied are you with the way mental health is handled at your workplace?"
+    type: single_choice
+    construct: overall_satisfied_way_mental_health
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "How likely are you to recommend your workplace as a supportive place for mental health? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_workplace_as_supportive
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q39
+    prompt: "How likely are you to use a workplace mental-health resource in the next 12 months?"
+    type: single_choice
+    construct: likely_use_workplace_mental_health
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q40
+    prompt: "How likely are you to consider an employer's mental-health support when looking for your next job?"
+    type: single_choice
+    construct: likely_consider_employer_s_mental
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q41
+    prompt: "What is one thing your workplace could do to better support mental health? (Optional short answer)"
+    type: free_text
+    construct: one_thing_workplace_could_better
+    required: false
+  - id: q42
+    prompt: "About how many years have you been in the workforce? Please enter a number."
+    type: free_text
+    construct: many_years_have_been_workforce
+    required: true
+  - id: q43
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q44
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q48
+    prompt: "Which industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Technology"
+      - id: "b"
+        label: "Healthcare"
+      - id: "c"
+        label: "Finance or banking"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Retail or hospitality"
+      - id: "f"
+        label: "Manufacturing"
+      - id: "g"
+        label: "Government or public sector"
+      - id: "h"
+        label: "Other"
+  - id: q49
+    prompt: "Approximately how many people work at your organization?"
+    type: single_choice
+    construct: approximately_many_people_work_organizat
+    required: true
+    options:
+      - id: "a"
+        label: "Fewer than 10"
+      - id: "b"
+        label: "10 to 99"
+      - id: "c"
+        label: "100 to 499"
+      - id: "d"
+        label: "500 to 4,999"
+      - id: "e"
+        label: "5,000 or more"
+      - id: "f"
+        label: "Not applicable"
+  - id: q50
+    prompt: "How many people, including yourself, live in your household?"
+    type: single_choice
+    construct: many_people_including_yourself_live
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q51
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or domestic partnership"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q52
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

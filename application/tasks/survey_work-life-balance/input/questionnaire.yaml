@@ -1,0 +1,739 @@
+schemaVersion: "1.0"
+id: work_life_balance_v1
+title: "Work–Life Balance Survey"
+description: "How working adults manage the boundary between their job and personal life and how that balance affects their everyday well-being."
+questions:
+  - id: q0
+    prompt: "Are you currently employed or self-employed (including part-time)?"
+    type: single_choice
+    construct: currently_employed_self_employed_includi
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, employed full-time"
+      - id: "b"
+        label: "Yes, employed part-time"
+      - id: "c"
+        label: "Yes, self-employed or freelance"
+      - id: "d"
+        label: "No, not currently working for pay"
+  - id: q1
+    prompt: "On a typical week, about how many hours do you work? Please enter a number of hours."
+    type: free_text
+    construct: typical_week_many_hours_work
+    required: true
+  - id: q2
+    prompt: "Which best describes where you usually do your job?"
+    type: single_choice
+    construct: best_describes_where_usually_job
+    required: true
+    options:
+      - id: "a"
+        label: "Fully on-site at an employer's location"
+      - id: "b"
+        label: "Mostly on-site with some remote days"
+      - id: "c"
+        label: "Hybrid, roughly split between on-site and remote"
+      - id: "d"
+        label: "Mostly remote with occasional on-site days"
+      - id: "e"
+        label: "Fully remote"
+  - id: q3
+    prompt: "How long have you been in your current job or role?"
+    type: single_choice
+    construct: long_have_been_current_job
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q4
+    prompt: "About how long is your typical one-way commute on days you travel to a workplace?"
+    type: single_choice
+    construct: long_typical_one_way_commute
+    required: true
+    options:
+      - id: "a"
+        label: "I do not commute (fully remote)"
+      - id: "b"
+        label: "Less than 15 minutes"
+      - id: "c"
+        label: "15 to 29 minutes"
+      - id: "d"
+        label: "30 to 44 minutes"
+      - id: "e"
+        label: "45 to 59 minutes"
+      - id: "f"
+        label: "60 minutes or more"
+  - id: q5
+    prompt: "Overall, how would you rate your current work–life balance?"
+    type: single_choice
+    construct: overall_would_rate_current_work
+    required: true
+    options:
+      - id: "a"
+        label: "Very poor"
+      - id: "b"
+        label: "Poor"
+      - id: "c"
+        label: "Fair"
+      - id: "d"
+        label: "Good"
+      - id: "e"
+        label: "Excellent"
+  - id: q6
+    prompt: "In a typical week, how often do you work outside your scheduled hours (evenings, early mornings, or weekends)?"
+    type: single_choice
+    construct: typical_week_often_work_outside
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Almost every day"
+  - id: q7
+    prompt: "How often do you check work email or messages during personal time?"
+    type: single_choice
+    construct: often_check_work_email_messages
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Daily"
+      - id: "e"
+        label: "Many times a day"
+  - id: q8
+    prompt: "In the past 12 months, about what share of your paid time off (vacation days) did you actually use?"
+    type: single_choice
+    construct: past_12_months_share_paid
+    required: true
+    options:
+      - id: "a"
+        label: "I do not receive paid time off"
+      - id: "b"
+        label: "None or almost none"
+      - id: "c"
+        label: "Less than half"
+      - id: "d"
+        label: "About half"
+      - id: "e"
+        label: "Most of it"
+      - id: "f"
+        label: "All of it"
+  - id: q9
+    prompt: "Which of the following do you regularly do to protect your personal time? (Select all that apply)"
+    type: multi_choice
+    construct: following_regularly_protect_personal_tim
+    required: true
+    options:
+      - id: "a"
+        label: "Turn off or mute work notifications after hours"
+      - id: "b"
+        label: "Keep a firm start and stop time each day"
+      - id: "c"
+        label: "Block focus or no-meeting time on my calendar"
+      - id: "d"
+        label: "Take a real lunch break away from work"
+      - id: "e"
+        label: "Keep a separate work phone or work profile"
+      - id: "f"
+        label: "Decline meetings outside working hours"
+      - id: "g"
+        label: "Use \"do not disturb\" or away status"
+      - id: "h"
+        label: "None of these"
+  - id: q10
+    prompt: "Which factors most disrupt your work–life balance? (Select all that apply)"
+    type: multi_choice
+    construct: factors_most_disrupt_work_life
+    required: true
+    options:
+      - id: "a"
+        label: "Heavy or unpredictable workload"
+      - id: "b"
+        label: "Long or unpredictable hours"
+      - id: "c"
+        label: "After-hours emails and messages"
+      - id: "d"
+        label: "Long commute"
+      - id: "e"
+        label: "Understaffing on my team"
+      - id: "f"
+        label: "Pressure from managers or clients"
+      - id: "g"
+        label: "Caregiving responsibilities at home"
+      - id: "h"
+        label: "Financial pressure to work more"
+      - id: "i"
+        label: "None of these"
+  - id: q11
+    prompt: "When you take time off, how often do you still handle some work?"
+    type: single_choice
+    construct: when_take_time_off_often
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q12
+    prompt: "How much do you agree or disagree: I can disconnect from work during my time off."
+    type: single_choice
+    construct: much_agree_disagree_i_can
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: My job leaves me enough energy for my personal life."
+    type: single_choice
+    construct: much_agree_disagree_my_job
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: My manager respects my time outside of work."
+    type: single_choice
+    construct: much_agree_disagree_my_manager
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: I feel guilty when I take time off."
+    type: single_choice
+    construct: much_agree_disagree_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: My employer genuinely cares about employee well-being."
+    type: single_choice
+    construct: much_agree_disagree_my_employer
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "Thinking about the past month, how often has work stress affected the following — Your sleep quality"
+    type: single_choice
+    construct: thinking_past_month_often_has
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q18
+    prompt: "Thinking about the past month, how often has work stress affected the following — Your mood or irritability"
+    type: single_choice
+    construct: thinking_past_month_often_has
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q19
+    prompt: "Thinking about the past month, how often has work stress affected the following — Time with family or friends"
+    type: single_choice
+    construct: thinking_past_month_often_has
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q20
+    prompt: "Thinking about the past month, how often has work stress affected the following — Your exercise or physical activity"
+    type: single_choice
+    construct: thinking_past_month_often_has
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q21
+    prompt: "Thinking about the past month, how often has work stress affected the following — Your eating habits"
+    type: single_choice
+    construct: thinking_past_month_often_has
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "In the past month, how often have you felt burned out by your work?"
+    type: single_choice
+    construct: past_month_often_have_felt
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Every day"
+  - id: q23
+    prompt: "On a typical workday, about how many hours do you have for yourself, family, or leisure after work? Please enter a number of hours."
+    type: free_text
+    construct: typical_workday_many_hours_have
+    required: true
+  - id: q24
+    prompt: "How flexible is your schedule in terms of when you start and stop working?"
+    type: single_choice
+    construct: flexible_schedule_terms_when_start
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all flexible"
+      - id: "b"
+        label: "Slightly flexible"
+      - id: "c"
+        label: "Moderately flexible"
+      - id: "d"
+        label: "Very flexible"
+      - id: "e"
+        label: "Completely flexible"
+  - id: q25
+    prompt: "How important is schedule flexibility to your overall job satisfaction?"
+    type: single_choice
+    construct: important_schedule_flexibility_overall_j
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "If you work remotely at least sometimes, how has it affected your work–life balance?"
+    type: single_choice
+    construct: if_work_remotely_least_sometimes
+    required: true
+    options:
+      - id: "a"
+        label: "Made it much worse"
+      - id: "b"
+        label: "Made it somewhat worse"
+      - id: "c"
+        label: "No real change"
+      - id: "d"
+        label: "Made it somewhat better"
+      - id: "e"
+        label: "Made it much better"
+      - id: "f"
+        label: "I do not work remotely"
+  - id: q27
+    prompt: "Which workplace benefits or policies would most improve your work–life balance? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: workplace_benefits_policies_would_most
+    required: true
+    options:
+      - id: "a"
+        label: "More paid time off"
+      - id: "b"
+        label: "Flexible or self-set hours"
+      - id: "c"
+        label: "Remote or hybrid work options"
+      - id: "d"
+        label: "A shorter or four-day work week"
+      - id: "e"
+        label: "Right-to-disconnect policy after hours"
+      - id: "f"
+        label: "More staff to reduce workload"
+      - id: "g"
+        label: "On-site or subsidized childcare"
+      - id: "h"
+        label: "Mental health days"
+      - id: "i"
+        label: "Sabbatical or extended leave"
+      - id: "j"
+        label: "Better manager training on boundaries"
+  - id: q28
+    prompt: "How often do you feel you have to choose between doing well at work and taking care of your personal life?"
+    type: single_choice
+    construct: often_feel_have_choose_between
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q29
+    prompt: "Do you have caregiving responsibilities (children, aging parents, or others) that affect your work schedule?"
+    type: single_choice
+    construct: have_caregiving_responsibilities_childre
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, significant responsibilities"
+      - id: "b"
+        label: "Yes, some responsibilities"
+      - id: "c"
+        label: "No caregiving responsibilities"
+  - id: q30
+    prompt: "How supported do you feel by your workplace in balancing caregiving and work?"
+    type: single_choice
+    construct: supported_feel_by_workplace_balancing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all supported"
+      - id: "b"
+        label: "Slightly supported"
+      - id: "c"
+        label: "Moderately supported"
+      - id: "d"
+        label: "Very supported"
+      - id: "e"
+        label: "Not applicable"
+  - id: q31
+    prompt: "Compared with a year ago, how is your work–life balance now?"
+    type: single_choice
+    construct: compared_year_ago_work_life
+    required: true
+    options:
+      - id: "a"
+        label: "Much worse"
+      - id: "b"
+        label: "Somewhat worse"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat better"
+      - id: "e"
+        label: "Much better"
+  - id: q32
+    prompt: "How satisfied are you with your current job overall?"
+    type: single_choice
+    construct: satisfied_current_job_overall
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How likely are you to look for a new job in the next 12 months mainly to improve your work–life balance?"
+    type: single_choice
+    construct: likely_look_new_job_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "Would you accept a lower salary in exchange for a substantially better work–life balance?"
+    type: single_choice
+    construct: would_accept_lower_salary_exchange
+    required: true
+    options:
+      - id: "a"
+        label: "Definitely not"
+      - id: "b"
+        label: "Probably not"
+      - id: "c"
+        label: "Not sure"
+      - id: "d"
+        label: "Probably yes"
+      - id: "e"
+        label: "Definitely yes"
+  - id: q35
+    prompt: "Overall, how likely are you to recommend your employer to a friend as a good place for work–life balance? Please use a 0 to 10 scale, where 0 is not at all likely and 10 is extremely likely. Please enter a number."
+    type: free_text
+    construct: overall_likely_recommend_employer_friend
+    required: true
+  - id: q36
+    prompt: "Is there anything you would most like to change about your work–life balance? (Optional short answer)"
+    type: free_text
+    construct: there_anything_would_most_like
+    required: false
+  - id: q37
+    prompt: "What is your age? Please enter a number (years old)."
+    type: free_text
+    construct: age_please_enter_number_years
+    required: true
+  - id: q38
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q42
+    prompt: "Which best describes the type of work you do?"
+    type: single_choice
+    construct: best_describes_type_work
+    required: true
+    options:
+      - id: "a"
+        label: "Management or executive"
+      - id: "b"
+        label: "Professional or technical"
+      - id: "c"
+        label: "Administrative or clerical"
+      - id: "d"
+        label: "Sales or customer service"
+      - id: "e"
+        label: "Skilled trades or manual labor"
+      - id: "f"
+        label: "Service or hospitality"
+      - id: "g"
+        label: "Healthcare or education"
+      - id: "h"
+        label: "Other"
+  - id: q43
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q45
+    prompt: "In which region of the United States do you live?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q46
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q47
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"

@@ -1,0 +1,795 @@
+schemaVersion: "1.0"
+id: workflow_automation_tools_v1
+title: "Workflow Automation Tools Survey"
+description: "How people use no-code and low-code workflow automation tools to connect apps and automate repetitive tasks — which tools they choose, what they automate, and how well it works."
+questions:
+  - id: q0
+    prompt: "Do you currently use any workflow automation tool to connect apps or automate repetitive tasks?"
+    type: single_choice
+    construct: currently_use_any_workflow_automation
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I plan to start"
+      - id: "d"
+        label: "No, and I have no plans to"
+  - id: q1
+    prompt: "How long have you been using workflow automation tools?"
+    type: single_choice
+    construct: long_have_been_using_workflow
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "More than 3 years"
+      - id: "e"
+        label: "I don't use them"
+  - id: q2
+    prompt: "How often do you build or edit automations?"
+    type: single_choice
+    construct: often_build_edit_automations
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "A few times a year"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q3
+    prompt: "Approximately how many automations (workflows/zaps/scenarios) do you currently have running? Enter a whole number."
+    type: free_text
+    construct: approximately_many_automations_workflows
+    required: true
+  - id: q4
+    prompt: "Which workflow automation tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: workflow_automation_tools_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Zapier"
+      - id: "b"
+        label: "Make (formerly Integromat)"
+      - id: "c"
+        label: "Microsoft Power Automate"
+      - id: "d"
+        label: "IFTTT"
+      - id: "e"
+        label: "n8n"
+      - id: "f"
+        label: "Workato"
+      - id: "g"
+        label: "Tray.io"
+      - id: "h"
+        label: "Pipedream"
+      - id: "i"
+        label: "Airtable Automations"
+      - id: "j"
+        label: "HubSpot Workflows"
+      - id: "k"
+        label: "Apple Shortcuts"
+      - id: "l"
+        label: "Google Apps Script"
+      - id: "m"
+        label: "Other (please specify)"
+  - id: q5
+    prompt: "Which workflow automation tool do you use most often?"
+    type: single_choice
+    construct: workflow_automation_tool_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Zapier"
+      - id: "b"
+        label: "Make"
+      - id: "c"
+        label: "Microsoft Power Automate"
+      - id: "d"
+        label: "IFTTT"
+      - id: "e"
+        label: "n8n"
+      - id: "f"
+        label: "Apple Shortcuts"
+      - id: "g"
+        label: "Another tool"
+      - id: "h"
+        label: "I don't have a regular tool"
+  - id: q6
+    prompt: "What kinds of tasks do you automate? (Select all that apply)"
+    type: multi_choice
+    construct: kinds_tasks_automate_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Moving data between apps"
+      - id: "b"
+        label: "Email or notification alerts"
+      - id: "c"
+        label: "Lead capture and CRM updates"
+      - id: "d"
+        label: "Social media posting"
+      - id: "e"
+        label: "File backups or transfers"
+      - id: "f"
+        label: "Form submissions to spreadsheets"
+      - id: "g"
+        label: "Calendar and scheduling"
+      - id: "h"
+        label: "E-commerce or order processing"
+      - id: "i"
+        label: "Reporting and dashboards"
+      - id: "j"
+        label: "Internal approvals or ticket routing"
+      - id: "k"
+        label: "Personal or home automation"
+      - id: "l"
+        label: "Other (please specify)"
+  - id: q7
+    prompt: "Which apps do you most often connect in your automations? (Select all that apply)"
+    type: multi_choice
+    construct: apps_most_often_connect_automations
+    required: true
+    options:
+      - id: "a"
+        label: "Gmail / Google Workspace"
+      - id: "b"
+        label: "Microsoft 365 / Outlook"
+      - id: "c"
+        label: "Slack"
+      - id: "d"
+        label: "Google Sheets"
+      - id: "e"
+        label: "Airtable"
+      - id: "f"
+        label: "Notion"
+      - id: "g"
+        label: "Salesforce or HubSpot"
+      - id: "h"
+        label: "Trello / Asana / Jira"
+      - id: "i"
+        label: "Shopify or other e-commerce"
+      - id: "j"
+        label: "Social media platforms"
+      - id: "k"
+        label: "Webhooks or custom APIs"
+      - id: "l"
+        label: "Other (please specify)"
+  - id: q8
+    prompt: "Which best describes your technical background?"
+    type: single_choice
+    construct: best_describes_technical_background
+    required: true
+    options:
+      - id: "a"
+        label: "Non-technical business user"
+      - id: "b"
+        label: "Technical business user / power user"
+      - id: "c"
+        label: "Developer or engineer"
+      - id: "d"
+        label: "IT or operations professional"
+  - id: q9
+    prompt: "How do you usually build automations?"
+    type: single_choice
+    construct: usually_build_automations
+    required: true
+    options:
+      - id: "a"
+        label: "Entirely with visual no-code builders"
+      - id: "b"
+        label: "Mostly no-code, occasionally with code steps"
+      - id: "c"
+        label: "A mix of visual builder and custom code"
+      - id: "d"
+        label: "Mostly custom code or scripts"
+  - id: q10
+    prompt: "Do you use AI features within your automation tool (e.g., AI steps, natural-language builders)?"
+    type: single_choice
+    construct: use_ai_features_within_automation
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I'm interested"
+      - id: "d"
+        label: "No, and I'm not interested"
+  - id: q11
+    prompt: "In which setting do you primarily use automation tools?"
+    type: single_choice
+    construct: setting_primarily_use_automation_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Personal / individual use"
+      - id: "b"
+        label: "Small team"
+      - id: "c"
+        label: "Department-wide"
+      - id: "d"
+        label: "Organization-wide"
+  - id: q12
+    prompt: "Do you pay for a workflow automation tool?"
+    type: single_choice
+    construct: pay_workflow_automation_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, personally"
+      - id: "b"
+        label: "Yes, my employer pays"
+      - id: "c"
+        label: "No, I use free tiers only"
+      - id: "d"
+        label: "No, I don't use these tools"
+  - id: q13
+    prompt: "Approximately how much is spent per month on your primary automation tool, in US dollars? Enter a whole number (enter 0 if free)."
+    type: free_text
+    construct: approximately_much_spent_per_month
+    required: true
+  - id: q14
+    prompt: "Approximately how many hours per week do you estimate automations save you? Enter a whole number."
+    type: free_text
+    construct: approximately_many_hours_per_week
+    required: true
+  - id: q15
+    prompt: "How much do you agree with the following statement? — Automation tools save me meaningful time each week."
+    type: single_choice
+    construct: much_agree_following_statement_automatio
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement? — Building automations is easy for someone with my skills."
+    type: single_choice
+    construct: much_agree_following_statement_building
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement? — My automations are reliable and rarely break."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement? — Pricing for automation tools is fair for the value I get."
+    type: single_choice
+    construct: much_agree_following_statement_pricing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement? — I worry about automations failing silently without me noticing."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How important is each factor when you choose an automation tool? — Number of app integrations available"
+    type: single_choice
+    construct: important_each_factor_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each factor when you choose an automation tool? — Ease of use"
+    type: single_choice
+    construct: important_each_factor_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each factor when you choose an automation tool? — Price"
+    type: single_choice
+    construct: important_each_factor_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each factor when you choose an automation tool? — Reliability and uptime"
+    type: single_choice
+    construct: important_each_factor_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each factor when you choose an automation tool? — Advanced logic and flexibility"
+    type: single_choice
+    construct: important_each_factor_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is each factor when you choose an automation tool? — Security and data privacy"
+    type: single_choice
+    construct: important_each_factor_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "Select your top 3 factors that matter most when choosing an automation tool. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_that
+    required: true
+    options:
+      - id: "a"
+        label: "Number of app integrations"
+      - id: "b"
+        label: "Ease of use"
+      - id: "c"
+        label: "Price"
+      - id: "d"
+        label: "Reliability and uptime"
+      - id: "e"
+        label: "Advanced logic and flexibility"
+      - id: "f"
+        label: "Security and data privacy"
+      - id: "g"
+        label: "Quality of support and documentation"
+      - id: "h"
+        label: "AI-assisted building"
+  - id: q27
+    prompt: "What frustrates you most about workflow automation tools? (Select all that apply)"
+    type: multi_choice
+    construct: frustrates_most_workflow_automation_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Automations breaking when an app changes"
+      - id: "b"
+        label: "Hitting task or usage limits"
+      - id: "c"
+        label: "Confusing error messages"
+      - id: "d"
+        label: "Missing integrations I need"
+      - id: "e"
+        label: "Cost scaling too quickly"
+      - id: "f"
+        label: "Debugging is difficult"
+      - id: "g"
+        label: "Steep learning curve for advanced features"
+      - id: "h"
+        label: "Nothing frustrates me"
+  - id: q28
+    prompt: "When an automation breaks, how do you usually find out?"
+    type: single_choice
+    construct: when_automation_breaks_usually_find
+    required: true
+    options:
+      - id: "a"
+        label: "The tool alerts me"
+      - id: "b"
+        label: "A colleague or customer tells me"
+      - id: "c"
+        label: "I notice missing results myself"
+      - id: "d"
+        label: "I check logs proactively"
+      - id: "e"
+        label: "I often don't find out for a while"
+  - id: q29
+    prompt: "How do you typically learn to build automations? (Select all that apply)"
+    type: multi_choice
+    construct: typically_learn_build_automations_select
+    required: true
+    options:
+      - id: "a"
+        label: "Official documentation"
+      - id: "b"
+        label: "Video tutorials"
+      - id: "c"
+        label: "Community forums"
+      - id: "d"
+        label: "Prebuilt templates"
+      - id: "e"
+        label: "Trial and error"
+      - id: "f"
+        label: "Colleagues or friends"
+      - id: "g"
+        label: "AI chatbot assistance"
+      - id: "h"
+        label: "Paid courses"
+  - id: q30
+    prompt: "How satisfied are you overall with your primary automation tool?"
+    type: single_choice
+    construct: satisfied_overall_primary_automation_too
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q31
+    prompt: "How satisfied are you with the reliability of your automations?"
+    type: single_choice
+    construct: satisfied_reliability_automations
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How likely are you to recommend your automation tool to a colleague? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_automation_tool_colleag
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q33
+    prompt: "How likely are you to switch automation tools in the next year?"
+    type: single_choice
+    construct: likely_switch_automation_tools_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "Compared with today, how much do you expect to rely on automation tools one year from now?"
+    type: single_choice
+    construct: compared_today_much_expect_rely
+    required: true
+    options:
+      - id: "a"
+        label: "Much less"
+      - id: "b"
+        label: "Somewhat less"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat more"
+      - id: "e"
+        label: "Much more"
+  - id: q35
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "Which best describes your role or function?"
+    type: single_choice
+    construct: best_describes_role_function
+    required: true
+    options:
+      - id: "a"
+        label: "Operations or administration"
+      - id: "b"
+        label: "Marketing or sales"
+      - id: "c"
+        label: "IT or engineering"
+      - id: "d"
+        label: "Finance or accounting"
+      - id: "e"
+        label: "Product or project management"
+      - id: "f"
+        label: "Founder or executive"
+      - id: "g"
+        label: "Other"
+  - id: q42
+    prompt: "How many people work at your organization?"
+    type: single_choice
+    construct: many_people_work_organization
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2–9"
+      - id: "c"
+        label: "10–49"
+      - id: "d"
+        label: "50–249"
+      - id: "e"
+        label: "250–999"
+      - id: "f"
+        label: "1,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q43
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q44
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q45
+    prompt: "Is there anything else you would like to share about how you use workflow automation tools?"
+    type: free_text
+    construct: there_anything_else_would_like
+    required: false

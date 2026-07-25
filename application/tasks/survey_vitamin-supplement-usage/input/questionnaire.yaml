@@ -1,0 +1,718 @@
+schemaVersion: "1.0"
+id: vitamin_supplement_usage_v1
+title: "Vitamin & Supplement Usage Survey"
+description: "How consumers choose, buy, and use vitamins and dietary supplements as part of their wellness routines."
+questions:
+  - id: q0
+    prompt: "Do you currently take any vitamins or dietary supplements?"
+    type: single_choice
+    construct: currently_take_any_vitamins_dietary
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, every day"
+      - id: "b"
+        label: "Yes, most days"
+      - id: "c"
+        label: "Yes, occasionally"
+      - id: "d"
+        label: "No, but I have in the past"
+      - id: "e"
+        label: "No, never"
+  - id: q1
+    prompt: "How long have you been taking vitamins or supplements regularly?"
+    type: single_choice
+    construct: long_have_been_taking_vitamins
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+      - id: "f"
+        label: "Not applicable"
+  - id: q2
+    prompt: "Which vitamins or supplements do you take? (Select all that apply)"
+    type: multi_choice
+    construct: vitamins_supplements_take_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Multivitamin"
+      - id: "b"
+        label: "Vitamin D"
+      - id: "c"
+        label: "Vitamin C"
+      - id: "d"
+        label: "Vitamin B or B-complex"
+      - id: "e"
+        label: "Calcium or magnesium"
+      - id: "f"
+        label: "Fish oil or omega-3"
+      - id: "g"
+        label: "Probiotics"
+      - id: "h"
+        label: "Protein powder or shakes"
+      - id: "i"
+        label: "Herbal supplements (for example, turmeric, echinacea)"
+      - id: "j"
+        label: "None of these"
+  - id: q3
+    prompt: "How many different supplements do you take on a typical day? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: many_different_supplements_take_typical
+    required: true
+  - id: q4
+    prompt: "Roughly how much do you spend on vitamins and supplements in a typical month? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: roughly_much_spend_vitamins_supplements
+    required: true
+  - id: q5
+    prompt: "What are your main reasons for taking supplements? (Select all that apply)"
+    type: multi_choice
+    construct: main_reasons_taking_supplements_select
+    required: true
+    options:
+      - id: "a"
+        label: "General health and wellness"
+      - id: "b"
+        label: "Fill gaps in my diet"
+      - id: "c"
+        label: "Boost energy"
+      - id: "d"
+        label: "Support immune health"
+      - id: "e"
+        label: "Support bone or joint health"
+      - id: "f"
+        label: "Improve sleep"
+      - id: "g"
+        label: "Support fitness or muscle recovery"
+      - id: "h"
+        label: "A doctor recommended it"
+      - id: "i"
+        label: "Heart or brain health"
+  - id: q6
+    prompt: "What prompted you to start taking supplements? (Select all that apply)"
+    type: multi_choice
+    construct: prompted_start_taking_supplements_select
+    required: true
+    options:
+      - id: "a"
+        label: "A doctor's recommendation"
+      - id: "b"
+        label: "Blood test results"
+      - id: "c"
+        label: "My own research"
+      - id: "d"
+        label: "Friends or family"
+      - id: "e"
+        label: "Social media or influencers"
+      - id: "f"
+        label: "Advertising"
+      - id: "g"
+        label: "A specific health goal"
+      - id: "h"
+        label: "Not applicable"
+  - id: q7
+    prompt: "Where do you usually buy your vitamins and supplements? (Select all that apply)"
+    type: multi_choice
+    construct: where_usually_buy_vitamins_supplements
+    required: true
+    options:
+      - id: "a"
+        label: "Pharmacy or drugstore"
+      - id: "b"
+        label: "Grocery store"
+      - id: "c"
+        label: "Big-box store (for example, Walmart or Target)"
+      - id: "d"
+        label: "Warehouse club (for example, Costco)"
+      - id: "e"
+        label: "Online (for example, Amazon)"
+      - id: "f"
+        label: "A vitamin or health store (for example, GNC)"
+      - id: "g"
+        label: "Direct from a brand or subscription service"
+  - id: q8
+    prompt: "When choosing a supplement, which do you usually pick?"
+    type: single_choice
+    construct: when_choosing_supplement_usually_pick
+    required: true
+    options:
+      - id: "a"
+        label: "A well-known name brand"
+      - id: "b"
+        label: "A store or generic brand"
+      - id: "c"
+        label: "Whichever is cheapest"
+      - id: "d"
+        label: "Whichever is recommended to me"
+      - id: "e"
+        label: "It depends on the product"
+  - id: q9
+    prompt: "What form do you prefer for your supplements?"
+    type: single_choice
+    construct: form_prefer_supplements
+    required: true
+    options:
+      - id: "a"
+        label: "Tablets or capsules"
+      - id: "b"
+        label: "Gummies"
+      - id: "c"
+        label: "Powders"
+      - id: "d"
+        label: "Liquids"
+      - id: "e"
+        label: "No preference"
+  - id: q10
+    prompt: "How did you decide which supplements to take? (Select all that apply)"
+    type: multi_choice
+    construct: did_decide_supplements_take_select
+    required: true
+    options:
+      - id: "a"
+        label: "A doctor or pharmacist recommended them"
+      - id: "b"
+        label: "Online research"
+      - id: "c"
+        label: "Product labels and claims"
+      - id: "d"
+        label: "Reviews and ratings"
+      - id: "e"
+        label: "Friends or family"
+      - id: "f"
+        label: "Social media"
+      - id: "g"
+        label: "Trial and error"
+  - id: q11
+    prompt: "How often do you take your supplements as directed on the label?"
+    type: single_choice
+    construct: often_take_supplements_as_directed
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q12
+    prompt: "Have you told your doctor which supplements you take?"
+    type: single_choice
+    construct: have_told_doctor_supplements_take
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, all of them"
+      - id: "b"
+        label: "Yes, some of them"
+      - id: "c"
+        label: "No, but I would if asked"
+      - id: "d"
+        label: "No"
+  - id: q13
+    prompt: "How much do you agree or disagree: Taking supplements is worth the money for me."
+    type: single_choice
+    construct: much_agree_disagree_taking_supplements
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I can feel a difference from the supplements I take."
+    type: single_choice
+    construct: much_agree_disagree_i_can
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: Supplements are an important part of my health routine."
+    type: single_choice
+    construct: much_agree_disagree_supplements_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: I trust the claims made on supplement labels."
+    type: single_choice
+    construct: much_agree_disagree_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree or disagree: Store-brand supplements are just as good as name brands."
+    type: single_choice
+    construct: much_agree_disagree_store_brand
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree or disagree: I wish it were easier to know which supplements actually work."
+    type: single_choice
+    construct: much_agree_disagree_i_wish
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How confident are you that the supplements you take are safe and high quality?"
+    type: single_choice
+    construct: confident_that_supplements_take_safe
+    required: true
+    options:
+      - id: "a"
+        label: "Very confident"
+      - id: "b"
+        label: "Somewhat confident"
+      - id: "c"
+        label: "Not very confident"
+      - id: "d"
+        label: "Not at all confident"
+  - id: q20
+    prompt: "How often do you check for a third-party quality seal (for example, USP or NSF) when buying supplements?"
+    type: single_choice
+    construct: often_check_third_party_quality
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q21
+    prompt: "How often do you read the ingredient list or supplement facts before buying?"
+    type: single_choice
+    construct: often_read_ingredient_list_supplement
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q22
+    prompt: "When choosing a supplement, how important is price?"
+    type: single_choice
+    construct: when_choosing_supplement_important_price
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing a supplement, how important is brand reputation?"
+    type: single_choice
+    construct: when_choosing_supplement_important_brand
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a supplement, how important is a third-party quality certification?"
+    type: single_choice
+    construct: when_choosing_supplement_important_third
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a supplement, how important are ingredients (for example, no artificial additives)?"
+    type: single_choice
+    construct: when_choosing_supplement_important_ingre
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a supplement, how important are reviews and ratings?"
+    type: single_choice
+    construct: when_choosing_supplement_important_revie
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Do you buy any supplements through a subscription or auto-delivery service?"
+    type: single_choice
+    construct: buy_any_supplements_through_subscription
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several"
+      - id: "b"
+        label: "Yes, one"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No"
+  - id: q28
+    prompt: "Have you ever stopped taking a supplement? Why? (Select all that apply)"
+    type: multi_choice
+    construct: have_ever_stopped_taking_supplement
+    required: true
+    options:
+      - id: "a"
+        label: "It was too expensive"
+      - id: "b"
+        label: "I didn't notice a benefit"
+      - id: "c"
+        label: "My doctor advised against it"
+      - id: "d"
+        label: "It was inconvenient to keep up"
+      - id: "e"
+        label: "I read something concerning about it"
+      - id: "f"
+        label: "I haven't stopped any"
+      - id: "g"
+        label: "Other reason"
+  - id: q29
+    prompt: "Select your top 3 things that matter most when choosing supplements. (Select up to 3)"
+    type: single_choice
+    construct: select_top_3_things_that
+    required: true
+    options:
+      - id: "a"
+        label: "Proven effectiveness"
+      - id: "b"
+        label: "Price"
+      - id: "c"
+        label: "Trusted brand"
+      - id: "d"
+        label: "Third-party quality testing"
+      - id: "e"
+        label: "Clean or natural ingredients"
+      - id: "f"
+        label: "A doctor's recommendation"
+      - id: "g"
+        label: "Good reviews"
+      - id: "h"
+        label: "Easy-to-take form"
+  - id: q30
+    prompt: "Overall, how satisfied are you with the supplements you take?"
+    type: single_choice
+    construct: overall_satisfied_supplements_take
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I don't take any"
+  - id: q31
+    prompt: "On a scale of 0 to 10, how likely are you to recommend a supplement you use to a friend? Please enter a number from 0 (not at all likely) to 10 (extremely likely)."
+    type: free_text
+    construct: scale_0_10_likely_recommend
+    required: true
+  - id: q32
+    prompt: "How likely are you to keep taking supplements over the next year?"
+    type: single_choice
+    construct: likely_keep_taking_supplements_over
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q33
+    prompt: "Is there one thing that would help you choose supplements more confidently? Please describe briefly (or enter \"none\")."
+    type: free_text
+    construct: there_one_thing_that_would
+    required: true
+  - id: q34
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q35
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Which best describes your race or ethnicity?"
+    type: single_choice
+    construct: best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian or Asian American"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Two or more races or another background"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q39
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q40
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q41
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+  - id: q42
+    prompt: "Which region of the country do you live in?"
+    type: single_choice
+    construct: region_country_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q44
+    prompt: "How would you describe your overall approach to health and wellness?"
+    type: single_choice
+    construct: would_describe_overall_approach_health
+    required: true
+    options:
+      - id: "a"
+        label: "Very proactive and health-focused"
+      - id: "b"
+        label: "Fairly health-conscious"
+      - id: "c"
+        label: "Somewhat health-conscious"
+      - id: "d"
+        label: "Not very focused on health"

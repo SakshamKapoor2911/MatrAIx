@@ -1,0 +1,869 @@
+schemaVersion: "1.0"
+id: umbrella_insurance_v1
+title: "Umbrella Insurance Survey"
+description: "Awareness, ownership, and attitudes toward personal umbrella liability insurance and the assets and risks it is meant to protect."
+questions:
+  - id: q0
+    prompt: "Before this survey, how familiar were you with personal umbrella (excess liability) insurance?"
+    type: single_choice
+    construct: before_this_survey_familiar_were
+    required: true
+    options:
+      - id: "a"
+        label: "Very familiar"
+      - id: "b"
+        label: "Somewhat familiar"
+      - id: "c"
+        label: "Had heard of it only"
+      - id: "d"
+        label: "Never heard of it"
+  - id: q1
+    prompt: "Do you currently have a personal umbrella liability insurance policy?"
+    type: single_choice
+    construct: currently_have_personal_umbrella_liabili
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I have considered it"
+      - id: "c"
+        label: "No, and I have not considered it"
+      - id: "d"
+        label: "Not sure"
+  - id: q2
+    prompt: "Do you currently have the underlying home/renters and auto insurance that an umbrella policy sits on top of?"
+    type: single_choice
+    construct: currently_have_underlying_home_renters
+    required: true
+    options:
+      - id: "a"
+        label: "Both home/renters and auto"
+      - id: "b"
+        label: "Only auto"
+      - id: "c"
+        label: "Only home/renters"
+      - id: "d"
+        label: "Neither"
+      - id: "e"
+        label: "Not sure"
+  - id: q3
+    prompt: "What made you consider or purchase umbrella insurance? (Select all that apply)"
+    type: multi_choice
+    construct: made_consider_purchase_umbrella_insuranc
+    required: true
+    options:
+      - id: "a"
+        label: "Protecting savings and assets"
+      - id: "b"
+        label: "Owning a home"
+      - id: "c"
+        label: "Having teen drivers"
+      - id: "d"
+        label: "Owning a swimming pool"
+      - id: "e"
+        label: "Owning a dog"
+      - id: "f"
+        label: "Renting out property"
+      - id: "g"
+        label: "Being a board member or volunteer"
+      - id: "h"
+        label: "A high public profile"
+      - id: "i"
+        label: "Advice from an agent"
+      - id: "j"
+        label: "Not applicable"
+  - id: q4
+    prompt: "How did you first learn about umbrella insurance?"
+    type: single_choice
+    construct: did_first_learn_umbrella_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "My insurance agent"
+      - id: "b"
+        label: "My financial advisor"
+      - id: "c"
+        label: "A bundled offer from my insurer"
+      - id: "d"
+        label: "Online research"
+      - id: "e"
+        label: "A friend or family member"
+      - id: "f"
+        label: "News or media"
+      - id: "g"
+        label: "I had not heard of it before"
+  - id: q5
+    prompt: "Who is your umbrella insurance provider?"
+    type: single_choice
+    construct: who_umbrella_insurance_provider
+    required: true
+    options:
+      - id: "a"
+        label: "State Farm"
+      - id: "b"
+        label: "Allstate"
+      - id: "c"
+        label: "GEICO"
+      - id: "d"
+        label: "USAA"
+      - id: "e"
+        label: "Liberty Mutual"
+      - id: "f"
+        label: "Progressive"
+      - id: "g"
+        label: "Chubb"
+      - id: "h"
+        label: "Nationwide"
+      - id: "i"
+        label: "Farmers"
+      - id: "j"
+        label: "Another company"
+      - id: "k"
+        label: "I do not have umbrella insurance"
+  - id: q6
+    prompt: "Is your umbrella policy with the same company as your home and auto insurance?"
+    type: single_choice
+    construct: umbrella_policy_same_company_as
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, the same insurer"
+      - id: "b"
+        label: "No, a different insurer"
+      - id: "c"
+        label: "Not sure"
+      - id: "d"
+        label: "Not applicable"
+  - id: q7
+    prompt: "What is your umbrella liability coverage limit?"
+    type: single_choice
+    construct: umbrella_liability_coverage_limit
+    required: true
+    options:
+      - id: "a"
+        label: "$1 million"
+      - id: "b"
+        label: "$2 million"
+      - id: "c"
+        label: "$3 million"
+      - id: "d"
+        label: "$5 million"
+      - id: "e"
+        label: "More than $5 million"
+      - id: "f"
+        label: "Not sure"
+  - id: q8
+    prompt: "About how much do you pay per year for umbrella insurance?"
+    type: single_choice
+    construct: much_pay_per_year_umbrella
+    required: true
+    options:
+      - id: "a"
+        label: "Under $150"
+      - id: "b"
+        label: "$150 to $249"
+      - id: "c"
+        label: "$250 to $399"
+      - id: "d"
+        label: "$400 to $599"
+      - id: "e"
+        label: "$600 or more"
+      - id: "f"
+        label: "Not sure"
+  - id: q9
+    prompt: "About how much do you pay per year for umbrella insurance, in U.S. dollars? Enter a whole number (0 if you do not have it)."
+    type: free_text
+    construct: much_pay_per_year_umbrella
+    required: true
+  - id: q10
+    prompt: "What underlying liability limits does your insurer require for the umbrella policy?"
+    type: single_choice
+    construct: underlying_liability_limits_does_insurer
+    required: true
+    options:
+      - id: "a"
+        label: "Not sure"
+      - id: "b"
+        label: "$250,000"
+      - id: "c"
+        label: "$300,000"
+      - id: "d"
+        label: "$500,000"
+      - id: "e"
+        label: "Higher than $500,000"
+  - id: q11
+    prompt: "Which assets or risks are you most trying to protect with umbrella coverage? (Select all that apply)"
+    type: multi_choice
+    construct: assets_risks_most_trying_protect
+    required: true
+    options:
+      - id: "a"
+        label: "Home equity"
+      - id: "b"
+        label: "Retirement or savings"
+      - id: "c"
+        label: "Future income and wages"
+      - id: "d"
+        label: "Investment or rental property"
+      - id: "e"
+        label: "Business interests"
+      - id: "f"
+        label: "College savings"
+      - id: "g"
+        label: "Vehicles or boats"
+      - id: "h"
+        label: "Nothing specific"
+  - id: q12
+    prompt: "Which of these liability risk factors apply to your household? (Select all that apply)"
+    type: multi_choice
+    construct: these_liability_risk_factors_apply
+    required: true
+    options:
+      - id: "a"
+        label: "Teen or young driver"
+      - id: "b"
+        label: "Swimming pool or hot tub"
+      - id: "c"
+        label: "Trampoline"
+      - id: "d"
+        label: "Dog"
+      - id: "e"
+        label: "Frequently hosting guests"
+      - id: "f"
+        label: "Rental or investment property"
+      - id: "g"
+        label: "Serving on a nonprofit board"
+      - id: "h"
+        label: "Publicly active on social media"
+      - id: "i"
+        label: "None of these"
+  - id: q13
+    prompt: "How much do you agree with the following statement about umbrella insurance: It is worth the cost for the protection it provides."
+    type: single_choice
+    construct: much_agree_following_statement_umbrella
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement about umbrella insurance: I understand how umbrella coverage works."
+    type: single_choice
+    construct: much_agree_following_statement_umbrella
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement about umbrella insurance: My standard home and auto liability limits are not enough on their own."
+    type: single_choice
+    construct: much_agree_following_statement_umbrella
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about umbrella insurance: A single lawsuit could threaten my savings."
+    type: single_choice
+    construct: much_agree_following_statement_umbrella
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about umbrella insurance: I would rather pay a bit more to have higher liability protection."
+    type: single_choice
+    construct: much_agree_following_statement_umbrella
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about umbrella insurance: Umbrella insurance is only for wealthy people."
+    type: single_choice
+    construct: much_agree_following_statement_umbrella
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "When choosing an umbrella policy, how important is each of the following: Low annual premium"
+    type: single_choice
+    construct: when_choosing_umbrella_policy_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "When choosing an umbrella policy, how important is each of the following: High coverage limit"
+    type: single_choice
+    construct: when_choosing_umbrella_policy_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "When choosing an umbrella policy, how important is each of the following: Using the same company as my other policies"
+    type: single_choice
+    construct: when_choosing_umbrella_policy_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When choosing an umbrella policy, how important is each of the following: The insurer's financial strength and reputation"
+    type: single_choice
+    construct: when_choosing_umbrella_policy_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing an umbrella policy, how important is each of the following: Coverage for lawsuits and legal defense costs"
+    type: single_choice
+    construct: when_choosing_umbrella_policy_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing an umbrella policy, how important is each of the following: Ease of adding it to my existing policies"
+    type: single_choice
+    construct: when_choosing_umbrella_policy_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing an umbrella policy, how important is each of the following: Coverage for rental or investment property risks"
+    type: single_choice
+    construct: when_choosing_umbrella_policy_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "Which are your top 3 factors when deciding on umbrella insurance? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_deciding
+    required: true
+    options:
+      - id: "a"
+        label: "Price"
+      - id: "b"
+        label: "Coverage limit"
+      - id: "c"
+        label: "Peace of mind"
+      - id: "d"
+        label: "Agent or advisor recommendation"
+      - id: "e"
+        label: "Bundling with my existing insurer"
+      - id: "f"
+        label: "Company reputation"
+      - id: "g"
+        label: "Protecting specific assets"
+      - id: "h"
+        label: "Ease of purchase"
+      - id: "i"
+        label: "Legal defense coverage"
+  - id: q27
+    prompt: "How likely do you think it is that you could be sued for an amount above your current liability limits?"
+    type: single_choice
+    construct: likely_think_it_that_could
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q28
+    prompt: "Have you ever been involved in a liability claim or lawsuit (for example, an accident where you were at fault)?"
+    type: single_choice
+    construct: have_ever_been_involved_liability
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q29
+    prompt: "How important is protecting your assets from lawsuits to you?"
+    type: single_choice
+    construct: important_protecting_assets_from_lawsuit
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "How much liability coverage do you think a household like yours should carry?"
+    type: single_choice
+    construct: much_liability_coverage_think_household
+    required: true
+    options:
+      - id: "a"
+        label: "None needed"
+      - id: "b"
+        label: "$300,000 to $500,000"
+      - id: "c"
+        label: "$1 million"
+      - id: "d"
+        label: "$2 to $3 million"
+      - id: "e"
+        label: "$5 million or more"
+      - id: "f"
+        label: "Not sure"
+  - id: q31
+    prompt: "How often do you review your overall insurance coverage with an agent or advisor?"
+    type: single_choice
+    construct: often_review_overall_insurance_coverage
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Once a year"
+      - id: "d"
+        label: "Every few years"
+      - id: "e"
+        label: "Whenever my situation changes"
+  - id: q32
+    prompt: "If you have umbrella insurance, how satisfied are you with it?"
+    type: single_choice
+    construct: if_have_umbrella_insurance_satisfied
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I do not have umbrella insurance"
+  - id: q33
+    prompt: "How likely are you to purchase or keep umbrella insurance in the next 12 months?"
+    type: single_choice
+    construct: likely_purchase_keep_umbrella_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "What is the main reason you do not have or might drop umbrella insurance?"
+    type: single_choice
+    construct: main_reason_not_have_might
+    required: true
+    options:
+      - id: "a"
+        label: "I do not think I need it"
+      - id: "b"
+        label: "It is too expensive"
+      - id: "c"
+        label: "I am not aware enough about it"
+      - id: "d"
+        label: "I do not have enough assets to protect"
+      - id: "e"
+        label: "I already have it and plan to keep it"
+      - id: "f"
+        label: "Other"
+  - id: q35
+    prompt: "What would make you buy (or keep) umbrella insurance? (Select all that apply)"
+    type: multi_choice
+    construct: would_make_buy_keep_umbrella
+    required: true
+    options:
+      - id: "a"
+        label: "A lower price"
+      - id: "b"
+        label: "An agent or advisor recommendation"
+      - id: "c"
+        label: "Hearing about a large lawsuit"
+      - id: "d"
+        label: "Acquiring more assets"
+      - id: "e"
+        label: "Having kids who start driving"
+      - id: "f"
+        label: "Buying a home or rental property"
+      - id: "g"
+        label: "Nothing would"
+      - id: "h"
+        label: "I already have it and plan to keep it"
+  - id: q36
+    prompt: "On a scale of 0 to 10, how likely are you to recommend umbrella insurance to a friend (0 = not at all likely, 10 = extremely likely)?"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q37
+    prompt: "What is your biggest question or concern about umbrella insurance? (Optional open response)"
+    type: free_text
+    construct: biggest_question_concern_umbrella_insura
+    required: false
+  - id: q38
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic, Latino, or Spanish origin"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Some other race or origin"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q44
+    prompt: "Including yourself, how many people live in your household? Please enter a whole number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q45
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Widowed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "In which U.S. region do you live?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q47
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q48
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"
+  - id: q49
+    prompt: "Which best describes your household's approximate net worth?"
+    type: single_choice
+    construct: best_describes_household_s_approximate
+    required: true
+    options:
+      - id: "a"
+        label: "Under $100,000"
+      - id: "b"
+        label: "$100,000 to $499,999"
+      - id: "c"
+        label: "$500,000 to $999,999"
+      - id: "d"
+        label: "$1 million to $1.99 million"
+      - id: "e"
+        label: "$2 million or more"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "About how many vehicles does your household own? Please enter a whole number."
+    type: free_text
+    construct: many_vehicles_does_household_own
+    required: true

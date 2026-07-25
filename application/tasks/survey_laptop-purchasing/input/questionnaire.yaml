@@ -1,0 +1,790 @@
+schemaVersion: "1.0"
+id: laptop_purchasing_v1
+title: "Laptop Purchasing Survey"
+description: "How consumers research, choose, and buy laptop computers — brands, budgets, purchase channels, decision criteria, and satisfaction with their choices."
+questions:
+  - id: q0
+    prompt: "Do you personally own or regularly use a laptop?"
+    type: single_choice
+    construct: personally_own_regularly_use_laptop
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I own one"
+      - id: "b"
+        label: "Yes, I use one provided by work or school"
+      - id: "c"
+        label: "No, but I plan to buy one soon"
+      - id: "d"
+        label: "No, I mainly use a desktop, tablet, or phone"
+  - id: q1
+    prompt: "When did you most recently purchase a laptop?"
+    type: single_choice
+    construct: when_did_most_recently_purchase
+    required: true
+    options:
+      - id: "a"
+        label: "Within the past 6 months"
+      - id: "b"
+        label: "6 months to 1 year ago"
+      - id: "c"
+        label: "1 to 2 years ago"
+      - id: "d"
+        label: "3 to 5 years ago"
+      - id: "e"
+        label: "More than 5 years ago"
+      - id: "f"
+        label: "I've never bought one myself"
+  - id: q2
+    prompt: "How many laptops does your household currently own? Enter a whole number."
+    type: free_text
+    construct: many_laptops_does_household_currently
+    required: true
+  - id: q3
+    prompt: "What is the main way you use your laptop? (Select all that apply)"
+    type: multi_choice
+    construct: main_way_use_laptop_select
+    required: true
+    options:
+      - id: "a"
+        label: "Web browsing and email"
+      - id: "b"
+        label: "Work / productivity (office apps, documents)"
+      - id: "c"
+        label: "School or coursework"
+      - id: "d"
+        label: "Programming / software development"
+      - id: "e"
+        label: "Photo or video editing"
+      - id: "f"
+        label: "Graphic design or creative work"
+      - id: "g"
+        label: "Gaming"
+      - id: "h"
+        label: "Streaming video and media"
+      - id: "i"
+        label: "Financial management"
+      - id: "j"
+        label: "General entertainment"
+  - id: q4
+    prompt: "Which laptop brand do you currently use most?"
+    type: single_choice
+    construct: laptop_brand_currently_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Apple (MacBook)"
+      - id: "b"
+        label: "Dell"
+      - id: "c"
+        label: "HP"
+      - id: "d"
+        label: "Lenovo"
+      - id: "e"
+        label: "ASUS"
+      - id: "f"
+        label: "Acer"
+      - id: "g"
+        label: "Microsoft (Surface)"
+      - id: "h"
+        label: "Samsung"
+      - id: "i"
+        label: "MSI / Razer / other gaming brand"
+      - id: "j"
+        label: "Other"
+  - id: q5
+    prompt: "Which operating system does your current laptop run?"
+    type: single_choice
+    construct: operating_system_does_current_laptop
+    required: true
+    options:
+      - id: "a"
+        label: "Windows"
+      - id: "b"
+        label: "macOS"
+      - id: "c"
+        label: "ChromeOS"
+      - id: "d"
+        label: "Linux"
+      - id: "e"
+        label: "Not sure"
+  - id: q6
+    prompt: "How much did you spend on your most recent laptop? Enter a whole-dollar amount (US$)."
+    type: free_text
+    construct: much_did_spend_most_recent
+    required: true
+  - id: q7
+    prompt: "What price range are you comfortable spending on a laptop?"
+    type: single_choice
+    construct: price_range_comfortable_spending_laptop
+    required: true
+    options:
+      - id: "a"
+        label: "Under $400"
+      - id: "b"
+        label: "$400-$699"
+      - id: "c"
+        label: "$700-$999"
+      - id: "d"
+        label: "$1,000-$1,499"
+      - id: "e"
+        label: "$1,500-$1,999"
+      - id: "f"
+        label: "$2,000 or more"
+  - id: q8
+    prompt: "Where do you typically buy laptops? (Select all that apply)"
+    type: multi_choice
+    construct: where_typically_buy_laptops_select
+    required: true
+    options:
+      - id: "a"
+        label: "Amazon"
+      - id: "b"
+        label: "Best Buy"
+      - id: "c"
+        label: "Manufacturer's website (Dell, Apple, HP, etc.)"
+      - id: "d"
+        label: "Walmart or Target"
+      - id: "e"
+        label: "Costco or warehouse club"
+      - id: "f"
+        label: "A local electronics store"
+      - id: "g"
+        label: "Refurbished / used marketplace"
+      - id: "h"
+        label: "Microsoft Store or Apple Store"
+  - id: q9
+    prompt: "How do you research laptops before buying? (Select all that apply)"
+    type: multi_choice
+    construct: research_laptops_before_buying_select
+    required: true
+    options:
+      - id: "a"
+        label: "Online reviews and rating sites"
+      - id: "b"
+        label: "YouTube reviews and comparisons"
+      - id: "c"
+        label: "Recommendations from friends or family"
+      - id: "d"
+        label: "In-store hands-on"
+      - id: "e"
+        label: "Manufacturer spec sheets"
+      - id: "f"
+        label: "Tech news and review websites"
+      - id: "g"
+        label: "Reddit or online forums"
+      - id: "h"
+        label: "AI chatbot recommendations"
+      - id: "i"
+        label: "I don't research much"
+  - id: q10
+    prompt: "How long do you typically research before buying a laptop?"
+    type: single_choice
+    construct: long_typically_research_before_buying
+    required: true
+    options:
+      - id: "a"
+        label: "I buy on impulse / very little research"
+      - id: "b"
+        label: "A few hours"
+      - id: "c"
+        label: "A few days"
+      - id: "d"
+        label: "A week or two"
+      - id: "e"
+        label: "More than a month"
+  - id: q11
+    prompt: "When buying a laptop, how important is the price?"
+    type: single_choice
+    construct: when_buying_laptop_important_price
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q12
+    prompt: "When buying a laptop, how important is battery life?"
+    type: single_choice
+    construct: when_buying_laptop_important_battery
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q13
+    prompt: "When buying a laptop, how important is performance (processor, RAM)?"
+    type: single_choice
+    construct: when_buying_laptop_important_performance
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q14
+    prompt: "When buying a laptop, how important is display quality?"
+    type: single_choice
+    construct: when_buying_laptop_important_display
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q15
+    prompt: "When buying a laptop, how important is weight and portability?"
+    type: single_choice
+    construct: when_buying_laptop_important_weight
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "When buying a laptop, how important is brand reputation?"
+    type: single_choice
+    construct: when_buying_laptop_important_brand
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "When buying a laptop, how important is build quality and durability?"
+    type: single_choice
+    construct: when_buying_laptop_important_build
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "Which THREE features matter most to you when choosing a laptop? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: three_features_matter_most_when
+    required: true
+    options:
+      - id: "a"
+        label: "Price / value"
+      - id: "b"
+        label: "Battery life"
+      - id: "c"
+        label: "Processor / performance"
+      - id: "d"
+        label: "RAM and storage"
+      - id: "e"
+        label: "Display quality"
+      - id: "f"
+        label: "Weight and portability"
+      - id: "g"
+        label: "Keyboard and trackpad"
+      - id: "h"
+        label: "Build quality"
+      - id: "i"
+        label: "Graphics card (for gaming/creative)"
+      - id: "j"
+        label: "Brand"
+      - id: "k"
+        label: "Ports and connectivity"
+  - id: q19
+    prompt: "What screen size do you prefer?"
+    type: single_choice
+    construct: screen_size_prefer
+    required: true
+    options:
+      - id: "a"
+        label: "11-12 inches (ultra-portable)"
+      - id: "b"
+        label: "13-14 inches"
+      - id: "c"
+        label: "15-16 inches"
+      - id: "d"
+        label: "17 inches or larger"
+      - id: "e"
+        label: "No preference"
+  - id: q20
+    prompt: "How much RAM do you look for?"
+    type: single_choice
+    construct: much_ram_look
+    required: true
+    options:
+      - id: "a"
+        label: "8 GB or less"
+      - id: "b"
+        label: "16 GB"
+      - id: "c"
+        label: "32 GB"
+      - id: "d"
+        label: "64 GB or more"
+      - id: "e"
+        label: "I don't know / don't consider it"
+  - id: q21
+    prompt: "What type of laptop form factor do you prefer?"
+    type: single_choice
+    construct: type_laptop_form_factor_prefer
+    required: true
+    options:
+      - id: "a"
+        label: "Traditional clamshell laptop"
+      - id: "b"
+        label: "2-in-1 convertible (touchscreen, folds back)"
+      - id: "c"
+        label: "Detachable tablet/laptop hybrid"
+      - id: "d"
+        label: "Gaming laptop"
+      - id: "e"
+        label: "No preference"
+  - id: q22
+    prompt: "How much do you agree: I am willing to pay more for a laptop from a brand I trust."
+    type: single_choice
+    construct: much_agree_i_am_willing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How much do you agree: I keep laptops until they no longer work rather than upgrading regularly."
+    type: single_choice
+    construct: much_agree_i_keep_laptops
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "How much do you agree: I find it difficult to compare laptop specifications."
+    type: single_choice
+    construct: much_agree_i_find_it
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "How much do you agree: Extended warranties or protection plans are worth buying for a laptop."
+    type: single_choice
+    construct: much_agree_extended_warranties_protectio
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q26
+    prompt: "How much do you agree: Repairability and upgradability influence which laptop I buy."
+    type: single_choice
+    construct: much_agree_repairability_upgradability_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q27
+    prompt: "Did you buy your most recent laptop new or refurbished/used?"
+    type: single_choice
+    construct: did_buy_most_recent_laptop
+    required: true
+    options:
+      - id: "a"
+        label: "Brand new"
+      - id: "b"
+        label: "Manufacturer-refurbished"
+      - id: "c"
+        label: "Used or open-box"
+      - id: "d"
+        label: "It was a gift or hand-me-down"
+      - id: "e"
+        label: "Not applicable"
+  - id: q28
+    prompt: "Did you take advantage of a sale or promotion (e.g., Black Friday) for your last laptop?"
+    type: single_choice
+    construct: did_take_advantage_sale_promotion
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I specifically waited for a sale"
+      - id: "b"
+        label: "Yes, but it was coincidental"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable"
+  - id: q29
+    prompt: "How did you pay for your most recent laptop?"
+    type: single_choice
+    construct: did_pay_most_recent_laptop
+    required: true
+    options:
+      - id: "a"
+        label: "Paid in full upfront"
+      - id: "b"
+        label: "Financing or installment plan"
+      - id: "c"
+        label: "Credit card, paid over time"
+      - id: "d"
+        label: "Employer or school provided"
+      - id: "e"
+        label: "Not applicable"
+  - id: q30
+    prompt: "How often do you replace your laptop?"
+    type: single_choice
+    construct: often_replace_laptop
+    required: true
+    options:
+      - id: "a"
+        label: "Every 1-2 years"
+      - id: "b"
+        label: "Every 3-4 years"
+      - id: "c"
+        label: "Every 5-6 years"
+      - id: "d"
+        label: "Only when it stops working"
+      - id: "e"
+        label: "I've never replaced one"
+  - id: q31
+    prompt: "What usually prompts you to buy a new laptop? (Select all that apply)"
+    type: multi_choice
+    construct: usually_prompts_buy_new_laptop
+    required: true
+    options:
+      - id: "a"
+        label: "Current one is too slow"
+      - id: "b"
+        label: "Current one broke or is failing"
+      - id: "c"
+        label: "Battery no longer holds a charge"
+      - id: "d"
+        label: "Want newer features/performance"
+      - id: "e"
+        label: "Software no longer supported"
+      - id: "f"
+        label: "Starting a new job or school"
+      - id: "g"
+        label: "Found a good deal"
+      - id: "h"
+        label: "Storage is full"
+  - id: q32
+    prompt: "How satisfied are you with your most recent laptop purchase?"
+    type: single_choice
+    construct: satisfied_most_recent_laptop_purchase
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How likely are you to buy the same brand again?"
+    type: single_choice
+    construct: likely_buy_same_brand_again
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "How likely are you to recommend your current laptop to others? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_current_laptop_others
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "What one thing would most improve your next laptop purchase experience?"
+    type: free_text
+    construct: one_thing_would_most_improve
+    required: true
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18-24"
+      - id: "b"
+        label: "25-34"
+      - id: "c"
+        label: "35-44"
+      - id: "d"
+        label: "45-54"
+      - id: "e"
+        label: "55-64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000-$49,999"
+      - id: "c"
+        label: "$50,000-$74,999"
+      - id: "d"
+        label: "$75,000-$99,999"
+      - id: "e"
+        label: "$100,000-$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Not currently employed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "How many people live in your household, including you?"
+    type: single_choice
+    construct: many_people_live_household_including
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q43
+    prompt: "Which best describes where you live?"
+    type: single_choice
+    construct: best_describes_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q44
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q45
+    prompt: "How would you describe yourself as a technology user?"
+    type: single_choice
+    construct: would_describe_yourself_as_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Power user / very tech-savvy"
+      - id: "b"
+        label: "Above average"
+      - id: "c"
+        label: "Average"
+      - id: "d"
+        label: "Below average"
+      - id: "e"
+        label: "Not tech-savvy at all"

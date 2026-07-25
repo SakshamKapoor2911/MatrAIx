@@ -1,0 +1,797 @@
+schemaVersion: "1.0"
+id: music_streaming_services_v1
+title: "Music Streaming Services Survey"
+description: "How people listen to music through streaming services, including which services and plans they use, listening habits, and what they value in a service."
+questions:
+  - id: q0
+    prompt: "Do you listen to music through streaming services or apps?"
+    type: single_choice
+    construct: listen_music_through_streaming_services
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, every day"
+      - id: "b"
+        label: "Yes, a few times a week"
+      - id: "c"
+        label: "Yes, occasionally"
+      - id: "d"
+        label: "No, I don't stream music"
+  - id: q1
+    prompt: "How long have you been using music streaming services?"
+    type: single_choice
+    construct: long_have_been_using_music
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 7 years"
+      - id: "d"
+        label: "8 or more years"
+  - id: q2
+    prompt: "Which music streaming services have you used in the past 3 months? (Select all that apply)"
+    type: multi_choice
+    construct: music_streaming_services_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Spotify"
+      - id: "b"
+        label: "Apple Music"
+      - id: "c"
+        label: "YouTube Music"
+      - id: "d"
+        label: "Amazon Music"
+      - id: "e"
+        label: "Pandora"
+      - id: "f"
+        label: "SoundCloud"
+      - id: "g"
+        label: "Tidal"
+      - id: "h"
+        label: "Deezer"
+      - id: "i"
+        label: "iHeartRadio"
+      - id: "j"
+        label: "YouTube (free, for music)"
+      - id: "k"
+        label: "Other"
+  - id: q3
+    prompt: "Which music streaming service do you use most often?"
+    type: single_choice
+    construct: music_streaming_service_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Spotify"
+      - id: "b"
+        label: "Apple Music"
+      - id: "c"
+        label: "YouTube Music"
+      - id: "d"
+        label: "Amazon Music"
+      - id: "e"
+        label: "Pandora"
+      - id: "f"
+        label: "SoundCloud"
+      - id: "g"
+        label: "Tidal"
+      - id: "h"
+        label: "Other"
+  - id: q4
+    prompt: "What type of plan do you have on your main service?"
+    type: single_choice
+    construct: type_plan_have_main_service
+    required: true
+    options:
+      - id: "a"
+        label: "Free ad-supported plan"
+      - id: "b"
+        label: "Individual paid plan"
+      - id: "c"
+        label: "Family plan"
+      - id: "d"
+        label: "Student plan"
+      - id: "e"
+        label: "Duo or couples plan"
+      - id: "f"
+        label: "Bundled with another service (e.g., phone or Prime)"
+      - id: "g"
+        label: "Not sure"
+  - id: q5
+    prompt: "Roughly how much do you spend per month on music streaming?"
+    type: free_text
+    construct: roughly_much_spend_per_month
+    required: true
+  - id: q6
+    prompt: "On a typical day, about how many hours do you spend listening to streamed music?"
+    type: single_choice
+    construct: typical_day_many_hours_spend
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 30 minutes"
+      - id: "b"
+        label: "30 minutes to 1 hour"
+      - id: "c"
+        label: "1 to 2 hours"
+      - id: "d"
+        label: "2 to 4 hours"
+      - id: "e"
+        label: "More than 4 hours"
+  - id: q7
+    prompt: "Which devices do you use to listen to streamed music? (Select all that apply)"
+    type: multi_choice
+    construct: devices_use_listen_streamed_music
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "Laptop or desktop computer"
+      - id: "c"
+        label: "Tablet"
+      - id: "d"
+        label: "Smart speaker (Echo, HomePod, Nest)"
+      - id: "e"
+        label: "Smart TV or streaming device"
+      - id: "f"
+        label: "Car audio system"
+      - id: "g"
+        label: "Wearable (smartwatch)"
+      - id: "h"
+        label: "Game console"
+  - id: q8
+    prompt: "When do you most often listen to music? (Select all that apply)"
+    type: multi_choice
+    construct: when_most_often_listen_music
+    required: true
+    options:
+      - id: "a"
+        label: "Commuting or driving"
+      - id: "b"
+        label: "Working or studying"
+      - id: "c"
+        label: "Exercising"
+      - id: "d"
+        label: "Doing chores"
+      - id: "e"
+        label: "Relaxing at home"
+      - id: "f"
+        label: "Cooking"
+      - id: "g"
+        label: "Falling asleep"
+      - id: "h"
+        label: "Socializing or at parties"
+      - id: "i"
+        label: "Walking or running"
+  - id: q9
+    prompt: "How do you usually discover new music? (Select all that apply)"
+    type: multi_choice
+    construct: usually_discover_new_music_select
+    required: true
+    options:
+      - id: "a"
+        label: "Algorithmic playlists (e.g., Discover Weekly, radio)"
+      - id: "b"
+        label: "Editorial or curated playlists"
+      - id: "c"
+        label: "Recommendations from friends"
+      - id: "d"
+        label: "Social media (TikTok, Instagram, etc.)"
+      - id: "e"
+        label: "YouTube"
+      - id: "f"
+        label: "Radio (traditional or online)"
+      - id: "g"
+        label: "Live shows and concerts"
+      - id: "h"
+        label: "Browsing charts and new releases"
+      - id: "i"
+        label: "I mostly listen to music I already know"
+  - id: q10
+    prompt: "How often do you use the following — Create or edit your own playlists"
+    type: single_choice
+    construct: often_use_following_create_edit
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q11
+    prompt: "How often do you use the following — Listen to algorithm-generated playlists or radio"
+    type: single_choice
+    construct: often_use_following_listen_algorithm
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q12
+    prompt: "How often do you use the following — Save or like songs to your library"
+    type: single_choice
+    construct: often_use_following_save_like
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q13
+    prompt: "How often do you use the following — Download music for offline listening"
+    type: single_choice
+    construct: often_use_following_download_music
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q14
+    prompt: "How often do you use the following — Share songs or playlists with others"
+    type: single_choice
+    construct: often_use_following_share_songs
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q15
+    prompt: "Do you also listen to podcasts or audiobooks through your music streaming app?"
+    type: single_choice
+    construct: also_listen_podcasts_audiobooks_through
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, sometimes"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "No"
+  - id: q16
+    prompt: "Which genres do you listen to most? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: genres_listen_most_select_top
+    required: true
+    options:
+      - id: "a"
+        label: "Pop"
+      - id: "b"
+        label: "Hip-hop / Rap"
+      - id: "c"
+        label: "Rock"
+      - id: "d"
+        label: "R&B / Soul"
+      - id: "e"
+        label: "Country"
+      - id: "f"
+        label: "Electronic / Dance"
+      - id: "g"
+        label: "Latin"
+      - id: "h"
+        label: "Jazz"
+      - id: "i"
+        label: "Classical"
+      - id: "j"
+        label: "Metal"
+      - id: "k"
+        label: "Indie / Alternative"
+      - id: "l"
+        label: "Folk / Acoustic"
+      - id: "m"
+        label: "Reggae / Reggaeton"
+      - id: "n"
+        label: "Christian / Gospel"
+  - id: q17
+    prompt: "Please rate your agreement — I get good value for the money I spend on music streaming"
+    type: single_choice
+    construct: please_rate_agreement_i_get
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "Please rate your agreement — The recommendations I get help me find music I enjoy"
+    type: single_choice
+    construct: please_rate_agreement_recommendations_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "Please rate your agreement — Music streaming is an important part of my daily routine"
+    type: single_choice
+    construct: please_rate_agreement_music_streaming
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Please rate your agreement — I care about the audio quality of the music I stream"
+    type: single_choice
+    construct: please_rate_agreement_i_care
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "Please rate your agreement — I would switch services to save money"
+    type: single_choice
+    construct: please_rate_agreement_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How important are the following features to you — Large music catalog"
+    type: single_choice
+    construct: important_following_features_large_music
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important are the following features to you — Quality of personalized recommendations"
+    type: single_choice
+    construct: important_following_features_quality_per
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important are the following features to you — High-fidelity or lossless audio"
+    type: single_choice
+    construct: important_following_features_high_fideli
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important are the following features to you — Offline downloads"
+    type: single_choice
+    construct: important_following_features_offline_dow
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important are the following features to you — Ad-free listening"
+    type: single_choice
+    construct: important_following_features_ad_free
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important are the following features to you — Low price"
+    type: single_choice
+    construct: important_following_features_low_price
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Have you ever switched your main music streaming service?"
+    type: single_choice
+    construct: have_ever_switched_main_music
+    required: true
+    options:
+      - id: "a"
+        label: "No, I've always used the same one"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "Yes, a few times"
+      - id: "d"
+        label: "Yes, many times"
+  - id: q29
+    prompt: "If you use a free plan, how bothered are you by the ads?"
+    type: single_choice
+    construct: if_use_free_plan_bothered
+    required: true
+    options:
+      - id: "a"
+        label: "Very bothered"
+      - id: "b"
+        label: "Somewhat bothered"
+      - id: "c"
+        label: "Not very bothered"
+      - id: "d"
+        label: "Not at all bothered"
+      - id: "e"
+        label: "Not applicable, I use a paid plan"
+  - id: q30
+    prompt: "Do you still buy or own music in any of these forms? (Select all that apply)"
+    type: multi_choice
+    construct: still_buy_own_music_any
+    required: true
+    options:
+      - id: "a"
+        label: "Digital downloads (e.g., iTunes purchases)"
+      - id: "b"
+        label: "CDs"
+      - id: "c"
+        label: "Vinyl records"
+      - id: "d"
+        label: "Cassette tapes"
+      - id: "e"
+        label: "No, I only stream"
+  - id: q31
+    prompt: "How do you feel about how much artists are paid by streaming services?"
+    type: single_choice
+    construct: feel_much_artists_paid_by
+    required: true
+    options:
+      - id: "a"
+        label: "They are paid fairly"
+      - id: "b"
+        label: "They are paid somewhat unfairly"
+      - id: "c"
+        label: "They are paid very unfairly"
+      - id: "d"
+        label: "I don't have an opinion"
+  - id: q32
+    prompt: "Roughly how many playlists have you created or saved on your main service?"
+    type: free_text
+    construct: roughly_many_playlists_have_created
+    required: true
+  - id: q33
+    prompt: "Do you use a features like year-in-review recaps (e.g., Spotify Wrapped)?"
+    type: single_choice
+    construct: use_features_like_year_review
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I look forward to it"
+      - id: "b"
+        label: "Yes, but I'm indifferent"
+      - id: "c"
+        label: "No, but I know about it"
+      - id: "d"
+        label: "No, I've never heard of it"
+  - id: q34
+    prompt: "Over the next year, how do you expect your music streaming spending to change?"
+    type: single_choice
+    construct: over_next_year_expect_music
+    required: true
+    options:
+      - id: "a"
+        label: "Decrease a lot"
+      - id: "b"
+        label: "Decrease somewhat"
+      - id: "c"
+        label: "Stay about the same"
+      - id: "d"
+        label: "Increase somewhat"
+      - id: "e"
+        label: "Increase a lot"
+  - id: q35
+    prompt: "Overall, how satisfied are you with your main music streaming service?"
+    type: single_choice
+    construct: overall_satisfied_main_music_streaming
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "How likely are you to recommend your main music service to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_main_music_service
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q37
+    prompt: "What would most improve your music streaming experience?"
+    type: free_text
+    construct: would_most_improve_music_streaming
+    required: true
+  - id: q38
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelance"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed, looking for work"
+      - id: "f"
+        label: "Not employed, not looking"
+      - id: "g"
+        label: "Retired"
+  - id: q44
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q45
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q46
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

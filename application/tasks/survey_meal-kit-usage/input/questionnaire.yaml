@@ -1,0 +1,902 @@
+schemaVersion: "1.0"
+id: meal_kit_usage_v1
+title: "Meal-Kit Usage Survey"
+description: "How people use meal-kit subscription services and how they judge their value."
+questions:
+  - id: q0
+    prompt: "Which best describes your experience with meal-kit subscription services?"
+    type: single_choice
+    construct: best_describes_experience_meal_kit
+    required: true
+    options:
+      - id: "a"
+        label: "I currently subscribe to one or more"
+      - id: "b"
+        label: "I subscribed in the past but not now"
+      - id: "c"
+        label: "I have never subscribed but I am interested"
+      - id: "d"
+        label: "I have never subscribed and I am not interested"
+  - id: q1
+    prompt: "How long have you used meal-kit services in total?"
+    type: single_choice
+    construct: long_have_used_meal_kit
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 3 months"
+      - id: "b"
+        label: "3 to 6 months"
+      - id: "c"
+        label: "6 months to 1 year"
+      - id: "d"
+        label: "1 to 3 years"
+      - id: "e"
+        label: "More than 3 years"
+      - id: "f"
+        label: "This does not apply to me"
+  - id: q2
+    prompt: "Which meal-kit service do you use most often (or used most recently)?"
+    type: single_choice
+    construct: meal_kit_service_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "HelloFresh"
+      - id: "b"
+        label: "Blue Apron"
+      - id: "c"
+        label: "Home Chef"
+      - id: "d"
+        label: "EveryPlate"
+      - id: "e"
+        label: "Factor"
+      - id: "f"
+        label: "Green Chef"
+      - id: "g"
+        label: "Marley Spoon"
+      - id: "h"
+        label: "Another service"
+      - id: "i"
+        label: "I have never used one"
+  - id: q3
+    prompt: "Which meal-kit services have you ever tried? (Select all that apply)"
+    type: multi_choice
+    construct: meal_kit_services_have_ever
+    required: true
+    options:
+      - id: "a"
+        label: "HelloFresh"
+      - id: "b"
+        label: "Blue Apron"
+      - id: "c"
+        label: "Home Chef"
+      - id: "d"
+        label: "EveryPlate"
+      - id: "e"
+        label: "Factor"
+      - id: "f"
+        label: "Green Chef"
+      - id: "g"
+        label: "Marley Spoon"
+      - id: "h"
+        label: "Sunbasket"
+      - id: "i"
+        label: "Purple Carrot"
+      - id: "j"
+        label: "I have never tried one"
+  - id: q4
+    prompt: "How many meal-kit boxes do you typically receive per month?"
+    type: single_choice
+    construct: many_meal_kit_boxes_typically
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1"
+      - id: "b"
+        label: "1 to 2"
+      - id: "c"
+        label: "3 to 4"
+      - id: "d"
+        label: "5 or more"
+      - id: "e"
+        label: "This does not apply to me"
+  - id: q5
+    prompt: "How many meals per box do you usually order?"
+    type: single_choice
+    construct: many_meals_per_box_usually
+    required: true
+    options:
+      - id: "a"
+        label: "2 meals"
+      - id: "b"
+        label: "3 meals"
+      - id: "c"
+        label: "4 meals"
+      - id: "d"
+        label: "5 or more meals"
+      - id: "e"
+        label: "This does not apply to me"
+  - id: q6
+    prompt: "How many people do you usually cook for with each meal kit?"
+    type: single_choice
+    construct: many_people_usually_cook_each
+    required: true
+    options:
+      - id: "a"
+        label: "Just myself"
+      - id: "b"
+        label: "2 people"
+      - id: "c"
+        label: "3 to 4 people"
+      - id: "d"
+        label: "5 or more people"
+      - id: "e"
+        label: "This does not apply to me"
+  - id: q7
+    prompt: "What first led you to try a meal-kit service?"
+    type: single_choice
+    construct: first_led_try_meal_kit
+    required: true
+    options:
+      - id: "a"
+        label: "Save time on meal planning"
+      - id: "b"
+        label: "Learn to cook new recipes"
+      - id: "c"
+        label: "Eat healthier"
+      - id: "d"
+        label: "Reduce food waste"
+      - id: "e"
+        label: "A promotion or discount"
+      - id: "f"
+        label: "A friend or family recommendation"
+      - id: "g"
+        label: "This does not apply to me"
+  - id: q8
+    prompt: "Which reasons make meal kits appealing to you? (Select all that apply)"
+    type: multi_choice
+    construct: reasons_make_meal_kits_appealing
+    required: true
+    options:
+      - id: "a"
+        label: "Saves time on planning"
+      - id: "b"
+        label: "Saves time shopping"
+      - id: "c"
+        label: "Portioned ingredients reduce waste"
+      - id: "d"
+        label: "Helps me try new recipes"
+      - id: "e"
+        label: "Helps me eat healthier"
+      - id: "f"
+        label: "Convenient delivery"
+      - id: "g"
+        label: "Good for busy weeknights"
+      - id: "h"
+        label: "Fun to cook"
+      - id: "i"
+        label: "None of these"
+  - id: q9
+    prompt: "Which meal-kit plan types do you usually choose? (Select all that apply)"
+    type: multi_choice
+    construct: meal_kit_plan_types_usually
+    required: true
+    options:
+      - id: "a"
+        label: "Standard or classic"
+      - id: "b"
+        label: "Vegetarian"
+      - id: "c"
+        label: "Calorie-smart or lighter"
+      - id: "d"
+        label: "Family-friendly"
+      - id: "e"
+        label: "Quick or 20-minute meals"
+      - id: "f"
+        label: "Prepared or heat-and-eat"
+      - id: "g"
+        label: "Pescatarian or seafood"
+      - id: "h"
+        label: "I do not choose a specific plan"
+  - id: q10
+    prompt: "About how much do you pay per serving with your meal kit, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_pay_per_serving_meal
+    required: true
+  - id: q11
+    prompt: "About how much do you spend on meal kits per month, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_spend_meal_kits_per
+    required: true
+  - id: q12
+    prompt: "How does the cost of meal kits compare to grocery shopping for the same meals?"
+    type: single_choice
+    construct: does_cost_meal_kits_compare
+    required: true
+    options:
+      - id: "a"
+        label: "Much cheaper"
+      - id: "b"
+        label: "Somewhat cheaper"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat more expensive"
+      - id: "e"
+        label: "Much more expensive"
+  - id: q13
+    prompt: "How often do you cook the meal kits within the recommended time?"
+    type: single_choice
+    construct: often_cook_meal_kits_within
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q14
+    prompt: "On average, how long do the recipes take you to prepare?"
+    type: single_choice
+    construct: average_long_recipes_take_prepare
+    required: true
+    options:
+      - id: "a"
+        label: "Under 20 minutes"
+      - id: "b"
+        label: "20 to 30 minutes"
+      - id: "c"
+        label: "30 to 45 minutes"
+      - id: "d"
+        label: "45 minutes to an hour"
+      - id: "e"
+        label: "More than an hour"
+  - id: q15
+    prompt: "How much do you agree: Meal kits save me time overall."
+    type: single_choice
+    construct: much_agree_meal_kits_save
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: Meal kits are a good value for the money."
+    type: single_choice
+    construct: much_agree_meal_kits_good
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: Meal kits have helped me eat healthier."
+    type: single_choice
+    construct: much_agree_meal_kits_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Meal kits have improved my cooking skills."
+    type: single_choice
+    construct: much_agree_meal_kits_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: The packaging waste from meal kits bothers me."
+    type: single_choice
+    construct: much_agree_packaging_waste_from
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: Meal kits reduce how much food I waste."
+    type: single_choice
+    construct: much_agree_meal_kits_reduce
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: I could easily cancel or pause my meal-kit subscription."
+    type: single_choice
+    construct: much_agree_i_could_easily
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "When choosing a meal-kit service, how important is price per serving?"
+    type: single_choice
+    construct: when_choosing_meal_kit_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing a meal-kit service, how important is recipe variety?"
+    type: single_choice
+    construct: when_choosing_meal_kit_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a meal-kit service, how important is ingredient quality?"
+    type: single_choice
+    construct: when_choosing_meal_kit_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a meal-kit service, how important is quick preparation time?"
+    type: single_choice
+    construct: when_choosing_meal_kit_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a meal-kit service, how important are dietary or menu options?"
+    type: single_choice
+    construct: when_choosing_meal_kit_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a meal-kit service, how important is flexible scheduling and skipping weeks?"
+    type: single_choice
+    construct: when_choosing_meal_kit_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Which are the top 3 factors when choosing a meal-kit service? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Price per serving"
+      - id: "b"
+        label: "Recipe variety"
+      - id: "c"
+        label: "Ingredient quality"
+      - id: "d"
+        label: "Quick preparation"
+      - id: "e"
+        label: "Dietary or menu options"
+      - id: "f"
+        label: "Flexible scheduling"
+      - id: "g"
+        label: "Delivery reliability"
+      - id: "h"
+        label: "Portion size"
+  - id: q29
+    prompt: "Which problems have you experienced with meal kits? (Select all that apply)"
+    type: multi_choice
+    construct: problems_have_experienced_meal_kits
+    required: true
+    options:
+      - id: "a"
+        label: "Missing or damaged ingredients"
+      - id: "b"
+        label: "Ingredients not fresh on arrival"
+      - id: "c"
+        label: "Late or missed deliveries"
+      - id: "d"
+        label: "Too much packaging"
+      - id: "e"
+        label: "Recipes took longer than stated"
+      - id: "f"
+        label: "Portions too small"
+      - id: "g"
+        label: "Hard to pause or cancel"
+      - id: "h"
+        label: "Billing or charge issues"
+      - id: "i"
+        label: "I have had no real problems"
+  - id: q30
+    prompt: "How do you usually handle weeks when you do not want a box?"
+    type: single_choice
+    construct: usually_handle_weeks_when_not
+    required: true
+    options:
+      - id: "a"
+        label: "I skip the week in the app"
+      - id: "b"
+        label: "I pause my subscription"
+      - id: "c"
+        label: "I change the delivery date"
+      - id: "d"
+        label: "I receive it anyway"
+      - id: "e"
+        label: "This does not apply to me"
+  - id: q31
+    prompt: "Besides meal kits, which other food options do you regularly use? (Select all that apply)"
+    type: multi_choice
+    construct: besides_meal_kits_other_food
+    required: true
+    options:
+      - id: "a"
+        label: "Traditional grocery shopping"
+      - id: "b"
+        label: "Grocery delivery (Instacart, Amazon Fresh)"
+      - id: "c"
+        label: "Restaurant takeout"
+      - id: "d"
+        label: "Food delivery apps (DoorDash, Uber Eats)"
+      - id: "e"
+        label: "Frozen prepared meals"
+      - id: "f"
+        label: "Meal prep on my own"
+      - id: "g"
+        label: "Dining out in person"
+  - id: q32
+    prompt: "How often do meal kits replace a meal you would otherwise get from a restaurant or takeout?"
+    type: single_choice
+    construct: often_meal_kits_replace_meal
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q33
+    prompt: "How did you first hear about the meal-kit service you use? (Select all that apply)"
+    type: multi_choice
+    construct: did_first_hear_meal_kit
+    required: true
+    options:
+      - id: "a"
+        label: "Social media ad"
+      - id: "b"
+        label: "TV or streaming ad"
+      - id: "c"
+        label: "Podcast ad or promo code"
+      - id: "d"
+        label: "Friend or family referral"
+      - id: "e"
+        label: "Online search"
+      - id: "f"
+        label: "Influencer recommendation"
+      - id: "g"
+        label: "Discount or coupon site"
+  - id: q34
+    prompt: "How satisfied are you with the recipe variety of your meal-kit service?"
+    type: single_choice
+    construct: satisfied_recipe_variety_meal_kit
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "How satisfied are you with the ingredient quality and freshness?"
+    type: single_choice
+    construct: satisfied_ingredient_quality_freshness
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "How satisfied are you with the delivery reliability?"
+    type: single_choice
+    construct: satisfied_delivery_reliability
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "Overall, how satisfied are you with your meal-kit service?"
+    type: single_choice
+    construct: overall_satisfied_meal_kit_service
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "How likely are you to recommend your meal-kit service to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_meal_kit_service
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q39
+    prompt: "How likely are you to keep your meal-kit subscription over the next year?"
+    type: single_choice
+    construct: likely_keep_meal_kit_subscription
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q40
+    prompt: "How likely are you to try a different meal-kit service in the next year?"
+    type: single_choice
+    construct: likely_try_different_meal_kit
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q41
+    prompt: "What is one thing that would make your meal-kit experience better? (Optional short answer)"
+    type: free_text
+    construct: one_thing_that_would_make
+    required: false
+  - id: q42
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q43
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q47
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q48
+    prompt: "How many people, including you, live in your household?"
+    type: single_choice
+    construct: many_people_including_live_household
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q49
+    prompt: "Do children under 18 live in your household?"
+    type: single_choice
+    construct: children_under_18_live_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q50
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship, not married"
+      - id: "c"
+        label: "Married"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q52
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

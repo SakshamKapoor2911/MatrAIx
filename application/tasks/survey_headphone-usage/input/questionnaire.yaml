@@ -1,0 +1,725 @@
+schemaVersion: "1.0"
+id: headphone_usage_v1
+title: "Headphone Usage Survey"
+description: "Everyday use of headphones and earbuds — device types and brands, listening habits, features valued, and attitudes toward sound quality and hearing safety."
+questions:
+  - id: q0
+    prompt: "How often do you use headphones or earbuds?"
+    type: single_choice
+    construct: often_use_headphones_earbuds
+    required: true
+    options:
+      - id: "a"
+        label: "Many hours every day"
+      - id: "b"
+        label: "Daily, but not for long"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Occasionally"
+      - id: "e"
+        label: "Rarely"
+  - id: q1
+    prompt: "Which types of headphones or earbuds do you own? (Select all that apply)"
+    type: multi_choice
+    construct: types_headphones_earbuds_own_select
+    required: true
+    options:
+      - id: "a"
+        label: "True wireless earbuds (e.g., AirPods)"
+      - id: "b"
+        label: "Wireless over-ear headphones"
+      - id: "c"
+        label: "Wireless on-ear headphones"
+      - id: "d"
+        label: "Wired earbuds"
+      - id: "e"
+        label: "Wired over-ear or on-ear headphones"
+      - id: "f"
+        label: "Neckband / wireless in-ear"
+      - id: "g"
+        label: "Bone conduction headphones"
+      - id: "h"
+        label: "Gaming headset"
+      - id: "i"
+        label: "None of these"
+  - id: q2
+    prompt: "Which type do you use MOST often?"
+    type: single_choice
+    construct: type_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "True wireless earbuds"
+      - id: "b"
+        label: "Wireless over-ear headphones"
+      - id: "c"
+        label: "Wired earbuds"
+      - id: "d"
+        label: "Wired over-ear headphones"
+      - id: "e"
+        label: "Gaming headset"
+      - id: "f"
+        label: "Bone conduction / other"
+  - id: q3
+    prompt: "How many pairs of headphones or earbuds do you currently own? Enter a whole number."
+    type: free_text
+    construct: many_pairs_headphones_earbuds_currently
+    required: true
+  - id: q4
+    prompt: "Which headphone/earbud brands do you own? (Select all that apply)"
+    type: multi_choice
+    construct: headphone_earbud_brands_own_select
+    required: true
+    options:
+      - id: "a"
+        label: "Apple (AirPods, Beats)"
+      - id: "b"
+        label: "Sony"
+      - id: "c"
+        label: "Bose"
+      - id: "d"
+        label: "Samsung (Galaxy Buds)"
+      - id: "e"
+        label: "Sennheiser"
+      - id: "f"
+        label: "JBL"
+      - id: "g"
+        label: "Anker / Soundcore"
+      - id: "h"
+        label: "Jabra"
+      - id: "i"
+        label: "Audio-Technica"
+      - id: "j"
+        label: "Skullcandy"
+      - id: "k"
+        label: "Other"
+  - id: q5
+    prompt: "What do you use headphones for? (Select all that apply)"
+    type: multi_choice
+    construct: use_headphones_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Music"
+      - id: "b"
+        label: "Podcasts and audiobooks"
+      - id: "c"
+        label: "Phone and video calls"
+      - id: "d"
+        label: "Gaming"
+      - id: "e"
+        label: "Watching videos / streaming"
+      - id: "f"
+        label: "Working out / exercise"
+      - id: "g"
+        label: "Focus / blocking out noise at work"
+      - id: "h"
+        label: "Commuting / travel"
+      - id: "i"
+        label: "Sleeping or relaxation"
+  - id: q6
+    prompt: "Roughly how many hours per day do you wear headphones? Enter a whole number."
+    type: free_text
+    construct: roughly_many_hours_per_day
+    required: true
+  - id: q7
+    prompt: "Where do you use headphones most? (Select all that apply)"
+    type: multi_choice
+    construct: where_use_headphones_most_select
+    required: true
+    options:
+      - id: "a"
+        label: "At home"
+      - id: "b"
+        label: "At work or school"
+      - id: "c"
+        label: "Commuting / on public transit"
+      - id: "d"
+        label: "At the gym / exercising"
+      - id: "e"
+        label: "Walking or running outdoors"
+      - id: "f"
+        label: "Traveling (flights, trips)"
+  - id: q8
+    prompt: "How do your primary headphones connect?"
+    type: single_choice
+    construct: primary_headphones_connect
+    required: true
+    options:
+      - id: "a"
+        label: "Bluetooth wireless"
+      - id: "b"
+        label: "Wired (3.5mm jack)"
+      - id: "c"
+        label: "Wired (USB-C or Lightning)"
+      - id: "d"
+        label: "Wireless with a USB dongle"
+      - id: "e"
+        label: "Not sure"
+  - id: q9
+    prompt: "Do your primary headphones have active noise cancellation (ANC)?"
+    type: single_choice
+    construct: primary_headphones_have_active_noise
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I use it often"
+      - id: "b"
+        label: "Yes, but I rarely use it"
+      - id: "c"
+        label: "No, but I'd like it"
+      - id: "d"
+        label: "No, and I don't need it"
+      - id: "e"
+        label: "Not sure"
+  - id: q10
+    prompt: "Roughly how much did you spend on your primary headphones? Enter a whole-dollar amount (US$)."
+    type: free_text
+    construct: roughly_much_did_spend_primary
+    required: true
+  - id: q11
+    prompt: "When buying headphones, how important is sound quality?"
+    type: single_choice
+    construct: when_buying_headphones_important_sound
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q12
+    prompt: "When buying headphones, how important is comfort and fit?"
+    type: single_choice
+    construct: when_buying_headphones_important_comfort
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q13
+    prompt: "When buying headphones, how important is noise cancellation?"
+    type: single_choice
+    construct: when_buying_headphones_important_noise
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q14
+    prompt: "When buying headphones, how important is battery life?"
+    type: single_choice
+    construct: when_buying_headphones_important_battery
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q15
+    prompt: "When buying headphones, how important is price?"
+    type: single_choice
+    construct: when_buying_headphones_important_price
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "When buying headphones, how important is the brand?"
+    type: single_choice
+    construct: when_buying_headphones_important_brand
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "When buying headphones, how important is microphone/call quality?"
+    type: single_choice
+    construct: when_buying_headphones_important_microph
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "Which THREE features matter most to you in headphones? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: three_features_matter_most_headphones
+    required: true
+    options:
+      - id: "a"
+        label: "Sound quality"
+      - id: "b"
+        label: "Comfort and fit"
+      - id: "c"
+        label: "Noise cancellation"
+      - id: "d"
+        label: "Battery life"
+      - id: "e"
+        label: "Price / value"
+      - id: "f"
+        label: "Microphone / call quality"
+      - id: "g"
+        label: "Portability"
+      - id: "h"
+        label: "Water/sweat resistance"
+      - id: "i"
+        label: "Brand"
+      - id: "j"
+        label: "Design and looks"
+  - id: q19
+    prompt: "How much do you agree: Good sound quality is worth paying extra for."
+    type: single_choice
+    construct: much_agree_good_sound_quality
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: I could not get through my day comfortably without headphones."
+    type: single_choice
+    construct: much_agree_i_could_not
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: I am concerned about hearing damage from headphone use."
+    type: single_choice
+    construct: much_agree_i_am_concerned
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: Noise cancellation greatly improves my listening experience."
+    type: single_choice
+    construct: much_agree_noise_cancellation_greatly
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How much do you agree: I prefer true wireless earbuds over wired or over-ear options."
+    type: single_choice
+    construct: much_agree_i_prefer_true
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "How often do you listen at high volume?"
+    type: single_choice
+    construct: often_listen_high_volume
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q25
+    prompt: "Do you use volume-limiting or hearing-safety features?"
+    type: single_choice
+    construct: use_volume_limiting_hearing_safety
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I know about them"
+      - id: "d"
+        label: "No, and I wasn't aware of them"
+  - id: q26
+    prompt: "How often do you replace your headphones/earbuds?"
+    type: single_choice
+    construct: often_replace_headphones_earbuds
+    required: true
+    options:
+      - id: "a"
+        label: "Every year or less"
+      - id: "b"
+        label: "Every 2-3 years"
+      - id: "c"
+        label: "Every 4-5 years"
+      - id: "d"
+        label: "Only when they break or wear out"
+      - id: "e"
+        label: "I keep them indefinitely"
+  - id: q27
+    prompt: "What usually prompts you to replace headphones? (Select all that apply)"
+    type: multi_choice
+    construct: usually_prompts_replace_headphones_selec
+    required: true
+    options:
+      - id: "a"
+        label: "They broke or stopped working"
+      - id: "b"
+        label: "Battery no longer holds a charge"
+      - id: "c"
+        label: "Worn ear tips or padding"
+      - id: "d"
+        label: "Lost one or the whole pair"
+      - id: "e"
+        label: "Wanted better sound or features"
+      - id: "f"
+        label: "Upgraded to a newer model"
+      - id: "g"
+        label: "Received a new pair as a gift"
+  - id: q28
+    prompt: "What frustrates you most about your headphones? (Select all that apply)"
+    type: multi_choice
+    construct: frustrates_most_headphones_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Battery life"
+      - id: "b"
+        label: "Comfort / fit"
+      - id: "c"
+        label: "Sound quality"
+      - id: "d"
+        label: "Connection dropouts"
+      - id: "e"
+        label: "Call/microphone quality"
+      - id: "f"
+        label: "Durability"
+      - id: "g"
+        label: "Losing earbuds"
+      - id: "h"
+        label: "Nothing frustrates me"
+  - id: q29
+    prompt: "Overall, how satisfied are you with your primary headphones?"
+    type: single_choice
+    construct: overall_satisfied_primary_headphones
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How likely are you to buy new headphones in the next 12 months?"
+    type: single_choice
+    construct: likely_buy_new_headphones_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "How likely are you to recommend your primary headphones to others? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_headphones_othe
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "What would your ideal pair of headphones be like?"
+    type: free_text
+    construct: would_ideal_pair_headphones_be
+    required: true
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18-24"
+      - id: "b"
+        label: "25-34"
+      - id: "c"
+        label: "35-44"
+      - id: "d"
+        label: "45-54"
+      - id: "e"
+        label: "55-64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000-$49,999"
+      - id: "c"
+        label: "$50,000-$74,999"
+      - id: "d"
+        label: "$75,000-$99,999"
+      - id: "e"
+        label: "$100,000-$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Not currently employed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Which best describes where you live?"
+    type: single_choice
+    construct: best_describes_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q40
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q41
+    prompt: "What is your primary smartphone platform?"
+    type: single_choice
+    construct: primary_smartphone_platform
+    required: true
+    options:
+      - id: "a"
+        label: "iPhone (iOS)"
+      - id: "b"
+        label: "Android"
+      - id: "c"
+        label: "Other"
+      - id: "d"
+        label: "I don't use a smartphone"
+  - id: q42
+    prompt: "How would you describe yourself as an audio enthusiast?"
+    type: single_choice
+    construct: would_describe_yourself_as_audio
+    required: true
+    options:
+      - id: "a"
+        label: "Audiophile — I care deeply about sound quality"
+      - id: "b"
+        label: "Enthusiast — I appreciate good audio"
+      - id: "c"
+        label: "Casual listener"
+      - id: "d"
+        label: "I just need something functional"

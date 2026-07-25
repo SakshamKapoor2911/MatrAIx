@@ -1,0 +1,817 @@
+schemaVersion: "1.0"
+id: vpn_usage_v1
+title: "VPN Usage Survey"
+description: "How people use virtual private networks (VPNs) for online privacy, security on public Wi-Fi, and access to restricted content."
+questions:
+  - id: q0
+    prompt: "Do you currently use a VPN (virtual private network)?"
+    type: single_choice
+    construct: currently_use_vpn_virtual_private
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I use one regularly"
+      - id: "b"
+        label: "Yes, but only occasionally"
+      - id: "c"
+        label: "No, but I have used one in the past"
+      - id: "d"
+        label: "No, and I never have"
+      - id: "e"
+        label: "I'm not sure what a VPN is"
+  - id: q1
+    prompt: "How long have you been using a VPN?"
+    type: single_choice
+    construct: long_have_been_using_vpn
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+      - id: "f"
+        label: "I don't use one"
+  - id: q2
+    prompt: "What are the main types of VPN you use? (Select all that apply)"
+    type: multi_choice
+    construct: main_types_vpn_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "A personal/consumer VPN service I subscribe to"
+      - id: "b"
+        label: "A free VPN app"
+      - id: "c"
+        label: "A VPN provided by my employer for work"
+      - id: "d"
+        label: "A VPN provided by my school"
+      - id: "e"
+        label: "A VPN I set up myself (self-hosted)"
+      - id: "f"
+        label: "A VPN built into my browser or antivirus"
+      - id: "g"
+        label: "I don't use any VPN"
+  - id: q3
+    prompt: "What first made you start using a VPN? (Select all that apply)"
+    type: multi_choice
+    construct: first_made_start_using_vpn
+    required: true
+    options:
+      - id: "a"
+        label: "To protect my privacy from tracking"
+      - id: "b"
+        label: "To stay secure on public Wi-Fi"
+      - id: "c"
+        label: "To access geo-restricted streaming content"
+      - id: "d"
+        label: "Required by my employer or school"
+      - id: "e"
+        label: "To hide my browsing from my internet provider"
+      - id: "f"
+        label: "To bypass network or content restrictions"
+      - id: "g"
+        label: "A recommendation or ad convinced me"
+      - id: "h"
+        label: "I have never used one"
+  - id: q4
+    prompt: "Which VPN services do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: vpn_services_currently_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "NordVPN"
+      - id: "b"
+        label: "ExpressVPN"
+      - id: "c"
+        label: "Surfshark"
+      - id: "d"
+        label: "Proton VPN"
+      - id: "e"
+        label: "CyberGhost"
+      - id: "f"
+        label: "Mullvad"
+      - id: "g"
+        label: "Private Internet Access (PIA)"
+      - id: "h"
+        label: "A VPN built into my antivirus (Norton, McAfee, etc.)"
+      - id: "i"
+        label: "My employer's or school's VPN"
+      - id: "j"
+        label: "A free VPN app"
+      - id: "k"
+        label: "Other"
+      - id: "l"
+        label: "I don't use a VPN"
+  - id: q5
+    prompt: "Which do you consider your primary VPN?"
+    type: single_choice
+    construct: consider_primary_vpn
+    required: true
+    options:
+      - id: "a"
+        label: "NordVPN"
+      - id: "b"
+        label: "ExpressVPN"
+      - id: "c"
+        label: "Surfshark"
+      - id: "d"
+        label: "Proton VPN"
+      - id: "e"
+        label: "CyberGhost or PIA"
+      - id: "f"
+        label: "Mullvad"
+      - id: "g"
+        label: "A VPN bundled with antivirus"
+      - id: "h"
+        label: "My employer's or school's VPN"
+      - id: "i"
+        label: "A free VPN app"
+      - id: "j"
+        label: "Other"
+      - id: "k"
+        label: "Not applicable"
+  - id: q6
+    prompt: "What kind of plan do you have for your primary personal VPN?"
+    type: single_choice
+    construct: kind_plan_have_primary_personal
+    required: true
+    options:
+      - id: "a"
+        label: "Free plan"
+      - id: "b"
+        label: "Paid monthly plan"
+      - id: "c"
+        label: "Paid annual or multi-year plan"
+      - id: "d"
+        label: "Bundled with another product I pay for"
+      - id: "e"
+        label: "Provided by employer or school"
+      - id: "f"
+        label: "I don't know"
+      - id: "g"
+        label: "Not applicable"
+  - id: q7
+    prompt: "Approximately how much do you pay per year for a personal VPN, in U.S. dollars? Enter 0 if you pay nothing."
+    type: free_text
+    construct: approximately_much_pay_per_year
+    required: true
+  - id: q8
+    prompt: "On which devices do you use a VPN? (Select all that apply)"
+    type: multi_choice
+    construct: devices_use_vpn_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Windows PC"
+      - id: "b"
+        label: "Mac"
+      - id: "c"
+        label: "iPhone"
+      - id: "d"
+        label: "Android phone"
+      - id: "e"
+        label: "Tablet"
+      - id: "f"
+        label: "Smart TV or streaming device"
+      - id: "g"
+        label: "Router (whole home)"
+      - id: "h"
+        label: "I don't use a VPN on any device"
+  - id: q9
+    prompt: "What do you use a VPN for? (Select all that apply)"
+    type: multi_choice
+    construct: use_vpn_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Securing my connection on public Wi-Fi"
+      - id: "b"
+        label: "General privacy while browsing"
+      - id: "c"
+        label: "Accessing streaming content from other regions"
+      - id: "d"
+        label: "Working remotely / accessing company resources"
+      - id: "e"
+        label: "Hiding activity from my internet provider"
+      - id: "f"
+        label: "Bypassing website or network blocks"
+      - id: "g"
+        label: "Downloading files (e.g., torrents)"
+      - id: "h"
+        label: "Getting better prices while shopping or booking"
+      - id: "i"
+        label: "I don't use a VPN"
+  - id: q10
+    prompt: "How often do you have your VPN turned on?"
+    type: single_choice
+    construct: often_have_vpn_turned
+    required: true
+    options:
+      - id: "a"
+        label: "Always on"
+      - id: "b"
+        label: "Most of the time"
+      - id: "c"
+        label: "Only on public Wi-Fi"
+      - id: "d"
+        label: "Only for specific tasks"
+      - id: "e"
+        label: "Rarely"
+      - id: "f"
+        label: "Not applicable"
+  - id: q11
+    prompt: "About how many hours per week do you spend connected through a VPN? Enter a whole number."
+    type: free_text
+    construct: many_hours_per_week_spend
+    required: true
+  - id: q12
+    prompt: "Please rate your agreement: A VPN meaningfully improves my online privacy."
+    type: single_choice
+    construct: please_rate_agreement_vpn_meaningfully
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "Please rate your agreement: I trust my VPN provider not to log or sell my activity."
+    type: single_choice
+    construct: please_rate_agreement_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "Please rate your agreement: Using a VPN noticeably slows down my internet."
+    type: single_choice
+    construct: please_rate_agreement_using_vpn
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "Please rate your agreement: A VPN is worth paying for."
+    type: single_choice
+    construct: please_rate_agreement_vpn_worth
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "Please rate your agreement: I feel safer using public Wi-Fi when my VPN is on."
+    type: single_choice
+    construct: please_rate_agreement_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "Please rate your agreement: VPN marketing exaggerates how much protection they provide."
+    type: single_choice
+    construct: please_rate_agreement_vpn_marketing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How important is this when choosing a VPN: Strong privacy and no-logs policy"
+    type: single_choice
+    construct: important_this_when_choosing_vpn
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is this when choosing a VPN: Connection speed"
+    type: single_choice
+    construct: important_this_when_choosing_vpn
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is this when choosing a VPN: Price"
+    type: single_choice
+    construct: important_this_when_choosing_vpn
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is this when choosing a VPN: Number and location of servers"
+    type: single_choice
+    construct: important_this_when_choosing_vpn
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is this when choosing a VPN: Works with streaming services"
+    type: single_choice
+    construct: important_this_when_choosing_vpn
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is this when choosing a VPN: Ease of use across devices"
+    type: single_choice
+    construct: important_this_when_choosing_vpn
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How did you first hear about the VPN you use? (Select all that apply)"
+    type: multi_choice
+    construct: did_first_hear_vpn_use
+    required: true
+    options:
+      - id: "a"
+        label: "YouTube or podcast sponsorship"
+      - id: "b"
+        label: "Online ad or website banner"
+      - id: "c"
+        label: "Friend or family recommendation"
+      - id: "d"
+        label: "Tech review site"
+      - id: "e"
+        label: "App store"
+      - id: "f"
+        label: "Provided by work or school"
+      - id: "g"
+        label: "Social media"
+      - id: "h"
+        label: "I don't use a VPN"
+  - id: q25
+    prompt: "Have you ever stopped using a VPN after trying one? Why? (Select all that apply)"
+    type: multi_choice
+    construct: have_ever_stopped_using_vpn
+    required: true
+    options:
+      - id: "a"
+        label: "It slowed my connection too much"
+      - id: "b"
+        label: "It was too expensive"
+      - id: "c"
+        label: "I didn't feel I needed it"
+      - id: "d"
+        label: "It caused websites or apps to break"
+      - id: "e"
+        label: "It was confusing to use"
+      - id: "f"
+        label: "I switched to a different VPN"
+      - id: "g"
+        label: "I have never stopped using one"
+      - id: "h"
+        label: "I have never used one"
+  - id: q26
+    prompt: "How concerned are you about your online privacy in general?"
+    type: single_choice
+    construct: concerned_online_privacy_general
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q27
+    prompt: "Do you use a free VPN, and if so, do you have concerns about it?"
+    type: single_choice
+    construct: use_free_vpn_if_so
+    required: true
+    options:
+      - id: "a"
+        label: "I use a free VPN and have no concerns"
+      - id: "b"
+        label: "I use a free VPN but have some concerns"
+      - id: "c"
+        label: "I avoid free VPNs due to privacy concerns"
+      - id: "d"
+        label: "I only use paid VPNs"
+      - id: "e"
+        label: "I don't use any VPN"
+  - id: q28
+    prompt: "Select your top 3 reasons you use (or would use) a VPN. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_use
+    required: true
+    options:
+      - id: "a"
+        label: "Privacy from tracking and my internet provider"
+      - id: "b"
+        label: "Security on public Wi-Fi"
+      - id: "c"
+        label: "Accessing content from other regions"
+      - id: "d"
+        label: "Remote work access"
+      - id: "e"
+        label: "Bypassing restrictions or censorship"
+      - id: "f"
+        label: "Anonymity while downloading"
+      - id: "g"
+        label: "Finding better prices online"
+      - id: "h"
+        label: "Peace of mind"
+  - id: q29
+    prompt: "Overall, how satisfied are you with your current VPN?"
+    type: single_choice
+    construct: overall_satisfied_current_vpn
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "On a scale of 0 to 10, how likely are you to recommend using a VPN to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "How likely are you to keep using or renewing your VPN next year?"
+    type: single_choice
+    construct: likely_keep_using_renewing_vpn
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q32
+    prompt: "Are you considering switching to a different VPN provider?"
+    type: single_choice
+    construct: considering_switching_different_vpn_prov
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I'm actively looking"
+      - id: "b"
+        label: "Maybe, I'm somewhat interested"
+      - id: "c"
+        label: "No, I'm satisfied"
+      - id: "d"
+        label: "Not applicable"
+  - id: q33
+    prompt: "If you could change one thing about your VPN, what would it be? (Optional)"
+    type: free_text
+    construct: if_could_change_one_thing
+    required: false
+  - id: q34
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18 years old"
+      - id: "b"
+        label: "18-24 years old"
+      - id: "c"
+        label: "25-34 years old"
+      - id: "d"
+        label: "35-44 years old"
+      - id: "e"
+        label: "45-54 years old"
+      - id: "f"
+        label: "55-64 years old"
+      - id: "g"
+        label: "65 years or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed, looking for work"
+      - id: "f"
+        label: "Not employed, not looking for work"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "How many people live in your household, including you? Enter a whole number."
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q41
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or domestic partnership"
+      - id: "c"
+        label: "In a relationship, not living together"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "In which U.S. region do you live?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "How would you rate your overall comfort with technology?"
+    type: single_choice
+    construct: would_rate_overall_comfort_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Extremely comfortable — I'm the person others ask for help"
+  - id: q45
+    prompt: "Which best describes your work situation?"
+    type: single_choice
+    construct: best_describes_work_situation
+    required: true
+    options:
+      - id: "a"
+        label: "I work fully remotely"
+      - id: "b"
+        label: "I work in a hybrid arrangement"
+      - id: "c"
+        label: "I work fully on-site"
+      - id: "d"
+        label: "I'm a student"
+      - id: "e"
+        label: "I'm not currently working"
+      - id: "f"
+        label: "Prefer not to say"

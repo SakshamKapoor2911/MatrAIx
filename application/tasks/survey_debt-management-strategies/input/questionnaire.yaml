@@ -1,0 +1,620 @@
+schemaVersion: "1.0"
+id: debt_management_strategies_v1
+title: "Debt Management Strategies Survey"
+description: "How consumers carry, prioritize, and pay down their debts, and how they feel about it."
+questions:
+  - id: q0
+    prompt: "Do you currently have any debt (excluding a mortgage)?"
+    type: single_choice
+    construct: currently_have_any_debt_excluding
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Only a mortgage"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q1
+    prompt: "Which types of debt do you currently carry? (Select all that apply)"
+    type: multi_choice
+    construct: types_debt_currently_carry_select
+    required: true
+    options:
+      - id: "a"
+        label: "Credit card balances"
+      - id: "b"
+        label: "Auto loan"
+      - id: "c"
+        label: "Student loans"
+      - id: "d"
+        label: "Personal loan"
+      - id: "e"
+        label: "Medical debt"
+      - id: "f"
+        label: "Mortgage or home equity loan"
+      - id: "g"
+        label: "Buy-now-pay-later balances"
+      - id: "h"
+        label: "Payday or title loan"
+      - id: "i"
+        label: "None of these"
+  - id: q2
+    prompt: "Approximately how much total non-mortgage debt do you currently owe? Enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: approximately_much_total_non_mortgage
+    required: true
+  - id: q3
+    prompt: "How would you describe your total debt over the past year?"
+    type: single_choice
+    construct: would_describe_total_debt_over
+    required: true
+    options:
+      - id: "a"
+        label: "Decreasing steadily"
+      - id: "b"
+        label: "Staying about the same"
+      - id: "c"
+        label: "Slowly increasing"
+      - id: "d"
+        label: "Rapidly increasing"
+  - id: q4
+    prompt: "Which of the following debt-payoff strategies have you used? (Select all that apply)"
+    type: multi_choice
+    construct: following_debt_payoff_strategies_have
+    required: true
+    options:
+      - id: "a"
+        label: "Debt snowball (smallest balance first)"
+      - id: "b"
+        label: "Debt avalanche (highest interest first)"
+      - id: "c"
+        label: "Balance transfer to a lower-rate card"
+      - id: "d"
+        label: "Debt consolidation loan"
+      - id: "e"
+        label: "Credit counseling or a debt management plan"
+      - id: "f"
+        label: "Negotiating directly with creditors"
+      - id: "g"
+        label: "Just paying the minimums"
+      - id: "h"
+        label: "None of these"
+  - id: q5
+    prompt: "How do you usually pay your debts each month?"
+    type: single_choice
+    construct: usually_pay_debts_each_month
+    required: true
+    options:
+      - id: "a"
+        label: "Pay more than the minimum on all"
+      - id: "b"
+        label: "Pay more than the minimum on some"
+      - id: "c"
+        label: "Pay only the minimums"
+      - id: "d"
+        label: "Sometimes miss payments"
+      - id: "e"
+        label: "I have no debt payments"
+  - id: q6
+    prompt: "How much do you pay toward debt in a typical month (beyond a mortgage)? Enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_pay_toward_debt_typical
+    required: true
+  - id: q7
+    prompt: "Have you missed or been late on a debt payment in the past 12 months?"
+    type: single_choice
+    construct: have_missed_been_late_debt
+    required: true
+    options:
+      - id: "a"
+        label: "No, never"
+      - id: "b"
+        label: "Once"
+      - id: "c"
+        label: "A few times"
+      - id: "d"
+        label: "Frequently"
+      - id: "e"
+        label: "I have no debt payments"
+  - id: q8
+    prompt: "Do you use any tools or apps to track or manage your debt?"
+    type: single_choice
+    construct: use_any_tools_apps_track
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a dedicated debt-payoff app"
+      - id: "b"
+        label: "Yes, a budgeting app"
+      - id: "c"
+        label: "Yes, a spreadsheet"
+      - id: "d"
+        label: "No, I track it in my head"
+      - id: "e"
+        label: "I don't track it"
+  - id: q9
+    prompt: "How much do you agree with the following statement: My debt causes me significant stress."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree with the following statement: I have a clear plan to pay off my debt."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: My debt limits my ability to reach other financial goals."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: I feel in control of my debt."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: I understand the interest rates on all of my debts."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How often do you worry about your debt?"
+    type: single_choice
+    construct: often_worry_debt
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q15
+    prompt: "Which are the top 3 factors that matter most in how you tackle debt? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_that_matter
+    required: true
+    options:
+      - id: "a"
+        label: "Paying the least interest overall"
+      - id: "b"
+        label: "Getting quick wins to stay motivated"
+      - id: "c"
+        label: "Lowering my monthly payment"
+      - id: "d"
+        label: "Improving my credit score"
+      - id: "e"
+        label: "Being debt-free as fast as possible"
+      - id: "f"
+        label: "Simplifying to one payment"
+      - id: "g"
+        label: "Avoiding fees"
+      - id: "h"
+        label: "Keeping some cash savings"
+      - id: "i"
+        label: "Protecting my credit report"
+  - id: q16
+    prompt: "Have you ever used a debt consolidation loan or balance transfer?"
+    type: single_choice
+    construct: have_ever_used_debt_consolidation
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it helped"
+      - id: "b"
+        label: "Yes, but it didn't help much"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No"
+  - id: q17
+    prompt: "Have you ever worked with a credit counseling agency or entered a debt management plan?"
+    type: single_choice
+    construct: have_ever_worked_credit_counseling
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I've considered it"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure what that is"
+  - id: q18
+    prompt: "Have you ever considered or filed for bankruptcy?"
+    type: single_choice
+    construct: have_ever_considered_filed_bankruptcy
+    required: true
+    options:
+      - id: "a"
+        label: "Filed for bankruptcy"
+      - id: "b"
+        label: "Seriously considered it"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q19
+    prompt: "How confident are you that you will be free of high-interest debt within the next five years?"
+    type: single_choice
+    construct: confident_that_will_be_free
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q20
+    prompt: "Which is your single most urgent debt priority right now?"
+    type: single_choice
+    construct: single_most_urgent_debt_priority
+    required: true
+    options:
+      - id: "a"
+        label: "Paying off credit cards"
+      - id: "b"
+        label: "Paying off student loans"
+      - id: "c"
+        label: "Paying off the car"
+      - id: "d"
+        label: "Handling medical debt"
+      - id: "e"
+        label: "Just keeping up with minimums"
+      - id: "f"
+        label: "I have no urgent debt priority"
+  - id: q21
+    prompt: "Where do you go for information on managing debt? (Select all that apply)"
+    type: multi_choice
+    construct: where_go_information_managing_debt
+    required: true
+    options:
+      - id: "a"
+        label: "A bank or credit union"
+      - id: "b"
+        label: "A financial advisor or counselor"
+      - id: "c"
+        label: "Online articles and calculators"
+      - id: "d"
+        label: "Social media or influencers"
+      - id: "e"
+        label: "Friends and family"
+      - id: "f"
+        label: "Budgeting or debt apps"
+      - id: "g"
+        label: "I don't seek information"
+  - id: q22
+    prompt: "How much do you agree: I would rather aggressively pay off debt than invest extra money."
+    type: single_choice
+    construct: much_agree_i_would_rather
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "Overall, how manageable does your current debt feel?"
+    type: single_choice
+    construct: overall_manageable_does_current_debt
+    required: true
+    options:
+      - id: "a"
+        label: "Very manageable"
+      - id: "b"
+        label: "Somewhat manageable"
+      - id: "c"
+        label: "Somewhat unmanageable"
+      - id: "d"
+        label: "Completely unmanageable"
+      - id: "e"
+        label: "I have no debt"
+  - id: q24
+    prompt: "How satisfied are you with the progress you're making on your debt?"
+    type: single_choice
+    construct: satisfied_progress_re_making_debt
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q25
+    prompt: "How likely are you to take on new debt in the next 12 months?"
+    type: single_choice
+    construct: likely_take_new_debt_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q26
+    prompt: "If you have any final thoughts about managing debt, please share them here (optional)."
+    type: free_text
+    construct: if_have_any_final_thoughts
+    required: false
+  - id: q27
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q28
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q29
+    prompt: "Which of the following best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q30
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000–$199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q32
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force (student, homemaker)"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Unable to work"
+  - id: q33
+    prompt: "Including yourself, how many people live in your household? Enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q34
+    prompt: "How many children under 18 live in your household? Enter a number."
+    type: free_text
+    construct: many_children_under_18_live
+    required: true
+  - id: q35
+    prompt: "What is your marital status?"
+    type: single_choice
+    construct: marital_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q36
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q37
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q38
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"
+  - id: q39
+    prompt: "Which best describes your current overall debt situation?"
+    type: single_choice
+    construct: best_describes_current_overall_debt
+    required: true
+    options:
+      - id: "a"
+        label: "I have no debt"
+      - id: "b"
+        label: "Manageable debt I'm paying down"
+      - id: "c"
+        label: "Significant debt that is stressful"
+      - id: "d"
+        label: "Debt I'm struggling to keep up with"
+      - id: "e"
+        label: "Prefer not to say"

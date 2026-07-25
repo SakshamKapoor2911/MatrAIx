@@ -1,0 +1,890 @@
+schemaVersion: "1.0"
+id: accounting_software_v1
+title: "Accounting & Bookkeeping Software Survey"
+description: "How individuals, freelancers, and small businesses choose, use, and evaluate accounting and bookkeeping software."
+questions:
+  - id: q0
+    prompt: "In what capacity do you use accounting or bookkeeping software?"
+    type: single_choice
+    construct: capacity_use_accounting_bookkeeping_soft
+    required: true
+    options:
+      - id: "a"
+        label: "For my own small business or self-employment"
+      - id: "b"
+        label: "As an employee who does bookkeeping for an employer"
+      - id: "c"
+        label: "As an accountant or bookkeeper serving multiple clients"
+      - id: "d"
+        label: "For personal or household finances only"
+      - id: "e"
+        label: "For a non-profit, club, or association"
+      - id: "f"
+        label: "I do not use accounting software"
+  - id: q1
+    prompt: "How many years have you been using accounting or bookkeeping software?"
+    type: free_text
+    construct: many_years_have_been_using
+    required: true
+  - id: q2
+    prompt: "How often do you log in to or use your accounting software?"
+    type: single_choice
+    construct: often_log_use_accounting_software
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times per day"
+      - id: "b"
+        label: "About once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "About once a week"
+      - id: "e"
+        label: "A few times a month"
+      - id: "f"
+        label: "Monthly or less often"
+  - id: q3
+    prompt: "Which accounting or bookkeeping tools do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: accounting_bookkeeping_tools_currently_u
+    required: true
+    options:
+      - id: "a"
+        label: "QuickBooks Online"
+      - id: "b"
+        label: "QuickBooks Desktop"
+      - id: "c"
+        label: "Xero"
+      - id: "d"
+        label: "FreshBooks"
+      - id: "e"
+        label: "Wave"
+      - id: "f"
+        label: "Sage (50 / Intacct / Business Cloud)"
+      - id: "g"
+        label: "Zoho Books"
+      - id: "h"
+        label: "NetSuite"
+      - id: "i"
+        label: "Microsoft Dynamics 365 / Business Central"
+      - id: "j"
+        label: "Bench or another bookkeeping service"
+      - id: "k"
+        label: "Spreadsheets (Excel / Google Sheets)"
+      - id: "l"
+        label: "Pen and paper or manual ledgers"
+      - id: "m"
+        label: "Other"
+  - id: q4
+    prompt: "Which tool do you use most often for accounting?"
+    type: single_choice
+    construct: tool_use_most_often_accounting
+    required: true
+    options:
+      - id: "a"
+        label: "QuickBooks (Online or Desktop)"
+      - id: "b"
+        label: "Xero"
+      - id: "c"
+        label: "FreshBooks"
+      - id: "d"
+        label: "Wave"
+      - id: "e"
+        label: "Sage"
+      - id: "f"
+        label: "Zoho Books"
+      - id: "g"
+        label: "NetSuite or Dynamics"
+      - id: "h"
+        label: "Spreadsheets only"
+      - id: "i"
+        label: "Other"
+  - id: q5
+    prompt: "How did you choose your primary accounting tool? (Select all that apply)"
+    type: multi_choice
+    construct: did_choose_primary_accounting_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Recommendation from my accountant or bookkeeper"
+      - id: "b"
+        label: "Recommendation from a friend or colleague"
+      - id: "c"
+        label: "Online reviews or comparison sites"
+      - id: "d"
+        label: "Price or free tier"
+      - id: "e"
+        label: "It integrated with tools I already use"
+      - id: "f"
+        label: "My bank or payment processor suggested it"
+      - id: "g"
+        label: "It was already in place when I started"
+      - id: "h"
+        label: "Free trial experience"
+      - id: "i"
+        label: "Other"
+  - id: q6
+    prompt: "Which accounting tasks do you perform with the software? (Select all that apply)"
+    type: multi_choice
+    construct: accounting_tasks_perform_software_select
+    required: true
+    options:
+      - id: "a"
+        label: "Creating and sending invoices"
+      - id: "b"
+        label: "Tracking and categorizing expenses"
+      - id: "c"
+        label: "Bank and credit-card reconciliation"
+      - id: "d"
+        label: "Running payroll"
+      - id: "e"
+        label: "Sales tax / VAT tracking"
+      - id: "f"
+        label: "Income tax preparation or filing"
+      - id: "g"
+        label: "Financial reporting (P&L, balance sheet)"
+      - id: "h"
+        label: "Inventory management"
+      - id: "i"
+        label: "Time tracking or project billing"
+      - id: "j"
+        label: "Managing accounts payable / bills"
+      - id: "k"
+        label: "Budgeting and forecasting"
+  - id: q7
+    prompt: "How do transactions typically get into your accounting system? (Select all that apply)"
+    type: multi_choice
+    construct: transactions_typically_get_into_accounti
+    required: true
+    options:
+      - id: "a"
+        label: "Automatic bank / credit-card feed"
+      - id: "b"
+        label: "Manual entry"
+      - id: "c"
+        label: "Uploading bank statements or CSV files"
+      - id: "d"
+        label: "Receipt scanning or photo capture"
+      - id: "e"
+        label: "Imported from a POS or e-commerce platform"
+      - id: "f"
+        label: "Imported from a payment processor (Stripe, PayPal, Square)"
+      - id: "g"
+        label: "My accountant enters them"
+  - id: q8
+    prompt: "On which devices do you access your accounting software? (Select all that apply)"
+    type: multi_choice
+    construct: devices_access_accounting_software_selec
+    required: true
+    options:
+      - id: "a"
+        label: "Windows desktop or laptop"
+      - id: "b"
+        label: "Mac desktop or laptop"
+      - id: "c"
+        label: "iPhone or iPad"
+      - id: "d"
+        label: "Android phone or tablet"
+      - id: "e"
+        label: "Web browser only"
+      - id: "f"
+        label: "I do not access it myself"
+  - id: q9
+    prompt: "How often do you use the mobile app for accounting tasks?"
+    type: single_choice
+    construct: often_use_mobile_app_accounting
+    required: true
+    options:
+      - id: "a"
+        label: "Very often — it is my main way to use the software"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+      - id: "f"
+        label: "There is no mobile app for my tool"
+  - id: q10
+    prompt: "Which of these do you integrate or connect with your accounting software? (Select all that apply)"
+    type: multi_choice
+    construct: these_integrate_connect_accounting_softw
+    required: true
+    options:
+      - id: "a"
+        label: "Bank or credit-card accounts"
+      - id: "b"
+        label: "Payment processor (Stripe / PayPal / Square)"
+      - id: "c"
+        label: "E-commerce platform (Shopify / Etsy / Amazon)"
+      - id: "d"
+        label: "Payroll service"
+      - id: "e"
+        label: "Expense or receipt app"
+      - id: "f"
+        label: "CRM or invoicing tool"
+      - id: "g"
+        label: "Point-of-sale system"
+      - id: "h"
+        label: "None of these"
+  - id: q11
+    prompt: "About how many hours per week do you personally spend on bookkeeping tasks?"
+    type: free_text
+    construct: many_hours_per_week_personally
+    required: true
+  - id: q12
+    prompt: "Who primarily handles the bookkeeping?"
+    type: single_choice
+    construct: who_primarily_handles_bookkeeping
+    required: true
+    options:
+      - id: "a"
+        label: "I do it all myself"
+      - id: "b"
+        label: "I do most of it, with an accountant reviewing"
+      - id: "c"
+        label: "Split roughly evenly with a bookkeeper or staff"
+      - id: "d"
+        label: "Mostly a bookkeeper or accountant, I just review"
+      - id: "e"
+        label: "Entirely outsourced"
+  - id: q13
+    prompt: "Which pricing model do you have for your main accounting tool?"
+    type: single_choice
+    construct: pricing_model_have_main_accounting
+    required: true
+    options:
+      - id: "a"
+        label: "Free plan"
+      - id: "b"
+        label: "Monthly subscription"
+      - id: "c"
+        label: "Annual subscription"
+      - id: "d"
+        label: "One-time license purchase"
+      - id: "e"
+        label: "Bundled with another service (bank, payroll, etc.)"
+      - id: "f"
+        label: "Don't know / someone else pays"
+  - id: q14
+    prompt: "Approximately how much do you spend per month on accounting software (in US dollars)?"
+    type: free_text
+    construct: approximately_much_spend_per_month
+    required: true
+  - id: q15
+    prompt: "How much do you agree with the following statement about your accounting software? — It is easy to use for someone without an accounting background."
+    type: single_choice
+    construct: much_agree_following_statement_accountin
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about your accounting software? — I trust the numbers and reports it produces."
+    type: single_choice
+    construct: much_agree_following_statement_accountin
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about your accounting software? — It saves me a significant amount of time."
+    type: single_choice
+    construct: much_agree_following_statement_accountin
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about your accounting software? — Customer support is responsive and helpful when I need it."
+    type: single_choice
+    construct: much_agree_following_statement_accountin
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about your accounting software? — It is good value for the money."
+    type: single_choice
+    construct: much_agree_following_statement_accountin
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement about your accounting software? — I worry about the security of my financial data in it."
+    type: single_choice
+    construct: much_agree_following_statement_accountin
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How satisfied are you with each aspect of your accounting software? — Invoicing features"
+    type: single_choice
+    construct: satisfied_each_aspect_accounting_softwar
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q22
+    prompt: "How satisfied are you with each aspect of your accounting software? — Bank reconciliation"
+    type: single_choice
+    construct: satisfied_each_aspect_accounting_softwar
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q23
+    prompt: "How satisfied are you with each aspect of your accounting software? — Reporting and dashboards"
+    type: single_choice
+    construct: satisfied_each_aspect_accounting_softwar
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q24
+    prompt: "How satisfied are you with each aspect of your accounting software? — Mobile app"
+    type: single_choice
+    construct: satisfied_each_aspect_accounting_softwar
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q25
+    prompt: "How satisfied are you with each aspect of your accounting software? — Payroll features"
+    type: single_choice
+    construct: satisfied_each_aspect_accounting_softwar
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q26
+    prompt: "How confident are you that your books are accurate and up to date at any given moment?"
+    type: single_choice
+    construct: confident_that_books_accurate_up
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+  - id: q27
+    prompt: "How do you handle income tax filing for the business or entity?"
+    type: single_choice
+    construct: handle_income_tax_filing_business
+    required: true
+    options:
+      - id: "a"
+        label: "File myself using the accounting software's tax tools"
+      - id: "b"
+        label: "File myself using separate tax software"
+      - id: "c"
+        label: "Export data and hand it to an accountant"
+      - id: "d"
+        label: "My accountant has direct access to the software"
+      - id: "e"
+        label: "Not applicable"
+  - id: q28
+    prompt: "Which AI or automation features do you use in your accounting software? (Select all that apply)"
+    type: multi_choice
+    construct: ai_automation_features_use_accounting
+    required: true
+    options:
+      - id: "a"
+        label: "Automatic transaction categorization"
+      - id: "b"
+        label: "Receipt scanning / data extraction"
+      - id: "c"
+        label: "Automated bank reconciliation matching"
+      - id: "d"
+        label: "Cash-flow forecasting"
+      - id: "e"
+        label: "Anomaly or duplicate detection"
+      - id: "f"
+        label: "Automated invoice reminders"
+      - id: "g"
+        label: "A built-in AI assistant / chatbot"
+      - id: "h"
+        label: "I do not use any automation features"
+  - id: q29
+    prompt: "How important are each of the following when choosing accounting software? — Ease of use"
+    type: single_choice
+    construct: important_each_following_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "How important are each of the following when choosing accounting software? — Price"
+    type: single_choice
+    construct: important_each_following_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q31
+    prompt: "How important are each of the following when choosing accounting software? — Integrations with other tools"
+    type: single_choice
+    construct: important_each_following_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q32
+    prompt: "How important are each of the following when choosing accounting software? — Accountant recommends or supports it"
+    type: single_choice
+    construct: important_each_following_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q33
+    prompt: "Select your top 3 most important features in accounting software. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_most_important
+    required: true
+    options:
+      - id: "a"
+        label: "Invoicing and getting paid"
+      - id: "b"
+        label: "Expense tracking"
+      - id: "c"
+        label: "Bank reconciliation"
+      - id: "d"
+        label: "Tax support"
+      - id: "e"
+        label: "Payroll"
+      - id: "f"
+        label: "Reporting and analytics"
+      - id: "g"
+        label: "Inventory"
+      - id: "h"
+        label: "Integrations"
+      - id: "i"
+        label: "Mobile access"
+      - id: "j"
+        label: "Multi-user / collaboration"
+  - id: q34
+    prompt: "What frustrates you most about your accounting software? (Select all that apply)"
+    type: multi_choice
+    construct: frustrates_most_accounting_software_sele
+    required: true
+    options:
+      - id: "a"
+        label: "Too expensive / rising prices"
+      - id: "b"
+        label: "Too complicated or steep learning curve"
+      - id: "c"
+        label: "Missing features I need"
+      - id: "d"
+        label: "Bank feeds break or miscategorize"
+      - id: "e"
+        label: "Slow or unhelpful support"
+      - id: "f"
+        label: "Poor mobile experience"
+      - id: "g"
+        label: "Hard to correct mistakes"
+      - id: "h"
+        label: "Nothing frustrates me"
+  - id: q35
+    prompt: "Have you switched accounting software in the past three years?"
+    type: single_choice
+    construct: have_switched_accounting_software_past
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, once"
+      - id: "b"
+        label: "Yes, more than once"
+      - id: "c"
+        label: "No, but I have considered it"
+      - id: "d"
+        label: "No, and I have not considered it"
+  - id: q36
+    prompt: "How likely are you to recommend your primary accounting software to a peer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_accounting_soft
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q37
+    prompt: "Overall, how satisfied are you with your primary accounting software?"
+    type: single_choice
+    construct: overall_satisfied_primary_accounting_sof
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "How likely are you to switch accounting software in the next 12 months?"
+    type: single_choice
+    construct: likely_switch_accounting_software_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q39
+    prompt: "If you could change one thing about your accounting software, what would it be?"
+    type: free_text
+    construct: if_could_change_one_thing
+    required: true
+  - id: q40
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 25"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is your annual household income (US dollars)?"
+    type: single_choice
+    construct: annual_household_income_us_dollars
+    required: true
+    options:
+      - id: "a"
+        label: "Under $35,000"
+      - id: "b"
+        label: "$35,000–$74,999"
+      - id: "c"
+        label: "$75,000–$124,999"
+      - id: "d"
+        label: "$125,000–$199,999"
+      - id: "e"
+        label: "$200,000 or more"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Professional or doctoral degree"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Self-employed / business owner"
+      - id: "b"
+        label: "Employed full-time"
+      - id: "c"
+        label: "Employed part-time"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+  - id: q46
+    prompt: "What is your professional or business role?"
+    type: single_choice
+    construct: professional_business_role
+    required: true
+    options:
+      - id: "a"
+        label: "Sole proprietor / freelancer"
+      - id: "b"
+        label: "Small-business owner with employees"
+      - id: "c"
+        label: "Accountant or bookkeeper (in-house)"
+      - id: "d"
+        label: "Accountant or bookkeeper (serving clients)"
+      - id: "e"
+        label: "Finance or office manager"
+      - id: "f"
+        label: "Not a finance role"
+  - id: q47
+    prompt: "How many people work in your business or organization?"
+    type: single_choice
+    construct: many_people_work_business_organization
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2–9"
+      - id: "c"
+        label: "10–49"
+      - id: "d"
+        label: "50–249"
+      - id: "e"
+        label: "250 or more"
+      - id: "f"
+        label: "Not applicable"
+  - id: q48
+    prompt: "How many people live in your household?"
+    type: free_text
+    construct: many_people_live_household
+    required: true
+  - id: q49
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q50
+    prompt: "How would you describe where you live?"
+    type: single_choice
+    construct: would_describe_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

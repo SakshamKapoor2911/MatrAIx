@@ -1,0 +1,691 @@
+schemaVersion: "1.0"
+id: round_up_savings_v1
+title: "Round-Up Savings Survey"
+description: "How people use round-up savings and investing features that automatically set aside the spare change from everyday purchases."
+questions:
+  - id: q0
+    prompt: "Are you familiar with \"round-up\" savings features that round each purchase up to the next dollar and save the difference?"
+    type: single_choice
+    construct: familiar_round_up_savings_features
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I use one"
+      - id: "b"
+        label: "Yes, I've used one in the past"
+      - id: "c"
+        label: "Yes, I know of them but have never used one"
+      - id: "d"
+        label: "No, I've never heard of them"
+  - id: q1
+    prompt: "Do you currently use any round-up savings or round-up investing feature?"
+    type: single_choice
+    construct: currently_use_any_round_up
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for savings"
+      - id: "b"
+        label: "Yes, for investing"
+      - id: "c"
+        label: "Yes, for both saving and investing"
+      - id: "d"
+        label: "No"
+  - id: q2
+    prompt: "How long have you been using round-up savings features?"
+    type: single_choice
+    construct: long_have_been_using_round
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "More than 3 years"
+      - id: "e"
+        label: "I don't currently use one"
+  - id: q3
+    prompt: "Which apps or services do you use (or have you used) for round-up savings or investing? (Select all that apply)"
+    type: multi_choice
+    construct: apps_services_use_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Acorns"
+      - id: "b"
+        label: "Chime"
+      - id: "c"
+        label: "Bank of America Keep the Change"
+      - id: "d"
+        label: "Qapital"
+      - id: "e"
+        label: "Stash"
+      - id: "f"
+        label: "My bank's or credit union's round-up feature"
+      - id: "g"
+        label: "Another app or service"
+      - id: "h"
+        label: "I don't use any"
+  - id: q4
+    prompt: "Where does your rounded-up spare change go?"
+    type: single_choice
+    construct: where_does_rounded_up_spare
+    required: true
+    options:
+      - id: "a"
+        label: "A savings account"
+      - id: "b"
+        label: "An investment or brokerage account"
+      - id: "c"
+        label: "A checking or spending account sub-goal"
+      - id: "d"
+        label: "Toward paying off debt"
+      - id: "e"
+        label: "I don't currently use round-ups"
+  - id: q5
+    prompt: "How did you first hear about round-up savings? (Select all that apply)"
+    type: multi_choice
+    construct: did_first_hear_round_up
+    required: true
+    options:
+      - id: "a"
+        label: "My bank or credit union offered it"
+      - id: "b"
+        label: "An app advertisement"
+      - id: "c"
+        label: "Friends or family"
+      - id: "d"
+        label: "Social media or a financial influencer"
+      - id: "e"
+        label: "A news article or blog"
+      - id: "f"
+        label: "I searched for a way to save automatically"
+      - id: "g"
+        label: "I don't remember"
+  - id: q6
+    prompt: "On average, how much do you save through round-ups each month? Please enter a dollar amount."
+    type: free_text
+    construct: average_much_save_through_round
+    required: true
+  - id: q7
+    prompt: "Do you use any multiplier feature (e.g., rounding up and then multiplying by 2x or 3x)?"
+    type: single_choice
+    construct: use_any_multiplier_feature_e
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, just the standard round-up"
+      - id: "d"
+        label: "My app doesn't offer that"
+  - id: q8
+    prompt: "Besides round-ups, do you make additional recurring or one-time contributions to the same account?"
+    type: single_choice
+    construct: besides_round_ups_make_additional
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, recurring contributions"
+      - id: "b"
+        label: "Yes, occasional one-time contributions"
+      - id: "c"
+        label: "No, only round-ups"
+      - id: "d"
+        label: "I don't use round-ups"
+  - id: q9
+    prompt: "How often do you check the balance you've built up through round-ups?"
+    type: single_choice
+    construct: often_check_balance_ve_built
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "Weekly"
+      - id: "c"
+        label: "Monthly"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q10
+    prompt: "What is your main goal for the money you save through round-ups?"
+    type: single_choice
+    construct: main_goal_money_save_through
+    required: true
+    options:
+      - id: "a"
+        label: "Building an emergency fund"
+      - id: "b"
+        label: "Saving for a specific purchase or trip"
+      - id: "c"
+        label: "Long-term investing or retirement"
+      - id: "d"
+        label: "General savings with no specific goal"
+      - id: "e"
+        label: "Paying down debt"
+      - id: "f"
+        label: "I don't use round-ups"
+  - id: q11
+    prompt: "How much do you agree or disagree: Round-ups help me save money I wouldn't have saved otherwise."
+    type: single_choice
+    construct: much_agree_disagree_round_ups
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: I barely notice the small amounts being rounded up."
+    type: single_choice
+    construct: much_agree_disagree_i_barely
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: Round-up savings add up to a meaningful amount over time."
+    type: single_choice
+    construct: much_agree_disagree_round_up
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I worry that round-ups could cause me to overdraft my account."
+    type: single_choice
+    construct: much_agree_disagree_i_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: Automating my savings makes me feel more in control of my money."
+    type: single_choice
+    construct: much_agree_disagree_automating_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How important is each feature in a round-up savings tool: No fees or low fees."
+    type: single_choice
+    construct: important_each_feature_round_up
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "How important is each feature in a round-up savings tool: A competitive interest rate or investment return."
+    type: single_choice
+    construct: important_each_feature_round_up
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each feature in a round-up savings tool: Easy access to withdraw my money."
+    type: single_choice
+    construct: important_each_feature_round_up
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is each feature in a round-up savings tool: The ability to set savings goals."
+    type: single_choice
+    construct: important_each_feature_round_up
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is each feature in a round-up savings tool: A round-up multiplier or boost option."
+    type: single_choice
+    construct: important_each_feature_round_up
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "Select your top 3 reasons for using (or wanting to use) round-up savings. (Select all that apply — choose up to 3)"
+    type: single_choice
+    construct: select_top_3_reasons_using
+    required: true
+    options:
+      - id: "a"
+        label: "It's effortless and automatic"
+      - id: "b"
+        label: "It helps me save without feeling it"
+      - id: "c"
+        label: "It builds a savings habit"
+      - id: "d"
+        label: "It lets me invest small amounts"
+      - id: "e"
+        label: "I like watching the balance grow"
+      - id: "f"
+        label: "It rounds up to a cause or goal I care about"
+      - id: "g"
+        label: "A friend or family member recommended it"
+      - id: "h"
+        label: "The app gave a signup bonus"
+  - id: q22
+    prompt: "What concerns you most about round-up savings tools? (Select all that apply)"
+    type: multi_choice
+    construct: concerns_most_round_up_savings
+    required: true
+    options:
+      - id: "a"
+        label: "Monthly subscription or account fees"
+      - id: "b"
+        label: "Risk of overdrafting"
+      - id: "c"
+        label: "Low returns on the money saved"
+      - id: "d"
+        label: "Data privacy and account security"
+      - id: "e"
+        label: "Money being hard to access"
+      - id: "f"
+        label: "It saves too little to matter"
+      - id: "g"
+        label: "I don't have any concerns"
+  - id: q23
+    prompt: "Does your round-up service charge a monthly fee?"
+    type: single_choice
+    construct: does_round_up_service_charge
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a flat monthly fee"
+      - id: "b"
+        label: "Yes, a percentage of assets"
+      - id: "c"
+        label: "No fee"
+      - id: "d"
+        label: "I'm not sure"
+      - id: "e"
+        label: "I don't use one"
+  - id: q24
+    prompt: "Have you ever stopped or paused using a round-up feature?"
+    type: single_choice
+    construct: have_ever_stopped_paused_using
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I didn't restart"
+      - id: "b"
+        label: "Yes, but I later restarted"
+      - id: "c"
+        label: "No, I've kept using it"
+      - id: "d"
+        label: "I've never used one"
+  - id: q25
+    prompt: "If you stopped using round-ups, what was the main reason?"
+    type: single_choice
+    construct: if_stopped_using_round_ups
+    required: true
+    options:
+      - id: "a"
+        label: "The fees weren't worth it"
+      - id: "b"
+        label: "It caused overdrafts or low balances"
+      - id: "c"
+        label: "I wasn't saving enough to matter"
+      - id: "d"
+        label: "I switched to a different way of saving"
+      - id: "e"
+        label: "I needed the money for spending"
+      - id: "f"
+        label: "Not applicable — I haven't stopped"
+  - id: q26
+    prompt: "Roughly what is the current balance you've accumulated through round-ups? Please enter a dollar amount."
+    type: free_text
+    construct: roughly_current_balance_ve_accumulated
+    required: true
+  - id: q27
+    prompt: "How much do you typically keep in your everyday checking account? Please enter a dollar amount."
+    type: free_text
+    construct: much_typically_keep_everyday_checking
+    required: true
+  - id: q28
+    prompt: "Besides round-ups, which other automatic savings methods do you use? (Select all that apply)"
+    type: multi_choice
+    construct: besides_round_ups_other_automatic
+    required: true
+    options:
+      - id: "a"
+        label: "Automatic transfers on payday"
+      - id: "b"
+        label: "Direct deposit split into savings"
+      - id: "c"
+        label: "A separate high-yield savings account"
+      - id: "d"
+        label: "Employer 401(k) contributions"
+      - id: "e"
+        label: "Cash-back rewards deposited to savings"
+      - id: "f"
+        label: "None of these"
+  - id: q29
+    prompt: "Overall, how satisfied are you with your round-up savings experience?"
+    type: single_choice
+    construct: overall_satisfied_round_up_savings
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I don't use round-ups"
+  - id: q30
+    prompt: "How likely are you to keep using (or start using) a round-up savings feature over the next year?"
+    type: single_choice
+    construct: likely_keep_using_start_using
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "On a scale of 0 to 10, how likely are you to recommend round-up savings to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "In a few words, what would make round-up savings more useful to you? (Optional)"
+    type: free_text
+    construct: few_words_would_make_round
+    required: false
+  - id: q33
+    prompt: "What is your age? Please enter a number (years old)."
+    type: free_text
+    construct: age_please_enter_number_years
+    required: true
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q39
+    prompt: "What is your annual household income before taxes?"
+    type: single_choice
+    construct: annual_household_income_before_taxes
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+  - id: q41
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q42
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q44
+    prompt: "How would you describe your comfort with using financial apps on your phone?"
+    type: single_choice
+    construct: would_describe_comfort_using_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Somewhat uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat comfortable"
+      - id: "e"
+        label: "Very comfortable"

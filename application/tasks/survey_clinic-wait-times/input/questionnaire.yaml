@@ -1,0 +1,792 @@
+schemaVersion: "1.0"
+id: clinic_wait_times_v1
+title: "Clinic Wait Times Survey"
+description: "Consumer experience with, and attitudes toward, waiting for care at clinics and doctors' offices."
+questions:
+  - id: q0
+    prompt: "In the past 12 months, about how many times did you visit a clinic or doctor's office?"
+    type: single_choice
+    construct: past_12_months_many_times
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1 time"
+      - id: "c"
+        label: "2 to 3 times"
+      - id: "d"
+        label: "4 to 6 times"
+      - id: "e"
+        label: "7 to 10 times"
+      - id: "f"
+        label: "More than 10 times"
+  - id: q1
+    prompt: "What type of clinic do you visit most often?"
+    type: single_choice
+    construct: type_clinic_visit_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Primary care office"
+      - id: "b"
+        label: "Specialist office"
+      - id: "c"
+        label: "Urgent care or walk-in clinic"
+      - id: "d"
+        label: "Community health center"
+      - id: "e"
+        label: "Retail or pharmacy clinic"
+      - id: "f"
+        label: "I do not visit clinics regularly"
+  - id: q2
+    prompt: "At your most recent visit, how long did you wait past your appointment time before being seen?"
+    type: single_choice
+    construct: most_recent_visit_long_did
+    required: true
+    options:
+      - id: "a"
+        label: "I was seen on time or early"
+      - id: "b"
+        label: "Less than 15 minutes"
+      - id: "c"
+        label: "15 to 29 minutes"
+      - id: "d"
+        label: "30 to 44 minutes"
+      - id: "e"
+        label: "45 to 59 minutes"
+      - id: "f"
+        label: "An hour or more"
+  - id: q3
+    prompt: "How long do you typically wait in the waiting room before being called back?"
+    type: single_choice
+    construct: long_typically_wait_waiting_room
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 5 minutes"
+      - id: "b"
+        label: "5 to 14 minutes"
+      - id: "c"
+        label: "15 to 29 minutes"
+      - id: "d"
+        label: "30 to 44 minutes"
+      - id: "e"
+        label: "45 minutes or more"
+  - id: q4
+    prompt: "After being called back, how long do you usually wait in the exam room before the provider comes in?"
+    type: single_choice
+    construct: after_being_called_back_long
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 5 minutes"
+      - id: "b"
+        label: "5 to 14 minutes"
+      - id: "c"
+        label: "15 to 29 minutes"
+      - id: "d"
+        label: "30 minutes or more"
+      - id: "e"
+        label: "Not sure"
+  - id: q5
+    prompt: "How does the wait time at clinics usually compare with what you expect?"
+    type: single_choice
+    construct: does_wait_time_clinics_usually
+    required: true
+    options:
+      - id: "a"
+        label: "Much shorter than expected"
+      - id: "b"
+        label: "Somewhat shorter"
+      - id: "c"
+        label: "About what I expected"
+      - id: "d"
+        label: "Somewhat longer"
+      - id: "e"
+        label: "Much longer than expected"
+  - id: q6
+    prompt: "How would you rate the typical wait time at the clinic you visit most?"
+    type: single_choice
+    construct: would_rate_typical_wait_time
+    required: true
+    options:
+      - id: "a"
+        label: "Very short"
+      - id: "b"
+        label: "Short"
+      - id: "c"
+        label: "Average"
+      - id: "d"
+        label: "Long"
+      - id: "e"
+        label: "Very long"
+  - id: q7
+    prompt: "What is the longest you have waited past your appointment time at a clinic?"
+    type: single_choice
+    construct: longest_have_waited_past_appointment
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 30 minutes"
+      - id: "b"
+        label: "30 to 59 minutes"
+      - id: "c"
+        label: "1 to 2 hours"
+      - id: "d"
+        label: "More than 2 hours"
+      - id: "e"
+        label: "Not sure"
+  - id: q8
+    prompt: "How much does wait time affect your overall satisfaction with a clinic?"
+    type: single_choice
+    construct: much_does_wait_time_affect
+    required: true
+    options:
+      - id: "a"
+        label: "A great deal"
+      - id: "b"
+        label: "A lot"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A little"
+      - id: "e"
+        label: "Not at all"
+  - id: q9
+    prompt: "What do you usually do while waiting at a clinic? (Select all that apply)"
+    type: multi_choice
+    construct: usually_while_waiting_clinic_select
+    required: true
+    options:
+      - id: "a"
+        label: "Use my phone"
+      - id: "b"
+        label: "Read a book or magazine"
+      - id: "c"
+        label: "Fill out paperwork"
+      - id: "d"
+        label: "Talk with others"
+      - id: "e"
+        label: "Just sit and wait"
+      - id: "f"
+        label: "Work or answer emails"
+      - id: "g"
+        label: "Watch TV in the waiting area"
+  - id: q10
+    prompt: "How much do you agree with the following statement: Long wait times make me less likely to return to a clinic."
+    type: single_choice
+    construct: much_agree_following_statement_long
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: Clinics should tell me if they are running behind."
+    type: single_choice
+    construct: much_agree_following_statement_clinics
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: I would choose a clinic with shorter waits even if it were less convenient."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: A comfortable waiting area makes waiting more bearable."
+    type: single_choice
+    construct: much_agree_following_statement_comfortab
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I expect some waiting as a normal part of a clinic visit."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How often does each of the following happen at the clinic you visit most: You wait longer than 30 minutes past your appointment time."
+    type: single_choice
+    construct: often_does_each_following_happen
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q16
+    prompt: "How often does each of the following happen at the clinic you visit most: Staff tell you how long the wait will be."
+    type: single_choice
+    construct: often_does_each_following_happen
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q17
+    prompt: "How often does each of the following happen at the clinic you visit most: You are updated if the provider is running late."
+    type: single_choice
+    construct: often_does_each_following_happen
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q18
+    prompt: "How often does each of the following happen at the clinic you visit most: The wait makes you late for other things."
+    type: single_choice
+    construct: often_does_each_following_happen
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q19
+    prompt: "Which of these would most reduce your frustration with waiting? (Select all that apply)"
+    type: multi_choice
+    construct: these_would_most_reduce_frustration
+    required: true
+    options:
+      - id: "a"
+        label: "Being told the expected wait up front"
+      - id: "b"
+        label: "Text updates about delays"
+      - id: "c"
+        label: "Online check-in before arriving"
+      - id: "d"
+        label: "A virtual waiting room so I can wait elsewhere"
+      - id: "e"
+        label: "A more comfortable waiting area"
+      - id: "f"
+        label: "Shorter waits overall"
+      - id: "g"
+        label: "Nothing would help much"
+  - id: q20
+    prompt: "Have you ever left a clinic without being seen because the wait was too long?"
+    type: single_choice
+    construct: have_ever_left_clinic_without
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I have considered it"
+      - id: "d"
+        label: "No, never"
+  - id: q21
+    prompt: "Have you ever switched clinics or providers because of long wait times?"
+    type: single_choice
+    construct: have_ever_switched_clinics_providers
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I have considered it"
+      - id: "d"
+        label: "No, never"
+  - id: q22
+    prompt: "How do you usually feel about the wait when the provider gives you enough time during the visit?"
+    type: single_choice
+    construct: usually_feel_wait_when_provider
+    required: true
+    options:
+      - id: "a"
+        label: "The wait is fully worth it"
+      - id: "b"
+        label: "The wait is mostly worth it"
+      - id: "c"
+        label: "It is a fair trade-off"
+      - id: "d"
+        label: "The wait still bothers me"
+      - id: "e"
+        label: "The wait is not worth it"
+  - id: q23
+    prompt: "Which check-in method does the clinic you visit most often use?"
+    type: single_choice
+    construct: check_method_does_clinic_visit
+    required: true
+    options:
+      - id: "a"
+        label: "Front-desk sign-in"
+      - id: "b"
+        label: "A self-service kiosk"
+      - id: "c"
+        label: "Online or app check-in"
+      - id: "d"
+        label: "Text-message check-in"
+      - id: "e"
+        label: "Not sure"
+  - id: q24
+    prompt: "How useful do you find online or mobile check-in for reducing your wait?"
+    type: single_choice
+    construct: useful_find_online_mobile_check
+    required: true
+    options:
+      - id: "a"
+        label: "Very useful"
+      - id: "b"
+        label: "Somewhat useful"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Not very useful"
+      - id: "e"
+        label: "I have not used it"
+  - id: q25
+    prompt: "How important is each of the following to you: Short wait times."
+    type: single_choice
+    construct: important_each_following_short_wait
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important is each of the following to you: Clear communication about delays."
+    type: single_choice
+    construct: important_each_following_clear_communica
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important is each of the following to you: A comfortable waiting area."
+    type: single_choice
+    construct: important_each_following_comfortable_wai
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "How important is each of the following to you: Being able to check in online."
+    type: single_choice
+    construct: important_each_following_being_able
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "What time of day do you find you wait the least at clinics?"
+    type: single_choice
+    construct: time_day_find_wait_least
+    required: true
+    options:
+      - id: "a"
+        label: "Early morning"
+      - id: "b"
+        label: "Late morning"
+      - id: "c"
+        label: "Early afternoon"
+      - id: "d"
+        label: "Late afternoon"
+      - id: "e"
+        label: "No clear difference"
+  - id: q30
+    prompt: "Select your top 3 things that would most improve your waiting experience. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_that
+    required: true
+    options:
+      - id: "a"
+        label: "Shorter overall waits"
+      - id: "b"
+        label: "Knowing the wait time up front"
+      - id: "c"
+        label: "Text updates about delays"
+      - id: "d"
+        label: "Online check-in"
+      - id: "e"
+        label: "A virtual waiting room"
+      - id: "f"
+        label: "A more comfortable waiting area"
+      - id: "g"
+        label: "Friendlier staff"
+      - id: "h"
+        label: "Faster paperwork"
+  - id: q31
+    prompt: "Overall, how satisfied are you with the wait times at the clinic you visit most?"
+    type: single_choice
+    construct: overall_satisfied_wait_times_clinic
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your usual clinic, considering its wait times? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q33
+    prompt: "How likely are you to keep using your current clinic given its wait times?"
+    type: single_choice
+    construct: likely_keep_using_current_clinic
+    required: true
+    options:
+      - id: "a"
+        label: "Very likely"
+      - id: "b"
+        label: "Somewhat likely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Somewhat unlikely"
+      - id: "e"
+        label: "Very unlikely"
+  - id: q34
+    prompt: "At your most recent visit, about how many minutes did you wait past your appointment time? Please enter a number of minutes."
+    type: free_text
+    construct: most_recent_visit_many_minutes
+    required: true
+  - id: q35
+    prompt: "What is the longest, in minutes, you would be willing to wait past your appointment time before it feels unacceptable? Please enter a number of minutes."
+    type: free_text
+    construct: longest_minutes_would_be_willing
+    required: true
+  - id: q36
+    prompt: "About how many minutes did your most recent clinic visit take from arrival to leaving? Please enter a number of minutes."
+    type: free_text
+    construct: many_minutes_did_most_recent
+    required: true
+  - id: q37
+    prompt: "In your own words, what would most improve wait times at the clinics you use? (Optional)"
+    type: free_text
+    construct: own_words_would_most_improve
+    required: false
+  - id: q38
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q39
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe or not to say"
+  - id: q40
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q44
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q46
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q47
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q48
+    prompt: "What type of health insurance do you primarily have?"
+    type: single_choice
+    construct: type_health_insurance_primarily_have
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored plan"
+      - id: "b"
+        label: "Plan bought on the marketplace or directly"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or veterans coverage"
+      - id: "f"
+        label: "I do not have health insurance"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "How is your overall health?"
+    type: single_choice
+    construct: overall_health
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent"
+      - id: "b"
+        label: "Very good"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Fair"
+      - id: "e"
+        label: "Poor"

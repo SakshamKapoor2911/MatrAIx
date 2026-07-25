@@ -1,0 +1,746 @@
+schemaVersion: "1.0"
+id: e_reader_usage_v1
+title: "E-Reader Usage Survey"
+description: "Digital reading habits and e-reader ownership — devices and brands used, where e-books come from, features valued, and attitudes toward digital versus print reading."
+questions:
+  - id: q0
+    prompt: "Do you read e-books (digital books)?"
+    type: single_choice
+    construct: read_e_books_digital_books
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "No, I only read print books"
+      - id: "e"
+        label: "No, I don't read books much"
+  - id: q1
+    prompt: "Do you own a dedicated e-reader device (e.g., Kindle, Kobo, Nook)?"
+    type: single_choice
+    construct: own_dedicated_e_reader_device
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I read e-books on other devices"
+      - id: "c"
+        label: "No, and I don't read e-books"
+      - id: "d"
+        label: "I used to own one but stopped using it"
+  - id: q2
+    prompt: "How long have you been reading e-books?"
+    type: single_choice
+    construct: long_have_been_reading_e
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "I don't read e-books"
+  - id: q3
+    prompt: "Which devices do you use to read e-books? (Select all that apply)"
+    type: multi_choice
+    construct: devices_use_read_e_books
+    required: true
+    options:
+      - id: "a"
+        label: "Dedicated e-reader (Kindle, Kobo, etc.)"
+      - id: "b"
+        label: "Smartphone"
+      - id: "c"
+        label: "Tablet"
+      - id: "d"
+        label: "Laptop or desktop computer"
+      - id: "e"
+        label: "E-reader with color screen"
+      - id: "f"
+        label: "I don't read e-books"
+  - id: q4
+    prompt: "Which e-reader brand do you own or use?"
+    type: single_choice
+    construct: e_reader_brand_own_use
+    required: true
+    options:
+      - id: "a"
+        label: "Amazon Kindle"
+      - id: "b"
+        label: "Rakuten Kobo"
+      - id: "c"
+        label: "Barnes & Noble Nook"
+      - id: "d"
+        label: "Boox / Onyx"
+      - id: "e"
+        label: "PocketBook"
+      - id: "f"
+        label: "I don't own a dedicated e-reader"
+      - id: "g"
+        label: "Other"
+  - id: q5
+    prompt: "Where do you get your e-books? (Select all that apply)"
+    type: multi_choice
+    construct: where_get_e_books_select
+    required: true
+    options:
+      - id: "a"
+        label: "Amazon Kindle Store"
+      - id: "b"
+        label: "Kobo store"
+      - id: "c"
+        label: "Apple Books"
+      - id: "d"
+        label: "Google Play Books"
+      - id: "e"
+        label: "Public library (e.g., Libby / OverDrive)"
+      - id: "f"
+        label: "Subscription service (e.g., Kindle Unlimited)"
+      - id: "g"
+        label: "Free / public domain sources (Project Gutenberg)"
+      - id: "h"
+        label: "Barnes & Noble"
+      - id: "i"
+        label: "Other"
+  - id: q6
+    prompt: "What formats of books do you read? (Select all that apply)"
+    type: multi_choice
+    construct: formats_books_read_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "E-books"
+      - id: "b"
+        label: "Print / physical books"
+      - id: "c"
+        label: "Audiobooks"
+      - id: "d"
+        label: "Magazines or newspapers (digital)"
+      - id: "e"
+        label: "Comics / graphic novels"
+      - id: "f"
+        label: "PDFs and documents"
+  - id: q7
+    prompt: "Roughly how many books do you read in a typical year? Enter a whole number."
+    type: free_text
+    construct: roughly_many_books_read_typical
+    required: true
+  - id: q8
+    prompt: "What share of your reading is now digital (e-books) versus print?"
+    type: single_choice
+    construct: share_reading_now_digital_e
+    required: true
+    options:
+      - id: "a"
+        label: "Almost all print"
+      - id: "b"
+        label: "Mostly print"
+      - id: "c"
+        label: "About half and half"
+      - id: "d"
+        label: "Mostly digital"
+      - id: "e"
+        label: "Almost all digital"
+  - id: q9
+    prompt: "How often do you read on an e-reader or e-book app?"
+    type: single_choice
+    construct: often_read_e_reader_e
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "About once a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Rarely"
+  - id: q10
+    prompt: "What genres do you mostly read? (Select all that apply)"
+    type: multi_choice
+    construct: genres_mostly_read_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Fiction / literary"
+      - id: "b"
+        label: "Mystery / thriller"
+      - id: "c"
+        label: "Science fiction / fantasy"
+      - id: "d"
+        label: "Romance"
+      - id: "e"
+        label: "Nonfiction / biography"
+      - id: "f"
+        label: "Self-help / business"
+      - id: "g"
+        label: "History"
+      - id: "h"
+        label: "Young adult"
+      - id: "i"
+        label: "Technical / professional"
+      - id: "j"
+        label: "Other"
+  - id: q11
+    prompt: "Do you subscribe to any e-book or audiobook services? (Select all that apply)"
+    type: multi_choice
+    construct: subscribe_any_e_book_audiobook
+    required: true
+    options:
+      - id: "a"
+        label: "Kindle Unlimited"
+      - id: "b"
+        label: "Audible"
+      - id: "c"
+        label: "Kobo Plus"
+      - id: "d"
+        label: "Scribd / Everand"
+      - id: "e"
+        label: "A library service (Libby, Hoopla)"
+      - id: "f"
+        label: "None of these"
+  - id: q12
+    prompt: "Roughly how much do you spend on e-books or reading subscriptions per month? Enter a whole-dollar amount (US$)."
+    type: free_text
+    construct: roughly_much_spend_e_books
+    required: true
+  - id: q13
+    prompt: "When choosing an e-reader, how important is screen quality (e-ink, glare-free)?"
+    type: single_choice
+    construct: when_choosing_e_reader_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q14
+    prompt: "When choosing an e-reader, how important is battery life?"
+    type: single_choice
+    construct: when_choosing_e_reader_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q15
+    prompt: "When choosing an e-reader, how important is price?"
+    type: single_choice
+    construct: when_choosing_e_reader_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "When choosing an e-reader, how important is a built-in adjustable light?"
+    type: single_choice
+    construct: when_choosing_e_reader_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "When choosing an e-reader, how important is waterproofing?"
+    type: single_choice
+    construct: when_choosing_e_reader_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "When choosing an e-reader, how important is the size and weight?"
+    type: single_choice
+    construct: when_choosing_e_reader_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "Which THREE features matter most to you in an e-reader? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: three_features_matter_most_e
+    required: true
+    options:
+      - id: "a"
+        label: "Screen quality / readability"
+      - id: "b"
+        label: "Battery life"
+      - id: "c"
+        label: "Price"
+      - id: "d"
+        label: "Adjustable front light / warm light"
+      - id: "e"
+        label: "Waterproofing"
+      - id: "f"
+        label: "Size and weight"
+      - id: "g"
+        label: "Storage capacity"
+      - id: "h"
+        label: "Ecosystem / bookstore selection"
+      - id: "i"
+        label: "Page-turn buttons"
+  - id: q20
+    prompt: "How much do you agree: E-readers are more convenient than physical books."
+    type: single_choice
+    construct: much_agree_e_readers_more
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: I still prefer the feel of a physical book."
+    type: single_choice
+    construct: much_agree_i_still_prefer
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: Reading on an e-reader is easier on my eyes than reading on a phone or tablet."
+    type: single_choice
+    construct: much_agree_reading_e_reader
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How much do you agree: E-books save me money compared to buying print books."
+    type: single_choice
+    construct: much_agree_e_books_save
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "How much do you agree: My e-reader has increased how much I read."
+    type: single_choice
+    construct: much_agree_my_e_reader
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "How much do you agree: I am concerned that I don't truly own the e-books I purchase."
+    type: single_choice
+    construct: much_agree_i_am_concerned
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q26
+    prompt: "What features do you use on your e-reader or reading app? (Select all that apply)"
+    type: multi_choice
+    construct: features_use_e_reader_reading
+    required: true
+    options:
+      - id: "a"
+        label: "Adjustable font size"
+      - id: "b"
+        label: "Built-in dictionary / definitions"
+      - id: "c"
+        label: "Highlights and notes"
+      - id: "d"
+        label: "Dark mode / night reading"
+      - id: "e"
+        label: "Text-to-speech / audiobook narration"
+      - id: "f"
+        label: "Syncing across devices"
+      - id: "g"
+        label: "Bookmarks"
+      - id: "h"
+        label: "Library book borrowing"
+      - id: "i"
+        label: "I use very few features"
+  - id: q27
+    prompt: "Where do you do most of your reading? (Select all that apply)"
+    type: multi_choice
+    construct: where_most_reading_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "At home / in bed"
+      - id: "b"
+        label: "Commuting or traveling"
+      - id: "c"
+        label: "During breaks at work"
+      - id: "d"
+        label: "Outdoors / at the beach or park"
+      - id: "e"
+        label: "Waiting rooms and lines"
+      - id: "f"
+        label: "Before sleep"
+  - id: q28
+    prompt: "What do you like most about e-readers? (Select all that apply)"
+    type: multi_choice
+    construct: like_most_e_readers_select
+    required: true
+    options:
+      - id: "a"
+        label: "Carrying many books in one device"
+      - id: "b"
+        label: "Adjustable text size"
+      - id: "c"
+        label: "Instant access to new books"
+      - id: "d"
+        label: "Lightweight and portable"
+      - id: "e"
+        label: "Reading in the dark"
+      - id: "f"
+        label: "Lower cost of books"
+      - id: "g"
+        label: "Library borrowing"
+      - id: "h"
+        label: "Long battery life"
+  - id: q29
+    prompt: "What do you dislike or find limiting about e-readers? (Select all that apply)"
+    type: multi_choice
+    construct: dislike_find_limiting_e_readers
+    required: true
+    options:
+      - id: "a"
+        label: "Missing the feel of physical books"
+      - id: "b"
+        label: "Screen strain or eye fatigue"
+      - id: "c"
+        label: "Restrictions on sharing / lending"
+      - id: "d"
+        label: "Battery or charging needs"
+      - id: "e"
+        label: "Digital rights management (DRM)"
+      - id: "f"
+        label: "Distraction from notifications (on phones/tablets)"
+      - id: "g"
+        label: "Cost of the device"
+      - id: "h"
+        label: "Nothing — I love it"
+  - id: q30
+    prompt: "How satisfied are you with your e-reading experience?"
+    type: single_choice
+    construct: satisfied_e_reading_experience
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q31
+    prompt: "How likely are you to buy a new or upgraded e-reader in the next 12 months?"
+    type: single_choice
+    construct: likely_buy_new_upgraded_e
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q32
+    prompt: "How likely are you to recommend using an e-reader to others? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_using_e_reader
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q33
+    prompt: "What would make you read more e-books, if anything?"
+    type: free_text
+    construct: would_make_read_more_e
+    required: true
+  - id: q34
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18-24"
+      - id: "b"
+        label: "25-34"
+      - id: "c"
+        label: "35-44"
+      - id: "d"
+        label: "45-54"
+      - id: "e"
+        label: "55-64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000-$49,999"
+      - id: "c"
+        label: "$50,000-$74,999"
+      - id: "d"
+        label: "$75,000-$99,999"
+      - id: "e"
+        label: "$100,000-$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Not currently employed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which best describes where you live?"
+    type: single_choice
+    construct: best_describes_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q41
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q42
+    prompt: "How would you describe yourself as a reader?"
+    type: single_choice
+    construct: would_describe_yourself_as_reader
+    required: true
+    options:
+      - id: "a"
+        label: "Avid reader — I read constantly"
+      - id: "b"
+        label: "Regular reader"
+      - id: "c"
+        label: "Occasional reader"
+      - id: "d"
+        label: "Infrequent reader"

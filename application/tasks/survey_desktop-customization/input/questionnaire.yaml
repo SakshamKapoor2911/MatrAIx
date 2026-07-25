@@ -1,0 +1,798 @@
+schemaVersion: "1.0"
+id: desktop_customization_v1
+title: "Desktop Customization Survey"
+description: "How people personalize and customize their computer desktop environment."
+questions:
+  - id: q0
+    prompt: "How much do you customize your computer's desktop environment?"
+    type: single_choice
+    construct: much_customize_computer_s_desktop
+    required: true
+    options:
+      - id: "a"
+        label: "Heavily — I invest a lot in it"
+      - id: "b"
+        label: "Moderately — I tweak several things"
+      - id: "c"
+        label: "A little — mostly wallpaper and a few settings"
+      - id: "d"
+        label: "Barely — I use the defaults"
+      - id: "e"
+        label: "Not at all — pure stock"
+  - id: q1
+    prompt: "Which operating system do you primarily customize?"
+    type: single_choice
+    construct: operating_system_primarily_customize
+    required: true
+    options:
+      - id: "a"
+        label: "Windows"
+      - id: "b"
+        label: "macOS"
+      - id: "c"
+        label: "Linux (any distribution)"
+      - id: "d"
+        label: "ChromeOS"
+      - id: "e"
+        label: "A mix of systems"
+  - id: q2
+    prompt: "How often do you change or refresh your desktop setup?"
+    type: single_choice
+    construct: often_change_refresh_desktop_setup
+    required: true
+    options:
+      - id: "a"
+        label: "Frequently — I'm always tweaking"
+      - id: "b"
+        label: "Every few months"
+      - id: "c"
+        label: "A couple of times a year"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "I set it once and leave it"
+  - id: q3
+    prompt: "How important is a personalized computer setup to you?"
+    type: single_choice
+    construct: important_personalized_computer_setup
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q4
+    prompt: "What do you customize on your desktop? (Select all that apply)"
+    type: multi_choice
+    construct: customize_desktop_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Wallpaper / background"
+      - id: "b"
+        label: "Theme or accent colors"
+      - id: "c"
+        label: "Light / dark mode"
+      - id: "d"
+        label: "Icons"
+      - id: "e"
+        label: "Taskbar or dock"
+      - id: "f"
+        label: "Widgets"
+      - id: "g"
+        label: "Fonts"
+      - id: "h"
+        label: "Window management / layout"
+      - id: "i"
+        label: "Keyboard shortcuts"
+      - id: "j"
+        label: "Cursor and pointer"
+      - id: "k"
+        label: "System sounds"
+      - id: "l"
+        label: "Startup apps"
+      - id: "m"
+        label: "Terminal / command line appearance"
+  - id: q5
+    prompt: "Which customization tools or apps do you use? (Select all that apply)"
+    type: multi_choice
+    construct: customization_tools_apps_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Rainmeter (Windows)"
+      - id: "b"
+        label: "Microsoft PowerToys"
+      - id: "c"
+        label: "Wallpaper Engine"
+      - id: "d"
+        label: "StartAllBack / Start11"
+      - id: "e"
+        label: "Bartender / Ice (macOS menu bar)"
+      - id: "f"
+        label: "Alfred or Raycast"
+      - id: "g"
+        label: "A tiling window manager (yabai, Amethyst, i3, etc.)"
+      - id: "h"
+        label: "A Linux desktop environment (GNOME, KDE, etc.) with extensions"
+      - id: "i"
+        label: "Custom icon packs"
+      - id: "j"
+        label: "Browser new-tab customization"
+      - id: "k"
+        label: "None"
+  - id: q6
+    prompt: "What style of wallpaper do you usually use?"
+    type: single_choice
+    construct: style_wallpaper_usually_use
+    required: true
+    options:
+      - id: "a"
+        label: "Minimal / solid color or gradient"
+      - id: "b"
+        label: "Nature or landscape photos"
+      - id: "c"
+        label: "Abstract or artistic"
+      - id: "d"
+        label: "Anime, gaming, or fandom art"
+      - id: "e"
+        label: "Live / animated wallpaper"
+      - id: "f"
+        label: "A photo of my own"
+      - id: "g"
+        label: "Whatever the default is"
+  - id: q7
+    prompt: "Which appearance mode do you prefer?"
+    type: single_choice
+    construct: appearance_mode_prefer
+    required: true
+    options:
+      - id: "a"
+        label: "Dark mode always"
+      - id: "b"
+        label: "Light mode always"
+      - id: "c"
+        label: "Automatic (switches with time of day)"
+      - id: "d"
+        label: "I switch depending on my mood or task"
+      - id: "e"
+        label: "No preference"
+  - id: q8
+    prompt: "Do you use a tiling window manager or window-management tools?"
+    type: single_choice
+    construct: use_tiling_window_manager_window
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a full tiling window manager"
+      - id: "b"
+        label: "Yes, snapping / window tools (FancyZones, Rectangle, etc.)"
+      - id: "c"
+        label: "Just the built-in window snapping"
+      - id: "d"
+        label: "No, I arrange windows manually"
+      - id: "e"
+        label: "Not sure"
+  - id: q9
+    prompt: "Where do you get ideas or resources for customizing your setup? (Select all that apply)"
+    type: multi_choice
+    construct: where_get_ideas_resources_customizing
+    required: true
+    options:
+      - id: "a"
+        label: "Reddit (r/unixporn, r/desktops, etc.)"
+      - id: "b"
+        label: "YouTube"
+      - id: "c"
+        label: "Friends or colleagues"
+      - id: "d"
+        label: "Pinterest"
+      - id: "e"
+        label: "DeviantArt / Wallhaven"
+      - id: "f"
+        label: "Community forums or Discord"
+      - id: "g"
+        label: "Blogs and articles"
+      - id: "h"
+        label: "I come up with my own"
+      - id: "i"
+        label: "I don't seek out ideas"
+  - id: q10
+    prompt: "Roughly how many hours did you spend customizing your setup in the past month? Enter a whole number."
+    type: free_text
+    construct: roughly_many_hours_did_spend
+    required: true
+  - id: q11
+    prompt: "How many monitors do you use in your main setup? Enter a whole number."
+    type: free_text
+    construct: many_monitors_use_main_setup
+    required: true
+  - id: q12
+    prompt: "How many virtual desktops or workspaces do you typically use? Enter a whole number."
+    type: free_text
+    construct: many_virtual_desktops_workspaces_typical
+    required: true
+  - id: q13
+    prompt: "How much do you agree with the following statement about desktop customization? A personalized setup makes me more productive."
+    type: single_choice
+    construct: much_agree_following_statement_desktop
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement about desktop customization? I genuinely enjoy tinkering with my setup."
+    type: single_choice
+    construct: much_agree_following_statement_desktop
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement about desktop customization? Customizing my desktop is mostly a waste of time."
+    type: single_choice
+    construct: much_agree_following_statement_desktop
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about desktop customization? My setup reflects my personality."
+    type: single_choice
+    construct: much_agree_following_statement_desktop
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about desktop customization? I get \"setup envy\" when I see other people's desktops."
+    type: single_choice
+    construct: much_agree_following_statement_desktop
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about desktop customization? I prefer clean stock defaults over heavy customization."
+    type: single_choice
+    construct: much_agree_following_statement_desktop
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about desktop customization? A clean, minimal desktop matters to me."
+    type: single_choice
+    construct: much_agree_following_statement_desktop
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Where do you fall on the \"aesthetics vs. function\" spectrum when customizing?"
+    type: single_choice
+    construct: where_fall_aesthetics_vs_function
+    required: true
+    options:
+      - id: "a"
+        label: "Purely about how it looks"
+      - id: "b"
+        label: "Mostly looks, some function"
+      - id: "c"
+        label: "An even balance"
+      - id: "d"
+        label: "Mostly function, some looks"
+      - id: "e"
+        label: "Purely about productivity and function"
+  - id: q21
+    prompt: "How important is each aspect when you customize? Visual aesthetics."
+    type: single_choice
+    construct: important_each_aspect_when_customize
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each aspect when you customize? Productivity and efficiency."
+    type: single_choice
+    construct: important_each_aspect_when_customize
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each aspect when you customize? Minimalism and reducing clutter."
+    type: single_choice
+    construct: important_each_aspect_when_customize
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each aspect when you customize? Uniqueness and self-expression."
+    type: single_choice
+    construct: important_each_aspect_when_customize
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is each aspect when you customize? Comfort and reducing eye strain."
+    type: single_choice
+    construct: important_each_aspect_when_customize
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "Select the top 3 things you customize the most. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_customize
+    required: true
+    options:
+      - id: "a"
+        label: "Wallpaper"
+      - id: "b"
+        label: "Theme and colors"
+      - id: "c"
+        label: "Dock or taskbar"
+      - id: "d"
+        label: "Icons"
+      - id: "e"
+        label: "Widgets"
+      - id: "f"
+        label: "Window management"
+      - id: "g"
+        label: "Keyboard shortcuts"
+      - id: "h"
+        label: "Terminal appearance"
+      - id: "i"
+        label: "Fonts"
+  - id: q27
+    prompt: "What are your main reasons for customizing your desktop? (Select all that apply)"
+    type: multi_choice
+    construct: main_reasons_customizing_desktop_select
+    required: true
+    options:
+      - id: "a"
+        label: "To make it look nicer"
+      - id: "b"
+        label: "To work more efficiently"
+      - id: "c"
+        label: "To express myself"
+      - id: "d"
+        label: "For fun / as a hobby"
+      - id: "e"
+        label: "To reduce clutter"
+      - id: "f"
+        label: "To reduce eye strain"
+      - id: "g"
+        label: "To match my other devices"
+      - id: "h"
+        label: "I don't customize much"
+  - id: q28
+    prompt: "Do you sync your customizations or dotfiles across machines?"
+    type: single_choice
+    construct: sync_customizations_dotfiles_across_mach
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, with a dotfiles repo or config sync"
+      - id: "b"
+        label: "Yes, through built-in account sync"
+      - id: "c"
+        label: "I set each machine up manually"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "Not applicable"
+  - id: q29
+    prompt: "How would you describe your desktop most of the time?"
+    type: single_choice
+    construct: would_describe_desktop_most_time
+    required: true
+    options:
+      - id: "a"
+        label: "Spotless — nothing on it"
+      - id: "b"
+        label: "Tidy with a few items"
+      - id: "c"
+        label: "Moderately cluttered"
+      - id: "d"
+        label: "Covered in icons and files"
+      - id: "e"
+        label: "It varies a lot"
+  - id: q30
+    prompt: "How would you rate your overall satisfaction with your current setup?"
+    type: single_choice
+    construct: would_rate_overall_satisfaction_current
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q31
+    prompt: "How well does your current setup reflect your personality and taste?"
+    type: single_choice
+    construct: well_does_current_setup_reflect
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Slightly"
+      - id: "c"
+        label: "Moderately"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Perfectly"
+  - id: q32
+    prompt: "How likely are you to significantly overhaul your setup in the next 12 months?"
+    type: single_choice
+    construct: likely_significantly_overhaul_setup_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q33
+    prompt: "On a scale of 0 to 10, how likely are you to recommend customizing a desktop setup to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q34
+    prompt: "If you could add or change one thing about your setup, what would it be? (Optional short answer)"
+    type: free_text
+    construct: if_could_add_change_one
+    required: false
+  - id: q35
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18-24"
+      - id: "c"
+        label: "25-34"
+      - id: "d"
+        label: "35-44"
+      - id: "e"
+        label: "45-54"
+      - id: "f"
+        label: "55-64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000-$49,999"
+      - id: "c"
+        label: "$50,000-$74,999"
+      - id: "d"
+        label: "$75,000-$99,999"
+      - id: "e"
+        label: "$100,000-$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Homemaker"
+      - id: "f"
+        label: "Unemployed"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "How many people live in your household, including yourself? Enter a whole number."
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q42
+    prompt: "What is your relationship status?"
+    type: single_choice
+    construct: relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or domestic partnership"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q44
+    prompt: "How would you describe where you live?"
+    type: single_choice
+    construct: would_describe_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q45
+    prompt: "Which best describes your role or technical background?"
+    type: single_choice
+    construct: best_describes_role_technical_background
+    required: true
+    options:
+      - id: "a"
+        label: "Software developer / engineer"
+      - id: "b"
+        label: "IT or technology professional"
+      - id: "c"
+        label: "Designer or creative professional"
+      - id: "d"
+        label: "Gamer / enthusiast"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Other office / knowledge worker"
+      - id: "g"
+        label: "General home user"
+      - id: "h"
+        label: "Other"
+  - id: q46
+    prompt: "How would you describe your comfort with technology in general?"
+    type: single_choice
+    construct: would_describe_comfort_technology_genera
+    required: true
+    options:
+      - id: "a"
+        label: "I'm an early adopter who loves new tech"
+      - id: "b"
+        label: "Comfortable and fairly up to date"
+      - id: "c"
+        label: "Average — I use what I need"
+      - id: "d"
+        label: "A bit behind the curve"
+      - id: "e"
+        label: "I find new technology difficult"

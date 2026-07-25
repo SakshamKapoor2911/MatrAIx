@@ -1,0 +1,7 @@
+# Tax Refund Usage
+
+How people receive their federal tax refunds and decide whether to save, spend, invest, or pay down debt with them.
+
+## About this survey
+
+This survey examines what people do with their tax refunds, opening with a screener on whether they received a refund, how often they do, how they filed, and how the refund arrived. It records the software or preparer used, refund size, how the amount compared to expectations, and the specific planned uses across debt paydown, saving, bills, purchases, investing, and giving. Attitudes are captured with an agreement Likert battery on whether the refund feels like a windfall, withholding preferences, and reliance on the refund, and a per-item importance matrix over competing uses of the money, plus a top-three priority ranking and a recommendation likelihood scale. Additional sections cover timing of spending, withholding adjustment, whether the refund is seen as returned money or extra, past regrets, share saved, tax-season stress, satisfaction, and confidence in the plan. Question types include single-choice, multi-select, agreement and importance matrices, satisfaction and likelihood Likert scales, an NPS-style 0–10 item, a ranking item, and numeric free-text. The survey closes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, dependents, housing, U.S. region, and urbanicity.

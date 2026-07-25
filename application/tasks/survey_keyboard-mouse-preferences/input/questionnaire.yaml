@@ -1,0 +1,715 @@
+schemaVersion: "1.0"
+id: keyboard_mouse_preferences_v1
+title: "Keyboard and Mouse Preferences Survey"
+description: "Preferences and habits around computer input devices — keyboard and mouse types, switches, layouts, brands, ergonomics, and satisfaction."
+questions:
+  - id: q0
+    prompt: "How many hours per day do you typically spend typing or using a mouse on a computer?"
+    type: single_choice
+    construct: many_hours_per_day_typically
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 hour"
+      - id: "b"
+        label: "1 to 3 hours"
+      - id: "c"
+        label: "4 to 6 hours"
+      - id: "d"
+        label: "7 to 9 hours"
+      - id: "e"
+        label: "More than 9 hours"
+  - id: q1
+    prompt: "What type of keyboard do you primarily use?"
+    type: single_choice
+    construct: type_keyboard_primarily_use
+    required: true
+    options:
+      - id: "a"
+        label: "Standard membrane keyboard"
+      - id: "b"
+        label: "Mechanical keyboard"
+      - id: "c"
+        label: "Laptop built-in keyboard"
+      - id: "d"
+        label: "Low-profile / scissor-switch keyboard"
+      - id: "e"
+        label: "Ergonomic / split keyboard"
+      - id: "f"
+        label: "Not sure"
+  - id: q2
+    prompt: "What type of mouse or pointing device do you primarily use?"
+    type: single_choice
+    construct: type_mouse_pointing_device_primarily
+    required: true
+    options:
+      - id: "a"
+        label: "Standard optical mouse"
+      - id: "b"
+        label: "Gaming mouse"
+      - id: "c"
+        label: "Laptop trackpad"
+      - id: "d"
+        label: "Trackball"
+      - id: "e"
+        label: "Vertical / ergonomic mouse"
+      - id: "f"
+        label: "Trackpad (external, e.g., Magic Trackpad)"
+      - id: "g"
+        label: "Stylus / pen tablet"
+  - id: q3
+    prompt: "How do your keyboard and mouse connect? (Select all that apply)"
+    type: multi_choice
+    construct: keyboard_mouse_connect_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Wired (USB)"
+      - id: "b"
+        label: "Wireless (2.4GHz USB dongle)"
+      - id: "c"
+        label: "Bluetooth"
+      - id: "d"
+        label: "Built into laptop"
+      - id: "e"
+        label: "Not sure"
+  - id: q4
+    prompt: "How many keyboards do you personally own? Enter a whole number."
+    type: free_text
+    construct: many_keyboards_personally_own_enter
+    required: true
+  - id: q5
+    prompt: "Which keyboard brands do you own or use? (Select all that apply)"
+    type: multi_choice
+    construct: keyboard_brands_own_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Logitech"
+      - id: "b"
+        label: "Corsair"
+      - id: "c"
+        label: "Razer"
+      - id: "d"
+        label: "Keychron"
+      - id: "e"
+        label: "Apple"
+      - id: "f"
+        label: "Microsoft"
+      - id: "g"
+        label: "Ducky / Varmilo / other enthusiast brand"
+      - id: "h"
+        label: "SteelSeries"
+      - id: "i"
+        label: "HyperX"
+      - id: "j"
+        label: "A custom / self-built keyboard"
+      - id: "k"
+        label: "Whatever came with my computer"
+      - id: "l"
+        label: "Other"
+  - id: q6
+    prompt: "If you use a mechanical keyboard, which switch type do you prefer?"
+    type: single_choice
+    construct: if_use_mechanical_keyboard_switch
+    required: true
+    options:
+      - id: "a"
+        label: "Linear (e.g., red switches)"
+      - id: "b"
+        label: "Tactile (e.g., brown switches)"
+      - id: "c"
+        label: "Clicky (e.g., blue switches)"
+      - id: "d"
+        label: "Silent switches"
+      - id: "e"
+        label: "I don't use a mechanical keyboard"
+      - id: "f"
+        label: "Not sure"
+  - id: q7
+    prompt: "What keyboard size/layout do you prefer?"
+    type: single_choice
+    construct: keyboard_size_layout_prefer
+    required: true
+    options:
+      - id: "a"
+        label: "Full-size (with number pad)"
+      - id: "b"
+        label: "Tenkeyless (TKL, no number pad)"
+      - id: "c"
+        label: "75% or compact"
+      - id: "d"
+        label: "60% / mini"
+      - id: "e"
+        label: "Split or ergonomic"
+      - id: "f"
+        label: "No preference"
+  - id: q8
+    prompt: "What do you primarily use your computer for? (Select all that apply)"
+    type: multi_choice
+    construct: primarily_use_computer_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Office work / productivity"
+      - id: "b"
+        label: "Programming / coding"
+      - id: "c"
+        label: "Gaming"
+      - id: "d"
+        label: "Writing / content creation"
+      - id: "e"
+        label: "Graphic design / creative work"
+      - id: "f"
+        label: "Data entry"
+      - id: "g"
+        label: "General browsing and media"
+      - id: "h"
+        label: "Video editing"
+  - id: q9
+    prompt: "How important is typing feel and sound when choosing a keyboard?"
+    type: single_choice
+    construct: important_typing_feel_sound_when
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q10
+    prompt: "How important is ergonomics and comfort in your input devices?"
+    type: single_choice
+    construct: important_ergonomics_comfort_input_devic
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q11
+    prompt: "How important is wireless / cable-free operation?"
+    type: single_choice
+    construct: important_wireless_cable_free_operation
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q12
+    prompt: "How important is customizability (keycaps, macros, remapping)?"
+    type: single_choice
+    construct: important_customizability_keycaps_macros
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q13
+    prompt: "How important is price when buying input devices?"
+    type: single_choice
+    construct: important_price_when_buying_input
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q14
+    prompt: "How important are RGB lighting and aesthetics?"
+    type: single_choice
+    construct: important_rgb_lighting_aesthetics
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q15
+    prompt: "Which THREE keyboard qualities matter most to you? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: three_keyboard_qualities_matter_most
+    required: true
+    options:
+      - id: "a"
+        label: "Typing feel"
+      - id: "b"
+        label: "Sound"
+      - id: "c"
+        label: "Build quality"
+      - id: "d"
+        label: "Ergonomics"
+      - id: "e"
+        label: "Wireless connectivity"
+      - id: "f"
+        label: "Customizability"
+      - id: "g"
+        label: "Price"
+      - id: "h"
+        label: "Layout / size"
+      - id: "i"
+        label: "Aesthetics / RGB"
+      - id: "j"
+        label: "Battery life"
+  - id: q16
+    prompt: "Roughly how much did you spend on your current primary keyboard? Enter a whole-dollar amount (US$)."
+    type: free_text
+    construct: roughly_much_did_spend_current
+    required: true
+  - id: q17
+    prompt: "How much do you agree: A good keyboard noticeably improves my productivity."
+    type: single_choice
+    construct: much_agree_good_keyboard_noticeably
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: I am willing to pay a premium for a keyboard I really like."
+    type: single_choice
+    construct: much_agree_i_am_willing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: I have experienced wrist, hand, or finger discomfort from typing."
+    type: single_choice
+    construct: much_agree_i_have_experienced
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: I prefer mechanical keyboards over membrane keyboards."
+    type: single_choice
+    construct: much_agree_i_prefer_mechanical
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: I customize my keyboard shortcuts, macros, or key mappings."
+    type: single_choice
+    construct: much_agree_i_customize_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "Do you use any ergonomic accessories? (Select all that apply)"
+    type: multi_choice
+    construct: use_any_ergonomic_accessories_select
+    required: true
+    options:
+      - id: "a"
+        label: "Wrist rest"
+      - id: "b"
+        label: "Palm rest for mouse"
+      - id: "c"
+        label: "Vertical or ergonomic mouse"
+      - id: "d"
+        label: "Split or tented keyboard"
+      - id: "e"
+        label: "Adjustable keyboard tray"
+      - id: "f"
+        label: "Standing desk setup"
+      - id: "g"
+        label: "None of these"
+  - id: q23
+    prompt: "How would you rate your typing speed?"
+    type: single_choice
+    construct: would_rate_typing_speed
+    required: true
+    options:
+      - id: "a"
+        label: "Very slow"
+      - id: "b"
+        label: "Below average"
+      - id: "c"
+        label: "Average"
+      - id: "d"
+        label: "Fast"
+      - id: "e"
+        label: "Very fast (touch typist)"
+  - id: q24
+    prompt: "Do you know your approximate typing speed in words per minute? Enter a whole number (or 0 if unsure)."
+    type: free_text
+    construct: know_approximate_typing_speed_words
+    required: true
+  - id: q25
+    prompt: "How often do you clean or maintain your keyboard and mouse?"
+    type: single_choice
+    construct: often_clean_maintain_keyboard_mouse
+    required: true
+    options:
+      - id: "a"
+        label: "Regularly (monthly or more)"
+      - id: "b"
+        label: "Occasionally (every few months)"
+      - id: "c"
+        label: "Rarely (once a year or so)"
+      - id: "d"
+        label: "Never"
+  - id: q26
+    prompt: "Have you ever built or heavily customized a keyboard (keycaps, switches, lubing)?"
+    type: single_choice
+    construct: have_ever_built_heavily_customized
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I'm into custom keyboards"
+      - id: "b"
+        label: "I've swapped keycaps or switches once or twice"
+      - id: "c"
+        label: "No, but I'm curious"
+      - id: "d"
+        label: "No, and I'm not interested"
+  - id: q27
+    prompt: "What frustrates you most about your current input devices? (Select all that apply)"
+    type: multi_choice
+    construct: frustrates_most_current_input_devices
+    required: true
+    options:
+      - id: "a"
+        label: "Discomfort or fatigue"
+      - id: "b"
+        label: "Keys feel mushy or unresponsive"
+      - id: "c"
+        label: "Too loud"
+      - id: "d"
+        label: "Connectivity or battery issues"
+      - id: "e"
+        label: "Layout or missing keys"
+      - id: "f"
+        label: "Mouse tracking or precision"
+      - id: "g"
+        label: "Wearing out too fast"
+      - id: "h"
+        label: "Nothing frustrates me"
+  - id: q28
+    prompt: "How satisfied are you with your current keyboard and mouse setup?"
+    type: single_choice
+    construct: satisfied_current_keyboard_mouse_setup
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "How likely are you to buy a new keyboard or mouse in the next 12 months?"
+    type: single_choice
+    construct: likely_buy_new_keyboard_mouse
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q30
+    prompt: "How likely are you to recommend your current keyboard to others? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_current_keyboard_others
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "What is your ideal keyboard or mouse setup, if different from what you have now?"
+    type: free_text
+    construct: ideal_keyboard_mouse_setup_if
+    required: true
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18-24"
+      - id: "b"
+        label: "25-34"
+      - id: "c"
+        label: "35-44"
+      - id: "d"
+        label: "45-54"
+      - id: "e"
+        label: "55-64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000-$49,999"
+      - id: "c"
+        label: "$50,000-$74,999"
+      - id: "d"
+        label: "$75,000-$99,999"
+      - id: "e"
+        label: "$100,000-$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Not currently employed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which best describes your primary occupation or field?"
+    type: single_choice
+    construct: best_describes_primary_occupation_field
+    required: true
+    options:
+      - id: "a"
+        label: "Technology / IT / software"
+      - id: "b"
+        label: "Office / administrative"
+      - id: "c"
+        label: "Creative / design / media"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Healthcare"
+      - id: "f"
+        label: "Finance / business"
+      - id: "g"
+        label: "Trades / manual work"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q39
+    prompt: "Which best describes where you live?"
+    type: single_choice
+    construct: best_describes_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q40
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q41
+    prompt: "How would you describe yourself when it comes to input-device gear?"
+    type: single_choice
+    construct: would_describe_yourself_when_it
+    required: true
+    options:
+      - id: "a"
+        label: "Enthusiast — I care a lot and follow the hobby"
+      - id: "b"
+        label: "Interested — I appreciate good gear"
+      - id: "c"
+        label: "Practical — I just want it to work well"
+      - id: "d"
+        label: "Indifferent — I use whatever I have"

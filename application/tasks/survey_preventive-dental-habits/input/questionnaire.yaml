@@ -1,0 +1,649 @@
+schemaVersion: "1.0"
+id: preventive_dental_habits_v1
+title: "Preventive Dental Habits Survey"
+description: "Everyday preventive dental care habits, routines, products, and attitudes."
+questions:
+  - id: q0
+    prompt: "How many times a day do you usually brush your teeth?"
+    type: single_choice
+    construct: many_times_day_usually_brush
+    required: true
+    options:
+      - id: "a"
+        label: "Less than once a day"
+      - id: "b"
+        label: "Once a day"
+      - id: "c"
+        label: "Twice a day"
+      - id: "d"
+        label: "Three or more times a day"
+  - id: q1
+    prompt: "How often do you floss or use between-teeth cleaners?"
+    type: single_choice
+    construct: often_floss_use_between_teeth
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "About once a week"
+      - id: "d"
+        label: "Occasionally"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q2
+    prompt: "What type of toothbrush do you mainly use?"
+    type: single_choice
+    construct: type_toothbrush_mainly_use
+    required: true
+    options:
+      - id: "a"
+        label: "Manual toothbrush"
+      - id: "b"
+        label: "Battery-powered toothbrush"
+      - id: "c"
+        label: "Rechargeable electric toothbrush"
+      - id: "d"
+        label: "Not sure"
+  - id: q3
+    prompt: "About how many minutes do you spend brushing each time? Please enter a number."
+    type: free_text
+    construct: many_minutes_spend_brushing_each
+    required: true
+  - id: q4
+    prompt: "Which preventive dental products do you regularly use? (Select all that apply)"
+    type: multi_choice
+    construct: preventive_dental_products_regularly_use
+    required: true
+    options:
+      - id: "a"
+        label: "Fluoride toothpaste"
+      - id: "b"
+        label: "Mouthwash or rinse"
+      - id: "c"
+        label: "Dental floss or picks"
+      - id: "d"
+        label: "Water flosser"
+      - id: "e"
+        label: "Tongue scraper"
+      - id: "f"
+        label: "Whitening products"
+      - id: "g"
+        label: "Interdental brushes"
+      - id: "h"
+        label: "None of these"
+  - id: q5
+    prompt: "Which toothpaste features do you look for? (Select all that apply)"
+    type: multi_choice
+    construct: toothpaste_features_look_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Fluoride"
+      - id: "b"
+        label: "Whitening"
+      - id: "c"
+        label: "Sensitivity relief"
+      - id: "d"
+        label: "Tartar control"
+      - id: "e"
+        label: "Natural or fluoride-free"
+      - id: "f"
+        label: "A specific flavor"
+      - id: "g"
+        label: "I do not pay attention to features"
+  - id: q6
+    prompt: "About how often do you get a routine dental checkup or cleaning?"
+    type: single_choice
+    construct: often_get_routine_dental_checkup
+    required: true
+    options:
+      - id: "a"
+        label: "Every 6 months or more often"
+      - id: "b"
+        label: "About once a year"
+      - id: "c"
+        label: "Every couple of years"
+      - id: "d"
+        label: "Only when I have a problem"
+      - id: "e"
+        label: "Never"
+  - id: q7
+    prompt: "When was your most recent dental checkup or cleaning?"
+    type: single_choice
+    construct: when_was_most_recent_dental
+    required: true
+    options:
+      - id: "a"
+        label: "Within the last 6 months"
+      - id: "b"
+        label: "6 to 12 months ago"
+      - id: "c"
+        label: "1 to 2 years ago"
+      - id: "d"
+        label: "More than 2 years ago"
+      - id: "e"
+        label: "I cannot remember or never"
+  - id: q8
+    prompt: "In the past two years, have you had any of the following preventive dental services? (Select all that apply)"
+    type: multi_choice
+    construct: past_two_years_have_had
+    required: true
+    options:
+      - id: "a"
+        label: "Routine cleaning"
+      - id: "b"
+        label: "Dental X-rays"
+      - id: "c"
+        label: "Fluoride treatment"
+      - id: "d"
+        label: "Dental sealants"
+      - id: "e"
+        label: "Oral cancer screening"
+      - id: "f"
+        label: "A gum-health evaluation"
+      - id: "g"
+        label: "None of these"
+  - id: q9
+    prompt: "What most influences how often you go to the dentist? (Select all that apply)"
+    type: multi_choice
+    construct: most_influences_often_go_dentist
+    required: true
+    options:
+      - id: "a"
+        label: "Cost or insurance coverage"
+      - id: "b"
+        label: "Dentist's recommended schedule"
+      - id: "c"
+        label: "Whether I have symptoms"
+      - id: "d"
+        label: "Time and convenience"
+      - id: "e"
+        label: "Dental anxiety or discomfort"
+      - id: "f"
+        label: "Habit or routine"
+  - id: q10
+    prompt: "Do you have dental insurance or a dental plan?"
+    type: single_choice
+    construct: have_dental_insurance_dental_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, through an employer"
+      - id: "b"
+        label: "Yes, purchased on my own"
+      - id: "c"
+        label: "Yes, through a public program"
+      - id: "d"
+        label: "No dental coverage"
+      - id: "e"
+        label: "Not sure"
+  - id: q11
+    prompt: "How often do you replace your toothbrush or brush head?"
+    type: single_choice
+    construct: often_replace_toothbrush_brush_head
+    required: true
+    options:
+      - id: "a"
+        label: "Every 1–2 months"
+      - id: "b"
+        label: "Every 3–4 months"
+      - id: "c"
+        label: "Every 5–6 months"
+      - id: "d"
+        label: "Less often than every 6 months"
+      - id: "e"
+        label: "Not sure"
+  - id: q12
+    prompt: "How would you rate your overall dental health?"
+    type: single_choice
+    construct: would_rate_overall_dental_health
+    required: true
+    options:
+      - id: "a"
+        label: "Poor"
+      - id: "b"
+        label: "Fair"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Very good"
+      - id: "e"
+        label: "Excellent"
+  - id: q13
+    prompt: "How much do you agree with the following statement about your dental care: I take good care of my teeth and gums."
+    type: single_choice
+    construct: much_agree_following_statement_dental
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement about your dental care: Preventive dental care is worth the time and money."
+    type: single_choice
+    construct: much_agree_following_statement_dental
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement about your dental care: I feel anxious about going to the dentist."
+    type: single_choice
+    construct: much_agree_following_statement_dental
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about your dental care: I am confident I know how to care for my teeth properly."
+    type: single_choice
+    construct: much_agree_following_statement_dental
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about your dental care: Cost keeps me from getting the dental care I need."
+    type: single_choice
+    construct: much_agree_following_statement_dental
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How important is a bright, white smile to you?"
+    type: single_choice
+    construct: important_bright_white_smile
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How often do you use whitening products or treatments?"
+    type: single_choice
+    construct: often_use_whitening_products_treatments
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "A few times a year"
+      - id: "d"
+        label: "Monthly"
+      - id: "e"
+        label: "Weekly or more often"
+  - id: q20
+    prompt: "Do you use any app or device to track or improve your dental habits?"
+    type: single_choice
+    construct: use_any_app_device_track
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a smart toothbrush app"
+      - id: "b"
+        label: "Yes, a reminder or habit app"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No, and I would not"
+  - id: q21
+    prompt: "What most often gets in the way of good preventive dental care? (Select all that apply)"
+    type: multi_choice
+    construct: most_often_gets_way_good
+    required: true
+    options:
+      - id: "a"
+        label: "Cost"
+      - id: "b"
+        label: "Lack of time"
+      - id: "c"
+        label: "Forgetting or lack of routine"
+      - id: "d"
+        label: "Fear or dislike of the dentist"
+      - id: "e"
+        label: "No nearby dentist"
+      - id: "f"
+        label: "Trouble getting an appointment"
+      - id: "g"
+        label: "Nothing in particular"
+  - id: q22
+    prompt: "Select your top 3 habits you believe matter most for good dental health. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_habits_believe
+    required: true
+    options:
+      - id: "a"
+        label: "Brushing twice a day"
+      - id: "b"
+        label: "Daily flossing"
+      - id: "c"
+        label: "Regular checkups and cleanings"
+      - id: "d"
+        label: "Using fluoride"
+      - id: "e"
+        label: "Limiting sugary foods and drinks"
+      - id: "f"
+        label: "Using mouthwash"
+      - id: "g"
+        label: "Replacing the toothbrush regularly"
+  - id: q23
+    prompt: "How do you feel about the cost of preventive dental care?"
+    type: single_choice
+    construct: feel_cost_preventive_dental_care
+    required: true
+    options:
+      - id: "a"
+        label: "Very affordable"
+      - id: "b"
+        label: "Somewhat affordable"
+      - id: "c"
+        label: "Somewhat expensive"
+      - id: "d"
+        label: "Very expensive"
+  - id: q24
+    prompt: "Where do you get most of your information about dental care? (Select all that apply)"
+    type: multi_choice
+    construct: where_get_most_information_dental
+    required: true
+    options:
+      - id: "a"
+        label: "My dentist or dental hygienist"
+      - id: "b"
+        label: "Websites or search engines"
+      - id: "c"
+        label: "Social media or videos"
+      - id: "d"
+        label: "Product packaging or ads"
+      - id: "e"
+        label: "Friends or family"
+      - id: "f"
+        label: "I do not seek out dental information"
+  - id: q25
+    prompt: "How often do you avoid or limit sugary foods and drinks for the sake of your teeth?"
+    type: single_choice
+    construct: often_avoid_limit_sugary_foods
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q26
+    prompt: "About how much do you spend per month on dental care products (toothpaste, brushes, floss, etc.)? Please enter a dollar amount."
+    type: free_text
+    construct: much_spend_per_month_dental
+    required: true
+  - id: q27
+    prompt: "Overall, how satisfied are you with your current preventive dental routine?"
+    type: single_choice
+    construct: overall_satisfied_current_preventive_den
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q28
+    prompt: "How likely are you to keep up your current preventive dental routine over the next year?"
+    type: single_choice
+    construct: likely_keep_up_current_preventive
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Somewhat likely"
+      - id: "d"
+        label: "Very likely"
+  - id: q29
+    prompt: "How likely are you to improve your dental habits in the next year?"
+    type: single_choice
+    construct: likely_improve_dental_habits_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Somewhat likely"
+      - id: "d"
+        label: "Very likely"
+  - id: q30
+    prompt: "In your own words, what would help you keep up better preventive dental habits?"
+    type: free_text
+    construct: own_words_would_help_keep
+    required: true
+  - id: q31
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q32
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe or not to say"
+  - id: q33
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q36
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+  - id: q37
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q40
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

@@ -1,0 +1,717 @@
+schemaVersion: "1.0"
+id: identity_theft_protection_v1
+title: "Identity Theft Protection Survey"
+description: "How people guard their personal identity, the tools and services they use, and their experiences with and responses to identity theft."
+questions:
+  - id: q0
+    prompt: "How concerned are you about identity theft affecting you or your household?"
+    type: single_choice
+    construct: concerned_identity_theft_affecting_house
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q1
+    prompt: "Have you ever been a victim of identity theft?"
+    type: single_choice
+    construct: have_ever_been_victim_identity
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, in the past 12 months"
+      - id: "b"
+        label: "Yes, 1–3 years ago"
+      - id: "c"
+        label: "Yes, more than 3 years ago"
+      - id: "d"
+        label: "No, never"
+      - id: "e"
+        label: "Not sure"
+  - id: q2
+    prompt: "Which types of identity theft have you experienced? (Select all that apply)"
+    type: multi_choice
+    construct: types_identity_theft_have_experienced
+    required: true
+    options:
+      - id: "a"
+        label: "Unauthorized credit or debit card charges"
+      - id: "b"
+        label: "A new account opened in my name"
+      - id: "c"
+        label: "Tax refund fraud"
+      - id: "d"
+        label: "Medical identity theft"
+      - id: "e"
+        label: "Government benefits or unemployment fraud"
+      - id: "f"
+        label: "A loan taken out in my name"
+      - id: "g"
+        label: "Account takeover (email, bank, or social media)"
+      - id: "h"
+        label: "I have not experienced identity theft"
+  - id: q3
+    prompt: "Do you currently subscribe to an identity theft protection or credit monitoring service?"
+    type: single_choice
+    construct: currently_subscribe_identity_theft_prote
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a paid service"
+      - id: "b"
+        label: "Yes, a free service"
+      - id: "c"
+        label: "Yes, one provided by my employer"
+      - id: "d"
+        label: "Yes, one provided after a data breach"
+      - id: "e"
+        label: "No, but I am considering it"
+      - id: "f"
+        label: "No, and I am not considering it"
+  - id: q4
+    prompt: "Which identity or credit protection services do you use or have you used? (Select all that apply)"
+    type: multi_choice
+    construct: identity_credit_protection_services_use
+    required: true
+    options:
+      - id: "a"
+        label: "LifeLock (Norton)"
+      - id: "b"
+        label: "Aura"
+      - id: "c"
+        label: "IdentityForce"
+      - id: "d"
+        label: "Experian IdentityWorks"
+      - id: "e"
+        label: "Credit Karma"
+      - id: "f"
+        label: "A free bank or card issuer monitoring tool"
+      - id: "g"
+        label: "Free credit reports (AnnualCreditReport.com)"
+      - id: "h"
+        label: "None of these"
+  - id: q5
+    prompt: "How much do you pay per month for identity theft protection? Enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_pay_per_month_identity
+    required: true
+  - id: q6
+    prompt: "Which protective steps have you taken? (Select all that apply)"
+    type: multi_choice
+    construct: protective_steps_have_taken_select
+    required: true
+    options:
+      - id: "a"
+        label: "Placed a credit freeze"
+      - id: "b"
+        label: "Set up a fraud alert"
+      - id: "c"
+        label: "Enabled two-factor authentication on key accounts"
+      - id: "d"
+        label: "Use a password manager"
+      - id: "e"
+        label: "Shred physical documents"
+      - id: "f"
+        label: "Check my credit reports regularly"
+      - id: "g"
+        label: "Set up account transaction alerts"
+      - id: "h"
+        label: "Locked my SIM or added carrier PIN protection"
+      - id: "i"
+        label: "None of these"
+  - id: q7
+    prompt: "How often do you check your credit report?"
+    type: single_choice
+    construct: often_check_credit_report
+    required: true
+    options:
+      - id: "a"
+        label: "Monthly or more often"
+      - id: "b"
+        label: "A few times a year"
+      - id: "c"
+        label: "Once a year"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q8
+    prompt: "How many of your online accounts use two-factor authentication?"
+    type: single_choice
+    construct: many_online_accounts_use_two
+    required: true
+    options:
+      - id: "a"
+        label: "All or nearly all"
+      - id: "b"
+        label: "Most"
+      - id: "c"
+        label: "About half"
+      - id: "d"
+        label: "A few"
+      - id: "e"
+        label: "None"
+  - id: q9
+    prompt: "How do you typically manage your passwords?"
+    type: single_choice
+    construct: typically_manage_passwords
+    required: true
+    options:
+      - id: "a"
+        label: "A dedicated password manager (e.g., 1Password, Bitwarden)"
+      - id: "b"
+        label: "My browser's built-in password manager"
+      - id: "c"
+        label: "I reuse a few passwords across sites"
+      - id: "d"
+        label: "I write them down"
+      - id: "e"
+        label: "I memorize them"
+  - id: q10
+    prompt: "Have you ever received a data breach notification?"
+    type: single_choice
+    construct: have_ever_received_data_breach
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several times"
+      - id: "b"
+        label: "Yes, once or twice"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not sure"
+  - id: q11
+    prompt: "After a data breach notification, what did you typically do? (Select all that apply)"
+    type: multi_choice
+    construct: after_data_breach_notification_did
+    required: true
+    options:
+      - id: "a"
+        label: "Changed the affected password"
+      - id: "b"
+        label: "Enrolled in offered credit monitoring"
+      - id: "c"
+        label: "Placed or updated a credit freeze"
+      - id: "d"
+        label: "Monitored my accounts more closely"
+      - id: "e"
+        label: "Closed the affected account"
+      - id: "f"
+        label: "Did nothing"
+      - id: "g"
+        label: "Not applicable"
+  - id: q12
+    prompt: "How much do you agree with the following statement: I feel in control of protecting my personal information."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: Companies do enough to protect my personal data."
+    type: single_choice
+    construct: much_agree_following_statement_companies
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: Identity theft protection services are worth the money."
+    type: single_choice
+    construct: much_agree_following_statement_identity
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: I would know what to do if my identity were stolen."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: It is inevitable that my personal data will be exposed at some point."
+    type: single_choice
+    construct: much_agree_following_statement_it
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How important is it to you that a protection service offers: Credit report and score monitoring?"
+    type: single_choice
+    construct: important_it_that_protection_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is it to you that a protection service offers: Dark web monitoring?"
+    type: single_choice
+    construct: important_it_that_protection_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is it to you that a protection service offers: Identity theft insurance and reimbursement?"
+    type: single_choice
+    construct: important_it_that_protection_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is it to you that a protection service offers: Restoration support to fix stolen identity?"
+    type: single_choice
+    construct: important_it_that_protection_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is it to you that a protection service offers: Real-time alerts for new activity?"
+    type: single_choice
+    construct: important_it_that_protection_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "Select the top 3 personal information types you most want to protect. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_personal_information
+    required: true
+    options:
+      - id: "a"
+        label: "Social Security number"
+      - id: "b"
+        label: "Bank and credit card numbers"
+      - id: "c"
+        label: "Login credentials and passwords"
+      - id: "d"
+        label: "Home address and phone number"
+      - id: "e"
+        label: "Medical and health records"
+      - id: "f"
+        label: "Tax records"
+      - id: "g"
+        label: "Email accounts"
+      - id: "h"
+        label: "Photos and personal files"
+  - id: q23
+    prompt: "How much do you worry about each risk: Your Social Security number being used to open accounts?"
+    type: single_choice
+    construct: much_worry_each_risk_social
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+  - id: q24
+    prompt: "How much do you worry about each risk: Your medical or health information being stolen?"
+    type: single_choice
+    construct: much_worry_each_risk_medical
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+  - id: q25
+    prompt: "How much do you worry about each risk: A child or elderly relative's identity being stolen?"
+    type: single_choice
+    construct: much_worry_each_risk_child
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+  - id: q26
+    prompt: "How willing are you to share personal data with companies in exchange for convenience?"
+    type: single_choice
+    construct: willing_share_personal_data_companies
+    required: true
+    options:
+      - id: "a"
+        label: "Very unwilling"
+      - id: "b"
+        label: "Somewhat unwilling"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat willing"
+      - id: "e"
+        label: "Very willing"
+  - id: q27
+    prompt: "Roughly how many online accounts do you have that store your payment information? Enter a number."
+    type: free_text
+    construct: roughly_many_online_accounts_have
+    required: true
+  - id: q28
+    prompt: "If you have been a victim, how long did it take to fully resolve the issue?"
+    type: single_choice
+    construct: if_have_been_victim_long
+    required: true
+    options:
+      - id: "a"
+        label: "Less than a week"
+      - id: "b"
+        label: "1–4 weeks"
+      - id: "c"
+        label: "1–6 months"
+      - id: "d"
+        label: "More than 6 months"
+      - id: "e"
+        label: "Still not resolved"
+      - id: "f"
+        label: "Not applicable"
+  - id: q29
+    prompt: "How satisfied are you with the identity protection tools or services you currently use?"
+    type: single_choice
+    construct: satisfied_identity_protection_tools_serv
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q30
+    prompt: "How likely are you to subscribe to (or upgrade) an identity protection service in the next 12 months?"
+    type: single_choice
+    construct: likely_subscribe_upgrade_identity_protec
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "On a scale of 0 to 10, how likely are you to recommend an identity theft protection service to others? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "What is your biggest concern or frustration about protecting your identity? Describe briefly. (Optional)"
+    type: free_text
+    construct: biggest_concern_frustration_protecting_i
+    required: false
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Another race or ethnicity"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your approximate annual household income before taxes?"
+    type: single_choice
+    construct: approximate_annual_household_income_befo
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $30,000"
+      - id: "b"
+        label: "$30,000 – $49,999"
+      - id: "c"
+        label: "$50,000 – $74,999"
+      - id: "d"
+        label: "$75,000 – $99,999"
+      - id: "e"
+        label: "$100,000 – $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school graduate or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+  - id: q39
+    prompt: "Including yourself, how many people live in your household? Enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q40
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q41
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q43
+    prompt: "How would you rate your overall comfort with technology and online security tools?"
+    type: single_choice
+    construct: would_rate_overall_comfort_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Extremely comfortable"

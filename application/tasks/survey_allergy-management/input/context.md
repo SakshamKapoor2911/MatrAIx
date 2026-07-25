@@ -1,0 +1,7 @@
+# Allergy Management
+
+How consumers manage everyday seasonal and environmental allergies.
+
+## About this survey
+
+This survey covers whether respondents experience seasonal or environmental allergies, how long they've had them, their triggers (pollen, dust, dander, mold, smoke, fragrances), worst seasons, and common everyday symptoms. It measures which products they use (antihistamines, nasal sprays, eye drops, prescriptions, air purifiers, saline rinses), medication frequency, yearly spend, brands used (Claritin, Zyrtec, Allegra, Flonase, Benadryl), exposure-reduction steps, use of pollen/air-quality apps, days affected in the past month, and where they buy. It runs Likert batteries on agreement (control, disruption, OTC effectiveness, planning ahead, side-effect worry, difficulty finding a product, openness to new products) and on the importance of product-selection factors, a top-3 most-bothersome-symptom ranking, impact on daily activities, symptom control, whether they've consulted a professional, confidence, satisfaction, intent to try a new product, and a 0–10 recommendation score, plus an open comment. Question types include single-choice, multi-select, Likert scales, a matrix battery split per item, a top-3 ranking, and numeric free-text. Demographics captured: age, gender, race/ethnicity, household income, education, employment, household size, marital status, region, urban/rural, insurance status, and pets in the household.

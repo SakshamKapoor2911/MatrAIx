@@ -1,0 +1,814 @@
+schemaVersion: "1.0"
+id: fitness_tracker_adoption_v1
+title: "Fitness Tracker Adoption Survey"
+description: "Consumer adoption and everyday use of wearable fitness trackers and smartwatches."
+questions:
+  - id: q0
+    prompt: "Do you currently own or wear a fitness tracker or smartwatch?"
+    type: single_choice
+    construct: currently_own_wear_fitness_tracker
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I wear one most days"
+      - id: "b"
+        label: "Yes, but I wear it only sometimes"
+      - id: "c"
+        label: "No, but I owned one in the past"
+      - id: "d"
+        label: "No, I have never owned one"
+  - id: q1
+    prompt: "Which type of device do you mainly use?"
+    type: single_choice
+    construct: type_device_mainly_use
+    required: true
+    options:
+      - id: "a"
+        label: "A smartwatch (for example, Apple Watch, Samsung Galaxy Watch)"
+      - id: "b"
+        label: "A fitness band (for example, Fitbit Charge, Xiaomi band)"
+      - id: "c"
+        label: "A GPS sport watch (for example, Garmin, Coros)"
+      - id: "d"
+        label: "A screenless tracker or ring (for example, Oura, Whoop)"
+      - id: "e"
+        label: "I do not currently use a device"
+  - id: q2
+    prompt: "Which brand is your current or most recent device? (Select all that apply)"
+    type: multi_choice
+    construct: brand_current_most_recent_device
+    required: true
+    options:
+      - id: "a"
+        label: "Apple"
+      - id: "b"
+        label: "Fitbit"
+      - id: "c"
+        label: "Garmin"
+      - id: "d"
+        label: "Samsung"
+      - id: "e"
+        label: "Oura"
+      - id: "f"
+        label: "Whoop"
+      - id: "g"
+        label: "Amazfit or Xiaomi"
+      - id: "h"
+        label: "Another brand"
+  - id: q3
+    prompt: "How long have you owned your current device? Please enter a number of months."
+    type: free_text
+    construct: long_have_owned_current_device
+    required: true
+  - id: q4
+    prompt: "About how much did your current device cost? Please enter a number in dollars."
+    type: free_text
+    construct: much_did_current_device_cost
+    required: true
+  - id: q5
+    prompt: "What first motivated you to get a fitness tracker? (Select all that apply)"
+    type: multi_choice
+    construct: first_motivated_get_fitness_tracker
+    required: true
+    options:
+      - id: "a"
+        label: "Wanting to be more active"
+      - id: "b"
+        label: "Tracking steps or daily movement"
+      - id: "c"
+        label: "Monitoring heart rate"
+      - id: "d"
+        label: "Tracking sleep"
+      - id: "e"
+        label: "Training for a sport or event"
+      - id: "f"
+        label: "A doctor's or coach's suggestion"
+      - id: "g"
+        label: "Curiosity about the technology"
+      - id: "h"
+        label: "It was a gift"
+  - id: q6
+    prompt: "How often do you wear your device?"
+    type: single_choice
+    construct: often_wear_device
+    required: true
+    options:
+      - id: "a"
+        label: "All day and night"
+      - id: "b"
+        label: "All day but not overnight"
+      - id: "c"
+        label: "Only during workouts"
+      - id: "d"
+        label: "A few days a week"
+      - id: "e"
+        label: "Rarely"
+  - id: q7
+    prompt: "Which metrics do you actively pay attention to? (Select all that apply)"
+    type: multi_choice
+    construct: metrics_actively_pay_attention_select
+    required: true
+    options:
+      - id: "a"
+        label: "Steps"
+      - id: "b"
+        label: "Heart rate"
+      - id: "c"
+        label: "Calories burned"
+      - id: "d"
+        label: "Sleep"
+      - id: "e"
+        label: "Distance or pace"
+      - id: "f"
+        label: "Active minutes or exercise rings"
+      - id: "g"
+        label: "Stress or recovery scores"
+      - id: "h"
+        label: "Blood oxygen"
+  - id: q8
+    prompt: "How often do you check your stats in the companion app?"
+    type: single_choice
+    construct: often_check_stats_companion_app
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Once a day"
+      - id: "e"
+        label: "Several times a day"
+  - id: q9
+    prompt: "Do you pay for a subscription tied to your device (for example, Fitbit Premium, Whoop membership)?"
+    type: single_choice
+    construct: pay_subscription_tied_device_example
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but the device offers one"
+      - id: "c"
+        label: "No subscription is offered"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q10
+    prompt: "Which best describes how your device fits into your routine?"
+    type: single_choice
+    construct: best_describes_device_fits_into
+    required: true
+    options:
+      - id: "a"
+        label: "It is central to how I manage my activity"
+      - id: "b"
+        label: "It is a helpful reminder but not central"
+      - id: "c"
+        label: "I mostly ignore it"
+      - id: "d"
+        label: "I have stopped using it"
+  - id: q11
+    prompt: "How much do you agree or disagree: My tracker has made me more physically active."
+    type: single_choice
+    construct: much_agree_disagree_my_tracker
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: I trust the data my device reports."
+    type: single_choice
+    construct: much_agree_disagree_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: Reaching my daily goals feels rewarding."
+    type: single_choice
+    construct: much_agree_disagree_reaching_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: Wearing the device sometimes makes me anxious about my numbers."
+    type: single_choice
+    construct: much_agree_disagree_wearing_device
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: I am concerned about how my health data is stored and shared."
+    type: single_choice
+    construct: much_agree_disagree_i_am
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: My device is worth what I paid for it."
+    type: single_choice
+    construct: much_agree_disagree_my_device
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How satisfied are you with the battery life?"
+    type: single_choice
+    construct: satisfied_battery_life
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q18
+    prompt: "How satisfied are you with the accuracy of the tracking?"
+    type: single_choice
+    construct: satisfied_accuracy_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q19
+    prompt: "How satisfied are you with the comfort and fit?"
+    type: single_choice
+    construct: satisfied_comfort_fit
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q20
+    prompt: "How satisfied are you with the companion app?"
+    type: single_choice
+    construct: satisfied_companion_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q21
+    prompt: "How satisfied are you with the design and appearance?"
+    type: single_choice
+    construct: satisfied_design_appearance
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q22
+    prompt: "How important was each factor when you chose your device: price?"
+    type: single_choice
+    construct: important_was_each_factor_when
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important was each factor when you chose your device: battery life?"
+    type: single_choice
+    construct: important_was_each_factor_when
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important was each factor when you chose your device: accuracy of health metrics?"
+    type: single_choice
+    construct: important_was_each_factor_when
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important was each factor when you chose your device: brand or ecosystem (for example, working with your phone)?"
+    type: single_choice
+    construct: important_was_each_factor_when
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important was each factor when you chose your device: style or appearance?"
+    type: single_choice
+    construct: important_was_each_factor_when
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Do you use your device to set and follow daily activity goals?"
+    type: single_choice
+    construct: use_device_set_follow_daily
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I usually meet them"
+      - id: "b"
+        label: "Yes, but I often miss them"
+      - id: "c"
+        label: "No, I do not set goals"
+      - id: "d"
+        label: "I did not know it could do that"
+  - id: q28
+    prompt: "Have you shared data from your device with a doctor or health provider?"
+    type: single_choice
+    construct: have_shared_data_from_device
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I would be willing to"
+      - id: "c"
+        label: "No, and I would not want to"
+      - id: "d"
+        label: "I'm not sure how"
+  - id: q29
+    prompt: "Which non-fitness features do you regularly use? (Select all that apply)"
+    type: multi_choice
+    construct: non_fitness_features_regularly_use
+    required: true
+    options:
+      - id: "a"
+        label: "Notifications or messages"
+      - id: "b"
+        label: "Contactless payments"
+      - id: "c"
+        label: "Music control"
+      - id: "d"
+        label: "Alarms or timers"
+      - id: "e"
+        label: "Navigation"
+      - id: "f"
+        label: "Fall detection or safety features"
+      - id: "g"
+        label: "I only use fitness features"
+  - id: q30
+    prompt: "Which have frustrated you about your device? (Select all that apply)"
+    type: multi_choice
+    construct: have_frustrated_device_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Short battery life"
+      - id: "b"
+        label: "Inaccurate readings"
+      - id: "c"
+        label: "Uncomfortable to wear"
+      - id: "d"
+        label: "Charging is inconvenient"
+      - id: "e"
+        label: "App is confusing"
+      - id: "f"
+        label: "Too many notifications"
+      - id: "g"
+        label: "Privacy concerns"
+      - id: "h"
+        label: "Nothing has frustrated me"
+  - id: q31
+    prompt: "If you stopped using a previous tracker, what was the main reason?"
+    type: single_choice
+    construct: if_stopped_using_previous_tracker
+    required: true
+    options:
+      - id: "a"
+        label: "I lost interest or motivation"
+      - id: "b"
+        label: "The device broke or wore out"
+      - id: "c"
+        label: "Battery or charging problems"
+      - id: "d"
+        label: "I did not trust the data"
+      - id: "e"
+        label: "Privacy concerns"
+      - id: "f"
+        label: "I upgraded to a new device"
+      - id: "g"
+        label: "Not applicable"
+  - id: q32
+    prompt: "How likely are you to keep using a fitness tracker over the next year?"
+    type: single_choice
+    construct: likely_keep_using_fitness_tracker
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q33
+    prompt: "How likely are you to upgrade to a newer device within the next two years?"
+    type: single_choice
+    construct: likely_upgrade_newer_device_within
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "Overall, how satisfied are you with your fitness tracker?"
+    type: single_choice
+    construct: overall_satisfied_fitness_tracker
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your device to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q36
+    prompt: "Which improvements would most increase the value of your device to you? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: improvements_would_most_increase_value
+    required: true
+    options:
+      - id: "a"
+        label: "Longer battery life"
+      - id: "b"
+        label: "More accurate metrics"
+      - id: "c"
+        label: "Lower price"
+      - id: "d"
+        label: "More comfortable design"
+      - id: "e"
+        label: "Better app and insights"
+      - id: "f"
+        label: "Stronger privacy protections"
+      - id: "g"
+        label: "More health sensors"
+      - id: "h"
+        label: "Better integration with my phone"
+  - id: q37
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65–74"
+      - id: "g"
+        label: "75 or older"
+  - id: q38
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino/a"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your household's annual income before taxes?"
+    type: single_choice
+    construct: household_s_annual_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q42
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+      - id: "h"
+        label: "Unable to work"
+  - id: q43
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q44
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q46
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q47
+    prompt: "Which best describes how comfortable you are with technology?"
+    type: single_choice
+    construct: best_describes_comfortable_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Very comfortable, an early adopter"
+      - id: "b"
+        label: "Comfortable with mainstream technology"
+      - id: "c"
+        label: "Somewhat cautious"
+      - id: "d"
+        label: "I avoid new technology when I can"
+  - id: q48
+    prompt: "In general, how would you rate your overall health?"
+    type: single_choice
+    construct: general_would_rate_overall_health
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent"
+      - id: "b"
+        label: "Very good"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Fair"
+      - id: "e"
+        label: "Poor"

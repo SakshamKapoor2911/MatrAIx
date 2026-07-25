@@ -1,0 +1,618 @@
+schemaVersion: "1.0"
+id: eye_strain_management_v1
+title: "Eye Strain Management Survey"
+description: "Consumer experience of digital eye strain and the habits and products used to manage it."
+questions:
+  - id: q0
+    prompt: "On a typical day, about how many hours do you spend looking at screens?"
+    type: single_choice
+    construct: typical_day_many_hours_spend
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 2 hours"
+      - id: "b"
+        label: "2 to 4 hours"
+      - id: "c"
+        label: "5 to 8 hours"
+      - id: "d"
+        label: "9 to 12 hours"
+      - id: "e"
+        label: "More than 12 hours"
+  - id: q1
+    prompt: "About how many hours per day do you spend on screens for work or study specifically? Please enter a number."
+    type: free_text
+    construct: many_hours_per_day_spend
+    required: true
+  - id: q2
+    prompt: "How often do you experience eye strain, tired eyes, or discomfort from screen use?"
+    type: single_choice
+    construct: often_experience_eye_strain_tired
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Almost daily"
+  - id: q3
+    prompt: "Which screen-related symptoms have you noticed? (Select all that apply)"
+    type: multi_choice
+    construct: screen_related_symptoms_have_noticed
+    required: true
+    options:
+      - id: "a"
+        label: "Tired or sore eyes"
+      - id: "b"
+        label: "Dry or watery eyes"
+      - id: "c"
+        label: "Blurred vision"
+      - id: "d"
+        label: "Headaches"
+      - id: "e"
+        label: "Neck or shoulder tension"
+      - id: "f"
+        label: "Trouble focusing after screen use"
+      - id: "g"
+        label: "Light sensitivity"
+      - id: "h"
+        label: "None of these"
+  - id: q4
+    prompt: "Which devices contribute most to your eye strain? (Select all that apply)"
+    type: multi_choice
+    construct: devices_contribute_most_eye_strain
+    required: true
+    options:
+      - id: "a"
+        label: "Laptop or desktop computer"
+      - id: "b"
+        label: "Smartphone"
+      - id: "c"
+        label: "Tablet or e-reader"
+      - id: "d"
+        label: "Television"
+      - id: "e"
+        label: "Gaming console or handheld"
+      - id: "f"
+        label: "None in particular"
+  - id: q5
+    prompt: "At what time of day do you most often notice eye strain?"
+    type: single_choice
+    construct: time_day_most_often_notice
+    required: true
+    options:
+      - id: "a"
+        label: "Morning"
+      - id: "b"
+        label: "Afternoon"
+      - id: "c"
+        label: "Evening or night"
+      - id: "d"
+        label: "It varies"
+      - id: "e"
+        label: "I do not notice it"
+  - id: q6
+    prompt: "Which habits do you use to reduce eye strain? (Select all that apply)"
+    type: multi_choice
+    construct: habits_use_reduce_eye_strain
+    required: true
+    options:
+      - id: "a"
+        label: "Taking regular screen breaks"
+      - id: "b"
+        label: "The 20-20-20 rule (look away every 20 minutes)"
+      - id: "c"
+        label: "Adjusting screen brightness or contrast"
+      - id: "d"
+        label: "Increasing text size"
+      - id: "e"
+        label: "Blinking more or using eye drops"
+      - id: "f"
+        label: "Improving room lighting"
+      - id: "g"
+        label: "Positioning the screen farther away"
+      - id: "h"
+        label: "I do not do anything specific"
+  - id: q7
+    prompt: "Do you use any blue-light filter or night mode on your devices?"
+    type: single_choice
+    construct: use_any_blue_light_filter
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, on all my devices"
+      - id: "b"
+        label: "Yes, on some devices"
+      - id: "c"
+        label: "No, but I have considered it"
+      - id: "d"
+        label: "No, and I have not considered it"
+  - id: q8
+    prompt: "Do you use blue-light-filtering or computer glasses?"
+    type: single_choice
+    construct: use_blue_light_filtering_computer
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No, and I would not"
+  - id: q9
+    prompt: "Which products do you use to help with eye comfort? (Select all that apply)"
+    type: multi_choice
+    construct: products_use_help_eye_comfort
+    required: true
+    options:
+      - id: "a"
+        label: "Lubricating or artificial-tear eye drops"
+      - id: "b"
+        label: "Blue-light-filtering glasses"
+      - id: "c"
+        label: "Anti-glare screen protectors"
+      - id: "d"
+        label: "A monitor stand or riser"
+      - id: "e"
+        label: "Warm compresses"
+      - id: "f"
+        label: "A humidifier"
+      - id: "g"
+        label: "None of these"
+  - id: q10
+    prompt: "How often do you take breaks from screens during long sessions?"
+    type: single_choice
+    construct: often_take_breaks_from_screens
+    required: true
+    options:
+      - id: "a"
+        label: "Every 20–30 minutes"
+      - id: "b"
+        label: "About once an hour"
+      - id: "c"
+        label: "Every few hours"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Almost never"
+  - id: q11
+    prompt: "Does an app or device remind you to take eye breaks?"
+    type: single_choice
+    construct: does_app_device_remind_take
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a break-reminder app"
+      - id: "b"
+        label: "Yes, a feature built into my device or wearable"
+      - id: "c"
+        label: "No, but I would use one"
+      - id: "d"
+        label: "No, and I would not"
+  - id: q12
+    prompt: "About how many continuous hours of screen time before your eyes feel strained? Please enter a number."
+    type: free_text
+    construct: many_continuous_hours_screen_time
+    required: true
+  - id: q13
+    prompt: "How much does eye strain affect your comfort or productivity?"
+    type: single_choice
+    construct: much_does_eye_strain_affect
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A great deal"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I actively manage how screens affect my eyes."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: My screen habits are hard to change because of work or school."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: Blue-light glasses or filters make a noticeable difference for me."
+    type: single_choice
+    construct: much_agree_following_statement_blue
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: I take breaks as often as I know I should."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement: Eye strain affects my sleep or evening comfort."
+    type: single_choice
+    construct: much_agree_following_statement_eye
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How effective do you find taking regular screen breaks for reducing strain?"
+    type: single_choice
+    construct: effective_find_taking_regular_screen
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all effective"
+      - id: "b"
+        label: "Slightly effective"
+      - id: "c"
+        label: "Moderately effective"
+      - id: "d"
+        label: "Very effective"
+      - id: "e"
+        label: "I do not take breaks"
+  - id: q20
+    prompt: "When did you last have an eye exam?"
+    type: single_choice
+    construct: when_did_last_have_eye
+    required: true
+    options:
+      - id: "a"
+        label: "Within the last year"
+      - id: "b"
+        label: "1 to 2 years ago"
+      - id: "c"
+        label: "3 to 5 years ago"
+      - id: "d"
+        label: "More than 5 years ago"
+      - id: "e"
+        label: "Never"
+  - id: q21
+    prompt: "Do you wear prescription glasses or contact lenses?"
+    type: single_choice
+    construct: wear_prescription_glasses_contact_lenses
+    required: true
+    options:
+      - id: "a"
+        label: "Glasses"
+      - id: "b"
+        label: "Contact lenses"
+      - id: "c"
+        label: "Both"
+      - id: "d"
+        label: "Neither"
+  - id: q22
+    prompt: "Have you talked to an eye-care professional about screen-related eye strain?"
+    type: single_choice
+    construct: have_talked_eye_care_professional
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I plan to"
+      - id: "c"
+        label: "No, and I do not plan to"
+  - id: q23
+    prompt: "What makes it hard to manage eye strain? (Select all that apply)"
+    type: multi_choice
+    construct: makes_it_hard_manage_eye
+    required: true
+    options:
+      - id: "a"
+        label: "My work requires long screen time"
+      - id: "b"
+        label: "I forget to take breaks"
+      - id: "c"
+        label: "Products or glasses cost too much"
+      - id: "d"
+        label: "I am not sure what actually helps"
+      - id: "e"
+        label: "I do not find it a big problem"
+      - id: "f"
+        label: "Nothing in particular"
+  - id: q24
+    prompt: "Select your top 3 approaches you rely on most to manage eye strain. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_approaches_rely
+    required: true
+    options:
+      - id: "a"
+        label: "Screen breaks"
+      - id: "b"
+        label: "Blue-light filters or night mode"
+      - id: "c"
+        label: "Blue-light or computer glasses"
+      - id: "d"
+        label: "Eye drops"
+      - id: "e"
+        label: "Adjusting brightness or text size"
+      - id: "f"
+        label: "Better lighting or screen positioning"
+      - id: "g"
+        label: "Getting an eye exam and correct prescription"
+  - id: q25
+    prompt: "How important is managing eye strain to you overall?"
+    type: single_choice
+    construct: important_managing_eye_strain_overall
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How satisfied are you with how you currently manage eye strain?"
+    type: single_choice
+    construct: satisfied_currently_manage_eye_strain
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q27
+    prompt: "How likely are you to adopt new habits to reduce eye strain in the next year?"
+    type: single_choice
+    construct: likely_adopt_new_habits_reduce
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Somewhat likely"
+      - id: "d"
+        label: "Very likely"
+  - id: q28
+    prompt: "In your own words, what has helped you most with eye strain?"
+    type: free_text
+    construct: own_words_has_helped_most
+    required: true
+  - id: q29
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q30
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe or not to say"
+  - id: q31
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q34
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+  - id: q35
+    prompt: "Which best describes your main daily screen use?"
+    type: single_choice
+    construct: best_describes_main_daily_screen
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly for work or study"
+      - id: "b"
+        label: "Mostly for leisure"
+      - id: "c"
+        label: "A roughly even mix"
+      - id: "d"
+        label: "Little screen use"
+  - id: q36
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q38
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q39
+    prompt: "How would you describe your overall interest in eye and vision health?"
+    type: single_choice
+    construct: would_describe_overall_interest_eye
+    required: true
+    options:
+      - id: "a"
+        label: "Not interested"
+      - id: "b"
+        label: "Somewhat interested"
+      - id: "c"
+        label: "Interested"
+      - id: "d"
+        label: "Very interested"

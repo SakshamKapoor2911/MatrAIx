@@ -1,0 +1,814 @@
+schemaVersion: "1.0"
+id: bi_analytics_tools_v1
+title: "Business Intelligence & Analytics Tools Survey"
+description: "Which business intelligence and analytics tools people use to explore data and build reports and dashboards, and how satisfied they are."
+questions:
+  - id: q0
+    prompt: "Which best describes how you work with business intelligence or analytics?"
+    type: single_choice
+    construct: best_describes_work_business_intelligenc
+    required: true
+    options:
+      - id: "a"
+        label: "I build reports and dashboards for others (analyst / BI developer)"
+      - id: "b"
+        label: "I mainly consume dashboards and reports others build"
+      - id: "c"
+        label: "Both build and consume roughly equally"
+      - id: "d"
+        label: "I manage a data or analytics team"
+      - id: "e"
+        label: "I occasionally look at reports but it's not central to my role"
+      - id: "f"
+        label: "I don't use BI or analytics tools"
+  - id: q1
+    prompt: "How many years have you worked with BI or analytics tools?"
+    type: free_text
+    construct: many_years_have_worked_bi
+    required: true
+  - id: q2
+    prompt: "Which BI or analytics tools do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: bi_analytics_tools_currently_use
+    required: true
+    options:
+      - id: "a"
+        label: "Microsoft Power BI"
+      - id: "b"
+        label: "Tableau"
+      - id: "c"
+        label: "Looker"
+      - id: "d"
+        label: "Looker Studio (Google Data Studio)"
+      - id: "e"
+        label: "Qlik Sense / QlikView"
+      - id: "f"
+        label: "Metabase"
+      - id: "g"
+        label: "Sisense"
+      - id: "h"
+        label: "Domo"
+      - id: "i"
+        label: "ThoughtSpot"
+      - id: "j"
+        label: "Amazon QuickSight"
+      - id: "k"
+        label: "Microsoft Excel"
+      - id: "l"
+        label: "Google Sheets"
+      - id: "m"
+        label: "Other"
+  - id: q3
+    prompt: "Which tool do you use most often for analytics and reporting?"
+    type: single_choice
+    construct: tool_use_most_often_analytics
+    required: true
+    options:
+      - id: "a"
+        label: "Power BI"
+      - id: "b"
+        label: "Tableau"
+      - id: "c"
+        label: "Looker / Looker Studio"
+      - id: "d"
+        label: "Qlik"
+      - id: "e"
+        label: "Metabase"
+      - id: "f"
+        label: "Excel"
+      - id: "g"
+        label: "Google Sheets"
+      - id: "h"
+        label: "Other"
+  - id: q4
+    prompt: "How often do you use BI or analytics tools?"
+    type: single_choice
+    construct: often_use_bi_analytics_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "About once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "About once a week"
+      - id: "e"
+        label: "A few times a month or less"
+  - id: q5
+    prompt: "What do you primarily use analytics tools for? (Select all that apply)"
+    type: multi_choice
+    construct: primarily_use_analytics_tools_select
+    required: true
+    options:
+      - id: "a"
+        label: "Building dashboards"
+      - id: "b"
+        label: "Ad hoc data exploration"
+      - id: "c"
+        label: "Scheduled / recurring reports"
+      - id: "d"
+        label: "KPI and performance monitoring"
+      - id: "e"
+        label: "Financial reporting"
+      - id: "f"
+        label: "Marketing / campaign analytics"
+      - id: "g"
+        label: "Sales / pipeline reporting"
+      - id: "h"
+        label: "Operational analytics"
+      - id: "i"
+        label: "Data storytelling / presentations"
+  - id: q6
+    prompt: "Where does the data you analyze mostly come from? (Select all that apply)"
+    type: multi_choice
+    construct: where_does_data_analyze_mostly
+    required: true
+    options:
+      - id: "a"
+        label: "A cloud data warehouse (Snowflake, BigQuery, Redshift)"
+      - id: "b"
+        label: "A traditional database (SQL Server, Postgres, MySQL)"
+      - id: "c"
+        label: "Spreadsheets / CSV files"
+      - id: "d"
+        label: "SaaS tools via connectors (Salesforce, Google Analytics, etc.)"
+      - id: "e"
+        label: "A data lake"
+      - id: "f"
+        label: "APIs"
+      - id: "g"
+        label: "I'm not sure where the data comes from"
+  - id: q7
+    prompt: "Which data warehouse or storage does your organization use? (Select all that apply)"
+    type: multi_choice
+    construct: data_warehouse_storage_does_organization
+    required: true
+    options:
+      - id: "a"
+        label: "Snowflake"
+      - id: "b"
+        label: "Google BigQuery"
+      - id: "c"
+        label: "Amazon Redshift"
+      - id: "d"
+        label: "Databricks"
+      - id: "e"
+        label: "Microsoft Azure Synapse / Fabric"
+      - id: "f"
+        label: "A traditional on-prem database"
+      - id: "g"
+        label: "I don't know"
+      - id: "h"
+        label: "Not applicable"
+  - id: q8
+    prompt: "How do you most often prepare or transform data before analysis?"
+    type: single_choice
+    construct: most_often_prepare_transform_data
+    required: true
+    options:
+      - id: "a"
+        label: "SQL queries"
+      - id: "b"
+        label: "The BI tool's built-in data prep"
+      - id: "c"
+        label: "A dedicated tool (dbt, Alteryx, Power Query)"
+      - id: "d"
+        label: "Spreadsheets"
+      - id: "e"
+        label: "Python / R scripts"
+      - id: "f"
+        label: "The data arrives ready to use"
+      - id: "g"
+        label: "Someone else prepares it"
+  - id: q9
+    prompt: "How comfortable are you writing SQL?"
+    type: single_choice
+    construct: comfortable_writing_sql
+    required: true
+    options:
+      - id: "a"
+        label: "Very comfortable"
+      - id: "b"
+        label: "Comfortable"
+      - id: "c"
+        label: "Somewhat comfortable"
+      - id: "d"
+        label: "Not comfortable"
+      - id: "e"
+        label: "I don't write SQL"
+  - id: q10
+    prompt: "How are dashboards and reports shared in your organization? (Select all that apply)"
+    type: multi_choice
+    construct: dashboards_reports_shared_organization_s
+    required: true
+    options:
+      - id: "a"
+        label: "Embedded in the BI tool / portal"
+      - id: "b"
+        label: "Scheduled email delivery"
+      - id: "c"
+        label: "Exported to PDF or slides"
+      - id: "d"
+        label: "Embedded in other apps"
+      - id: "e"
+        label: "Posted in Slack / Teams"
+      - id: "f"
+        label: "Exported to spreadsheets"
+      - id: "g"
+        label: "Not really shared"
+  - id: q11
+    prompt: "How often is the data in your main dashboards refreshed?"
+    type: single_choice
+    construct: often_data_main_dashboards_refreshed
+    required: true
+    options:
+      - id: "a"
+        label: "Real-time / near real-time"
+      - id: "b"
+        label: "Multiple times a day"
+      - id: "c"
+        label: "Daily"
+      - id: "d"
+        label: "Weekly"
+      - id: "e"
+        label: "Monthly or less"
+      - id: "f"
+        label: "I don't know"
+  - id: q12
+    prompt: "About how many dashboards or reports do you regularly use or maintain?"
+    type: free_text
+    construct: many_dashboards_reports_regularly_use
+    required: true
+  - id: q13
+    prompt: "Which AI or automation features do you use in your BI tools? (Select all that apply)"
+    type: multi_choice
+    construct: ai_automation_features_use_bi
+    required: true
+    options:
+      - id: "a"
+        label: "Natural-language querying (\"ask a question\")"
+      - id: "b"
+        label: "Automated insights / anomaly detection"
+      - id: "c"
+        label: "AI-generated summaries or narratives"
+      - id: "d"
+        label: "Forecasting"
+      - id: "e"
+        label: "Suggested visualizations"
+      - id: "f"
+        label: "Copilot-style assistants"
+      - id: "g"
+        label: "I don't use any AI features"
+  - id: q14
+    prompt: "How much do you agree with the following statement? — I can get the data and answers I need without waiting on others."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement? — I trust the accuracy of the numbers in our dashboards."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement? — Our BI tool is easy for non-technical people to use."
+    type: single_choice
+    construct: much_agree_following_statement_our
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement? — There are too many conflicting reports / \"single source of truth\" is a problem."
+    type: single_choice
+    construct: much_agree_following_statement_there
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement? — Our organization makes decisions based on data."
+    type: single_choice
+    construct: much_agree_following_statement_our
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How satisfied are you with each aspect of your primary BI tool? — Ease of building reports"
+    type: single_choice
+    construct: satisfied_each_aspect_primary_bi
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q20
+    prompt: "How satisfied are you with each aspect of your primary BI tool? — Performance / speed"
+    type: single_choice
+    construct: satisfied_each_aspect_primary_bi
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q21
+    prompt: "How satisfied are you with each aspect of your primary BI tool? — Data connectors and integrations"
+    type: single_choice
+    construct: satisfied_each_aspect_primary_bi
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q22
+    prompt: "How satisfied are you with each aspect of your primary BI tool? — Sharing and collaboration"
+    type: single_choice
+    construct: satisfied_each_aspect_primary_bi
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q23
+    prompt: "How satisfied are you with each aspect of your primary BI tool? — Value for money"
+    type: single_choice
+    construct: satisfied_each_aspect_primary_bi
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q24
+    prompt: "How important is each factor when choosing a BI tool? — Ease of use for business users"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is each factor when choosing a BI tool? — Data source connectivity"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important is each factor when choosing a BI tool? — Price / licensing cost"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important is each factor when choosing a BI tool? — Governance and security"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Select the top 3 biggest challenges you face with analytics. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_biggest_challenges
+    required: true
+    options:
+      - id: "a"
+        label: "Data quality issues"
+      - id: "b"
+        label: "Slow performance"
+      - id: "c"
+        label: "Too many/conflicting reports"
+      - id: "d"
+        label: "Users lack skills to self-serve"
+      - id: "e"
+        label: "Hard to get data connected"
+      - id: "f"
+        label: "Governance and access control"
+      - id: "g"
+        label: "Cost of licenses"
+      - id: "h"
+        label: "Keeping dashboards maintained"
+      - id: "i"
+        label: "Trust in the numbers"
+      - id: "j"
+        label: "Turning insights into action"
+  - id: q29
+    prompt: "How would you describe your organization's overall data maturity?"
+    type: single_choice
+    construct: would_describe_organization_s_overall
+    required: true
+    options:
+      - id: "a"
+        label: "Advanced — data is central to decisions"
+      - id: "b"
+        label: "Developing — good tools, uneven adoption"
+      - id: "c"
+        label: "Basic — mostly spreadsheets and manual reports"
+      - id: "d"
+        label: "Early / just getting started"
+      - id: "e"
+        label: "I don't know"
+  - id: q30
+    prompt: "How likely are you to recommend your primary BI tool to a peer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_bi_tool
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "Overall, how satisfied are you with your BI and analytics tools?"
+    type: single_choice
+    construct: overall_satisfied_bi_analytics_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How likely is your organization to change its primary BI tool in the next 12 months?"
+    type: single_choice
+    construct: likely_organization_change_its_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q33
+    prompt: "What would most improve analytics and reporting at your organization?"
+    type: free_text
+    construct: would_most_improve_analytics_reporting
+    required: true
+  - id: q34
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 25"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your annual household income (US dollars)?"
+    type: single_choice
+    construct: annual_household_income_us_dollars
+    required: true
+    options:
+      - id: "a"
+        label: "Under $50,000"
+      - id: "b"
+        label: "$50,000–$99,999"
+      - id: "c"
+        label: "$100,000–$149,999"
+      - id: "d"
+        label: "$150,000–$249,999"
+      - id: "e"
+        label: "$250,000 or more"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Professional or doctoral degree"
+  - id: q39
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed / freelancer"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+  - id: q40
+    prompt: "Which best describes your role or department?"
+    type: single_choice
+    construct: best_describes_role_department
+    required: true
+    options:
+      - id: "a"
+        label: "Data / analytics / BI"
+      - id: "b"
+        label: "Finance / accounting"
+      - id: "c"
+        label: "Marketing"
+      - id: "d"
+        label: "Sales"
+      - id: "e"
+        label: "Operations"
+      - id: "f"
+        label: "Executive / management"
+      - id: "g"
+        label: "IT / engineering"
+      - id: "h"
+        label: "Other"
+  - id: q41
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Technology / software"
+      - id: "b"
+        label: "Finance / banking / insurance"
+      - id: "c"
+        label: "Healthcare / pharma"
+      - id: "d"
+        label: "Retail / e-commerce"
+      - id: "e"
+        label: "Government / non-profit"
+      - id: "f"
+        label: "Education"
+      - id: "g"
+        label: "Manufacturing / energy"
+      - id: "h"
+        label: "Other"
+  - id: q42
+    prompt: "How large is the company or organization you work for?"
+    type: single_choice
+    construct: large_company_organization_work
+    required: true
+    options:
+      - id: "a"
+        label: "Just me / freelance"
+      - id: "b"
+        label: "2–49"
+      - id: "c"
+        label: "50–249"
+      - id: "d"
+        label: "250–999"
+      - id: "e"
+        label: "1,000–4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q43
+    prompt: "What is your work arrangement?"
+    type: single_choice
+    construct: work_arrangement
+    required: true
+    options:
+      - id: "a"
+        label: "Fully remote"
+      - id: "b"
+        label: "Hybrid"
+      - id: "c"
+        label: "Fully in person"
+      - id: "d"
+        label: "Not currently working"
+  - id: q44
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q45
+    prompt: "How would you describe where you live?"
+    type: single_choice
+    construct: would_describe_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

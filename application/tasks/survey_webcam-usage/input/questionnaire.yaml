@@ -1,0 +1,694 @@
+schemaVersion: "1.0"
+id: webcam_usage_v1
+title: "Webcam Usage Survey"
+description: "How people own and use webcams — device types and brands, video-call and streaming habits, purchase criteria, privacy behavior, and satisfaction."
+questions:
+  - id: q0
+    prompt: "Do you use a webcam (built-in or external) at least occasionally?"
+    type: single_choice
+    construct: use_webcam_built_external_least
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "No, I don't use a webcam"
+  - id: q1
+    prompt: "What type of webcam do you primarily use?"
+    type: single_choice
+    construct: type_webcam_primarily_use
+    required: true
+    options:
+      - id: "a"
+        label: "Built-in laptop webcam"
+      - id: "b"
+        label: "Built-in monitor or all-in-one webcam"
+      - id: "c"
+        label: "External USB webcam"
+      - id: "d"
+        label: "A smartphone used as a webcam"
+      - id: "e"
+        label: "A dedicated camera (DSLR/mirrorless) as a webcam"
+      - id: "f"
+        label: "I don't use a webcam"
+  - id: q2
+    prompt: "If you use an external webcam, which brand is it?"
+    type: single_choice
+    construct: if_use_external_webcam_brand
+    required: true
+    options:
+      - id: "a"
+        label: "Logitech"
+      - id: "b"
+        label: "Razer"
+      - id: "c"
+        label: "Elgato"
+      - id: "d"
+        label: "Microsoft"
+      - id: "e"
+        label: "Anker / other"
+      - id: "f"
+        label: "I only use a built-in webcam"
+      - id: "g"
+        label: "Not sure"
+  - id: q3
+    prompt: "What do you primarily use your webcam for? (Select all that apply)"
+    type: multi_choice
+    construct: primarily_use_webcam_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Work video meetings"
+      - id: "b"
+        label: "Personal video calls with family/friends"
+      - id: "c"
+        label: "Online classes or education"
+      - id: "d"
+        label: "Job interviews"
+      - id: "e"
+        label: "Live streaming (Twitch, YouTube)"
+      - id: "f"
+        label: "Recording videos or tutorials"
+      - id: "g"
+        label: "Telehealth appointments"
+      - id: "h"
+        label: "Content creation / social media"
+      - id: "i"
+        label: "Security or monitoring"
+  - id: q4
+    prompt: "How many video calls do you make or join in a typical week? Enter a whole number."
+    type: free_text
+    construct: many_video_calls_make_join
+    required: true
+  - id: q5
+    prompt: "Which apps or platforms do you use your webcam with? (Select all that apply)"
+    type: multi_choice
+    construct: apps_platforms_use_webcam_select
+    required: true
+    options:
+      - id: "a"
+        label: "Zoom"
+      - id: "b"
+        label: "Microsoft Teams"
+      - id: "c"
+        label: "Google Meet"
+      - id: "d"
+        label: "FaceTime"
+      - id: "e"
+        label: "Discord"
+      - id: "f"
+        label: "Skype"
+      - id: "g"
+        label: "Slack"
+      - id: "h"
+        label: "Webex"
+      - id: "i"
+        label: "Streaming software (OBS, Streamlabs)"
+      - id: "j"
+        label: "Other"
+  - id: q6
+    prompt: "How often do you use your webcam?"
+    type: single_choice
+    construct: often_use_webcam
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "About once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Rarely"
+  - id: q7
+    prompt: "When you are on a video call, how often do you turn your camera on?"
+    type: single_choice
+    construct: when_video_call_often_turn
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q8
+    prompt: "What resolution is your primary webcam?"
+    type: single_choice
+    construct: resolution_primary_webcam
+    required: true
+    options:
+      - id: "a"
+        label: "720p or lower"
+      - id: "b"
+        label: "1080p (Full HD)"
+      - id: "c"
+        label: "4K"
+      - id: "d"
+        label: "Not sure"
+  - id: q9
+    prompt: "Roughly how much did you spend on your external webcam (if you have one)? Enter a whole-dollar amount (US$), or 0 if you only use a built-in one."
+    type: free_text
+    construct: roughly_much_did_spend_external
+    required: true
+  - id: q10
+    prompt: "When choosing a webcam, how important is image quality?"
+    type: single_choice
+    construct: when_choosing_webcam_important_image
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q11
+    prompt: "When choosing a webcam, how important is low-light performance?"
+    type: single_choice
+    construct: when_choosing_webcam_important_low
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q12
+    prompt: "When choosing a webcam, how important is microphone quality?"
+    type: single_choice
+    construct: when_choosing_webcam_important_microphon
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q13
+    prompt: "When choosing a webcam, how important is price?"
+    type: single_choice
+    construct: when_choosing_webcam_important_price
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q14
+    prompt: "When choosing a webcam, how important is autofocus and framing features?"
+    type: single_choice
+    construct: when_choosing_webcam_important_autofocus
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q15
+    prompt: "When choosing a webcam, how important is a built-in privacy shutter?"
+    type: single_choice
+    construct: when_choosing_webcam_important_built
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "Which THREE webcam features matter most to you? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: three_webcam_features_matter_most
+    required: true
+    options:
+      - id: "a"
+        label: "Image quality / resolution"
+      - id: "b"
+        label: "Low-light performance"
+      - id: "c"
+        label: "Microphone quality"
+      - id: "d"
+        label: "Autofocus / framing"
+      - id: "e"
+        label: "Price"
+      - id: "f"
+        label: "Privacy shutter"
+      - id: "g"
+        label: "Wide field of view"
+      - id: "h"
+        label: "Easy setup / plug-and-play"
+      - id: "i"
+        label: "Background blur / effects support"
+  - id: q17
+    prompt: "How much do you agree: A good webcam makes a meaningful difference on video calls."
+    type: single_choice
+    construct: much_agree_good_webcam_makes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: I am concerned about my webcam being accessed without my knowledge."
+    type: single_choice
+    construct: much_agree_i_am_concerned
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: I feel comfortable being on camera during video calls."
+    type: single_choice
+    construct: much_agree_i_feel_comfortable
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: The built-in webcam quality on laptops is generally good enough."
+    type: single_choice
+    construct: much_agree_built_webcam_quality
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: I care about how I look and how my background appears on camera."
+    type: single_choice
+    construct: much_agree_i_care_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "Do you cover your webcam when not in use?"
+    type: single_choice
+    construct: cover_webcam_when_not_use
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, with a physical cover or shutter"
+      - id: "b"
+        label: "Yes, with tape or a sticky note"
+      - id: "c"
+        label: "No, but I've thought about it"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "My laptop lid stays closed anyway"
+  - id: q23
+    prompt: "Do you use any of the following on video calls? (Select all that apply)"
+    type: multi_choice
+    construct: use_any_following_video_calls
+    required: true
+    options:
+      - id: "a"
+        label: "Virtual/blurred background"
+      - id: "b"
+        label: "Beauty or touch-up filters"
+      - id: "c"
+        label: "Additional lighting (ring light, lamp)"
+      - id: "d"
+        label: "A separate/external microphone"
+      - id: "e"
+        label: "Green screen"
+      - id: "f"
+        label: "Auto-framing / follow features"
+      - id: "g"
+        label: "None of these"
+  - id: q24
+    prompt: "What frustrates you most about your webcam? (Select all that apply)"
+    type: multi_choice
+    construct: frustrates_most_webcam_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Poor image quality"
+      - id: "b"
+        label: "Bad performance in low light"
+      - id: "c"
+        label: "Poor microphone / audio"
+      - id: "d"
+        label: "Awkward camera angle or position"
+      - id: "e"
+        label: "Focus problems"
+      - id: "f"
+        label: "Connection or driver issues"
+      - id: "g"
+        label: "Privacy worries"
+      - id: "h"
+        label: "Nothing frustrates me"
+  - id: q25
+    prompt: "How often do you experience technical problems with your webcam?"
+    type: single_choice
+    construct: often_experience_technical_problems_webc
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q26
+    prompt: "How has your webcam use changed compared to a few years ago?"
+    type: single_choice
+    construct: has_webcam_use_changed_compared
+    required: true
+    options:
+      - id: "a"
+        label: "I use it much more now"
+      - id: "b"
+        label: "I use it somewhat more"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "I use it somewhat less"
+      - id: "e"
+        label: "I use it much less"
+  - id: q27
+    prompt: "Overall, how satisfied are you with your current webcam?"
+    type: single_choice
+    construct: overall_satisfied_current_webcam
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q28
+    prompt: "How likely are you to buy a new or upgraded webcam in the next 12 months?"
+    type: single_choice
+    construct: likely_buy_new_upgraded_webcam
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q29
+    prompt: "How likely are you to recommend your current webcam to others? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_current_webcam_others
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q30
+    prompt: "What one thing would most improve your video-call experience?"
+    type: free_text
+    construct: one_thing_would_most_improve
+    required: true
+  - id: q31
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18-24"
+      - id: "b"
+        label: "25-34"
+      - id: "c"
+        label: "35-44"
+      - id: "d"
+        label: "45-54"
+      - id: "e"
+        label: "55-64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000-$49,999"
+      - id: "c"
+        label: "$50,000-$74,999"
+      - id: "d"
+        label: "$75,000-$99,999"
+      - id: "e"
+        label: "$100,000-$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Not currently employed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Which best describes your work arrangement?"
+    type: single_choice
+    construct: best_describes_work_arrangement
+    required: true
+    options:
+      - id: "a"
+        label: "Fully remote"
+      - id: "b"
+        label: "Hybrid"
+      - id: "c"
+        label: "Fully in-person"
+      - id: "d"
+        label: "Not currently working"
+  - id: q38
+    prompt: "Which best describes where you live?"
+    type: single_choice
+    construct: best_describes_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q39
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q40
+    prompt: "How would you describe your comfort with technology in general?"
+    type: single_choice
+    construct: would_describe_comfort_technology_genera
+    required: true
+    options:
+      - id: "a"
+        label: "Early adopter — I love trying new tech"
+      - id: "b"
+        label: "Comfortable — I keep up fairly well"
+      - id: "c"
+        label: "Average — I use what I need"
+      - id: "d"
+        label: "Cautious — I adopt slowly"
+      - id: "e"
+        label: "Reluctant — technology often frustrates me"

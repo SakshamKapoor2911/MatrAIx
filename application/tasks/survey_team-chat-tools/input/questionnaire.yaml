@@ -1,0 +1,696 @@
+schemaVersion: "1.0"
+id: team_chat_tools_v1
+title: "Team Chat Tools Survey"
+description: "How people use workplace team chat and messaging tools — which tools they choose, what they use them for, and how chat affects focus, connection, and productivity."
+questions:
+  - id: q0
+    prompt: "Do you use a team chat or messaging tool for work?"
+    type: single_choice
+    construct: use_team_chat_messaging_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, it's central to my workday"
+      - id: "b"
+        label: "Yes, but only occasionally"
+      - id: "c"
+        label: "No, but my organization has one"
+      - id: "d"
+        label: "No, I don't use one for work"
+  - id: q1
+    prompt: "How long have you used team chat tools for work?"
+    type: single_choice
+    construct: long_have_used_team_chat
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 7 years"
+      - id: "d"
+        label: "More than 7 years"
+      - id: "e"
+        label: "I don't use them"
+  - id: q2
+    prompt: "How many hours per day do you actively use team chat tools? Enter a whole number."
+    type: free_text
+    construct: many_hours_per_day_actively
+    required: true
+  - id: q3
+    prompt: "Which team chat tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: team_chat_tools_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Slack"
+      - id: "b"
+        label: "Microsoft Teams"
+      - id: "c"
+        label: "Discord"
+      - id: "d"
+        label: "Google Chat"
+      - id: "e"
+        label: "Mattermost"
+      - id: "f"
+        label: "Zulip"
+      - id: "g"
+        label: "Rocket.Chat"
+      - id: "h"
+        label: "Element / Matrix"
+      - id: "i"
+        label: "Cisco Webex"
+      - id: "j"
+        label: "Telegram"
+      - id: "k"
+        label: "Other (please specify)"
+  - id: q4
+    prompt: "Which team chat tool do you use most often for work?"
+    type: single_choice
+    construct: team_chat_tool_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Slack"
+      - id: "b"
+        label: "Microsoft Teams"
+      - id: "c"
+        label: "Discord"
+      - id: "d"
+        label: "Google Chat"
+      - id: "e"
+        label: "Mattermost"
+      - id: "f"
+        label: "Another tool"
+  - id: q5
+    prompt: "Who chose the team chat tool you use for work?"
+    type: single_choice
+    construct: who_chose_team_chat_tool
+    required: true
+    options:
+      - id: "a"
+        label: "I chose it myself"
+      - id: "b"
+        label: "My team chose it"
+      - id: "c"
+        label: "IT or leadership mandated it"
+      - id: "d"
+        label: "It came bundled with our other software"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q6
+    prompt: "How do you primarily access your team chat tool? (Select all that apply)"
+    type: multi_choice
+    construct: primarily_access_team_chat_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Desktop app"
+      - id: "b"
+        label: "Web browser"
+      - id: "c"
+        label: "Mobile app"
+      - id: "d"
+        label: "Tablet"
+  - id: q7
+    prompt: "What do you use team chat for? (Select all that apply)"
+    type: multi_choice
+    construct: use_team_chat_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Quick questions and answers"
+      - id: "b"
+        label: "Project coordination"
+      - id: "c"
+        label: "Sharing files and links"
+      - id: "d"
+        label: "Voice or video huddles"
+      - id: "e"
+        label: "Announcements"
+      - id: "f"
+        label: "Social / non-work chat"
+      - id: "g"
+        label: "Alerts from other apps (bots/integrations)"
+      - id: "h"
+        label: "Direct messages with individuals"
+      - id: "i"
+        label: "Cross-company or client channels"
+  - id: q8
+    prompt: "Approximately how many channels or groups are you a member of? Enter a whole number."
+    type: free_text
+    construct: approximately_many_channels_groups_membe
+    required: true
+  - id: q9
+    prompt: "Which features do you regularly use? (Select all that apply)"
+    type: multi_choice
+    construct: features_regularly_use_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Threads"
+      - id: "b"
+        label: "Mentions (@ someone)"
+      - id: "c"
+        label: "Emoji reactions"
+      - id: "d"
+        label: "Voice or video calls / huddles"
+      - id: "e"
+        label: "Screen sharing"
+      - id: "f"
+        label: "Search"
+      - id: "g"
+        label: "Saved items or bookmarks"
+      - id: "h"
+        label: "Status / availability"
+      - id: "i"
+        label: "App integrations or bots"
+      - id: "j"
+        label: "Do Not Disturb / notification scheduling"
+  - id: q10
+    prompt: "How do you manage notifications from your team chat tool?"
+    type: single_choice
+    construct: manage_notifications_from_team_chat
+    required: true
+    options:
+      - id: "a"
+        label: "I get notified for almost everything"
+      - id: "b"
+        label: "Only for mentions and direct messages"
+      - id: "c"
+        label: "I mute most channels"
+      - id: "d"
+        label: "I use scheduled Do Not Disturb hours"
+      - id: "e"
+        label: "I keep notifications mostly off"
+  - id: q11
+    prompt: "Do you use AI features in your team chat tool (e.g., message summaries, AI assistants)?"
+    type: single_choice
+    construct: use_ai_features_team_chat
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I'm interested"
+      - id: "d"
+        label: "No, and I'm not interested"
+  - id: q12
+    prompt: "Do you use your team chat tool to communicate with people outside your organization (clients, vendors, partners)?"
+    type: single_choice
+    construct: use_team_chat_tool_communicate
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No"
+  - id: q13
+    prompt: "How much do you agree with the following statement? — Team chat helps me communicate faster than email."
+    type: single_choice
+    construct: much_agree_following_statement_team
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement? — I feel pressure to respond quickly on team chat."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement? — Team chat frequently interrupts my focused work."
+    type: single_choice
+    construct: much_agree_following_statement_team
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement? — Important information is easy to find later in team chat."
+    type: single_choice
+    construct: much_agree_following_statement_important
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement? — Team chat helps me feel connected to my coworkers."
+    type: single_choice
+    construct: much_agree_following_statement_team
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How often do you experience each of the following on team chat? — Feeling overwhelmed by the volume of messages"
+    type: single_choice
+    construct: often_experience_each_following_team
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q19
+    prompt: "How often do you experience each of the following on team chat? — Missing an important message"
+    type: single_choice
+    construct: often_experience_each_following_team
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q20
+    prompt: "How often do you experience each of the following on team chat? — Checking messages outside of work hours"
+    type: single_choice
+    construct: often_experience_each_following_team
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q21
+    prompt: "How often do you experience each of the following on team chat? — Using it for casual, non-work conversation"
+    type: single_choice
+    construct: often_experience_each_following_team
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "Select your top 3 factors that matter most when choosing a team chat tool. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_that
+    required: true
+    options:
+      - id: "a"
+        label: "Ease of use"
+      - id: "b"
+        label: "Reliability"
+      - id: "c"
+        label: "Integrations with other apps"
+      - id: "d"
+        label: "Search quality"
+      - id: "e"
+        label: "Voice and video quality"
+      - id: "f"
+        label: "Security and privacy"
+      - id: "g"
+        label: "Price"
+      - id: "h"
+        label: "Notification controls"
+  - id: q23
+    prompt: "What frustrates you most about team chat tools? (Select all that apply)"
+    type: multi_choice
+    construct: frustrates_most_team_chat_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Too many notifications"
+      - id: "b"
+        label: "Hard to find past messages"
+      - id: "c"
+        label: "Too many channels to keep up with"
+      - id: "d"
+        label: "Expectation to be always available"
+      - id: "e"
+        label: "Distracting from deep work"
+      - id: "f"
+        label: "Poor voice/video quality"
+      - id: "g"
+        label: "Cluttered interface"
+      - id: "h"
+        label: "Nothing frustrates me"
+  - id: q24
+    prompt: "Do you pay for your team chat tool?"
+    type: single_choice
+    construct: pay_team_chat_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, personally"
+      - id: "b"
+        label: "Yes, my employer pays"
+      - id: "c"
+        label: "No, we use a free tier"
+      - id: "d"
+        label: "I don't know"
+  - id: q25
+    prompt: "How satisfied are you overall with your primary team chat tool?"
+    type: single_choice
+    construct: satisfied_overall_primary_team_chat
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q26
+    prompt: "How satisfied are you with how team chat affects your productivity?"
+    type: single_choice
+    construct: satisfied_team_chat_affects_productivity
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q27
+    prompt: "How likely are you to recommend your team chat tool to another team? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_team_chat_tool
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q28
+    prompt: "How likely is your team to switch chat tools in the next year?"
+    type: single_choice
+    construct: likely_team_switch_chat_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q29
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q30
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your current work arrangement?"
+    type: single_choice
+    construct: best_describes_current_work_arrangement
+    required: true
+    options:
+      - id: "a"
+        label: "Fully remote"
+      - id: "b"
+        label: "Hybrid"
+      - id: "c"
+        label: "Fully in-person"
+      - id: "d"
+        label: "Not applicable"
+  - id: q36
+    prompt: "Which best describes your role?"
+    type: single_choice
+    construct: best_describes_role
+    required: true
+    options:
+      - id: "a"
+        label: "Individual contributor"
+      - id: "b"
+        label: "Team lead or supervisor"
+      - id: "c"
+        label: "Manager"
+      - id: "d"
+        label: "Executive or business owner"
+      - id: "e"
+        label: "Other"
+  - id: q37
+    prompt: "How many people work at your organization?"
+    type: single_choice
+    construct: many_people_work_organization
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2–9"
+      - id: "c"
+        label: "10–49"
+      - id: "d"
+        label: "50–249"
+      - id: "e"
+        label: "250–999"
+      - id: "f"
+        label: "1,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q38
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q39
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q40
+    prompt: "Is there anything else you would like to share about how you use team chat tools?"
+    type: free_text
+    construct: there_anything_else_would_like
+    required: false

@@ -1,0 +1,762 @@
+schemaVersion: "1.0"
+id: first_time_homebuying_v1
+title: "First-Time Homebuying Survey"
+description: "The experiences, plans, and challenges of buying a first home."
+questions:
+  - id: q0
+    prompt: "Which best describes your current homebuying situation?"
+    type: single_choice
+    construct: best_describes_current_homebuying_situat
+    required: true
+    options:
+      - id: "a"
+        label: "I bought my first home in the past 2 years"
+      - id: "b"
+        label: "I'm actively shopping for my first home now"
+      - id: "c"
+        label: "I plan to buy my first home in the next few years"
+      - id: "d"
+        label: "I'd like to buy someday but have no timeline"
+      - id: "e"
+        label: "I don't plan to buy a home"
+  - id: q1
+    prompt: "Do you currently own a home?"
+    type: single_choice
+    construct: currently_own_home
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, my first home"
+      - id: "b"
+        label: "No, I rent"
+      - id: "c"
+        label: "No, I live with family or others"
+      - id: "d"
+        label: "Other arrangement"
+  - id: q2
+    prompt: "How long have you been (or were you) actively looking for a first home?"
+    type: single_choice
+    construct: long_have_been_were_actively
+    required: true
+    options:
+      - id: "a"
+        label: "I haven't started looking"
+      - id: "b"
+        label: "Less than 3 months"
+      - id: "c"
+        label: "3 to 6 months"
+      - id: "d"
+        label: "6 months to 1 year"
+      - id: "e"
+        label: "More than 1 year"
+  - id: q3
+    prompt: "What type of home are you looking for (or did you buy)?"
+    type: single_choice
+    construct: type_home_looking_did_buy
+    required: true
+    options:
+      - id: "a"
+        label: "Single-family house"
+      - id: "b"
+        label: "Townhouse"
+      - id: "c"
+        label: "Condominium"
+      - id: "d"
+        label: "Multi-family (duplex, etc.)"
+      - id: "e"
+        label: "Manufactured or mobile home"
+      - id: "f"
+        label: "Undecided"
+  - id: q4
+    prompt: "What are your main reasons for wanting to buy a first home? (Select all that apply)"
+    type: multi_choice
+    construct: main_reasons_wanting_buy_first
+    required: true
+    options:
+      - id: "a"
+        label: "Build equity instead of paying rent"
+      - id: "b"
+        label: "Stability and putting down roots"
+      - id: "c"
+        label: "More space or a better location"
+      - id: "d"
+        label: "Starting or growing a family"
+      - id: "e"
+        label: "An investment for the future"
+      - id: "f"
+        label: "Freedom to renovate or personalize"
+      - id: "g"
+        label: "Rising rents made buying attractive"
+      - id: "h"
+        label: "Tax benefits"
+  - id: q5
+    prompt: "How are you funding (or did you fund) your down payment? (Select all that apply)"
+    type: multi_choice
+    construct: funding_did_fund_down_payment
+    required: true
+    options:
+      - id: "a"
+        label: "Personal savings"
+      - id: "b"
+        label: "A gift from family"
+      - id: "c"
+        label: "A down payment assistance program"
+      - id: "d"
+        label: "Sale of investments"
+      - id: "e"
+        label: "Retirement account withdrawal or loan"
+      - id: "f"
+        label: "A second job or side income"
+      - id: "g"
+        label: "I haven't saved a down payment yet"
+  - id: q6
+    prompt: "What size down payment are you planning (or did you make)?"
+    type: single_choice
+    construct: size_down_payment_planning_did
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 5%"
+      - id: "b"
+        label: "5% to 9%"
+      - id: "c"
+        label: "10% to 19%"
+      - id: "d"
+        label: "20%"
+      - id: "e"
+        label: "More than 20%"
+      - id: "f"
+        label: "I'm not sure yet"
+  - id: q7
+    prompt: "Which type of mortgage are you using or considering?"
+    type: single_choice
+    construct: type_mortgage_using_considering
+    required: true
+    options:
+      - id: "a"
+        label: "Conventional loan"
+      - id: "b"
+        label: "FHA loan"
+      - id: "c"
+        label: "VA loan"
+      - id: "d"
+        label: "USDA loan"
+      - id: "e"
+        label: "A first-time buyer or state program"
+      - id: "f"
+        label: "I'm not sure yet"
+  - id: q8
+    prompt: "Have you been pre-approved for a mortgage?"
+    type: single_choice
+    construct: have_been_pre_approved_mortgage
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I have a pre-approval"
+      - id: "b"
+        label: "I've been pre-qualified but not pre-approved"
+      - id: "c"
+        label: "No, but I plan to get pre-approved"
+      - id: "d"
+        label: "No"
+  - id: q9
+    prompt: "Which resources are you using in your homebuying process? (Select all that apply)"
+    type: multi_choice
+    construct: resources_using_homebuying_process_selec
+    required: true
+    options:
+      - id: "a"
+        label: "A real estate agent"
+      - id: "b"
+        label: "Online listing sites (Zillow, Redfin, Realtor.com)"
+      - id: "c"
+        label: "A mortgage lender or broker"
+      - id: "d"
+        label: "First-time buyer education courses or counseling"
+      - id: "e"
+        label: "Friends or family who've bought homes"
+      - id: "f"
+        label: "Financial blogs, YouTube, or podcasts"
+      - id: "g"
+        label: "A financial advisor"
+      - id: "h"
+        label: "I'm mostly figuring it out on my own"
+  - id: q10
+    prompt: "What is the biggest obstacle to buying your first home?"
+    type: single_choice
+    construct: biggest_obstacle_buying_first_home
+    required: true
+    options:
+      - id: "a"
+        label: "Saving enough for a down payment"
+      - id: "b"
+        label: "High home prices"
+      - id: "c"
+        label: "High mortgage interest rates"
+      - id: "d"
+        label: "Not enough inventory / few options"
+      - id: "e"
+        label: "Qualifying for a loan / credit"
+      - id: "f"
+        label: "Competition from other buyers"
+      - id: "g"
+        label: "Job or income uncertainty"
+  - id: q11
+    prompt: "Which of these challenges have you faced in your homebuying journey? (Select all that apply)"
+    type: multi_choice
+    construct: these_challenges_have_faced_homebuying
+    required: true
+    options:
+      - id: "a"
+        label: "Down payment savings"
+      - id: "b"
+        label: "Affording monthly payments"
+      - id: "c"
+        label: "Getting approved for a mortgage"
+      - id: "d"
+        label: "Understanding the process"
+      - id: "e"
+        label: "Finding homes in my budget"
+      - id: "f"
+        label: "Bidding wars or losing offers"
+      - id: "g"
+        label: "Closing costs"
+      - id: "h"
+        label: "Student loan or other debt"
+      - id: "i"
+        label: "None of these"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Owning a home is an important financial goal for me."
+    type: single_choice
+    construct: much_agree_following_statement_owning
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: The homebuying process feels overwhelming."
+    type: single_choice
+    construct: much_agree_following_statement_homebuyin
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: Buying a home is out of reach for people like me right now."
+    type: single_choice
+    construct: much_agree_following_statement_buying
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: I understand the costs of homeownership beyond the mortgage."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I would rather keep renting for the flexibility."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How important is each of the following in a first home: Affordable monthly payment."
+    type: single_choice
+    construct: important_each_following_first_home
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each of the following in a first home: A good school district."
+    type: single_choice
+    construct: important_each_following_first_home
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is each of the following in a first home: A short commute or good location."
+    type: single_choice
+    construct: important_each_following_first_home
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is each of the following in a first home: Enough space for my needs."
+    type: single_choice
+    construct: important_each_following_first_home
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each of the following in a first home: Low maintenance and move-in-ready condition."
+    type: single_choice
+    construct: important_each_following_first_home
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How knowledgeable do you feel about the homebuying process?"
+    type: single_choice
+    construct: knowledgeable_feel_homebuying_process
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all knowledgeable"
+      - id: "b"
+        label: "Slightly knowledgeable"
+      - id: "c"
+        label: "Moderately knowledgeable"
+      - id: "d"
+        label: "Very knowledgeable"
+      - id: "e"
+        label: "Extremely knowledgeable"
+  - id: q23
+    prompt: "How confident are you that you can afford a home in your desired area?"
+    type: single_choice
+    construct: confident_that_can_afford_home
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q24
+    prompt: "How would you rate the current housing market for first-time buyers?"
+    type: single_choice
+    construct: would_rate_current_housing_market
+    required: true
+    options:
+      - id: "a"
+        label: "Very unfavorable"
+      - id: "b"
+        label: "Somewhat unfavorable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat favorable"
+      - id: "e"
+        label: "Very favorable"
+  - id: q25
+    prompt: "Have you researched or used any first-time homebuyer assistance programs?"
+    type: single_choice
+    construct: have_researched_used_any_first
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I plan to use one"
+      - id: "b"
+        label: "Yes, but I don't qualify"
+      - id: "c"
+        label: "I've heard of them but haven't looked into it"
+      - id: "d"
+        label: "No, I didn't know they existed"
+  - id: q26
+    prompt: "How prepared do you feel for the ongoing costs of homeownership (taxes, insurance, repairs)?"
+    type: single_choice
+    construct: prepared_feel_ongoing_costs_homeownershi
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all prepared"
+      - id: "b"
+        label: "Slightly prepared"
+      - id: "c"
+        label: "Moderately prepared"
+      - id: "d"
+        label: "Very prepared"
+      - id: "e"
+        label: "Extremely prepared"
+  - id: q27
+    prompt: "Select your top 3 priorities when choosing a first home. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_priorities_when
+    required: true
+    options:
+      - id: "a"
+        label: "Price / affordability"
+      - id: "b"
+        label: "Location and neighborhood"
+      - id: "c"
+        label: "Size and layout"
+      - id: "d"
+        label: "School quality"
+      - id: "e"
+        label: "Commute and access to work"
+      - id: "f"
+        label: "Move-in-ready condition"
+      - id: "g"
+        label: "Yard or outdoor space"
+      - id: "h"
+        label: "Future resale value"
+  - id: q28
+    prompt: "How much have current mortgage interest rates affected your plans?"
+    type: single_choice
+    construct: much_have_current_mortgage_interest
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "A great deal — I've delayed or paused"
+      - id: "e"
+        label: "Not applicable"
+  - id: q29
+    prompt: "Overall, how satisfied are you with your homebuying experience so far?"
+    type: single_choice
+    construct: overall_satisfied_homebuying_experience_
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How likely are you to buy a first home within the next 2 years?"
+    type: single_choice
+    construct: likely_buy_first_home_within
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely — or I already have"
+  - id: q31
+    prompt: "On a scale from 0 to 10, how optimistic are you about becoming a homeowner, where 0 is not at all optimistic and 10 is extremely optimistic?"
+    type: single_choice
+    construct: scale_from_0_10_optimistic
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "What is your target (or actual) home purchase price? Please enter a dollar amount."
+    type: free_text
+    construct: target_actual_home_purchase_price
+    required: true
+  - id: q33
+    prompt: "How much have you saved so far toward a down payment and closing costs? Please enter a dollar amount."
+    type: free_text
+    construct: much_have_saved_so_far
+    required: true
+  - id: q34
+    prompt: "What is your approximate annual household income before taxes? Please enter a dollar amount."
+    type: free_text
+    construct: approximate_annual_household_income_befo
+    required: true
+  - id: q35
+    prompt: "If there is anything else you'd like to share about your first-home journey, please describe it briefly."
+    type: free_text
+    construct: if_there_anything_else_d
+    required: false
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Another race or ethnicity"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your annual household income before taxes?"
+    type: single_choice
+    construct: annual_household_income_before_taxes
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school graduate or equivalent"
+      - id: "c"
+        label: "Some college or associate's degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q41
+    prompt: "Which best describes your current employment status?"
+    type: single_choice
+    construct: best_describes_current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelance"
+      - id: "d"
+        label: "Not employed, looking for work"
+      - id: "e"
+        label: "Not employed, not looking for work"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q42
+    prompt: "How would you describe your credit score range?"
+    type: single_choice
+    construct: would_describe_credit_score_range
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent (740+)"
+      - id: "b"
+        label: "Good (670–739)"
+      - id: "c"
+        label: "Fair (580–669)"
+      - id: "d"
+        label: "Poor (below 580)"
+      - id: "e"
+        label: "I don't know"
+  - id: q43
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q44
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q46
+    prompt: "How would you describe the area where you want to buy (or bought)?"
+    type: single_choice
+    construct: would_describe_area_where_want
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

@@ -1,0 +1,755 @@
+schemaVersion: "1.0"
+id: podcast_app_usage_v1
+title: "Podcast App Usage Survey"
+description: "How people listen to podcasts and which apps they use, including listening habits, genres, discovery, and attitudes toward ads and paid content."
+questions:
+  - id: q0
+    prompt: "Do you listen to podcasts?"
+    type: single_choice
+    construct: listen_podcasts
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "No, never"
+  - id: q1
+    prompt: "How long have you been listening to podcasts?"
+    type: single_choice
+    construct: long_have_been_listening_podcasts
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 7 years"
+      - id: "d"
+        label: "8 or more years"
+  - id: q2
+    prompt: "Which apps do you use to listen to podcasts? (Select all that apply)"
+    type: multi_choice
+    construct: apps_use_listen_podcasts_select
+    required: true
+    options:
+      - id: "a"
+        label: "Spotify"
+      - id: "b"
+        label: "Apple Podcasts"
+      - id: "c"
+        label: "YouTube or YouTube Music"
+      - id: "d"
+        label: "Google Podcasts / Pocket Casts"
+      - id: "e"
+        label: "Amazon Music / Audible"
+      - id: "f"
+        label: "Overcast"
+      - id: "g"
+        label: "Castbox"
+      - id: "h"
+        label: "Stitcher"
+      - id: "i"
+        label: "iHeartRadio"
+      - id: "j"
+        label: "A podcast's own website or app"
+      - id: "k"
+        label: "Other"
+  - id: q3
+    prompt: "Which app do you use most often for podcasts?"
+    type: single_choice
+    construct: app_use_most_often_podcasts
+    required: true
+    options:
+      - id: "a"
+        label: "Spotify"
+      - id: "b"
+        label: "Apple Podcasts"
+      - id: "c"
+        label: "YouTube"
+      - id: "d"
+        label: "Pocket Casts"
+      - id: "e"
+        label: "Amazon Music / Audible"
+      - id: "f"
+        label: "Overcast"
+      - id: "g"
+        label: "Castbox"
+      - id: "h"
+        label: "iHeartRadio"
+      - id: "i"
+        label: "Other"
+  - id: q4
+    prompt: "About how many podcast episodes do you listen to in a typical week?"
+    type: single_choice
+    construct: many_podcast_episodes_listen_typical
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1"
+      - id: "b"
+        label: "1 to 2"
+      - id: "c"
+        label: "3 to 5"
+      - id: "d"
+        label: "6 to 10"
+      - id: "e"
+        label: "More than 10"
+  - id: q5
+    prompt: "Roughly how many podcasts do you currently follow or subscribe to?"
+    type: free_text
+    construct: roughly_many_podcasts_currently_follow
+    required: true
+  - id: q6
+    prompt: "On which devices do you listen to podcasts? (Select all that apply)"
+    type: multi_choice
+    construct: devices_listen_podcasts_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "Laptop or desktop computer"
+      - id: "c"
+        label: "Tablet"
+      - id: "d"
+        label: "Smart speaker (Echo, HomePod, Nest)"
+      - id: "e"
+        label: "Car audio system"
+      - id: "f"
+        label: "Smartwatch or wearable"
+      - id: "g"
+        label: "Smart TV"
+  - id: q7
+    prompt: "When do you usually listen to podcasts? (Select all that apply)"
+    type: multi_choice
+    construct: when_usually_listen_podcasts_select
+    required: true
+    options:
+      - id: "a"
+        label: "Commuting or driving"
+      - id: "b"
+        label: "Exercising"
+      - id: "c"
+        label: "Doing chores or housework"
+      - id: "d"
+        label: "Working or studying"
+      - id: "e"
+        label: "Relaxing at home"
+      - id: "f"
+        label: "Walking"
+      - id: "g"
+        label: "Falling asleep"
+      - id: "h"
+        label: "Cooking"
+  - id: q8
+    prompt: "Which podcast genres do you listen to most? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: podcast_genres_listen_most_select
+    required: true
+    options:
+      - id: "a"
+        label: "News and politics"
+      - id: "b"
+        label: "True crime"
+      - id: "c"
+        label: "Comedy"
+      - id: "d"
+        label: "Society and culture"
+      - id: "e"
+        label: "Business and finance"
+      - id: "f"
+        label: "Technology"
+      - id: "g"
+        label: "Health and wellness"
+      - id: "h"
+        label: "Sports"
+      - id: "i"
+        label: "Science"
+      - id: "j"
+        label: "History"
+      - id: "k"
+        label: "Education and self-improvement"
+      - id: "l"
+        label: "Arts and entertainment"
+      - id: "m"
+        label: "Fiction and storytelling"
+      - id: "n"
+        label: "Religion and spirituality"
+  - id: q9
+    prompt: "How do you usually discover new podcasts? (Select all that apply)"
+    type: multi_choice
+    construct: usually_discover_new_podcasts_select
+    required: true
+    options:
+      - id: "a"
+        label: "In-app recommendations or charts"
+      - id: "b"
+        label: "Recommendations from friends or family"
+      - id: "c"
+        label: "Social media"
+      - id: "d"
+        label: "A host mentioning it on another podcast"
+      - id: "e"
+        label: "Ads or promotions"
+      - id: "f"
+        label: "News articles or newsletters"
+      - id: "g"
+        label: "Search for a specific topic"
+      - id: "h"
+        label: "Guests I follow appearing on a show"
+  - id: q10
+    prompt: "Do you watch video versions of podcasts (e.g., on YouTube)?"
+    type: single_choice
+    construct: watch_video_versions_podcasts_e
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I mostly watch video podcasts"
+      - id: "b"
+        label: "Yes, sometimes"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "No, I only listen to audio"
+  - id: q11
+    prompt: "How often do you use the following — Listen at faster than normal speed"
+    type: single_choice
+    construct: often_use_following_listen_faster
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q12
+    prompt: "How often do you use the following — Skip ads or sponsor segments"
+    type: single_choice
+    construct: often_use_following_skip_ads
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q13
+    prompt: "How often do you use the following — Download episodes for offline listening"
+    type: single_choice
+    construct: often_use_following_download_episodes
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q14
+    prompt: "How often do you use the following — Share episodes with others"
+    type: single_choice
+    construct: often_use_following_share_episodes
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q15
+    prompt: "How often do you use the following — Leave ratings or reviews"
+    type: single_choice
+    construct: often_use_following_leave_ratings
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q16
+    prompt: "How do you usually listen to an episode?"
+    type: single_choice
+    construct: usually_listen_episode
+    required: true
+    options:
+      - id: "a"
+        label: "Start to finish in one sitting"
+      - id: "b"
+        label: "In several sessions over time"
+      - id: "c"
+        label: "I skip around to the parts I care about"
+      - id: "d"
+        label: "It depends on the show"
+  - id: q17
+    prompt: "Please rate your agreement — Podcasts are a valuable way for me to learn new things"
+    type: single_choice
+    construct: please_rate_agreement_podcasts_valuable
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "Please rate your agreement — I feel a personal connection to the hosts I listen to"
+    type: single_choice
+    construct: please_rate_agreement_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "Please rate your agreement — Podcast ads are annoying"
+    type: single_choice
+    construct: please_rate_agreement_podcast_ads
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Please rate your agreement — I have discovered products or brands through podcast ads"
+    type: single_choice
+    construct: please_rate_agreement_i_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "Please rate your agreement — I would pay to remove ads from my favorite podcasts"
+    type: single_choice
+    construct: please_rate_agreement_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "Do you pay for any podcast-related subscriptions?"
+    type: single_choice
+    construct: pay_any_podcast_related_subscriptions
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a premium podcast app subscription"
+      - id: "b"
+        label: "Yes, individual show memberships (e.g., Patreon)"
+      - id: "c"
+        label: "Yes, both"
+      - id: "d"
+        label: "No, I only use free podcasts"
+  - id: q23
+    prompt: "Roughly how much do you spend per month on podcast subscriptions or memberships?"
+    type: free_text
+    construct: roughly_much_spend_per_month
+    required: true
+  - id: q24
+    prompt: "How important are the following in a podcast app — Easy-to-use interface"
+    type: single_choice
+    construct: important_following_podcast_app_easy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important are the following in a podcast app — Good recommendations for new shows"
+    type: single_choice
+    construct: important_following_podcast_app_good
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important are the following in a podcast app — Playback controls (speed, skip, sleep timer)"
+    type: single_choice
+    construct: important_following_podcast_app_playback
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important are the following in a podcast app — Offline downloads"
+    type: single_choice
+    construct: important_following_podcast_app_offline
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "How important are the following in a podcast app — Having all my audio (music and podcasts) in one app"
+    type: single_choice
+    construct: important_following_podcast_app_having
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "Have you started listening to podcasts more or less over the past year?"
+    type: single_choice
+    construct: have_started_listening_podcasts_more
+    required: true
+    options:
+      - id: "a"
+        label: "Much less"
+      - id: "b"
+        label: "Somewhat less"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat more"
+      - id: "e"
+        label: "Much more"
+  - id: q30
+    prompt: "Do you also listen to audiobooks?"
+    type: single_choice
+    construct: also_listen_audiobooks
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "No"
+  - id: q31
+    prompt: "Have you ever switched your main podcast app?"
+    type: single_choice
+    construct: have_ever_switched_main_podcast
+    required: true
+    options:
+      - id: "a"
+        label: "No, I've always used the same one"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "Yes, a few times"
+      - id: "d"
+        label: "Yes, many times"
+  - id: q32
+    prompt: "What was the main reason you chose your current podcast app?"
+    type: free_text
+    construct: was_main_reason_chose_current
+    required: true
+  - id: q33
+    prompt: "Over the next year, how do you expect your podcast listening to change?"
+    type: single_choice
+    construct: over_next_year_expect_podcast
+    required: true
+    options:
+      - id: "a"
+        label: "Decrease a lot"
+      - id: "b"
+        label: "Decrease somewhat"
+      - id: "c"
+        label: "Stay about the same"
+      - id: "d"
+        label: "Increase somewhat"
+      - id: "e"
+        label: "Increase a lot"
+  - id: q34
+    prompt: "Overall, how satisfied are you with your podcast app?"
+    type: single_choice
+    construct: overall_satisfied_podcast_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "How likely are you to recommend your podcast app to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_podcast_app_friend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelance"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed, looking for work"
+      - id: "f"
+        label: "Not employed, not looking"
+      - id: "g"
+        label: "Retired"
+  - id: q42
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q43
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q44
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

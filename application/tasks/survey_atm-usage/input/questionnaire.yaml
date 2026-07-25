@@ -1,0 +1,739 @@
+schemaVersion: "1.0"
+id: atm_usage_v1
+title: "ATM Usage Survey"
+description: "How people use ATMs to access cash and how they handle ATM fees."
+questions:
+  - id: q0
+    prompt: "Do you currently have a checking account or debit card at a bank or credit union?"
+    type: single_choice
+    construct: currently_have_checking_account_debit
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, at a bank"
+      - id: "b"
+        label: "Yes, at a credit union"
+      - id: "c"
+        label: "Yes, at an online-only or neobank"
+      - id: "d"
+        label: "No, I don't have one"
+  - id: q1
+    prompt: "How often do you use an ATM?"
+    type: single_choice
+    construct: often_use_atm
+    required: true
+    options:
+      - id: "a"
+        label: "Several times a week"
+      - id: "b"
+        label: "About once a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "About once a month"
+      - id: "e"
+        label: "A few times a year"
+      - id: "f"
+        label: "Almost never"
+  - id: q2
+    prompt: "Which type of ATM do you use most often?"
+    type: single_choice
+    construct: type_atm_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "My own bank's or credit union's ATM"
+      - id: "b"
+        label: "Another bank's ATM (out-of-network)"
+      - id: "c"
+        label: "A surcharge-free network ATM (e.g., Allpoint, MoneyPass)"
+      - id: "d"
+        label: "A standalone or convenience-store ATM"
+      - id: "e"
+        label: "An ATM inside a store, bar, or gas station"
+      - id: "f"
+        label: "I don't use ATMs"
+  - id: q3
+    prompt: "What do you mainly use ATMs for? (Select all that apply)"
+    type: multi_choice
+    construct: mainly_use_atms_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Withdrawing cash"
+      - id: "b"
+        label: "Depositing cash"
+      - id: "c"
+        label: "Depositing checks"
+      - id: "d"
+        label: "Checking my account balance"
+      - id: "e"
+        label: "Transferring money between accounts"
+      - id: "f"
+        label: "Getting smaller bills or change"
+      - id: "g"
+        label: "Buying stamps, transit cards, or other services"
+      - id: "h"
+        label: "I don't use ATMs"
+  - id: q4
+    prompt: "Which ATM networks or providers have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: atm_networks_providers_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Chase"
+      - id: "b"
+        label: "Bank of America"
+      - id: "c"
+        label: "Wells Fargo"
+      - id: "d"
+        label: "A credit union or its shared branching ATMs"
+      - id: "e"
+        label: "Allpoint"
+      - id: "f"
+        label: "MoneyPass"
+      - id: "g"
+        label: "A standalone/independent ATM (e.g., in a store)"
+      - id: "h"
+        label: "I don't remember or don't use ATMs"
+  - id: q5
+    prompt: "About how much cash do you typically withdraw in a single ATM visit? Please enter a dollar amount (enter 0 if you don't use ATMs)."
+    type: free_text
+    construct: much_cash_typically_withdraw_single
+    required: true
+  - id: q6
+    prompt: "About how much cash do you withdraw from ATMs in a typical month? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_cash_withdraw_from_atms
+    required: true
+  - id: q7
+    prompt: "About how many times did you use an ATM in the past 30 days? Please enter a number."
+    type: free_text
+    construct: many_times_did_use_atm
+    required: true
+  - id: q8
+    prompt: "When you need cash, what is your most common way of getting it?"
+    type: single_choice
+    construct: when_need_cash_most_common
+    required: true
+    options:
+      - id: "a"
+        label: "Withdraw from an ATM"
+      - id: "b"
+        label: "Get cash back at a store checkout"
+      - id: "c"
+        label: "Withdraw from a teller inside a branch"
+      - id: "d"
+        label: "Receive cash from other people or my job"
+      - id: "e"
+        label: "I rarely use cash"
+  - id: q9
+    prompt: "Have you ever used a cardless or mobile ATM feature (e.g., tapping your phone or scanning a code to withdraw cash)?"
+    type: single_choice
+    construct: have_ever_used_cardless_mobile
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I use it regularly"
+      - id: "b"
+        label: "Yes, I've tried it a few times"
+      - id: "c"
+        label: "No, but I'm aware of it"
+      - id: "d"
+        label: "No, I've never heard of it"
+  - id: q10
+    prompt: "How do you usually find an ATM when you need one? (Select all that apply)"
+    type: multi_choice
+    construct: usually_find_atm_when_need
+    required: true
+    options:
+      - id: "a"
+        label: "My bank's mobile app or website locator"
+      - id: "b"
+        label: "A map app (e.g., Google Maps)"
+      - id: "c"
+        label: "I go to a branch I already know"
+      - id: "d"
+        label: "Whatever ATM is nearby, regardless of network"
+      - id: "e"
+        label: "Inside stores or gas stations I'm already visiting"
+      - id: "f"
+        label: "I don't actively look for ATMs"
+  - id: q11
+    prompt: "How concerned are you about paying out-of-network ATM fees?"
+    type: single_choice
+    construct: concerned_paying_out_network_atm
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q12
+    prompt: "What do you do to avoid ATM fees? (Select all that apply)"
+    type: multi_choice
+    construct: avoid_atm_fees_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Only use my own bank's ATMs"
+      - id: "b"
+        label: "Get cash back at store checkouts instead"
+      - id: "c"
+        label: "Withdraw larger amounts less often"
+      - id: "d"
+        label: "Use a bank that reimburses ATM fees"
+      - id: "e"
+        label: "Use surcharge-free network ATMs"
+      - id: "f"
+        label: "I don't take any steps to avoid fees"
+  - id: q13
+    prompt: "About how much did you pay in ATM fees (out-of-network plus operator surcharges) in the past month? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_did_pay_atm_fees
+    required: true
+  - id: q14
+    prompt: "Does your bank reimburse any ATM fees you are charged?"
+    type: single_choice
+    construct: does_bank_reimburse_any_atm
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, it reimburses all ATM fees"
+      - id: "b"
+        label: "Yes, up to a monthly limit"
+      - id: "c"
+        label: "No, it does not reimburse fees"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q15
+    prompt: "In the past year, have you experienced any of the following ATM problems? (Select all that apply)"
+    type: multi_choice
+    construct: past_year_have_experienced_any
+    required: true
+    options:
+      - id: "a"
+        label: "The ATM was out of cash"
+      - id: "b"
+        label: "The ATM was out of order or offline"
+      - id: "c"
+        label: "The machine kept or \"ate\" my card"
+      - id: "d"
+        label: "I was charged an unexpected fee"
+      - id: "e"
+        label: "I suspected a card skimmer or tampering"
+      - id: "f"
+        label: "A deposit was delayed or not credited correctly"
+      - id: "g"
+        label: "No problems in the past year"
+  - id: q16
+    prompt: "How much do you agree with the following statement about ATMs? ATMs are convenient and easy for me to access when I need cash."
+    type: single_choice
+    construct: much_agree_following_statement_atms
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about ATMs? I worry about card skimming or fraud when using ATMs."
+    type: single_choice
+    construct: much_agree_following_statement_atms
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about ATMs? ATM fees are unreasonably high."
+    type: single_choice
+    construct: much_agree_following_statement_atms
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about ATMs? I use cash a lot less than I did a few years ago."
+    type: single_choice
+    construct: much_agree_following_statement_atms
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement about ATMs? Having plenty of nearby ATMs is important to me when choosing a bank."
+    type: single_choice
+    construct: much_agree_following_statement_atms
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree with the following statement about ATMs? ATMs are becoming less necessary for me over time."
+    type: single_choice
+    construct: much_agree_following_statement_atms
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "In the past 6 months, how often did you withdraw cash from an ATM?"
+    type: single_choice
+    construct: past_6_months_often_did
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q23
+    prompt: "In the past 6 months, how often did you deposit cash or checks at an ATM?"
+    type: single_choice
+    construct: past_6_months_often_did
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q24
+    prompt: "In the past 6 months, how often did you pay an out-of-network ATM fee?"
+    type: single_choice
+    construct: past_6_months_often_did
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q25
+    prompt: "In the past 6 months, how often did you use a cardless or mobile ATM feature?"
+    type: single_choice
+    construct: past_6_months_often_did
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q26
+    prompt: "How important is each of the following when you decide which ATM to use? A fee-free or in-network machine."
+    type: single_choice
+    construct: important_each_following_when_decide
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important is each of the following when you decide which ATM to use? Being close to where I already am."
+    type: single_choice
+    construct: important_each_following_when_decide
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "How important is each of the following when you decide which ATM to use? Feeling safe and secure at the location."
+    type: single_choice
+    construct: important_each_following_when_decide
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "How important is each of the following when you decide which ATM to use? The machine being reliable and stocked with cash."
+    type: single_choice
+    construct: important_each_following_when_decide
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "Which of these are the top 3 factors when you choose which ATM to use? (Select up to 3)"
+    type: single_choice
+    construct: these_top_3_factors_when
+    required: true
+    options:
+      - id: "a"
+        label: "Avoiding fees"
+      - id: "b"
+        label: "Convenient location"
+      - id: "c"
+        label: "Safety of the location"
+      - id: "d"
+        label: "Belongs to my bank or network"
+      - id: "e"
+        label: "Reliability (in service, has cash)"
+      - id: "f"
+        label: "Supports deposits or other functions"
+      - id: "g"
+        label: "Supports cardless/mobile access"
+      - id: "h"
+        label: "Well-lit or open 24 hours"
+  - id: q31
+    prompt: "Overall, how satisfied are you with the ATM access your bank or credit union provides?"
+    type: single_choice
+    construct: overall_satisfied_atm_access_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "Over the past few years, how has your overall use of ATMs changed?"
+    type: single_choice
+    construct: over_past_few_years_has
+    required: true
+    options:
+      - id: "a"
+        label: "Increased a lot"
+      - id: "b"
+        label: "Increased somewhat"
+      - id: "c"
+        label: "Stayed about the same"
+      - id: "d"
+        label: "Decreased somewhat"
+      - id: "e"
+        label: "Decreased a lot"
+  - id: q33
+    prompt: "How likely are you to still be regularly using ATMs three years from now?"
+    type: single_choice
+    construct: likely_still_be_regularly_using
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "How likely are you to recommend your current bank or credit union to a friend, based on its ATM access and fees? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: likely_recommend_current_bank_credit
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "If you could improve one thing about your ATM experience, what would it be? (Optional; write a short answer or enter \"none\".)"
+    type: free_text
+    construct: if_could_improve_one_thing
+    required: false
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed, looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed and not looking"
+  - id: q42
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q43
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q45
+    prompt: "What type of area do you live in?"
+    type: single_choice
+    construct: type_area_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q46
+    prompt: "Which type of financial institution do you consider your primary bank?"
+    type: single_choice
+    construct: type_financial_institution_consider_prim
+    required: true
+    options:
+      - id: "a"
+        label: "A large national bank"
+      - id: "b"
+        label: "A regional or community bank"
+      - id: "c"
+        label: "A credit union"
+      - id: "d"
+        label: "An online-only or neobank"
+      - id: "e"
+        label: "I don't have a primary bank"

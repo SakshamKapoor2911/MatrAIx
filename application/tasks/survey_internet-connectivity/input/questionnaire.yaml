@@ -1,0 +1,713 @@
+schemaVersion: "1.0"
+id: internet_connectivity_v1
+title: "Internet Connectivity Survey"
+description: "How households experience their home internet service — the connection type, provider, speed, reliability, cost, and overall satisfaction."
+questions:
+  - id: q0
+    prompt: "Do you have internet service at home?"
+    type: single_choice
+    construct: have_internet_service_home
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a fixed home connection"
+      - id: "b"
+        label: "Yes, but only through a mobile / cellular connection"
+      - id: "c"
+        label: "No home internet — I rely on other locations"
+      - id: "d"
+        label: "No internet access"
+  - id: q1
+    prompt: "What type of home internet connection do you have?"
+    type: single_choice
+    construct: type_home_internet_connection_have
+    required: true
+    options:
+      - id: "a"
+        label: "Fiber"
+      - id: "b"
+        label: "Cable"
+      - id: "c"
+        label: "DSL"
+      - id: "d"
+        label: "Fixed wireless"
+      - id: "e"
+        label: "5G / cellular home internet"
+      - id: "f"
+        label: "Satellite (e.g. Starlink, HughesNet)"
+      - id: "g"
+        label: "I do not know"
+      - id: "h"
+        label: "Not applicable"
+  - id: q2
+    prompt: "Who is your home internet provider?"
+    type: single_choice
+    construct: who_home_internet_provider
+    required: true
+    options:
+      - id: "a"
+        label: "Comcast / Xfinity"
+      - id: "b"
+        label: "Spectrum / Charter"
+      - id: "c"
+        label: "AT&T"
+      - id: "d"
+        label: "Verizon"
+      - id: "e"
+        label: "T-Mobile"
+      - id: "f"
+        label: "Cox"
+      - id: "g"
+        label: "Starlink"
+      - id: "h"
+        label: "A regional or local provider"
+      - id: "i"
+        label: "Other"
+      - id: "j"
+        label: "Not applicable"
+  - id: q3
+    prompt: "Roughly what download speed does your plan advertise?"
+    type: single_choice
+    construct: roughly_download_speed_does_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Under 25 Mbps"
+      - id: "b"
+        label: "25–100 Mbps"
+      - id: "c"
+        label: "100–300 Mbps"
+      - id: "d"
+        label: "300–500 Mbps"
+      - id: "e"
+        label: "500 Mbps–1 Gbps"
+      - id: "f"
+        label: "More than 1 Gbps"
+      - id: "g"
+        label: "I do not know"
+  - id: q4
+    prompt: "What do you primarily use your home internet for? (Select all that apply)"
+    type: multi_choice
+    construct: primarily_use_home_internet_select
+    required: true
+    options:
+      - id: "a"
+        label: "Streaming video"
+      - id: "b"
+        label: "Streaming music"
+      - id: "c"
+        label: "Video calls / meetings"
+      - id: "d"
+        label: "Working or studying from home"
+      - id: "e"
+        label: "Online gaming"
+      - id: "f"
+        label: "Web browsing and email"
+      - id: "g"
+        label: "Social media"
+      - id: "h"
+        label: "Smart home devices"
+      - id: "i"
+        label: "Large downloads / uploads"
+      - id: "j"
+        label: "Running a home server or hosting"
+  - id: q5
+    prompt: "How many devices are usually connected to your home internet at once?"
+    type: single_choice
+    construct: many_devices_usually_connected_home
+    required: true
+    options:
+      - id: "a"
+        label: "1–3"
+      - id: "b"
+        label: "4–7"
+      - id: "c"
+        label: "8–12"
+      - id: "d"
+        label: "13–20"
+      - id: "e"
+        label: "More than 20"
+  - id: q6
+    prompt: "Do you have a backup internet connection (mobile hotspot, second provider)?"
+    type: single_choice
+    construct: have_backup_internet_connection_mobile
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a dedicated backup"
+      - id: "b"
+        label: "I use my phone's hotspot when needed"
+      - id: "c"
+        label: "No backup"
+      - id: "d"
+        label: "Not applicable"
+  - id: q7
+    prompt: "Does your plan have a monthly data cap?"
+    type: single_choice
+    construct: does_plan_have_monthly_data
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I sometimes hit it"
+      - id: "b"
+        label: "Yes, but I rarely hit it"
+      - id: "c"
+        label: "No, it is unlimited"
+      - id: "d"
+        label: "I do not know"
+  - id: q8
+    prompt: "How often does your home internet go down or become unusable?"
+    type: single_choice
+    construct: often_does_home_internet_go
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "A few times a year"
+      - id: "c"
+        label: "About once a month"
+      - id: "d"
+        label: "Weekly"
+      - id: "e"
+        label: "Several times a week or more"
+  - id: q9
+    prompt: "When your internet is slow or down, how much does it disrupt your day?"
+    type: single_choice
+    construct: when_internet_slow_down_much
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "Quite a bit"
+      - id: "e"
+        label: "Severely — I cannot work or function"
+  - id: q10
+    prompt: "How often do you run a speed test on your connection?"
+    type: single_choice
+    construct: often_run_speed_test_connection
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "A few times a year"
+      - id: "d"
+        label: "Monthly"
+      - id: "e"
+        label: "Weekly or more"
+  - id: q11
+    prompt: "Select your top 3 factors when choosing an internet provider. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_when
+    required: true
+    options:
+      - id: "a"
+        label: "Download / upload speed"
+      - id: "b"
+        label: "Price"
+      - id: "c"
+        label: "Reliability / uptime"
+      - id: "d"
+        label: "No data caps"
+      - id: "e"
+        label: "Customer service"
+      - id: "f"
+        label: "No contract or flexible terms"
+      - id: "g"
+        label: "Bundle with TV / phone"
+      - id: "h"
+        label: "Low latency (for gaming or calls)"
+  - id: q12
+    prompt: "How much do you agree: My home internet is fast enough for what I do."
+    type: single_choice
+    construct: much_agree_my_home_internet
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree: My home internet is reliable."
+    type: single_choice
+    construct: much_agree_my_home_internet
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: My internet is a good value for the price."
+    type: single_choice
+    construct: much_agree_my_internet_good
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: I have limited choice of providers where I live."
+    type: single_choice
+    construct: much_agree_i_have_limited
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: A reliable connection is essential to my work or studies."
+    type: single_choice
+    construct: much_agree_reliable_connection_essential
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How satisfied are you with your home internet on: Download and upload speed."
+    type: single_choice
+    construct: satisfied_home_internet_download_upload
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q18
+    prompt: "How satisfied are you with your home internet on: Reliability and uptime."
+    type: single_choice
+    construct: satisfied_home_internet_reliability_upti
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q19
+    prompt: "How satisfied are you with your home internet on: Monthly price."
+    type: single_choice
+    construct: satisfied_home_internet_monthly_price
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q20
+    prompt: "How satisfied are you with your home internet on: Customer support."
+    type: single_choice
+    construct: satisfied_home_internet_customer_support
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q21
+    prompt: "How satisfied are you with your home internet on: Wi-Fi coverage throughout your home."
+    type: single_choice
+    construct: satisfied_home_internet_wi_fi
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q22
+    prompt: "Have you switched internet providers in the past three years?"
+    type: single_choice
+    construct: have_switched_internet_providers_past
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "Yes, more than once"
+      - id: "d"
+        label: "I wanted to but had no other option"
+  - id: q23
+    prompt: "What issues do you experience with your home internet? (Select all that apply)"
+    type: multi_choice
+    construct: issues_experience_home_internet_select
+    required: true
+    options:
+      - id: "a"
+        label: "Slow speeds"
+      - id: "b"
+        label: "Frequent outages"
+      - id: "c"
+        label: "Buffering while streaming"
+      - id: "d"
+        label: "Lag during gaming or calls"
+      - id: "e"
+        label: "Weak Wi-Fi in parts of my home"
+      - id: "f"
+        label: "Surprise price increases"
+      - id: "g"
+        label: "Poor customer service"
+      - id: "h"
+        label: "None of these"
+  - id: q24
+    prompt: "How do you feel about the price you pay relative to the service you get?"
+    type: single_choice
+    construct: feel_price_pay_relative_service
+    required: true
+    options:
+      - id: "a"
+        label: "I overpay significantly"
+      - id: "b"
+        label: "I overpay a little"
+      - id: "c"
+        label: "It is about right"
+      - id: "d"
+        label: "It is a good deal"
+      - id: "e"
+        label: "Not sure"
+  - id: q25
+    prompt: "Roughly how much do you pay per month for home internet (USD)? Enter a number."
+    type: free_text
+    construct: roughly_much_pay_per_month
+    required: true
+  - id: q26
+    prompt: "What download speed do you typically get, in Mbps? Enter a number."
+    type: free_text
+    construct: download_speed_typically_get_mbps
+    required: true
+  - id: q27
+    prompt: "About how many internet-connected devices are in your home? Enter a number."
+    type: free_text
+    construct: many_internet_connected_devices_home
+    required: true
+  - id: q28
+    prompt: "Overall, how satisfied are you with your home internet service?"
+    type: single_choice
+    construct: overall_satisfied_home_internet_service
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "How likely are you to recommend your internet provider to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: likely_recommend_internet_provider_frien
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q30
+    prompt: "How likely are you to switch providers in the next 12 months?"
+    type: single_choice
+    construct: likely_switch_providers_next_12
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Unsure"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "What is the single biggest problem with your home internet? Please describe."
+    type: free_text
+    construct: single_biggest_problem_home_internet
+    required: true
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Which best describes your current employment status?"
+    type: single_choice
+    construct: best_describes_current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Do you work or study from home?"
+    type: single_choice
+    construct: work_study_from_home
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, full-time"
+      - id: "b"
+        label: "Yes, part-time / hybrid"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "No"
+  - id: q38
+    prompt: "What is your approximate annual household income (USD)?"
+    type: single_choice
+    construct: approximate_annual_household_income_usd
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000–$199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "How many people live in your household, including yourself?"
+    type: single_choice
+    construct: many_people_live_household_including
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q40
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

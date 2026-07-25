@@ -1,0 +1,809 @@
+schemaVersion: "1.0"
+id: web_browser_choice_v1
+title: "Web Browser Choice & Habits Survey"
+description: "Which web browsers people use across their devices and the habits, preferences, and privacy attitudes behind those choices."
+questions:
+  - id: q0
+    prompt: "Which web browser do you use most often on your main computer?"
+    type: single_choice
+    construct: web_browser_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Google Chrome"
+      - id: "b"
+        label: "Microsoft Edge"
+      - id: "c"
+        label: "Safari"
+      - id: "d"
+        label: "Mozilla Firefox"
+      - id: "e"
+        label: "Brave"
+      - id: "f"
+        label: "Opera"
+      - id: "g"
+        label: "Another browser"
+  - id: q1
+    prompt: "Which web browsers have you used on any device in the past month? (Select all that apply)"
+    type: multi_choice
+    construct: web_browsers_have_used_any
+    required: true
+    options:
+      - id: "a"
+        label: "Google Chrome"
+      - id: "b"
+        label: "Microsoft Edge"
+      - id: "c"
+        label: "Safari"
+      - id: "d"
+        label: "Mozilla Firefox"
+      - id: "e"
+        label: "Brave"
+      - id: "f"
+        label: "Opera"
+      - id: "g"
+        label: "Vivaldi"
+      - id: "h"
+        label: "Arc"
+      - id: "i"
+        label: "DuckDuckGo browser"
+      - id: "j"
+        label: "Samsung Internet"
+      - id: "k"
+        label: "Tor Browser"
+  - id: q2
+    prompt: "How long have you been using your current main browser as your primary one?"
+    type: single_choice
+    construct: long_have_been_using_current
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+  - id: q3
+    prompt: "How many different browsers do you have installed on your main computer right now?"
+    type: free_text
+    construct: many_different_browsers_have_installed
+    required: true
+  - id: q4
+    prompt: "On which devices do you regularly browse the web? (Select all that apply)"
+    type: multi_choice
+    construct: devices_regularly_browse_web_select
+    required: true
+    options:
+      - id: "a"
+        label: "Windows PC"
+      - id: "b"
+        label: "Mac"
+      - id: "c"
+        label: "Linux computer"
+      - id: "d"
+        label: "iPhone"
+      - id: "e"
+        label: "Android phone"
+      - id: "f"
+        label: "iPad or Android tablet"
+      - id: "g"
+        label: "Smart TV or streaming device"
+      - id: "h"
+        label: "Work-issued computer"
+  - id: q5
+    prompt: "Why did you choose your current main browser? (Select all that apply)"
+    type: multi_choice
+    construct: why_did_choose_current_main
+    required: true
+    options:
+      - id: "a"
+        label: "It came pre-installed on my device"
+      - id: "b"
+        label: "It is fast"
+      - id: "c"
+        label: "Better privacy or tracking protection"
+      - id: "d"
+        label: "Syncs across my devices"
+      - id: "e"
+        label: "Works well with my other accounts (Google, Apple, Microsoft)"
+      - id: "f"
+        label: "Extensions or add-ons I need"
+      - id: "g"
+        label: "Recommended by someone I trust"
+      - id: "h"
+        label: "Habit / I have always used it"
+      - id: "i"
+        label: "Uses less memory or battery"
+  - id: q6
+    prompt: "Roughly how many hours per day do you spend using a web browser?"
+    type: free_text
+    construct: roughly_many_hours_per_day
+    required: true
+  - id: q7
+    prompt: "Do you use the same browser on your phone and your computer?"
+    type: single_choice
+    construct: use_same_browser_phone_computer
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, the same on both"
+      - id: "b"
+        label: "Different browsers on each"
+      - id: "c"
+        label: "I only browse on one type of device"
+  - id: q8
+    prompt: "How often do you switch between different browsers during a typical week?"
+    type: single_choice
+    construct: often_switch_between_different_browsers
+    required: true
+    options:
+      - id: "a"
+        label: "Never, I only use one"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Constantly, I use several in parallel"
+  - id: q9
+    prompt: "Which browser features do you regularly use? (Select all that apply)"
+    type: multi_choice
+    construct: browser_features_regularly_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Bookmarks or favorites"
+      - id: "b"
+        label: "Browser sync across devices"
+      - id: "c"
+        label: "Saved passwords / password manager"
+      - id: "d"
+        label: "Autofill for forms and payments"
+      - id: "e"
+        label: "Reader or reading mode"
+      - id: "f"
+        label: "Tab groups"
+      - id: "g"
+        label: "Private / incognito windows"
+      - id: "h"
+        label: "Built-in translation"
+      - id: "i"
+        label: "Vertical tabs or sidebar"
+      - id: "j"
+        label: "Profiles for different purposes"
+  - id: q10
+    prompt: "About how many browser tabs do you typically have open at once?"
+    type: single_choice
+    construct: many_browser_tabs_typically_have
+    required: true
+    options:
+      - id: "a"
+        label: "1–3"
+      - id: "b"
+        label: "4–10"
+      - id: "c"
+        label: "11–25"
+      - id: "d"
+        label: "26–50"
+      - id: "e"
+        label: "More than 50"
+  - id: q11
+    prompt: "How do you usually navigate to a website you visit often?"
+    type: single_choice
+    construct: usually_navigate_website_visit_often
+    required: true
+    options:
+      - id: "a"
+        label: "Type it in the address bar"
+      - id: "b"
+        label: "Use a bookmark or favorite"
+      - id: "c"
+        label: "Search for it each time"
+      - id: "d"
+        label: "Use the browser's speed dial / new tab shortcuts"
+      - id: "e"
+        label: "It is set as my home page"
+  - id: q12
+    prompt: "Do you use private / incognito mode?"
+    type: single_choice
+    construct: use_private_incognito_mode
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "It is my default way to browse"
+  - id: q13
+    prompt: "How many browser extensions or add-ons do you currently have installed?"
+    type: single_choice
+    construct: many_browser_extensions_add_ons
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1–3"
+      - id: "c"
+        label: "4–7"
+      - id: "d"
+        label: "8 or more"
+      - id: "e"
+        label: "Not sure"
+  - id: q14
+    prompt: "Which of the following privacy steps do you take in your browser? (Select all that apply)"
+    type: multi_choice
+    construct: following_privacy_steps_take_browser
+    required: true
+    options:
+      - id: "a"
+        label: "Block third-party cookies"
+      - id: "b"
+        label: "Use tracking protection or an ad blocker"
+      - id: "c"
+        label: "Clear browsing history or cookies regularly"
+      - id: "d"
+        label: "Reject or minimize cookie consent pop-ups"
+      - id: "e"
+        label: "Use a VPN alongside the browser"
+      - id: "f"
+        label: "Turn off telemetry / data sharing"
+      - id: "g"
+        label: "None of these"
+  - id: q15
+    prompt: "How much do you agree with the following statement about your main browser? — My browser is fast and responsive"
+    type: single_choice
+    construct: much_agree_following_statement_main
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about your main browser? — My browser protects my privacy well"
+    type: single_choice
+    construct: much_agree_following_statement_main
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about your main browser? — My browser uses too much memory or slows my computer down"
+    type: single_choice
+    construct: much_agree_following_statement_main
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about your main browser? — I am concerned about how much data my browser collects"
+    type: single_choice
+    construct: much_agree_following_statement_main
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about your main browser? — Syncing my data across devices is important to me"
+    type: single_choice
+    construct: much_agree_following_statement_main
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How important is each of the following when choosing a browser? — Speed and performance"
+    type: single_choice
+    construct: important_each_following_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each of the following when choosing a browser? — Privacy and tracking protection"
+    type: single_choice
+    construct: important_each_following_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each of the following when choosing a browser? — Extension and add-on ecosystem"
+    type: single_choice
+    construct: important_each_following_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each of the following when choosing a browser? — Syncing across my devices"
+    type: single_choice
+    construct: important_each_following_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each of the following when choosing a browser? — Low battery and resource usage"
+    type: single_choice
+    construct: important_each_following_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "Which factors would most influence you to switch to a different browser? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: factors_would_most_influence_switch
+    required: true
+    options:
+      - id: "a"
+        label: "Better speed"
+      - id: "b"
+        label: "Stronger privacy protections"
+      - id: "c"
+        label: "Lower memory usage"
+      - id: "d"
+        label: "Better cross-device sync"
+      - id: "e"
+        label: "More or better extensions"
+      - id: "f"
+        label: "A cleaner or nicer interface"
+      - id: "g"
+        label: "Built-in AI features"
+      - id: "h"
+        label: "Recommendation from a friend"
+      - id: "i"
+        label: "Nothing would make me switch"
+  - id: q26
+    prompt: "How do you feel about ads and tracking on the websites you visit?"
+    type: single_choice
+    construct: feel_ads_tracking_websites_visit
+    required: true
+    options:
+      - id: "a"
+        label: "They don't bother me"
+      - id: "b"
+        label: "Mildly annoying but I tolerate them"
+      - id: "c"
+        label: "Annoying enough that I block them"
+      - id: "d"
+        label: "A serious privacy concern for me"
+  - id: q27
+    prompt: "Have you used any AI features built into a browser (summaries, chat assistant, etc.)?"
+    type: single_choice
+    construct: have_used_any_ai_features
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, tried it a few times"
+      - id: "c"
+        label: "No, but I am interested"
+      - id: "d"
+        label: "No, and I am not interested"
+      - id: "e"
+        label: "I didn't know browsers had these"
+  - id: q28
+    prompt: "Which search engine is set as the default in your main browser?"
+    type: single_choice
+    construct: search_engine_set_as_default
+    required: true
+    options:
+      - id: "a"
+        label: "Google"
+      - id: "b"
+        label: "Bing"
+      - id: "c"
+        label: "DuckDuckGo"
+      - id: "d"
+        label: "Yahoo"
+      - id: "e"
+        label: "Brave Search"
+      - id: "f"
+        label: "Another one"
+      - id: "g"
+        label: "Not sure"
+  - id: q29
+    prompt: "Have you changed your browser's default search engine from what it came with?"
+    type: single_choice
+    construct: have_changed_browser_s_default
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"
+  - id: q30
+    prompt: "How do you handle passwords for websites?"
+    type: single_choice
+    construct: handle_passwords_websites
+    required: true
+    options:
+      - id: "a"
+        label: "I let the browser save and fill them"
+      - id: "b"
+        label: "I use a separate password manager"
+      - id: "c"
+        label: "I remember them or reuse a few"
+      - id: "d"
+        label: "I write them down"
+      - id: "e"
+        label: "A mix of methods"
+  - id: q31
+    prompt: "How often do you clear your browsing history or cookies?"
+    type: single_choice
+    construct: often_clear_browsing_history_cookies
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Every few months"
+      - id: "d"
+        label: "Monthly"
+      - id: "e"
+        label: "Weekly or more often"
+  - id: q32
+    prompt: "How satisfied are you overall with your main browser?"
+    type: single_choice
+    construct: satisfied_overall_main_browser
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How satisfied are you with your browser's privacy and tracking protection?"
+    type: single_choice
+    construct: satisfied_browser_s_privacy_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How likely are you to still be using the same main browser a year from now?"
+    type: single_choice
+    construct: likely_still_be_using_same
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q35
+    prompt: "How likely are you to recommend your main browser to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_main_browser_friend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q36
+    prompt: "What is the single thing you would most like to change or improve about your browser?"
+    type: free_text
+    construct: single_thing_would_most_like
+    required: true
+  - id: q37
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Full-time student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q44
+    prompt: "What is your current relationship status?"
+    type: single_choice
+    construct: current_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship or partnered"
+      - id: "c"
+        label: "Married"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q46
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q47
+    prompt: "How would you rate your overall technical skill with computers?"
+    type: single_choice
+    construct: would_rate_overall_technical_skill
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert / power user"

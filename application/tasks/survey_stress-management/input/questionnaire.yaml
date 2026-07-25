@@ -1,0 +1,761 @@
+schemaVersion: "1.0"
+id: stress_management_v1
+title: "Stress Management Survey"
+description: "Everyday stress and the ways consumers manage it."
+questions:
+  - id: q0
+    prompt: "In general, how would you describe your everyday stress level?"
+    type: single_choice
+    construct: general_would_describe_everyday_stress
+    required: true
+    options:
+      - id: "a"
+        label: "Very low"
+      - id: "b"
+        label: "Low"
+      - id: "c"
+        label: "Moderate"
+      - id: "d"
+        label: "High"
+      - id: "e"
+        label: "Very high"
+  - id: q1
+    prompt: "Over the past month, how often have you felt stressed?"
+    type: single_choice
+    construct: over_past_month_often_have
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Almost every day"
+  - id: q2
+    prompt: "On a scale of 0 to 10, how well do you feel you manage your stress? (0 = not well at all, 10 = extremely well)"
+    type: single_choice
+    construct: scale_0_10_well_feel
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q3
+    prompt: "Which are the biggest sources of stress in your life? (Select all that apply)"
+    type: multi_choice
+    construct: biggest_sources_stress_life_select
+    required: true
+    options:
+      - id: "a"
+        label: "Work or school"
+      - id: "b"
+        label: "Money or finances"
+      - id: "c"
+        label: "Family or relationships"
+      - id: "d"
+        label: "Health"
+      - id: "e"
+        label: "Time pressure or busyness"
+      - id: "f"
+        label: "Commuting or daily logistics"
+      - id: "g"
+        label: "News or world events"
+      - id: "h"
+        label: "Technology or being always connected"
+  - id: q4
+    prompt: "At what time of day do you tend to feel most stressed?"
+    type: single_choice
+    construct: time_day_tend_feel_most
+    required: true
+    options:
+      - id: "a"
+        label: "Early morning"
+      - id: "b"
+        label: "Midday"
+      - id: "c"
+        label: "Afternoon"
+      - id: "d"
+        label: "Evening"
+      - id: "e"
+        label: "At night"
+      - id: "f"
+        label: "It varies"
+  - id: q5
+    prompt: "Which activities do you use to relax or manage stress? (Select all that apply)"
+    type: multi_choice
+    construct: activities_use_relax_manage_stress
+    required: true
+    options:
+      - id: "a"
+        label: "Exercise or physical activity"
+      - id: "b"
+        label: "Time outdoors or in nature"
+      - id: "c"
+        label: "Talking with friends or family"
+      - id: "d"
+        label: "Hobbies or creative activities"
+      - id: "e"
+        label: "Meditation or breathing exercises"
+      - id: "f"
+        label: "Music, TV, or entertainment"
+      - id: "g"
+        label: "Reading"
+      - id: "h"
+        label: "Prayer or spiritual practice"
+      - id: "i"
+        label: "Rest or naps"
+  - id: q6
+    prompt: "Which one activity helps you most with stress?"
+    type: single_choice
+    construct: one_activity_helps_most_stress
+    required: true
+    options:
+      - id: "a"
+        label: "Exercise"
+      - id: "b"
+        label: "Time in nature"
+      - id: "c"
+        label: "Talking with others"
+      - id: "d"
+        label: "A hobby"
+      - id: "e"
+        label: "Meditation or breathing"
+      - id: "f"
+        label: "Entertainment or media"
+      - id: "g"
+        label: "Rest"
+  - id: q7
+    prompt: "How often do you make time specifically to relax or unwind?"
+    type: single_choice
+    construct: often_make_time_specifically_relax
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "A few times a week"
+      - id: "e"
+        label: "Every day"
+  - id: q8
+    prompt: "Do you use any apps or tools to help manage stress? (Select all that apply)"
+    type: multi_choice
+    construct: use_any_apps_tools_help
+    required: true
+    options:
+      - id: "a"
+        label: "A meditation app (for example, Calm, Headspace)"
+      - id: "b"
+        label: "A breathing or relaxation app"
+      - id: "c"
+        label: "A journaling app"
+      - id: "d"
+        label: "A wearable that tracks stress or recovery"
+      - id: "e"
+        label: "Music or nature-sound apps"
+      - id: "f"
+        label: "None of these"
+  - id: q9
+    prompt: "About how many minutes per day do you spend on relaxation or stress-management activities? Please enter a number."
+    type: free_text
+    construct: many_minutes_per_day_spend
+    required: true
+  - id: q10
+    prompt: "How much do you agree or disagree: I have effective ways to manage my stress."
+    type: single_choice
+    construct: much_agree_disagree_i_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree: My daily stress is manageable most of the time."
+    type: single_choice
+    construct: much_agree_disagree_my_daily
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: I make my own well-being a priority."
+    type: single_choice
+    construct: much_agree_disagree_i_make
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I have people I can turn to when I feel stressed."
+    type: single_choice
+    construct: much_agree_disagree_i_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I would like to handle stress better than I do now."
+    type: single_choice
+    construct: much_agree_disagree_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How often does stress affect your sleep?"
+    type: single_choice
+    construct: often_does_stress_affect_sleep
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q16
+    prompt: "How often does stress affect your energy levels?"
+    type: single_choice
+    construct: often_does_stress_affect_energy
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q17
+    prompt: "How often does stress affect your focus or productivity?"
+    type: single_choice
+    construct: often_does_stress_affect_focus
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q18
+    prompt: "How often does stress affect your eating habits?"
+    type: single_choice
+    construct: often_does_stress_affect_eating
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q19
+    prompt: "How often does stress affect your relationships?"
+    type: single_choice
+    construct: often_does_stress_affect_relationships
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q20
+    prompt: "How important is each approach for managing your stress: regular exercise?"
+    type: single_choice
+    construct: important_each_approach_managing_stress
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each approach for managing your stress: enough sleep?"
+    type: single_choice
+    construct: important_each_approach_managing_stress
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each approach for managing your stress: social support?"
+    type: single_choice
+    construct: important_each_approach_managing_stress
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each approach for managing your stress: time for hobbies or fun?"
+    type: single_choice
+    construct: important_each_approach_managing_stress
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each approach for managing your stress: mindfulness or relaxation practices?"
+    type: single_choice
+    construct: important_each_approach_managing_stress
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "Which barriers get in the way of managing your stress? (Select all that apply)"
+    type: multi_choice
+    construct: barriers_get_way_managing_stress
+    required: true
+    options:
+      - id: "a"
+        label: "Lack of time"
+      - id: "b"
+        label: "Feeling too tired"
+      - id: "c"
+        label: "Not knowing what works"
+      - id: "d"
+        label: "Cost of activities or services"
+      - id: "e"
+        label: "Lack of support"
+      - id: "f"
+        label: "Difficulty building a habit"
+      - id: "g"
+        label: "Nothing in particular"
+  - id: q26
+    prompt: "How often do you practice mindfulness, meditation, or breathing exercises?"
+    type: single_choice
+    construct: often_practice_mindfulness_meditation_br
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "A few times a week"
+      - id: "e"
+        label: "Daily"
+  - id: q27
+    prompt: "Has your workplace or school offered any stress-management or wellness resources?"
+    type: single_choice
+    construct: has_workplace_school_offered_any
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I have used them"
+      - id: "b"
+        label: "Yes, but I have not used them"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable"
+  - id: q28
+    prompt: "How comfortable would you be talking to a professional about stress if you wanted to?"
+    type: single_choice
+    construct: comfortable_would_be_talking_professiona
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Somewhat uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat comfortable"
+      - id: "e"
+        label: "Very comfortable"
+  - id: q29
+    prompt: "Compared with a year ago, how would you say your stress level has changed?"
+    type: single_choice
+    construct: compared_year_ago_would_say
+    required: true
+    options:
+      - id: "a"
+        label: "Much lower"
+      - id: "b"
+        label: "Somewhat lower"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat higher"
+      - id: "e"
+        label: "Much higher"
+  - id: q30
+    prompt: "Overall, how satisfied are you with how you manage stress?"
+    type: single_choice
+    construct: overall_satisfied_manage_stress
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q31
+    prompt: "How likely are you to try a new way to manage stress in the next few months?"
+    type: single_choice
+    construct: likely_try_new_way_manage
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q32
+    prompt: "Which would most help you manage stress better? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: would_most_help_manage_stress
+    required: true
+    options:
+      - id: "a"
+        label: "More free time"
+      - id: "b"
+        label: "Better sleep"
+      - id: "c"
+        label: "More exercise"
+      - id: "d"
+        label: "More social support"
+      - id: "e"
+        label: "Learning relaxation techniques"
+      - id: "f"
+        label: "Fewer work or financial pressures"
+      - id: "g"
+        label: "A tool or app that helps"
+      - id: "h"
+        label: "Professional guidance"
+  - id: q33
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65–74"
+      - id: "g"
+        label: "75 or older"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino/a"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your household's annual income before taxes?"
+    type: single_choice
+    construct: household_s_annual_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+      - id: "h"
+        label: "Unable to work"
+  - id: q39
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q40
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "Do you have children under 18 living in your household?"
+    type: single_choice
+    construct: have_children_under_18_living
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q44
+    prompt: "In general, how would you rate your overall health?"
+    type: single_choice
+    construct: general_would_rate_overall_health
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent"
+      - id: "b"
+        label: "Very good"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Fair"
+      - id: "e"
+        label: "Poor"

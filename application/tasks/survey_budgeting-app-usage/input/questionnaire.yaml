@@ -1,0 +1,707 @@
+schemaVersion: "1.0"
+id: budgeting_app_usage_v1
+title: "Budgeting App Usage Survey"
+description: "How people use budgeting apps and digital tools to manage their spending."
+questions:
+  - id: q0
+    prompt: "Do you currently use any app or digital tool to manage your budget or spending?"
+    type: single_choice
+    construct: currently_use_any_app_digital
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I have in the past"
+      - id: "d"
+        label: "No, I have never used one"
+  - id: q1
+    prompt: "How long have you used a budgeting app or tool?"
+    type: single_choice
+    construct: long_have_used_budgeting_app
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "More than 3 years"
+      - id: "e"
+        label: "I do not use one"
+  - id: q2
+    prompt: "Which budgeting apps or tools do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: budgeting_apps_tools_currently_use
+    required: true
+    options:
+      - id: "a"
+        label: "YNAB (You Need A Budget)"
+      - id: "b"
+        label: "Monarch Money"
+      - id: "c"
+        label: "Rocket Money (formerly Truebill)"
+      - id: "d"
+        label: "EveryDollar"
+      - id: "e"
+        label: "Copilot"
+      - id: "f"
+        label: "PocketGuard"
+      - id: "g"
+        label: "Goodbudget"
+      - id: "h"
+        label: "A spreadsheet (Excel or Google Sheets)"
+      - id: "i"
+        label: "My bank's built-in budgeting feature"
+      - id: "j"
+        label: "I do not use a budgeting app"
+  - id: q3
+    prompt: "Which single tool do you rely on most for budgeting?"
+    type: single_choice
+    construct: single_tool_rely_most_budgeting
+    required: true
+    options:
+      - id: "a"
+        label: "A dedicated budgeting app"
+      - id: "b"
+        label: "My bank's built-in tool"
+      - id: "c"
+        label: "A spreadsheet"
+      - id: "d"
+        label: "Pen and paper"
+      - id: "e"
+        label: "I do not budget with a tool"
+  - id: q4
+    prompt: "Do you pay for a premium or subscription budgeting app?"
+    type: single_choice
+    construct: pay_premium_subscription_budgeting_app
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, I use only free tools"
+      - id: "c"
+        label: "I used to pay but stopped"
+      - id: "d"
+        label: "Not applicable"
+  - id: q5
+    prompt: "About how much do you pay per year for budgeting apps or tools? Please enter a dollar amount (enter 0 if free)."
+    type: free_text
+    construct: much_pay_per_year_budgeting
+    required: true
+  - id: q6
+    prompt: "How often do you open or check your budgeting app?"
+    type: single_choice
+    construct: often_open_check_budgeting_app
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "About once a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Rarely"
+  - id: q7
+    prompt: "Do you link your bank and card accounts to your budgeting app?"
+    type: single_choice
+    construct: link_bank_card_accounts_budgeting
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, all or most of them"
+      - id: "b"
+        label: "Yes, some of them"
+      - id: "c"
+        label: "No, I enter transactions manually"
+      - id: "d"
+        label: "I do not use a budgeting app"
+  - id: q8
+    prompt: "Which features of your budgeting app do you use? (Select all that apply)"
+    type: multi_choice
+    construct: features_budgeting_app_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Setting monthly spending categories"
+      - id: "b"
+        label: "Tracking transactions automatically"
+      - id: "c"
+        label: "Bill reminders or due-date alerts"
+      - id: "d"
+        label: "Savings goals"
+      - id: "e"
+        label: "Subscription tracking or cancellation"
+      - id: "f"
+        label: "Debt payoff tracking"
+      - id: "g"
+        label: "Credit score monitoring"
+      - id: "h"
+        label: "Spending reports and charts"
+      - id: "i"
+        label: "I do not use a budgeting app"
+  - id: q9
+    prompt: "What budgeting method do you follow?"
+    type: single_choice
+    construct: budgeting_method_follow
+    required: true
+    options:
+      - id: "a"
+        label: "Zero-based budget (every dollar assigned)"
+      - id: "b"
+        label: "50/30/20 rule"
+      - id: "c"
+        label: "Envelope or category limits"
+      - id: "d"
+        label: "Just tracking spending without strict limits"
+      - id: "e"
+        label: "No particular method"
+      - id: "f"
+        label: "I do not budget"
+  - id: q10
+    prompt: "Which types of spending do you track most closely? (Select all that apply)"
+    type: multi_choice
+    construct: types_spending_track_most_closely
+    required: true
+    options:
+      - id: "a"
+        label: "Groceries and food"
+      - id: "b"
+        label: "Dining out and takeout"
+      - id: "c"
+        label: "Subscriptions and memberships"
+      - id: "d"
+        label: "Shopping and discretionary purchases"
+      - id: "e"
+        label: "Bills and utilities"
+      - id: "f"
+        label: "Transportation and gas"
+      - id: "g"
+        label: "Entertainment"
+      - id: "h"
+        label: "I do not track spending categories"
+  - id: q11
+    prompt: "How did you first find your budgeting app? (Select all that apply)"
+    type: multi_choice
+    construct: did_first_find_budgeting_app
+    required: true
+    options:
+      - id: "a"
+        label: "App store search"
+      - id: "b"
+        label: "Recommendation from friends or family"
+      - id: "c"
+        label: "Social media or an online creator"
+      - id: "d"
+        label: "News article or review"
+      - id: "e"
+        label: "My bank suggested it"
+      - id: "f"
+        label: "An ad"
+      - id: "g"
+        label: "Not applicable"
+  - id: q12
+    prompt: "How much do you agree or disagree: Using a budgeting app has improved my spending habits."
+    type: single_choice
+    construct: much_agree_disagree_using_budgeting
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: My budgeting app is easy to use."
+    type: single_choice
+    construct: much_agree_disagree_my_budgeting
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I trust my budgeting app to keep my financial data secure."
+    type: single_choice
+    construct: much_agree_disagree_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: I often forget to check or update my budget."
+    type: single_choice
+    construct: much_agree_disagree_i_often
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: My budgeting app helps me reach my savings goals."
+    type: single_choice
+    construct: much_agree_disagree_my_budgeting
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How satisfied are you with each aspect of your budgeting app — Ease of setup?"
+    type: single_choice
+    construct: satisfied_each_aspect_budgeting_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q18
+    prompt: "How satisfied are you with each aspect of your budgeting app — Accuracy of transaction categorization?"
+    type: single_choice
+    construct: satisfied_each_aspect_budgeting_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q19
+    prompt: "How satisfied are you with each aspect of your budgeting app — Reliability of account syncing?"
+    type: single_choice
+    construct: satisfied_each_aspect_budgeting_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q20
+    prompt: "How satisfied are you with each aspect of your budgeting app — Value for the price?"
+    type: single_choice
+    construct: satisfied_each_aspect_budgeting_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q21
+    prompt: "How satisfied are you with each aspect of your budgeting app — Design and appearance?"
+    type: single_choice
+    construct: satisfied_each_aspect_budgeting_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q22
+    prompt: "Please select your top 3 reasons for using a budgeting app. (Select all that apply)"
+    type: multi_choice
+    construct: please_select_top_3_reasons
+    required: true
+    options:
+      - id: "a"
+        label: "Control overspending"
+      - id: "b"
+        label: "Build savings"
+      - id: "c"
+        label: "Pay off debt"
+      - id: "d"
+        label: "Track where my money goes"
+      - id: "e"
+        label: "Avoid overdrafts or late fees"
+      - id: "f"
+        label: "Manage bills"
+      - id: "g"
+        label: "Cancel unused subscriptions"
+      - id: "h"
+        label: "Reach a specific goal"
+  - id: q23
+    prompt: "What frustrates you most about budgeting apps? (Select all that apply)"
+    type: multi_choice
+    construct: frustrates_most_budgeting_apps_select
+    required: true
+    options:
+      - id: "a"
+        label: "Accounts fail to sync"
+      - id: "b"
+        label: "Transactions are miscategorized"
+      - id: "c"
+        label: "Too much manual work"
+      - id: "d"
+        label: "Subscription cost"
+      - id: "e"
+        label: "Confusing interface"
+      - id: "f"
+        label: "Privacy or security concerns"
+      - id: "g"
+        label: "Nothing frustrates me"
+  - id: q24
+    prompt: "Have you ever stopped using a budgeting app?"
+    type: single_choice
+    construct: have_ever_stopped_using_budgeting
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I did not replace it"
+      - id: "b"
+        label: "Yes, and I switched to a different one"
+      - id: "c"
+        label: "No, I still use my first one"
+      - id: "d"
+        label: "I have never used one"
+  - id: q25
+    prompt: "How much has using a budgeting app changed your monthly savings?"
+    type: single_choice
+    construct: much_has_using_budgeting_app
+    required: true
+    options:
+      - id: "a"
+        label: "I save much more now"
+      - id: "b"
+        label: "I save a little more"
+      - id: "c"
+        label: "No change"
+      - id: "d"
+        label: "I save less"
+      - id: "e"
+        label: "Not sure"
+  - id: q26
+    prompt: "How confident do you feel managing your monthly budget?"
+    type: single_choice
+    construct: confident_feel_managing_monthly_budget
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q27
+    prompt: "Overall, how satisfied are you with your main budgeting app?"
+    type: single_choice
+    construct: overall_satisfied_main_budgeting_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q28
+    prompt: "How likely are you to keep using a budgeting app over the next year?"
+    type: single_choice
+    construct: likely_keep_using_budgeting_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q29
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your budgeting app to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q30
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $30,000"
+      - id: "b"
+        label: "$30,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Homemaker or full-time caregiver"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+  - id: q37
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "What type of smartphone do you primarily use?"
+    type: single_choice
+    construct: type_smartphone_primarily_use
+    required: true
+    options:
+      - id: "a"
+        label: "iPhone (iOS)"
+      - id: "b"
+        label: "Android phone"
+      - id: "c"
+        label: "Other"
+      - id: "d"
+        label: "I do not use a smartphone"
+  - id: q40
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

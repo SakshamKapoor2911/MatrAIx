@@ -1,0 +1,798 @@
+schemaVersion: "1.0"
+id: messaging_app_usage_v1
+title: "Messaging App Usage Survey"
+description: "How people use messaging and chat apps to stay in touch with family, friends, and coworkers."
+questions:
+  - id: q0
+    prompt: "Do you regularly use messaging or chat apps to communicate with others?"
+    type: single_choice
+    construct: regularly_use_messaging_chat_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, they're my main way of communicating"
+      - id: "b"
+        label: "Yes, but I also call and email a lot"
+      - id: "c"
+        label: "Yes, but only occasionally"
+      - id: "d"
+        label: "No, I mostly call or text with SMS"
+      - id: "e"
+        label: "No, I rarely message anyone"
+  - id: q1
+    prompt: "Which messaging apps do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: messaging_apps_currently_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "SMS / standard text messaging"
+      - id: "b"
+        label: "iMessage"
+      - id: "c"
+        label: "WhatsApp"
+      - id: "d"
+        label: "Facebook Messenger"
+      - id: "e"
+        label: "Instagram Direct"
+      - id: "f"
+        label: "Snapchat"
+      - id: "g"
+        label: "Telegram"
+      - id: "h"
+        label: "Signal"
+      - id: "i"
+        label: "Discord"
+      - id: "j"
+        label: "Slack"
+      - id: "k"
+        label: "Microsoft Teams (personal use)"
+      - id: "l"
+        label: "Google Messages (RCS)"
+      - id: "m"
+        label: "WeChat"
+      - id: "n"
+        label: "Other"
+  - id: q2
+    prompt: "Which messaging app do you use most often?"
+    type: single_choice
+    construct: messaging_app_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "SMS / text messaging"
+      - id: "b"
+        label: "iMessage"
+      - id: "c"
+        label: "WhatsApp"
+      - id: "d"
+        label: "Facebook Messenger"
+      - id: "e"
+        label: "Instagram Direct"
+      - id: "f"
+        label: "Snapchat"
+      - id: "g"
+        label: "Telegram"
+      - id: "h"
+        label: "Signal"
+      - id: "i"
+        label: "Discord"
+      - id: "j"
+        label: "WeChat"
+      - id: "k"
+        label: "Other"
+  - id: q3
+    prompt: "About how many messages do you send across all apps on a typical day?"
+    type: single_choice
+    construct: many_messages_send_across_all
+    required: true
+    options:
+      - id: "a"
+        label: "Fewer than 10"
+      - id: "b"
+        label: "10 to 25"
+      - id: "c"
+        label: "26 to 50"
+      - id: "d"
+        label: "51 to 100"
+      - id: "e"
+        label: "More than 100"
+  - id: q4
+    prompt: "About how many different messaging apps do you use in a typical week? Enter a whole number."
+    type: free_text
+    construct: many_different_messaging_apps_use
+    required: true
+  - id: q5
+    prompt: "Who do you communicate with most through messaging apps? (Select all that apply)"
+    type: multi_choice
+    construct: who_communicate_most_through_messaging
+    required: true
+    options:
+      - id: "a"
+        label: "Family"
+      - id: "b"
+        label: "Close friends"
+      - id: "c"
+        label: "Wider friend groups"
+      - id: "d"
+        label: "Coworkers or classmates"
+      - id: "e"
+        label: "Romantic partner"
+      - id: "f"
+        label: "Community or hobby groups"
+      - id: "g"
+        label: "Businesses or customer service"
+  - id: q6
+    prompt: "What do you use messaging apps for? (Select all that apply)"
+    type: multi_choice
+    construct: use_messaging_apps_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Quick one-on-one chats"
+      - id: "b"
+        label: "Group conversations"
+      - id: "c"
+        label: "Sharing photos and videos"
+      - id: "d"
+        label: "Voice messages"
+      - id: "e"
+        label: "Voice or video calls"
+      - id: "f"
+        label: "Sharing links or memes"
+      - id: "g"
+        label: "Coordinating plans"
+      - id: "h"
+        label: "Sending money or payments"
+      - id: "i"
+        label: "Work or school coordination"
+  - id: q7
+    prompt: "Which features do you regularly use? (Select all that apply)"
+    type: multi_choice
+    construct: features_regularly_use_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Group chats"
+      - id: "b"
+        label: "Voice messages"
+      - id: "c"
+        label: "Video calls"
+      - id: "d"
+        label: "Voice calls"
+      - id: "e"
+        label: "Disappearing or self-destructing messages"
+      - id: "f"
+        label: "Stickers, GIFs, or emoji reactions"
+      - id: "g"
+        label: "Read receipts"
+      - id: "h"
+        label: "Status or story updates"
+      - id: "i"
+        label: "Payments or money transfer"
+      - id: "j"
+        label: "None of these"
+  - id: q8
+    prompt: "How do you feel about read receipts (showing when you've seen a message)?"
+    type: single_choice
+    construct: feel_read_receipts_showing_when
+    required: true
+    options:
+      - id: "a"
+        label: "I like them and keep them on"
+      - id: "b"
+        label: "I don't mind them"
+      - id: "c"
+        label: "I turn them off"
+      - id: "d"
+        label: "I wish they didn't exist"
+      - id: "e"
+        label: "I've never thought about it"
+  - id: q9
+    prompt: "How quickly do you usually feel you should reply to a message?"
+    type: single_choice
+    construct: quickly_usually_feel_should_reply
+    required: true
+    options:
+      - id: "a"
+        label: "Immediately"
+      - id: "b"
+        label: "Within a few minutes"
+      - id: "c"
+        label: "Within an hour"
+      - id: "d"
+        label: "Within a day"
+      - id: "e"
+        label: "Whenever I get around to it"
+  - id: q10
+    prompt: "How often do you feel pressure to reply quickly to messages?"
+    type: single_choice
+    construct: often_feel_pressure_reply_quickly
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q11
+    prompt: "How many group chats are you active in?"
+    type: single_choice
+    construct: many_group_chats_active
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1 to 2"
+      - id: "c"
+        label: "3 to 5"
+      - id: "d"
+        label: "6 to 10"
+      - id: "e"
+        label: "More than 10"
+  - id: q12
+    prompt: "Please rate your agreement: Messaging apps help me stay close to the people I care about."
+    type: single_choice
+    construct: please_rate_agreement_messaging_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "Please rate your agreement: I sometimes feel overwhelmed by the number of messages I get."
+    type: single_choice
+    construct: please_rate_agreement_i_sometimes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "Please rate your agreement: End-to-end encryption is important to me when choosing a messaging app."
+    type: single_choice
+    construct: please_rate_agreement_end_end
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "Please rate your agreement: I prefer texting over calling for most conversations."
+    type: single_choice
+    construct: please_rate_agreement_i_prefer
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "Please rate your agreement: It bothers me when the people I want to message use a different app."
+    type: single_choice
+    construct: please_rate_agreement_it_bothers
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "Please rate your agreement: I trust my main messaging app to keep my conversations private."
+    type: single_choice
+    construct: please_rate_agreement_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How important is this in a messaging app: Privacy and encryption"
+    type: single_choice
+    construct: important_this_messaging_app_privacy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is this in a messaging app: The people I know already use it"
+    type: single_choice
+    construct: important_this_messaging_app_people
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is this in a messaging app: Reliability and message delivery"
+    type: single_choice
+    construct: important_this_messaging_app_reliability
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is this in a messaging app: Fun features (stickers, reactions, effects)"
+    type: single_choice
+    construct: important_this_messaging_app_fun
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is this in a messaging app: Voice and video call quality"
+    type: single_choice
+    construct: important_this_messaging_app_voice
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is this in a messaging app: Working across phone and computer"
+    type: single_choice
+    construct: important_this_messaging_app_working
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How often do you use messaging apps for voice or video calls instead of a regular phone call?"
+    type: single_choice
+    construct: often_use_messaging_apps_voice
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Almost always"
+  - id: q25
+    prompt: "Have you switched your main messaging app in the past few years?"
+    type: single_choice
+    construct: have_switched_main_messaging_app
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I'm happy with the change"
+      - id: "b"
+        label: "Yes, but I still miss the old one"
+      - id: "c"
+        label: "No, I've used the same one for years"
+      - id: "d"
+        label: "I use several equally"
+      - id: "e"
+        label: "Not applicable"
+  - id: q26
+    prompt: "What would make you switch to a different messaging app? (Select all that apply)"
+    type: multi_choice
+    construct: would_make_switch_different_messaging
+    required: true
+    options:
+      - id: "a"
+        label: "My friends and family moving to it"
+      - id: "b"
+        label: "Better privacy or encryption"
+      - id: "c"
+        label: "Better features"
+      - id: "d"
+        label: "Fewer ads or less clutter"
+      - id: "e"
+        label: "It works better across my devices"
+      - id: "f"
+        label: "A privacy scandal with my current app"
+      - id: "g"
+        label: "Nothing — I'm committed to my current app"
+  - id: q27
+    prompt: "How do you manage messaging notifications?"
+    type: single_choice
+    construct: manage_messaging_notifications
+    required: true
+    options:
+      - id: "a"
+        label: "I allow all notifications"
+      - id: "b"
+        label: "I mute noisy group chats"
+      - id: "c"
+        label: "I turn off notifications for some apps"
+      - id: "d"
+        label: "I keep most messaging notifications off"
+      - id: "e"
+        label: "I use Do Not Disturb / Focus modes"
+  - id: q28
+    prompt: "Select the top 3 things you value most in a messaging app. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_value
+    required: true
+    options:
+      - id: "a"
+        label: "Privacy and encryption"
+      - id: "b"
+        label: "Everyone I know uses it"
+      - id: "c"
+        label: "Reliability"
+      - id: "d"
+        label: "Fun features and expression"
+      - id: "e"
+        label: "Good voice and video calls"
+      - id: "f"
+        label: "Works across all my devices"
+      - id: "g"
+        label: "Clean, ad-free experience"
+      - id: "h"
+        label: "Easy group chats"
+  - id: q29
+    prompt: "Overall, how satisfied are you with your main messaging app?"
+    type: single_choice
+    construct: overall_satisfied_main_messaging_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your main messaging app to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "How likely are you to still use your main messaging app a year from now?"
+    type: single_choice
+    construct: likely_still_use_main_messaging
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q32
+    prompt: "If you could change one thing about the messaging apps you use, what would it be? (Optional)"
+    type: free_text
+    construct: if_could_change_one_thing
+    required: false
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18 years old"
+      - id: "b"
+        label: "18-24 years old"
+      - id: "c"
+        label: "25-34 years old"
+      - id: "d"
+        label: "35-44 years old"
+      - id: "e"
+        label: "45-54 years old"
+      - id: "f"
+        label: "55-64 years old"
+      - id: "g"
+        label: "65 years or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed, looking for work"
+      - id: "f"
+        label: "Not employed, not looking for work"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "How many people live in your household, including you? Enter a whole number."
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q40
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or domestic partnership"
+      - id: "c"
+        label: "In a relationship, not living together"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "In which U.S. region do you live?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "Which mobile platform do you primarily use?"
+    type: single_choice
+    construct: mobile_platform_primarily_use
+    required: true
+    options:
+      - id: "a"
+        label: "iPhone (iOS)"
+      - id: "b"
+        label: "Android"
+      - id: "c"
+        label: "Both about equally"
+      - id: "d"
+        label: "Other"
+      - id: "e"
+        label: "Not applicable"
+  - id: q44
+    prompt: "How would you rate your overall comfort with technology?"
+    type: single_choice
+    construct: would_rate_overall_comfort_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Extremely comfortable — I'm the person others ask for help"

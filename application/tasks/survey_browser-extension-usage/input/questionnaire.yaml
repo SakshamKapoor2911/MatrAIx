@@ -1,0 +1,721 @@
+schemaVersion: "1.0"
+id: browser_extension_usage_v1
+title: "Browser Extension & Add-on Usage Survey"
+description: "How people discover, choose, manage, and trust the browser extensions and add-ons they install."
+questions:
+  - id: q0
+    prompt: "Do you currently use any browser extensions or add-ons?"
+    type: single_choice
+    construct: currently_use_any_browser_extensions
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several"
+      - id: "b"
+        label: "Yes, a few"
+      - id: "c"
+        label: "Just one or two"
+      - id: "d"
+        label: "No, but I have in the past"
+      - id: "e"
+        label: "No, I have never used any"
+  - id: q1
+    prompt: "Which browser do you install most of your extensions in?"
+    type: single_choice
+    construct: browser_install_most_extensions
+    required: true
+    options:
+      - id: "a"
+        label: "Google Chrome"
+      - id: "b"
+        label: "Microsoft Edge"
+      - id: "c"
+        label: "Mozilla Firefox"
+      - id: "d"
+        label: "Safari"
+      - id: "e"
+        label: "Brave"
+      - id: "f"
+        label: "Another browser"
+      - id: "g"
+        label: "I don't use extensions"
+  - id: q2
+    prompt: "About how many extensions do you currently have installed in your main browser?"
+    type: free_text
+    construct: many_extensions_currently_have_installed
+    required: true
+  - id: q3
+    prompt: "About how many of your installed extensions do you actually use regularly?"
+    type: free_text
+    construct: many_installed_extensions_actually_use
+    required: true
+  - id: q4
+    prompt: "Which categories of extensions do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: categories_extensions_currently_use_sele
+    required: true
+    options:
+      - id: "a"
+        label: "Ad blocker / content blocker"
+      - id: "b"
+        label: "Password manager"
+      - id: "c"
+        label: "Privacy / anti-tracking"
+      - id: "d"
+        label: "Shopping / coupons / price tracking"
+      - id: "e"
+        label: "Productivity / to-do / notes"
+      - id: "f"
+        label: "Grammar or writing helper"
+      - id: "g"
+        label: "VPN or proxy"
+      - id: "h"
+        label: "Dark mode / themes"
+      - id: "i"
+        label: "Tab management"
+      - id: "j"
+        label: "Video / download helper"
+      - id: "k"
+        label: "AI assistant / chatbot"
+      - id: "l"
+        label: "Developer tools"
+      - id: "m"
+        label: "Translation"
+  - id: q5
+    prompt: "Which specific extensions do you use, if any? (Select all that apply)"
+    type: multi_choice
+    construct: specific_extensions_use_if_any
+    required: true
+    options:
+      - id: "a"
+        label: "uBlock Origin"
+      - id: "b"
+        label: "AdBlock / AdBlock Plus"
+      - id: "c"
+        label: "1Password"
+      - id: "d"
+        label: "Bitwarden"
+      - id: "e"
+        label: "LastPass"
+      - id: "f"
+        label: "Grammarly"
+      - id: "g"
+        label: "Honey"
+      - id: "h"
+        label: "Dark Reader"
+      - id: "i"
+        label: "Privacy Badger"
+      - id: "j"
+        label: "Pocket"
+      - id: "k"
+        label: "A browser-based VPN extension"
+      - id: "l"
+        label: "An AI assistant extension (ChatGPT, etc.)"
+      - id: "m"
+        label: "None of these"
+  - id: q6
+    prompt: "How did you first discover the extensions you use? (Select all that apply)"
+    type: multi_choice
+    construct: did_first_discover_extensions_use
+    required: true
+    options:
+      - id: "a"
+        label: "The browser's extension store"
+      - id: "b"
+        label: "A friend or colleague recommended them"
+      - id: "c"
+        label: "An article, video, or blog"
+      - id: "d"
+        label: "Social media or an online forum"
+      - id: "e"
+        label: "Search when I had a specific need"
+      - id: "f"
+        label: "They were already installed on my device"
+      - id: "g"
+        label: "Recommended within another app or website"
+  - id: q7
+    prompt: "How often do you install a new extension?"
+    type: single_choice
+    construct: often_install_new_extension
+    required: true
+    options:
+      - id: "a"
+        label: "Never anymore"
+      - id: "b"
+        label: "Less than once a year"
+      - id: "c"
+        label: "A few times a year"
+      - id: "d"
+        label: "Roughly once a month"
+      - id: "e"
+        label: "Several times a month"
+  - id: q8
+    prompt: "When you consider installing an extension, what do you check first? (Select all that apply)"
+    type: multi_choice
+    construct: when_consider_installing_extension_check
+    required: true
+    options:
+      - id: "a"
+        label: "Star rating and number of reviews"
+      - id: "b"
+        label: "Who the developer is"
+      - id: "c"
+        label: "What permissions it requests"
+      - id: "d"
+        label: "Number of users / downloads"
+      - id: "e"
+        label: "Whether it is open-source"
+      - id: "f"
+        label: "Price or whether it is free"
+      - id: "g"
+        label: "I don't really check anything"
+  - id: q9
+    prompt: "How often do you review the permissions an extension requests before installing it?"
+    type: single_choice
+    construct: often_review_permissions_extension_reque
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q10
+    prompt: "How often do you remove extensions you no longer use?"
+    type: single_choice
+    construct: often_remove_extensions_no_longer
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "Regularly"
+      - id: "e"
+        label: "I clean them up frequently"
+  - id: q11
+    prompt: "Have you ever removed an extension for any of these reasons? (Select all that apply)"
+    type: multi_choice
+    construct: have_ever_removed_extension_any
+    required: true
+    options:
+      - id: "a"
+        label: "It slowed down my browser"
+      - id: "b"
+        label: "Privacy or security concerns"
+      - id: "c"
+        label: "It stopped working or wasn't updated"
+      - id: "d"
+        label: "It started showing ads or changed behavior"
+      - id: "e"
+        label: "It went from free to paid"
+      - id: "f"
+        label: "I simply didn't need it anymore"
+      - id: "g"
+        label: "I have never removed one"
+  - id: q12
+    prompt: "Do you use different extensions on your work browser versus your personal browser?"
+    type: single_choice
+    construct: use_different_extensions_work_browser
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, very different sets"
+      - id: "b"
+        label: "Somewhat different"
+      - id: "c"
+        label: "The same on both"
+      - id: "d"
+        label: "I only use extensions on one"
+      - id: "e"
+        label: "Not applicable"
+  - id: q13
+    prompt: "Have you ever paid for a browser extension or its premium version?"
+    type: single_choice
+    construct: have_ever_paid_browser_extension
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a one-time purchase"
+      - id: "b"
+        label: "Yes, an ongoing subscription"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No, I only use free extensions"
+  - id: q14
+    prompt: "Do you use extensions on your mobile browser?"
+    type: single_choice
+    construct: use_extensions_mobile_browser
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Occasionally"
+      - id: "c"
+        label: "No, my mobile browser supports them but I don't"
+      - id: "d"
+        label: "No, my mobile browser doesn't support them"
+      - id: "e"
+        label: "I don't browse on mobile"
+  - id: q15
+    prompt: "How much do you agree with the following statement about browser extensions? — Extensions make my browsing noticeably more productive"
+    type: single_choice
+    construct: much_agree_following_statement_browser
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about browser extensions? — I worry about the privacy risks of the extensions I install"
+    type: single_choice
+    construct: much_agree_following_statement_browser
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about browser extensions? — Too many extensions slow my browser down"
+    type: single_choice
+    construct: much_agree_following_statement_browser
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about browser extensions? — I trust the extension store to keep out malicious extensions"
+    type: single_choice
+    construct: much_agree_following_statement_browser
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about browser extensions? — I would struggle to browse comfortably without my key extensions"
+    type: single_choice
+    construct: much_agree_following_statement_browser
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How important is each of the following when deciding to keep an extension? — It saves me time"
+    type: single_choice
+    construct: important_each_following_when_deciding
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each of the following when deciding to keep an extension? — It respects my privacy"
+    type: single_choice
+    construct: important_each_following_when_deciding
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each of the following when deciding to keep an extension? — It doesn't slow my browser down"
+    type: single_choice
+    construct: important_each_following_when_deciding
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each of the following when deciding to keep an extension? — It is kept up to date by its developer"
+    type: single_choice
+    construct: important_each_following_when_deciding
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "Which types of extensions do you consider most valuable? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: types_extensions_consider_most_valuable
+    required: true
+    options:
+      - id: "a"
+        label: "Ad / content blockers"
+      - id: "b"
+        label: "Password managers"
+      - id: "c"
+        label: "Privacy / anti-tracking"
+      - id: "d"
+        label: "Shopping and savings"
+      - id: "e"
+        label: "Productivity and organization"
+      - id: "f"
+        label: "Writing and grammar"
+      - id: "g"
+        label: "AI assistants"
+      - id: "h"
+        label: "Tab and window management"
+      - id: "i"
+        label: "Themes and appearance"
+      - id: "j"
+        label: "Developer tools"
+  - id: q25
+    prompt: "How concerned are you that an extension could collect or misuse your browsing data?"
+    type: single_choice
+    construct: concerned_that_extension_could_collect
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q26
+    prompt: "Have you ever had a bad experience with an extension (malware, spam, data leak)?"
+    type: single_choice
+    construct: have_ever_had_bad_experience
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it affected me significantly"
+      - id: "b"
+        label: "Yes, but it was minor"
+      - id: "c"
+        label: "No, never"
+      - id: "d"
+        label: "Not sure"
+  - id: q27
+    prompt: "How do you keep your extensions updated?"
+    type: single_choice
+    construct: keep_extensions_updated
+    required: true
+    options:
+      - id: "a"
+        label: "They update automatically"
+      - id: "b"
+        label: "I update them manually"
+      - id: "c"
+        label: "A mix of both"
+      - id: "d"
+        label: "I don't update them"
+      - id: "e"
+        label: "Not sure how updates work"
+  - id: q28
+    prompt: "How satisfied are you overall with the extensions you currently use?"
+    type: single_choice
+    construct: satisfied_overall_extensions_currently_u
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "How likely are you to recommend using browser extensions to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_using_browser_extension
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q30
+    prompt: "Which single extension would you least want to give up, and why?"
+    type: free_text
+    construct: single_extension_would_least_want
+    required: true
+  - id: q31
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Full-time student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q38
+    prompt: "What is your current relationship status?"
+    type: single_choice
+    construct: current_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship or partnered"
+      - id: "c"
+        label: "Married"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q40
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q41
+    prompt: "How would you rate your overall technical skill with computers?"
+    type: single_choice
+    construct: would_rate_overall_technical_skill
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert / power user"

@@ -1,0 +1,738 @@
+schemaVersion: "1.0"
+id: mortgage_shopping_v1
+title: "Mortgage Shopping Survey"
+description: "How people compare lenders and shop for a mortgage."
+questions:
+  - id: q0
+    prompt: "Which best describes your experience with mortgage shopping?"
+    type: single_choice
+    construct: best_describes_experience_mortgage_shopp
+    required: true
+    options:
+      - id: "a"
+        label: "I'm shopping for a mortgage right now"
+      - id: "b"
+        label: "I got a mortgage in the past 2 years"
+      - id: "c"
+        label: "I got a mortgage more than 2 years ago"
+      - id: "d"
+        label: "I plan to shop for one soon"
+      - id: "e"
+        label: "I've never shopped for a mortgage"
+  - id: q1
+    prompt: "What type of mortgage are you shopping for (or did you get)?"
+    type: single_choice
+    construct: type_mortgage_shopping_did_get
+    required: true
+    options:
+      - id: "a"
+        label: "Purchase loan for a primary home"
+      - id: "b"
+        label: "Purchase loan for a second home or investment property"
+      - id: "c"
+        label: "Refinance of an existing mortgage"
+      - id: "d"
+        label: "Not sure yet"
+  - id: q2
+    prompt: "Which loan type are you considering or did you choose?"
+    type: single_choice
+    construct: loan_type_considering_did_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Conventional loan"
+      - id: "b"
+        label: "FHA loan"
+      - id: "c"
+        label: "VA loan"
+      - id: "d"
+        label: "USDA loan"
+      - id: "e"
+        label: "Jumbo loan"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q3
+    prompt: "Which loan term are you considering or did you choose?"
+    type: single_choice
+    construct: loan_term_considering_did_choose
+    required: true
+    options:
+      - id: "a"
+        label: "30-year fixed"
+      - id: "b"
+        label: "15-year fixed"
+      - id: "c"
+        label: "20-year fixed"
+      - id: "d"
+        label: "Adjustable-rate (ARM)"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q4
+    prompt: "How many lenders did you (or do you plan to) get quotes from?"
+    type: single_choice
+    construct: many_lenders_did_plan_get
+    required: true
+    options:
+      - id: "a"
+        label: "Just 1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3 to 4"
+      - id: "d"
+        label: "5 or more"
+      - id: "e"
+        label: "I'm not sure yet"
+  - id: q5
+    prompt: "Which types of lenders did you get quotes from? (Select all that apply)"
+    type: multi_choice
+    construct: types_lenders_did_get_quotes
+    required: true
+    options:
+      - id: "a"
+        label: "My existing bank or credit union"
+      - id: "b"
+        label: "A large national bank (Chase, Wells Fargo, etc.)"
+      - id: "c"
+        label: "An online lender (Rocket Mortgage, Better.com, etc.)"
+      - id: "d"
+        label: "A mortgage broker"
+      - id: "e"
+        label: "A local or regional lender"
+      - id: "f"
+        label: "A builder's preferred lender"
+      - id: "g"
+        label: "I only used one lender"
+  - id: q6
+    prompt: "Which tools or resources did you use to shop for a mortgage? (Select all that apply)"
+    type: multi_choice
+    construct: tools_resources_did_use_shop
+    required: true
+    options:
+      - id: "a"
+        label: "Online rate comparison sites (Bankrate, NerdWallet)"
+      - id: "b"
+        label: "Lender websites directly"
+      - id: "c"
+        label: "A mortgage broker"
+      - id: "d"
+        label: "A real estate agent's referral"
+      - id: "e"
+        label: "Friends or family recommendations"
+      - id: "f"
+        label: "Financial blogs, YouTube, or podcasts"
+      - id: "g"
+        label: "Loan Estimate documents to compare offers"
+  - id: q7
+    prompt: "Did you get pre-approved before shopping for rates?"
+    type: single_choice
+    construct: did_get_pre_approved_before
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, before comparing lenders"
+      - id: "b"
+        label: "Yes, but only with one lender"
+      - id: "c"
+        label: "No, I got quotes first"
+      - id: "d"
+        label: "No"
+  - id: q8
+    prompt: "What was the most important factor in choosing your lender?"
+    type: single_choice
+    construct: was_most_important_factor_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "The lowest interest rate"
+      - id: "b"
+        label: "The lowest closing costs / fees"
+      - id: "c"
+        label: "Reputation and reviews"
+      - id: "d"
+        label: "Speed and ease of the process"
+      - id: "e"
+        label: "A recommendation I trusted"
+      - id: "f"
+        label: "Customer service and communication"
+  - id: q9
+    prompt: "Which fees or costs did you compare across lenders? (Select all that apply)"
+    type: multi_choice
+    construct: fees_costs_did_compare_across
+    required: true
+    options:
+      - id: "a"
+        label: "Interest rate / APR"
+      - id: "b"
+        label: "Origination fees"
+      - id: "c"
+        label: "Discount points"
+      - id: "d"
+        label: "Appraisal and inspection fees"
+      - id: "e"
+        label: "Closing costs overall"
+      - id: "f"
+        label: "Private mortgage insurance (PMI)"
+      - id: "g"
+        label: "I didn't compare fees in detail"
+  - id: q10
+    prompt: "Did you consider paying discount points to lower your rate?"
+    type: single_choice
+    construct: did_consider_paying_discount_points
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I paid points"
+      - id: "b"
+        label: "Yes, but I decided not to"
+      - id: "c"
+        label: "No, I didn't consider it"
+      - id: "d"
+        label: "I'm not familiar with points"
+  - id: q11
+    prompt: "Did you lock your interest rate during the process?"
+    type: single_choice
+    construct: did_lock_interest_rate_during
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I locked my rate"
+      - id: "b"
+        label: "No, I let it float"
+      - id: "c"
+        label: "I'm still deciding"
+      - id: "d"
+        label: "Not applicable"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Shopping multiple lenders is worth the effort to save money."
+    type: single_choice
+    construct: much_agree_following_statement_shopping
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: The mortgage process was confusing and hard to compare."
+    type: single_choice
+    construct: much_agree_following_statement_mortgage
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I felt confident I understood the terms of my loan."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: I trusted my lender to give me a fair deal."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I worried about being able to afford the monthly payment."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How important was each of the following in choosing a lender: The interest rate."
+    type: single_choice
+    construct: important_was_each_following_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important was each of the following in choosing a lender: Closing costs and fees."
+    type: single_choice
+    construct: important_was_each_following_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important was each of the following in choosing a lender: Speed of closing."
+    type: single_choice
+    construct: important_was_each_following_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important was each of the following in choosing a lender: Customer service and responsiveness."
+    type: single_choice
+    construct: important_was_each_following_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important was each of the following in choosing a lender: Lender reputation and reviews."
+    type: single_choice
+    construct: important_was_each_following_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How knowledgeable did you feel about mortgages when you started shopping?"
+    type: single_choice
+    construct: knowledgeable_did_feel_mortgages_when
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all knowledgeable"
+      - id: "b"
+        label: "Slightly knowledgeable"
+      - id: "c"
+        label: "Moderately knowledgeable"
+      - id: "d"
+        label: "Very knowledgeable"
+      - id: "e"
+        label: "Extremely knowledgeable"
+  - id: q23
+    prompt: "How much did interest rates influence your timing?"
+    type: single_choice
+    construct: much_did_interest_rates_influence
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "A great deal"
+  - id: q24
+    prompt: "Did comparing lenders result in a better rate or terms for you?"
+    type: single_choice
+    construct: did_comparing_lenders_result_better
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, significantly better"
+      - id: "b"
+        label: "Yes, somewhat better"
+      - id: "c"
+        label: "No noticeable difference"
+      - id: "d"
+        label: "I didn't compare"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q25
+    prompt: "How did you primarily communicate with your lender?"
+    type: single_choice
+    construct: did_primarily_communicate_lender
+    required: true
+    options:
+      - id: "a"
+        label: "Online / mobile app"
+      - id: "b"
+        label: "Phone"
+      - id: "c"
+        label: "Email"
+      - id: "d"
+        label: "In person"
+      - id: "e"
+        label: "A mix of channels"
+  - id: q26
+    prompt: "What was the most frustrating part of mortgage shopping?"
+    type: single_choice
+    construct: was_most_frustrating_part_mortgage
+    required: true
+    options:
+      - id: "a"
+        label: "Comparing confusing offers"
+      - id: "b"
+        label: "Paperwork and documentation"
+      - id: "c"
+        label: "Slow responses or delays"
+      - id: "d"
+        label: "Changing rates"
+      - id: "e"
+        label: "Unexpected fees"
+      - id: "f"
+        label: "Nothing was particularly frustrating"
+  - id: q27
+    prompt: "Select your top 3 things you'd advise a first-time mortgage shopper to prioritize. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_d
+    required: true
+    options:
+      - id: "a"
+        label: "Get quotes from multiple lenders"
+      - id: "b"
+        label: "Compare the APR, not just the rate"
+      - id: "c"
+        label: "Get pre-approved early"
+      - id: "d"
+        label: "Improve your credit score first"
+      - id: "e"
+        label: "Save for a larger down payment"
+      - id: "f"
+        label: "Watch out for closing costs"
+      - id: "g"
+        label: "Lock your rate at the right time"
+      - id: "h"
+        label: "Read the Loan Estimate carefully"
+  - id: q28
+    prompt: "How satisfied were you (or are you) with your mortgage lender?"
+    type: single_choice
+    construct: satisfied_were_mortgage_lender
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "How satisfied were you with the interest rate and terms you got?"
+    type: single_choice
+    construct: satisfied_were_interest_rate_terms
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "On a scale from 0 to 10, how likely are you to recommend your lender to a friend, where 0 is not at all likely and 10 is extremely likely?"
+    type: single_choice
+    construct: scale_from_0_10_likely
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "What interest rate did you get (or are you being quoted)? Please enter a percentage."
+    type: free_text
+    construct: interest_rate_did_get_being
+    required: true
+  - id: q32
+    prompt: "What is your mortgage loan amount (or the amount you're seeking)? Please enter a dollar amount."
+    type: free_text
+    construct: mortgage_loan_amount_amount_re
+    required: true
+  - id: q33
+    prompt: "About how much are your estimated or actual closing costs? Please enter a dollar amount."
+    type: free_text
+    construct: much_estimated_actual_closing_costs
+    required: true
+  - id: q34
+    prompt: "If there is anything else you'd like to share about your mortgage shopping experience, please describe it briefly."
+    type: free_text
+    construct: if_there_anything_else_d
+    required: false
+  - id: q35
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Another race or ethnicity"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your annual household income before taxes?"
+    type: single_choice
+    construct: annual_household_income_before_taxes
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school graduate or equivalent"
+      - id: "c"
+        label: "Some college or associate's degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q40
+    prompt: "Which best describes your current employment status?"
+    type: single_choice
+    construct: best_describes_current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelance"
+      - id: "d"
+        label: "Not employed, looking for work"
+      - id: "e"
+        label: "Not employed, not looking for work"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q41
+    prompt: "How would you describe your credit score range?"
+    type: single_choice
+    construct: would_describe_credit_score_range
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent (740+)"
+      - id: "b"
+        label: "Good (670–739)"
+      - id: "c"
+        label: "Fair (580–669)"
+      - id: "d"
+        label: "Poor (below 580)"
+      - id: "e"
+        label: "I don't know"
+  - id: q42
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q43
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q45
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q46
+    prompt: "Do you currently own or rent your home?"
+    type: single_choice
+    construct: currently_own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"

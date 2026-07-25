@@ -1,0 +1,759 @@
+schemaVersion: "1.0"
+id: family_caregiving_v1
+title: "Family Caregiving Survey"
+description: "The everyday experiences and attitudes of people who help care for a family member."
+questions:
+  - id: q0
+    prompt: "Do you currently provide unpaid help or care to a family member or friend because of their health, age, or a condition?"
+    type: single_choice
+    construct: currently_provide_unpaid_help_care
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, right now"
+      - id: "b"
+        label: "I did within the past year"
+      - id: "c"
+        label: "I did more than a year ago"
+      - id: "d"
+        label: "No, but I expect to"
+      - id: "e"
+        label: "No, never"
+  - id: q1
+    prompt: "Who is the main person you help or have helped?"
+    type: single_choice
+    construct: who_main_person_help_have
+    required: true
+    options:
+      - id: "a"
+        label: "A parent or parent-in-law"
+      - id: "b"
+        label: "A spouse or partner"
+      - id: "c"
+        label: "A grandparent"
+      - id: "d"
+        label: "A child or grandchild"
+      - id: "e"
+        label: "Another relative"
+      - id: "f"
+        label: "A friend or neighbor"
+  - id: q2
+    prompt: "How long have you been providing this care?"
+    type: single_choice
+    construct: long_have_been_providing_this
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+  - id: q3
+    prompt: "About how many hours per week do you spend on caregiving? Please enter a number of hours."
+    type: free_text
+    construct: many_hours_per_week_spend
+    required: true
+  - id: q4
+    prompt: "Do you live with the person you care for?"
+    type: single_choice
+    construct: live_person_care
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, in the same home"
+      - id: "b"
+        label: "No, but nearby (within 20 minutes)"
+      - id: "c"
+        label: "No, 20 minutes to an hour away"
+      - id: "d"
+        label: "No, more than an hour away"
+      - id: "e"
+        label: "Not applicable"
+  - id: q5
+    prompt: "Which caregiving tasks do you regularly help with? (Select all that apply)"
+    type: multi_choice
+    construct: caregiving_tasks_regularly_help_select
+    required: true
+    options:
+      - id: "a"
+        label: "Grocery shopping and errands"
+      - id: "b"
+        label: "Preparing meals"
+      - id: "c"
+        label: "Housekeeping and laundry"
+      - id: "d"
+        label: "Transportation to appointments"
+      - id: "e"
+        label: "Managing medications and reminders"
+      - id: "f"
+        label: "Personal care (bathing, dressing)"
+      - id: "g"
+        label: "Managing money or paperwork"
+      - id: "h"
+        label: "Companionship and emotional support"
+  - id: q6
+    prompt: "Which health or coordination tasks do you handle? (Select all that apply)"
+    type: multi_choice
+    construct: health_coordination_tasks_handle_select
+    required: true
+    options:
+      - id: "a"
+        label: "Scheduling medical appointments"
+      - id: "b"
+        label: "Communicating with doctors or nurses"
+      - id: "c"
+        label: "Managing insurance or benefits"
+      - id: "d"
+        label: "Coordinating other helpers or services"
+      - id: "e"
+        label: "Tracking symptoms or health changes"
+      - id: "f"
+        label: "Accessing an online patient portal"
+      - id: "g"
+        label: "None of these"
+  - id: q7
+    prompt: "Do you share caregiving responsibilities with others?"
+    type: single_choice
+    construct: share_caregiving_responsibilities_others
+    required: true
+    options:
+      - id: "a"
+        label: "No, I do it all myself"
+      - id: "b"
+        label: "Yes, with other family members"
+      - id: "c"
+        label: "Yes, with paid helpers"
+      - id: "d"
+        label: "Yes, with both family and paid help"
+      - id: "e"
+        label: "Not applicable"
+  - id: q8
+    prompt: "About how much do you personally spend out of pocket on caregiving in a typical month? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_personally_spend_out_pocket
+    required: true
+  - id: q9
+    prompt: "How has caregiving affected your paid work? (Select all that apply)"
+    type: multi_choice
+    construct: has_caregiving_affected_paid_work
+    required: true
+    options:
+      - id: "a"
+        label: "Reduced my hours"
+      - id: "b"
+        label: "Taken time off or used leave"
+      - id: "c"
+        label: "Passed up promotions or opportunities"
+      - id: "d"
+        label: "Switched to a more flexible job"
+      - id: "e"
+        label: "Stopped working"
+      - id: "f"
+        label: "No effect on my work"
+      - id: "g"
+        label: "Not applicable"
+  - id: q10
+    prompt: "Which resources or supports have you used as a caregiver? (Select all that apply)"
+    type: multi_choice
+    construct: resources_supports_have_used_as
+    required: true
+    options:
+      - id: "a"
+        label: "Online information or forums"
+      - id: "b"
+        label: "A caregiver support group"
+      - id: "c"
+        label: "Respite care or a break service"
+      - id: "d"
+        label: "Help from a social worker or care manager"
+      - id: "e"
+        label: "Employer benefits (leave, EAP)"
+      - id: "f"
+        label: "Apps or tools for organizing care"
+      - id: "g"
+        label: "None of these"
+  - id: q11
+    prompt: "How prepared did you feel when you first started caregiving?"
+    type: single_choice
+    construct: prepared_did_feel_when_first
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all prepared"
+      - id: "b"
+        label: "Slightly prepared"
+      - id: "c"
+        label: "Moderately prepared"
+      - id: "d"
+        label: "Very prepared"
+      - id: "e"
+        label: "Completely prepared"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Caregiving is rewarding for me."
+    type: single_choice
+    construct: much_agree_following_statement_caregivin
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: Caregiving leaves me feeling stretched thin."
+    type: single_choice
+    construct: much_agree_following_statement_caregivin
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I have enough support to manage my caregiving role."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: Caregiving has strained my finances."
+    type: single_choice
+    construct: much_agree_following_statement_caregivin
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I have enough time for my own health and interests."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: I know where to turn when I need caregiving help."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement: Coordinating with health care providers is difficult."
+    type: single_choice
+    construct: much_agree_following_statement_coordinat
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How often do you feel confident handling the caregiving tasks that come up?"
+    type: single_choice
+    construct: often_feel_confident_handling_caregiving
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q20
+    prompt: "How often do you get a break or time for yourself?"
+    type: single_choice
+    construct: often_get_break_time_yourself
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q21
+    prompt: "How important would the following support be to you: More financial help or paid leave."
+    type: single_choice
+    construct: important_would_following_support_be
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important would the following support be to you: Respite care so I can take breaks."
+    type: single_choice
+    construct: important_would_following_support_be
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important would the following support be to you: Training on caregiving tasks."
+    type: single_choice
+    construct: important_would_following_support_be
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important would the following support be to you: Help coordinating medical care."
+    type: single_choice
+    construct: important_would_following_support_be
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important would the following support be to you: Emotional support or a support group."
+    type: single_choice
+    construct: important_would_following_support_be
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important would the following support be to you: Flexible work arrangements."
+    type: single_choice
+    construct: important_would_following_support_be
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Which supports would help you most as a caregiver? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: supports_would_help_most_as
+    required: true
+    options:
+      - id: "a"
+        label: "Financial help or paid leave"
+      - id: "b"
+        label: "Respite care and breaks"
+      - id: "c"
+        label: "Training and how-to guidance"
+      - id: "d"
+        label: "Care coordination help"
+      - id: "e"
+        label: "Emotional support or a group"
+      - id: "f"
+        label: "Flexible work options"
+      - id: "g"
+        label: "Help from other family members"
+      - id: "h"
+        label: "Better information about available services"
+  - id: q28
+    prompt: "Which tools or technology do you use to help with caregiving? (Select all that apply)"
+    type: multi_choice
+    construct: tools_technology_use_help_caregiving
+    required: true
+    options:
+      - id: "a"
+        label: "Shared calendar or scheduling app"
+      - id: "b"
+        label: "Medication reminder app"
+      - id: "c"
+        label: "Group text or family chat"
+      - id: "d"
+        label: "Patient portal or health app"
+      - id: "e"
+        label: "Video calls to check in"
+      - id: "f"
+        label: "A medical alert or monitoring device"
+      - id: "g"
+        label: "None of these"
+  - id: q29
+    prompt: "How well do you feel you balance caregiving with the rest of your life?"
+    type: single_choice
+    construct: well_feel_balance_caregiving_rest
+    required: true
+    options:
+      - id: "a"
+        label: "Very poorly"
+      - id: "b"
+        label: "Poorly"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q30
+    prompt: "How has caregiving affected your relationship with the person you help?"
+    type: single_choice
+    construct: has_caregiving_affected_relationship_per
+    required: true
+    options:
+      - id: "a"
+        label: "Made it much worse"
+      - id: "b"
+        label: "Made it somewhat worse"
+      - id: "c"
+        label: "No change"
+      - id: "d"
+        label: "Made it somewhat better"
+      - id: "e"
+        label: "Made it much better"
+  - id: q31
+    prompt: "How confident are you that you can keep up your caregiving role going forward?"
+    type: single_choice
+    construct: confident_that_can_keep_up
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+  - id: q32
+    prompt: "Overall, how satisfied are you with the support available to you as a caregiver?"
+    type: single_choice
+    construct: overall_satisfied_support_available_as
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How likely are you to seek out a new caregiving resource or service in the next year?"
+    type: single_choice
+    construct: likely_seek_out_new_caregiving
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "On a scale of 0 to 10, how likely are you to recommend the caregiving resources you found to another caregiver? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "What would make your caregiving role easier? Please describe briefly."
+    type: free_text
+    construct: would_make_caregiving_role_easier
+    required: true
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which of the following best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Other"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college"
+      - id: "c"
+        label: "Associate's degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q42
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q43
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which region of the country do you live in?"
+    type: single_choice
+    construct: region_country_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q45
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q46
+    prompt: "Do you have children under 18 living in your household?"
+    type: single_choice
+    construct: have_children_under_18_living
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"

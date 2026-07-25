@@ -1,0 +1,786 @@
+schemaVersion: "1.0"
+id: health_newsletter_subscriptions_v1
+title: "Health Newsletter Subscriptions Survey"
+description: "How consumers subscribe to, read, trust, and value email and digital health and wellness newsletters."
+questions:
+  - id: q0
+    prompt: "Do you currently subscribe to any health or wellness newsletters (by email or app)?"
+    type: single_choice
+    construct: currently_subscribe_any_health_wellness
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several"
+      - id: "b"
+        label: "Yes, one or two"
+      - id: "c"
+        label: "I used to but no longer do"
+      - id: "d"
+        label: "No, but I am interested"
+      - id: "e"
+        label: "No, and I am not interested"
+  - id: q1
+    prompt: "Roughly how many health or wellness newsletters do you currently receive? Please enter a number."
+    type: free_text
+    construct: roughly_many_health_wellness_newsletters
+    required: true
+  - id: q2
+    prompt: "How long have you subscribed to health newsletters overall?"
+    type: single_choice
+    construct: long_have_subscribed_health_newsletters
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "More than 3 years"
+      - id: "e"
+        label: "I do not subscribe to any"
+  - id: q3
+    prompt: "How often do health newsletters arrive in your inbox?"
+    type: single_choice
+    construct: often_health_newsletters_arrive_inbox
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Weekly"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Monthly or less often"
+  - id: q4
+    prompt: "On average, how often do you actually open and read the health newsletters you receive?"
+    type: single_choice
+    construct: average_often_actually_open_read
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q5
+    prompt: "Which topics do the health newsletters you follow cover? (Select all that apply)"
+    type: multi_choice
+    construct: topics_health_newsletters_follow_cover
+    required: true
+    options:
+      - id: "a"
+        label: "General wellness and healthy living"
+      - id: "b"
+        label: "Nutrition and diet"
+      - id: "c"
+        label: "Fitness and exercise"
+      - id: "d"
+        label: "Mental and emotional wellbeing"
+      - id: "e"
+        label: "Sleep"
+      - id: "f"
+        label: "Medical and research news"
+      - id: "g"
+        label: "Vitamins and supplements"
+      - id: "h"
+        label: "Condition-specific information (e.g., heart health, diabetes)"
+      - id: "i"
+        label: "Women's or men's health"
+      - id: "j"
+        label: "Healthy recipes"
+      - id: "k"
+        label: "I do not follow any"
+  - id: q6
+    prompt: "Which kinds of publishers or sources send the newsletters you read? (Select all that apply)"
+    type: multi_choice
+    construct: kinds_publishers_sources_send_newsletter
+    required: true
+    options:
+      - id: "a"
+        label: "Hospital or clinic systems (e.g., Mayo Clinic, Cleveland Clinic)"
+      - id: "b"
+        label: "News outlets and magazines"
+      - id: "c"
+        label: "Independent writers or creators (e.g., Substack)"
+      - id: "d"
+        label: "Government health agencies (e.g., CDC, NIH)"
+      - id: "e"
+        label: "Nonprofit or advocacy organizations"
+      - id: "f"
+        label: "Fitness or wellness apps and brands"
+      - id: "g"
+        label: "Individual doctors or health professionals"
+      - id: "h"
+        label: "Supplement or health-product companies"
+      - id: "i"
+        label: "I am not sure who publishes them"
+  - id: q7
+    prompt: "How did you find or start most of your health newsletter subscriptions? (Select all that apply)"
+    type: multi_choice
+    construct: did_find_start_most_health
+    required: true
+    options:
+      - id: "a"
+        label: "Signed up on a website"
+      - id: "b"
+        label: "Recommended by a friend or family member"
+      - id: "c"
+        label: "Through social media"
+      - id: "d"
+        label: "Bundled with an app or account I use"
+      - id: "e"
+        label: "Suggested by a doctor or health professional"
+      - id: "f"
+        label: "Came with a purchase or membership"
+      - id: "g"
+        label: "I do not remember"
+  - id: q8
+    prompt: "On which device do you most often read health newsletters?"
+    type: single_choice
+    construct: device_most_often_read_health
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "Laptop or desktop computer"
+      - id: "c"
+        label: "Tablet"
+      - id: "d"
+        label: "I read them across several devices"
+      - id: "e"
+        label: "I do not read them"
+  - id: q9
+    prompt: "Which content format do you most prefer in a health newsletter?"
+    type: single_choice
+    construct: content_format_most_prefer_health
+    required: true
+    options:
+      - id: "a"
+        label: "Short text summaries"
+      - id: "b"
+        label: "Longer in-depth articles"
+      - id: "c"
+        label: "Bulleted tips and lists"
+      - id: "d"
+        label: "Links to videos or podcasts"
+      - id: "e"
+        label: "Infographics and images"
+      - id: "f"
+        label: "No strong preference"
+  - id: q10
+    prompt: "At what time of day do you most often read health newsletters?"
+    type: single_choice
+    construct: time_day_most_often_read
+    required: true
+    options:
+      - id: "a"
+        label: "Early morning"
+      - id: "b"
+        label: "Midday or lunch"
+      - id: "c"
+        label: "Evening"
+      - id: "d"
+        label: "Whenever I have a spare moment"
+      - id: "e"
+        label: "I do not read them regularly"
+  - id: q11
+    prompt: "Are any of your current health newsletters paid subscriptions?"
+    type: single_choice
+    construct: any_current_health_newsletters_paid
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one or more are paid"
+      - id: "b"
+        label: "No, all are free"
+      - id: "c"
+        label: "I am not sure"
+      - id: "d"
+        label: "I do not subscribe to any"
+  - id: q12
+    prompt: "In total, about how much do you pay per month for health newsletter subscriptions? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: total_much_pay_per_month
+    required: true
+  - id: q13
+    prompt: "About how many minutes per week do you spend reading health newsletters? Please enter a number of minutes."
+    type: free_text
+    construct: many_minutes_per_week_spend
+    required: true
+  - id: q14
+    prompt: "How much do you agree with the following statement about the health newsletters you read: The information is trustworthy."
+    type: single_choice
+    construct: much_agree_following_statement_health
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement about the health newsletters you read: The content is easy to understand."
+    type: single_choice
+    construct: much_agree_following_statement_health
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about the health newsletters you read: The topics are relevant to my life."
+    type: single_choice
+    construct: much_agree_following_statement_health
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about the health newsletters you read: They arrive too frequently."
+    type: single_choice
+    construct: much_agree_following_statement_health
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about the health newsletters you read: The advice is practical and something I can act on."
+    type: single_choice
+    construct: much_agree_following_statement_health
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about the health newsletters you read: They influence the health decisions I make."
+    type: single_choice
+    construct: much_agree_following_statement_health
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement about the health newsletters you read: They contain too much product promotion or advertising."
+    type: single_choice
+    construct: much_agree_following_statement_health
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "Overall, how satisfied are you with the health newsletters you currently receive?"
+    type: single_choice
+    construct: overall_satisfied_health_newsletters_cur
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q22
+    prompt: "How important are health newsletters as a source of health information for you?"
+    type: single_choice
+    construct: important_health_newsletters_as_source
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How often do you take a specific action (try a tip, change a habit, look something up) because of a health newsletter?"
+    type: single_choice
+    construct: often_take_specific_action_try
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q24
+    prompt: "How often do you forward or share a health newsletter with someone else?"
+    type: single_choice
+    construct: often_forward_share_health_newsletter
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q25
+    prompt: "Compared with information from your own doctor, how much do you trust health newsletters?"
+    type: single_choice
+    construct: compared_information_from_own_doctor
+    required: true
+    options:
+      - id: "a"
+        label: "I trust newsletters much less"
+      - id: "b"
+        label: "I trust newsletters somewhat less"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "I trust newsletters somewhat more"
+      - id: "e"
+        label: "I trust newsletters much more"
+  - id: q26
+    prompt: "How concerned are you about the accuracy of the health information in newsletters?"
+    type: single_choice
+    construct: concerned_accuracy_health_information_ne
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+  - id: q27
+    prompt: "How do you usually check a health claim you read in a newsletter? (Select all that apply)"
+    type: multi_choice
+    construct: usually_check_health_claim_read
+    required: true
+    options:
+      - id: "a"
+        label: "Look at another trusted health website"
+      - id: "b"
+        label: "Ask a doctor or pharmacist"
+      - id: "c"
+        label: "Look for cited studies or sources"
+      - id: "d"
+        label: "Discuss it with friends or family"
+      - id: "e"
+        label: "I generally trust it without checking"
+      - id: "f"
+        label: "Not applicable"
+  - id: q28
+    prompt: "Which of the following would most likely cause you to unsubscribe from a health newsletter? (Select all that apply)"
+    type: multi_choice
+    construct: following_would_most_likely_cause
+    required: true
+    options:
+      - id: "a"
+        label: "Too many emails"
+      - id: "b"
+        label: "Too much advertising or selling"
+      - id: "c"
+        label: "Information I do not trust"
+      - id: "d"
+        label: "Content not relevant to me"
+      - id: "e"
+        label: "Hard-to-read format"
+      - id: "f"
+        label: "Privacy concerns"
+      - id: "g"
+        label: "Nothing would make me unsubscribe"
+  - id: q29
+    prompt: "Select your top 3 topics you would most want a health newsletter to cover. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_topics_would
+    required: true
+    options:
+      - id: "a"
+        label: "Nutrition and healthy eating"
+      - id: "b"
+        label: "Fitness and movement"
+      - id: "c"
+        label: "Sleep"
+      - id: "d"
+        label: "Stress and mental wellbeing"
+      - id: "e"
+        label: "Preventive care and screenings"
+      - id: "f"
+        label: "Managing a specific condition"
+      - id: "g"
+        label: "Medical and research news"
+      - id: "h"
+        label: "Supplements and vitamins"
+      - id: "i"
+        label: "Healthy aging"
+  - id: q30
+    prompt: "How much do you value personalization (content tailored to your age, goals, or interests) in a health newsletter?"
+    type: single_choice
+    construct: much_value_personalization_content_tailo
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A great deal"
+  - id: q31
+    prompt: "How comfortable are you sharing your interests or health goals to receive a more personalized newsletter?"
+    type: single_choice
+    construct: comfortable_sharing_interests_health_goa
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Somewhat uncomfortable"
+      - id: "c"
+        label: "Somewhat comfortable"
+      - id: "d"
+        label: "Very comfortable"
+  - id: q32
+    prompt: "How concerned are you about how newsletter publishers use your email address and reading data?"
+    type: single_choice
+    construct: concerned_newsletter_publishers_use_emai
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+  - id: q33
+    prompt: "Have you unsubscribed from a health newsletter in the past year?"
+    type: single_choice
+    construct: have_unsubscribed_from_health_newsletter
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I did not replace it"
+      - id: "b"
+        label: "Yes, but I subscribed to a different one"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable"
+  - id: q34
+    prompt: "How likely are you to recommend a health newsletter you enjoy to a friend, on a scale of 0 (not at all likely) to 10 (extremely likely)?"
+    type: single_choice
+    construct: likely_recommend_health_newsletter_enjoy
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "How likely are you to keep your current health newsletter subscriptions over the next year?"
+    type: single_choice
+    construct: likely_keep_current_health_newsletter
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Somewhat likely"
+      - id: "d"
+        label: "Very likely"
+  - id: q36
+    prompt: "How likely would you be to pay for a health newsletter that you found especially valuable?"
+    type: single_choice
+    construct: likely_would_be_pay_health
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Somewhat likely"
+      - id: "d"
+        label: "Very likely"
+  - id: q37
+    prompt: "In your own words, what would make a health newsletter more valuable or enjoyable for you?"
+    type: free_text
+    construct: own_words_would_make_health
+    required: true
+  - id: q38
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q39
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe or not to say"
+  - id: q40
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+  - id: q44
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q47
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q48
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q49
+    prompt: "How would you describe your overall interest in health and wellness information?"
+    type: single_choice
+    construct: would_describe_overall_interest_health
+    required: true
+    options:
+      - id: "a"
+        label: "Not interested"
+      - id: "b"
+        label: "Somewhat interested"
+      - id: "c"
+        label: "Interested"
+      - id: "d"
+        label: "Very interested"

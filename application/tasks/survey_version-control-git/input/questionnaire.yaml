@@ -1,0 +1,907 @@
+schemaVersion: "1.0"
+id: version_control_git_v1
+title: "Version Control & Git Usage Survey"
+description: "How developers use version control systems — especially Git — including tools, workflows, and attitudes."
+questions:
+  - id: q0
+    prompt: "How often do you use a version control system (such as Git) in your work?"
+    type: single_choice
+    construct: often_use_version_control_system
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "I am just learning to use version control"
+      - id: "e"
+        label: "I don't use version control"
+  - id: q1
+    prompt: "Including any education, how many years have you used version control? Please enter a number."
+    type: free_text
+    construct: including_any_education_many_years
+    required: true
+  - id: q2
+    prompt: "Which version control system do you primarily use?"
+    type: single_choice
+    construct: version_control_system_primarily_use
+    required: true
+    options:
+      - id: "a"
+        label: "Git"
+      - id: "b"
+        label: "Subversion (SVN)"
+      - id: "c"
+        label: "Mercurial"
+      - id: "d"
+        label: "Perforce"
+      - id: "e"
+        label: "Team Foundation Version Control (TFVC)"
+      - id: "f"
+        label: "Other"
+  - id: q3
+    prompt: "Which code hosting platform do you use most often?"
+    type: single_choice
+    construct: code_hosting_platform_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "GitHub"
+      - id: "b"
+        label: "GitLab"
+      - id: "c"
+        label: "Bitbucket"
+      - id: "d"
+        label: "Azure Repos / Azure DevOps"
+      - id: "e"
+        label: "A self-hosted server (self-managed GitLab, Gitea, etc.)"
+      - id: "f"
+        label: "Other"
+  - id: q4
+    prompt: "Which code hosting platforms have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: code_hosting_platforms_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "GitHub"
+      - id: "b"
+        label: "GitLab"
+      - id: "c"
+        label: "Bitbucket"
+      - id: "d"
+        label: "Azure Repos"
+      - id: "e"
+        label: "Gitea or Forgejo"
+      - id: "f"
+        label: "SourceForge"
+      - id: "g"
+        label: "A self-hosted internal server"
+      - id: "h"
+        label: "Other"
+  - id: q5
+    prompt: "How do you usually interact with Git? (Select all that apply)"
+    type: multi_choice
+    construct: usually_interact_git_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "The command line"
+      - id: "b"
+        label: "My editor or IDE's built-in Git tools"
+      - id: "c"
+        label: "A standalone Git GUI client"
+      - id: "d"
+        label: "The hosting platform's web interface"
+      - id: "e"
+        label: "Git hooks or scripts"
+  - id: q6
+    prompt: "Which Git GUI clients do you use, if any? (Select all that apply)"
+    type: multi_choice
+    construct: git_gui_clients_use_if
+    required: true
+    options:
+      - id: "a"
+        label: "GitHub Desktop"
+      - id: "b"
+        label: "GitKraken"
+      - id: "c"
+        label: "Sourcetree"
+      - id: "d"
+        label: "Tower"
+      - id: "e"
+        label: "Fork"
+      - id: "f"
+        label: "Lazygit"
+      - id: "g"
+        label: "I don't use a GUI client"
+  - id: q7
+    prompt: "How often do you commit changes?"
+    type: single_choice
+    construct: often_commit_changes
+    required: true
+    options:
+      - id: "a"
+        label: "Many times a day"
+      - id: "b"
+        label: "About once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Weekly or less"
+  - id: q8
+    prompt: "How often do you push to a remote repository?"
+    type: single_choice
+    construct: often_push_remote_repository
+    required: true
+    options:
+      - id: "a"
+        label: "Many times a day"
+      - id: "b"
+        label: "About once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Weekly or less"
+  - id: q9
+    prompt: "Which branching strategy does your team primarily use?"
+    type: single_choice
+    construct: branching_strategy_does_team_primarily
+    required: true
+    options:
+      - id: "a"
+        label: "Trunk-based development"
+      - id: "b"
+        label: "GitHub Flow (short-lived feature branches)"
+      - id: "c"
+        label: "Git Flow (develop/release/hotfix branches)"
+      - id: "d"
+        label: "Feature branches without a formal model"
+      - id: "e"
+        label: "We commit directly to the main branch"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q10
+    prompt: "Which best describes your commit message habits?"
+    type: single_choice
+    construct: best_describes_commit_message_habits
+    required: true
+    options:
+      - id: "a"
+        label: "I follow a strict convention (e.g., Conventional Commits)"
+      - id: "b"
+        label: "I write clear descriptive messages without a formal convention"
+      - id: "c"
+        label: "I write short informal messages"
+      - id: "d"
+        label: "My messages are often minimal (e.g., \"fix\", \"wip\")"
+  - id: q11
+    prompt: "When integrating changes, do you prefer merge or rebase?"
+    type: single_choice
+    construct: when_integrating_changes_prefer_merge
+    required: true
+    options:
+      - id: "a"
+        label: "Merge"
+      - id: "b"
+        label: "Rebase"
+      - id: "c"
+        label: "A mix depending on the situation"
+      - id: "d"
+        label: "I don't think about it"
+  - id: q12
+    prompt: "How do you usually resolve merge conflicts?"
+    type: single_choice
+    construct: usually_resolve_merge_conflicts
+    required: true
+    options:
+      - id: "a"
+        label: "On the command line"
+      - id: "b"
+        label: "In my editor or IDE"
+      - id: "c"
+        label: "In a dedicated GUI tool"
+      - id: "d"
+        label: "I try to avoid situations that cause them"
+      - id: "e"
+        label: "I ask a teammate for help"
+  - id: q13
+    prompt: "How often do you use pull requests or merge requests?"
+    type: single_choice
+    construct: often_use_pull_requests_merge
+    required: true
+    options:
+      - id: "a"
+        label: "For every change"
+      - id: "b"
+        label: "For most changes"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "Rarely or never"
+  - id: q14
+    prompt: "How involved are you in reviewing others' code?"
+    type: single_choice
+    construct: involved_reviewing_others_code
+    required: true
+    options:
+      - id: "a"
+        label: "I review code frequently"
+      - id: "b"
+        label: "I review code occasionally"
+      - id: "c"
+        label: "I rarely review code"
+      - id: "d"
+        label: "I never review code"
+  - id: q15
+    prompt: "Which Git features do you use? (Select all that apply)"
+    type: multi_choice
+    construct: git_features_use_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Branches"
+      - id: "b"
+        label: "Tags"
+      - id: "c"
+        label: "Stash"
+      - id: "d"
+        label: "Cherry-pick"
+      - id: "e"
+        label: "Interactive rebase"
+      - id: "f"
+        label: "Bisect"
+      - id: "g"
+        label: "Submodules"
+      - id: "h"
+        label: "Hooks"
+      - id: "i"
+        label: "Reflog"
+      - id: "j"
+        label: "Worktrees"
+  - id: q16
+    prompt: "Which hosting platform features do you regularly use? (Select all that apply)"
+    type: multi_choice
+    construct: hosting_platform_features_regularly_use
+    required: true
+    options:
+      - id: "a"
+        label: "Issue tracking"
+      - id: "b"
+        label: "Pull / merge requests"
+      - id: "c"
+        label: "Built-in CI/CD (Actions, Pipelines)"
+      - id: "d"
+        label: "Wikis"
+      - id: "e"
+        label: "Project boards"
+      - id: "f"
+        label: "Package registries"
+      - id: "g"
+        label: "Discussions"
+      - id: "h"
+        label: "Releases"
+      - id: "i"
+        label: "Code scanning / security"
+  - id: q17
+    prompt: "How many repositories do you actively work on? Please enter a number."
+    type: free_text
+    construct: many_repositories_actively_work_please
+    required: true
+  - id: q18
+    prompt: "On average, about how many commits do you make per week? Please enter a number."
+    type: free_text
+    construct: average_many_commits_make_per
+    required: true
+  - id: q19
+    prompt: "How much do you agree: I feel confident using Git."
+    type: single_choice
+    construct: much_agree_i_feel_confident
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: The Git command line still intimidates me."
+    type: single_choice
+    construct: much_agree_git_command_line
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: I have lost work or created a mess because of a Git mistake."
+    type: single_choice
+    construct: much_agree_i_have_lost
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: A clean, meaningful commit history is important to me."
+    type: single_choice
+    construct: much_agree_clean_meaningful_commit
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How much do you agree: I prefer a graphical interface over the command line for Git."
+    type: single_choice
+    construct: much_agree_i_prefer_graphical
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "How much do you agree: Code review meaningfully improves the quality of our code."
+    type: single_choice
+    construct: much_agree_code_review_meaningfully
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "How much do you agree: My team follows consistent version control practices."
+    type: single_choice
+    construct: much_agree_my_team_follows
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q26
+    prompt: "When evaluating a hosting platform, how important is CI/CD integration?"
+    type: single_choice
+    construct: when_evaluating_hosting_platform_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When evaluating a hosting platform, how important are code review tools?"
+    type: single_choice
+    construct: when_evaluating_hosting_platform_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When evaluating a hosting platform, how important is issue tracking?"
+    type: single_choice
+    construct: when_evaluating_hosting_platform_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "When evaluating a hosting platform, how important are access control and security features?"
+    type: single_choice
+    construct: when_evaluating_hosting_platform_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "When evaluating a hosting platform, how important is price?"
+    type: single_choice
+    construct: when_evaluating_hosting_platform_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q31
+    prompt: "When evaluating a hosting platform, how important is its ecosystem of integrations?"
+    type: single_choice
+    construct: when_evaluating_hosting_platform_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q32
+    prompt: "Which are your top 3 reasons for using version control? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_reasons_using_version
+    required: true
+    options:
+      - id: "a"
+        label: "Collaborating with others"
+      - id: "b"
+        label: "Keeping a history and ability to roll back"
+      - id: "c"
+        label: "Backup and safety"
+      - id: "d"
+        label: "Code review workflows"
+      - id: "e"
+        label: "Enabling CI/CD automation"
+      - id: "f"
+        label: "Branching and experimentation"
+      - id: "g"
+        label: "Auditability and blame / accountability"
+      - id: "h"
+        label: "It is required by my team"
+  - id: q33
+    prompt: "How would you rate your own Git skills?"
+    type: single_choice
+    construct: would_rate_own_git_skills
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert"
+  - id: q34
+    prompt: "How did you learn to use Git? (Select all that apply)"
+    type: multi_choice
+    construct: did_learn_use_git_select
+    required: true
+    options:
+      - id: "a"
+        label: "On the job"
+      - id: "b"
+        label: "Online tutorials or documentation"
+      - id: "c"
+        label: "A course or bootcamp"
+      - id: "d"
+        label: "School or university"
+      - id: "e"
+        label: "A colleague or mentor"
+      - id: "f"
+        label: "Trial and error"
+  - id: q35
+    prompt: "Do you use commit signing or other repository security measures?"
+    type: single_choice
+    construct: use_commit_signing_other_repository
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I sign my commits"
+      - id: "b"
+        label: "We enforce protected branches and required reviews"
+      - id: "c"
+        label: "Both of the above"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q36
+    prompt: "Are your main repositories hosted in the cloud or self-hosted?"
+    type: single_choice
+    construct: main_repositories_hosted_cloud_self
+    required: true
+    options:
+      - id: "a"
+        label: "Cloud-hosted (GitHub.com, GitLab.com, etc.)"
+      - id: "b"
+        label: "Self-hosted / on-premises"
+      - id: "c"
+        label: "A mix of both"
+  - id: q37
+    prompt: "How satisfied are you with your primary hosting platform?"
+    type: single_choice
+    construct: satisfied_primary_hosting_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "How often do Git or version control problems block your work?"
+    type: single_choice
+    construct: often_git_version_control_problems
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q39
+    prompt: "Do you use version control for non-code files (documents, configs, notes)?"
+    type: single_choice
+    construct: use_version_control_non_code
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No"
+  - id: q40
+    prompt: "Overall, how satisfied are you with your version control setup?"
+    type: single_choice
+    construct: overall_satisfied_version_control_setup
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q41
+    prompt: "How likely are you to recommend your hosting platform to another developer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_hosting_platform_anothe
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q42
+    prompt: "How likely are you to switch hosting platforms within the next year?"
+    type: single_choice
+    construct: likely_switch_hosting_platforms_within
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q43
+    prompt: "What is one thing you wish were easier about version control? (Optional short answer)"
+    type: free_text
+    construct: one_thing_wish_were_easier
+    required: false
+  - id: q44
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "Mobile developer"
+      - id: "e"
+        label: "Data scientist or ML engineer"
+      - id: "f"
+        label: "DevOps or platform engineer"
+      - id: "g"
+        label: "Engineering manager"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q45
+    prompt: "How many years have you coded professionally (not counting education)?"
+    type: single_choice
+    construct: many_years_have_coded_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't code professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q46
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q47
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q48
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q49
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q50
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q52
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q53
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q54
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

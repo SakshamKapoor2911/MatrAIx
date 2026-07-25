@@ -1,0 +1,800 @@
+schemaVersion: "1.0"
+id: childcare_cost_burden_v1
+title: "Childcare Cost Burden Survey"
+description: "How families experience the cost and financial burden of paying for childcare."
+questions:
+  - id: q0
+    prompt: "Do you currently have any children under age 13 living in your household?"
+    type: single_choice
+    construct: currently_have_any_children_under
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one child under 13"
+      - id: "b"
+        label: "Yes, two children under 13"
+      - id: "c"
+        label: "Yes, three or more children under 13"
+      - id: "d"
+        label: "No children under 13"
+  - id: q1
+    prompt: "Do you currently pay for any form of childcare?"
+    type: single_choice
+    construct: currently_pay_any_form_childcare
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly (most weeks)"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I have paid for childcare in the past"
+      - id: "d"
+        label: "No, I rely only on free or family care"
+  - id: q2
+    prompt: "How many children do you currently pay for childcare for? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: many_children_currently_pay_childcare
+    required: true
+  - id: q3
+    prompt: "How long have you been paying for childcare for your current child or children?"
+    type: single_choice
+    construct: long_have_been_paying_childcare
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 2 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+      - id: "f"
+        label: "I do not currently pay for childcare"
+  - id: q4
+    prompt: "What types of paid childcare do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: types_paid_childcare_currently_use
+    required: true
+    options:
+      - id: "a"
+        label: "Daycare or childcare center"
+      - id: "b"
+        label: "Home-based or in-home daycare"
+      - id: "c"
+        label: "Nanny or in-home caregiver"
+      - id: "d"
+        label: "Babysitter (hourly, as needed)"
+      - id: "e"
+        label: "Preschool or pre-K program"
+      - id: "f"
+        label: "Before- or after-school program"
+      - id: "g"
+        label: "Summer camp or seasonal care"
+      - id: "h"
+        label: "Au pair"
+      - id: "i"
+        label: "I do not use paid childcare"
+  - id: q5
+    prompt: "Which single type of childcare accounts for most of your childcare spending?"
+    type: single_choice
+    construct: single_type_childcare_accounts_most
+    required: true
+    options:
+      - id: "a"
+        label: "Daycare or childcare center"
+      - id: "b"
+        label: "Home-based or in-home daycare"
+      - id: "c"
+        label: "Nanny or in-home caregiver"
+      - id: "d"
+        label: "Preschool or pre-K program"
+      - id: "e"
+        label: "Before- or after-school program"
+      - id: "f"
+        label: "Summer or seasonal care"
+      - id: "g"
+        label: "Not applicable"
+  - id: q6
+    prompt: "On average, how many hours per week is your child (or children) in paid childcare? Please enter a number of hours."
+    type: free_text
+    construct: average_many_hours_per_week
+    required: true
+  - id: q7
+    prompt: "How did you find your current primary childcare provider? (Select all that apply)"
+    type: multi_choice
+    construct: did_find_current_primary_childcare
+    required: true
+    options:
+      - id: "a"
+        label: "Word of mouth from friends or family"
+      - id: "b"
+        label: "Online search or review site"
+      - id: "c"
+        label: "Childcare referral or matching service"
+      - id: "d"
+        label: "Employer resource or benefit"
+      - id: "e"
+        label: "Waitlist I joined earlier"
+      - id: "f"
+        label: "Local community or religious organization"
+      - id: "g"
+        label: "Social media or neighborhood app"
+      - id: "h"
+        label: "Other"
+  - id: q8
+    prompt: "About how much do you spend on childcare per month, across all children? Please enter a dollar amount."
+    type: free_text
+    construct: much_spend_childcare_per_month
+    required: true
+  - id: q9
+    prompt: "Which range best describes your total monthly childcare spending?"
+    type: single_choice
+    construct: range_best_describes_total_monthly
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $250"
+      - id: "b"
+        label: "$250 to $599"
+      - id: "c"
+        label: "$600 to $999"
+      - id: "d"
+        label: "$1,000 to $1,499"
+      - id: "e"
+        label: "$1,500 to $2,499"
+      - id: "f"
+        label: "$2,500 to $3,499"
+      - id: "g"
+        label: "$3,500 or more"
+  - id: q10
+    prompt: "Roughly what share of your household take-home pay goes to childcare?"
+    type: single_choice
+    construct: roughly_share_household_take_home
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 5%"
+      - id: "b"
+        label: "5% to 9%"
+      - id: "c"
+        label: "10% to 14%"
+      - id: "d"
+        label: "15% to 24%"
+      - id: "e"
+        label: "25% to 34%"
+      - id: "f"
+        label: "35% or more"
+  - id: q11
+    prompt: "How do you pay for or offset the cost of childcare? (Select all that apply)"
+    type: multi_choice
+    construct: pay_offset_cost_childcare_select
+    required: true
+    options:
+      - id: "a"
+        label: "Out of pocket from regular income"
+      - id: "b"
+        label: "Dependent Care Flexible Spending Account (FSA)"
+      - id: "c"
+        label: "Child and Dependent Care Tax Credit"
+      - id: "d"
+        label: "State or federal childcare subsidy or voucher"
+      - id: "e"
+        label: "Employer-provided childcare benefit or stipend"
+      - id: "f"
+        label: "Help from family members or the child's other parent"
+      - id: "g"
+        label: "Credit card carried month to month"
+      - id: "h"
+        label: "Savings or borrowing"
+      - id: "i"
+        label: "None of these"
+  - id: q12
+    prompt: "Compared with 12 months ago, how has the cost of your childcare changed?"
+    type: single_choice
+    construct: compared_12_months_ago_has
+    required: true
+    options:
+      - id: "a"
+        label: "Increased a lot"
+      - id: "b"
+        label: "Increased a little"
+      - id: "c"
+        label: "Stayed about the same"
+      - id: "d"
+        label: "Decreased a little"
+      - id: "e"
+        label: "Decreased a lot"
+      - id: "f"
+        label: "Not applicable"
+  - id: q13
+    prompt: "How difficult was it to find childcare that met your needs and budget?"
+    type: single_choice
+    construct: difficult_was_it_find_childcare
+    required: true
+    options:
+      - id: "a"
+        label: "Very easy"
+      - id: "b"
+        label: "Somewhat easy"
+      - id: "c"
+        label: "Neither easy nor difficult"
+      - id: "d"
+        label: "Somewhat difficult"
+      - id: "e"
+        label: "Very difficult"
+  - id: q14
+    prompt: "Have you ever been placed on a waitlist for a childcare program?"
+    type: single_choice
+    construct: have_ever_been_placed_waitlist
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I am currently on one"
+      - id: "b"
+        label: "Yes, in the past"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not sure"
+  - id: q15
+    prompt: "How much do you agree or disagree: The cost of childcare is a major financial burden for my household."
+    type: single_choice
+    construct: much_agree_disagree_cost_childcare
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: I have had to cut back on other essentials to afford childcare."
+    type: single_choice
+    construct: much_agree_disagree_i_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree or disagree: The quality of care I receive is worth what I pay."
+    type: single_choice
+    construct: much_agree_disagree_quality_care
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree or disagree: I worry about being able to afford childcare in the coming year."
+    type: single_choice
+    construct: much_agree_disagree_i_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree or disagree: Childcare costs have influenced my decisions about whether to have more children."
+    type: single_choice
+    construct: much_agree_disagree_childcare_costs
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Because of childcare costs, how often have you cut your own work hours or turned down work?"
+    type: single_choice
+    construct: because_childcare_costs_often_have
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q21
+    prompt: "Because of childcare costs, how often have you delayed paying other bills?"
+    type: single_choice
+    construct: because_childcare_costs_often_have
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "Because of childcare costs, how often have you dipped into savings or emergency funds?"
+    type: single_choice
+    construct: because_childcare_costs_often_have
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q23
+    prompt: "Because of childcare costs, how often have you taken on credit card or other debt?"
+    type: single_choice
+    construct: because_childcare_costs_often_have
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q24
+    prompt: "Which trade-offs, if any, have you made because of childcare costs? (Select all that apply)"
+    type: multi_choice
+    construct: trade_offs_if_any_have
+    required: true
+    options:
+      - id: "a"
+        label: "Reduced my own work hours"
+      - id: "b"
+        label: "Left the workforce entirely"
+      - id: "c"
+        label: "Turned down a job or promotion"
+      - id: "d"
+        label: "Moved to a cheaper area or home"
+      - id: "e"
+        label: "Chose lower-cost care than I preferred"
+      - id: "f"
+        label: "Relied more on unpaid family care"
+      - id: "g"
+        label: "Delayed having another child"
+      - id: "h"
+        label: "None of these"
+  - id: q25
+    prompt: "When choosing childcare, please select your top 3 most important factors. (Select all that apply)"
+    type: multi_choice
+    construct: when_choosing_childcare_please_select
+    required: true
+    options:
+      - id: "a"
+        label: "Total cost"
+      - id: "b"
+        label: "Safety and cleanliness"
+      - id: "c"
+        label: "Caregiver quality and warmth"
+      - id: "d"
+        label: "Location and convenience"
+      - id: "e"
+        label: "Hours and flexibility"
+      - id: "f"
+        label: "Educational or developmental program"
+      - id: "g"
+        label: "Availability of a spot"
+      - id: "h"
+        label: "Recommendations from others"
+  - id: q26
+    prompt: "How has caring for and paying for children affected your financial stress overall?"
+    type: single_choice
+    construct: has_caring_paying_children_affected
+    required: true
+    options:
+      - id: "a"
+        label: "Greatly increased my stress"
+      - id: "b"
+        label: "Somewhat increased my stress"
+      - id: "c"
+        label: "No effect"
+      - id: "d"
+        label: "Somewhat reduced my stress"
+      - id: "e"
+        label: "Not applicable"
+  - id: q27
+    prompt: "Do you have a second parent or partner who shares childcare costs?"
+    type: single_choice
+    construct: have_second_parent_partner_who
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, we split costs roughly equally"
+      - id: "b"
+        label: "Yes, but one of us pays most of it"
+      - id: "c"
+        label: "No, I cover childcare costs alone"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q28
+    prompt: "Does your employer offer any childcare-related benefits?"
+    type: single_choice
+    construct: does_employer_offer_any_childcare
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I use them"
+      - id: "b"
+        label: "Yes, but I do not use them"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not sure"
+      - id: "e"
+        label: "Not employed"
+  - id: q29
+    prompt: "Which childcare-related benefits does your employer offer? (Select all that apply)"
+    type: multi_choice
+    construct: childcare_related_benefits_does_employer
+    required: true
+    options:
+      - id: "a"
+        label: "Dependent Care FSA"
+      - id: "b"
+        label: "On-site or near-site childcare"
+      - id: "c"
+        label: "Backup or emergency care"
+      - id: "d"
+        label: "Childcare subsidy or stipend"
+      - id: "e"
+        label: "Flexible or remote scheduling"
+      - id: "f"
+        label: "Paid family leave"
+      - id: "g"
+        label: "None of these"
+      - id: "h"
+        label: "Not sure"
+  - id: q30
+    prompt: "In the past year, how often did a gap in childcare force you to miss work?"
+    type: single_choice
+    construct: past_year_often_did_gap
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Once or twice"
+      - id: "c"
+        label: "A few times"
+      - id: "d"
+        label: "Many times"
+      - id: "e"
+        label: "Not applicable"
+  - id: q31
+    prompt: "How confident are you that you can cover an unexpected increase in childcare costs?"
+    type: single_choice
+    construct: confident_that_can_cover_unexpected
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q32
+    prompt: "How important is government or employer help with childcare costs to your family's finances?"
+    type: single_choice
+    construct: important_government_employer_help_child
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q33
+    prompt: "Overall, how satisfied are you with the value you get for what you pay for childcare?"
+    type: single_choice
+    construct: overall_satisfied_value_get_pay
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How likely are you to keep using paid childcare over the next 12 months?"
+    type: single_choice
+    construct: likely_keep_using_paid_childcare
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q35
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your current childcare provider to another parent? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q36
+    prompt: "If you could change one thing about your childcare situation, what would it be? (Optional short answer)"
+    type: free_text
+    construct: if_could_change_one_thing
+    required: false
+  - id: q37
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 25"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 or older"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $30,000"
+      - id: "b"
+        label: "$30,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Homemaker or full-time caregiver"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+  - id: q44
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q46
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q47
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q48
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"
+      - id: "d"
+        label: "Prefer not to say"

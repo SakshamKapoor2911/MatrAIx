@@ -1,0 +1,795 @@
+schemaVersion: "1.0"
+id: video_streaming_services_v1
+title: "Video Streaming Services Survey"
+description: "How people subscribe to and watch video streaming services for movies and TV, including which services they use, spending, and what drives their choices and cancellations."
+questions:
+  - id: q0
+    prompt: "Do you watch movies or TV shows through streaming services?"
+    type: single_choice
+    construct: watch_movies_tv_shows_through
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, most days"
+      - id: "b"
+        label: "Yes, a few times a week"
+      - id: "c"
+        label: "Yes, occasionally"
+      - id: "d"
+        label: "No, I don't use streaming services"
+  - id: q1
+    prompt: "About how long have you been using paid video streaming services?"
+    type: single_choice
+    construct: long_have_been_using_paid
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 7 years"
+      - id: "d"
+        label: "8 or more years"
+      - id: "e"
+        label: "I only use free services"
+  - id: q2
+    prompt: "Which video streaming services do you currently have access to (paid or shared)? (Select all that apply)"
+    type: multi_choice
+    construct: video_streaming_services_currently_have
+    required: true
+    options:
+      - id: "a"
+        label: "Netflix"
+      - id: "b"
+        label: "Amazon Prime Video"
+      - id: "c"
+        label: "Disney+"
+      - id: "d"
+        label: "Max (HBO Max)"
+      - id: "e"
+        label: "Hulu"
+      - id: "f"
+        label: "Apple TV+"
+      - id: "g"
+        label: "Peacock"
+      - id: "h"
+        label: "Paramount+"
+      - id: "i"
+        label: "YouTube TV"
+      - id: "j"
+        label: "YouTube Premium"
+      - id: "k"
+        label: "ESPN+ or other sports service"
+      - id: "l"
+        label: "Tubi, Pluto TV, or other free ad-supported service"
+      - id: "m"
+        label: "Other"
+  - id: q3
+    prompt: "How many paid streaming subscriptions do you personally pay for?"
+    type: free_text
+    construct: many_paid_streaming_subscriptions_person
+    required: true
+  - id: q4
+    prompt: "Which service do you watch the most?"
+    type: single_choice
+    construct: service_watch_most
+    required: true
+    options:
+      - id: "a"
+        label: "Netflix"
+      - id: "b"
+        label: "Amazon Prime Video"
+      - id: "c"
+        label: "Disney+"
+      - id: "d"
+        label: "Max (HBO Max)"
+      - id: "e"
+        label: "Hulu"
+      - id: "f"
+        label: "Apple TV+"
+      - id: "g"
+        label: "Peacock"
+      - id: "h"
+        label: "Paramount+"
+      - id: "i"
+        label: "YouTube"
+      - id: "j"
+        label: "Other"
+  - id: q5
+    prompt: "On which devices do you usually watch streaming content? (Select all that apply)"
+    type: multi_choice
+    construct: devices_usually_watch_streaming_content
+    required: true
+    options:
+      - id: "a"
+        label: "Smart TV"
+      - id: "b"
+        label: "Streaming device (Roku, Apple TV, Fire TV, Chromecast)"
+      - id: "c"
+        label: "Game console"
+      - id: "d"
+        label: "Laptop or desktop computer"
+      - id: "e"
+        label: "Smartphone"
+      - id: "f"
+        label: "Tablet"
+      - id: "g"
+        label: "Cable or satellite box app"
+  - id: q6
+    prompt: "On a typical day, about how many hours do you spend watching streaming content?"
+    type: single_choice
+    construct: typical_day_many_hours_spend
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 30 minutes"
+      - id: "b"
+        label: "30 minutes to 1 hour"
+      - id: "c"
+        label: "1 to 2 hours"
+      - id: "d"
+        label: "2 to 3 hours"
+      - id: "e"
+        label: "3 to 5 hours"
+      - id: "f"
+        label: "More than 5 hours"
+  - id: q7
+    prompt: "Roughly how much do you spend in total per month on video streaming subscriptions?"
+    type: free_text
+    construct: roughly_much_spend_total_per
+    required: true
+  - id: q8
+    prompt: "Which of these plan types do you mostly use?"
+    type: single_choice
+    construct: these_plan_types_mostly_use
+    required: true
+    options:
+      - id: "a"
+        label: "Ad-free premium plans"
+      - id: "b"
+        label: "Cheaper ad-supported plans"
+      - id: "c"
+        label: "A mix of both"
+      - id: "d"
+        label: "Only free ad-supported services"
+      - id: "e"
+        label: "Not sure"
+  - id: q9
+    prompt: "What do you mainly watch on streaming services? (Select all that apply)"
+    type: multi_choice
+    construct: mainly_watch_streaming_services_select
+    required: true
+    options:
+      - id: "a"
+        label: "Movies"
+      - id: "b"
+        label: "Scripted TV series and dramas"
+      - id: "c"
+        label: "Comedies and sitcoms"
+      - id: "d"
+        label: "Documentaries"
+      - id: "e"
+        label: "Reality TV"
+      - id: "f"
+        label: "Kids' and family content"
+      - id: "g"
+        label: "Anime"
+      - id: "h"
+        label: "Live sports"
+      - id: "i"
+        label: "News"
+      - id: "j"
+        label: "Stand-up comedy specials"
+      - id: "k"
+        label: "International or foreign-language content"
+  - id: q10
+    prompt: "How do you usually decide what to watch? (Select all that apply)"
+    type: multi_choice
+    construct: usually_decide_watch_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Recommendations from the service's algorithm"
+      - id: "b"
+        label: "Trending or top-10 lists"
+      - id: "c"
+        label: "Recommendations from friends or family"
+      - id: "d"
+        label: "Social media buzz"
+      - id: "e"
+        label: "Reviews or ratings sites"
+      - id: "f"
+        label: "I search for something specific"
+      - id: "g"
+        label: "I rewatch things I already know"
+  - id: q11
+    prompt: "How often do you binge-watch (watch several episodes in one sitting)?"
+    type: single_choice
+    construct: often_binge_watch_watch_several
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q12
+    prompt: "How often do you struggle to find something to watch?"
+    type: single_choice
+    construct: often_struggle_find_something_watch
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q13
+    prompt: "Do you share a streaming account with people outside your household?"
+    type: single_choice
+    construct: share_streaming_account_people_outside
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I use someone else's account"
+      - id: "b"
+        label: "Yes, I share my account with others"
+      - id: "c"
+        label: "Both"
+      - id: "d"
+        label: "No"
+  - id: q14
+    prompt: "Please rate your agreement — I get good value for the money I spend on streaming"
+    type: single_choice
+    construct: please_rate_agreement_i_get
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "Please rate your agreement — There are too many streaming services to keep track of"
+    type: single_choice
+    construct: please_rate_agreement_there_too
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "Please rate your agreement — I would cancel a service if it raised its price"
+    type: single_choice
+    construct: please_rate_agreement_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "Please rate your agreement — I don't mind ads if they lower the subscription price"
+    type: single_choice
+    construct: please_rate_agreement_i_don
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "Please rate your agreement — I prefer streaming over traditional cable or satellite TV"
+    type: single_choice
+    construct: please_rate_agreement_i_prefer
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How important are the following when choosing a streaming service — Size and variety of the content library"
+    type: single_choice
+    construct: important_following_when_choosing_stream
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important are the following when choosing a streaming service — Exclusive or original shows"
+    type: single_choice
+    construct: important_following_when_choosing_stream
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important are the following when choosing a streaming service — Monthly price"
+    type: single_choice
+    construct: important_following_when_choosing_stream
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important are the following when choosing a streaming service — No ads or few ads"
+    type: single_choice
+    construct: important_following_when_choosing_stream
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important are the following when choosing a streaming service — Video quality (4K, HDR)"
+    type: single_choice
+    construct: important_following_when_choosing_stream
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important are the following when choosing a streaming service — Ease of use of the app"
+    type: single_choice
+    construct: important_following_when_choosing_stream
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "Which factors would make you cancel a subscription? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: factors_would_make_cancel_subscription
+    required: true
+    options:
+      - id: "a"
+        label: "Price increase"
+      - id: "b"
+        label: "Not enough new content"
+      - id: "c"
+        label: "Finished the show I signed up for"
+      - id: "d"
+        label: "Too many ads"
+      - id: "e"
+        label: "Poor app or streaming quality"
+      - id: "f"
+        label: "Found it elsewhere"
+      - id: "g"
+        label: "Cutting back on spending"
+      - id: "h"
+        label: "Password-sharing crackdowns"
+      - id: "i"
+        label: "A better service came out"
+      - id: "j"
+        label: "Removed a show I liked"
+  - id: q26
+    prompt: "In the past year, have you cancelled any streaming service?"
+    type: single_choice
+    construct: past_year_have_cancelled_any
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes, one"
+      - id: "c"
+        label: "Yes, two"
+      - id: "d"
+        label: "Yes, three or more"
+  - id: q27
+    prompt: "Do you practice \"subscription rotation\" (subscribing and cancelling based on what you want to watch)?"
+    type: single_choice
+    construct: practice_subscription_rotation_subscribi
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No, I keep the same subscriptions"
+  - id: q28
+    prompt: "How often do you watch content with subtitles or captions on?"
+    type: single_choice
+    construct: often_watch_content_subtitles_captions
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q29
+    prompt: "Do you download content to watch offline?"
+    type: single_choice
+    construct: download_content_watch_offline
+    required: true
+    options:
+      - id: "a"
+        label: "Frequently"
+      - id: "b"
+        label: "Sometimes"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "Never"
+  - id: q30
+    prompt: "Which of these have you also used in the past month? (Select all that apply)"
+    type: multi_choice
+    construct: these_have_also_used_past
+    required: true
+    options:
+      - id: "a"
+        label: "YouTube (free)"
+      - id: "b"
+        label: "Live TV streaming (YouTube TV, Sling, Hulu Live)"
+      - id: "c"
+        label: "Renting or buying movies digitally"
+      - id: "d"
+        label: "A library service (Kanopy, Hoopla)"
+      - id: "e"
+        label: "Free ad-supported services (Tubi, Pluto, Freevee)"
+      - id: "f"
+        label: "Traditional cable or satellite TV"
+      - id: "g"
+        label: "None of these"
+  - id: q31
+    prompt: "How satisfied are you with the recommendations you get from your main service?"
+    type: single_choice
+    construct: satisfied_recommendations_get_from_main
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "Compared with a year ago, how many streaming services do you pay for now?"
+    type: single_choice
+    construct: compared_year_ago_many_streaming
+    required: true
+    options:
+      - id: "a"
+        label: "Many fewer"
+      - id: "b"
+        label: "Somewhat fewer"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat more"
+      - id: "e"
+        label: "Many more"
+  - id: q33
+    prompt: "Over the next year, how do you expect your streaming spending to change?"
+    type: single_choice
+    construct: over_next_year_expect_streaming
+    required: true
+    options:
+      - id: "a"
+        label: "Decrease a lot"
+      - id: "b"
+        label: "Decrease somewhat"
+      - id: "c"
+        label: "Stay about the same"
+      - id: "d"
+        label: "Increase somewhat"
+      - id: "e"
+        label: "Increase a lot"
+  - id: q34
+    prompt: "Overall, how satisfied are you with your video streaming experience?"
+    type: single_choice
+    construct: overall_satisfied_video_streaming_experi
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "How likely are you to recommend your main streaming service to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_main_streaming_service
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q36
+    prompt: "What would most improve your streaming experience?"
+    type: free_text
+    construct: would_most_improve_streaming_experience
+    required: true
+  - id: q37
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+  - id: q42
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelance"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed, looking for work"
+      - id: "f"
+        label: "Not employed, not looking"
+      - id: "g"
+        label: "Retired"
+  - id: q43
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q44
+    prompt: "Are there children under 18 living in your household?"
+    type: single_choice
+    construct: there_children_under_18_living
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q46
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

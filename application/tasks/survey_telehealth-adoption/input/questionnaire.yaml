@@ -1,0 +1,702 @@
+schemaVersion: "1.0"
+id: telehealth_adoption_v1
+title: "Telehealth Adoption Survey"
+description: "Whether and how people adopt and use virtual (phone or video) medical visits."
+questions:
+  - id: q0
+    prompt: "Have you ever had a telehealth visit (a phone or video appointment with a health professional)?"
+    type: single_choice
+    construct: have_ever_had_telehealth_visit
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, in the past 12 months"
+      - id: "b"
+        label: "Yes, but more than 12 months ago"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No, and I would not consider it"
+  - id: q1
+    prompt: "About how many telehealth visits have you had in the past 12 months? Please enter a number."
+    type: free_text
+    construct: many_telehealth_visits_have_had
+    required: true
+  - id: q2
+    prompt: "What type of telehealth have you used most often?"
+    type: single_choice
+    construct: type_telehealth_have_used_most
+    required: true
+    options:
+      - id: "a"
+        label: "Video visit"
+      - id: "b"
+        label: "Phone call (voice only)"
+      - id: "c"
+        label: "Secure messaging or chat"
+      - id: "d"
+        label: "I have not used telehealth"
+  - id: q3
+    prompt: "For which of the following have you used or would you use telehealth? (Select all that apply)"
+    type: multi_choice
+    construct: following_have_used_would_use
+    required: true
+    options:
+      - id: "a"
+        label: "A minor illness such as a cold or infection"
+      - id: "b"
+        label: "A follow-up on an ongoing condition"
+      - id: "c"
+        label: "A prescription refill"
+      - id: "d"
+        label: "Reviewing test results"
+      - id: "e"
+        label: "A skin or rash concern"
+      - id: "f"
+        label: "General health questions"
+      - id: "g"
+        label: "Mental or emotional wellness support"
+  - id: q4
+    prompt: "Which platforms or services have you used for telehealth? (Select all that apply)"
+    type: multi_choice
+    construct: platforms_services_have_used_telehealth
+    required: true
+    options:
+      - id: "a"
+        label: "My regular doctor's video system (for example MyChart)"
+      - id: "b"
+        label: "Teladoc"
+      - id: "c"
+        label: "Amwell"
+      - id: "d"
+        label: "MDLIVE"
+      - id: "e"
+        label: "Doctor on Demand"
+      - id: "f"
+        label: "My insurer's telehealth app"
+      - id: "g"
+        label: "A video call such as Zoom or FaceTime with my provider"
+      - id: "h"
+        label: "I have not used any"
+  - id: q5
+    prompt: "What device do you most often use for telehealth visits?"
+    type: single_choice
+    construct: device_most_often_use_telehealth
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "Laptop or desktop computer"
+      - id: "c"
+        label: "Tablet"
+      - id: "d"
+        label: "I have not used telehealth"
+  - id: q6
+    prompt: "What are the main reasons you would choose a telehealth visit over an in-person one? (Select all that apply)"
+    type: multi_choice
+    construct: main_reasons_would_choose_telehealth
+    required: true
+    options:
+      - id: "a"
+        label: "It saves travel time"
+      - id: "b"
+        label: "It is easier to fit into my schedule"
+      - id: "c"
+        label: "I avoid waiting rooms"
+      - id: "d"
+        label: "It lowers my risk of catching something"
+      - id: "e"
+        label: "It is lower cost"
+      - id: "f"
+        label: "I can include a family member or caregiver"
+      - id: "g"
+        label: "Care is available after hours"
+  - id: q7
+    prompt: "What concerns you most about telehealth? (Select all that apply)"
+    type: multi_choice
+    construct: concerns_most_telehealth_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "The provider cannot examine me physically"
+      - id: "b"
+        label: "Privacy of my health information"
+      - id: "c"
+        label: "Technical or connection problems"
+      - id: "d"
+        label: "It feels less personal"
+      - id: "e"
+        label: "Whether my insurance covers it"
+      - id: "f"
+        label: "Not knowing how to use the technology"
+      - id: "g"
+        label: "I have no concerns"
+  - id: q8
+    prompt: "Which are the top 3 situations where you would most prefer telehealth over an in-person visit? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_situations_where_would
+    required: true
+    options:
+      - id: "a"
+        label: "Minor illness"
+      - id: "b"
+        label: "Prescription refill"
+      - id: "c"
+        label: "Follow-up appointment"
+      - id: "d"
+        label: "Reviewing test results"
+      - id: "e"
+        label: "Mental or emotional wellness"
+      - id: "f"
+        label: "A quick question"
+      - id: "g"
+        label: "A specialist consult from another area"
+  - id: q9
+    prompt: "How much do you agree or disagree with the following statement about telehealth — Telehealth is convenient for me"
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree or disagree with the following statement about telehealth — I trust the quality of care from a telehealth visit"
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree with the following statement about telehealth — Telehealth saves me money"
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree with the following statement about telehealth — I worry about the privacy of telehealth visits"
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree with the following statement about telehealth — It is easy for me to use the technology"
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree with the following statement about telehealth — Telehealth makes it easier to get care when I need it"
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How comfortable are you using video technology for a medical appointment?"
+    type: single_choice
+    construct: comfortable_using_video_technology_medic
+    required: true
+    options:
+      - id: "a"
+        label: "Very comfortable"
+      - id: "b"
+        label: "Somewhat comfortable"
+      - id: "c"
+        label: "Not very comfortable"
+      - id: "d"
+        label: "Not at all comfortable"
+  - id: q16
+    prompt: "How does the cost of a typical telehealth visit compare to an in-person visit, in your experience?"
+    type: single_choice
+    construct: does_cost_typical_telehealth_visit
+    required: true
+    options:
+      - id: "a"
+        label: "Much lower"
+      - id: "b"
+        label: "Somewhat lower"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat higher"
+      - id: "e"
+        label: "I don't know"
+  - id: q17
+    prompt: "How often does your health insurance cover the telehealth services you want?"
+    type: single_choice
+    construct: often_does_health_insurance_cover
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q18
+    prompt: "How important is it to you that telehealth is offered as an option by your provider?"
+    type: single_choice
+    construct: important_it_that_telehealth_offered
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How likely are you to choose a telehealth visit the next time you have a minor health issue?"
+    type: single_choice
+    construct: likely_choose_telehealth_visit_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q20
+    prompt: "On a scale of 0 to 10, how likely are you to recommend telehealth to a friend or family member? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q21
+    prompt: "Compared with two years ago, how has your use of telehealth changed?"
+    type: single_choice
+    construct: compared_two_years_ago_has
+    required: true
+    options:
+      - id: "a"
+        label: "I use it much more now"
+      - id: "b"
+        label: "I use it somewhat more now"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "I use it less now"
+      - id: "e"
+        label: "I have never used it"
+  - id: q22
+    prompt: "How confident are you that you could set up and complete a video visit on your own?"
+    type: single_choice
+    construct: confident_that_could_set_up
+    required: true
+    options:
+      - id: "a"
+        label: "Very confident"
+      - id: "b"
+        label: "Somewhat confident"
+      - id: "c"
+        label: "Not very confident"
+      - id: "d"
+        label: "Not at all confident"
+  - id: q23
+    prompt: "Who most often provides your telehealth visits?"
+    type: single_choice
+    construct: who_most_often_provides_telehealth
+    required: true
+    options:
+      - id: "a"
+        label: "My own regular doctor or their practice"
+      - id: "b"
+        label: "A different provider from my health system"
+      - id: "c"
+        label: "A provider from a standalone telehealth service"
+      - id: "d"
+        label: "Whoever is available at the time"
+      - id: "e"
+        label: "I have not used telehealth"
+  - id: q24
+    prompt: "How does telehealth affect how quickly you seek care for a minor issue?"
+    type: single_choice
+    construct: does_telehealth_affect_quickly_seek
+    required: true
+    options:
+      - id: "a"
+        label: "I seek care sooner because it is easy"
+      - id: "b"
+        label: "No real difference"
+      - id: "c"
+        label: "I wait longer because I prefer in-person"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q25
+    prompt: "Which of the following would increase your use of telehealth? (Select all that apply)"
+    type: multi_choice
+    construct: following_would_increase_use_telehealth
+    required: true
+    options:
+      - id: "a"
+        label: "Lower cost"
+      - id: "b"
+        label: "Better insurance coverage"
+      - id: "c"
+        label: "Easier-to-use technology"
+      - id: "d"
+        label: "Being able to see my own doctor"
+      - id: "e"
+        label: "Shorter wait times"
+      - id: "f"
+        label: "More privacy assurances"
+      - id: "g"
+        label: "Faster prescriptions"
+      - id: "h"
+        label: "Nothing would increase my use"
+  - id: q26
+    prompt: "How much do you agree: Telehealth is a good option for people who have trouble traveling to appointments."
+    type: single_choice
+    construct: much_agree_telehealth_good_option
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q27
+    prompt: "How much do you agree: I would use telehealth for a wellness or lifestyle consultation."
+    type: single_choice
+    construct: much_agree_i_would_use
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q28
+    prompt: "How often do you think telehealth could replace an in-person visit for your routine needs?"
+    type: single_choice
+    construct: often_think_telehealth_could_replace
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q29
+    prompt: "How important is it that telehealth visits are covered by your insurance the same as in-person visits?"
+    type: single_choice
+    construct: important_it_that_telehealth_visits
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "What would make you more likely to use telehealth in the future? Please answer briefly."
+    type: free_text
+    construct: would_make_more_likely_use
+    required: true
+  - id: q31
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 to 74"
+      - id: "g"
+        label: "75 or older"
+  - id: q32
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino/a"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Another race or ethnicity"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q36
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Homemaker or caregiver"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q37
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q38
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Widowed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I do not live in the United States"
+  - id: q40
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q41
+    prompt: "What is your primary health insurance coverage?"
+    type: single_choice
+    construct: primary_health_insurance_coverage
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored insurance"
+      - id: "b"
+        label: "Insurance I bought myself (marketplace or private)"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or VA (TRICARE)"
+      - id: "f"
+        label: "I am uninsured"
+      - id: "g"
+        label: "Not sure"

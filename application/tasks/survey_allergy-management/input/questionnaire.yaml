@@ -1,0 +1,759 @@
+schemaVersion: "1.0"
+id: allergy_management_v1
+title: "Allergy Management Survey"
+description: "How consumers manage everyday seasonal and environmental allergies."
+questions:
+  - id: q0
+    prompt: "Do you experience seasonal or environmental allergies?"
+    type: single_choice
+    construct: experience_seasonal_environmental_allerg
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, year-round"
+      - id: "b"
+        label: "Yes, seasonally"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "No"
+  - id: q1
+    prompt: "How long have you dealt with seasonal or environmental allergies?"
+    type: single_choice
+    construct: long_have_dealt_seasonal_environmental
+    required: true
+    options:
+      - id: "a"
+        label: "Less than a year"
+      - id: "b"
+        label: "1 to 5 years"
+      - id: "c"
+        label: "5 to 10 years"
+      - id: "d"
+        label: "More than 10 years"
+      - id: "e"
+        label: "Not applicable"
+  - id: q2
+    prompt: "Which allergy triggers affect you? (Select all that apply)"
+    type: multi_choice
+    construct: allergy_triggers_affect_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Pollen (trees, grass, weeds)"
+      - id: "b"
+        label: "Dust or dust mites"
+      - id: "c"
+        label: "Pet dander"
+      - id: "d"
+        label: "Mold"
+      - id: "e"
+        label: "Smoke or air pollution"
+      - id: "f"
+        label: "Certain fragrances or products"
+      - id: "g"
+        label: "Not sure"
+  - id: q3
+    prompt: "Which times of year are usually worst for you? (Select all that apply)"
+    type: multi_choice
+    construct: times_year_usually_worst_select
+    required: true
+    options:
+      - id: "a"
+        label: "Spring"
+      - id: "b"
+        label: "Summer"
+      - id: "c"
+        label: "Fall"
+      - id: "d"
+        label: "Winter"
+      - id: "e"
+        label: "Year-round"
+      - id: "f"
+        label: "Not applicable"
+  - id: q4
+    prompt: "Which everyday symptoms do you typically notice? (Select all that apply)"
+    type: multi_choice
+    construct: everyday_symptoms_typically_notice_selec
+    required: true
+    options:
+      - id: "a"
+        label: "Sneezing"
+      - id: "b"
+        label: "Runny or stuffy nose"
+      - id: "c"
+        label: "Itchy or watery eyes"
+      - id: "d"
+        label: "Congestion"
+      - id: "e"
+        label: "Mild cough or throat irritation"
+      - id: "f"
+        label: "Fatigue"
+      - id: "g"
+        label: "None"
+  - id: q5
+    prompt: "Which products do you use to manage allergies? (Select all that apply)"
+    type: multi_choice
+    construct: products_use_manage_allergies_select
+    required: true
+    options:
+      - id: "a"
+        label: "Over-the-counter antihistamines"
+      - id: "b"
+        label: "Nasal sprays"
+      - id: "c"
+        label: "Eye drops"
+      - id: "d"
+        label: "Prescription allergy medication"
+      - id: "e"
+        label: "Air purifier"
+      - id: "f"
+        label: "Saline rinse"
+      - id: "g"
+        label: "None"
+  - id: q6
+    prompt: "How often do you take allergy medication during your allergy season?"
+    type: single_choice
+    construct: often_take_allergy_medication_during
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Only when symptoms flare"
+      - id: "d"
+        label: "A few times a week"
+      - id: "e"
+        label: "Daily"
+  - id: q7
+    prompt: "Roughly how much do you spend on allergy products in a typical year? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: roughly_much_spend_allergy_products
+    required: true
+  - id: q8
+    prompt: "Which allergy product brands do you use? (Select all that apply)"
+    type: multi_choice
+    construct: allergy_product_brands_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Claritin"
+      - id: "b"
+        label: "Zyrtec"
+      - id: "c"
+        label: "Allegra"
+      - id: "d"
+        label: "Flonase"
+      - id: "e"
+        label: "Benadryl"
+      - id: "f"
+        label: "A store or generic brand"
+      - id: "g"
+        label: "Not applicable"
+  - id: q9
+    prompt: "Which steps do you take to reduce exposure to triggers? (Select all that apply)"
+    type: multi_choice
+    construct: steps_take_reduce_exposure_triggers
+    required: true
+    options:
+      - id: "a"
+        label: "Checking pollen or air-quality forecasts"
+      - id: "b"
+        label: "Keeping windows closed"
+      - id: "c"
+        label: "Using an air purifier or filter"
+      - id: "d"
+        label: "Cleaning or dusting more often"
+      - id: "e"
+        label: "Showering or changing clothes after being outdoors"
+      - id: "f"
+        label: "Limiting time outdoors on bad days"
+      - id: "g"
+        label: "I don't take specific steps"
+  - id: q10
+    prompt: "Do you use any apps or online tools to track pollen or air quality?"
+    type: single_choice
+    construct: use_any_apps_online_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I'd consider it"
+      - id: "d"
+        label: "No"
+  - id: q11
+    prompt: "In the past month, on about how many days did your allergies bother you? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: past_month_many_days_did
+    required: true
+  - id: q12
+    prompt: "Where do you usually buy your allergy products?"
+    type: single_choice
+    construct: where_usually_buy_allergy_products
+    required: true
+    options:
+      - id: "a"
+        label: "Pharmacy or drugstore"
+      - id: "b"
+        label: "Grocery or big-box store"
+      - id: "c"
+        label: "Online retailer"
+      - id: "d"
+        label: "A mix of places"
+      - id: "e"
+        label: "Not applicable"
+  - id: q13
+    prompt: "How much do you agree with the following statement: My current approaches control my symptoms well."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: Allergies disrupt my daily life during peak times."
+    type: single_choice
+    construct: much_agree_following_statement_allergies
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: Over-the-counter products work well for me."
+    type: single_choice
+    construct: much_agree_following_statement_over
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I plan ahead for my allergy season."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: I worry about side effects like drowsiness from allergy products."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement: It's hard to find a product that works for me."
+    type: single_choice
+    construct: much_agree_following_statement_it
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement: I'm willing to try new allergy products."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How important is the following when choosing an allergy product: How effective it is."
+    type: single_choice
+    construct: important_following_when_choosing_allerg
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is the following when choosing an allergy product: A non-drowsy formula."
+    type: single_choice
+    construct: important_following_when_choosing_allerg
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is the following when choosing an allergy product: Price."
+    type: single_choice
+    construct: important_following_when_choosing_allerg
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is the following when choosing an allergy product: Brand."
+    type: single_choice
+    construct: important_following_when_choosing_allerg
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is the following when choosing an allergy product: Long-lasting relief."
+    type: single_choice
+    construct: important_following_when_choosing_allerg
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is the following when choosing an allergy product: A doctor's or pharmacist's recommendation."
+    type: single_choice
+    construct: important_following_when_choosing_allerg
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "Which allergy symptoms bother you most? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: allergy_symptoms_bother_most_select
+    required: true
+    options:
+      - id: "a"
+        label: "Sneezing"
+      - id: "b"
+        label: "Runny or stuffy nose"
+      - id: "c"
+        label: "Itchy or watery eyes"
+      - id: "d"
+        label: "Congestion"
+      - id: "e"
+        label: "Cough or throat irritation"
+      - id: "f"
+        label: "Fatigue"
+      - id: "g"
+        label: "Trouble sleeping"
+      - id: "h"
+        label: "Sinus pressure"
+  - id: q27
+    prompt: "How much do allergies affect your daily activities during peak times?"
+    type: single_choice
+    construct: much_allergies_affect_daily_activities
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Quite a bit"
+      - id: "e"
+        label: "A great deal"
+  - id: q28
+    prompt: "How well do your current approaches control your symptoms?"
+    type: single_choice
+    construct: well_current_approaches_control_symptoms
+    required: true
+    options:
+      - id: "a"
+        label: "Very poorly"
+      - id: "b"
+        label: "Poorly"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q29
+    prompt: "Have you ever consulted a professional about your allergies?"
+    type: single_choice
+    construct: have_ever_consulted_professional_allergi
+    required: true
+    options:
+      - id: "a"
+        label: "Primary care doctor"
+      - id: "b"
+        label: "Pharmacist"
+      - id: "c"
+        label: "Allergy specialist"
+      - id: "d"
+        label: "More than one of these"
+      - id: "e"
+        label: "No, I manage on my own"
+  - id: q30
+    prompt: "How confident are you in managing your allergies on your own?"
+    type: single_choice
+    construct: confident_managing_allergies_own
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+  - id: q31
+    prompt: "Overall, how satisfied are you with how you manage your allergies?"
+    type: single_choice
+    construct: overall_satisfied_manage_allergies
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How likely are you to try a new allergy product in the next year?"
+    type: single_choice
+    construct: likely_try_new_allergy_product
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q33
+    prompt: "On a scale of 0 to 10, how likely are you to recommend an allergy product that worked for you to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q34
+    prompt: "What would help you manage your allergies better? Please describe briefly."
+    type: free_text
+    construct: would_help_manage_allergies_better
+    required: true
+  - id: q35
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Which of the following best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Other"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college"
+      - id: "c"
+        label: "Associate's degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q40
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q41
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q42
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "Which region of the country do you live in?"
+    type: single_choice
+    construct: region_country_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q44
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q45
+    prompt: "What is your current health insurance status?"
+    type: single_choice
+    construct: current_health_insurance_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored insurance"
+      - id: "b"
+        label: "Plan purchased on my own or through the marketplace"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or VA coverage"
+      - id: "f"
+        label: "Uninsured"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "Do you have any pets in your household?"
+    type: single_choice
+    construct: have_any_pets_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one"
+      - id: "b"
+        label: "Yes, more than one"
+      - id: "c"
+        label: "No"

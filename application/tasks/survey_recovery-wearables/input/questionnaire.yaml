@@ -1,0 +1,884 @@
+schemaVersion: "1.0"
+id: recovery_wearables_v1
+title: "Recovery Wearables Survey"
+description: "How people use recovery-focused wearables such as Whoop, Oura, and Garmin, the metrics they track, and their attitudes toward the data."
+questions:
+  - id: q0
+    prompt: "Do you currently use a recovery-focused wearable (such as a fitness ring or strap that tracks sleep and recovery)?"
+    type: single_choice
+    construct: currently_use_recovery_focused_wearable
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I wear one daily"
+      - id: "b"
+        label: "Yes, but not every day"
+      - id: "c"
+        label: "I used to but stopped"
+      - id: "d"
+        label: "No, but I am interested"
+      - id: "e"
+        label: "No, and I am not interested"
+  - id: q1
+    prompt: "How long have you used a recovery wearable?"
+    type: single_choice
+    construct: long_have_used_recovery_wearable
+    required: true
+    options:
+      - id: "a"
+        label: "I do not use one"
+      - id: "b"
+        label: "Less than 6 months"
+      - id: "c"
+        label: "6 months to 1 year"
+      - id: "d"
+        label: "1 to 3 years"
+      - id: "e"
+        label: "More than 3 years"
+  - id: q2
+    prompt: "Which recovery or fitness wearables do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: recovery_fitness_wearables_currently_use
+    required: true
+    options:
+      - id: "a"
+        label: "Whoop"
+      - id: "b"
+        label: "Oura Ring"
+      - id: "c"
+        label: "Garmin watch"
+      - id: "d"
+        label: "Apple Watch"
+      - id: "e"
+        label: "Fitbit"
+      - id: "f"
+        label: "Samsung Galaxy Watch"
+      - id: "g"
+        label: "Ultrahuman Ring"
+      - id: "h"
+        label: "None of these"
+  - id: q3
+    prompt: "Which device do you rely on most for recovery insights?"
+    type: single_choice
+    construct: device_rely_most_recovery_insights
+    required: true
+    options:
+      - id: "a"
+        label: "Whoop"
+      - id: "b"
+        label: "Oura Ring"
+      - id: "c"
+        label: "Garmin watch"
+      - id: "d"
+        label: "Apple Watch"
+      - id: "e"
+        label: "Fitbit"
+      - id: "f"
+        label: "Another device"
+      - id: "g"
+        label: "I do not use one"
+  - id: q4
+    prompt: "What was your main reason for starting to use a recovery wearable?"
+    type: single_choice
+    construct: was_main_reason_starting_use
+    required: true
+    options:
+      - id: "a"
+        label: "Improve sleep"
+      - id: "b"
+        label: "Optimize training and workouts"
+      - id: "c"
+        label: "Reduce stress"
+      - id: "d"
+        label: "General health awareness"
+      - id: "e"
+        label: "Curiosity about the technology"
+      - id: "f"
+        label: "I do not use one"
+  - id: q5
+    prompt: "Which metrics do you regularly track? (Select all that apply)"
+    type: multi_choice
+    construct: metrics_regularly_track_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Sleep duration and stages"
+      - id: "b"
+        label: "Heart rate variability (HRV)"
+      - id: "c"
+        label: "Resting heart rate"
+      - id: "d"
+        label: "Recovery or readiness score"
+      - id: "e"
+        label: "Strain or activity load"
+      - id: "f"
+        label: "Body temperature"
+      - id: "g"
+        label: "Respiratory rate"
+      - id: "h"
+        label: "Steps"
+      - id: "i"
+        label: "None of these"
+  - id: q6
+    prompt: "How often do you check your wearable's app or data?"
+    type: single_choice
+    construct: often_check_wearable_s_app
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "Once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "I do not use an app"
+  - id: q7
+    prompt: "Which of these do you use your recovery data to guide? (Select all that apply)"
+    type: multi_choice
+    construct: these_use_recovery_data_guide
+    required: true
+    options:
+      - id: "a"
+        label: "When to work out hard"
+      - id: "b"
+        label: "When to rest or take a recovery day"
+      - id: "c"
+        label: "My bedtime or sleep schedule"
+      - id: "d"
+        label: "Caffeine or alcohol choices"
+      - id: "e"
+        label: "Stress management"
+      - id: "f"
+        label: "Nutrition or hydration"
+      - id: "g"
+        label: "I do not act on the data"
+  - id: q8
+    prompt: "How did you pay for your wearable?"
+    type: single_choice
+    construct: did_pay_wearable
+    required: true
+    options:
+      - id: "a"
+        label: "One-time purchase"
+      - id: "b"
+        label: "Purchase plus a subscription"
+      - id: "c"
+        label: "Subscription or membership only"
+      - id: "d"
+        label: "It was a gift"
+      - id: "e"
+        label: "I do not use one"
+  - id: q9
+    prompt: "About how much did you spend on your wearable device, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_did_spend_wearable_device
+    required: true
+  - id: q10
+    prompt: "About how many hours of sleep does your wearable typically report you get per night? Please enter a number."
+    type: free_text
+    construct: many_hours_sleep_does_wearable
+    required: true
+  - id: q11
+    prompt: "How would you describe your fitness or activity level?"
+    type: single_choice
+    construct: would_describe_fitness_activity_level
+    required: true
+    options:
+      - id: "a"
+        label: "Sedentary"
+      - id: "b"
+        label: "Lightly active"
+      - id: "c"
+        label: "Moderately active"
+      - id: "d"
+        label: "Very active"
+      - id: "e"
+        label: "Athlete or competitive"
+  - id: q12
+    prompt: "How much do you trust the accuracy of your wearable's data?"
+    type: single_choice
+    construct: much_trust_accuracy_wearable_s
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Mostly"
+      - id: "e"
+        label: "Completely"
+  - id: q13
+    prompt: "How much do you agree: My recovery wearable has improved my sleep."
+    type: single_choice
+    construct: much_agree_my_recovery_wearable
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: The data from my wearable is worth the cost."
+    type: single_choice
+    construct: much_agree_data_from_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: I sometimes feel anxious about my recovery scores."
+    type: single_choice
+    construct: much_agree_i_sometimes_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: My wearable helps me make better training decisions."
+    type: single_choice
+    construct: much_agree_my_wearable_helps
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: I worry about the privacy of my health data."
+    type: single_choice
+    construct: much_agree_i_worry_privacy
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: I would feel lost without my wearable."
+    type: single_choice
+    construct: much_agree_i_would_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "Thinking about your recovery wearable, how much do you agree that the sleep tracking is accurate?"
+    type: single_choice
+    construct: thinking_recovery_wearable_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Thinking about your recovery wearable, how much do you agree that the recovery score is useful?"
+    type: single_choice
+    construct: thinking_recovery_wearable_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "Thinking about your recovery wearable, how much do you agree that the battery life is sufficient?"
+    type: single_choice
+    construct: thinking_recovery_wearable_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "Thinking about your recovery wearable, how much do you agree that it is comfortable to wear?"
+    type: single_choice
+    construct: thinking_recovery_wearable_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "Thinking about your recovery wearable, how much do you agree that the app is easy to understand?"
+    type: single_choice
+    construct: thinking_recovery_wearable_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "When choosing a recovery wearable, how important is data accuracy?"
+    type: single_choice
+    construct: when_choosing_recovery_wearable_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a recovery wearable, how important is battery life?"
+    type: single_choice
+    construct: when_choosing_recovery_wearable_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a recovery wearable, how important is comfort and design?"
+    type: single_choice
+    construct: when_choosing_recovery_wearable_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a recovery wearable, how important is the absence of a subscription fee?"
+    type: single_choice
+    construct: when_choosing_recovery_wearable_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing a recovery wearable, how important is app quality and insights?"
+    type: single_choice
+    construct: when_choosing_recovery_wearable_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "When choosing a recovery wearable, how important is data privacy?"
+    type: single_choice
+    construct: when_choosing_recovery_wearable_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "Which are your top 3 factors when choosing a recovery wearable? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Data accuracy"
+      - id: "b"
+        label: "Battery life"
+      - id: "c"
+        label: "Comfort and design"
+      - id: "d"
+        label: "No subscription fee"
+      - id: "e"
+        label: "App quality and insights"
+      - id: "f"
+        label: "Data privacy"
+      - id: "g"
+        label: "Price of the device"
+      - id: "h"
+        label: "Brand reputation"
+  - id: q31
+    prompt: "How has using a recovery wearable affected your sleep habits?"
+    type: single_choice
+    construct: has_using_recovery_wearable_affected
+    required: true
+    options:
+      - id: "a"
+        label: "Much worse"
+      - id: "b"
+        label: "Somewhat worse"
+      - id: "c"
+        label: "No change"
+      - id: "d"
+        label: "Somewhat better"
+      - id: "e"
+        label: "Much better"
+  - id: q32
+    prompt: "How often do you change your behavior based on your recovery data?"
+    type: single_choice
+    construct: often_change_behavior_based_recovery
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q33
+    prompt: "Which other apps do you connect to your wearable? (Select all that apply)"
+    type: multi_choice
+    construct: other_apps_connect_wearable_select
+    required: true
+    options:
+      - id: "a"
+        label: "Apple Health"
+      - id: "b"
+        label: "Google Fit or Health Connect"
+      - id: "c"
+        label: "Strava"
+      - id: "d"
+        label: "TrainingPeaks"
+      - id: "e"
+        label: "A nutrition app (MyFitnessPal, etc.)"
+      - id: "f"
+        label: "A meditation app"
+      - id: "g"
+        label: "None of these"
+  - id: q34
+    prompt: "How comfortable are you sharing your recovery data with others (coaches, friends, community)?"
+    type: single_choice
+    construct: comfortable_sharing_recovery_data_others
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Somewhat uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat comfortable"
+      - id: "e"
+        label: "Very comfortable"
+  - id: q35
+    prompt: "How satisfied are you with the accuracy of your wearable?"
+    type: single_choice
+    construct: satisfied_accuracy_wearable
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "How satisfied are you with your wearable's app and insights?"
+    type: single_choice
+    construct: satisfied_wearable_s_app_insights
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "Overall, how satisfied are you with your recovery wearable?"
+    type: single_choice
+    construct: overall_satisfied_recovery_wearable
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I do not use one"
+  - id: q38
+    prompt: "How likely are you to recommend your recovery wearable to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_recovery_wearable_frien
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q39
+    prompt: "How likely are you to keep using a recovery wearable over the next 12 months?"
+    type: single_choice
+    construct: likely_keep_using_recovery_wearable
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q40
+    prompt: "How likely are you to switch to a different wearable brand in the next 12 months?"
+    type: single_choice
+    construct: likely_switch_different_wearable_brand
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q41
+    prompt: "What is one thing you would improve about your recovery wearable? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_recovery
+    required: false
+  - id: q42
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q43
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q47
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q48
+    prompt: "How many people, including yourself, live in your household?"
+    type: single_choice
+    construct: many_people_including_yourself_live
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q49
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or domestic partnership"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q51
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q52
+    prompt: "Do you own any other connected health or fitness devices?"
+    type: single_choice
+    construct: own_any_other_connected_health
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a smart scale"
+      - id: "b"
+        label: "Yes, a blood pressure or heart monitor"
+      - id: "c"
+        label: "Yes, multiple connected devices"
+      - id: "d"
+        label: "No, only my wearable"
+      - id: "e"
+        label: "No connected devices at all"

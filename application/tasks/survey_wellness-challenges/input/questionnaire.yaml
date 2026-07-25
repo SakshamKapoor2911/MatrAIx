@@ -1,0 +1,773 @@
+schemaVersion: "1.0"
+id: wellness_challenges_v1
+title: "Wellness Challenges Survey"
+description: "Participation in and attitudes toward wellness challenges such as step contests and fitness streaks."
+questions:
+  - id: q0
+    prompt: "Have you ever taken part in a wellness challenge?"
+    type: single_choice
+    construct: have_ever_taken_part_wellness
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I'm in one now"
+      - id: "b"
+        label: "Yes, in the past"
+      - id: "c"
+        label: "No, but I'd consider it"
+      - id: "d"
+        label: "No, and I'm not interested"
+  - id: q1
+    prompt: "Which best describes your current involvement with wellness challenges?"
+    type: single_choice
+    construct: best_describes_current_involvement_welln
+    required: true
+    options:
+      - id: "a"
+        label: "Actively participating"
+      - id: "b"
+        label: "Between challenges but plan to rejoin"
+      - id: "c"
+        label: "Participated before but not now"
+      - id: "d"
+        label: "Only curious about them"
+      - id: "e"
+        label: "Not applicable"
+  - id: q2
+    prompt: "What types of wellness challenges have you joined? (Select all that apply)"
+    type: multi_choice
+    construct: types_wellness_challenges_have_joined
+    required: true
+    options:
+      - id: "a"
+        label: "Step or walking challenge"
+      - id: "b"
+        label: "Fitness or workout streak"
+      - id: "c"
+        label: "Hydration challenge"
+      - id: "d"
+        label: "Nutrition or healthy-eating challenge"
+      - id: "e"
+        label: "Sleep challenge"
+      - id: "f"
+        label: "Meditation or mindfulness challenge"
+      - id: "g"
+        label: "Weight or activity goal"
+      - id: "h"
+        label: "Not applicable"
+  - id: q3
+    prompt: "Where did the challenge come from? (Select all that apply)"
+    type: multi_choice
+    construct: where_did_challenge_come_from
+    required: true
+    options:
+      - id: "a"
+        label: "My employer's wellness program"
+      - id: "b"
+        label: "A fitness app"
+      - id: "c"
+        label: "My health insurer"
+      - id: "d"
+        label: "A gym or studio"
+      - id: "e"
+        label: "Friends or family"
+      - id: "f"
+        label: "A social media community"
+      - id: "g"
+        label: "Not applicable"
+  - id: q4
+    prompt: "Was the challenge individual or team-based?"
+    type: single_choice
+    construct: was_challenge_individual_team_based
+    required: true
+    options:
+      - id: "a"
+        label: "Individual only"
+      - id: "b"
+        label: "Team-based"
+      - id: "c"
+        label: "Both options were available"
+      - id: "d"
+        label: "Not applicable"
+  - id: q5
+    prompt: "What motivated you to join? (Select all that apply)"
+    type: multi_choice
+    construct: motivated_join_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Rewards or prizes"
+      - id: "b"
+        label: "Friendly competition"
+      - id: "c"
+        label: "Personal health goals"
+      - id: "d"
+        label: "Social connection"
+      - id: "e"
+        label: "Employer encouragement"
+      - id: "f"
+        label: "Curiosity or novelty"
+      - id: "g"
+        label: "Not applicable"
+  - id: q6
+    prompt: "What kinds of rewards did the challenge offer? (Select all that apply)"
+    type: multi_choice
+    construct: kinds_rewards_did_challenge_offer
+    required: true
+    options:
+      - id: "a"
+        label: "Cash or gift cards"
+      - id: "b"
+        label: "Lower insurance premiums or HSA contributions"
+      - id: "c"
+        label: "Merchandise or prizes"
+      - id: "d"
+        label: "Badges or leaderboard status"
+      - id: "e"
+        label: "Charitable donations"
+      - id: "f"
+        label: "No rewards"
+      - id: "g"
+        label: "Not applicable"
+  - id: q7
+    prompt: "How many wellness challenges have you completed in the past year? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: many_wellness_challenges_have_completed
+    required: true
+  - id: q8
+    prompt: "About how much was the total value of any rewards you earned from challenges in the past year? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_was_total_value_any
+    required: true
+  - id: q9
+    prompt: "How did you track your progress?"
+    type: single_choice
+    construct: did_track_progress
+    required: true
+    options:
+      - id: "a"
+        label: "A fitness tracker or smartwatch"
+      - id: "b"
+        label: "A phone app"
+      - id: "c"
+        label: "Manual logging"
+      - id: "d"
+        label: "A mix of methods"
+      - id: "e"
+        label: "Not applicable"
+  - id: q10
+    prompt: "Which apps or platforms have you used for wellness challenges? (Select all that apply)"
+    type: multi_choice
+    construct: apps_platforms_have_used_wellness
+    required: true
+    options:
+      - id: "a"
+        label: "Fitbit"
+      - id: "b"
+        label: "Apple Fitness / Apple Health"
+      - id: "c"
+        label: "Virgin Pulse / Personify Health"
+      - id: "d"
+        label: "Strava"
+      - id: "e"
+        label: "An employer or insurer wellness platform"
+      - id: "f"
+        label: "Another app"
+      - id: "g"
+        label: "Not applicable"
+  - id: q11
+    prompt: "About how long did a typical challenge last?"
+    type: single_choice
+    construct: long_did_typical_challenge_last
+    required: true
+    options:
+      - id: "a"
+        label: "A few days"
+      - id: "b"
+        label: "About a week"
+      - id: "c"
+        label: "Two to four weeks"
+      - id: "d"
+        label: "One to three months"
+      - id: "e"
+        label: "Longer than three months"
+      - id: "f"
+        label: "Not applicable"
+  - id: q12
+    prompt: "How much do you agree with the following statement about wellness challenges: They were motivating."
+    type: single_choice
+    construct: much_agree_following_statement_wellness
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement about wellness challenges: They were fun."
+    type: single_choice
+    construct: much_agree_following_statement_wellness
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement about wellness challenges: They helped me build healthier habits."
+    type: single_choice
+    construct: much_agree_following_statement_wellness
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement about wellness challenges: They helped me connect with coworkers, friends, or family."
+    type: single_choice
+    construct: much_agree_following_statement_wellness
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about wellness challenges: The rewards were worth the effort."
+    type: single_choice
+    construct: much_agree_following_statement_wellness
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about wellness challenges: I was comfortable sharing my activity data."
+    type: single_choice
+    construct: much_agree_following_statement_wellness
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about wellness challenges: They sometimes felt like pressure."
+    type: single_choice
+    construct: much_agree_following_statement_wellness
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How important is the following in making a wellness challenge appealing: Rewards or prizes."
+    type: single_choice
+    construct: important_following_making_wellness_chal
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is the following in making a wellness challenge appealing: A social or team aspect."
+    type: single_choice
+    construct: important_following_making_wellness_chal
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is the following in making a wellness challenge appealing: Easy progress tracking."
+    type: single_choice
+    construct: important_following_making_wellness_chal
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is the following in making a wellness challenge appealing: Fairness for different fitness levels."
+    type: single_choice
+    construct: important_following_making_wellness_chal
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is the following in making a wellness challenge appealing: Privacy of my activity data."
+    type: single_choice
+    construct: important_following_making_wellness_chal
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is the following in making a wellness challenge appealing: Fit with my personal goals."
+    type: single_choice
+    construct: important_following_making_wellness_chal
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "Which motivators matter most to you in a wellness challenge? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: motivators_matter_most_wellness_challeng
+    required: true
+    options:
+      - id: "a"
+        label: "Rewards or prizes"
+      - id: "b"
+        label: "Friendly competition"
+      - id: "c"
+        label: "Personal health goals"
+      - id: "d"
+        label: "Social connection"
+      - id: "e"
+        label: "Badges or leaderboards"
+      - id: "f"
+        label: "Supporting a charity"
+      - id: "g"
+        label: "Encouragement from others"
+      - id: "h"
+        label: "Novelty and fun"
+  - id: q26
+    prompt: "Did the challenge lead to any lasting habit changes?"
+    type: single_choice
+    construct: did_challenge_lead_any_lasting
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, lasting changes"
+      - id: "b"
+        label: "Some changes that faded"
+      - id: "c"
+        label: "No lasting changes"
+      - id: "d"
+        label: "Too early to tell"
+      - id: "e"
+        label: "Not applicable"
+  - id: q27
+    prompt: "How confident are you in keeping up the habits you built during a challenge?"
+    type: single_choice
+    construct: confident_keeping_up_habits_built
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+  - id: q28
+    prompt: "What did you find frustrating, if anything? (Select all that apply)"
+    type: multi_choice
+    construct: did_find_frustrating_if_anything
+    required: true
+    options:
+      - id: "a"
+        label: "Too competitive"
+      - id: "b"
+        label: "Hard to keep up"
+      - id: "c"
+        label: "Tracking was inconvenient"
+      - id: "d"
+        label: "Rewards weren't worth it"
+      - id: "e"
+        label: "Privacy of my activity data"
+      - id: "f"
+        label: "Felt like pressure from my employer"
+      - id: "g"
+        label: "Nothing frustrating"
+  - id: q29
+    prompt: "How concerned are you about the privacy of activity data shared in challenges?"
+    type: single_choice
+    construct: concerned_privacy_activity_data_shared
+    required: true
+    options:
+      - id: "a"
+        label: "Very concerned"
+      - id: "b"
+        label: "Somewhat concerned"
+      - id: "c"
+        label: "Not very concerned"
+      - id: "d"
+        label: "Not concerned at all"
+  - id: q30
+    prompt: "Overall, how satisfied were you with your wellness challenge experience?"
+    type: single_choice
+    construct: overall_satisfied_were_wellness_challeng
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q31
+    prompt: "On a scale of 0 to 10, how likely are you to recommend joining a wellness challenge to a friend or coworker? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "How likely are you to join another wellness challenge?"
+    type: single_choice
+    construct: likely_join_another_wellness_challenge
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q33
+    prompt: "If your employer offered a well-designed challenge next month, how likely would you be to join?"
+    type: single_choice
+    construct: if_employer_offered_well_designed
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "What would make wellness challenges more appealing to you? Please describe briefly."
+    type: free_text
+    construct: would_make_wellness_challenges_more
+    required: true
+  - id: q35
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Which of the following best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Other"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college"
+      - id: "c"
+        label: "Associate's degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q40
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q41
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q42
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "Which region of the country do you live in?"
+    type: single_choice
+    construct: region_country_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q44
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q45
+    prompt: "Does your employer offer wellness challenges or activity programs?"
+    type: single_choice
+    construct: does_employer_offer_wellness_challenges
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I take part"
+      - id: "b"
+        label: "Yes, but I don't take part"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not sure"
+      - id: "e"
+        label: "Not applicable"
+  - id: q46
+    prompt: "Do you own a fitness tracker or smartwatch?"
+    type: single_choice
+    construct: own_fitness_tracker_smartwatch
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I wear it most days"
+      - id: "b"
+        label: "Yes, but I rarely use it"
+      - id: "c"
+        label: "No"
+  - id: q47
+    prompt: "How would you describe your usual level of physical activity?"
+    type: single_choice
+    construct: would_describe_usual_level_physical
+    required: true
+    options:
+      - id: "a"
+        label: "Not active"
+      - id: "b"
+        label: "Lightly active"
+      - id: "c"
+        label: "Moderately active"
+      - id: "d"
+        label: "Very active"

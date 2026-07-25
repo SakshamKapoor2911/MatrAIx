@@ -1,0 +1,880 @@
+schemaVersion: "1.0"
+id: command_line_productivity_tools_v1
+title: "Command-Line Productivity Tools Survey"
+description: "How developers and technical users adopt and use modern command-line productivity tools."
+questions:
+  - id: q0
+    prompt: "How often do you use command-line productivity tools beyond the basics?"
+    type: single_choice
+    construct: often_use_command_line_productivity
+    required: true
+    options:
+      - id: "a"
+        label: "Constantly throughout the day"
+      - id: "b"
+        label: "A few times a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "I only use standard built-in commands"
+  - id: q1
+    prompt: "How long have you been using modern command-line tools (ripgrep, fzf, etc.)?"
+    type: single_choice
+    construct: long_have_been_using_modern
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "What is your primary operating system for command-line work?"
+    type: single_choice
+    construct: primary_operating_system_command_line
+    required: true
+    options:
+      - id: "a"
+        label: "macOS"
+      - id: "b"
+        label: "Windows"
+      - id: "c"
+        label: "Linux"
+      - id: "d"
+        label: "Windows with WSL"
+      - id: "e"
+        label: "Other"
+  - id: q3
+    prompt: "Which command-line search or navigation tool do you use most often?"
+    type: single_choice
+    construct: command_line_search_navigation_tool
+    required: true
+    options:
+      - id: "a"
+        label: "ripgrep (rg)"
+      - id: "b"
+        label: "fzf"
+      - id: "c"
+        label: "zoxide"
+      - id: "d"
+        label: "fd"
+      - id: "e"
+        label: "grep or find (the classics)"
+      - id: "f"
+        label: "I don't use these tools"
+  - id: q4
+    prompt: "Which modern command-line tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: modern_command_line_tools_have
+    required: true
+    options:
+      - id: "a"
+        label: "ripgrep (rg)"
+      - id: "b"
+        label: "fzf"
+      - id: "c"
+        label: "fd"
+      - id: "d"
+        label: "bat"
+      - id: "e"
+        label: "eza or exa"
+      - id: "f"
+        label: "zoxide"
+      - id: "g"
+        label: "jq"
+      - id: "h"
+        label: "tmux"
+      - id: "i"
+        label: "delta"
+      - id: "j"
+        label: "sd or ast-grep"
+      - id: "k"
+        label: "None of these"
+  - id: q5
+    prompt: "Which of these tools have replaced a classic Unix tool for you? (Select all that apply)"
+    type: multi_choice
+    construct: these_tools_have_replaced_classic
+    required: true
+    options:
+      - id: "a"
+        label: "ripgrep replaced grep"
+      - id: "b"
+        label: "fd replaced find"
+      - id: "c"
+        label: "bat replaced cat"
+      - id: "d"
+        label: "eza or exa replaced ls"
+      - id: "e"
+        label: "zoxide replaced cd"
+      - id: "f"
+        label: "delta replaced diff"
+      - id: "g"
+        label: "dust or duf replaced du/df"
+      - id: "h"
+        label: "I still use the classics"
+  - id: q6
+    prompt: "Which command-line tools would you like to adopt or use more? (Select all that apply)"
+    type: multi_choice
+    construct: command_line_tools_would_like
+    required: true
+    options:
+      - id: "a"
+        label: "fzf"
+      - id: "b"
+        label: "ripgrep"
+      - id: "c"
+        label: "zoxide"
+      - id: "d"
+        label: "jq"
+      - id: "e"
+        label: "tmux"
+      - id: "f"
+        label: "bat"
+      - id: "g"
+        label: "delta"
+      - id: "h"
+        label: "I'm happy with what I use"
+  - id: q7
+    prompt: "How do you install most of your command-line tools?"
+    type: single_choice
+    construct: install_most_command_line_tools
+    required: true
+    options:
+      - id: "a"
+        label: "A package manager (Homebrew, apt, etc.)"
+      - id: "b"
+        label: "Cargo, npm, pip, or another language toolchain"
+      - id: "c"
+        label: "Downloading prebuilt binaries"
+      - id: "d"
+        label: "Building from source"
+      - id: "e"
+        label: "They come preinstalled"
+  - id: q8
+    prompt: "About how many command-line productivity tools do you use regularly? Please enter a number."
+    type: free_text
+    construct: many_command_line_productivity_tools
+    required: true
+  - id: q9
+    prompt: "Do you use a terminal multiplexer?"
+    type: single_choice
+    construct: use_terminal_multiplexer
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, tmux"
+      - id: "b"
+        label: "Yes, GNU Screen or Zellij"
+      - id: "c"
+        label: "Yes, my terminal's built-in panes"
+      - id: "d"
+        label: "No"
+  - id: q10
+    prompt: "How do you use fzf, if at all? (Select all that apply)"
+    type: multi_choice
+    construct: use_fzf_if_all_select
+    required: true
+    options:
+      - id: "a"
+        label: "Fuzzy command history search"
+      - id: "b"
+        label: "Fuzzy file finding"
+      - id: "c"
+        label: "Git branch or commit selection"
+      - id: "d"
+        label: "Directory jumping"
+      - id: "e"
+        label: "Custom scripts and pipelines"
+      - id: "f"
+        label: "I don't use fzf"
+  - id: q11
+    prompt: "Which tasks do you regularly use command-line tools for? (Select all that apply)"
+    type: multi_choice
+    construct: tasks_regularly_use_command_line
+    required: true
+    options:
+      - id: "a"
+        label: "Searching code and text"
+      - id: "b"
+        label: "Navigating directories"
+      - id: "c"
+        label: "Processing JSON or structured data"
+      - id: "d"
+        label: "Viewing files and diffs"
+      - id: "e"
+        label: "Managing terminal sessions"
+      - id: "f"
+        label: "Batch renaming or editing files"
+      - id: "g"
+        label: "Monitoring system resources"
+      - id: "h"
+        label: "Automation and scripting"
+  - id: q12
+    prompt: "Do you use jq or a similar tool for processing structured data?"
+    type: single_choice
+    construct: use_jq_similar_tool_processing
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I'd like to"
+      - id: "d"
+        label: "No"
+  - id: q13
+    prompt: "About how many custom shell aliases or functions wrap these tools for you? Please enter a number."
+    type: free_text
+    construct: many_custom_shell_aliases_functions
+    required: true
+  - id: q14
+    prompt: "How do you discover new command-line tools? (Select all that apply)"
+    type: multi_choice
+    construct: discover_new_command_line_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Social media (Reddit, Hacker News, X)"
+      - id: "b"
+        label: "Blog posts and newsletters"
+      - id: "c"
+        label: "Colleagues and friends"
+      - id: "d"
+        label: "GitHub trending or awesome lists"
+      - id: "e"
+        label: "YouTube or streamers"
+      - id: "f"
+        label: "Documentation of other tools"
+  - id: q15
+    prompt: "How do you keep your command-line tools updated?"
+    type: single_choice
+    construct: keep_command_line_tools_updated
+    required: true
+    options:
+      - id: "a"
+        label: "Automatically via my package manager"
+      - id: "b"
+        label: "I update them manually now and then"
+      - id: "c"
+        label: "I rarely update them"
+      - id: "d"
+        label: "I'm not sure how they update"
+  - id: q16
+    prompt: "How much do you agree: Modern command-line tools noticeably speed up my work."
+    type: single_choice
+    construct: much_agree_modern_command_line
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: The classic Unix tools are good enough for most of my needs."
+    type: single_choice
+    construct: much_agree_classic_unix_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: I enjoy trying out new command-line tools."
+    type: single_choice
+    construct: much_agree_i_enjoy_trying
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: Tools written in Rust or Go feel faster and more reliable to me."
+    type: single_choice
+    construct: much_agree_tools_written_rust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: Keeping a portable, consistent toolset across machines matters to me."
+    type: single_choice
+    construct: much_agree_keeping_portable_consistent
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: I sometimes install tools I never end up using."
+    type: single_choice
+    construct: much_agree_i_sometimes_install
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "When adopting a command-line tool, how important is speed and performance?"
+    type: single_choice
+    construct: when_adopting_command_line_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When adopting a command-line tool, how important is ease of learning?"
+    type: single_choice
+    construct: when_adopting_command_line_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When adopting a command-line tool, how important is cross-platform availability?"
+    type: single_choice
+    construct: when_adopting_command_line_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When adopting a command-line tool, how important is good documentation?"
+    type: single_choice
+    construct: when_adopting_command_line_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When adopting a command-line tool, how important is active maintenance?"
+    type: single_choice
+    construct: when_adopting_command_line_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When adopting a command-line tool, how important is composability with other tools?"
+    type: single_choice
+    construct: when_adopting_command_line_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Which are your top 3 criteria when adopting a command-line tool? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_criteria_when_adopting
+    required: true
+    options:
+      - id: "a"
+        label: "Speed and performance"
+      - id: "b"
+        label: "Ease of learning"
+      - id: "c"
+        label: "Cross-platform availability"
+      - id: "d"
+        label: "Good documentation"
+      - id: "e"
+        label: "Active maintenance"
+      - id: "f"
+        label: "Composability"
+      - id: "g"
+        label: "Popularity in the community"
+      - id: "h"
+        label: "Sensible defaults"
+  - id: q29
+    prompt: "How often do you learn a new command-line tool or feature?"
+    type: single_choice
+    construct: often_learn_new_command_line
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q30
+    prompt: "How often do you write shell scripts that combine several of these tools?"
+    type: single_choice
+    construct: often_write_shell_scripts_that
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q31
+    prompt: "How often do you use fuzzy history or reverse search when running commands?"
+    type: single_choice
+    construct: often_use_fuzzy_history_reverse
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q32
+    prompt: "Do you configure these tools with custom flags or config files?"
+    type: single_choice
+    construct: configure_these_tools_custom_flags
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, extensively"
+      - id: "b"
+        label: "Yes, a little"
+      - id: "c"
+        label: "No, I use defaults"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q33
+    prompt: "Which best describes how you adopted these tools?"
+    type: single_choice
+    construct: best_describes_adopted_these_tools
+    required: true
+    options:
+      - id: "a"
+        label: "I actively seek out new tools"
+      - id: "b"
+        label: "I adopt tools when I hit a specific pain point"
+      - id: "c"
+        label: "I adopt tools when others recommend them"
+      - id: "d"
+        label: "I mostly stick with what I already know"
+  - id: q34
+    prompt: "Do you use an AI assistant to help write command-line commands?"
+    type: single_choice
+    construct: use_ai_assistant_help_write
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I'm interested"
+      - id: "d"
+        label: "No"
+  - id: q35
+    prompt: "How satisfied are you with the speed of your command-line workflow?"
+    type: single_choice
+    construct: satisfied_speed_command_line_workflow
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "How satisfied are you with how well your tools work together?"
+    type: single_choice
+    construct: satisfied_well_tools_work_together
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "Overall, how satisfied are you with your command-line toolset?"
+    type: single_choice
+    construct: overall_satisfied_command_line_toolset
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "How likely are you to recommend modern command-line tools to another developer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_modern_command_line
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q39
+    prompt: "How likely are you to adopt a new command-line tool within the next year?"
+    type: single_choice
+    construct: likely_adopt_new_command_line
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q40
+    prompt: "What is one command-line tool you wish existed or worked better? (Optional short answer)"
+    type: free_text
+    construct: one_command_line_tool_wish
+    required: false
+  - id: q41
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "DevOps or platform engineer"
+      - id: "e"
+        label: "Systems or infrastructure engineer"
+      - id: "f"
+        label: "Data engineer or scientist"
+      - id: "g"
+        label: "Engineering manager"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q42
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q44
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q45
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q46
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q47
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q50
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q51
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

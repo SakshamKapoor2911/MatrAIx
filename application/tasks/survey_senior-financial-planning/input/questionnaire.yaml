@@ -1,0 +1,712 @@
+schemaVersion: "1.0"
+id: senior_financial_planning_v1
+title: "Senior Financial Planning Survey"
+description: "How older adults plan and manage their finances in and around retirement."
+questions:
+  - id: q0
+    prompt: "Which best describes your current stage?"
+    type: single_choice
+    construct: best_describes_current_stage
+    required: true
+    options:
+      - id: "a"
+        label: "Already retired"
+      - id: "b"
+        label: "Semi-retired or working part-time"
+      - id: "c"
+        label: "Planning to retire within 5 years"
+      - id: "d"
+        label: "Planning to retire in more than 5 years"
+      - id: "e"
+        label: "I do not expect to retire"
+  - id: q1
+    prompt: "At what age do you plan to (or did you) retire? Please enter a number (age in years)."
+    type: free_text
+    construct: age_plan_did_retire_please
+    required: true
+  - id: q2
+    prompt: "How prepared do you feel financially for retirement?"
+    type: single_choice
+    construct: prepared_feel_financially_retirement
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all prepared"
+      - id: "b"
+        label: "Slightly prepared"
+      - id: "c"
+        label: "Moderately prepared"
+      - id: "d"
+        label: "Well prepared"
+      - id: "e"
+        label: "Very well prepared"
+  - id: q3
+    prompt: "Which sources of retirement income do you have or expect to have? (Select all that apply)"
+    type: multi_choice
+    construct: sources_retirement_income_have_expect
+    required: true
+    options:
+      - id: "a"
+        label: "Social Security"
+      - id: "b"
+        label: "A pension"
+      - id: "c"
+        label: "A 401(k) or 403(b)"
+      - id: "d"
+        label: "An IRA or Roth IRA"
+      - id: "e"
+        label: "Personal savings or brokerage accounts"
+      - id: "f"
+        label: "Rental or real estate income"
+      - id: "g"
+        label: "An annuity"
+      - id: "h"
+        label: "Continued work or part-time income"
+      - id: "i"
+        label: "Support from family"
+      - id: "j"
+        label: "None of these"
+  - id: q4
+    prompt: "What do you expect to be your largest source of retirement income?"
+    type: single_choice
+    construct: expect_be_largest_source_retirement
+    required: true
+    options:
+      - id: "a"
+        label: "Social Security"
+      - id: "b"
+        label: "A pension"
+      - id: "c"
+        label: "Retirement accounts (401(k), IRA)"
+      - id: "d"
+        label: "Personal savings and investments"
+      - id: "e"
+        label: "Real estate or rental income"
+      - id: "f"
+        label: "Continued work"
+      - id: "g"
+        label: "Not sure"
+  - id: q5
+    prompt: "Do you have a written financial plan for retirement?"
+    type: single_choice
+    construct: have_written_financial_plan_retirement
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a detailed plan"
+      - id: "b"
+        label: "Yes, a rough plan"
+      - id: "c"
+        label: "No, but I've thought about it"
+      - id: "d"
+        label: "No plan at all"
+  - id: q6
+    prompt: "Do you currently work with a financial professional?"
+    type: single_choice
+    construct: currently_work_financial_professional
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a financial advisor or planner"
+      - id: "b"
+        label: "Yes, an accountant or tax professional only"
+      - id: "c"
+        label: "No, I manage it myself"
+      - id: "d"
+        label: "No, but I'm considering getting help"
+  - id: q7
+    prompt: "How confident are you that your savings will last through retirement?"
+    type: single_choice
+    construct: confident_that_savings_will_last
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q8
+    prompt: "About how much do you have saved for retirement across all accounts? Please enter a dollar amount."
+    type: free_text
+    construct: much_have_saved_retirement_across
+    required: true
+  - id: q9
+    prompt: "How much do you agree or disagree: I have enough saved to maintain my lifestyle in retirement."
+    type: single_choice
+    construct: much_agree_disagree_i_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree or disagree: I worry about outliving my money."
+    type: single_choice
+    construct: much_agree_disagree_i_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree: Rising healthcare costs are a major concern for me."
+    type: single_choice
+    construct: much_agree_disagree_rising_healthcare
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: I feel in control of my finances."
+    type: single_choice
+    construct: much_agree_disagree_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I want to leave an inheritance for my family."
+    type: single_choice
+    construct: much_agree_disagree_i_want
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How concerned are you about each of the following in retirement: Running out of savings"
+    type: single_choice
+    construct: concerned_each_following_retirement_runn
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q15
+    prompt: "How concerned are you about each of the following in retirement: Healthcare and medical costs"
+    type: single_choice
+    construct: concerned_each_following_retirement_heal
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q16
+    prompt: "How concerned are you about each of the following in retirement: Long-term care or nursing costs"
+    type: single_choice
+    construct: concerned_each_following_retirement_long
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q17
+    prompt: "How concerned are you about each of the following in retirement: Inflation eroding my income"
+    type: single_choice
+    construct: concerned_each_following_retirement_infl
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q18
+    prompt: "How concerned are you about each of the following in retirement: Being a financial burden on my family"
+    type: single_choice
+    construct: concerned_each_following_retirement_bein
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q19
+    prompt: "How concerned are you about each of the following in retirement: Financial scams targeting older adults"
+    type: single_choice
+    construct: concerned_each_following_retirement_fina
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q20
+    prompt: "Which of the following have you already done to plan for later life? (Select all that apply)"
+    type: multi_choice
+    construct: following_have_already_done_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Created a will"
+      - id: "b"
+        label: "Set up a trust"
+      - id: "c"
+        label: "Named beneficiaries on accounts"
+      - id: "d"
+        label: "Set up a power of attorney"
+      - id: "e"
+        label: "Made healthcare directives"
+      - id: "f"
+        label: "Bought long-term care insurance"
+      - id: "g"
+        label: "Talked with family about my wishes"
+      - id: "h"
+        label: "Organized my financial documents"
+      - id: "i"
+        label: "None of these yet"
+  - id: q21
+    prompt: "Do you have a plan for how you will draw down your savings in retirement?"
+    type: single_choice
+    construct: have_plan_will_draw_down
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a clear withdrawal strategy"
+      - id: "b"
+        label: "A general idea"
+      - id: "c"
+        label: "No plan yet"
+      - id: "d"
+        label: "Not applicable"
+  - id: q22
+    prompt: "How are your retirement investments currently allocated?"
+    type: single_choice
+    construct: retirement_investments_currently_allocat
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly conservative (cash, bonds)"
+      - id: "b"
+        label: "Balanced (mix of stocks and bonds)"
+      - id: "c"
+        label: "Mostly growth (stocks)"
+      - id: "d"
+        label: "I'm not sure how they're allocated"
+      - id: "e"
+        label: "I don't have investments"
+  - id: q23
+    prompt: "Have you claimed or when do you plan to claim Social Security?"
+    type: single_choice
+    construct: have_claimed_when_plan_claim
+    required: true
+    options:
+      - id: "a"
+        label: "Already claiming"
+      - id: "b"
+        label: "Plan to claim at 62 (early)"
+      - id: "c"
+        label: "Plan to claim at full retirement age"
+      - id: "d"
+        label: "Plan to delay to increase benefits"
+      - id: "e"
+        label: "Not sure"
+  - id: q24
+    prompt: "How do you feel about your current housing situation for retirement?"
+    type: single_choice
+    construct: feel_current_housing_situation_retiremen
+    required: true
+    options:
+      - id: "a"
+        label: "I plan to stay in my current home"
+      - id: "b"
+        label: "I plan to downsize"
+      - id: "c"
+        label: "I plan to move (e.g., closer to family, lower cost area)"
+      - id: "d"
+        label: "I'm considering senior or assisted living"
+      - id: "e"
+        label: "I'm not sure yet"
+  - id: q25
+    prompt: "Which everyday money tasks, if any, do you get help with? (Select all that apply)"
+    type: multi_choice
+    construct: everyday_money_tasks_if_any
+    required: true
+    options:
+      - id: "a"
+        label: "Paying bills"
+      - id: "b"
+        label: "Managing investments"
+      - id: "c"
+        label: "Filing taxes"
+      - id: "d"
+        label: "Budgeting"
+      - id: "e"
+        label: "Understanding Medicare or insurance"
+      - id: "f"
+        label: "Online banking"
+      - id: "g"
+        label: "I don't need help with any of these"
+  - id: q26
+    prompt: "How confident are you in managing money online and avoiding scams?"
+    type: single_choice
+    construct: confident_managing_money_online_avoiding
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q27
+    prompt: "Select your top 3 financial priorities for retirement. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_financial_priorities
+    required: true
+    options:
+      - id: "a"
+        label: "Making my savings last"
+      - id: "b"
+        label: "Covering healthcare costs"
+      - id: "c"
+        label: "Maintaining my lifestyle"
+      - id: "d"
+        label: "Leaving an inheritance"
+      - id: "e"
+        label: "Paying off remaining debt"
+      - id: "f"
+        label: "Traveling or enjoying retirement"
+      - id: "g"
+        label: "Helping children or grandchildren"
+      - id: "h"
+        label: "Protecting against scams and fraud"
+  - id: q28
+    prompt: "How often do you review your retirement finances?"
+    type: single_choice
+    construct: often_review_retirement_finances
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Once a year or less"
+      - id: "c"
+        label: "A few times a year"
+      - id: "d"
+        label: "Monthly"
+      - id: "e"
+        label: "Weekly or more"
+  - id: q29
+    prompt: "Do you currently carry any debt?"
+    type: single_choice
+    construct: currently_carry_any_debt
+    required: true
+    options:
+      - id: "a"
+        label: "No debt"
+      - id: "b"
+        label: "A mortgage only"
+      - id: "c"
+        label: "Credit card or consumer debt"
+      - id: "d"
+        label: "Multiple types of debt"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q30
+    prompt: "Overall, how satisfied are you with your financial situation in retirement (or your retirement plan)?"
+    type: single_choice
+    construct: overall_satisfied_financial_situation_re
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q31
+    prompt: "How likely are you to make changes to your retirement plan in the next year?"
+    type: single_choice
+    construct: likely_make_changes_retirement_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Somewhat likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "50–54"
+      - id: "b"
+        label: "55–59"
+      - id: "c"
+        label: "60–64"
+      - id: "d"
+        label: "65–69"
+      - id: "e"
+        label: "70–74"
+      - id: "f"
+        label: "75 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q42
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own with a mortgage"
+      - id: "b"
+        label: "Own outright"
+      - id: "c"
+        label: "Rent"
+      - id: "d"
+        label: "Other arrangement"
+  - id: q43
+    prompt: "What type of health coverage do you primarily have?"
+    type: single_choice
+    construct: type_health_coverage_primarily_have
+    required: true
+    options:
+      - id: "a"
+        label: "Medicare only"
+      - id: "b"
+        label: "Medicare plus a supplement or Advantage plan"
+      - id: "c"
+        label: "Employer or retiree health plan"
+      - id: "d"
+        label: "Marketplace or private insurance"
+      - id: "e"
+        label: "Medicaid"
+      - id: "f"
+        label: "No health coverage"
+      - id: "g"
+        label: "Prefer not to say"

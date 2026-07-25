@@ -1,0 +1,7 @@
+# Smoking Cessation Attitudes
+
+General public attitudes toward quit-smoking programs, tools, and support resources.
+
+## About this survey
+
+This survey measures opinions and awareness rather than clinical behavior. It captures a respondent's broad relationship to smoking, how important they think it is to support people who want to quit, how serious they consider the issue, awareness of support options and effective approaches, how many people they know who have tried to quit, and where they think people turn first. It runs Likert batteries on agreement (resources easy to find, willpower, value of support, apps, workplace support, campaign effectiveness, cost as a barrier) and on the importance of different forms of help, a top-3 ranking of barriers, campaign influence, comfort encouraging others, the most helpful approach, quit-line awareness, channels where anti-smoking messages are seen, likelihood to recommend a quit app, policies supported, and support for smoke-free workplaces, plus an open comment. Question types include single-choice, multi-select, Likert scales, a matrix battery split per item, a top-3 ranking, and numeric free-text. Demographics captured: age, gender, race/ethnicity, household income, education, employment, household size, marital status, region, urban/rural, insurance status, and self-rated health. Content is intentionally benign and attitude-focused.

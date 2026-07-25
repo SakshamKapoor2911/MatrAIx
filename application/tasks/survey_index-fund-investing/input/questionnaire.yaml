@@ -1,0 +1,708 @@
+schemaVersion: "1.0"
+id: index_fund_investing_v1
+title: "Index Fund Investing Survey"
+description: "How investors use low-cost index funds and ETFs to build their portfolios."
+questions:
+  - id: q0
+    prompt: "Do you invest in index funds or index ETFs (funds that track a market index rather than being actively picked)?"
+    type: single_choice
+    construct: invest_index_funds_index_etfs
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, they are the core of my investments"
+      - id: "b"
+        label: "Yes, as part of a broader mix"
+      - id: "c"
+        label: "No, but I am considering them"
+      - id: "d"
+        label: "No, I prefer other investments"
+      - id: "e"
+        label: "I'm not sure what an index fund is"
+  - id: q1
+    prompt: "How long have you been investing in index funds?"
+    type: single_choice
+    construct: long_have_been_investing_index
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 10 years"
+      - id: "d"
+        label: "More than 10 years"
+      - id: "e"
+        label: "Not applicable"
+  - id: q2
+    prompt: "Which types of index funds do you hold? (Select all that apply)"
+    type: multi_choice
+    construct: types_index_funds_hold_select
+    required: true
+    options:
+      - id: "a"
+        label: "S&P 500 index fund"
+      - id: "b"
+        label: "Total U.S. stock market index fund"
+      - id: "c"
+        label: "International or global stock index fund"
+      - id: "d"
+        label: "Bond index fund"
+      - id: "e"
+        label: "Target-date fund (which uses index funds)"
+      - id: "f"
+        label: "Sector or thematic index fund"
+      - id: "g"
+        label: "I don't hold any index funds"
+  - id: q3
+    prompt: "Which fund families or products do you use? (Select all that apply)"
+    type: multi_choice
+    construct: fund_families_products_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Vanguard (e.g., VOO, VTI, VTSAX)"
+      - id: "b"
+        label: "Fidelity (e.g., FXAIX, FZROX)"
+      - id: "c"
+        label: "Charles Schwab (e.g., SWPPX, SCHB)"
+      - id: "d"
+        label: "iShares / BlackRock (e.g., IVV, ITOT)"
+      - id: "e"
+        label: "SPDR (e.g., SPY)"
+      - id: "f"
+        label: "A fund inside my workplace retirement plan"
+      - id: "g"
+        label: "Not sure of the specific fund"
+  - id: q4
+    prompt: "Through which account(s) do you hold index funds? (Select all that apply)"
+    type: multi_choice
+    construct: through_account_s_hold_index
+    required: true
+    options:
+      - id: "a"
+        label: "Workplace retirement plan (401(k), 403(b))"
+      - id: "b"
+        label: "IRA (Traditional or Roth)"
+      - id: "c"
+        label: "Taxable brokerage account"
+      - id: "d"
+        label: "A robo-advisor"
+      - id: "e"
+        label: "A 529 or education account"
+      - id: "f"
+        label: "Not applicable"
+  - id: q5
+    prompt: "About how much do you currently have invested in index funds?"
+    type: single_choice
+    construct: much_currently_have_invested_index
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $5,000"
+      - id: "b"
+        label: "$5,000 to $24,999"
+      - id: "c"
+        label: "$25,000 to $99,999"
+      - id: "d"
+        label: "$100,000 to $499,999"
+      - id: "e"
+        label: "$500,000 or more"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q6
+    prompt: "About how much do you invest in index funds in a typical month? Please enter a dollar amount."
+    type: free_text
+    construct: much_invest_index_funds_typical
+    required: true
+  - id: q7
+    prompt: "How do you usually add money to your index funds?"
+    type: single_choice
+    construct: usually_add_money_index_funds
+    required: true
+    options:
+      - id: "a"
+        label: "Automatic recurring contributions"
+      - id: "b"
+        label: "Manual contributions when I have money to invest"
+      - id: "c"
+        label: "Payroll deductions into a retirement plan"
+      - id: "d"
+        label: "Occasional lump sums"
+      - id: "e"
+        label: "Not applicable"
+  - id: q8
+    prompt: "How aware are you of the expense ratios (annual fees) of the funds you own?"
+    type: single_choice
+    construct: aware_expense_ratios_annual_fees
+    required: true
+    options:
+      - id: "a"
+        label: "I know them precisely"
+      - id: "b"
+        label: "I have a rough idea"
+      - id: "c"
+        label: "I know they are low but not the exact numbers"
+      - id: "d"
+        label: "I don't pay attention to them"
+      - id: "e"
+        label: "I don't know what an expense ratio is"
+  - id: q9
+    prompt: "How often do you rebalance or adjust your index fund holdings?"
+    type: single_choice
+    construct: often_rebalance_adjust_index_fund
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Only when a fund is added or removed in my plan"
+      - id: "c"
+        label: "About once a year"
+      - id: "d"
+        label: "A few times a year"
+      - id: "e"
+        label: "More often than that"
+  - id: q10
+    prompt: "How did you first decide to invest in index funds?"
+    type: single_choice
+    construct: did_first_decide_invest_index
+    required: true
+    options:
+      - id: "a"
+        label: "Advice from a financial advisor"
+      - id: "b"
+        label: "Books, articles, or financial media"
+      - id: "c"
+        label: "Recommendation from friends or family"
+      - id: "d"
+        label: "Social media or online communities"
+      - id: "e"
+        label: "They were the default in my retirement plan"
+      - id: "f"
+        label: "Not applicable"
+  - id: q11
+    prompt: "How much do you agree: Index funds are a smart, low-cost way to invest."
+    type: single_choice
+    construct: much_agree_index_funds_smart
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree: Most people are better off with index funds than trying to pick winning stocks."
+    type: single_choice
+    construct: much_agree_most_people_better
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree: I understand how index funds work."
+    type: single_choice
+    construct: much_agree_i_understand_index
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: Actively managed funds are worth their higher fees if they beat the market."
+    type: single_choice
+    construct: much_agree_actively_managed_funds
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: The simplicity of index investing is a big part of its appeal to me."
+    type: single_choice
+    construct: much_agree_simplicity_index_investing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: I find index investing boring, and that is fine with me."
+    type: single_choice
+    construct: much_agree_i_find_index
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: I worry that index funds will not protect me in a market crash."
+    type: single_choice
+    construct: much_agree_i_worry_that
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "When choosing an index fund, how important is each factor: a low expense ratio."
+    type: single_choice
+    construct: when_choosing_index_fund_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "When choosing an index fund, how important is each factor: broad diversification."
+    type: single_choice
+    construct: when_choosing_index_fund_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "When choosing an index fund, how important is each factor: the reputation of the fund company."
+    type: single_choice
+    construct: when_choosing_index_fund_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "When choosing an index fund, how important is each factor: past performance of the index."
+    type: single_choice
+    construct: when_choosing_index_fund_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When choosing an index fund, how important is each factor: no minimum investment or trading commission."
+    type: single_choice
+    construct: when_choosing_index_fund_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "Which factors are your top 3 reasons for investing in index funds? (Select all that apply — choose up to 3)"
+    type: single_choice
+    construct: factors_top_3_reasons_investing
+    required: true
+    options:
+      - id: "a"
+        label: "Low fees"
+      - id: "b"
+        label: "Diversification"
+      - id: "c"
+        label: "Simplicity and low maintenance"
+      - id: "d"
+        label: "Strong long-term track record"
+      - id: "e"
+        label: "Not having to pick stocks"
+      - id: "f"
+        label: "Advice from experts or media"
+      - id: "g"
+        label: "It is the default in my retirement plan"
+  - id: q24
+    prompt: "Do you practice dollar-cost averaging (investing a fixed amount on a regular schedule)?"
+    type: single_choice
+    construct: practice_dollar_cost_averaging_investing
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, consistently"
+      - id: "b"
+        label: "Sometimes"
+      - id: "c"
+        label: "No, I invest lump sums when I can"
+      - id: "d"
+        label: "Not applicable"
+  - id: q25
+    prompt: "When the market falls sharply, how do you usually treat your index fund investments?"
+    type: single_choice
+    construct: when_market_falls_sharply_usually
+    required: true
+    options:
+      - id: "a"
+        label: "Keep investing on schedule"
+      - id: "b"
+        label: "Invest extra while prices are low"
+      - id: "c"
+        label: "Pause new investments but hold what I have"
+      - id: "d"
+        label: "Move some money to safer investments"
+      - id: "e"
+        label: "Sell to avoid further losses"
+  - id: q26
+    prompt: "Besides index funds, which other investments do you also hold? (Select all that apply)"
+    type: multi_choice
+    construct: besides_index_funds_other_investments
+    required: true
+    options:
+      - id: "a"
+        label: "Individual stocks"
+      - id: "b"
+        label: "Actively managed mutual funds"
+      - id: "c"
+        label: "Bonds or CDs"
+      - id: "d"
+        label: "Real estate"
+      - id: "e"
+        label: "Cryptocurrency"
+      - id: "f"
+        label: "I hold only index funds"
+      - id: "g"
+        label: "Not applicable"
+  - id: q27
+    prompt: "How confident are you that index funds will help you meet your long-term financial goals?"
+    type: single_choice
+    construct: confident_that_index_funds_will
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q28
+    prompt: "How satisfied are you with the returns on your index fund investments so far?"
+    type: single_choice
+    construct: satisfied_returns_index_fund_investments
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q29
+    prompt: "How likely are you to keep investing in index funds over the next several years?"
+    type: single_choice
+    construct: likely_keep_investing_index_funds
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q30
+    prompt: "On a scale of 0 to 10, how likely are you to recommend index fund investing to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "Is there anything else you would like to share about your experience with index funds? (Optional — you may leave a short comment.)"
+    type: free_text
+    construct: there_anything_else_would_like
+    required: false
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Which best describes your race or ethnicity?"
+    type: single_choice
+    construct: best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Two or more races"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree or trade certificate"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q42
+    prompt: "How would you describe your level of investing experience?"
+    type: single_choice
+    construct: would_describe_level_investing_experienc
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Some experience"
+      - id: "c"
+        label: "Experienced"
+      - id: "d"
+        label: "Very experienced"

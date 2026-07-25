@@ -1,0 +1,661 @@
+schemaVersion: "1.0"
+id: discount_shopping_v1
+title: "Discount Shopping Survey"
+description: "How consumers shop for discounts, deals, and lower-priced goods across discount, off-price, warehouse, and secondhand channels."
+questions:
+  - id: q0
+    prompt: "How would you describe your overall approach to shopping?"
+    type: single_choice
+    construct: would_describe_overall_approach_shopping
+    required: true
+    options:
+      - id: "a"
+        label: "I almost always look for the lowest price or best deal"
+      - id: "b"
+        label: "I look for deals but value quality too"
+      - id: "c"
+        label: "I balance price and convenience equally"
+      - id: "d"
+        label: "I mostly buy what I want regardless of price"
+      - id: "e"
+        label: "Price rarely factors into my decisions"
+  - id: q1
+    prompt: "Over the past year, has your focus on finding discounts and lower prices..."
+    type: single_choice
+    construct: over_past_year_has_focus
+    required: true
+    options:
+      - id: "a"
+        label: "Increased a lot"
+      - id: "b"
+        label: "Increased somewhat"
+      - id: "c"
+        label: "Stayed about the same"
+      - id: "d"
+        label: "Decreased somewhat"
+      - id: "e"
+        label: "Decreased a lot"
+  - id: q2
+    prompt: "Which types of discount stores or channels do you shop at? (Select all that apply)"
+    type: multi_choice
+    construct: types_discount_stores_channels_shop
+    required: true
+    options:
+      - id: "a"
+        label: "Discount or dollar stores (e.g., Dollar General, Dollar Tree)"
+      - id: "b"
+        label: "Warehouse clubs (e.g., Costco, Sam's Club, BJ's)"
+      - id: "c"
+        label: "Off-price retailers (e.g., TJ Maxx, Marshalls, Ross)"
+      - id: "d"
+        label: "Outlet malls"
+      - id: "e"
+        label: "Thrift or secondhand stores"
+      - id: "f"
+        label: "Online marketplaces (e.g., Amazon, eBay, Temu, Shein)"
+      - id: "g"
+        label: "Resale apps (e.g., Poshmark, Facebook Marketplace, OfferUp)"
+      - id: "h"
+        label: "Clearance sections of regular stores"
+  - id: q3
+    prompt: "How often do you buy secondhand or used items to save money?"
+    type: single_choice
+    construct: often_buy_secondhand_used_items
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q4
+    prompt: "In which categories do you actively seek discounts? (Select all that apply)"
+    type: multi_choice
+    construct: categories_actively_seek_discounts_selec
+    required: true
+    options:
+      - id: "a"
+        label: "Groceries"
+      - id: "b"
+        label: "Clothing and shoes"
+      - id: "c"
+        label: "Household goods"
+      - id: "d"
+        label: "Electronics"
+      - id: "e"
+        label: "Furniture and home decor"
+      - id: "f"
+        label: "Toys and kids' items"
+      - id: "g"
+        label: "Health and beauty"
+      - id: "h"
+        label: "Gifts"
+  - id: q5
+    prompt: "About what percentage of your total spending goes to discount or off-price shopping?"
+    type: single_choice
+    construct: percentage_total_spending_goes_discount
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 10%"
+      - id: "b"
+        label: "10% to 25%"
+      - id: "c"
+        label: "26% to 50%"
+      - id: "d"
+        label: "51% to 75%"
+      - id: "e"
+        label: "More than 75%"
+  - id: q6
+    prompt: "About how much do you estimate you save each month by shopping for discounts? Please enter a number of dollars."
+    type: free_text
+    construct: much_estimate_save_each_month
+    required: true
+  - id: q7
+    prompt: "How do you usually decide something is a good deal? (Select all that apply)"
+    type: multi_choice
+    construct: usually_decide_something_good_deal
+    required: true
+    options:
+      - id: "a"
+        label: "Comparing prices across stores or sites"
+      - id: "b"
+        label: "Checking price-history tools or trackers"
+      - id: "c"
+        label: "Percentage off the original price"
+      - id: "d"
+        label: "Comparing cost per unit"
+      - id: "e"
+        label: "Reviews and quality ratings"
+      - id: "f"
+        label: "My own sense of what things should cost"
+      - id: "g"
+        label: "Advice from friends or family"
+  - id: q8
+    prompt: "How often do you wait for a sale before buying something you want?"
+    type: single_choice
+    construct: often_wait_sale_before_buying
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q9
+    prompt: "How much do you agree with the following statement: Finding a great deal gives me real satisfaction."
+    type: single_choice
+    construct: much_agree_following_statement_finding
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree with the following statement: Buying discounted items sometimes leads me to spend more overall."
+    type: single_choice
+    construct: much_agree_following_statement_buying
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: I would rather buy fewer, higher-quality items than many cheap ones."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Shopping secondhand is a smart way to save money."
+    type: single_choice
+    construct: much_agree_following_statement_shopping
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: Rising prices have pushed me to shop for more discounts."
+    type: single_choice
+    construct: much_agree_following_statement_rising
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How important is each factor when you shop for discounts: getting the lowest possible price?"
+    type: single_choice
+    construct: important_each_factor_when_shop
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q15
+    prompt: "How important is each factor when you shop for discounts: the quality and durability of the item?"
+    type: single_choice
+    construct: important_each_factor_when_shop
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "How important is each factor when you shop for discounts: the convenience of where you buy it?"
+    type: single_choice
+    construct: important_each_factor_when_shop
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "How important is each factor when you shop for discounts: the brand or reputation?"
+    type: single_choice
+    construct: important_each_factor_when_shop
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each factor when you shop for discounts: whether the item is environmentally friendly or reused?"
+    type: single_choice
+    construct: important_each_factor_when_shop
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "Which shopping events do you plan purchases around? (Select all that apply)"
+    type: multi_choice
+    construct: shopping_events_plan_purchases_around
+    required: true
+    options:
+      - id: "a"
+        label: "Black Friday or Cyber Monday"
+      - id: "b"
+        label: "Amazon Prime Day"
+      - id: "c"
+        label: "Holiday clearance sales"
+      - id: "d"
+        label: "Back-to-school sales"
+      - id: "e"
+        label: "End-of-season markdowns"
+      - id: "f"
+        label: "Store anniversary or membership sales"
+      - id: "g"
+        label: "I don't plan around sales events"
+  - id: q20
+    prompt: "Which of these behaviors do you regularly do to save money? (Select all that apply)"
+    type: multi_choice
+    construct: these_behaviors_regularly_save_money
+    required: true
+    options:
+      - id: "a"
+        label: "Buy store or generic brands"
+      - id: "b"
+        label: "Buy in bulk"
+      - id: "c"
+        label: "Stock up when items are on sale"
+      - id: "d"
+        label: "Use price-matching policies"
+      - id: "e"
+        label: "Shop clearance or open-box items"
+      - id: "f"
+        label: "Delay purchases until prices drop"
+      - id: "g"
+        label: "Sell or trade in items I no longer need"
+  - id: q21
+    prompt: "What is the main downside you experience from discount shopping?"
+    type: single_choice
+    construct: main_downside_experience_from_discount
+    required: true
+    options:
+      - id: "a"
+        label: "Lower quality or shorter-lived items"
+      - id: "b"
+        label: "Spending more time searching"
+      - id: "c"
+        label: "Buying things I don't really need"
+      - id: "d"
+        label: "Limited selection or sizes"
+      - id: "e"
+        label: "Crowded stores or shipping delays"
+      - id: "f"
+        label: "I don't experience any downsides"
+      - id: "g"
+        label: "Other"
+  - id: q22
+    prompt: "Select the top 3 reasons you shop for discounts. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_shop
+    required: true
+    options:
+      - id: "a"
+        label: "To stretch a tight budget"
+      - id: "b"
+        label: "The thrill of finding a bargain"
+      - id: "c"
+        label: "To afford more of what I want"
+      - id: "d"
+        label: "To save for other goals"
+      - id: "e"
+        label: "To reduce waste or reuse items"
+      - id: "f"
+        label: "It's a habit I grew up with"
+      - id: "g"
+        label: "To keep up with rising prices"
+      - id: "h"
+        label: "To treat myself affordably"
+  - id: q23
+    prompt: "How has inflation over the past two years affected your shopping habits?"
+    type: single_choice
+    construct: has_inflation_over_past_two
+    required: true
+    options:
+      - id: "a"
+        label: "I trade down to cheaper options much more"
+      - id: "b"
+        label: "I trade down somewhat more"
+      - id: "c"
+        label: "No real change"
+      - id: "d"
+        label: "I actually spend more freely now"
+      - id: "e"
+        label: "Not sure"
+  - id: q24
+    prompt: "How satisfied are you with the savings you achieve through discount shopping?"
+    type: single_choice
+    construct: satisfied_savings_achieve_through_discou
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q25
+    prompt: "How likely are you to keep shopping this way over the next year?"
+    type: single_choice
+    construct: likely_keep_shopping_this_way
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q26
+    prompt: "On a scale of 0 to 10, how much do you enjoy the process of hunting for deals? (0 = not at all, 10 = a great deal)"
+    type: single_choice
+    construct: scale_0_10_much_enjoy
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q27
+    prompt: "Please share any thoughts about your discount-shopping habits or what drives them."
+    type: free_text
+    construct: please_share_any_thoughts_discount
+    required: true
+  - id: q28
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18-24"
+      - id: "b"
+        label: "25-34"
+      - id: "c"
+        label: "35-44"
+      - id: "d"
+        label: "45-54"
+      - id: "e"
+        label: "55-64"
+      - id: "f"
+        label: "65 or older"
+  - id: q29
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q30
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is your total annual household income (before taxes)?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q33
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Homemaker or caregiver"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Unable to work"
+  - id: q34
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q35
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q36
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q37
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q38
+    prompt: "How would you describe your current financial situation?"
+    type: single_choice
+    construct: would_describe_current_financial_situati
+    required: true
+    options:
+      - id: "a"
+        label: "Comfortable, with money left over"
+      - id: "b"
+        label: "Getting by, breaking even"
+      - id: "c"
+        label: "Stretched, but managing"
+      - id: "d"
+        label: "Struggling to make ends meet"
+  - id: q39
+    prompt: "How many children under 18 live in your household? Please enter a number."
+    type: free_text
+    construct: many_children_under_18_live
+    required: true

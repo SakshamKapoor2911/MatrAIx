@@ -1,0 +1,674 @@
+schemaVersion: "1.0"
+id: cashback_loyalty_programs_v1
+title: "Cashback and Loyalty Programs Survey"
+description: "How consumers use cashback and loyalty rewards programs."
+questions:
+  - id: q0
+    prompt: "Do you participate in any cashback or loyalty rewards programs?"
+    type: single_choice
+    construct: participate_any_cashback_loyalty_rewards
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several"
+      - id: "b"
+        label: "Yes, one or two"
+      - id: "c"
+        label: "No, but I have in the past"
+      - id: "d"
+        label: "No, I have never participated"
+  - id: q1
+    prompt: "About how many loyalty or rewards programs are you enrolled in? Please enter a number."
+    type: free_text
+    construct: many_loyalty_rewards_programs_enrolled
+    required: true
+  - id: q2
+    prompt: "Which types of rewards programs do you use? (Select all that apply)"
+    type: multi_choice
+    construct: types_rewards_programs_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Cashback credit cards"
+      - id: "b"
+        label: "Travel or airline miles credit cards"
+      - id: "c"
+        label: "Grocery or drugstore loyalty programs"
+      - id: "d"
+        label: "Restaurant or coffee shop rewards (for example, Starbucks Rewards)"
+      - id: "e"
+        label: "Airline frequent flyer programs"
+      - id: "f"
+        label: "Hotel loyalty programs"
+      - id: "g"
+        label: "Retail store loyalty or points programs"
+      - id: "h"
+        label: "Cashback shopping apps or portals"
+      - id: "i"
+        label: "Gas station or warehouse club rewards"
+      - id: "j"
+        label: "I do not use any"
+  - id: q3
+    prompt: "Which cashback apps or portals do you use? (Select all that apply)"
+    type: multi_choice
+    construct: cashback_apps_portals_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Rakuten"
+      - id: "b"
+        label: "Ibotta"
+      - id: "c"
+        label: "Fetch"
+      - id: "d"
+        label: "Honey"
+      - id: "e"
+        label: "Upside"
+      - id: "f"
+        label: "A bank or card issuer's shopping portal"
+      - id: "g"
+        label: "Store apps with built-in cashback"
+      - id: "h"
+        label: "I do not use cashback apps"
+  - id: q4
+    prompt: "Do you have a credit card that earns cashback or rewards?"
+    type: single_choice
+    construct: have_credit_card_that_earns
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it is my main card"
+      - id: "b"
+        label: "Yes, but I use it only sometimes"
+      - id: "c"
+        label: "No, but I plan to get one"
+      - id: "d"
+        label: "No"
+  - id: q5
+    prompt: "How do you primarily earn rewards? (Select all that apply)"
+    type: multi_choice
+    construct: primarily_earn_rewards_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Everyday credit or debit card spending"
+      - id: "b"
+        label: "Grocery and household shopping"
+      - id: "c"
+        label: "Dining and takeout"
+      - id: "d"
+        label: "Travel bookings"
+      - id: "e"
+        label: "Gas and transportation"
+      - id: "f"
+        label: "Online shopping through portals"
+      - id: "g"
+        label: "Scanning receipts"
+      - id: "h"
+        label: "Not applicable"
+  - id: q6
+    prompt: "About how much do you estimate you earn in cashback or rewards value per year? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_estimate_earn_cashback_rewards
+    required: true
+  - id: q7
+    prompt: "How often do you use a rewards program or cashback app when making a purchase?"
+    type: single_choice
+    construct: often_use_rewards_program_cashback
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q8
+    prompt: "How do you usually redeem your rewards? (Select all that apply)"
+    type: multi_choice
+    construct: usually_redeem_rewards_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Statement credit or cash back"
+      - id: "b"
+        label: "Direct deposit or PayPal"
+      - id: "c"
+        label: "Gift cards"
+      - id: "d"
+        label: "Travel bookings (flights or hotels)"
+      - id: "e"
+        label: "Merchandise"
+      - id: "f"
+        label: "Discounts at checkout"
+      - id: "g"
+        label: "I let them accumulate without redeeming"
+      - id: "h"
+        label: "Not applicable"
+  - id: q9
+    prompt: "How often do you redeem your rewards rather than letting them build up?"
+    type: single_choice
+    construct: often_redeem_rewards_rather_than
+    required: true
+    options:
+      - id: "a"
+        label: "As soon as I can"
+      - id: "b"
+        label: "Every few months"
+      - id: "c"
+        label: "About once a year"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "I let them accumulate indefinitely"
+  - id: q10
+    prompt: "Have you ever lost rewards or points because they expired?"
+    type: single_choice
+    construct: have_ever_lost_rewards_points
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not sure"
+  - id: q11
+    prompt: "How much do you agree or disagree: Rewards programs meaningfully save me money."
+    type: single_choice
+    construct: much_agree_disagree_rewards_programs
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: I sometimes spend more than I planned to earn rewards."
+    type: single_choice
+    construct: much_agree_disagree_i_sometimes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: Loyalty programs make me more likely to shop at a particular store or brand."
+    type: single_choice
+    construct: much_agree_disagree_loyalty_programs
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: Keeping track of multiple rewards programs is a hassle."
+    type: single_choice
+    construct: much_agree_disagree_keeping_track
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: I worry about how much personal data these programs collect."
+    type: single_choice
+    construct: much_agree_disagree_i_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How influential is each factor in where you shop — Earning cashback or points?"
+    type: single_choice
+    construct: influential_each_factor_where_shop
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all influential"
+      - id: "b"
+        label: "Slightly influential"
+      - id: "c"
+        label: "Moderately influential"
+      - id: "d"
+        label: "Very influential"
+      - id: "e"
+        label: "Extremely influential"
+  - id: q17
+    prompt: "How influential is each factor in where you shop — Member-only discounts or coupons?"
+    type: single_choice
+    construct: influential_each_factor_where_shop
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all influential"
+      - id: "b"
+        label: "Slightly influential"
+      - id: "c"
+        label: "Moderately influential"
+      - id: "d"
+        label: "Very influential"
+      - id: "e"
+        label: "Extremely influential"
+  - id: q18
+    prompt: "How influential is each factor in where you shop — Free shipping or perks?"
+    type: single_choice
+    construct: influential_each_factor_where_shop
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all influential"
+      - id: "b"
+        label: "Slightly influential"
+      - id: "c"
+        label: "Moderately influential"
+      - id: "d"
+        label: "Very influential"
+      - id: "e"
+        label: "Extremely influential"
+  - id: q19
+    prompt: "How influential is each factor in where you shop — Early access or exclusive offers?"
+    type: single_choice
+    construct: influential_each_factor_where_shop
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all influential"
+      - id: "b"
+        label: "Slightly influential"
+      - id: "c"
+        label: "Moderately influential"
+      - id: "d"
+        label: "Very influential"
+      - id: "e"
+        label: "Extremely influential"
+  - id: q20
+    prompt: "Please select your top 3 things you value most in a rewards program. (Select all that apply)"
+    type: multi_choice
+    construct: please_select_top_3_things
+    required: true
+    options:
+      - id: "a"
+        label: "High cashback or points rate"
+      - id: "b"
+        label: "Easy redemption"
+      - id: "c"
+        label: "No annual fee"
+      - id: "d"
+        label: "Flexible ways to use rewards"
+      - id: "e"
+        label: "Rewards that do not expire"
+      - id: "f"
+        label: "Bonus categories I actually use"
+      - id: "g"
+        label: "Sign-up or welcome bonuses"
+      - id: "h"
+        label: "Simple, easy-to-understand terms"
+  - id: q21
+    prompt: "Do you pay an annual fee for any of your rewards cards?"
+    type: single_choice
+    construct: pay_annual_fee_any_rewards
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for one card"
+      - id: "b"
+        label: "Yes, for more than one card"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable"
+  - id: q22
+    prompt: "Do you carry a balance on your rewards credit card from month to month?"
+    type: single_choice
+    construct: carry_balance_rewards_credit_card
+    required: true
+    options:
+      - id: "a"
+        label: "No, I pay in full every month"
+      - id: "b"
+        label: "Sometimes"
+      - id: "c"
+        label: "Yes, most months"
+      - id: "d"
+        label: "Not applicable"
+  - id: q23
+    prompt: "How much effort do you put into maximizing rewards across programs?"
+    type: single_choice
+    construct: much_effort_put_into_maximizing
+    required: true
+    options:
+      - id: "a"
+        label: "A great deal"
+      - id: "b"
+        label: "Quite a bit"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A little"
+      - id: "e"
+        label: "None"
+  - id: q24
+    prompt: "Compared with a year ago, how has your use of rewards programs changed?"
+    type: single_choice
+    construct: compared_year_ago_has_use
+    required: true
+    options:
+      - id: "a"
+        label: "I use them much more"
+      - id: "b"
+        label: "I use them a little more"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "I use them less"
+      - id: "e"
+        label: "I stopped using them"
+  - id: q25
+    prompt: "How confident are you that you are getting good value from your rewards programs?"
+    type: single_choice
+    construct: confident_that_getting_good_value
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q26
+    prompt: "Overall, how satisfied are you with the rewards programs you use?"
+    type: single_choice
+    construct: overall_satisfied_rewards_programs_use
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q27
+    prompt: "How likely are you to sign up for a new rewards program in the next year?"
+    type: single_choice
+    construct: likely_sign_up_new_rewards
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q28
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your favorite rewards program to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q29
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q30
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $30,000"
+      - id: "b"
+        label: "$30,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Homemaker or full-time caregiver"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+  - id: q36
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q38
+    prompt: "How often do you shop online versus in stores?"
+    type: single_choice
+    construct: often_shop_online_versus_stores
+    required: true
+    options:
+      - id: "a"
+        label: "Almost entirely online"
+      - id: "b"
+        label: "Mostly online"
+      - id: "c"
+        label: "About equally"
+      - id: "d"
+        label: "Mostly in stores"
+      - id: "e"
+        label: "Almost entirely in stores"
+  - id: q39
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q40
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

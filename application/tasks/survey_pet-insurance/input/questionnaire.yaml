@@ -1,0 +1,933 @@
+schemaVersion: "1.0"
+id: pet_insurance_v1
+title: "Pet Insurance Survey"
+description: "How pet owners choose, use, and evaluate pet health insurance, including plan design, cost, claims, and provider satisfaction."
+questions:
+  - id: q0
+    prompt: "Do you currently own a pet (dog, cat, or other)?"
+    type: single_choice
+    construct: currently_own_pet_dog_cat
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one pet"
+      - id: "b"
+        label: "Yes, more than one pet"
+      - id: "c"
+        label: "No, but I owned a pet recently"
+      - id: "d"
+        label: "No"
+  - id: q1
+    prompt: "Do you currently have a pet health insurance policy for any of your pets?"
+    type: single_choice
+    construct: currently_have_pet_health_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, an active policy"
+      - id: "b"
+        label: "No, but I had one before"
+      - id: "c"
+        label: "No, I have never had it"
+      - id: "d"
+        label: "I am considering it"
+      - id: "e"
+        label: "Not sure"
+  - id: q2
+    prompt: "How many pets do you currently own? Please enter a whole number."
+    type: free_text
+    construct: many_pets_currently_own_please
+    required: true
+  - id: q3
+    prompt: "Which type of pet is covered (or would you insure) by pet insurance?"
+    type: single_choice
+    construct: type_pet_covered_would_insure
+    required: true
+    options:
+      - id: "a"
+        label: "A dog"
+      - id: "b"
+        label: "A cat"
+      - id: "c"
+        label: "Both dogs and cats"
+      - id: "d"
+        label: "Another type of pet"
+      - id: "e"
+        label: "Not applicable"
+  - id: q4
+    prompt: "Why do you have (or would you consider) pet insurance? (Select all that apply)"
+    type: multi_choice
+    construct: why_have_would_consider_pet
+    required: true
+    options:
+      - id: "a"
+        label: "Cover unexpected accidents"
+      - id: "b"
+        label: "Cover illness or disease"
+      - id: "c"
+        label: "Cover expensive surgeries"
+      - id: "d"
+        label: "Manage chronic condition costs"
+      - id: "e"
+        label: "Peace of mind"
+      - id: "f"
+        label: "My pet's breed is prone to health issues"
+      - id: "g"
+        label: "My pet is aging"
+      - id: "h"
+        label: "Recommended by my veterinarian"
+  - id: q5
+    prompt: "How long have you had pet insurance (current or most recent policy)?"
+    type: single_choice
+    construct: long_have_had_pet_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 years or more"
+      - id: "e"
+        label: "I have never had it"
+  - id: q6
+    prompt: "Who is your current pet insurance provider?"
+    type: single_choice
+    construct: who_current_pet_insurance_provider
+    required: true
+    options:
+      - id: "a"
+        label: "Trupanion"
+      - id: "b"
+        label: "Healthy Paws"
+      - id: "c"
+        label: "Nationwide"
+      - id: "d"
+        label: "Embrace"
+      - id: "e"
+        label: "ASPCA Pet Health Insurance"
+      - id: "f"
+        label: "Lemonade"
+      - id: "g"
+        label: "Figo"
+      - id: "h"
+        label: "Fetch (by The Dodo)"
+      - id: "i"
+        label: "MetLife"
+      - id: "j"
+        label: "Pets Best"
+      - id: "k"
+        label: "Another company"
+      - id: "l"
+        label: "I do not have pet insurance"
+  - id: q7
+    prompt: "Which pet insurance providers did you compare before choosing? (Select all that apply)"
+    type: multi_choice
+    construct: pet_insurance_providers_did_compare
+    required: true
+    options:
+      - id: "a"
+        label: "Trupanion"
+      - id: "b"
+        label: "Healthy Paws"
+      - id: "c"
+        label: "Nationwide"
+      - id: "d"
+        label: "Embrace"
+      - id: "e"
+        label: "ASPCA Pet Health Insurance"
+      - id: "f"
+        label: "Lemonade"
+      - id: "g"
+        label: "Figo"
+      - id: "h"
+        label: "Fetch"
+      - id: "i"
+        label: "Pets Best"
+      - id: "j"
+        label: "A comparison website"
+      - id: "k"
+        label: "I did not compare"
+  - id: q8
+    prompt: "What type of coverage does your pet insurance plan provide?"
+    type: single_choice
+    construct: type_coverage_does_pet_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Accident and illness"
+      - id: "b"
+        label: "Accident only"
+      - id: "c"
+        label: "Accident, illness, and wellness"
+      - id: "d"
+        label: "Wellness or routine care only"
+      - id: "e"
+        label: "Not sure"
+  - id: q9
+    prompt: "About how much do you pay per month for pet insurance (per pet)?"
+    type: single_choice
+    construct: much_pay_per_month_pet
+    required: true
+    options:
+      - id: "a"
+        label: "Under $20"
+      - id: "b"
+        label: "$20 to $34"
+      - id: "c"
+        label: "$35 to $49"
+      - id: "d"
+        label: "$50 to $74"
+      - id: "e"
+        label: "$75 or more"
+      - id: "f"
+        label: "Not sure"
+  - id: q10
+    prompt: "About how much do you pay per month for pet insurance per pet, in U.S. dollars? Enter a whole number."
+    type: free_text
+    construct: much_pay_per_month_pet
+    required: true
+  - id: q11
+    prompt: "What reimbursement level does your plan offer?"
+    type: single_choice
+    construct: reimbursement_level_does_plan_offer
+    required: true
+    options:
+      - id: "a"
+        label: "70%"
+      - id: "b"
+        label: "80%"
+      - id: "c"
+        label: "90%"
+      - id: "d"
+        label: "100%"
+      - id: "e"
+        label: "Not sure"
+  - id: q12
+    prompt: "What annual deductible does your plan have?"
+    type: single_choice
+    construct: annual_deductible_does_plan_have
+    required: true
+    options:
+      - id: "a"
+        label: "Under $250"
+      - id: "b"
+        label: "$250"
+      - id: "c"
+        label: "$500"
+      - id: "d"
+        label: "$750"
+      - id: "e"
+        label: "$1,000 or more"
+      - id: "f"
+        label: "Not sure"
+  - id: q13
+    prompt: "What is your plan's annual payout limit?"
+    type: single_choice
+    construct: plan_s_annual_payout_limit
+    required: true
+    options:
+      - id: "a"
+        label: "Under $5,000"
+      - id: "b"
+        label: "$5,000 to $9,999"
+      - id: "c"
+        label: "$10,000 to $14,999"
+      - id: "d"
+        label: "$15,000 or more"
+      - id: "e"
+        label: "Unlimited"
+      - id: "f"
+        label: "Not sure"
+  - id: q14
+    prompt: "Which optional coverages does your plan include? (Select all that apply)"
+    type: multi_choice
+    construct: optional_coverages_does_plan_include
+    required: true
+    options:
+      - id: "a"
+        label: "Wellness or routine care add-on"
+      - id: "b"
+        label: "Dental illness"
+      - id: "c"
+        label: "Behavioral therapy"
+      - id: "d"
+        label: "Alternative therapies such as acupuncture"
+      - id: "e"
+        label: "Prescription medications"
+      - id: "f"
+        label: "Exam fees"
+      - id: "g"
+        label: "Hereditary or congenital conditions"
+      - id: "h"
+        label: "None of these"
+  - id: q15
+    prompt: "How did you purchase your pet insurance?"
+    type: single_choice
+    construct: did_purchase_pet_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Online directly from the insurer"
+      - id: "b"
+        label: "Through the insurer's app"
+      - id: "c"
+        label: "Through my veterinarian"
+      - id: "d"
+        label: "Through an employer benefit"
+      - id: "e"
+        label: "Through a comparison website"
+  - id: q16
+    prompt: "About how much did you spend on veterinary care for your pet(s) in the past 12 months, in U.S. dollars? Enter a whole number."
+    type: free_text
+    construct: much_did_spend_veterinary_care
+    required: true
+  - id: q17
+    prompt: "How old is your insured pet?"
+    type: single_choice
+    construct: old_insured_pet
+    required: true
+    options:
+      - id: "a"
+        label: "Under 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 7 years"
+      - id: "d"
+        label: "8 to 10 years"
+      - id: "e"
+        label: "Over 10 years"
+      - id: "f"
+        label: "Not applicable"
+  - id: q18
+    prompt: "How much do you agree with the following statement about your pet insurance: My pet insurance is worth what I pay for it."
+    type: single_choice
+    construct: much_agree_following_statement_pet
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about your pet insurance: I clearly understand what my plan covers."
+    type: single_choice
+    construct: much_agree_following_statement_pet
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement about your pet insurance: My plan covers the treatments my pet is likely to need."
+    type: single_choice
+    construct: much_agree_following_statement_pet
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree with the following statement about your pet insurance: I trust my provider to reimburse claims fairly."
+    type: single_choice
+    construct: much_agree_following_statement_pet
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree with the following statement about your pet insurance: The process for filing claims is easy."
+    type: single_choice
+    construct: much_agree_following_statement_pet
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How often do you use your pet insurance to file claims?"
+    type: single_choice
+    construct: often_use_pet_insurance_file
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q24
+    prompt: "When choosing a pet insurance plan, how important is each of the following: Low monthly premium"
+    type: single_choice
+    construct: when_choosing_pet_insurance_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a pet insurance plan, how important is each of the following: High reimbursement percentage"
+    type: single_choice
+    construct: when_choosing_pet_insurance_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a pet insurance plan, how important is each of the following: Low deductible"
+    type: single_choice
+    construct: when_choosing_pet_insurance_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a pet insurance plan, how important is each of the following: High or unlimited annual payout"
+    type: single_choice
+    construct: when_choosing_pet_insurance_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing a pet insurance plan, how important is each of the following: Coverage for hereditary or chronic conditions"
+    type: single_choice
+    construct: when_choosing_pet_insurance_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "When choosing a pet insurance plan, how important is each of the following: Fast claim reimbursement"
+    type: single_choice
+    construct: when_choosing_pet_insurance_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "When choosing a pet insurance plan, how important is each of the following: No upper age limit or lifelong coverage"
+    type: single_choice
+    construct: when_choosing_pet_insurance_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q31
+    prompt: "Which are your top 3 factors when choosing a pet insurance plan? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Monthly premium"
+      - id: "b"
+        label: "Reimbursement level"
+      - id: "c"
+        label: "Deductible"
+      - id: "d"
+        label: "Annual payout limit"
+      - id: "e"
+        label: "Breadth of coverage"
+      - id: "f"
+        label: "Claim speed"
+      - id: "g"
+        label: "Provider reputation"
+      - id: "h"
+        label: "Veterinarian recommendation"
+      - id: "i"
+        label: "No age restrictions"
+  - id: q32
+    prompt: "Have you ever filed a pet insurance claim?"
+    type: single_choice
+    construct: have_ever_filed_pet_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one claim"
+      - id: "b"
+        label: "Yes, more than one claim"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What have your pet insurance claims involved? (Select all that apply)"
+    type: multi_choice
+    construct: have_pet_insurance_claims_involved
+    required: true
+    options:
+      - id: "a"
+        label: "Accident or injury"
+      - id: "b"
+        label: "Illness or infection"
+      - id: "c"
+        label: "Surgery"
+      - id: "d"
+        label: "Chronic condition"
+      - id: "e"
+        label: "Cancer treatment"
+      - id: "f"
+        label: "Emergency or ER visit"
+      - id: "g"
+        label: "Prescription medication"
+      - id: "h"
+        label: "I have never filed a claim"
+  - id: q34
+    prompt: "How satisfied were you with your most recent claim reimbursement?"
+    type: single_choice
+    construct: satisfied_were_most_recent_claim
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I have never filed a claim"
+  - id: q35
+    prompt: "About how much was your largest pet insurance claim reimbursement, in U.S. dollars? Enter a whole number (0 if none)."
+    type: free_text
+    construct: much_was_largest_pet_insurance
+    required: true
+  - id: q36
+    prompt: "How long did reimbursement take for your most recent claim?"
+    type: single_choice
+    construct: long_did_reimbursement_take_most
+    required: true
+    options:
+      - id: "a"
+        label: "Less than a week"
+      - id: "b"
+        label: "1 to 2 weeks"
+      - id: "c"
+        label: "3 to 4 weeks"
+      - id: "d"
+        label: "More than a month"
+      - id: "e"
+        label: "I have never filed a claim"
+  - id: q37
+    prompt: "Overall, how satisfied are you with your pet insurance provider?"
+    type: single_choice
+    construct: overall_satisfied_pet_insurance_provider
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "How satisfied are you with the price you pay for pet insurance?"
+    type: single_choice
+    construct: satisfied_price_pay_pet_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q39
+    prompt: "Has your pet insurance premium changed at your most recent renewal?"
+    type: single_choice
+    construct: has_pet_insurance_premium_changed
+    required: true
+    options:
+      - id: "a"
+        label: "It increased significantly"
+      - id: "b"
+        label: "It increased slightly"
+      - id: "c"
+        label: "It stayed about the same"
+      - id: "d"
+        label: "It decreased"
+      - id: "e"
+        label: "Not sure"
+  - id: q40
+    prompt: "How likely are you to renew your pet insurance for the next 12 months?"
+    type: single_choice
+    construct: likely_renew_pet_insurance_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q41
+    prompt: "How likely are you to keep paying for pet insurance as your pet ages?"
+    type: single_choice
+    construct: likely_keep_paying_pet_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your pet insurance provider to a friend (0 = not at all likely, 10 = extremely likely)?"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q43
+    prompt: "What is your biggest concern about pet insurance? (Optional open response)"
+    type: free_text
+    construct: biggest_concern_pet_insurance_optional
+    required: false
+  - id: q44
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic, Latino, or Spanish origin"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Some other race or origin"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+  - id: q49
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q50
+    prompt: "Including yourself, how many people live in your household? Please enter a whole number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q51
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Widowed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q52
+    prompt: "In which U.S. region do you live?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q54
+    prompt: "Which pets do you own? (Select all that apply)"
+    type: multi_choice
+    construct: pets_own_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Dog"
+      - id: "b"
+        label: "Cat"
+      - id: "c"
+        label: "Bird"
+      - id: "d"
+        label: "Small mammal (rabbit, hamster, etc.)"
+      - id: "e"
+        label: "Reptile"
+      - id: "f"
+        label: "Fish"
+      - id: "g"
+        label: "Other"
+  - id: q55
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"

@@ -1,0 +1,892 @@
+schemaVersion: "1.0"
+id: web_hosting_choices_v1
+title: "Web Hosting Choices Survey"
+description: "How developers and site owners choose and use web hosting providers and platforms."
+questions:
+  - id: q0
+    prompt: "How often do you set up or manage web hosting?"
+    type: single_choice
+    construct: often_set_up_manage_web
+    required: true
+    options:
+      - id: "a"
+        label: "Regularly, as part of my main work"
+      - id: "b"
+        label: "Occasionally for projects"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "I am just learning"
+      - id: "e"
+        label: "I don't manage web hosting"
+  - id: q1
+    prompt: "How long have you been managing web hosting?"
+    type: single_choice
+    construct: long_have_been_managing_web
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "Which type of hosting do you use most often?"
+    type: single_choice
+    construct: type_hosting_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "A platform-as-a-service (Vercel, Netlify, etc.)"
+      - id: "b"
+        label: "A cloud provider (AWS, GCP, Azure)"
+      - id: "c"
+        label: "A VPS (virtual private server)"
+      - id: "d"
+        label: "Shared hosting"
+      - id: "e"
+        label: "A managed WordPress or app host"
+      - id: "f"
+        label: "Self-hosted on my own hardware"
+  - id: q3
+    prompt: "Which hosting provider do you use most often?"
+    type: single_choice
+    construct: hosting_provider_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Vercel"
+      - id: "b"
+        label: "Netlify"
+      - id: "c"
+        label: "Cloudflare Pages"
+      - id: "d"
+        label: "AWS"
+      - id: "e"
+        label: "DigitalOcean"
+      - id: "f"
+        label: "A shared host (Bluehost, HostGator, etc.)"
+      - id: "g"
+        label: "Hetzner or Linode"
+      - id: "h"
+        label: "GitHub Pages"
+      - id: "i"
+        label: "Other"
+  - id: q4
+    prompt: "Which hosting providers have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: hosting_providers_have_used_past
+    required: true
+    options:
+      - id: "a"
+        label: "Vercel"
+      - id: "b"
+        label: "Netlify"
+      - id: "c"
+        label: "Cloudflare Pages"
+      - id: "d"
+        label: "AWS"
+      - id: "e"
+        label: "Google Cloud"
+      - id: "f"
+        label: "Microsoft Azure"
+      - id: "g"
+        label: "DigitalOcean"
+      - id: "h"
+        label: "Hetzner"
+      - id: "i"
+        label: "Linode or Akamai"
+      - id: "j"
+        label: "A shared hosting provider"
+      - id: "k"
+        label: "None of these"
+  - id: q5
+    prompt: "Which providers are you interested in trying next? (Select all that apply)"
+    type: multi_choice
+    construct: providers_interested_trying_next_select
+    required: true
+    options:
+      - id: "a"
+        label: "Vercel"
+      - id: "b"
+        label: "Cloudflare Pages"
+      - id: "c"
+        label: "Netlify"
+      - id: "d"
+        label: "Hetzner"
+      - id: "e"
+        label: "Fly.io"
+      - id: "f"
+        label: "Railway or Render"
+      - id: "g"
+        label: "I'm happy with what I use"
+  - id: q6
+    prompt: "What do you primarily host? (Select all that apply)"
+    type: multi_choice
+    construct: primarily_host_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Static websites"
+      - id: "b"
+        label: "Dynamic web applications"
+      - id: "c"
+        label: "APIs or backend services"
+      - id: "d"
+        label: "Databases"
+      - id: "e"
+        label: "A personal blog or portfolio"
+      - id: "f"
+        label: "E-commerce sites"
+      - id: "g"
+        label: "Side projects"
+      - id: "h"
+        label: "Client or business sites"
+  - id: q7
+    prompt: "Why did you choose your primary hosting provider?"
+    type: single_choice
+    construct: why_did_choose_primary_hosting
+    required: true
+    options:
+      - id: "a"
+        label: "Price or free tier"
+      - id: "b"
+        label: "Ease of deployment"
+      - id: "c"
+        label: "Performance and reliability"
+      - id: "d"
+        label: "Features and integrations"
+      - id: "e"
+        label: "Familiarity or prior experience"
+      - id: "f"
+        label: "A team or client requirement"
+  - id: q8
+    prompt: "About how many websites or apps do you currently host? Please enter a number."
+    type: free_text
+    construct: many_websites_apps_currently_host
+    required: true
+  - id: q9
+    prompt: "About how much do you spend on web hosting per month, in US dollars? Please enter a number."
+    type: free_text
+    construct: much_spend_web_hosting_per
+    required: true
+  - id: q10
+    prompt: "How do you deploy to your hosting? (Select all that apply)"
+    type: multi_choice
+    construct: deploy_hosting_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Automatic deploys on Git push"
+      - id: "b"
+        label: "A CI/CD pipeline"
+      - id: "c"
+        label: "A CLI tool"
+      - id: "d"
+        label: "Manual file uploads (FTP, SFTP)"
+      - id: "e"
+        label: "A control panel (cPanel, etc.)"
+      - id: "f"
+        label: "Containers or Kubernetes"
+  - id: q11
+    prompt: "Which hosting-related services do you use? (Select all that apply)"
+    type: multi_choice
+    construct: hosting_related_services_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "A CDN"
+      - id: "b"
+        label: "Managed SSL/TLS certificates"
+      - id: "c"
+        label: "Serverless or edge functions"
+      - id: "d"
+        label: "Object storage"
+      - id: "e"
+        label: "Managed databases"
+      - id: "f"
+        label: "DDoS protection"
+      - id: "g"
+        label: "Preview or staging environments"
+      - id: "h"
+        label: "Monitoring and analytics"
+  - id: q12
+    prompt: "How do you handle SSL/TLS certificates?"
+    type: single_choice
+    construct: handle_ssl_tls_certificates
+    required: true
+    options:
+      - id: "a"
+        label: "Automatic via the host (Let's Encrypt, etc.)"
+      - id: "b"
+        label: "Via Cloudflare or a CDN"
+      - id: "c"
+        label: "I configure them manually"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q13
+    prompt: "Roughly what does your hosting cost per month?"
+    type: single_choice
+    construct: roughly_does_hosting_cost_per
+    required: true
+    options:
+      - id: "a"
+        label: "Free"
+      - id: "b"
+        label: "Less than $10"
+      - id: "c"
+        label: "$10 to $50"
+      - id: "d"
+        label: "$50 to $200"
+      - id: "e"
+        label: "$200 to $1,000"
+      - id: "f"
+        label: "More than $1,000"
+  - id: q14
+    prompt: "How do you scale your hosting when traffic grows?"
+    type: single_choice
+    construct: scale_hosting_when_traffic_grows
+    required: true
+    options:
+      - id: "a"
+        label: "The platform scales automatically"
+      - id: "b"
+        label: "I manually upgrade my plan or server"
+      - id: "c"
+        label: "I add a CDN or caching"
+      - id: "d"
+        label: "I haven't needed to scale"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q15
+    prompt: "Have you migrated hosting providers in the past two years?"
+    type: single_choice
+    construct: have_migrated_hosting_providers_past
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, once"
+      - id: "b"
+        label: "Yes, more than once"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No"
+  - id: q16
+    prompt: "How much do you agree: Ease of deployment is the most important thing in a host for me."
+    type: single_choice
+    construct: much_agree_ease_deployment_most
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: I prefer platforms that handle infrastructure for me over managing servers myself."
+    type: single_choice
+    construct: much_agree_i_prefer_platforms
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: I worry about unexpected or unpredictable hosting bills."
+    type: single_choice
+    construct: much_agree_i_worry_unexpected
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: I worry about being locked into a single hosting provider."
+    type: single_choice
+    construct: much_agree_i_worry_being
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: A generous free tier is a major factor in what I choose."
+    type: single_choice
+    construct: much_agree_generous_free_tier
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: I am comfortable managing servers and infrastructure myself."
+    type: single_choice
+    construct: much_agree_i_am_comfortable
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "When choosing a hosting provider, how important is price?"
+    type: single_choice
+    construct: when_choosing_hosting_provider_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing a hosting provider, how important is ease of deployment?"
+    type: single_choice
+    construct: when_choosing_hosting_provider_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a hosting provider, how important is reliability and uptime?"
+    type: single_choice
+    construct: when_choosing_hosting_provider_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a hosting provider, how important is performance and speed?"
+    type: single_choice
+    construct: when_choosing_hosting_provider_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a hosting provider, how important is scalability?"
+    type: single_choice
+    construct: when_choosing_hosting_provider_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a hosting provider, how important is customer support?"
+    type: single_choice
+    construct: when_choosing_hosting_provider_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Which are your top 3 factors when choosing a hosting provider? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Price"
+      - id: "b"
+        label: "Ease of deployment"
+      - id: "c"
+        label: "Reliability and uptime"
+      - id: "d"
+        label: "Performance and speed"
+      - id: "e"
+        label: "Scalability"
+      - id: "f"
+        label: "Customer support"
+      - id: "g"
+        label: "Features and integrations"
+      - id: "h"
+        label: "Data location or compliance"
+  - id: q29
+    prompt: "How often do you deploy changes to your hosted sites?"
+    type: single_choice
+    construct: often_deploy_changes_hosted_sites
+    required: true
+    options:
+      - id: "a"
+        label: "Rarely"
+      - id: "b"
+        label: "Monthly"
+      - id: "c"
+        label: "Weekly"
+      - id: "d"
+        label: "Daily"
+      - id: "e"
+        label: "Multiple times a day"
+  - id: q30
+    prompt: "How often do you experience downtime or outages with your host?"
+    type: single_choice
+    construct: often_experience_downtime_outages_host
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q31
+    prompt: "How often do you review your hosting costs?"
+    type: single_choice
+    construct: often_review_hosting_costs
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Every month"
+  - id: q32
+    prompt: "Do you use a content delivery network (CDN)?"
+    type: single_choice
+    construct: use_content_delivery_network_cdn
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, my host includes one"
+      - id: "b"
+        label: "Yes, a separate CDN (Cloudflare, etc.)"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q33
+    prompt: "Which best describes who manages your hosting?"
+    type: single_choice
+    construct: best_describes_who_manages_hosting
+    required: true
+    options:
+      - id: "a"
+        label: "I manage it entirely myself"
+      - id: "b"
+        label: "My team or company manages it"
+      - id: "c"
+        label: "A managed service handles most of it"
+      - id: "d"
+        label: "A client or third party manages it"
+  - id: q34
+    prompt: "How did you discover your primary hosting provider? (Select all that apply)"
+    type: multi_choice
+    construct: did_discover_primary_hosting_provider
+    required: true
+    options:
+      - id: "a"
+        label: "Word of mouth"
+      - id: "b"
+        label: "Social media or online communities"
+      - id: "c"
+        label: "Blog posts or comparisons"
+      - id: "d"
+        label: "YouTube or courses"
+      - id: "e"
+        label: "It was used at work"
+      - id: "f"
+        label: "I searched and compared options"
+  - id: q35
+    prompt: "How satisfied are you with your host's reliability?"
+    type: single_choice
+    construct: satisfied_host_s_reliability
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "How satisfied are you with your host's pricing and value?"
+    type: single_choice
+    construct: satisfied_host_s_pricing_value
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "Overall, how satisfied are you with your primary hosting provider?"
+    type: single_choice
+    construct: overall_satisfied_primary_hosting_provid
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "How likely are you to recommend your primary hosting provider to another developer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_hosting_provide
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q39
+    prompt: "How likely are you to switch your primary hosting provider within the next year?"
+    type: single_choice
+    construct: likely_switch_primary_hosting_provider
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q40
+    prompt: "What is one thing you would improve about your hosting provider? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_hosting
+    required: false
+  - id: q41
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "DevOps or platform engineer"
+      - id: "e"
+        label: "Systems or infrastructure engineer"
+      - id: "f"
+        label: "Freelancer or agency owner"
+      - id: "g"
+        label: "Engineering manager"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q42
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q44
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q45
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Media or entertainment"
+      - id: "h"
+        label: "Other"
+  - id: q46
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q47
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q50
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q51
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

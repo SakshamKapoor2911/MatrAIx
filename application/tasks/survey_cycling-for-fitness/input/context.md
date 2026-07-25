@@ -1,0 +1,7 @@
+# Cycling for Fitness
+
+How people cycle for fitness and recreation, including their gear, indoor versus outdoor riding, and apps.
+
+## About this survey
+
+This survey profiles cyclists, starting with a screener on whether and how long they have ridden, how often, weekly mileage, and their indoor-versus-outdoor split. It records main motivation, cycling types, bikes and trainer brands such as Trek, Specialized, Peloton, and Wahoo, apps such as Strava, Zwift, and TrainerRoad, essential gear, ride devices, event participation, and numeric items on weekly miles and bike spend. Attitudes are captured through an agreement Likert battery on lifestyle, app motivation, indoor training, and safety, an importance matrix over bike-and-gear buying criteria, and a barrier matrix rating weather, traffic safety, cost, and time, plus a top-three ranking of buying factors. Additional sections cover social sharing, self-maintenance, complementary activities, and satisfaction with routine, app, gear, and cycling overall, followed by a recommendation-likelihood scale and intent to enter events, buy gear, or keep riding. Question types include single-choice, multi-select, several Likert scales, two matrix batteries, a ranking item, and numeric free-text. The survey concludes with a demographic block covering fitness level, age, gender, race and ethnicity, income, education, employment, household size, marital status, U.S. region, and urbanicity.

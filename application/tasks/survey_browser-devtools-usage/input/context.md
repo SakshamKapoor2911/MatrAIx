@@ -1,0 +1,7 @@
+# Browser Developer Tools Usage
+
+How developers use browser developer tools such as Chrome DevTools and Firefox Developer Tools, including which panels and features they rely on.
+
+## About this survey
+
+This survey profiles browser developer tools usage, opening with a screener on frequency, tenure, and the respondent's web role. It records the primary browser's DevTools alongside browsers used, the panels and debugging features relied upon, common tasks, responsive and device-testing features, performance and auditing tools, CSS features, and how DevTools is opened. Attitudes are captured with an agreement Likert battery covering job dependence, feature coverage, browser preference, the Performance panel, discovery, complexity, and accessibility trust, plus a per-item importance matrix over DevTools panels, a top-three ranking of most-used panels, and multi-selects of features. Further sections examine JavaScript debugging style, network diagnosis, responsive-design handling, customization, extensions, and feeling overwhelmed, followed by satisfaction, a recommendation scale, and intent to learn features or switch browsers. Question types include single-choice, multi-select, several Likert scales, an importance matrix, a ranking item, a 0–10 recommendation scale, and numeric free-text. The survey ends with a demographic block covering role, professional experience, employment, company size, industry, age, gender, race and ethnicity, education, U.S. region, and urbanicity.

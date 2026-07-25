@@ -1,0 +1,607 @@
+schemaVersion: "1.0"
+id: second_opinion_seeking_v1
+title: "Seeking a Second Medical Opinion Survey"
+description: "Consumer attitudes, experiences, and decision factors around seeking second medical opinions."
+questions:
+  - id: q0
+    prompt: "Have you ever sought a second opinion from another doctor about a diagnosis or treatment?"
+    type: single_choice
+    construct: have_ever_sought_second_opinion
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I have considered it"
+      - id: "d"
+        label: "No, and I have never considered it"
+  - id: q1
+    prompt: "In general, how open are you to seeking a second opinion when facing an important health decision?"
+    type: single_choice
+    construct: general_open_seeking_second_opinion
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all open"
+      - id: "b"
+        label: "Slightly open"
+      - id: "c"
+        label: "Moderately open"
+      - id: "d"
+        label: "Very open"
+      - id: "e"
+        label: "Extremely open"
+  - id: q2
+    prompt: "About how many times in your life have you sought a second medical opinion? Please enter a number (enter 0 if never)."
+    type: free_text
+    construct: many_times_life_have_sought
+    required: true
+  - id: q3
+    prompt: "What situations would most prompt you to seek a second opinion? (Select all that apply)"
+    type: multi_choice
+    construct: situations_would_most_prompt_seek
+    required: true
+    options:
+      - id: "a"
+        label: "A serious or life-changing diagnosis"
+      - id: "b"
+        label: "A recommendation for surgery"
+      - id: "c"
+        label: "A diagnosis I found surprising"
+      - id: "d"
+        label: "Treatment that is not working"
+      - id: "e"
+        label: "Conflicting information from providers"
+      - id: "f"
+        label: "An expensive treatment"
+      - id: "g"
+        label: "I did not feel heard by my doctor"
+      - id: "h"
+        label: "A rare or unclear condition"
+      - id: "i"
+        label: "I would not seek a second opinion"
+  - id: q4
+    prompt: "If you sought a second opinion, how would you most likely find another provider? (Select all that apply)"
+    type: multi_choice
+    construct: if_sought_second_opinion_would
+    required: true
+    options:
+      - id: "a"
+        label: "Referral from my current doctor"
+      - id: "b"
+        label: "Recommendation from family or friends"
+      - id: "c"
+        label: "My insurance provider directory"
+      - id: "d"
+        label: "Online reviews or ratings"
+      - id: "e"
+        label: "A major medical center's website"
+      - id: "f"
+        label: "A virtual second-opinion service"
+      - id: "g"
+        label: "My employer's health benefits or advocate"
+      - id: "h"
+        label: "I am not sure how I would find one"
+  - id: q5
+    prompt: "Thinking about the most recent time you sought a second opinion, did the second opinion agree with the first?"
+    type: single_choice
+    construct: thinking_most_recent_time_sought
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, they fully agreed"
+      - id: "b"
+        label: "They mostly agreed with small differences"
+      - id: "c"
+        label: "They disagreed in important ways"
+      - id: "d"
+        label: "I have never sought a second opinion"
+  - id: q6
+    prompt: "After getting a second opinion, what did you do?"
+    type: single_choice
+    construct: after_getting_second_opinion_did
+    required: true
+    options:
+      - id: "a"
+        label: "Continued with the original plan"
+      - id: "b"
+        label: "Switched to the second doctor's recommendation"
+      - id: "c"
+        label: "Combined advice from both"
+      - id: "d"
+        label: "Sought a third opinion"
+      - id: "e"
+        label: "Still deciding"
+      - id: "f"
+        label: "I have never sought a second opinion"
+  - id: q7
+    prompt: "What has kept you (or would keep you) from seeking a second opinion? (Select all that apply)"
+    type: multi_choice
+    construct: has_kept_would_keep_from
+    required: true
+    options:
+      - id: "a"
+        label: "Cost or insurance coverage"
+      - id: "b"
+        label: "Time and effort involved"
+      - id: "c"
+        label: "Not wanting to offend my doctor"
+      - id: "d"
+        label: "Trusting my current doctor's judgment"
+      - id: "e"
+        label: "Not knowing how to find another provider"
+      - id: "f"
+        label: "Long wait for another appointment"
+      - id: "g"
+        label: "Feeling it would not change anything"
+      - id: "h"
+        label: "Travel or distance"
+      - id: "i"
+        label: "Nothing would keep me from seeking one"
+  - id: q8
+    prompt: "How comfortable would you be telling your doctor that you want a second opinion?"
+    type: single_choice
+    construct: comfortable_would_be_telling_doctor
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Somewhat uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat comfortable"
+      - id: "e"
+        label: "Very comfortable"
+  - id: q9
+    prompt: "How much do you agree or disagree: Seeking a second opinion is a normal part of taking charge of my health."
+    type: single_choice
+    construct: much_agree_disagree_seeking_second
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree or disagree: I worry that seeking a second opinion could offend my doctor."
+    type: single_choice
+    construct: much_agree_disagree_i_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree: A second opinion gives me more confidence in a health decision."
+    type: single_choice
+    construct: much_agree_disagree_second_opinion
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: Second opinions are worth the extra time and cost."
+    type: single_choice
+    construct: much_agree_disagree_second_opinions
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I would trust a second opinion done by video or online."
+    type: single_choice
+    construct: much_agree_disagree_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How important would each factor be in choosing a doctor for a second opinion — Their reputation or credentials"
+    type: single_choice
+    construct: important_would_each_factor_be
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q15
+    prompt: "How important would each factor be in choosing a doctor for a second opinion — Whether my insurance covers it"
+    type: single_choice
+    construct: important_would_each_factor_be
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "How important would each factor be in choosing a doctor for a second opinion — How quickly I could be seen"
+    type: single_choice
+    construct: important_would_each_factor_be
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "How important would each factor be in choosing a doctor for a second opinion — Being affiliated with a top medical center"
+    type: single_choice
+    construct: important_would_each_factor_be
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important would each factor be in choosing a doctor for a second opinion — The option to do it remotely"
+    type: single_choice
+    construct: important_would_each_factor_be
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "Have you ever avoided or delayed a treatment because you wanted a second opinion first?"
+    type: single_choice
+    construct: have_ever_avoided_delayed_treatment
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"
+  - id: q20
+    prompt: "How interested are you in virtual second-opinion services (where specialists review your case remotely)?"
+    type: single_choice
+    construct: interested_virtual_second_opinion_servic
+    required: true
+    options:
+      - id: "a"
+        label: "Very interested"
+      - id: "b"
+        label: "Somewhat interested"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Not very interested"
+      - id: "e"
+        label: "Not at all interested"
+  - id: q21
+    prompt: "How much does whether your insurance covers a second opinion affect your decision to seek one?"
+    type: single_choice
+    construct: much_does_whether_insurance_covers
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "It is the deciding factor"
+  - id: q22
+    prompt: "About how much would you be willing to pay out of pocket for a second opinion if it were not covered? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_would_be_willing_pay
+    required: true
+  - id: q23
+    prompt: "Which would most encourage you to seek a second opinion when needed? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: would_most_encourage_seek_second
+    required: true
+    options:
+      - id: "a"
+        label: "Insurance coverage for it"
+      - id: "b"
+        label: "An easy way to find a specialist"
+      - id: "c"
+        label: "A remote or virtual option"
+      - id: "d"
+        label: "Reassurance my doctor would not be offended"
+      - id: "e"
+        label: "Quick access to another appointment"
+      - id: "f"
+        label: "Help gathering and sharing my records"
+      - id: "g"
+        label: "Lower out-of-pocket cost"
+      - id: "h"
+        label: "A recommendation from someone I trust"
+      - id: "i"
+        label: "More time to decide before treatment"
+  - id: q24
+    prompt: "Overall, how valuable do you think second opinions are for making health decisions?"
+    type: single_choice
+    construct: overall_valuable_think_second_opinions
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all valuable"
+      - id: "b"
+        label: "Slightly valuable"
+      - id: "c"
+        label: "Moderately valuable"
+      - id: "d"
+        label: "Very valuable"
+      - id: "e"
+        label: "Extremely valuable"
+  - id: q25
+    prompt: "How likely are you to seek a second opinion the next time you face a major health decision?"
+    type: single_choice
+    construct: likely_seek_second_opinion_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q26
+    prompt: "Is there anything that would make you more likely to seek a second opinion? (Optional short answer)"
+    type: free_text
+    construct: there_anything_that_would_make
+    required: false
+  - id: q27
+    prompt: "What is your age? Please enter a number (years old)."
+    type: free_text
+    construct: age_please_enter_number_years
+    required: true
+  - id: q28
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q29
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q30
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q32
+    prompt: "Do you currently have health insurance coverage?"
+    type: single_choice
+    construct: currently_have_health_insurance_coverage
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, through an employer"
+      - id: "b"
+        label: "Yes, through a government program (Medicare, Medicaid, etc.)"
+      - id: "c"
+        label: "Yes, purchased on my own"
+      - id: "d"
+        label: "No, I am uninsured"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "How would you rate your overall health?"
+    type: single_choice
+    construct: would_rate_overall_health
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent"
+      - id: "b"
+        label: "Very good"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Fair"
+      - id: "e"
+        label: "Poor"
+  - id: q34
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Homemaker or caregiver"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not currently employed"
+  - id: q35
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q36
+    prompt: "In which region of the United States do you live?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q37
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q38
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "How many times in the past 5 years have you faced a health decision serious enough that you considered a second opinion? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: many_times_past_5_years
+    required: true

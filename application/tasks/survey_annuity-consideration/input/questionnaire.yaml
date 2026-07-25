@@ -1,0 +1,722 @@
+schemaVersion: "1.0"
+id: annuity_consideration_v1
+title: "Annuity Consideration Survey"
+description: "Awareness of annuities and whether people would consider them as part of their retirement income."
+questions:
+  - id: q0
+    prompt: "Before this survey, how familiar were you with annuities?"
+    type: single_choice
+    construct: before_this_survey_familiar_were
+    required: true
+    options:
+      - id: "a"
+        label: "Never heard of them"
+      - id: "b"
+        label: "Heard of them but don't know how they work"
+      - id: "c"
+        label: "Somewhat familiar"
+      - id: "d"
+        label: "Fairly familiar"
+      - id: "e"
+        label: "Very familiar"
+  - id: q1
+    prompt: "Do you currently own an annuity?"
+    type: single_choice
+    construct: currently_own_annuity
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one"
+      - id: "b"
+        label: "Yes, more than one"
+      - id: "c"
+        label: "No, but I've seriously considered it"
+      - id: "d"
+        label: "No, and I haven't considered it"
+      - id: "e"
+        label: "Not sure"
+  - id: q2
+    prompt: "How would you describe your understanding of the difference between annuity types (fixed, variable, indexed)?"
+    type: single_choice
+    construct: would_describe_understanding_difference_
+    required: true
+    options:
+      - id: "a"
+        label: "I don't know the difference"
+      - id: "b"
+        label: "I've heard the terms but don't understand them"
+      - id: "c"
+        label: "I understand them somewhat"
+      - id: "d"
+        label: "I understand them well"
+      - id: "e"
+        label: "I understand them very well"
+  - id: q3
+    prompt: "What is your main goal (or would be your main goal) for an annuity?"
+    type: single_choice
+    construct: main_goal_would_be_main
+    required: true
+    options:
+      - id: "a"
+        label: "Guaranteed income in retirement"
+      - id: "b"
+        label: "Protecting my savings from market losses"
+      - id: "c"
+        label: "Tax-deferred growth"
+      - id: "d"
+        label: "Leaving money to heirs"
+      - id: "e"
+        label: "I don't have a goal for annuities"
+      - id: "f"
+        label: "Not sure"
+  - id: q4
+    prompt: "Which retirement income sources do you currently have or expect? (Select all that apply)"
+    type: multi_choice
+    construct: retirement_income_sources_currently_have
+    required: true
+    options:
+      - id: "a"
+        label: "Social Security"
+      - id: "b"
+        label: "A pension"
+      - id: "c"
+        label: "A 401(k) or 403(b)"
+      - id: "d"
+        label: "An IRA or Roth IRA"
+      - id: "e"
+        label: "Personal savings or investments"
+      - id: "f"
+        label: "Real estate or rental income"
+      - id: "g"
+        label: "An annuity"
+      - id: "h"
+        label: "Continued work"
+      - id: "i"
+        label: "None of these"
+  - id: q5
+    prompt: "How concerned are you about outliving your retirement savings?"
+    type: single_choice
+    construct: concerned_outliving_retirement_savings
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q6
+    prompt: "How appealing is the idea of guaranteed income for life?"
+    type: single_choice
+    construct: appealing_idea_guaranteed_income_life
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all appealing"
+      - id: "b"
+        label: "Slightly appealing"
+      - id: "c"
+        label: "Moderately appealing"
+      - id: "d"
+        label: "Very appealing"
+      - id: "e"
+        label: "Extremely appealing"
+  - id: q7
+    prompt: "How likely are you to consider buying an annuity in the next few years?"
+    type: single_choice
+    construct: likely_consider_buying_annuity_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Somewhat likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q8
+    prompt: "Where have you heard about annuities? (Select all that apply)"
+    type: multi_choice
+    construct: where_have_heard_annuities_select
+    required: true
+    options:
+      - id: "a"
+        label: "A financial advisor"
+      - id: "b"
+        label: "My employer or retirement plan"
+      - id: "c"
+        label: "An insurance company or agent"
+      - id: "d"
+        label: "News or financial media"
+      - id: "e"
+        label: "Friends or family"
+      - id: "f"
+        label: "Advertising"
+      - id: "g"
+        label: "Social media"
+      - id: "h"
+        label: "I haven't really heard about them"
+  - id: q9
+    prompt: "How much do you agree or disagree: Annuities are too complicated to understand."
+    type: single_choice
+    construct: much_agree_disagree_annuities_too
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree or disagree: The guaranteed income from an annuity would give me peace of mind."
+    type: single_choice
+    construct: much_agree_disagree_guaranteed_income
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree: I worry annuities have high fees or hidden costs."
+    type: single_choice
+    construct: much_agree_disagree_i_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: I don't like locking up my money for a long time."
+    type: single_choice
+    construct: much_agree_disagree_i_don
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I'd rather manage my own investments than buy an annuity."
+    type: single_choice
+    construct: much_agree_disagree_i_d
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I trust insurance companies to honor annuity guarantees."
+    type: single_choice
+    construct: much_agree_disagree_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How important is each annuity feature to you: Guaranteed lifetime income"
+    type: single_choice
+    construct: important_each_annuity_feature_guarantee
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "How important is each annuity feature to you: Protection from market losses"
+    type: single_choice
+    construct: important_each_annuity_feature_protectio
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "How important is each annuity feature to you: Low fees"
+    type: single_choice
+    construct: important_each_annuity_feature_low
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each annuity feature to you: Access to my money if I need it"
+    type: single_choice
+    construct: important_each_annuity_feature_access
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is each annuity feature to you: A benefit for my heirs"
+    type: single_choice
+    construct: important_each_annuity_feature_benefit
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is each annuity feature to you: Payments that keep up with inflation"
+    type: single_choice
+    construct: important_each_annuity_feature_payments
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "What concerns you most about annuities? (Select all that apply)"
+    type: multi_choice
+    construct: concerns_most_annuities_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "High or hidden fees"
+      - id: "b"
+        label: "Complexity and hard-to-read contracts"
+      - id: "c"
+        label: "Locking up my money"
+      - id: "d"
+        label: "Lower returns than investing myself"
+      - id: "e"
+        label: "Trusting the insurance company"
+      - id: "f"
+        label: "Losing money if I die early"
+      - id: "g"
+        label: "Aggressive sales tactics"
+      - id: "h"
+        label: "I don't have major concerns"
+  - id: q22
+    prompt: "If you were to buy an annuity, roughly how much of your savings would you be willing to put in? Please enter a percentage."
+    type: free_text
+    construct: if_were_buy_annuity_roughly
+    required: true
+  - id: q23
+    prompt: "Who would you most trust to advise you about annuities?"
+    type: single_choice
+    construct: who_would_most_trust_advise
+    required: true
+    options:
+      - id: "a"
+        label: "An independent financial advisor"
+      - id: "b"
+        label: "An insurance agent"
+      - id: "c"
+        label: "My bank or brokerage"
+      - id: "d"
+        label: "Friends or family"
+      - id: "e"
+        label: "My own research"
+      - id: "f"
+        label: "I wouldn't trust anyone fully"
+  - id: q24
+    prompt: "How does the idea of an annuity compare with keeping your money in investments like stocks and bonds?"
+    type: single_choice
+    construct: does_idea_annuity_compare_keeping
+    required: true
+    options:
+      - id: "a"
+        label: "Much worse than investing"
+      - id: "b"
+        label: "Somewhat worse"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat better"
+      - id: "e"
+        label: "Much better than investing"
+  - id: q25
+    prompt: "At what age do you think an annuity would make the most sense for someone? Please enter a number (age in years)."
+    type: free_text
+    construct: age_think_annuity_would_make
+    required: true
+  - id: q26
+    prompt: "Select the top 3 things that would make you more likely to buy an annuity. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_that
+    required: true
+    options:
+      - id: "a"
+        label: "Clear, simple explanation of how it works"
+      - id: "b"
+        label: "Low and transparent fees"
+      - id: "c"
+        label: "Strong guarantees backed by a reputable company"
+      - id: "d"
+        label: "Protection against inflation"
+      - id: "e"
+        label: "Flexibility to access money"
+      - id: "f"
+        label: "A trusted advisor's recommendation"
+      - id: "g"
+        label: "Higher payout rates"
+      - id: "h"
+        label: "A benefit left to my heirs"
+  - id: q27
+    prompt: "How much do you feel you need guaranteed income beyond Social Security in retirement?"
+    type: single_choice
+    construct: much_feel_need_guaranteed_income
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "Quite a bit"
+      - id: "e"
+        label: "A great deal"
+  - id: q28
+    prompt: "Overall, how favorable is your view of annuities as a retirement tool?"
+    type: single_choice
+    construct: overall_favorable_view_annuities_as
+    required: true
+    options:
+      - id: "a"
+        label: "Very unfavorable"
+      - id: "b"
+        label: "Unfavorable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Favorable"
+      - id: "e"
+        label: "Very favorable"
+  - id: q29
+    prompt: "How likely are you to research annuities further after this survey?"
+    type: single_choice
+    construct: likely_research_annuities_further_after
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Somewhat likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q30
+    prompt: "Which best describes your current stage of retirement planning?"
+    type: single_choice
+    construct: best_describes_current_stage_retirement
+    required: true
+    options:
+      - id: "a"
+        label: "Already retired"
+      - id: "b"
+        label: "Retiring within 5 years"
+      - id: "c"
+        label: "Retiring in 5 to 15 years"
+      - id: "d"
+        label: "Retirement is more than 15 years away"
+      - id: "e"
+        label: "I haven't started planning"
+  - id: q31
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–34"
+      - id: "b"
+        label: "35–44"
+      - id: "c"
+        label: "45–54"
+      - id: "d"
+        label: "55–64"
+      - id: "e"
+        label: "65–74"
+      - id: "f"
+        label: "75 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "About how much do you have saved for retirement across all accounts?"
+    type: single_choice
+    construct: much_have_saved_retirement_across
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$99,999"
+      - id: "c"
+        label: "$100,000–$249,999"
+      - id: "d"
+        label: "$250,000–$499,999"
+      - id: "e"
+        label: "$500,000–$999,999"
+      - id: "f"
+        label: "$1,000,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Homemaker or caregiver"
+      - id: "g"
+        label: "Unable to work"
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q41
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q43
+    prompt: "How would you describe your overall approach to financial risk?"
+    type: single_choice
+    construct: would_describe_overall_approach_financia
+    required: true
+    options:
+      - id: "a"
+        label: "Very conservative"
+      - id: "b"
+        label: "Somewhat conservative"
+      - id: "c"
+        label: "Moderate"
+      - id: "d"
+        label: "Somewhat aggressive"
+      - id: "e"
+        label: "Very aggressive"

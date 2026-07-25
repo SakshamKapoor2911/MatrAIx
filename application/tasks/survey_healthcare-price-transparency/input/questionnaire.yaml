@@ -1,0 +1,758 @@
+schemaVersion: "1.0"
+id: healthcare_price_transparency_v1
+title: "Healthcare Price Transparency Survey"
+description: "Consumer behavior around, and attitudes toward, knowing the price of healthcare before receiving it."
+questions:
+  - id: q0
+    prompt: "Before getting care, how often do you try to find out what it will cost?"
+    type: single_choice
+    construct: before_getting_care_often_try
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q1
+    prompt: "In the past 12 months, have you looked up the price of a medical service before getting it?"
+    type: single_choice
+    construct: past_12_months_have_looked
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several times"
+      - id: "b"
+        label: "Yes, once or twice"
+      - id: "c"
+        label: "No, but I have in the past"
+      - id: "d"
+        label: "No, I have never done this"
+  - id: q2
+    prompt: "For which types of care have you checked prices in advance? (Select all that apply)"
+    type: multi_choice
+    construct: types_care_have_checked_prices
+    required: true
+    options:
+      - id: "a"
+        label: "Doctor office visits"
+      - id: "b"
+        label: "Lab tests or bloodwork"
+      - id: "c"
+        label: "Imaging (for example, MRI, CT, X-ray)"
+      - id: "d"
+        label: "Prescription medications"
+      - id: "e"
+        label: "Planned procedures or surgery"
+      - id: "f"
+        label: "Dental or vision care"
+      - id: "g"
+        label: "Emergency or urgent care"
+      - id: "h"
+        label: "I have not checked prices"
+  - id: q3
+    prompt: "Which sources have you used to find healthcare prices? (Select all that apply)"
+    type: multi_choice
+    construct: sources_have_used_find_healthcare
+    required: true
+    options:
+      - id: "a"
+        label: "My insurer's website or app"
+      - id: "b"
+        label: "The hospital or clinic's price list or estimator"
+      - id: "c"
+        label: "A price-comparison website or app"
+      - id: "d"
+        label: "Calling the provider's billing office"
+      - id: "e"
+        label: "Asking my doctor or their staff"
+      - id: "f"
+        label: "A prescription-price tool (for example, GoodRx)"
+      - id: "g"
+        label: "Friends, family, or online reviews"
+      - id: "h"
+        label: "I have not used any source"
+  - id: q4
+    prompt: "How easy or difficult was it to find the price information you needed?"
+    type: single_choice
+    construct: easy_difficult_was_it_find
+    required: true
+    options:
+      - id: "a"
+        label: "Very easy"
+      - id: "b"
+        label: "Somewhat easy"
+      - id: "c"
+        label: "Neither easy nor difficult"
+      - id: "d"
+        label: "Somewhat difficult"
+      - id: "e"
+        label: "Very difficult"
+  - id: q5
+    prompt: "When you found a price, how accurate did it turn out to be compared with your final bill?"
+    type: single_choice
+    construct: when_found_price_accurate_did
+    required: true
+    options:
+      - id: "a"
+        label: "Very accurate"
+      - id: "b"
+        label: "Somewhat accurate"
+      - id: "c"
+        label: "Not very accurate"
+      - id: "d"
+        label: "Not at all accurate"
+      - id: "e"
+        label: "I have not compared"
+  - id: q6
+    prompt: "Have you ever chosen a different provider or facility because of price?"
+    type: single_choice
+    construct: have_ever_chosen_different_provider
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I have considered it"
+      - id: "d"
+        label: "No, never"
+  - id: q7
+    prompt: "Have you ever delayed or skipped care because you were unsure of the cost?"
+    type: single_choice
+    construct: have_ever_delayed_skipped_care
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several times"
+      - id: "b"
+        label: "Yes, once or twice"
+      - id: "c"
+        label: "No, but I have worried about it"
+      - id: "d"
+        label: "No, never"
+  - id: q8
+    prompt: "Have you ever asked a provider for a cost estimate before a service?"
+    type: single_choice
+    construct: have_ever_asked_provider_cost
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I received a clear estimate"
+      - id: "b"
+        label: "Yes, but the estimate was unclear"
+      - id: "c"
+        label: "Yes, but I could not get an estimate"
+      - id: "d"
+        label: "No, I have not asked"
+  - id: q9
+    prompt: "Have you ever tried to negotiate a medical price or bill?"
+    type: single_choice
+    construct: have_ever_tried_negotiate_medical
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it worked"
+      - id: "b"
+        label: "Yes, but it did not work"
+      - id: "c"
+        label: "No, but I would try"
+      - id: "d"
+        label: "No, and I would not"
+  - id: q10
+    prompt: "How aware are you that hospitals are required to post their prices online?"
+    type: single_choice
+    construct: aware_that_hospitals_required_post
+    required: true
+    options:
+      - id: "a"
+        label: "Very aware"
+      - id: "b"
+        label: "Somewhat aware"
+      - id: "c"
+        label: "Only slightly aware"
+      - id: "d"
+        label: "Not aware at all"
+  - id: q11
+    prompt: "How much do you agree with the following statement: I have enough information to know what my care will cost."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Healthcare prices are too hard to find and understand."
+    type: single_choice
+    construct: much_agree_following_statement_healthcar
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: Knowing prices in advance would change where I get care."
+    type: single_choice
+    construct: much_agree_following_statement_knowing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I trust the price estimates that providers or insurers give me."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: Providers should be required to share prices before care."
+    type: single_choice
+    construct: much_agree_following_statement_providers
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: The price of care reflects its quality."
+    type: single_choice
+    construct: much_agree_following_statement_price
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How important is price transparency to you for each type of care: Routine office visits."
+    type: single_choice
+    construct: important_price_transparency_each_type
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is price transparency to you for each type of care: Lab tests and imaging."
+    type: single_choice
+    construct: important_price_transparency_each_type
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is price transparency to you for each type of care: Planned procedures or surgery."
+    type: single_choice
+    construct: important_price_transparency_each_type
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is price transparency to you for each type of care: Prescription medications."
+    type: single_choice
+    construct: important_price_transparency_each_type
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How much does out-of-pocket cost influence your healthcare decisions?"
+    type: single_choice
+    construct: much_does_out_pocket_cost
+    required: true
+    options:
+      - id: "a"
+        label: "A great deal"
+      - id: "b"
+        label: "A lot"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A little"
+      - id: "e"
+        label: "Not at all"
+  - id: q22
+    prompt: "When comparing prices, how do you usually balance cost against other factors?"
+    type: single_choice
+    construct: when_comparing_prices_usually_balance
+    required: true
+    options:
+      - id: "a"
+        label: "I mostly choose the lowest price"
+      - id: "b"
+        label: "I weigh price against convenience"
+      - id: "c"
+        label: "I weigh price against quality or reputation"
+      - id: "d"
+        label: "I rarely let price decide"
+      - id: "e"
+        label: "I do not compare prices"
+  - id: q23
+    prompt: "How confident are you in your ability to estimate what you will owe after insurance?"
+    type: single_choice
+    construct: confident_ability_estimate_will_owe
+    required: true
+    options:
+      - id: "a"
+        label: "Very confident"
+      - id: "b"
+        label: "Somewhat confident"
+      - id: "c"
+        label: "Neither confident nor unconfident"
+      - id: "d"
+        label: "Somewhat unconfident"
+      - id: "e"
+        label: "Not at all confident"
+  - id: q24
+    prompt: "Which barriers make it hard to compare healthcare prices? (Select all that apply)"
+    type: multi_choice
+    construct: barriers_make_it_hard_compare
+    required: true
+    options:
+      - id: "a"
+        label: "Prices are hard to find"
+      - id: "b"
+        label: "Estimates are confusing or full of jargon"
+      - id: "c"
+        label: "Insurance coverage is unclear"
+      - id: "d"
+        label: "Final bills differ from estimates"
+      - id: "e"
+        label: "I do not have time"
+      - id: "f"
+        label: "I do not know where to look"
+      - id: "g"
+        label: "I have not faced barriers"
+  - id: q25
+    prompt: "How often does surprise or unexpected cost affect you after receiving care?"
+    type: single_choice
+    construct: often_does_surprise_unexpected_cost
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q26
+    prompt: "Which tools would you be most likely to use to compare prices? (Select all that apply)"
+    type: multi_choice
+    construct: tools_would_be_most_likely
+    required: true
+    options:
+      - id: "a"
+        label: "My insurer's cost estimator"
+      - id: "b"
+        label: "A hospital price list"
+      - id: "c"
+        label: "An independent price-comparison app"
+      - id: "d"
+        label: "A prescription-price tool"
+      - id: "e"
+        label: "A phone call to the billing office"
+      - id: "f"
+        label: "Advice from my doctor's office"
+      - id: "g"
+        label: "I would not use any of these"
+  - id: q27
+    prompt: "How useful do you find your insurer's cost-estimate tools, if you have used them?"
+    type: single_choice
+    construct: useful_find_insurer_s_cost
+    required: true
+    options:
+      - id: "a"
+        label: "Very useful"
+      - id: "b"
+        label: "Somewhat useful"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Not very useful"
+      - id: "e"
+        label: "I have not used them"
+  - id: q28
+    prompt: "Select your top 3 things that would help you understand healthcare prices better. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_that
+    required: true
+    options:
+      - id: "a"
+        label: "Clear, upfront price estimates"
+      - id: "b"
+        label: "Estimates that match the final bill"
+      - id: "c"
+        label: "Easy-to-use comparison tools"
+      - id: "d"
+        label: "Plain-language explanations"
+      - id: "e"
+        label: "Knowing my exact out-of-pocket cost"
+      - id: "f"
+        label: "Prices shown at the point of scheduling"
+      - id: "g"
+        label: "Help from a person when I need it"
+      - id: "h"
+        label: "Price and quality shown together"
+  - id: q29
+    prompt: "Overall, how satisfied are you with the availability of healthcare price information?"
+    type: single_choice
+    construct: overall_satisfied_availability_healthcar
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "On a scale of 0 to 10, how likely are you to check prices before your next non-emergency care? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_check
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "Over the next 12 months, do you plan to compare healthcare prices more than you do now?"
+    type: single_choice
+    construct: over_next_12_months_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Definitely yes"
+      - id: "b"
+        label: "Probably yes"
+      - id: "c"
+        label: "Not sure"
+      - id: "d"
+        label: "Probably not"
+      - id: "e"
+        label: "Definitely not"
+  - id: q32
+    prompt: "About how many times in the past 12 months did you look up a healthcare price? Please enter a number."
+    type: free_text
+    construct: many_times_past_12_months
+    required: true
+  - id: q33
+    prompt: "About how many minutes did you spend the last time you tried to find a price? Please enter a number of minutes."
+    type: free_text
+    construct: many_minutes_did_spend_last
+    required: true
+  - id: q34
+    prompt: "What is the highest dollar amount of a medical bill you would pay without checking the price first? Please enter a number in dollars."
+    type: free_text
+    construct: highest_dollar_amount_medical_bill
+    required: true
+  - id: q35
+    prompt: "In your own words, what would make healthcare prices easier to understand? (Optional)"
+    type: free_text
+    construct: own_words_would_make_healthcare
+    required: false
+  - id: q36
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe or not to say"
+  - id: q38
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q42
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q44
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q45
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q46
+    prompt: "What type of health insurance do you primarily have?"
+    type: single_choice
+    construct: type_health_insurance_primarily_have
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored plan"
+      - id: "b"
+        label: "Plan bought on the marketplace or directly"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or veterans coverage"
+      - id: "f"
+        label: "I do not have health insurance"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "Which best describes your health plan's deductible?"
+    type: single_choice
+    construct: best_describes_health_plan_s
+    required: true
+    options:
+      - id: "a"
+        label: "Low deductible (under $1,000)"
+      - id: "b"
+        label: "Moderate deductible ($1,000–$2,999)"
+      - id: "c"
+        label: "High deductible ($3,000 or more)"
+      - id: "d"
+        label: "Not sure"
+      - id: "e"
+        label: "I do not have insurance"

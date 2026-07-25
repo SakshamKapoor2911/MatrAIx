@@ -1,0 +1,862 @@
+schemaVersion: "1.0"
+id: bankruptcy_attitudes_v1
+title: "Personal Bankruptcy Attitudes Survey"
+description: "Public attitudes toward personal bankruptcy, the stigma surrounding it, and respondents' own experience considering or filing Chapter 7 or Chapter 13."
+questions:
+  - id: q0
+    prompt: "Which of the following best describes your personal experience with bankruptcy?"
+    type: single_choice
+    construct: following_best_describes_personal_experi
+    required: true
+    options:
+      - id: "a"
+        label: "I have filed for personal bankruptcy"
+      - id: "b"
+        label: "I consulted an attorney but did not file"
+      - id: "c"
+        label: "I have seriously considered filing"
+      - id: "d"
+        label: "A close family member or friend has filed"
+      - id: "e"
+        label: "I have no personal or close connection to bankruptcy"
+  - id: q1
+    prompt: "How familiar are you with the difference between Chapter 7 and Chapter 13 bankruptcy?"
+    type: single_choice
+    construct: familiar_difference_between_chapter_7
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all familiar"
+      - id: "b"
+        label: "Slightly familiar"
+      - id: "c"
+        label: "Moderately familiar"
+      - id: "d"
+        label: "Very familiar"
+      - id: "e"
+        label: "Extremely familiar"
+  - id: q2
+    prompt: "Have you ever seriously worried that you might need to file for bankruptcy?"
+    type: single_choice
+    construct: have_ever_seriously_worried_that
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, currently"
+      - id: "b"
+        label: "Yes, in the past"
+      - id: "c"
+        label: "No, but it has crossed my mind"
+      - id: "d"
+        label: "No, never"
+  - id: q3
+    prompt: "How would you describe your current level of debt-related stress?"
+    type: single_choice
+    construct: would_describe_current_level_debt
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "Low"
+      - id: "c"
+        label: "Moderate"
+      - id: "d"
+        label: "High"
+      - id: "e"
+        label: "Overwhelming"
+  - id: q4
+    prompt: "Which types of debt cause you (or have caused you) the most stress? (Select all that apply)"
+    type: multi_choice
+    construct: types_debt_cause_have_caused
+    required: true
+    options:
+      - id: "a"
+        label: "Credit card debt"
+      - id: "b"
+        label: "Medical bills"
+      - id: "c"
+        label: "Mortgage or housing debt"
+      - id: "d"
+        label: "Auto loans"
+      - id: "e"
+        label: "Student loans"
+      - id: "f"
+        label: "Personal or payday loans"
+      - id: "g"
+        label: "Business debt"
+      - id: "h"
+        label: "Tax debt"
+      - id: "i"
+        label: "None"
+  - id: q5
+    prompt: "What triggered (or could trigger) serious consideration of bankruptcy? (Select all that apply)"
+    type: multi_choice
+    construct: triggered_could_trigger_serious_consider
+    required: true
+    options:
+      - id: "a"
+        label: "Job loss or reduced income"
+      - id: "b"
+        label: "Overwhelming medical bills"
+      - id: "c"
+        label: "Divorce or separation"
+      - id: "d"
+        label: "A failed business"
+      - id: "e"
+        label: "Accumulated credit card debt"
+      - id: "f"
+        label: "Foreclosure or eviction risk"
+      - id: "g"
+        label: "An unexpected emergency expense"
+      - id: "h"
+        label: "Not applicable"
+  - id: q6
+    prompt: "If you filed or considered filing, which professionals did you consult? (Select all that apply)"
+    type: multi_choice
+    construct: if_filed_considered_filing_professionals
+    required: true
+    options:
+      - id: "a"
+        label: "A bankruptcy attorney"
+      - id: "b"
+        label: "A nonprofit credit counselor"
+      - id: "c"
+        label: "A financial advisor"
+      - id: "d"
+        label: "Legal aid or a free clinic"
+      - id: "e"
+        label: "Online research only"
+      - id: "f"
+        label: "I did not consult anyone"
+      - id: "g"
+        label: "Not applicable"
+  - id: q7
+    prompt: "Which chapter of bankruptcy did you file or most seriously consider?"
+    type: single_choice
+    construct: chapter_bankruptcy_did_file_most
+    required: true
+    options:
+      - id: "a"
+        label: "Chapter 7 (liquidation)"
+      - id: "b"
+        label: "Chapter 13 (repayment plan)"
+      - id: "c"
+        label: "I was unsure which applied to me"
+      - id: "d"
+        label: "Not applicable"
+  - id: q8
+    prompt: "At the time you were most worried, approximately what was your total debt?"
+    type: single_choice
+    construct: time_were_most_worried_approximately
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $10,000"
+      - id: "b"
+        label: "$10,000 to $24,999"
+      - id: "c"
+        label: "$25,000 to $49,999"
+      - id: "d"
+        label: "$50,000 to $99,999"
+      - id: "e"
+        label: "$100,000 or more"
+      - id: "f"
+        label: "Not applicable"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q9
+    prompt: "If you filed, approximately how much did you pay in attorney and filing costs? (Enter a whole-dollar number, or 0 if not applicable.)"
+    type: free_text
+    construct: if_filed_approximately_much_did
+    required: true
+  - id: q10
+    prompt: "If you filed, how did you pay for the process?"
+    type: single_choice
+    construct: if_filed_did_pay_process
+    required: true
+    options:
+      - id: "a"
+        label: "Savings"
+      - id: "b"
+        label: "Help from family or friends"
+      - id: "c"
+        label: "A payment plan with the attorney"
+      - id: "d"
+        label: "Legal aid or pro bono help"
+      - id: "e"
+        label: "I have not filed"
+  - id: q11
+    prompt: "Which alternatives to bankruptcy did you try or seriously consider? (Select all that apply)"
+    type: multi_choice
+    construct: alternatives_bankruptcy_did_try_seriousl
+    required: true
+    options:
+      - id: "a"
+        label: "Debt consolidation loan"
+      - id: "b"
+        label: "Debt settlement program"
+      - id: "c"
+        label: "Nonprofit credit counseling"
+      - id: "d"
+        label: "Selling assets"
+      - id: "e"
+        label: "Borrowing from family or friends"
+      - id: "f"
+        label: "Taking on a second job or side income"
+      - id: "g"
+        label: "Negotiating directly with creditors"
+      - id: "h"
+        label: "None of these"
+  - id: q12
+    prompt: "How often do you discuss your finances or debt situation with other people?"
+    type: single_choice
+    construct: often_discuss_finances_debt_situation
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q13
+    prompt: "How much do you agree with the following statement: Bankruptcy is a responsible way for someone to get a fresh financial start."
+    type: single_choice
+    construct: much_agree_following_statement_bankruptc
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: People who file for bankruptcy are generally irresponsible with money."
+    type: single_choice
+    construct: much_agree_following_statement_people
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: Filing for bankruptcy should carry no shame."
+    type: single_choice
+    construct: much_agree_following_statement_filing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I would be embarrassed to tell others that I had filed for bankruptcy."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: The bankruptcy system in this country is fair."
+    type: single_choice
+    construct: much_agree_following_statement_bankruptc
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement: Medical debt is a legitimate reason to file for bankruptcy."
+    type: single_choice
+    construct: much_agree_following_statement_medical
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement: Filing for bankruptcy is a sign of personal failure."
+    type: single_choice
+    construct: much_agree_following_statement_filing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "If facing bankruptcy, how important would protecting your home be to you?"
+    type: single_choice
+    construct: if_facing_bankruptcy_important_would
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "If facing bankruptcy, how important would keeping your car be to you?"
+    type: single_choice
+    construct: if_facing_bankruptcy_important_would
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "If facing bankruptcy, how important would minimizing damage to your credit be to you?"
+    type: single_choice
+    construct: if_facing_bankruptcy_important_would
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "If facing bankruptcy, how important would getting professional legal help be to you?"
+    type: single_choice
+    construct: if_facing_bankruptcy_important_would
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "If facing bankruptcy, how important would a fast resolution be to you?"
+    type: single_choice
+    construct: if_facing_bankruptcy_important_would
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "If facing bankruptcy, how important would privacy and confidentiality be to you?"
+    type: single_choice
+    construct: if_facing_bankruptcy_important_would
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "If a friend told you they had filed for bankruptcy, how would you react?"
+    type: single_choice
+    construct: if_friend_told_they_had
+    required: true
+    options:
+      - id: "a"
+        label: "I would think less of them"
+      - id: "b"
+        label: "I would be somewhat concerned about their judgment"
+      - id: "c"
+        label: "I would not judge them at all"
+      - id: "d"
+        label: "I would admire them for taking action"
+      - id: "e"
+        label: "Not sure"
+  - id: q27
+    prompt: "Do you think it is currently too easy or too hard for individuals to file for bankruptcy?"
+    type: single_choice
+    construct: think_it_currently_too_easy
+    required: true
+    options:
+      - id: "a"
+        label: "Much too easy"
+      - id: "b"
+        label: "Somewhat too easy"
+      - id: "c"
+        label: "About right"
+      - id: "d"
+        label: "Somewhat too hard"
+      - id: "e"
+        label: "Much too hard"
+      - id: "f"
+        label: "Don't know"
+  - id: q28
+    prompt: "To the best of your knowledge, how long does a Chapter 7 bankruptcy typically stay on a credit report?"
+    type: single_choice
+    construct: best_knowledge_long_does_chapter
+    required: true
+    options:
+      - id: "a"
+        label: "About 2 years"
+      - id: "b"
+        label: "About 5 years"
+      - id: "c"
+        label: "About 7 years"
+      - id: "d"
+        label: "About 10 years"
+      - id: "e"
+        label: "Don't know"
+  - id: q29
+    prompt: "Which statement best reflects your view of who bankruptcy laws mostly favor?"
+    type: single_choice
+    construct: statement_best_reflects_view_who
+    required: true
+    options:
+      - id: "a"
+        label: "They mostly favor creditors and banks"
+      - id: "b"
+        label: "They mostly favor debtors and individuals"
+      - id: "c"
+        label: "They are reasonably balanced"
+      - id: "d"
+        label: "Don't know"
+  - id: q30
+    prompt: "If you were to file for bankruptcy, how likely would you be to tell close family?"
+    type: single_choice
+    construct: if_were_file_bankruptcy_likely
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "Which are your top 3 most acceptable reasons for someone to file for bankruptcy? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_most_acceptable_reasons
+    required: true
+    options:
+      - id: "a"
+        label: "Catastrophic medical bills"
+      - id: "b"
+        label: "Job loss"
+      - id: "c"
+        label: "Divorce"
+      - id: "d"
+        label: "A failed business"
+      - id: "e"
+        label: "Predatory lending or fraud"
+      - id: "f"
+        label: "Natural disaster or emergency"
+      - id: "g"
+        label: "Overwhelming credit card debt"
+  - id: q32
+    prompt: "If you have filed, how do you feel about that decision today? (If you have not filed, choose \"Not applicable.\")"
+    type: single_choice
+    construct: if_have_filed_feel_that
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied with the decision"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied with the decision"
+      - id: "f"
+        label: "Not applicable"
+  - id: q33
+    prompt: "On a scale from 0 to 10, how likely would you be to recommend that someone drowning in debt at least consider bankruptcy? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: scale_from_0_10_likely
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q34
+    prompt: "How likely would you be to file for bankruptcy yourself if you became overwhelmed by debt?"
+    type: single_choice
+    construct: likely_would_be_file_bankruptcy
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q35
+    prompt: "How confident are you that you understand how the bankruptcy process works?"
+    type: single_choice
+    construct: confident_that_understand_bankruptcy_pro
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+  - id: q36
+    prompt: "In your view, how has the stigma around bankruptcy changed over the past decade?"
+    type: single_choice
+    construct: view_has_stigma_around_bankruptcy
+    required: true
+    options:
+      - id: "a"
+        label: "Much more stigmatized"
+      - id: "b"
+        label: "Somewhat more stigmatized"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat less stigmatized"
+      - id: "e"
+        label: "Much less stigmatized"
+  - id: q37
+    prompt: "What are your overall thoughts or feelings about personal bankruptcy? (Optional)"
+    type: free_text
+    construct: overall_thoughts_feelings_personal_bankr
+    required: false
+  - id: q38
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino/a"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Another race or ethnicity"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or independent contractor"
+      - id: "d"
+        label: "Unemployed, looking for work"
+      - id: "e"
+        label: "Not employed and not looking"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q44
+    prompt: "Including yourself, how many people live in your household? (Enter a number.)"
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q45
+    prompt: "What is your marital status?"
+    type: single_choice
+    construct: marital_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Widowed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own with a mortgage"
+      - id: "b"
+        label: "Own outright"
+      - id: "c"
+        label: "Rent"
+      - id: "d"
+        label: "Live with family or others without paying rent"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "What is your current health insurance status?"
+    type: single_choice
+    construct: current_health_insurance_status
+    required: true
+    options:
+      - id: "a"
+        label: "Insured through an employer"
+      - id: "b"
+        label: "Insured through a government program (Medicare, Medicaid, etc.)"
+      - id: "c"
+        label: "Insured through a private plan I bought myself"
+      - id: "d"
+        label: "Uninsured"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Has anyone in your immediate family ever filed for bankruptcy?"
+    type: single_choice
+    construct: has_anyone_immediate_family_ever
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"
+      - id: "d"
+        label: "Prefer not to say"

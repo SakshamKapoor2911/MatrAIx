@@ -1,0 +1,746 @@
+schemaVersion: "1.0"
+id: life_insurance_attitudes_v1
+title: "Life Insurance Attitudes Survey"
+description: "How people think about, own, and make decisions about life insurance, including coverage adequacy, barriers, and trust in advice sources."
+questions:
+  - id: q0
+    prompt: "Do you currently have any life insurance coverage?"
+    type: single_choice
+    construct: currently_have_any_life_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, through my employer only"
+      - id: "b"
+        label: "Yes, an individual policy I bought myself"
+      - id: "c"
+        label: "Yes, both employer and individual coverage"
+      - id: "d"
+        label: "No, but I have had it in the past"
+      - id: "e"
+        label: "No, I have never had life insurance"
+  - id: q1
+    prompt: "What type(s) of life insurance do you currently have? (Select all that apply)"
+    type: multi_choice
+    construct: type_s_life_insurance_currently
+    required: true
+    options:
+      - id: "a"
+        label: "Term life insurance"
+      - id: "b"
+        label: "Whole life insurance"
+      - id: "c"
+        label: "Universal or variable life insurance"
+      - id: "d"
+        label: "Group life through an employer"
+      - id: "e"
+        label: "Final expense / burial insurance"
+      - id: "f"
+        label: "I don't know what type I have"
+      - id: "g"
+        label: "I do not have life insurance"
+  - id: q2
+    prompt: "How long have you had your current life insurance coverage?"
+    type: single_choice
+    construct: long_have_had_current_life
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 9 years"
+      - id: "d"
+        label: "10 to 20 years"
+      - id: "e"
+        label: "More than 20 years"
+      - id: "f"
+        label: "I do not have life insurance"
+  - id: q3
+    prompt: "About how much total life insurance coverage (death benefit) do you have, in U.S. dollars? Please enter a whole number (enter 0 if none)."
+    type: free_text
+    construct: much_total_life_insurance_coverage
+    required: true
+  - id: q4
+    prompt: "About how much do you pay for life insurance per month, in U.S. dollars? Please enter a whole number (enter 0 if none or employer-paid)."
+    type: free_text
+    construct: much_pay_life_insurance_per
+    required: true
+  - id: q5
+    prompt: "Who is your primary life insurance provider, if any?"
+    type: single_choice
+    construct: who_primary_life_insurance_provider
+    required: true
+    options:
+      - id: "a"
+        label: "Northwestern Mutual"
+      - id: "b"
+        label: "New York Life"
+      - id: "c"
+        label: "MassMutual"
+      - id: "d"
+        label: "State Farm"
+      - id: "e"
+        label: "Prudential"
+      - id: "f"
+        label: "MetLife"
+      - id: "g"
+        label: "An employer's group plan"
+      - id: "h"
+        label: "Another company"
+      - id: "i"
+        label: "I do not have life insurance"
+  - id: q6
+    prompt: "How did you obtain your current life insurance? (Select all that apply)"
+    type: multi_choice
+    construct: did_obtain_current_life_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Automatically through my employer"
+      - id: "b"
+        label: "Through a financial advisor or agent"
+      - id: "c"
+        label: "Directly online from an insurer"
+      - id: "d"
+        label: "Through an online marketplace or broker"
+      - id: "e"
+        label: "Through a bank or credit union"
+      - id: "f"
+        label: "I do not have life insurance"
+  - id: q7
+    prompt: "Who depends on your income financially? (Select all that apply)"
+    type: multi_choice
+    construct: who_depends_income_financially_select
+    required: true
+    options:
+      - id: "a"
+        label: "A spouse or partner"
+      - id: "b"
+        label: "Children under 18"
+      - id: "c"
+        label: "Adult children"
+      - id: "d"
+        label: "Aging parents or relatives"
+      - id: "e"
+        label: "No one depends on my income"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q8
+    prompt: "What are the main reasons you have or would want life insurance? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: main_reasons_have_would_want
+    required: true
+    options:
+      - id: "a"
+        label: "Replace my income for my family"
+      - id: "b"
+        label: "Cover funeral and final expenses"
+      - id: "c"
+        label: "Pay off a mortgage or debts"
+      - id: "d"
+        label: "Fund my children's education"
+      - id: "e"
+        label: "Leave an inheritance"
+      - id: "f"
+        label: "Peace of mind"
+      - id: "g"
+        label: "Build cash value / savings"
+      - id: "h"
+        label: "Cover business obligations"
+      - id: "i"
+        label: "It was offered at work"
+  - id: q9
+    prompt: "How important is each of the following in your decision about life insurance? — Monthly premium / cost"
+    type: single_choice
+    construct: important_each_following_decision_life
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q10
+    prompt: "How important is each of the following in your decision about life insurance? — Amount of coverage (death benefit)"
+    type: single_choice
+    construct: important_each_following_decision_life
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q11
+    prompt: "How important is each of the following in your decision about life insurance? — Company financial strength and reputation"
+    type: single_choice
+    construct: important_each_following_decision_life
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q12
+    prompt: "How important is each of the following in your decision about life insurance? — Whether it builds cash value"
+    type: single_choice
+    construct: important_each_following_decision_life
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q13
+    prompt: "How important is each of the following in your decision about life insurance? — Ease of the application process"
+    type: single_choice
+    construct: important_each_following_decision_life
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I have enough life insurance to meet my family's needs."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: Life insurance is too expensive for what you get."
+    type: single_choice
+    construct: much_agree_following_statement_life
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I understand the difference between term and whole life insurance."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: Buying life insurance is a confusing process."
+    type: single_choice
+    construct: much_agree_following_statement_buying
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement: I feel uncomfortable thinking about or planning for my death."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement: Everyone with dependents should have life insurance."
+    type: single_choice
+    construct: much_agree_following_statement_everyone
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How confident are you that you know how much life insurance you actually need?"
+    type: single_choice
+    construct: confident_that_know_much_life
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q21
+    prompt: "If you do not have enough (or any) life insurance, what are the main reasons? (Select all that apply)"
+    type: multi_choice
+    construct: if_not_have_enough_any
+    required: true
+    options:
+      - id: "a"
+        label: "It is too expensive"
+      - id: "b"
+        label: "I haven't gotten around to it"
+      - id: "c"
+        label: "I don't think I need it"
+      - id: "d"
+        label: "The process is confusing"
+      - id: "e"
+        label: "I don't know how much I need"
+      - id: "f"
+        label: "I don't trust insurance companies"
+      - id: "g"
+        label: "I have enough coverage already"
+      - id: "h"
+        label: "Health conditions make it hard to qualify"
+  - id: q22
+    prompt: "How often do you review your life insurance coverage?"
+    type: single_choice
+    construct: often_review_life_insurance_coverage
+    required: true
+    options:
+      - id: "a"
+        label: "At least once a year"
+      - id: "b"
+        label: "Every few years"
+      - id: "c"
+        label: "Only after a major life event"
+      - id: "d"
+        label: "I have never reviewed it"
+      - id: "e"
+        label: "Not applicable"
+  - id: q23
+    prompt: "Which life events have prompted you to think about life insurance? (Select all that apply)"
+    type: multi_choice
+    construct: life_events_have_prompted_think
+    required: true
+    options:
+      - id: "a"
+        label: "Getting married or partnered"
+      - id: "b"
+        label: "Having a child"
+      - id: "c"
+        label: "Buying a home"
+      - id: "d"
+        label: "Starting a business"
+      - id: "e"
+        label: "A death in the family"
+      - id: "f"
+        label: "Starting a new job"
+      - id: "g"
+        label: "Getting older"
+      - id: "h"
+        label: "None of these"
+  - id: q24
+    prompt: "How likely would you be to buy or increase life insurance in the next 12 months?"
+    type: single_choice
+    construct: likely_would_be_buy_increase
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q25
+    prompt: "How much would you trust each source for life insurance advice? — A licensed financial advisor"
+    type: single_choice
+    construct: much_would_trust_each_source
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q26
+    prompt: "How much would you trust each source for life insurance advice? — An insurance agent"
+    type: single_choice
+    construct: much_would_trust_each_source
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q27
+    prompt: "How much would you trust each source for life insurance advice? — Friends and family"
+    type: single_choice
+    construct: much_would_trust_each_source
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q28
+    prompt: "How much would you trust each source for life insurance advice? — Online reviews and comparison sites"
+    type: single_choice
+    construct: much_would_trust_each_source
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q29
+    prompt: "How satisfied are you with your current life insurance situation?"
+    type: single_choice
+    construct: satisfied_current_life_insurance_situati
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "On a scale of 0 to 10, how likely are you to recommend that others get life insurance (0 = not at all likely, 10 = extremely likely)?"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "What is your biggest question or hesitation about life insurance? (Optional open response)"
+    type: free_text
+    construct: biggest_question_hesitation_life_insuran
+    required: false
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic, Latino, or Spanish origin"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Some other race or origin"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a whole number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Widowed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "How many children under 18 do you have? Please enter a whole number."
+    type: free_text
+    construct: many_children_under_18_have
+    required: true
+  - id: q41
+    prompt: "In which U.S. region do you live?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q43
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Are you the primary income earner in your household?"
+    type: single_choice
+    construct: primary_income_earner_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I am the sole earner"
+      - id: "b"
+        label: "Yes, I earn most of the income"
+      - id: "c"
+        label: "We earn roughly equally"
+      - id: "d"
+        label: "No, someone else earns most"
+      - id: "e"
+        label: "Prefer not to say"

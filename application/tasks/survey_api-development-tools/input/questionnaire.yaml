@@ -1,0 +1,964 @@
+schemaVersion: "1.0"
+id: api_development_tools_v1
+title: "API Development Tools Survey"
+description: "How developers choose, use, and evaluate the tools they use to build, test, document, and consume APIs."
+questions:
+  - id: q0
+    prompt: "How often do you build, test, or consume APIs in your work?"
+    type: single_choice
+    construct: often_build_test_consume_apis
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "I am just learning to work with APIs"
+      - id: "e"
+        label: "I rarely work with APIs"
+  - id: q1
+    prompt: "How long have you been working with APIs?"
+    type: single_choice
+    construct: long_have_been_working_apis
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "What best describes your primary relationship to APIs?"
+    type: single_choice
+    construct: best_describes_primary_relationship_apis
+    required: true
+    options:
+      - id: "a"
+        label: "I build and maintain APIs"
+      - id: "b"
+        label: "I mostly consume third-party or internal APIs"
+      - id: "c"
+        label: "I test and validate APIs"
+      - id: "d"
+        label: "I write API documentation or specs"
+      - id: "e"
+        label: "I work across all of these roughly equally"
+  - id: q3
+    prompt: "Which type of API do you work with most often?"
+    type: single_choice
+    construct: type_api_work_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "REST / HTTP"
+      - id: "b"
+        label: "GraphQL"
+      - id: "c"
+        label: "gRPC"
+      - id: "d"
+        label: "SOAP"
+      - id: "e"
+        label: "WebSockets or event-driven"
+      - id: "f"
+        label: "Other"
+  - id: q4
+    prompt: "Which API development or testing tool do you use most often?"
+    type: single_choice
+    construct: api_development_testing_tool_use
+    required: true
+    options:
+      - id: "a"
+        label: "Postman"
+      - id: "b"
+        label: "Insomnia"
+      - id: "c"
+        label: "Bruno"
+      - id: "d"
+        label: "curl"
+      - id: "e"
+        label: "Hoppscotch"
+      - id: "f"
+        label: "Thunder Client"
+      - id: "g"
+        label: "HTTPie"
+      - id: "h"
+        label: "Other"
+  - id: q5
+    prompt: "Which API clients or testing tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: api_clients_testing_tools_have
+    required: true
+    options:
+      - id: "a"
+        label: "Postman"
+      - id: "b"
+        label: "Insomnia"
+      - id: "c"
+        label: "Bruno"
+      - id: "d"
+        label: "Hoppscotch"
+      - id: "e"
+        label: "Thunder Client"
+      - id: "f"
+        label: "curl"
+      - id: "g"
+        label: "HTTPie"
+      - id: "h"
+        label: "Paw / RapidAPI"
+      - id: "i"
+        label: "VS Code REST Client"
+      - id: "j"
+        label: "None of these"
+  - id: q6
+    prompt: "Which API documentation or specification tools have you used? (Select all that apply)"
+    type: multi_choice
+    construct: api_documentation_specification_tools_ha
+    required: true
+    options:
+      - id: "a"
+        label: "Swagger UI / OpenAPI"
+      - id: "b"
+        label: "Redoc"
+      - id: "c"
+        label: "Stoplight"
+      - id: "d"
+        label: "Postman documentation"
+      - id: "e"
+        label: "ReadMe"
+      - id: "f"
+        label: "Docusaurus or custom docs"
+      - id: "g"
+        label: "None"
+  - id: q7
+    prompt: "Which command-line HTTP tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: command_line_http_tools_use
+    required: true
+    options:
+      - id: "a"
+        label: "curl"
+      - id: "b"
+        label: "HTTPie"
+      - id: "c"
+        label: "wget"
+      - id: "d"
+        label: "xh"
+      - id: "e"
+        label: "grpcurl"
+      - id: "f"
+        label: "None"
+  - id: q8
+    prompt: "Which API mocking or virtualization tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: api_mocking_virtualization_tools_use
+    required: true
+    options:
+      - id: "a"
+        label: "Postman mock servers"
+      - id: "b"
+        label: "Mockoon"
+      - id: "c"
+        label: "WireMock"
+      - id: "d"
+        label: "Prism (Stoplight)"
+      - id: "e"
+        label: "Mock Service Worker (MSW)"
+      - id: "f"
+        label: "Beeceptor"
+      - id: "g"
+        label: "None"
+  - id: q9
+    prompt: "Which API gateway or management platforms do you work with? (Select all that apply)"
+    type: multi_choice
+    construct: api_gateway_management_platforms_work
+    required: true
+    options:
+      - id: "a"
+        label: "Kong"
+      - id: "b"
+        label: "AWS API Gateway"
+      - id: "c"
+        label: "Apigee"
+      - id: "d"
+        label: "Azure API Management"
+      - id: "e"
+        label: "Tyk"
+      - id: "f"
+        label: "Cloudflare API Gateway"
+      - id: "g"
+        label: "None"
+  - id: q10
+    prompt: "Which authentication methods do you commonly work with in APIs? (Select all that apply)"
+    type: multi_choice
+    construct: authentication_methods_commonly_work_api
+    required: true
+    options:
+      - id: "a"
+        label: "API keys"
+      - id: "b"
+        label: "OAuth 2.0"
+      - id: "c"
+        label: "JWT / bearer tokens"
+      - id: "d"
+        label: "Basic authentication"
+      - id: "e"
+        label: "Mutual TLS (mTLS)"
+      - id: "f"
+        label: "Session cookies"
+      - id: "g"
+        label: "None of these"
+  - id: q11
+    prompt: "How do you primarily organize and share API requests?"
+    type: single_choice
+    construct: primarily_organize_share_api_requests
+    required: true
+    options:
+      - id: "a"
+        label: "Shared team collections or workspaces"
+      - id: "b"
+        label: "Requests committed to a git repository"
+      - id: "c"
+        label: "Personal collections, not shared"
+      - id: "d"
+        label: "Ad hoc, I recreate requests as needed"
+      - id: "e"
+        label: "I don't save requests"
+  - id: q12
+    prompt: "Which API testing approaches do you use? (Select all that apply)"
+    type: multi_choice
+    construct: api_testing_approaches_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Manual testing in a client"
+      - id: "b"
+        label: "Automated integration tests"
+      - id: "c"
+        label: "Contract testing"
+      - id: "d"
+        label: "Load or performance testing"
+      - id: "e"
+        label: "Testing in CI pipelines"
+      - id: "f"
+        label: "Security or fuzz testing"
+      - id: "g"
+        label: "None of these"
+  - id: q13
+    prompt: "Which contract-testing or schema-validation tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: contract_testing_schema_validation_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Pact"
+      - id: "b"
+        label: "OpenAPI validators"
+      - id: "c"
+        label: "Spectral"
+      - id: "d"
+        label: "Dredd"
+      - id: "e"
+        label: "Schemathesis"
+      - id: "f"
+        label: "None"
+  - id: q14
+    prompt: "Do you currently pay for a tier of any API development tool?"
+    type: single_choice
+    construct: currently_pay_tier_any_api
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a personal paid plan"
+      - id: "b"
+        label: "Yes, my company pays for a team plan"
+      - id: "c"
+        label: "No, I only use free tiers"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q15
+    prompt: "About how many distinct API endpoints do you regularly work with? Please enter a number."
+    type: free_text
+    construct: many_distinct_api_endpoints_regularly
+    required: true
+  - id: q16
+    prompt: "How many separate API tools do you use in a typical week? Please enter a number."
+    type: free_text
+    construct: many_separate_api_tools_use
+    required: true
+  - id: q17
+    prompt: "How did you learn to work with APIs? (Select all that apply)"
+    type: multi_choice
+    construct: did_learn_work_apis_select
+    required: true
+    options:
+      - id: "a"
+        label: "On the job"
+      - id: "b"
+        label: "Online courses or documentation"
+      - id: "c"
+        label: "A course or bootcamp"
+      - id: "d"
+        label: "School or university"
+      - id: "e"
+        label: "A colleague or mentor"
+      - id: "f"
+        label: "Trial and error"
+  - id: q18
+    prompt: "How would you rate your overall proficiency with API development and testing?"
+    type: single_choice
+    construct: would_rate_overall_proficiency_api
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert"
+  - id: q19
+    prompt: "Thinking about your primary API tool, how much do you agree: it is easy to use."
+    type: single_choice
+    construct: thinking_primary_api_tool_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Thinking about your primary API tool, how much do you agree: it noticeably speeds up my work."
+    type: single_choice
+    construct: thinking_primary_api_tool_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "Thinking about your primary API tool, how much do you agree: it has strong collaboration features."
+    type: single_choice
+    construct: thinking_primary_api_tool_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "Thinking about your primary API tool, how much do you agree: it is reliable and stable."
+    type: single_choice
+    construct: thinking_primary_api_tool_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "Thinking about your primary API tool, how much do you agree: it fits well into automated workflows."
+    type: single_choice
+    construct: thinking_primary_api_tool_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "Thinking about your primary API tool, how much do you agree: it was worth any learning curve."
+    type: single_choice
+    construct: thinking_primary_api_tool_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "When choosing an API development tool, how important is ease of use?"
+    type: single_choice
+    construct: when_choosing_api_development_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing an API development tool, how important is speed and performance?"
+    type: single_choice
+    construct: when_choosing_api_development_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing an API development tool, how important are collaboration and sharing features?"
+    type: single_choice
+    construct: when_choosing_api_development_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing an API development tool, how important is price or cost?"
+    type: single_choice
+    construct: when_choosing_api_development_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "When choosing an API development tool, how important is offline or local-only operation?"
+    type: single_choice
+    construct: when_choosing_api_development_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "When choosing an API development tool, how important is git-friendly, plain-text storage?"
+    type: single_choice
+    construct: when_choosing_api_development_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q31
+    prompt: "When choosing an API development tool, how important is scripting and automation support?"
+    type: single_choice
+    construct: when_choosing_api_development_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q32
+    prompt: "How often do you write automated tests for the APIs you work with?"
+    type: single_choice
+    construct: often_write_automated_tests_apis
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q33
+    prompt: "How much do you agree: I prefer open-source API tools over closed-source ones."
+    type: single_choice
+    construct: much_agree_i_prefer_open
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q34
+    prompt: "How much do you agree: requiring an account or cloud sync to use an API tool is a concern for me."
+    type: single_choice
+    construct: much_agree_requiring_account_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q35
+    prompt: "How much do you agree: AI-assisted features in API tools are genuinely useful to me."
+    type: single_choice
+    construct: much_agree_ai_assisted_features
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q36
+    prompt: "Which are your top 3 most important features in an API tool? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_most_important_features
+    required: true
+    options:
+      - id: "a"
+        label: "Fast, lightweight interface"
+      - id: "b"
+        label: "Team collaboration and sharing"
+      - id: "c"
+        label: "Environment and variable management"
+      - id: "d"
+        label: "Automated testing and scripting"
+      - id: "e"
+        label: "Mock server support"
+      - id: "f"
+        label: "OpenAPI / spec import and export"
+      - id: "g"
+        label: "Offline or local operation"
+      - id: "h"
+        label: "Git integration"
+  - id: q37
+    prompt: "Which of these are pain points with your current API tooling? (Select all that apply)"
+    type: multi_choice
+    construct: these_pain_points_current_api
+    required: true
+    options:
+      - id: "a"
+        label: "Slow or bloated interface"
+      - id: "b"
+        label: "Too expensive"
+      - id: "c"
+        label: "Poor collaboration"
+      - id: "d"
+        label: "Weak automation or scripting"
+      - id: "e"
+        label: "Privacy or data-storage concerns"
+      - id: "f"
+        label: "Hard to keep requests in sync with the team"
+      - id: "g"
+        label: "No major pain points"
+  - id: q38
+    prompt: "How often do you run into problems configuring API authentication?"
+    type: single_choice
+    construct: often_run_into_problems_configuring
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q39
+    prompt: "How satisfied are you with your primary API tool?"
+    type: single_choice
+    construct: satisfied_primary_api_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q40
+    prompt: "How satisfied are you with your current API documentation workflow?"
+    type: single_choice
+    construct: satisfied_current_api_documentation_work
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q41
+    prompt: "How likely are you to recommend your primary API tool to another developer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_api_tool
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q42
+    prompt: "How likely are you to try a new API tool within the next year?"
+    type: single_choice
+    construct: likely_try_new_api_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q43
+    prompt: "How likely are you to switch your primary API tool within the next year?"
+    type: single_choice
+    construct: likely_switch_primary_api_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q44
+    prompt: "What is one thing you would improve about the API tools you use? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_api
+    required: false
+  - id: q45
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "DevOps or platform engineer"
+      - id: "e"
+        label: "QA or test engineer"
+      - id: "f"
+        label: "Engineering manager"
+      - id: "g"
+        label: "API or developer-experience specialist"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q46
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q47
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q48
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q49
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q50
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q51
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q52
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q53
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q54
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q55
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

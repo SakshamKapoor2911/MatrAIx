@@ -1,0 +1,7 @@
+# Bond Investing
+
+How people invest in bonds — corporate, municipal, and government — directly and through bond mutual funds and ETFs.
+
+## About this survey
+
+This survey screens for familiarity with bonds and current holdings, then covers awareness and ownership across bond types (Treasury, corporate, municipal, high-yield, agency, and international), how respondents invest (individual bonds, funds, ETFs, target-date and employer plans), and reasons for investing. Free-text items capture bond holdings and portfolio share, and a knowledge check probes the rate-price relationship along with familiarity with concepts such as duration, credit ratings, yield to maturity, and laddering. Likert batteries measure attitudes about the portfolio role of bonds, understanding of risk, perceived returns, rate-risk worries, and preference for funds, plus an importance matrix on investing factors (yield, credit quality, maturity, tax treatment, fees) and a top-3 ranking of reasons to invest. Additional items cover risk tolerance, allocation changes, laddering, municipal tax exemption, who manages decisions, information sources, attention to the Federal Reserve, likelihood to increase holdings, satisfaction, a 0–10 recommendation score, and an optional comment. A full demographic block records age, gender, race/ethnicity, education, employment, income, marital status, investable assets, life stage, region, and urbanicity.

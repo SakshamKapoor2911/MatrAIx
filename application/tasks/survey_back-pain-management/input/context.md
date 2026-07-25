@@ -1,0 +1,7 @@
+# Everyday Back Comfort
+
+Everyday back comfort and the general self-care approaches and products consumers use.
+
+## About this survey
+
+This survey covers how often respondents experience everyday back discomfort, how long they've dealt with it, perceived contributors (sitting, lifting, posture, activity, sleep, stress), and the everyday approaches they use (stretching, heat/cold, over-the-counter relief, massage, ergonomics, supportive bedding). It measures stretching frequency, product purchases and yearly spend, whether they've seen a professional, discomfort days in the past month, where they seek information, posture attention, and over-the-counter relief use. It runs Likert batteries on agreement (approaches work, activity helps, know-how, impact on activities, worry, self-care preference, openness to new products) and on how important each approach is, a top-3 most-helpful-approach ranking, impact on daily activities, how well approaches work, confidence, openness to new routines, satisfaction, intent to try something new, and a 0–10 recommendation score, plus an open comment. Question types include single-choice, multi-select, Likert scales, a matrix battery split per item, a top-3 ranking, and numeric free-text. Demographics captured: age, gender, race/ethnicity, household income, education, employment, household size, marital status, region, urban/rural, activity level, and typical daily activity. Content is intentionally benign and routine-focused.

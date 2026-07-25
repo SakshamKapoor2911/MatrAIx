@@ -1,0 +1,752 @@
+schemaVersion: "1.0"
+id: hsa_fsa_usage_v1
+title: "Health Savings & Flexible Spending Account Usage Survey"
+description: "How consumers set up, fund, and spend tax-advantaged health accounts such as HSAs and FSAs."
+questions:
+  - id: q0
+    prompt: "Do you currently have any tax-advantaged health spending account?"
+    type: single_choice
+    construct: currently_have_any_tax_advantaged
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I have one now"
+      - id: "b"
+        label: "I had one in the past but not now"
+      - id: "c"
+        label: "No, I have never had one"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q1
+    prompt: "Which of these account types do you have now or have had in the past? (Select all that apply)"
+    type: multi_choice
+    construct: these_account_types_have_now
+    required: true
+    options:
+      - id: "a"
+        label: "Health Savings Account (HSA)"
+      - id: "b"
+        label: "Health Flexible Spending Account (FSA)"
+      - id: "c"
+        label: "Dependent Care FSA"
+      - id: "d"
+        label: "Limited Purpose FSA (dental and vision only)"
+      - id: "e"
+        label: "Health Reimbursement Arrangement (HRA)"
+      - id: "f"
+        label: "None of these"
+  - id: q2
+    prompt: "How long have you had your current (or most recent) account?"
+    type: single_choice
+    construct: long_have_had_current_most
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q3
+    prompt: "How was your account offered or opened?"
+    type: single_choice
+    construct: was_account_offered_opened
+    required: true
+    options:
+      - id: "a"
+        label: "Through my own employer's benefits program"
+      - id: "b"
+        label: "Through my spouse's or a family member's employer"
+      - id: "c"
+        label: "I opened it on my own with a bank or provider"
+      - id: "d"
+        label: "Through a health insurance marketplace plan"
+      - id: "e"
+        label: "Not applicable"
+  - id: q4
+    prompt: "Which company administers your account?"
+    type: single_choice
+    construct: company_administers_account
+    required: true
+    options:
+      - id: "a"
+        label: "Fidelity"
+      - id: "b"
+        label: "HealthEquity"
+      - id: "c"
+        label: "Optum Bank"
+      - id: "d"
+        label: "HSA Bank / WEX"
+      - id: "e"
+        label: "Bank of America"
+      - id: "f"
+        label: "Another provider"
+      - id: "g"
+        label: "I don't know"
+  - id: q5
+    prompt: "Is your account paired with a high-deductible health plan (HDHP)?"
+    type: single_choice
+    construct: account_paired_high_deductible_health
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "I'm not sure"
+  - id: q6
+    prompt: "Roughly how much do you contribute to the account per year? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: roughly_much_contribute_account_per
+    required: true
+  - id: q7
+    prompt: "How do you decide how much to contribute each year?"
+    type: single_choice
+    construct: decide_much_contribute_each_year
+    required: true
+    options:
+      - id: "a"
+        label: "I estimate my expected medical expenses"
+      - id: "b"
+        label: "I contribute the maximum allowed by the IRS"
+      - id: "c"
+        label: "I contribute up to my employer's match or seed amount"
+      - id: "d"
+        label: "I contribute a round number without much planning"
+      - id: "e"
+        label: "It's automatic and I haven't changed it"
+      - id: "f"
+        label: "Not applicable"
+  - id: q8
+    prompt: "Does your employer contribute money to your account?"
+    type: single_choice
+    construct: does_employer_contribute_money_account
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, they match part of my contributions"
+      - id: "b"
+        label: "Yes, they seed a fixed amount regardless of my contributions"
+      - id: "c"
+        label: "No employer contribution"
+      - id: "d"
+        label: "I don't know"
+  - id: q9
+    prompt: "Roughly how much does your employer contribute to your account per year? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: roughly_much_does_employer_contribute
+    required: true
+  - id: q10
+    prompt: "What do you typically use the funds for? (Select all that apply)"
+    type: multi_choice
+    construct: typically_use_funds_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Doctor visit copays and deductibles"
+      - id: "b"
+        label: "Prescription medications"
+      - id: "c"
+        label: "Dental care"
+      - id: "d"
+        label: "Vision care and eyeglasses or contacts"
+      - id: "e"
+        label: "Over-the-counter medicine and supplies"
+      - id: "f"
+        label: "Mental health or therapy services"
+      - id: "g"
+        label: "Medical devices or equipment"
+      - id: "h"
+        label: "Dependent or childcare costs"
+      - id: "i"
+        label: "I rarely use the funds"
+  - id: q11
+    prompt: "How do you usually pay for eligible expenses?"
+    type: single_choice
+    construct: usually_pay_eligible_expenses
+    required: true
+    options:
+      - id: "a"
+        label: "Linked debit card at the point of sale"
+      - id: "b"
+        label: "Pay out of pocket, then submit a reimbursement claim"
+      - id: "c"
+        label: "A mix of both"
+      - id: "d"
+        label: "I rarely make eligible purchases"
+  - id: q12
+    prompt: "How often do you submit reimbursement claims with receipts?"
+    type: single_choice
+    construct: often_submit_reimbursement_claims_receip
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q13
+    prompt: "If you have an HSA, do you invest any of the balance?"
+    type: single_choice
+    construct: if_have_hsa_invest_any
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I invest a portion for long-term growth"
+      - id: "b"
+        label: "No, I keep it all as cash for expenses"
+      - id: "c"
+        label: "I didn't know I could invest it"
+      - id: "d"
+        label: "Not applicable, I don't have an HSA"
+  - id: q14
+    prompt: "Roughly what percentage of your HSA balance is invested rather than held as cash? Please enter a number from 0 to 100 (enter 0 if none or not applicable)."
+    type: free_text
+    construct: roughly_percentage_hsa_balance_invested
+    required: true
+  - id: q15
+    prompt: "How do you track your account balance and receipts?"
+    type: single_choice
+    construct: track_account_balance_receipts
+    required: true
+    options:
+      - id: "a"
+        label: "The provider's mobile app"
+      - id: "b"
+        label: "The provider's website"
+      - id: "c"
+        label: "A spreadsheet or personal budgeting app"
+      - id: "d"
+        label: "Paper receipts and mailed statements"
+      - id: "e"
+        label: "I don't actively track it"
+  - id: q16
+    prompt: "How much do you agree or disagree: I clearly understand which expenses are eligible for my account."
+    type: single_choice
+    construct: much_agree_disagree_i_clearly
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree or disagree: The account meaningfully lowers my taxes."
+    type: single_choice
+    construct: much_agree_disagree_account_meaningfully
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree or disagree: The provider's app or website is easy to use."
+    type: single_choice
+    construct: much_agree_disagree_provider_s
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree or disagree: I worry about losing money I don't spend in time."
+    type: single_choice
+    construct: much_agree_disagree_i_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree or disagree: I think of my HSA as a way to save for future or retirement health costs."
+    type: single_choice
+    construct: much_agree_disagree_i_think
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree or disagree: Choosing how much to contribute each year is stressful."
+    type: single_choice
+    construct: much_agree_disagree_choosing_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How often do you check your account balance?"
+    type: single_choice
+    construct: often_check_account_balance
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "A few times a year"
+      - id: "c"
+        label: "Monthly"
+      - id: "d"
+        label: "Weekly"
+      - id: "e"
+        label: "Several times a week or more"
+  - id: q23
+    prompt: "How confident are you that you understand the annual contribution limits for your account?"
+    type: single_choice
+    construct: confident_that_understand_annual_contrib
+    required: true
+    options:
+      - id: "a"
+        label: "Very confident"
+      - id: "b"
+        label: "Somewhat confident"
+      - id: "c"
+        label: "Not very confident"
+      - id: "d"
+        label: "Not at all confident"
+  - id: q24
+    prompt: "If you have an FSA, how does your plan handle unused funds at year end?"
+    type: single_choice
+    construct: if_have_fsa_does_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Use it or lose it, no carryover"
+      - id: "b"
+        label: "A limited carryover to the next year"
+      - id: "c"
+        label: "A grace period of a few extra months to spend"
+      - id: "d"
+        label: "I'm not sure"
+      - id: "e"
+        label: "Not applicable, I don't have an FSA"
+  - id: q25
+    prompt: "Have you ever forfeited FSA money because of a spending deadline?"
+    type: single_choice
+    construct: have_ever_forfeited_fsa_money
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I lost a meaningful amount"
+      - id: "b"
+        label: "Yes, but only a small amount"
+      - id: "c"
+        label: "No, I've always spent it in time"
+      - id: "d"
+        label: "Not applicable"
+  - id: q26
+    prompt: "In a typical year, about how much money do you leave unspent or forfeit? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: typical_year_much_money_leave
+    required: true
+  - id: q27
+    prompt: "Have you ever done a last-minute purchase (for example, extra glasses or supplies) mainly to use up account funds before a deadline?"
+    type: single_choice
+    construct: have_ever_done_last_minute
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable"
+  - id: q28
+    prompt: "Where do you usually turn when you have a question about your account? (Select all that apply)"
+    type: multi_choice
+    construct: where_usually_turn_when_have
+    required: true
+    options:
+      - id: "a"
+        label: "The provider's website or help center"
+      - id: "b"
+        label: "The provider's phone support"
+      - id: "c"
+        label: "My employer's HR or benefits team"
+      - id: "d"
+        label: "Friends or family"
+      - id: "e"
+        label: "Online searches or forums"
+      - id: "f"
+        label: "I usually don't seek help"
+  - id: q29
+    prompt: "When choosing whether and how much to fund your account, how important is each factor: the tax savings?"
+    type: single_choice
+    construct: when_choosing_whether_much_fund
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "When choosing whether and how much to fund your account, how important is each factor: your expected out-of-pocket medical costs?"
+    type: single_choice
+    construct: when_choosing_whether_much_fund
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q31
+    prompt: "When choosing whether and how much to fund your account, how important is each factor: the employer contribution or match?"
+    type: single_choice
+    construct: when_choosing_whether_much_fund
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q32
+    prompt: "When choosing whether and how much to fund your account, how important is each factor: the ability to invest and grow the balance?"
+    type: single_choice
+    construct: when_choosing_whether_much_fund
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q33
+    prompt: "What makes using the account harder for you? (Select all that apply)"
+    type: multi_choice
+    construct: makes_using_account_harder_select
+    required: true
+    options:
+      - id: "a"
+        label: "Confusing eligibility rules"
+      - id: "b"
+        label: "Deadlines to spend the funds"
+      - id: "c"
+        label: "Paperwork or reimbursement claims"
+      - id: "d"
+        label: "Hard to estimate how much to contribute"
+      - id: "e"
+        label: "Slow reimbursement"
+      - id: "f"
+        label: "Debit card getting declined for eligible items"
+      - id: "g"
+        label: "Nothing, it's easy to use"
+  - id: q34
+    prompt: "Select your top 3 improvements that would make your account most useful. (Select up to 3)"
+    type: single_choice
+    construct: select_top_3_improvements_that
+    required: true
+    options:
+      - id: "a"
+        label: "Clearer list of eligible expenses"
+      - id: "b"
+        label: "No use-it-or-lose-it deadline"
+      - id: "c"
+        label: "A better mobile app"
+      - id: "d"
+        label: "Faster reimbursements"
+      - id: "e"
+        label: "Higher employer contribution"
+      - id: "f"
+        label: "Easier investing options"
+      - id: "g"
+        label: "Better customer support"
+      - id: "h"
+        label: "A tool to estimate the right contribution"
+  - id: q35
+    prompt: "Overall, how satisfied are you with your account?"
+    type: single_choice
+    construct: overall_satisfied_account
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your account provider to a friend or coworker? Please enter a number from 0 (not at all likely) to 10 (extremely likely)."
+    type: free_text
+    construct: scale_0_10_likely_recommend
+    required: true
+  - id: q37
+    prompt: "How likely are you to keep or increase your contribution next year?"
+    type: single_choice
+    construct: likely_keep_increase_contribution_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "Is there one change that would make your account easier to use? Please describe briefly (or enter \"none\")."
+    type: free_text
+    construct: there_one_change_that_would
+    required: true
+  - id: q39
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q40
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "Which best describes your race or ethnicity?"
+    type: single_choice
+    construct: best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian or Asian American"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Two or more races or another background"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q44
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q45
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q46
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+  - id: q47
+    prompt: "Which region of the country do you live in?"
+    type: single_choice
+    construct: region_country_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q48
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q49
+    prompt: "What is your primary source of health insurance?"
+    type: single_choice
+    construct: primary_source_health_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored plan"
+      - id: "b"
+        label: "Plan purchased on the marketplace or directly"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or veterans coverage (TRICARE / VA)"
+      - id: "f"
+        label: "I don't have health insurance"
+      - id: "g"
+        label: "Prefer not to say"

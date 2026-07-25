@@ -1,0 +1,829 @@
+schemaVersion: "1.0"
+id: web_development_practices_v1
+title: "Web Development Practices Survey"
+description: "How people build for the web: the frameworks, languages, tooling, and engineering practices they use and their satisfaction with them."
+questions:
+  - id: q0
+    prompt: "Which best describes your involvement in web development?"
+    type: single_choice
+    construct: best_describes_involvement_web_developme
+    required: true
+    options:
+      - id: "a"
+        label: "Professional web developer (main job)"
+      - id: "b"
+        label: "Developer whose work includes some web"
+      - id: "c"
+        label: "Freelancer / agency building sites for clients"
+      - id: "d"
+        label: "Student learning web development"
+      - id: "e"
+        label: "Hobbyist building sites for fun or side projects"
+      - id: "f"
+        label: "I don't build for the web"
+  - id: q1
+    prompt: "How many years have you been building for the web?"
+    type: free_text
+    construct: many_years_have_been_building
+    required: true
+  - id: q2
+    prompt: "Which part of the web stack do you primarily work on?"
+    type: single_choice
+    construct: part_web_stack_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end"
+      - id: "b"
+        label: "Back-end"
+      - id: "c"
+        label: "Full-stack"
+      - id: "d"
+        label: "No preference / varies"
+  - id: q3
+    prompt: "Which front-end frameworks or libraries do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: front_end_frameworks_libraries_currently
+    required: true
+    options:
+      - id: "a"
+        label: "React"
+      - id: "b"
+        label: "Vue.js"
+      - id: "c"
+        label: "Angular"
+      - id: "d"
+        label: "Svelte"
+      - id: "e"
+        label: "Next.js"
+      - id: "f"
+        label: "Nuxt"
+      - id: "g"
+        label: "Astro"
+      - id: "h"
+        label: "SolidJS"
+      - id: "i"
+        label: "jQuery"
+      - id: "j"
+        label: "HTMX"
+      - id: "k"
+        label: "Plain HTML/CSS/JS (no framework)"
+      - id: "l"
+        label: "Other"
+  - id: q4
+    prompt: "Which back-end languages or runtimes do you use for web work? (Select all that apply)"
+    type: multi_choice
+    construct: back_end_languages_runtimes_use
+    required: true
+    options:
+      - id: "a"
+        label: "Node.js / JavaScript"
+      - id: "b"
+        label: "Python"
+      - id: "c"
+        label: "PHP"
+      - id: "d"
+        label: "Ruby"
+      - id: "e"
+        label: "Java"
+      - id: "f"
+        label: "C# / .NET"
+      - id: "g"
+        label: "Go"
+      - id: "h"
+        label: "Rust"
+      - id: "i"
+        label: "Elixir"
+      - id: "j"
+        label: "I don't do back-end work"
+      - id: "k"
+        label: "Other"
+  - id: q5
+    prompt: "How do you usually handle CSS and styling? (Select all that apply)"
+    type: multi_choice
+    construct: usually_handle_css_styling_select
+    required: true
+    options:
+      - id: "a"
+        label: "Plain CSS"
+      - id: "b"
+        label: "Sass / SCSS"
+      - id: "c"
+        label: "Tailwind CSS"
+      - id: "d"
+        label: "CSS-in-JS (styled-components, Emotion)"
+      - id: "e"
+        label: "CSS Modules"
+      - id: "f"
+        label: "Bootstrap"
+      - id: "g"
+        label: "A component library (MUI, Chakra, shadcn/ui)"
+      - id: "h"
+        label: "Other"
+  - id: q6
+    prompt: "Where do you typically deploy or host web projects? (Select all that apply)"
+    type: multi_choice
+    construct: where_typically_deploy_host_web
+    required: true
+    options:
+      - id: "a"
+        label: "Vercel"
+      - id: "b"
+        label: "Netlify"
+      - id: "c"
+        label: "AWS"
+      - id: "d"
+        label: "Cloudflare"
+      - id: "e"
+        label: "Google Cloud"
+      - id: "f"
+        label: "Microsoft Azure"
+      - id: "g"
+        label: "DigitalOcean / Linode / Render / Fly.io"
+      - id: "h"
+        label: "Traditional shared hosting (cPanel, etc.)"
+      - id: "i"
+        label: "Self-managed VPS or on-prem"
+      - id: "j"
+        label: "Other"
+  - id: q7
+    prompt: "Which content management or site-building platforms do you use? (Select all that apply)"
+    type: multi_choice
+    construct: content_management_site_building_platfor
+    required: true
+    options:
+      - id: "a"
+        label: "WordPress"
+      - id: "b"
+        label: "Webflow"
+      - id: "c"
+        label: "Shopify"
+      - id: "d"
+        label: "Squarespace / Wix"
+      - id: "e"
+        label: "A headless CMS (Contentful, Sanity, Strapi)"
+      - id: "f"
+        label: "Static site generator"
+      - id: "g"
+        label: "I build without a CMS"
+      - id: "h"
+        label: "Other"
+  - id: q8
+    prompt: "Which version control setup do you use?"
+    type: single_choice
+    construct: version_control_setup_use
+    required: true
+    options:
+      - id: "a"
+        label: "Git with GitHub"
+      - id: "b"
+        label: "Git with GitLab"
+      - id: "c"
+        label: "Git with Bitbucket"
+      - id: "d"
+        label: "Git self-hosted"
+      - id: "e"
+        label: "A non-Git system"
+      - id: "f"
+        label: "I don't use version control"
+  - id: q9
+    prompt: "How often do you deploy changes to production?"
+    type: single_choice
+    construct: often_deploy_changes_production
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "Daily"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Weekly"
+      - id: "e"
+        label: "Monthly or less"
+      - id: "f"
+        label: "Not applicable"
+  - id: q10
+    prompt: "Which of these engineering practices do you follow? (Select all that apply)"
+    type: multi_choice
+    construct: these_engineering_practices_follow_selec
+    required: true
+    options:
+      - id: "a"
+        label: "Code review / pull requests"
+      - id: "b"
+        label: "Automated CI/CD pipelines"
+      - id: "c"
+        label: "Automated testing"
+      - id: "d"
+        label: "Linting and formatting tools"
+      - id: "e"
+        label: "Feature flags"
+      - id: "f"
+        label: "Staging / preview environments"
+      - id: "g"
+        label: "Infrastructure as code"
+      - id: "h"
+        label: "None of these"
+  - id: q11
+    prompt: "How do you approach automated testing for web projects?"
+    type: single_choice
+    construct: approach_automated_testing_web_projects
+    required: true
+    options:
+      - id: "a"
+        label: "Comprehensive tests (unit, integration, end-to-end)"
+      - id: "b"
+        label: "Some unit and integration tests"
+      - id: "c"
+        label: "Mostly end-to-end / manual testing"
+      - id: "d"
+        label: "Minimal automated testing"
+      - id: "e"
+        label: "No automated testing"
+  - id: q12
+    prompt: "Which testing tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: testing_tools_use_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Jest / Vitest"
+      - id: "b"
+        label: "Cypress"
+      - id: "c"
+        label: "Playwright"
+      - id: "d"
+        label: "Testing Library"
+      - id: "e"
+        label: "Selenium"
+      - id: "f"
+        label: "PHPUnit / pytest / other language-specific"
+      - id: "g"
+        label: "I don't use testing tools"
+  - id: q13
+    prompt: "How much do you prioritize each of the following in your web work? — Accessibility (a11y)"
+    type: single_choice
+    construct: much_prioritize_each_following_web
+    required: true
+    options:
+      - id: "a"
+        label: "Not a priority"
+      - id: "b"
+        label: "Low priority"
+      - id: "c"
+        label: "Moderate priority"
+      - id: "d"
+        label: "High priority"
+      - id: "e"
+        label: "Top priority"
+  - id: q14
+    prompt: "How much do you prioritize each of the following in your web work? — Performance / page speed"
+    type: single_choice
+    construct: much_prioritize_each_following_web
+    required: true
+    options:
+      - id: "a"
+        label: "Not a priority"
+      - id: "b"
+        label: "Low priority"
+      - id: "c"
+        label: "Moderate priority"
+      - id: "d"
+        label: "High priority"
+      - id: "e"
+        label: "Top priority"
+  - id: q15
+    prompt: "How much do you prioritize each of the following in your web work? — SEO"
+    type: single_choice
+    construct: much_prioritize_each_following_web
+    required: true
+    options:
+      - id: "a"
+        label: "Not a priority"
+      - id: "b"
+        label: "Low priority"
+      - id: "c"
+        label: "Moderate priority"
+      - id: "d"
+        label: "High priority"
+      - id: "e"
+        label: "Top priority"
+  - id: q16
+    prompt: "How much do you prioritize each of the following in your web work? — Security"
+    type: single_choice
+    construct: much_prioritize_each_following_web
+    required: true
+    options:
+      - id: "a"
+        label: "Not a priority"
+      - id: "b"
+        label: "Low priority"
+      - id: "c"
+        label: "Moderate priority"
+      - id: "d"
+        label: "High priority"
+      - id: "e"
+        label: "Top priority"
+  - id: q17
+    prompt: "How much do you prioritize each of the following in your web work? — Mobile / responsive design"
+    type: single_choice
+    construct: much_prioritize_each_following_web
+    required: true
+    options:
+      - id: "a"
+        label: "Not a priority"
+      - id: "b"
+        label: "Low priority"
+      - id: "c"
+        label: "Moderate priority"
+      - id: "d"
+        label: "High priority"
+      - id: "e"
+        label: "Top priority"
+  - id: q18
+    prompt: "Which AI tools do you use in your web development workflow? (Select all that apply)"
+    type: multi_choice
+    construct: ai_tools_use_web_development
+    required: true
+    options:
+      - id: "a"
+        label: "GitHub Copilot"
+      - id: "b"
+        label: "ChatGPT"
+      - id: "c"
+        label: "Claude"
+      - id: "d"
+        label: "Cursor"
+      - id: "e"
+        label: "Google Gemini"
+      - id: "f"
+        label: "v0 / other UI-generation tools"
+      - id: "g"
+        label: "Codeium / Tabnine"
+      - id: "h"
+        label: "I don't use AI tools"
+  - id: q19
+    prompt: "About what percentage of your code do you estimate is AI-assisted?"
+    type: free_text
+    construct: percentage_code_estimate_ai_assisted
+    required: true
+  - id: q20
+    prompt: "How much do you agree with the following statement? — AI coding tools make me more productive."
+    type: single_choice
+    construct: much_agree_following_statement_ai
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree with the following statement? — Keeping up with new frameworks and tools is exhausting."
+    type: single_choice
+    construct: much_agree_following_statement_keeping
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree with the following statement? — I am happy with my current front-end framework."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How much do you agree with the following statement? — My team has good testing and quality practices."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "How much do you agree with the following statement? — Web development is more complex than it needs to be."
+    type: single_choice
+    construct: much_agree_following_statement_web
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "How satisfied are you with each part of your web workflow? — Development experience / tooling"
+    type: single_choice
+    construct: satisfied_each_part_web_workflow
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q26
+    prompt: "How satisfied are you with each part of your web workflow? — Build and deployment"
+    type: single_choice
+    construct: satisfied_each_part_web_workflow
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q27
+    prompt: "How satisfied are you with each part of your web workflow? — Testing and QA"
+    type: single_choice
+    construct: satisfied_each_part_web_workflow
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q28
+    prompt: "How satisfied are you with each part of your web workflow? — Hosting and infrastructure"
+    type: single_choice
+    construct: satisfied_each_part_web_workflow
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "Which browsers do you actively test against? (Select all that apply)"
+    type: multi_choice
+    construct: browsers_actively_test_against_select
+    required: true
+    options:
+      - id: "a"
+        label: "Chrome"
+      - id: "b"
+        label: "Safari"
+      - id: "c"
+        label: "Firefox"
+      - id: "d"
+        label: "Edge"
+      - id: "e"
+        label: "Mobile Safari (iOS)"
+      - id: "f"
+        label: "Mobile Chrome (Android)"
+      - id: "g"
+        label: "I don't test across browsers"
+  - id: q30
+    prompt: "Select the top 3 biggest challenges in your web development work. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_biggest_challenges
+    required: true
+    options:
+      - id: "a"
+        label: "Keeping up with new tools/frameworks"
+      - id: "b"
+        label: "Browser / device compatibility"
+      - id: "c"
+        label: "Performance optimization"
+      - id: "d"
+        label: "Accessibility"
+      - id: "e"
+        label: "Security"
+      - id: "f"
+        label: "Technical debt / legacy code"
+      - id: "g"
+        label: "Testing coverage"
+      - id: "h"
+        label: "Tight deadlines"
+      - id: "i"
+        label: "Deployment / DevOps complexity"
+      - id: "j"
+        label: "Dependency management"
+  - id: q31
+    prompt: "How do you keep your skills current? (Select all that apply)"
+    type: multi_choice
+    construct: keep_skills_current_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Documentation / MDN"
+      - id: "b"
+        label: "YouTube tutorials"
+      - id: "c"
+        label: "Blogs and newsletters"
+      - id: "d"
+        label: "Online courses"
+      - id: "e"
+        label: "Twitter/X, Reddit, or dev communities"
+      - id: "f"
+        label: "Conferences and meetups"
+      - id: "g"
+        label: "Learning on the job"
+      - id: "h"
+        label: "Podcasts"
+  - id: q32
+    prompt: "How likely are you to recommend web development as a career to a newcomer today? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_web_development_as
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q33
+    prompt: "Overall, how satisfied are you with your web development tools and workflow?"
+    type: single_choice
+    construct: overall_satisfied_web_development_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How likely are you to adopt a new primary front-end framework in the next 12 months?"
+    type: single_choice
+    construct: likely_adopt_new_primary_front
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q35
+    prompt: "What is the single biggest thing you would change about modern web development?"
+    type: free_text
+    construct: single_biggest_thing_would_change
+    required: true
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 25"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your annual household income (US dollars)?"
+    type: single_choice
+    construct: annual_household_income_us_dollars
+    required: true
+    options:
+      - id: "a"
+        label: "Under $50,000"
+      - id: "b"
+        label: "$50,000–$99,999"
+      - id: "c"
+        label: "$100,000–$149,999"
+      - id: "d"
+        label: "$150,000–$249,999"
+      - id: "e"
+        label: "$250,000 or more"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Professional or doctoral degree"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed / freelancer"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+  - id: q42
+    prompt: "How many years of professional development experience do you have?"
+    type: free_text
+    construct: many_years_professional_development_expe
+    required: true
+  - id: q43
+    prompt: "How large is the company or organization you work for?"
+    type: single_choice
+    construct: large_company_organization_work
+    required: true
+    options:
+      - id: "a"
+        label: "Just me / freelance"
+      - id: "b"
+        label: "2–9"
+      - id: "c"
+        label: "10–49"
+      - id: "d"
+        label: "50–249"
+      - id: "e"
+        label: "250–999"
+      - id: "f"
+        label: "1,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q44
+    prompt: "What is your work arrangement?"
+    type: single_choice
+    construct: work_arrangement
+    required: true
+    options:
+      - id: "a"
+        label: "Fully remote"
+      - id: "b"
+        label: "Hybrid"
+      - id: "c"
+        label: "Fully in person"
+      - id: "d"
+        label: "Not currently working"
+  - id: q45
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q46
+    prompt: "How would you describe where you live?"
+    type: single_choice
+    construct: would_describe_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

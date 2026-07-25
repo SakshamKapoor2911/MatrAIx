@@ -1,0 +1,870 @@
+schemaVersion: "1.0"
+id: fractional_share_investing_v1
+title: "Fractional Share Investing Survey"
+description: "How people use fractional-share and micro-investing apps to start investing, build habits, and grow small balances over time."
+questions:
+  - id: q0
+    prompt: "Do you invest using fractional shares or a micro-investing app?"
+    type: single_choice
+    construct: invest_using_fractional_shares_micro
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "I've tried it but stopped"
+      - id: "d"
+        label: "No, but I'm interested"
+      - id: "e"
+        label: "No, and I'm not interested"
+  - id: q1
+    prompt: "How long have you been using fractional-share or micro-investing apps?"
+    type: single_choice
+    construct: long_have_been_using_fractional
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 2 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+  - id: q2
+    prompt: "Which app do you use most often for fractional investing?"
+    type: single_choice
+    construct: app_use_most_often_fractional
+    required: true
+    options:
+      - id: "a"
+        label: "Robinhood"
+      - id: "b"
+        label: "Acorns"
+      - id: "c"
+        label: "Stash"
+      - id: "d"
+        label: "Public"
+      - id: "e"
+        label: "Fidelity"
+      - id: "f"
+        label: "Charles Schwab"
+      - id: "g"
+        label: "SoFi Invest"
+      - id: "h"
+        label: "Cash App Investing"
+      - id: "i"
+        label: "Other"
+  - id: q3
+    prompt: "Which fractional or micro-investing apps have you used? (Select all that apply)"
+    type: multi_choice
+    construct: fractional_micro_investing_apps_have
+    required: true
+    options:
+      - id: "a"
+        label: "Robinhood"
+      - id: "b"
+        label: "Acorns"
+      - id: "c"
+        label: "Stash"
+      - id: "d"
+        label: "Public"
+      - id: "e"
+        label: "Fidelity"
+      - id: "f"
+        label: "Charles Schwab"
+      - id: "g"
+        label: "SoFi Invest"
+      - id: "h"
+        label: "Cash App Investing"
+      - id: "i"
+        label: "Webull"
+  - id: q4
+    prompt: "What first drew you to fractional-share investing?"
+    type: single_choice
+    construct: first_drew_fractional_share_investing
+    required: true
+    options:
+      - id: "a"
+        label: "Being able to start with a small amount"
+      - id: "b"
+        label: "Buying expensive stocks I couldn't otherwise afford"
+      - id: "c"
+        label: "Automatic or round-up investing"
+      - id: "d"
+        label: "A simple, easy-to-use app"
+      - id: "e"
+        label: "A friend or family recommendation"
+      - id: "f"
+        label: "Social media or online content"
+  - id: q5
+    prompt: "How do you typically add money to your investments? (Select all that apply)"
+    type: multi_choice
+    construct: typically_add_money_investments_select
+    required: true
+    options:
+      - id: "a"
+        label: "Automatic recurring deposits"
+      - id: "b"
+        label: "Round-ups on purchases"
+      - id: "c"
+        label: "Manual one-time deposits"
+      - id: "d"
+        label: "Direct deposit from my paycheck"
+      - id: "e"
+        label: "Reinvested dividends"
+      - id: "f"
+        label: "Windfalls like bonuses or refunds"
+  - id: q6
+    prompt: "About how much do you invest through these apps in a typical month, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_invest_through_these_apps
+    required: true
+  - id: q7
+    prompt: "About how much is your total balance across these apps, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_total_balance_across_these
+    required: true
+  - id: q8
+    prompt: "What do you mainly invest in through these apps? (Select all that apply)"
+    type: multi_choice
+    construct: mainly_invest_through_these_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Individual stocks"
+      - id: "b"
+        label: "Exchange-traded funds (ETFs)"
+      - id: "c"
+        label: "Index funds"
+      - id: "d"
+        label: "Pre-built or themed portfolios"
+      - id: "e"
+        label: "Cryptocurrency"
+      - id: "f"
+        label: "Bonds or fixed income"
+      - id: "g"
+        label: "Retirement accounts (IRA, etc.)"
+  - id: q9
+    prompt: "How often do you check your investment app?"
+    type: single_choice
+    construct: often_check_investment_app
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "Once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Rarely"
+  - id: q10
+    prompt: "How often do you buy or sell investments?"
+    type: single_choice
+    construct: often_buy_sell_investments
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a week"
+      - id: "b"
+        label: "Weekly"
+      - id: "c"
+        label: "Monthly"
+      - id: "d"
+        label: "A few times a year"
+      - id: "e"
+        label: "I rarely trade; I mostly hold"
+  - id: q11
+    prompt: "What are your main goals for investing through these apps? (Select all that apply)"
+    type: multi_choice
+    construct: main_goals_investing_through_these
+    required: true
+    options:
+      - id: "a"
+        label: "Building long-term wealth"
+      - id: "b"
+        label: "Saving for retirement"
+      - id: "c"
+        label: "Learning how investing works"
+      - id: "d"
+        label: "Growing an emergency cushion"
+      - id: "e"
+        label: "Saving for a specific purchase"
+      - id: "f"
+        label: "Earning extra income"
+      - id: "g"
+        label: "Just experimenting for fun"
+  - id: q12
+    prompt: "Do you use a subscription or pay any fees for your primary app?"
+    type: single_choice
+    construct: use_subscription_pay_any_fees
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a monthly subscription"
+      - id: "b"
+        label: "Yes, other fees"
+      - id: "c"
+        label: "No fees that I'm aware of"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q13
+    prompt: "How did you learn about investing before or while using these apps? (Select all that apply)"
+    type: multi_choice
+    construct: did_learn_investing_before_while
+    required: true
+    options:
+      - id: "a"
+        label: "In-app education or tips"
+      - id: "b"
+        label: "Social media and online videos"
+      - id: "c"
+        label: "Friends or family"
+      - id: "d"
+        label: "Financial news or websites"
+      - id: "e"
+        label: "Books or courses"
+      - id: "f"
+        label: "Trial and error"
+      - id: "g"
+        label: "I haven't really learned formally"
+  - id: q14
+    prompt: "How would you rate your overall investing knowledge?"
+    type: single_choice
+    construct: would_rate_overall_investing_knowledge
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Some basic knowledge"
+      - id: "c"
+        label: "Intermediate"
+      - id: "d"
+        label: "Advanced"
+      - id: "e"
+        label: "Expert"
+  - id: q15
+    prompt: "How much do you agree: Fractional shares make investing feel accessible to me."
+    type: single_choice
+    construct: much_agree_fractional_shares_make
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: These apps have helped me build a habit of investing."
+    type: single_choice
+    construct: much_agree_these_apps_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: I understand the risks of the investments I hold."
+    type: single_choice
+    construct: much_agree_i_understand_risks
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: I worry about losing money in these apps."
+    type: single_choice
+    construct: much_agree_i_worry_losing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: The app makes it tempting to trade too much."
+    type: single_choice
+    construct: much_agree_app_makes_it
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: I trust these apps to keep my money and data secure."
+    type: single_choice
+    construct: much_agree_i_trust_these
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: Investing small amounts regularly will pay off over time."
+    type: single_choice
+    construct: much_agree_investing_small_amounts
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "When choosing an investing app, how important are low or no fees?"
+    type: single_choice
+    construct: when_choosing_investing_app_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing an investing app, how important is ease of use?"
+    type: single_choice
+    construct: when_choosing_investing_app_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing an investing app, how important is the range of investments offered?"
+    type: single_choice
+    construct: when_choosing_investing_app_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing an investing app, how important are automatic and round-up features?"
+    type: single_choice
+    construct: when_choosing_investing_app_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing an investing app, how important are educational tools?"
+    type: single_choice
+    construct: when_choosing_investing_app_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing an investing app, how important is security and trust?"
+    type: single_choice
+    construct: when_choosing_investing_app_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Which are your top 3 reasons for using a fractional-investing app? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_reasons_using_fractional
+    required: true
+    options:
+      - id: "a"
+        label: "Low barrier to start"
+      - id: "b"
+        label: "Easy-to-use app"
+      - id: "c"
+        label: "Automatic investing"
+      - id: "d"
+        label: "Access to expensive stocks"
+      - id: "e"
+        label: "Learning about investing"
+      - id: "f"
+        label: "Low fees"
+      - id: "g"
+        label: "Building long-term wealth"
+      - id: "h"
+        label: "Fun or entertainment"
+  - id: q29
+    prompt: "How do you decide what to invest in?"
+    type: single_choice
+    construct: decide_invest
+    required: true
+    options:
+      - id: "a"
+        label: "My own research"
+      - id: "b"
+        label: "App recommendations or pre-built portfolios"
+      - id: "c"
+        label: "Tips from social media"
+      - id: "d"
+        label: "Advice from friends or family"
+      - id: "e"
+        label: "I mostly pick familiar company names"
+  - id: q30
+    prompt: "Have you ever made an investing decision you later regretted using one of these apps?"
+    type: single_choice
+    construct: have_ever_made_investing_decision
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several times"
+      - id: "b"
+        label: "Yes, once or twice"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q31
+    prompt: "Do you also invest through more traditional accounts outside these apps?"
+    type: single_choice
+    construct: also_invest_through_more_traditional
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a workplace retirement plan"
+      - id: "b"
+        label: "Yes, a traditional brokerage account"
+      - id: "c"
+        label: "Yes, both"
+      - id: "d"
+        label: "No, these apps are my only investments"
+  - id: q32
+    prompt: "Which app features do you use regularly? (Select all that apply)"
+    type: multi_choice
+    construct: app_features_use_regularly_select
+    required: true
+    options:
+      - id: "a"
+        label: "Round-ups"
+      - id: "b"
+        label: "Recurring deposits"
+      - id: "c"
+        label: "Pre-built portfolios"
+      - id: "d"
+        label: "In-app research or news"
+      - id: "e"
+        label: "Educational content"
+      - id: "f"
+        label: "Retirement accounts"
+      - id: "g"
+        label: "Price alerts or notifications"
+  - id: q33
+    prompt: "How satisfied are you with your primary investing app's ease of use?"
+    type: single_choice
+    construct: satisfied_primary_investing_app_s
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How satisfied are you with the returns on your investments so far?"
+    type: single_choice
+    construct: satisfied_returns_investments_so_far
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "How satisfied are you with the fees you pay?"
+    type: single_choice
+    construct: satisfied_fees_pay
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "Overall, how satisfied are you with your primary investing app?"
+    type: single_choice
+    construct: overall_satisfied_primary_investing_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "How likely are you to recommend your primary investing app to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_investing_app
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q38
+    prompt: "How likely are you to increase how much you invest in the next year?"
+    type: single_choice
+    construct: likely_increase_much_invest_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q39
+    prompt: "How likely are you to switch to a different investing app in the next year?"
+    type: single_choice
+    construct: likely_switch_different_investing_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q40
+    prompt: "What is one thing you would improve about your primary investing app? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_primary
+    required: false
+  - id: q41
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q42
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What was your total household income last year?"
+    type: single_choice
+    construct: was_total_household_income_last
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q46
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q47
+    prompt: "How many people live in your household, including yourself?"
+    type: single_choice
+    construct: many_people_live_household_including
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q48
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "Which best describes your overall investing experience?"
+    type: single_choice
+    construct: best_describes_overall_investing_experie
+    required: true
+    options:
+      - id: "a"
+        label: "These apps are my first investing experience"
+      - id: "b"
+        label: "I had some investing experience before"
+      - id: "c"
+        label: "I am an experienced investor"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q51
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

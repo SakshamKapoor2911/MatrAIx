@@ -1,0 +1,812 @@
+schemaVersion: "1.0"
+id: telemedicine_specialists_v1
+title: "Telemedicine with Specialists Survey"
+description: "Consumer use of, experience with, and attitudes toward seeing medical specialists through telehealth."
+questions:
+  - id: q0
+    prompt: "In the past 12 months, have you had a telehealth visit with a medical specialist (not your primary care doctor)?"
+    type: single_choice
+    construct: past_12_months_have_had
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I have in the past"
+      - id: "d"
+        label: "No, I have never had a specialist telehealth visit"
+  - id: q1
+    prompt: "How long ago was your most recent specialist telehealth visit?"
+    type: single_choice
+    construct: long_ago_was_most_recent
+    required: true
+    options:
+      - id: "a"
+        label: "Within the past month"
+      - id: "b"
+        label: "1 to 3 months ago"
+      - id: "c"
+        label: "4 to 12 months ago"
+      - id: "d"
+        label: "More than a year ago"
+      - id: "e"
+        label: "I have never had one"
+  - id: q2
+    prompt: "Which types of specialists have you seen through telehealth? (Select all that apply)"
+    type: multi_choice
+    construct: types_specialists_have_seen_through
+    required: true
+    options:
+      - id: "a"
+        label: "Dermatology (skin)"
+      - id: "b"
+        label: "Cardiology (heart)"
+      - id: "c"
+        label: "Mental or behavioral health"
+      - id: "d"
+        label: "Endocrinology (for example, diabetes or thyroid)"
+      - id: "e"
+        label: "Allergy or immunology"
+      - id: "f"
+        label: "Gastroenterology"
+      - id: "g"
+        label: "Neurology"
+      - id: "h"
+        label: "Nutrition or dietitian"
+      - id: "i"
+        label: "Another specialty"
+      - id: "j"
+        label: "I have not seen a specialist by telehealth"
+  - id: q3
+    prompt: "How was your most recent specialist telehealth visit conducted?"
+    type: single_choice
+    construct: was_most_recent_specialist_telehealth
+    required: true
+    options:
+      - id: "a"
+        label: "Video call"
+      - id: "b"
+        label: "Phone call (voice only)"
+      - id: "c"
+        label: "Secure messaging or chat"
+      - id: "d"
+        label: "A mix of these"
+      - id: "e"
+        label: "I have not had one"
+  - id: q4
+    prompt: "How did you connect to your most recent specialist telehealth visit?"
+    type: single_choice
+    construct: did_connect_most_recent_specialist
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "Tablet"
+      - id: "c"
+        label: "Laptop or desktop computer"
+      - id: "d"
+        label: "Phone call on a landline"
+      - id: "e"
+        label: "I have not had one"
+  - id: q5
+    prompt: "Which platform or service did you use for your specialist telehealth visit?"
+    type: single_choice
+    construct: platform_service_did_use_specialist
+    required: true
+    options:
+      - id: "a"
+        label: "The specialist's own patient portal or app"
+      - id: "b"
+        label: "A hospital or health-system app"
+      - id: "c"
+        label: "A standalone telehealth service (for example, Teladoc, Amwell, MDLIVE)"
+      - id: "d"
+        label: "A general video app (for example, Zoom, FaceTime)"
+      - id: "e"
+        label: "Not sure"
+      - id: "f"
+        label: "I have not had one"
+  - id: q6
+    prompt: "How did you first arrange your specialist telehealth visit?"
+    type: single_choice
+    construct: did_first_arrange_specialist_telehealth
+    required: true
+    options:
+      - id: "a"
+        label: "Referral from my primary care doctor"
+      - id: "b"
+        label: "I contacted the specialist's office directly"
+      - id: "c"
+        label: "Through my insurance's telehealth service"
+      - id: "d"
+        label: "Through a hospital or health system"
+      - id: "e"
+        label: "Another way"
+  - id: q7
+    prompt: "What were the main reasons you chose telehealth for a specialist visit? (Select all that apply)"
+    type: multi_choice
+    construct: were_main_reasons_chose_telehealth
+    required: true
+    options:
+      - id: "a"
+        label: "The specialist was far from where I live"
+      - id: "b"
+        label: "It saved travel time"
+      - id: "c"
+        label: "It was easier to fit into my schedule"
+      - id: "d"
+        label: "Shorter wait for an appointment"
+      - id: "e"
+        label: "It was recommended or required by the provider"
+      - id: "f"
+        label: "To avoid exposure to illness"
+      - id: "g"
+        label: "I could include a family member or caregiver"
+      - id: "h"
+        label: "I have not had one"
+  - id: q8
+    prompt: "How long did you wait to get your specialist telehealth appointment?"
+    type: single_choice
+    construct: long_did_wait_get_specialist
+    required: true
+    options:
+      - id: "a"
+        label: "Same or next day"
+      - id: "b"
+        label: "Within a week"
+      - id: "c"
+        label: "1 to 2 weeks"
+      - id: "d"
+        label: "3 to 4 weeks"
+      - id: "e"
+        label: "More than a month"
+      - id: "f"
+        label: "I have not had one"
+  - id: q9
+    prompt: "Did your specialist telehealth visit replace or add to an in-person visit?"
+    type: single_choice
+    construct: did_specialist_telehealth_visit_replace
+    required: true
+    options:
+      - id: "a"
+        label: "It replaced an in-person visit"
+      - id: "b"
+        label: "It was in addition to in-person care"
+      - id: "c"
+        label: "It was a follow-up after an in-person visit"
+      - id: "d"
+        label: "It led to an in-person visit being scheduled"
+      - id: "e"
+        label: "I have not had one"
+  - id: q10
+    prompt: "How much do you agree with the following statement: The specialist could address my concerns well over telehealth."
+    type: single_choice
+    construct: much_agree_following_statement_specialis
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: The care I received was as good as an in-person specialist visit."
+    type: single_choice
+    construct: much_agree_following_statement_care
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: I had technical problems during the visit."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: Telehealth made it easier to reach a specialist I could not otherwise see."
+    type: single_choice
+    construct: much_agree_following_statement_telehealt
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I felt comfortable discussing my health over telehealth."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: My privacy was well protected during the visit."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How satisfied were you with each aspect of your specialist telehealth visit: Ease of scheduling."
+    type: single_choice
+    construct: satisfied_were_each_aspect_specialist
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q17
+    prompt: "How satisfied were you with each aspect of your specialist telehealth visit: Wait time to be seen."
+    type: single_choice
+    construct: satisfied_were_each_aspect_specialist
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q18
+    prompt: "How satisfied were you with each aspect of your specialist telehealth visit: Quality of the audio and video connection."
+    type: single_choice
+    construct: satisfied_were_each_aspect_specialist
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q19
+    prompt: "How satisfied were you with each aspect of your specialist telehealth visit: The specialist's communication and attention."
+    type: single_choice
+    construct: satisfied_were_each_aspect_specialist
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q20
+    prompt: "How satisfied were you with each aspect of your specialist telehealth visit: The follow-up plan and instructions."
+    type: single_choice
+    construct: satisfied_were_each_aspect_specialist
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q21
+    prompt: "What was the biggest drawback of your specialist telehealth visit?"
+    type: single_choice
+    construct: was_biggest_drawback_specialist_teleheal
+    required: true
+    options:
+      - id: "a"
+        label: "The specialist could not do a physical exam"
+      - id: "b"
+        label: "Technical or connection problems"
+      - id: "c"
+        label: "It felt less personal"
+      - id: "d"
+        label: "It was hard to share test results or images"
+      - id: "e"
+        label: "Cost or insurance issues"
+      - id: "f"
+        label: "There were no major drawbacks"
+  - id: q22
+    prompt: "How did the cost of your specialist telehealth visit compare with an in-person visit?"
+    type: single_choice
+    construct: did_cost_specialist_telehealth_visit
+    required: true
+    options:
+      - id: "a"
+        label: "Much less expensive"
+      - id: "b"
+        label: "Somewhat less expensive"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat more expensive"
+      - id: "e"
+        label: "Not sure"
+  - id: q23
+    prompt: "Was your specialist telehealth visit covered by your insurance?"
+    type: single_choice
+    construct: was_specialist_telehealth_visit_covered
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, fully covered"
+      - id: "b"
+        label: "Yes, partly covered"
+      - id: "c"
+        label: "No, I paid out of pocket"
+      - id: "d"
+        label: "Not sure"
+      - id: "e"
+        label: "I do not have insurance"
+  - id: q24
+    prompt: "Which barriers, if any, would make you hesitant to use telehealth for a specialist? (Select all that apply)"
+    type: multi_choice
+    construct: barriers_if_any_would_make
+    required: true
+    options:
+      - id: "a"
+        label: "Concern the specialist cannot examine me properly"
+      - id: "b"
+        label: "Preference for seeing a specialist in person"
+      - id: "c"
+        label: "Worries about privacy or data security"
+      - id: "d"
+        label: "Trouble with the technology"
+      - id: "e"
+        label: "Unclear insurance coverage or cost"
+      - id: "f"
+        label: "Poor internet or phone connection"
+      - id: "g"
+        label: "None of these"
+  - id: q25
+    prompt: "How comfortable are you using video technology for a medical visit?"
+    type: single_choice
+    construct: comfortable_using_video_technology_medic
+    required: true
+    options:
+      - id: "a"
+        label: "Very comfortable"
+      - id: "b"
+        label: "Somewhat comfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat uncomfortable"
+      - id: "e"
+        label: "Very uncomfortable"
+  - id: q26
+    prompt: "For which of these would you be willing to use specialist telehealth in the future? (Select all that apply)"
+    type: multi_choice
+    construct: these_would_be_willing_use
+    required: true
+    options:
+      - id: "a"
+        label: "A first consultation with a new specialist"
+      - id: "b"
+        label: "A routine follow-up"
+      - id: "c"
+        label: "Reviewing test or lab results"
+      - id: "d"
+        label: "Medication management"
+      - id: "e"
+        label: "A second opinion"
+      - id: "f"
+        label: "Mental or behavioral health"
+      - id: "g"
+        label: "None of these"
+  - id: q27
+    prompt: "How important is each of the following when choosing specialist telehealth: Being able to see the specialist quickly."
+    type: single_choice
+    construct: important_each_following_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "How important is each of the following when choosing specialist telehealth: Avoiding travel."
+    type: single_choice
+    construct: important_each_following_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "How important is each of the following when choosing specialist telehealth: Low out-of-pocket cost."
+    type: single_choice
+    construct: important_each_following_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "How important is each of the following when choosing specialist telehealth: The specialist's reputation or credentials."
+    type: single_choice
+    construct: important_each_following_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q31
+    prompt: "Select your top 3 factors that matter most when choosing a specialist telehealth visit. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_that
+    required: true
+    options:
+      - id: "a"
+        label: "Short wait for an appointment"
+      - id: "b"
+        label: "No travel needed"
+      - id: "c"
+        label: "Low cost"
+      - id: "d"
+        label: "Quality of the specialist"
+      - id: "e"
+        label: "Insurance coverage"
+      - id: "f"
+        label: "Ease of using the technology"
+      - id: "g"
+        label: "Privacy protections"
+      - id: "h"
+        label: "Ability to include a caregiver"
+  - id: q32
+    prompt: "Overall, how satisfied were you with your specialist telehealth experience?"
+    type: single_choice
+    construct: overall_satisfied_were_specialist_telehe
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I have not had one"
+  - id: q33
+    prompt: "On a scale of 0 to 10, how likely are you to recommend specialist telehealth to a friend or family member? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q34
+    prompt: "How willing are you to use telehealth for a specialist visit in the future?"
+    type: single_choice
+    construct: willing_use_telehealth_specialist_visit
+    required: true
+    options:
+      - id: "a"
+        label: "Very willing"
+      - id: "b"
+        label: "Somewhat willing"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat unwilling"
+      - id: "e"
+        label: "Very unwilling"
+  - id: q35
+    prompt: "About how many specialist telehealth visits have you had in the past 12 months? Please enter a number."
+    type: free_text
+    construct: many_specialist_telehealth_visits_have
+    required: true
+  - id: q36
+    prompt: "About how many minutes did your most recent specialist telehealth visit last? Please enter a number of minutes."
+    type: free_text
+    construct: many_minutes_did_most_recent
+    required: true
+  - id: q37
+    prompt: "About how far, in miles, is the nearest in-person office for the specialist you saw? Please enter a number of miles."
+    type: free_text
+    construct: far_miles_nearest_person_office
+    required: true
+  - id: q38
+    prompt: "In your own words, what would make specialist telehealth work better for you? (Optional)"
+    type: free_text
+    construct: own_words_would_make_specialist
+    required: false
+  - id: q39
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q40
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe or not to say"
+  - id: q41
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q44
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q45
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q47
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q48
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q49
+    prompt: "What type of health insurance do you primarily have?"
+    type: single_choice
+    construct: type_health_insurance_primarily_have
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored plan"
+      - id: "b"
+        label: "Plan bought on the marketplace or directly"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or veterans coverage"
+      - id: "f"
+        label: "I do not have health insurance"
+      - id: "g"
+        label: "Prefer not to say"

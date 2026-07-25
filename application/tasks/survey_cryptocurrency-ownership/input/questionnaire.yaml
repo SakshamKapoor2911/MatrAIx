@@ -1,0 +1,761 @@
+schemaVersion: "1.0"
+id: cryptocurrency_ownership_v1
+title: "Cryptocurrency Ownership Survey"
+description: "Who owns cryptocurrency and digital assets, how they hold and manage them, and their attitudes toward the risks and future of crypto."
+questions:
+  - id: q0
+    prompt: "Do you currently own any cryptocurrency or digital assets?"
+    type: single_choice
+    construct: currently_own_any_cryptocurrency_digital
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I currently own cryptocurrency"
+      - id: "b"
+        label: "I used to own it but sold everything"
+      - id: "c"
+        label: "No, but I plan to buy within the next year"
+      - id: "d"
+        label: "No, and I have no plans to buy"
+      - id: "e"
+        label: "I am not sure what cryptocurrency is"
+  - id: q1
+    prompt: "How long have you owned cryptocurrency (or owned it, if you have since sold)?"
+    type: single_choice
+    construct: long_have_owned_cryptocurrency_owned
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "4 to 6 years"
+      - id: "e"
+        label: "More than 6 years"
+      - id: "f"
+        label: "I have never owned cryptocurrency"
+  - id: q2
+    prompt: "Which cryptocurrencies do you currently own or have owned? (Select all that apply)"
+    type: multi_choice
+    construct: cryptocurrencies_currently_own_have_owne
+    required: true
+    options:
+      - id: "a"
+        label: "Bitcoin (BTC)"
+      - id: "b"
+        label: "Ethereum (ETH)"
+      - id: "c"
+        label: "A stablecoin (e.g., USDC, USDT)"
+      - id: "d"
+        label: "Solana (SOL)"
+      - id: "e"
+        label: "XRP"
+      - id: "f"
+        label: "Dogecoin or other meme coins"
+      - id: "g"
+        label: "A Bitcoin or Ethereum ETF (through a brokerage)"
+      - id: "h"
+        label: "Other altcoins"
+      - id: "i"
+        label: "I have never owned cryptocurrency"
+  - id: q3
+    prompt: "Roughly what is the current total value of your cryptocurrency holdings, in U.S. dollars? Please enter a whole number."
+    type: free_text
+    construct: roughly_current_total_value_cryptocurren
+    required: true
+  - id: q4
+    prompt: "Approximately what share of your total investable assets is held in cryptocurrency?"
+    type: single_choice
+    construct: approximately_share_total_investable_ass
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1%"
+      - id: "b"
+        label: "1% to 5%"
+      - id: "c"
+        label: "6% to 10%"
+      - id: "d"
+        label: "11% to 25%"
+      - id: "e"
+        label: "26% to 50%"
+      - id: "f"
+        label: "More than 50%"
+      - id: "g"
+        label: "Not sure"
+  - id: q5
+    prompt: "Where do you primarily store or hold your cryptocurrency? (Select all that apply)"
+    type: multi_choice
+    construct: where_primarily_store_hold_cryptocurrenc
+    required: true
+    options:
+      - id: "a"
+        label: "A centralized exchange (e.g., Coinbase, Kraken)"
+      - id: "b"
+        label: "A brokerage app (e.g., Robinhood, PayPal)"
+      - id: "c"
+        label: "A software / hot wallet (e.g., MetaMask, Trust Wallet)"
+      - id: "d"
+        label: "A hardware / cold wallet (e.g., Ledger, Trezor)"
+      - id: "e"
+        label: "A crypto ETF in a traditional brokerage account"
+      - id: "f"
+        label: "I am not sure where it is held"
+  - id: q6
+    prompt: "Which platform do you use most often to buy or hold cryptocurrency?"
+    type: single_choice
+    construct: platform_use_most_often_buy
+    required: true
+    options:
+      - id: "a"
+        label: "Coinbase"
+      - id: "b"
+        label: "Binance / Binance.US"
+      - id: "c"
+        label: "Kraken"
+      - id: "d"
+        label: "Robinhood"
+      - id: "e"
+        label: "PayPal or Venmo"
+      - id: "f"
+        label: "Cash App"
+      - id: "g"
+        label: "A self-custody wallet"
+      - id: "h"
+        label: "Another platform"
+  - id: q7
+    prompt: "How did you first acquire cryptocurrency?"
+    type: single_choice
+    construct: did_first_acquire_cryptocurrency
+    required: true
+    options:
+      - id: "a"
+        label: "Bought it on an exchange or app"
+      - id: "b"
+        label: "Received it as payment for goods or services"
+      - id: "c"
+        label: "Received it as a gift or transfer"
+      - id: "d"
+        label: "Earned it through mining or staking"
+      - id: "e"
+        label: "Through an employer or airdrop"
+      - id: "f"
+        label: "I have never acquired cryptocurrency"
+  - id: q8
+    prompt: "What are your main reasons for owning cryptocurrency? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: main_reasons_owning_cryptocurrency_selec
+    required: true
+    options:
+      - id: "a"
+        label: "Long-term investment or store of value"
+      - id: "b"
+        label: "Potential for high returns"
+      - id: "c"
+        label: "Diversifying my portfolio"
+      - id: "d"
+        label: "Distrust of banks or traditional finance"
+      - id: "e"
+        label: "Hedge against inflation"
+      - id: "f"
+        label: "Interest in the technology"
+      - id: "g"
+        label: "To make payments or transfers"
+      - id: "h"
+        label: "Friends or family are involved"
+      - id: "i"
+        label: "Fear of missing out"
+  - id: q9
+    prompt: "How would you describe your overall approach to cryptocurrency?"
+    type: single_choice
+    construct: would_describe_overall_approach_cryptocu
+    required: true
+    options:
+      - id: "a"
+        label: "Long-term holder (\"buy and hold\")"
+      - id: "b"
+        label: "Occasional buyer, rarely sell"
+      - id: "c"
+        label: "Active trader"
+      - id: "d"
+        label: "I only hold what I received, not by choice"
+      - id: "e"
+        label: "I have exited the market"
+  - id: q10
+    prompt: "How often do you check the value of your cryptocurrency holdings?"
+    type: single_choice
+    construct: often_check_value_cryptocurrency_holding
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "About once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q11
+    prompt: "How do you typically add to your cryptocurrency holdings?"
+    type: single_choice
+    construct: typically_add_cryptocurrency_holdings
+    required: true
+    options:
+      - id: "a"
+        label: "Recurring / automatic purchases (dollar-cost averaging)"
+      - id: "b"
+        label: "Lump-sum purchases when I have extra cash"
+      - id: "c"
+        label: "Buying when prices drop"
+      - id: "d"
+        label: "Buying when prices are rising"
+      - id: "e"
+        label: "I no longer add to my holdings"
+  - id: q12
+    prompt: "Have you ever used any of the following crypto-related activities? (Select all that apply)"
+    type: multi_choice
+    construct: have_ever_used_any_following
+    required: true
+    options:
+      - id: "a"
+        label: "Staking to earn rewards"
+      - id: "b"
+        label: "Lending or earning yield"
+      - id: "c"
+        label: "Buying or selling NFTs"
+      - id: "d"
+        label: "Using decentralized finance (DeFi) apps"
+      - id: "e"
+        label: "Making a purchase with crypto"
+      - id: "f"
+        label: "Sending crypto to friends or family"
+      - id: "g"
+        label: "None of these"
+  - id: q13
+    prompt: "How much do you agree with the following statement: Cryptocurrency is a legitimate long-term investment."
+    type: single_choice
+    construct: much_agree_following_statement_cryptocur
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I understand how the cryptocurrency I own actually works."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: I worry about losing my cryptocurrency to hacking, fraud, or scams."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I am comfortable with the price swings of cryptocurrency."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: Governments should more tightly regulate cryptocurrency."
+    type: single_choice
+    construct: much_agree_following_statement_governmen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How concerned are you about each of the following aspects of owning crypto? — Price volatility"
+    type: single_choice
+    construct: concerned_each_following_aspects_owning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q19
+    prompt: "How concerned are you about each of the following aspects of owning crypto? — Losing access to your wallet or keys"
+    type: single_choice
+    construct: concerned_each_following_aspects_owning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q20
+    prompt: "How concerned are you about each of the following aspects of owning crypto? — Exchange failure or bankruptcy"
+    type: single_choice
+    construct: concerned_each_following_aspects_owning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q21
+    prompt: "How concerned are you about each of the following aspects of owning crypto? — Scams and fraud"
+    type: single_choice
+    construct: concerned_each_following_aspects_owning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q22
+    prompt: "How concerned are you about each of the following aspects of owning crypto? — Tax reporting complexity"
+    type: single_choice
+    construct: concerned_each_following_aspects_owning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q23
+    prompt: "How confident are you that you could safely recover your cryptocurrency if you lost your phone or computer?"
+    type: single_choice
+    construct: confident_that_could_safely_recover
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q24
+    prompt: "Have you ever lost cryptocurrency due to any of the following? (Select all that apply)"
+    type: multi_choice
+    construct: have_ever_lost_cryptocurrency_due
+    required: true
+    options:
+      - id: "a"
+        label: "A scam or fraud"
+      - id: "b"
+        label: "A hacked account or wallet"
+      - id: "c"
+        label: "Losing my keys or password"
+      - id: "d"
+        label: "An exchange collapse or bankruptcy"
+      - id: "e"
+        label: "Sending to the wrong address"
+      - id: "f"
+        label: "I have never lost cryptocurrency this way"
+  - id: q25
+    prompt: "Where do you get most of your information about cryptocurrency? (Select all that apply)"
+    type: multi_choice
+    construct: where_get_most_information_cryptocurrenc
+    required: true
+    options:
+      - id: "a"
+        label: "Crypto news sites (e.g., CoinDesk, Cointelegraph)"
+      - id: "b"
+        label: "Social media (X/Twitter, Reddit, TikTok)"
+      - id: "c"
+        label: "YouTube or podcasts"
+      - id: "d"
+        label: "Friends, family, or coworkers"
+      - id: "e"
+        label: "The exchange or app I use"
+      - id: "f"
+        label: "Mainstream financial news"
+      - id: "g"
+        label: "A financial advisor"
+  - id: q26
+    prompt: "How do you report cryptocurrency on your taxes?"
+    type: single_choice
+    construct: report_cryptocurrency_taxes
+    required: true
+    options:
+      - id: "a"
+        label: "I track and report all transactions carefully"
+      - id: "b"
+        label: "I report only when I sell or cash out"
+      - id: "c"
+        label: "I use tax software or a service to help"
+      - id: "d"
+        label: "I have not had any taxable crypto events"
+      - id: "e"
+        label: "I do not report my cryptocurrency"
+  - id: q27
+    prompt: "Have you ever recommended that someone else buy cryptocurrency?"
+    type: single_choice
+    construct: have_ever_recommended_that_someone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I would"
+      - id: "d"
+        label: "No, and I would not"
+  - id: q28
+    prompt: "How satisfied are you overall with your experience owning cryptocurrency?"
+    type: single_choice
+    construct: satisfied_overall_experience_owning_cryp
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "How likely are you to buy more cryptocurrency in the next 12 months?"
+    type: single_choice
+    construct: likely_buy_more_cryptocurrency_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q30
+    prompt: "On a scale of 0 to 10, how likely are you to recommend owning cryptocurrency to a friend or family member (0 = not at all likely, 10 = extremely likely)?"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "In a typical month, about how many dollars do you add to your cryptocurrency holdings? Please enter a whole number (enter 0 if none)."
+    type: free_text
+    construct: typical_month_many_dollars_add
+    required: true
+  - id: q32
+    prompt: "What is your biggest hope or concern about the future of cryptocurrency? (Optional open response)"
+    type: free_text
+    construct: biggest_hope_concern_future_cryptocurren
+    required: false
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic, Latino, or Spanish origin"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Some other race or origin"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q39
+    prompt: "Including yourself, how many people live in your household? Please enter a whole number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q40
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Widowed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "In which U.S. region do you live?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q43
+    prompt: "Which best describes your overall comfort with financial technology?"
+    type: single_choice
+    construct: best_describes_overall_comfort_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Early adopter — I try new tools quickly"
+      - id: "b"
+        label: "Comfortable but cautious"
+      - id: "c"
+        label: "Average"
+      - id: "d"
+        label: "I prefer traditional financial tools"
+      - id: "e"
+        label: "I avoid new financial technology"
+  - id: q44
+    prompt: "Which best describes your overall investment risk tolerance?"
+    type: single_choice
+    construct: best_describes_overall_investment_risk
+    required: true
+    options:
+      - id: "a"
+        label: "Very conservative"
+      - id: "b"
+        label: "Conservative"
+      - id: "c"
+        label: "Moderate"
+      - id: "d"
+        label: "Aggressive"
+      - id: "e"
+        label: "Very aggressive"

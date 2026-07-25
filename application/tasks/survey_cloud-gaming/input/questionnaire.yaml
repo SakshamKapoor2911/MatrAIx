@@ -1,0 +1,731 @@
+schemaVersion: "1.0"
+id: cloud_gaming_v1
+title: "Cloud Gaming Survey"
+description: "How people perceive and use cloud gaming services that stream games from remote servers, including adoption, performance experience, and attitudes."
+questions:
+  - id: q0
+    prompt: "How familiar are you with cloud gaming (streaming games from remote servers instead of running them on your own device)?"
+    type: single_choice
+    construct: familiar_cloud_gaming_streaming_games
+    required: true
+    options:
+      - id: "a"
+        label: "I use it regularly"
+      - id: "b"
+        label: "I've tried it"
+      - id: "c"
+        label: "I know what it is but haven't tried it"
+      - id: "d"
+        label: "I've never heard of it before now"
+  - id: q1
+    prompt: "Have you ever used a cloud gaming service?"
+    type: single_choice
+    construct: have_ever_used_cloud_gaming
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I use one currently"
+      - id: "b"
+        label: "Yes, but I don't anymore"
+      - id: "c"
+        label: "No, but I'm interested"
+      - id: "d"
+        label: "No, and I'm not interested"
+  - id: q2
+    prompt: "Which cloud gaming services have you used or tried? (Select all that apply)"
+    type: multi_choice
+    construct: cloud_gaming_services_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Xbox Cloud Gaming (Game Pass Ultimate)"
+      - id: "b"
+        label: "NVIDIA GeForce NOW"
+      - id: "c"
+        label: "Amazon Luna"
+      - id: "d"
+        label: "PlayStation Plus cloud streaming"
+      - id: "e"
+        label: "Boosteroid"
+      - id: "f"
+        label: "Shadow"
+      - id: "g"
+        label: "Google Stadia (before shutdown)"
+      - id: "h"
+        label: "Another service"
+      - id: "i"
+        label: "None"
+  - id: q3
+    prompt: "Which cloud gaming service do you use most (or would most like to try)?"
+    type: single_choice
+    construct: cloud_gaming_service_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Xbox Cloud Gaming"
+      - id: "b"
+        label: "NVIDIA GeForce NOW"
+      - id: "c"
+        label: "Amazon Luna"
+      - id: "d"
+        label: "PlayStation Plus cloud streaming"
+      - id: "e"
+        label: "Boosteroid"
+      - id: "f"
+        label: "Shadow"
+      - id: "g"
+        label: "Other"
+      - id: "h"
+        label: "None / not sure"
+  - id: q4
+    prompt: "How long have you been using cloud gaming?"
+    type: single_choice
+    construct: long_have_been_using_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 2 years"
+      - id: "d"
+        label: "More than 2 years"
+      - id: "e"
+        label: "I don't currently use it"
+  - id: q5
+    prompt: "On which devices do you (or would you) play cloud games? (Select all that apply)"
+    type: multi_choice
+    construct: devices_would_play_cloud_games
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "Tablet"
+      - id: "c"
+        label: "Laptop or desktop computer"
+      - id: "d"
+        label: "Smart TV"
+      - id: "e"
+        label: "Streaming device (Fire TV, Chromecast, etc.)"
+      - id: "f"
+        label: "Game console"
+      - id: "g"
+        label: "Handheld gaming device"
+  - id: q6
+    prompt: "On a typical week, about how many hours do you spend cloud gaming?"
+    type: single_choice
+    construct: typical_week_many_hours_spend
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "Less than 2 hours"
+      - id: "c"
+        label: "2 to 5 hours"
+      - id: "d"
+        label: "6 to 10 hours"
+      - id: "e"
+        label: "More than 10 hours"
+  - id: q7
+    prompt: "What most attracts you to cloud gaming? (Select all that apply)"
+    type: multi_choice
+    construct: most_attracts_cloud_gaming_select
+    required: true
+    options:
+      - id: "a"
+        label: "Playing without buying expensive hardware"
+      - id: "b"
+        label: "Playing on many different devices"
+      - id: "c"
+        label: "Playing high-end games on a low-end device"
+      - id: "d"
+        label: "No large downloads or installs"
+      - id: "e"
+        label: "Trying games included in a subscription"
+      - id: "f"
+        label: "Playing away from home"
+      - id: "g"
+        label: "Nothing attracts me to it"
+  - id: q8
+    prompt: "What is your main concern about cloud gaming? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: main_concern_cloud_gaming_select
+    required: true
+    options:
+      - id: "a"
+        label: "Input lag or latency"
+      - id: "b"
+        label: "Needing a fast, stable internet connection"
+      - id: "c"
+        label: "Video quality or compression"
+      - id: "d"
+        label: "Not owning the games I play"
+      - id: "e"
+        label: "Ongoing subscription costs"
+      - id: "f"
+        label: "Limited game library"
+      - id: "g"
+        label: "Data usage or caps"
+      - id: "h"
+        label: "Service could shut down"
+      - id: "i"
+        label: "Reliability and downtime"
+      - id: "j"
+        label: "Account or privacy concerns"
+  - id: q9
+    prompt: "What type of internet connection do you mainly use at home?"
+    type: single_choice
+    construct: type_internet_connection_mainly_use
+    required: true
+    options:
+      - id: "a"
+        label: "Fiber"
+      - id: "b"
+        label: "Cable"
+      - id: "c"
+        label: "DSL"
+      - id: "d"
+        label: "Fixed wireless or satellite"
+      - id: "e"
+        label: "5G home internet"
+      - id: "f"
+        label: "Mobile data / hotspot"
+      - id: "g"
+        label: "Not sure"
+  - id: q10
+    prompt: "Roughly what is your home internet download speed?"
+    type: single_choice
+    construct: roughly_home_internet_download_speed
+    required: true
+    options:
+      - id: "a"
+        label: "Under 25 Mbps"
+      - id: "b"
+        label: "25 to 100 Mbps"
+      - id: "c"
+        label: "100 to 300 Mbps"
+      - id: "d"
+        label: "300 to 1000 Mbps"
+      - id: "e"
+        label: "Over 1000 Mbps (gigabit)"
+      - id: "f"
+        label: "Not sure"
+  - id: q11
+    prompt: "How would you rate the performance you experience (or expect) with cloud gaming?"
+    type: single_choice
+    construct: would_rate_performance_experience_expect
+    required: true
+    options:
+      - id: "a"
+        label: "Very poor"
+      - id: "b"
+        label: "Poor"
+      - id: "c"
+        label: "Acceptable"
+      - id: "d"
+        label: "Good"
+      - id: "e"
+        label: "Excellent"
+  - id: q12
+    prompt: "How often do you experience the following when cloud gaming — Noticeable input lag"
+    type: single_choice
+    construct: often_experience_following_when_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q13
+    prompt: "How often do you experience the following when cloud gaming — Video quality dropping or blurring"
+    type: single_choice
+    construct: often_experience_following_when_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q14
+    prompt: "How often do you experience the following when cloud gaming — Disconnections or session drops"
+    type: single_choice
+    construct: often_experience_following_when_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q15
+    prompt: "How often do you experience the following when cloud gaming — Long wait times or queues to start"
+    type: single_choice
+    construct: often_experience_following_when_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q16
+    prompt: "Please rate your agreement — Cloud gaming lets me play games I otherwise couldn't run"
+    type: single_choice
+    construct: please_rate_agreement_cloud_gaming
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "Please rate your agreement — The performance of cloud gaming is good enough for how I play"
+    type: single_choice
+    construct: please_rate_agreement_performance_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "Please rate your agreement — I'd rather own and install games than stream them"
+    type: single_choice
+    construct: please_rate_agreement_i_d
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "Please rate your agreement — Cloud gaming is the future of how most people will play games"
+    type: single_choice
+    construct: please_rate_agreement_cloud_gaming
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Please rate your agreement — Cloud gaming saves me money compared with buying gaming hardware"
+    type: single_choice
+    construct: please_rate_agreement_cloud_gaming
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How important are the following in a cloud gaming service — Low latency and responsiveness"
+    type: single_choice
+    construct: important_following_cloud_gaming_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important are the following in a cloud gaming service — Size and quality of the game library"
+    type: single_choice
+    construct: important_following_cloud_gaming_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important are the following in a cloud gaming service — Monthly price"
+    type: single_choice
+    construct: important_following_cloud_gaming_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important are the following in a cloud gaming service — Working on all my devices"
+    type: single_choice
+    construct: important_following_cloud_gaming_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important are the following in a cloud gaming service — Video quality (resolution and frame rate)"
+    type: single_choice
+    construct: important_following_cloud_gaming_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "Do you currently pay for a cloud gaming service?"
+    type: single_choice
+    construct: currently_pay_cloud_gaming_service
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a dedicated cloud gaming subscription"
+      - id: "b"
+        label: "Yes, it's bundled with another subscription I have"
+      - id: "c"
+        label: "No, I use only free tiers"
+      - id: "d"
+        label: "No, I don't use cloud gaming"
+  - id: q27
+    prompt: "Roughly how much do you spend per month on cloud gaming services?"
+    type: free_text
+    construct: roughly_much_spend_per_month
+    required: true
+  - id: q28
+    prompt: "How do you (or would you) use cloud gaming relative to other ways of playing?"
+    type: single_choice
+    construct: would_use_cloud_gaming_relative
+    required: true
+    options:
+      - id: "a"
+        label: "As my main way to game"
+      - id: "b"
+        label: "Alongside a console or PC"
+      - id: "c"
+        label: "Only for trying games before buying"
+      - id: "d"
+        label: "Only when away from my main setup"
+      - id: "e"
+        label: "I don't use it"
+  - id: q29
+    prompt: "Roughly how many different games have you played through cloud gaming?"
+    type: free_text
+    construct: roughly_many_different_games_have
+    required: true
+  - id: q30
+    prompt: "How likely are you to use (or keep using) cloud gaming over the next year?"
+    type: single_choice
+    construct: likely_use_keep_using_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "Over the next year, how do you expect your cloud gaming use to change?"
+    type: single_choice
+    construct: over_next_year_expect_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Decrease a lot"
+      - id: "b"
+        label: "Decrease somewhat"
+      - id: "c"
+        label: "Stay about the same"
+      - id: "d"
+        label: "Increase somewhat"
+      - id: "e"
+        label: "Increase a lot"
+  - id: q32
+    prompt: "Overall, how satisfied are you with cloud gaming (or your impression of it)?"
+    type: single_choice
+    construct: overall_satisfied_cloud_gaming_impressio
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How likely are you to recommend cloud gaming to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_cloud_gaming_friend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q34
+    prompt: "What would make you use cloud gaming more, or what holds you back?"
+    type: free_text
+    construct: would_make_use_cloud_gaming
+    required: true
+  - id: q35
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+  - id: q40
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelance"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed, looking for work"
+      - id: "f"
+        label: "Not employed, not looking"
+      - id: "g"
+        label: "Retired"
+  - id: q41
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q42
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

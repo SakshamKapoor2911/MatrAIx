@@ -1,0 +1,754 @@
+schemaVersion: "1.0"
+id: desktop_building_v1
+title: "Desktop PC Building Survey"
+description: "Building, upgrading, and owning custom desktop PCs — experience level, component choices, budgets, build resources, and satisfaction among DIY and enthusiast builders."
+questions:
+  - id: q0
+    prompt: "Which best describes your experience with desktop PCs?"
+    type: single_choice
+    construct: best_describes_experience_desktop_pcs
+    required: true
+    options:
+      - id: "a"
+        label: "I have built my own desktop PC from parts"
+      - id: "b"
+        label: "I've upgraded parts but never built from scratch"
+      - id: "c"
+        label: "I own a pre-built desktop and haven't modified it"
+      - id: "d"
+        label: "I don't own a desktop but plan to build one"
+      - id: "e"
+        label: "I don't own or plan to own a desktop"
+  - id: q1
+    prompt: "How many desktop PCs have you personally built from parts? Enter a whole number."
+    type: free_text
+    construct: many_desktop_pcs_have_personally
+    required: true
+  - id: q2
+    prompt: "When did you most recently build or upgrade a desktop PC?"
+    type: single_choice
+    construct: when_did_most_recently_build
+    required: true
+    options:
+      - id: "a"
+        label: "Within the past 6 months"
+      - id: "b"
+        label: "6 months to 1 year ago"
+      - id: "c"
+        label: "1 to 2 years ago"
+      - id: "d"
+        label: "3 to 5 years ago"
+      - id: "e"
+        label: "More than 5 years ago"
+      - id: "f"
+        label: "I never have"
+  - id: q3
+    prompt: "What do you primarily use your desktop for? (Select all that apply)"
+    type: multi_choice
+    construct: primarily_use_desktop_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Gaming"
+      - id: "b"
+        label: "Work / productivity"
+      - id: "c"
+        label: "Programming / software development"
+      - id: "d"
+        label: "Video or photo editing"
+      - id: "e"
+        label: "3D modeling / rendering"
+      - id: "f"
+        label: "Streaming or content creation"
+      - id: "g"
+        label: "Machine learning / data science"
+      - id: "h"
+        label: "General web and media use"
+      - id: "i"
+        label: "Home server / NAS"
+      - id: "j"
+        label: "Cryptocurrency or compute tasks"
+  - id: q4
+    prompt: "What was the main reason you built (or would build) rather than buy pre-built?"
+    type: single_choice
+    construct: was_main_reason_built_would
+    required: true
+    options:
+      - id: "a"
+        label: "Better value for the money"
+      - id: "b"
+        label: "Full control over components"
+      - id: "c"
+        label: "Higher performance"
+      - id: "d"
+        label: "The enjoyment of building"
+      - id: "e"
+        label: "Easier future upgrades"
+      - id: "f"
+        label: "Customization and aesthetics"
+      - id: "g"
+        label: "I prefer pre-built, actually"
+  - id: q5
+    prompt: "Roughly how much did you spend on your most recent build or upgrade? Enter a whole-dollar amount (US$)."
+    type: free_text
+    construct: roughly_much_did_spend_most
+    required: true
+  - id: q6
+    prompt: "What is your typical total budget for a full desktop build?"
+    type: single_choice
+    construct: typical_total_budget_full_desktop
+    required: true
+    options:
+      - id: "a"
+        label: "Under $500"
+      - id: "b"
+        label: "$500-$999"
+      - id: "c"
+        label: "$1,000-$1,499"
+      - id: "d"
+        label: "$1,500-$1,999"
+      - id: "e"
+        label: "$2,000-$2,999"
+      - id: "f"
+        label: "$3,000 or more"
+  - id: q7
+    prompt: "Which CPU brand do you prefer for your builds?"
+    type: single_choice
+    construct: cpu_brand_prefer_builds
+    required: true
+    options:
+      - id: "a"
+        label: "AMD (Ryzen)"
+      - id: "b"
+        label: "Intel (Core)"
+      - id: "c"
+        label: "No strong preference"
+      - id: "d"
+        label: "Not sure"
+  - id: q8
+    prompt: "Which GPU brand do you prefer?"
+    type: single_choice
+    construct: gpu_brand_prefer
+    required: true
+    options:
+      - id: "a"
+        label: "NVIDIA (GeForce)"
+      - id: "b"
+        label: "AMD (Radeon)"
+      - id: "c"
+        label: "Intel (Arc)"
+      - id: "d"
+        label: "No strong preference"
+      - id: "e"
+        label: "I don't use a dedicated GPU"
+  - id: q9
+    prompt: "Where do you buy PC components? (Select all that apply)"
+    type: multi_choice
+    construct: where_buy_pc_components_select
+    required: true
+    options:
+      - id: "a"
+        label: "Amazon"
+      - id: "b"
+        label: "Newegg"
+      - id: "c"
+        label: "Micro Center"
+      - id: "d"
+        label: "Best Buy"
+      - id: "e"
+        label: "Manufacturer websites"
+      - id: "f"
+        label: "B&H or specialty retailers"
+      - id: "g"
+        label: "Used marketplaces (eBay, r/hardwareswap)"
+      - id: "h"
+        label: "Local computer stores"
+  - id: q10
+    prompt: "Which resources do you use when planning a build? (Select all that apply)"
+    type: multi_choice
+    construct: resources_use_when_planning_build
+    required: true
+    options:
+      - id: "a"
+        label: "PCPartPicker"
+      - id: "b"
+        label: "YouTube build guides and reviews"
+      - id: "c"
+        label: "Reddit (e.g., r/buildapc)"
+      - id: "d"
+        label: "Tech review websites and benchmarks"
+      - id: "e"
+        label: "Discord communities or forums"
+      - id: "f"
+        label: "Friends who build PCs"
+      - id: "g"
+        label: "AI chatbot recommendations"
+      - id: "h"
+        label: "Manufacturer spec pages"
+  - id: q11
+    prompt: "How do you decide which parts to buy? (Select all that apply)"
+    type: multi_choice
+    construct: decide_parts_buy_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Benchmark performance"
+      - id: "b"
+        label: "Price-to-performance ratio"
+      - id: "c"
+        label: "Reviews and reliability reputation"
+      - id: "d"
+        label: "Compatibility with other parts"
+      - id: "e"
+        label: "Aesthetics (RGB, color scheme)"
+      - id: "f"
+        label: "Brand loyalty"
+      - id: "g"
+        label: "Future upgrade potential"
+      - id: "h"
+        label: "Sales and deals"
+  - id: q12
+    prompt: "When building a PC, how important is price-to-performance value?"
+    type: single_choice
+    construct: when_building_pc_important_price
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q13
+    prompt: "When building a PC, how important is gaming/graphics performance?"
+    type: single_choice
+    construct: when_building_pc_important_gaming
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q14
+    prompt: "When building a PC, how important is quiet operation / cooling?"
+    type: single_choice
+    construct: when_building_pc_important_quiet
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q15
+    prompt: "When building a PC, how important is appearance and aesthetics (RGB, case design)?"
+    type: single_choice
+    construct: when_building_pc_important_appearance
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "When building a PC, how important is future upgradability?"
+    type: single_choice
+    construct: when_building_pc_important_future
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "When building a PC, how important is energy efficiency?"
+    type: single_choice
+    construct: when_building_pc_important_energy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "Which THREE components do you consider most important to spend money on? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: three_components_consider_most_important
+    required: true
+    options:
+      - id: "a"
+        label: "CPU"
+      - id: "b"
+        label: "Graphics card (GPU)"
+      - id: "c"
+        label: "RAM"
+      - id: "d"
+        label: "Storage (SSD/NVMe)"
+      - id: "e"
+        label: "Motherboard"
+      - id: "f"
+        label: "Power supply"
+      - id: "g"
+        label: "Cooling (air/liquid)"
+      - id: "h"
+        label: "Case"
+      - id: "i"
+        label: "Monitor and peripherals"
+  - id: q19
+    prompt: "What type of CPU cooling do you use?"
+    type: single_choice
+    construct: type_cpu_cooling_use
+    required: true
+    options:
+      - id: "a"
+        label: "Stock air cooler"
+      - id: "b"
+        label: "Aftermarket air cooler"
+      - id: "c"
+        label: "All-in-one (AIO) liquid cooler"
+      - id: "d"
+        label: "Custom liquid cooling loop"
+      - id: "e"
+        label: "Not sure"
+  - id: q20
+    prompt: "How much total storage does your desktop have?"
+    type: single_choice
+    construct: much_total_storage_does_desktop
+    required: true
+    options:
+      - id: "a"
+        label: "Under 500 GB"
+      - id: "b"
+        label: "500 GB - 1 TB"
+      - id: "c"
+        label: "1 TB - 2 TB"
+      - id: "d"
+        label: "2 TB - 4 TB"
+      - id: "e"
+        label: "More than 4 TB"
+  - id: q21
+    prompt: "How much RAM is in your current desktop?"
+    type: single_choice
+    construct: much_ram_current_desktop
+    required: true
+    options:
+      - id: "a"
+        label: "8 GB or less"
+      - id: "b"
+        label: "16 GB"
+      - id: "c"
+        label: "32 GB"
+      - id: "d"
+        label: "64 GB"
+      - id: "e"
+        label: "More than 64 GB"
+  - id: q22
+    prompt: "How much do you agree: Building my own PC saved me money compared to buying pre-built."
+    type: single_choice
+    construct: much_agree_building_my_own
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How much do you agree: I enjoy the process of researching and assembling PC parts."
+    type: single_choice
+    construct: much_agree_i_enjoy_process
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "How much do you agree: I feel confident troubleshooting hardware problems on my own."
+    type: single_choice
+    construct: much_agree_i_feel_confident
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "How much do you agree: Keeping up with new hardware releases is important to me."
+    type: single_choice
+    construct: much_agree_keeping_up_new
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q26
+    prompt: "How much do you agree: GPU prices are a major barrier to building the PC I want."
+    type: single_choice
+    construct: much_agree_gpu_prices_major
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q27
+    prompt: "How often do you upgrade individual components (not a full rebuild)?"
+    type: single_choice
+    construct: often_upgrade_individual_components_not
+    required: true
+    options:
+      - id: "a"
+        label: "Every few months"
+      - id: "b"
+        label: "About once a year"
+      - id: "c"
+        label: "Every 2-3 years"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q28
+    prompt: "Did you encounter any problems during your most recent build? (Select all that apply)"
+    type: multi_choice
+    construct: did_encounter_any_problems_during
+    required: true
+    options:
+      - id: "a"
+        label: "Part compatibility issues"
+      - id: "b"
+        label: "Difficulty with cable management"
+      - id: "c"
+        label: "PC wouldn't POST/boot at first"
+      - id: "d"
+        label: "Overheating or thermal issues"
+      - id: "e"
+        label: "A defective (DOA) component"
+      - id: "f"
+        label: "BIOS or driver problems"
+      - id: "g"
+        label: "No significant problems"
+      - id: "h"
+        label: "I haven't built one"
+  - id: q29
+    prompt: "Do you overclock any of your components?"
+    type: single_choice
+    construct: overclock_any_components
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, CPU and/or GPU"
+      - id: "b"
+        label: "Yes, just RAM (XMP/EXPO)"
+      - id: "c"
+        label: "No, but I know how"
+      - id: "d"
+        label: "No, and I don't plan to"
+      - id: "e"
+        label: "Not sure what that means"
+  - id: q30
+    prompt: "What operating system does your desktop run?"
+    type: single_choice
+    construct: operating_system_does_desktop_run
+    required: true
+    options:
+      - id: "a"
+        label: "Windows"
+      - id: "b"
+        label: "Linux"
+      - id: "c"
+        label: "Dual-boot (Windows and Linux)"
+      - id: "d"
+        label: "macOS (Hackintosh or Apple)"
+      - id: "e"
+        label: "Other"
+  - id: q31
+    prompt: "How satisfied are you with your current desktop build?"
+    type: single_choice
+    construct: satisfied_current_desktop_build
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How likely are you to build or upgrade a desktop in the next 12 months?"
+    type: single_choice
+    construct: likely_build_upgrade_desktop_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q33
+    prompt: "How likely are you to recommend building a PC to someone considering it? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_building_pc_someone
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q34
+    prompt: "What advice would you give to a first-time PC builder?"
+    type: free_text
+    construct: advice_would_give_first_time
+    required: true
+  - id: q35
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18-24"
+      - id: "b"
+        label: "25-34"
+      - id: "c"
+        label: "35-44"
+      - id: "d"
+        label: "45-54"
+      - id: "e"
+        label: "55-64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000-$49,999"
+      - id: "c"
+        label: "$50,000-$74,999"
+      - id: "d"
+        label: "$75,000-$99,999"
+      - id: "e"
+        label: "$100,000-$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Not currently employed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "Which best describes where you live?"
+    type: single_choice
+    construct: best_describes_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q42
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q43
+    prompt: "How would you describe yourself as a PC hardware enthusiast?"
+    type: single_choice
+    construct: would_describe_yourself_as_pc
+    required: true
+    options:
+      - id: "a"
+        label: "Expert — I follow hardware closely and build often"
+      - id: "b"
+        label: "Enthusiast — I'm knowledgeable and enjoy it"
+      - id: "c"
+        label: "Hobbyist — I know enough to get by"
+      - id: "d"
+        label: "Beginner — still learning"
+      - id: "e"
+        label: "Not an enthusiast"

@@ -1,0 +1,847 @@
+schemaVersion: "1.0"
+id: equity_compensation_rsus_v1
+title: "Equity Compensation and RSUs Survey"
+description: "How employees receive and manage restricted stock units and stock options, including vesting, sell strategy, and their understanding of the mechanics and taxes."
+questions:
+  - id: q0
+    prompt: "Do you currently receive equity compensation from an employer?"
+    type: single_choice
+    construct: currently_receive_equity_compensation_fr
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, RSUs"
+      - id: "b"
+        label: "Yes, stock options"
+      - id: "c"
+        label: "Yes, both RSUs and options"
+      - id: "d"
+        label: "No, but I have in the past"
+      - id: "e"
+        label: "No, never"
+  - id: q1
+    prompt: "Which forms of equity compensation do you currently hold or have been granted? (Select all that apply)"
+    type: multi_choice
+    construct: forms_equity_compensation_currently_hold
+    required: true
+    options:
+      - id: "a"
+        label: "Restricted stock units (RSUs)"
+      - id: "b"
+        label: "Incentive stock options (ISOs)"
+      - id: "c"
+        label: "Non-qualified stock options (NSOs)"
+      - id: "d"
+        label: "Restricted stock awards (RSAs)"
+      - id: "e"
+        label: "Stock appreciation rights (SARs)"
+      - id: "f"
+        label: "Employee stock purchase plan (ESPP) shares"
+      - id: "g"
+        label: "Performance stock units (PSUs)"
+      - id: "h"
+        label: "None"
+  - id: q2
+    prompt: "Is the company whose equity you hold publicly traded or private?"
+    type: single_choice
+    construct: company_whose_equity_hold_publicly
+    required: true
+    options:
+      - id: "a"
+        label: "Publicly traded"
+      - id: "b"
+        label: "Private"
+      - id: "c"
+        label: "A mix (I hold equity in more than one)"
+      - id: "d"
+        label: "Not applicable"
+  - id: q3
+    prompt: "How long have you received equity compensation?"
+    type: single_choice
+    construct: long_have_received_equity_compensation
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "Not applicable"
+  - id: q4
+    prompt: "How well do you understand how your equity compensation vests and is taxed?"
+    type: single_choice
+    construct: well_understand_equity_compensation_vest
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all well"
+      - id: "b"
+        label: "Slightly well"
+      - id: "c"
+        label: "Moderately well"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Extremely well"
+  - id: q5
+    prompt: "What vesting schedule applies to most of your equity?"
+    type: single_choice
+    construct: vesting_schedule_applies_most_equity
+    required: true
+    options:
+      - id: "a"
+        label: "4-year vest with a 1-year cliff"
+      - id: "b"
+        label: "4-year vest, monthly or quarterly"
+      - id: "c"
+        label: "Annual vesting"
+      - id: "d"
+        label: "Performance- or milestone-based"
+      - id: "e"
+        label: "Another schedule"
+      - id: "f"
+        label: "Don't know / not applicable"
+  - id: q6
+    prompt: "Approximately what is the annual dollar value of your equity grants (at grant)? (Enter a whole-dollar number, or 0 if none.)"
+    type: free_text
+    construct: approximately_annual_dollar_value_equity
+    required: true
+  - id: q7
+    prompt: "Roughly what share of your total compensation is equity?"
+    type: single_choice
+    construct: roughly_share_total_compensation_equity
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 10%"
+      - id: "b"
+        label: "10% to 24%"
+      - id: "c"
+        label: "25% to 49%"
+      - id: "d"
+        label: "50% or more"
+      - id: "e"
+        label: "Don't know"
+  - id: q8
+    prompt: "When your RSUs vest, what do you typically do?"
+    type: single_choice
+    construct: when_rsus_vest_typically
+    required: true
+    options:
+      - id: "a"
+        label: "Sell all of the vested shares right away"
+      - id: "b"
+        label: "Sell some and hold the rest"
+      - id: "c"
+        label: "Hold all of the shares"
+      - id: "d"
+        label: "Only sell enough to cover taxes (sell-to-cover)"
+      - id: "e"
+        label: "Not applicable"
+  - id: q9
+    prompt: "For stock options, what is your typical exercise strategy?"
+    type: single_choice
+    construct: stock_options_typical_exercise_strategy
+    required: true
+    options:
+      - id: "a"
+        label: "Exercise and hold"
+      - id: "b"
+        label: "Exercise and sell the same day"
+      - id: "c"
+        label: "Wait until a liquidity event (IPO or acquisition)"
+      - id: "d"
+        label: "I have not exercised any options"
+      - id: "e"
+        label: "Not applicable"
+  - id: q10
+    prompt: "What drives your decision to sell or hold vested equity? (Select all that apply)"
+    type: multi_choice
+    construct: drives_decision_sell_hold_vested
+    required: true
+    options:
+      - id: "a"
+        label: "Diversifying away from company stock"
+      - id: "b"
+        label: "Belief in the company's future"
+      - id: "c"
+        label: "Meeting a specific financial goal"
+      - id: "d"
+        label: "Minimizing taxes"
+      - id: "e"
+        label: "Locking in gains"
+      - id: "f"
+        label: "Needing the cash"
+      - id: "g"
+        label: "Advice from a financial advisor"
+      - id: "h"
+        label: "Not applicable"
+  - id: q11
+    prompt: "Do you use a 10b5-1 trading plan to sell your shares?"
+    type: single_choice
+    construct: use_10b5_1_trading_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "I don't know what that is"
+      - id: "d"
+        label: "Not applicable"
+  - id: q12
+    prompt: "How do you handle the taxes owed when equity vests or is exercised? (Select all that apply)"
+    type: multi_choice
+    construct: handle_taxes_owed_when_equity
+    required: true
+    options:
+      - id: "a"
+        label: "Sell-to-cover shares automatically"
+      - id: "b"
+        label: "Pay quarterly estimated taxes"
+      - id: "c"
+        label: "Set aside cash for the tax bill"
+      - id: "d"
+        label: "Increase paycheck withholding"
+      - id: "e"
+        label: "Work with a CPA or tax advisor"
+      - id: "f"
+        label: "I am unsure how to handle it"
+  - id: q13
+    prompt: "Which platform manages your equity? (Select all that apply)"
+    type: multi_choice
+    construct: platform_manages_equity_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Carta"
+      - id: "b"
+        label: "Morgan Stanley at Work (Shareworks / E*TRADE)"
+      - id: "c"
+        label: "Fidelity"
+      - id: "d"
+        label: "Charles Schwab"
+      - id: "e"
+        label: "Pulley"
+      - id: "f"
+        label: "A custom or in-house portal"
+      - id: "g"
+        label: "Don't know"
+  - id: q14
+    prompt: "How often do you check the value of your equity compensation?"
+    type: single_choice
+    construct: often_check_value_equity_compensation
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Monthly"
+      - id: "d"
+        label: "Weekly"
+      - id: "e"
+        label: "Daily or more"
+  - id: q15
+    prompt: "How much do you agree with the following statement about your equity compensation: It is a major reason I stay at my job."
+    type: single_choice
+    construct: much_agree_following_statement_equity
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about your equity compensation: I understand how it is taxed."
+    type: single_choice
+    construct: much_agree_following_statement_equity
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about your equity compensation: I worry about having too much wealth tied to my company."
+    type: single_choice
+    construct: much_agree_following_statement_equity
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about your equity compensation: The value feels uncertain to me."
+    type: single_choice
+    construct: much_agree_following_statement_equity
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about your equity compensation: I factor it into my major financial decisions."
+    type: single_choice
+    construct: much_agree_following_statement_equity
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement about your equity compensation: I would take more equity over more base salary."
+    type: single_choice
+    construct: much_agree_following_statement_equity
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "When evaluating an equity compensation offer, how important is the grant's dollar value?"
+    type: single_choice
+    construct: when_evaluating_equity_compensation_offe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When evaluating an equity compensation offer, how important is the vesting schedule?"
+    type: single_choice
+    construct: when_evaluating_equity_compensation_offe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When evaluating an equity compensation offer, how important are the company's growth prospects?"
+    type: single_choice
+    construct: when_evaluating_equity_compensation_offe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When evaluating an equity compensation offer, how important is liquidity (the ability to sell)?"
+    type: single_choice
+    construct: when_evaluating_equity_compensation_offe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When evaluating an equity compensation offer, how important is the tax treatment?"
+    type: single_choice
+    construct: when_evaluating_equity_compensation_offe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When evaluating a stock option offer, how important is the strike (exercise) price?"
+    type: single_choice
+    construct: when_evaluating_stock_option_offer
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Have you diversified your investments after equity vested?"
+    type: single_choice
+    construct: have_diversified_investments_after_equit
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, significantly"
+      - id: "b"
+        label: "Yes, somewhat"
+      - id: "c"
+        label: "No, I have kept most in company stock"
+      - id: "d"
+        label: "Not applicable"
+  - id: q28
+    prompt: "Have you ever made an 83(b) election or exercised options early?"
+    type: single_choice
+    construct: have_ever_made_83_b
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "I don't know what that means"
+      - id: "d"
+        label: "Not applicable"
+  - id: q29
+    prompt: "How well do you understand the alternative minimum tax (AMT) risk of exercising ISOs?"
+    type: single_choice
+    construct: well_understand_alternative_minimum_tax
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Slightly"
+      - id: "c"
+        label: "Moderately"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "I have never heard of it"
+  - id: q30
+    prompt: "What is the single biggest challenge you face with your equity compensation?"
+    type: single_choice
+    construct: single_biggest_challenge_face_equity
+    required: true
+    options:
+      - id: "a"
+        label: "Understanding the taxes"
+      - id: "b"
+        label: "Deciding when to sell"
+      - id: "c"
+        label: "Managing concentration risk"
+      - id: "d"
+        label: "Illiquidity (can't sell yet)"
+      - id: "e"
+        label: "Uncertain company value"
+      - id: "f"
+        label: "Cash needed to exercise options"
+      - id: "g"
+        label: "No major challenges"
+  - id: q31
+    prompt: "Which are your top 3 things you most value about equity compensation? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_things_most_value
+    required: true
+    options:
+      - id: "a"
+        label: "Wealth-building potential"
+      - id: "b"
+        label: "Alignment with the company's success"
+      - id: "c"
+        label: "Tax advantages"
+      - id: "d"
+        label: "Retention incentive"
+      - id: "e"
+        label: "Ownership and pride"
+      - id: "f"
+        label: "Supplementing my salary"
+      - id: "g"
+        label: "Flexibility to sell when I choose"
+  - id: q32
+    prompt: "Overall, how satisfied are you with your equity compensation package?"
+    type: single_choice
+    construct: overall_satisfied_equity_compensation_pa
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "Approximately how much total value have you realized from equity compensation so far? (Enter a whole-dollar number, or 0 if none.)"
+    type: free_text
+    construct: approximately_much_total_value_have
+    required: true
+  - id: q34
+    prompt: "On a scale from 0 to 10, how likely are you to recommend that job seekers prioritize equity compensation? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: scale_from_0_10_likely
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "How likely are you to negotiate for more equity in a future job offer?"
+    type: single_choice
+    construct: likely_negotiate_more_equity_future
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q36
+    prompt: "How confident are you about a positive financial outcome from your equity compensation?"
+    type: single_choice
+    construct: confident_positive_financial_outcome_fro
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+  - id: q37
+    prompt: "What do you wish you had understood earlier about equity compensation? (Optional)"
+    type: free_text
+    construct: wish_had_understood_earlier_equity
+    required: false
+  - id: q38
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino/a"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Another race or ethnicity"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $75,000"
+      - id: "b"
+        label: "$75,000 to $124,999"
+      - id: "c"
+        label: "$125,000 to $199,999"
+      - id: "d"
+        label: "$200,000 to $299,999"
+      - id: "e"
+        label: "$300,000 to $499,999"
+      - id: "f"
+        label: "$500,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or independent contractor"
+      - id: "d"
+        label: "Unemployed, looking for work"
+      - id: "e"
+        label: "Not employed and not looking"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q44
+    prompt: "Including yourself, how many people live in your household? (Enter a number.)"
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q45
+    prompt: "What is your marital status?"
+    type: single_choice
+    construct: marital_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Widowed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "Which industry do you work in?"
+    type: single_choice
+    construct: industry_work
+    required: true
+    options:
+      - id: "a"
+        label: "Technology or software"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare or biotech"
+      - id: "d"
+        label: "Media or entertainment"
+      - id: "e"
+        label: "Consulting or professional services"
+      - id: "f"
+        label: "Another industry"
+  - id: q49
+    prompt: "Which best describes your role level?"
+    type: single_choice
+    construct: best_describes_role_level
+    required: true
+    options:
+      - id: "a"
+        label: "Individual contributor (entry or mid-level)"
+      - id: "b"
+        label: "Senior individual contributor or staff"
+      - id: "c"
+        label: "Manager"
+      - id: "d"
+        label: "Director or above"
+      - id: "e"
+        label: "Executive or founder"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which best describes the stage of the company whose equity you hold?"
+    type: single_choice
+    construct: best_describes_stage_company_whose
+    required: true
+    options:
+      - id: "a"
+        label: "Early-stage startup"
+      - id: "b"
+        label: "Growth-stage private company"
+      - id: "c"
+        label: "Late-stage / pre-IPO"
+      - id: "d"
+        label: "Publicly traded"
+      - id: "e"
+        label: "Not applicable"

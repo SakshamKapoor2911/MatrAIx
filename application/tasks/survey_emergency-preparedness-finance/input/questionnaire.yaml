@@ -1,0 +1,654 @@
+schemaVersion: "1.0"
+id: emergency_preparedness_finance_v1
+title: "Financial Emergency Preparedness Survey"
+description: "How ready households are to absorb unexpected expenses and income shocks, including their emergency savings, resources, and confidence."
+questions:
+  - id: q0
+    prompt: "If you had an unexpected expense of $400 today, how would you most likely cover it?"
+    type: single_choice
+    construct: if_had_unexpected_expense_400
+    required: true
+    options:
+      - id: "a"
+        label: "With cash or money in my checking or savings account"
+      - id: "b"
+        label: "By putting it on a credit card and paying it off next statement"
+      - id: "c"
+        label: "By putting it on a credit card and paying over time"
+      - id: "d"
+        label: "By borrowing from friends or family"
+      - id: "e"
+        label: "With a payday loan, pawn, or similar"
+      - id: "f"
+        label: "I could not cover it right now"
+  - id: q1
+    prompt: "Do you currently have an emergency fund set aside for unexpected expenses?"
+    type: single_choice
+    construct: currently_have_emergency_fund_set
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a dedicated emergency fund"
+      - id: "b"
+        label: "Yes, but it is mixed with my regular savings"
+      - id: "c"
+        label: "No, but I am building one"
+      - id: "d"
+        label: "No emergency fund at all"
+  - id: q2
+    prompt: "How many months of essential expenses could your household cover using only savings if income stopped?"
+    type: single_choice
+    construct: many_months_essential_expenses_could
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 2 weeks"
+      - id: "b"
+        label: "About 1 month"
+      - id: "c"
+        label: "2 to 3 months"
+      - id: "d"
+        label: "4 to 6 months"
+      - id: "e"
+        label: "7 to 12 months"
+      - id: "f"
+        label: "More than 12 months"
+  - id: q3
+    prompt: "About how much money do you currently have set aside for emergencies? Please enter a number of dollars."
+    type: free_text
+    construct: much_money_currently_have_set
+    required: true
+  - id: q4
+    prompt: "Where do you keep the money you would use in an emergency? (Select all that apply)"
+    type: multi_choice
+    construct: where_keep_money_would_use
+    required: true
+    options:
+      - id: "a"
+        label: "Checking account"
+      - id: "b"
+        label: "Regular savings account"
+      - id: "c"
+        label: "High-yield savings account"
+      - id: "d"
+        label: "Cash at home"
+      - id: "e"
+        label: "Money market or certificate of deposit"
+      - id: "f"
+        label: "Brokerage or investment account"
+      - id: "g"
+        label: "I have no emergency money set aside"
+  - id: q5
+    prompt: "How often do you add money to your emergency savings?"
+    type: single_choice
+    construct: often_add_money_emergency_savings
+    required: true
+    options:
+      - id: "a"
+        label: "Every paycheck automatically"
+      - id: "b"
+        label: "Every month"
+      - id: "c"
+        label: "Occasionally when I can"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q6
+    prompt: "Have you had to use emergency savings or take on debt for an unexpected expense in the past 12 months?"
+    type: single_choice
+    construct: have_had_use_emergency_savings
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No"
+  - id: q7
+    prompt: "Which unexpected expenses have you faced in the past two years? (Select all that apply)"
+    type: multi_choice
+    construct: unexpected_expenses_have_faced_past
+    required: true
+    options:
+      - id: "a"
+        label: "Major car repair"
+      - id: "b"
+        label: "Medical or dental bill"
+      - id: "c"
+        label: "Home or appliance repair"
+      - id: "d"
+        label: "Job loss or reduced hours"
+      - id: "e"
+        label: "Emergency travel"
+      - id: "f"
+        label: "Helping a family member"
+      - id: "g"
+        label: "Pet emergency"
+      - id: "h"
+        label: "None of these"
+  - id: q8
+    prompt: "How confident are you that you could handle a major unexpected expense without going into debt?"
+    type: single_choice
+    construct: confident_that_could_handle_major
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+  - id: q9
+    prompt: "How much do you agree with the following statement: I worry about being able to cover an unexpected expense."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree with the following statement: My finances are stable enough to handle a surprise cost."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: Building an emergency fund is one of my top financial priorities."
+    type: single_choice
+    construct: much_agree_following_statement_building
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: It is hard to save because my expenses use up all my income."
+    type: single_choice
+    construct: much_agree_following_statement_it
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How prepared do you feel for the following type of emergency: a sudden job loss or income drop?"
+    type: single_choice
+    construct: prepared_feel_following_type_emergency
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all prepared"
+      - id: "b"
+        label: "Slightly prepared"
+      - id: "c"
+        label: "Moderately prepared"
+      - id: "d"
+        label: "Very prepared"
+      - id: "e"
+        label: "Extremely prepared"
+  - id: q14
+    prompt: "How prepared do you feel for the following type of emergency: a large medical or dental expense?"
+    type: single_choice
+    construct: prepared_feel_following_type_emergency
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all prepared"
+      - id: "b"
+        label: "Slightly prepared"
+      - id: "c"
+        label: "Moderately prepared"
+      - id: "d"
+        label: "Very prepared"
+      - id: "e"
+        label: "Extremely prepared"
+  - id: q15
+    prompt: "How prepared do you feel for the following type of emergency: a major car or transportation breakdown?"
+    type: single_choice
+    construct: prepared_feel_following_type_emergency
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all prepared"
+      - id: "b"
+        label: "Slightly prepared"
+      - id: "c"
+        label: "Moderately prepared"
+      - id: "d"
+        label: "Very prepared"
+      - id: "e"
+        label: "Extremely prepared"
+  - id: q16
+    prompt: "How prepared do you feel for the following type of emergency: a home or major appliance repair?"
+    type: single_choice
+    construct: prepared_feel_following_type_emergency
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all prepared"
+      - id: "b"
+        label: "Slightly prepared"
+      - id: "c"
+        label: "Moderately prepared"
+      - id: "d"
+        label: "Very prepared"
+      - id: "e"
+        label: "Extremely prepared"
+  - id: q17
+    prompt: "How prepared do you feel for the following type of emergency: a natural disaster or extended power outage?"
+    type: single_choice
+    construct: prepared_feel_following_type_emergency
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all prepared"
+      - id: "b"
+        label: "Slightly prepared"
+      - id: "c"
+        label: "Moderately prepared"
+      - id: "d"
+        label: "Very prepared"
+      - id: "e"
+        label: "Extremely prepared"
+  - id: q18
+    prompt: "Besides savings, what resources could you draw on in a financial emergency? (Select all that apply)"
+    type: multi_choice
+    construct: besides_savings_resources_could_draw
+    required: true
+    options:
+      - id: "a"
+        label: "Credit cards"
+      - id: "b"
+        label: "A personal line of credit or HELOC"
+      - id: "c"
+        label: "Retirement account loan or withdrawal"
+      - id: "d"
+        label: "Help from family or friends"
+      - id: "e"
+        label: "Selling belongings or investments"
+      - id: "f"
+        label: "A side job or gig work"
+      - id: "g"
+        label: "Community or government assistance"
+      - id: "h"
+        label: "I have no other resources"
+  - id: q19
+    prompt: "What is the biggest barrier keeping you from saving more for emergencies?"
+    type: single_choice
+    construct: biggest_barrier_keeping_from_saving
+    required: true
+    options:
+      - id: "a"
+        label: "My income is too low"
+      - id: "b"
+        label: "My expenses are too high"
+      - id: "c"
+        label: "Existing debt payments"
+      - id: "d"
+        label: "Unpredictable or irregular income"
+      - id: "e"
+        label: "I prioritize other financial goals"
+      - id: "f"
+        label: "I have no barrier — I save enough"
+      - id: "g"
+        label: "Other"
+  - id: q20
+    prompt: "Select the top 3 steps you have taken to be more financially prepared. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_steps_have
+    required: true
+    options:
+      - id: "a"
+        label: "Built or added to an emergency fund"
+      - id: "b"
+        label: "Set up automatic transfers to savings"
+      - id: "c"
+        label: "Created a household budget"
+      - id: "d"
+        label: "Paid down high-interest debt"
+      - id: "e"
+        label: "Bought or reviewed insurance coverage"
+      - id: "f"
+        label: "Kept some cash on hand"
+      - id: "g"
+        label: "Increased my income"
+      - id: "h"
+        label: "I have not taken any steps"
+  - id: q21
+    prompt: "Do you have a written or clear mental plan for how you would handle a financial emergency?"
+    type: single_choice
+    construct: have_written_clear_mental_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a written plan"
+      - id: "b"
+        label: "Yes, a clear mental plan"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "No plan"
+  - id: q22
+    prompt: "How would you describe the stability of your household income?"
+    type: single_choice
+    construct: would_describe_stability_household_incom
+    required: true
+    options:
+      - id: "a"
+        label: "Very stable and predictable"
+      - id: "b"
+        label: "Mostly stable"
+      - id: "c"
+        label: "Somewhat variable"
+      - id: "d"
+        label: "Very unpredictable"
+  - id: q23
+    prompt: "How much total non-mortgage debt does your household carry?"
+    type: single_choice
+    construct: much_total_non_mortgage_debt
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "Under $5,000"
+      - id: "c"
+        label: "$5,000 to $19,999"
+      - id: "d"
+        label: "$20,000 to $49,999"
+      - id: "e"
+        label: "$50,000 or more"
+      - id: "f"
+        label: "Not sure"
+  - id: q24
+    prompt: "How satisfied are you with your household's overall financial preparedness?"
+    type: single_choice
+    construct: satisfied_household_s_overall_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q25
+    prompt: "How likely are you to increase your emergency savings in the next 12 months?"
+    type: single_choice
+    construct: likely_increase_emergency_savings_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q26
+    prompt: "On a scale of 0 to 10, how prepared do you feel for a financial emergency overall? (0 = not at all prepared, 10 = fully prepared)"
+    type: single_choice
+    construct: scale_0_10_prepared_feel
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q27
+    prompt: "How much do you aim to have saved as a fully funded emergency fund? Please enter a number of dollars."
+    type: free_text
+    construct: much_aim_have_saved_as
+    required: true
+  - id: q28
+    prompt: "Please share anything about how you prepare for or worry about financial emergencies."
+    type: free_text
+    construct: please_share_anything_prepare_worry
+    required: true
+  - id: q29
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18-24"
+      - id: "b"
+        label: "25-34"
+      - id: "c"
+        label: "35-44"
+      - id: "d"
+        label: "45-54"
+      - id: "e"
+        label: "55-64"
+      - id: "f"
+        label: "65 or older"
+  - id: q30
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your total annual household income (before taxes)?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q34
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Homemaker or caregiver"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Unable to work"
+  - id: q35
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q36
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q37
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q38
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q39
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own with a mortgage"
+      - id: "b"
+        label: "Own outright"
+      - id: "c"
+        label: "Rent"
+      - id: "d"
+        label: "Other arrangement"
+  - id: q40
+    prompt: "How many children under 18 live in your household? Please enter a number."
+    type: free_text
+    construct: many_children_under_18_live
+    required: true

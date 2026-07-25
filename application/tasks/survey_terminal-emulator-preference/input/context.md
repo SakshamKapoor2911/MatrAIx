@@ -1,0 +1,7 @@
+# Terminal Emulator Preference
+
+How developers and technical users choose, customize, and use terminal emulator applications.
+
+## About this survey
+
+This survey profiles terminal emulator usage, beginning with a screener on frequency, tenure, primary operating system, and the respondent's main terminal along with the emulators they have used and want to try. It records how the terminal was chosen, hours spent in it, the shell and multiplexer used, fonts, ligatures, color schemes, configuration management, remote SSH usage, and the tasks the terminal is used for. Attitudes are captured through an agreement Likert battery on speed, customizability, minimalism, keyboard-driven workflow, and AI features, an importance matrix over terminal-selection criteria, frequency scales for tweaking configuration and encountering rendering issues, and a top-three ranking of decision factors. Later sections cover discovery channels, setup style, satisfaction with performance and customization, overall satisfaction, recommendation likelihood, switching intent, and an optional open comment. Question types include single-choice, multi-select, several Likert scales, an importance matrix, a ranking item, an NPS-style 0–10 scale, and numeric free-text. The survey concludes with a demographic block covering role, professional experience, employment, company size, industry, age, gender, race and ethnicity, education, U.S. region, and urbanicity.

@@ -1,0 +1,938 @@
+schemaVersion: "1.0"
+id: code_review_practices_v1
+title: "Code Review Practices Survey"
+description: "How developers and teams conduct code review, including the tools, turnaround, standards, and attitudes involved."
+questions:
+  - id: q0
+    prompt: "How often do you participate in code review (as author or reviewer)?"
+    type: single_choice
+    construct: often_participate_code_review_as
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "I am just starting to do code review"
+      - id: "e"
+        label: "I rarely participate in code review"
+  - id: q1
+    prompt: "How long have you been participating in code review?"
+    type: single_choice
+    construct: long_have_been_participating_code
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "What best describes your primary role?"
+    type: single_choice
+    construct: best_describes_primary_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "Engineering manager or lead"
+      - id: "e"
+        label: "DevOps or platform engineer"
+      - id: "f"
+        label: "I contribute code occasionally"
+  - id: q3
+    prompt: "What is your typical relationship to code review?"
+    type: single_choice
+    construct: typical_relationship_code_review
+    required: true
+    options:
+      - id: "a"
+        label: "I mostly review others' code"
+      - id: "b"
+        label: "My code is mostly reviewed by others"
+      - id: "c"
+        label: "I both review and get reviewed roughly equally"
+      - id: "d"
+        label: "I rarely take part in code review"
+  - id: q4
+    prompt: "On which platform do most of your code reviews happen?"
+    type: single_choice
+    construct: platform_most_code_reviews_happen
+    required: true
+    options:
+      - id: "a"
+        label: "GitHub pull requests"
+      - id: "b"
+        label: "GitLab merge requests"
+      - id: "c"
+        label: "Bitbucket pull requests"
+      - id: "d"
+        label: "Gerrit"
+      - id: "e"
+        label: "Azure DevOps"
+      - id: "f"
+        label: "Other"
+  - id: q5
+    prompt: "Which code review platforms have you used? (Select all that apply)"
+    type: multi_choice
+    construct: code_review_platforms_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "GitHub"
+      - id: "b"
+        label: "GitLab"
+      - id: "c"
+        label: "Bitbucket"
+      - id: "d"
+        label: "Gerrit"
+      - id: "e"
+        label: "Azure DevOps"
+      - id: "f"
+        label: "Review Board"
+      - id: "g"
+        label: "Phabricator"
+      - id: "h"
+        label: "None"
+  - id: q6
+    prompt: "Which supporting tools does your review process use? (Select all that apply)"
+    type: multi_choice
+    construct: supporting_tools_does_review_process
+    required: true
+    options:
+      - id: "a"
+        label: "Linters (ESLint, Ruff, etc.)"
+      - id: "b"
+        label: "Static analysis (SonarQube, CodeQL)"
+      - id: "c"
+        label: "Formatters (Prettier, Black)"
+      - id: "d"
+        label: "Danger or policy bots"
+      - id: "e"
+        label: "AI review assistants (CodeRabbit, Copilot, etc.)"
+      - id: "f"
+        label: "Coverage reporting"
+      - id: "g"
+        label: "None"
+  - id: q7
+    prompt: "Which CI checks are required before merging in your team? (Select all that apply)"
+    type: multi_choice
+    construct: ci_checks_required_before_merging
+    required: true
+    options:
+      - id: "a"
+        label: "Automated tests pass"
+      - id: "b"
+        label: "Linting passes"
+      - id: "c"
+        label: "Type checking passes"
+      - id: "d"
+        label: "Coverage threshold met"
+      - id: "e"
+        label: "Security scan passes"
+      - id: "f"
+        label: "Successful build"
+      - id: "g"
+        label: "None required"
+  - id: q8
+    prompt: "What do you focus on most when reviewing code? (Select all that apply)"
+    type: multi_choice
+    construct: focus_most_when_reviewing_code
+    required: true
+    options:
+      - id: "a"
+        label: "Correctness and logic"
+      - id: "b"
+        label: "Readability and style"
+      - id: "c"
+        label: "Security"
+      - id: "d"
+        label: "Performance"
+      - id: "e"
+        label: "Test coverage"
+      - id: "f"
+        label: "Architecture and design"
+      - id: "g"
+        label: "Documentation"
+  - id: q9
+    prompt: "How large is a typical pull request in your team?"
+    type: single_choice
+    construct: large_typical_pull_request_team
+    required: true
+    options:
+      - id: "a"
+        label: "Very small (under 50 lines)"
+      - id: "b"
+        label: "Small (50 to 200 lines)"
+      - id: "c"
+        label: "Medium (200 to 500 lines)"
+      - id: "d"
+        label: "Large (500 to 1,000 lines)"
+      - id: "e"
+        label: "Very large (over 1,000 lines)"
+  - id: q10
+    prompt: "What is the typical turnaround time for a first review in your team?"
+    type: single_choice
+    construct: typical_turnaround_time_first_review
+    required: true
+    options:
+      - id: "a"
+        label: "Within an hour"
+      - id: "b"
+        label: "Within a few hours"
+      - id: "c"
+        label: "Within a day"
+      - id: "d"
+        label: "One to three days"
+      - id: "e"
+        label: "More than three days"
+  - id: q11
+    prompt: "How many reviewers are typically required to approve a change?"
+    type: single_choice
+    construct: many_reviewers_typically_required_approv
+    required: true
+    options:
+      - id: "a"
+        label: "None required"
+      - id: "b"
+        label: "One reviewer"
+      - id: "c"
+        label: "Two reviewers"
+      - id: "d"
+        label: "Three or more reviewers"
+      - id: "e"
+        label: "It varies by change"
+  - id: q12
+    prompt: "Does your team use pull-request templates or checklists?"
+    type: single_choice
+    construct: does_team_use_pull_request
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, always"
+      - id: "b"
+        label: "Yes, sometimes"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q13
+    prompt: "Does your team use AI-assisted code review?"
+    type: single_choice
+    construct: does_team_use_ai_assisted
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but we're considering it"
+      - id: "d"
+        label: "No"
+  - id: q14
+    prompt: "How are review comments typically resolved?"
+    type: single_choice
+    construct: review_comments_typically_resolved
+    required: true
+    options:
+      - id: "a"
+        label: "Author addresses each comment before merge"
+      - id: "b"
+        label: "Author addresses major comments, defers minor ones"
+      - id: "c"
+        label: "Comments are discussed synchronously"
+      - id: "d"
+        label: "Comments are often left unresolved"
+      - id: "e"
+        label: "It varies widely"
+  - id: q15
+    prompt: "About how many pull requests do you review in a typical week? Please enter a number."
+    type: free_text
+    construct: many_pull_requests_review_typical
+    required: true
+  - id: q16
+    prompt: "Roughly how many hours pass before your pull requests get a first review? Please enter a number."
+    type: free_text
+    construct: roughly_many_hours_pass_before
+    required: true
+  - id: q17
+    prompt: "How did you learn to do code review? (Select all that apply)"
+    type: multi_choice
+    construct: did_learn_code_review_select
+    required: true
+    options:
+      - id: "a"
+        label: "On the job"
+      - id: "b"
+        label: "Online courses or documentation"
+      - id: "c"
+        label: "A course or bootcamp"
+      - id: "d"
+        label: "School or university"
+      - id: "e"
+        label: "A colleague or mentor"
+      - id: "f"
+        label: "Trial and error"
+  - id: q18
+    prompt: "How would you rate your proficiency at reviewing code?"
+    type: single_choice
+    construct: would_rate_proficiency_reviewing_code
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert"
+  - id: q19
+    prompt: "In my team, how much do you agree: code review improves overall code quality."
+    type: single_choice
+    construct: my_team_much_agree_code
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "In my team, how much do you agree: code review reliably catches bugs before they ship."
+    type: single_choice
+    construct: my_team_much_agree_code
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "In my team, how much do you agree: code review spreads knowledge across the team."
+    type: single_choice
+    construct: my_team_much_agree_code
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "In my team, how much do you agree: code reviews are completed promptly."
+    type: single_choice
+    construct: my_team_much_agree_code
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "In my team, how much do you agree: review feedback is constructive and respectful."
+    type: single_choice
+    construct: my_team_much_agree_review
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "In my team, how much do you agree: code review slows delivery more than it should."
+    type: single_choice
+    construct: my_team_much_agree_code
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "In my team, how much do you agree: we have clear code-review standards and guidelines."
+    type: single_choice
+    construct: my_team_much_agree_we
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q26
+    prompt: "In a good code review, how important is catching bugs?"
+    type: single_choice
+    construct: good_code_review_important_catching
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "In a good code review, how important is checking readability?"
+    type: single_choice
+    construct: good_code_review_important_checking
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "In a good code review, how important is verifying test coverage?"
+    type: single_choice
+    construct: good_code_review_important_verifying
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "In a good code review, how important is security review?"
+    type: single_choice
+    construct: good_code_review_important_security
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "In a good code review, how important is mentoring and knowledge sharing?"
+    type: single_choice
+    construct: good_code_review_important_mentoring
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q31
+    prompt: "In a good code review, how important is fast turnaround?"
+    type: single_choice
+    construct: good_code_review_important_fast
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q32
+    prompt: "In a good code review, how important is enforcing consistent style?"
+    type: single_choice
+    construct: good_code_review_important_enforcing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q33
+    prompt: "How often does waiting on code review delay your work?"
+    type: single_choice
+    construct: often_does_waiting_code_review
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q34
+    prompt: "How much do you agree: AI-assisted code review tools add real value."
+    type: single_choice
+    construct: much_agree_ai_assisted_code
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q35
+    prompt: "How much do you agree: large pull requests get lower-quality reviews."
+    type: single_choice
+    construct: much_agree_large_pull_requests
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q36
+    prompt: "How much do you agree: code review is a good use of my time."
+    type: single_choice
+    construct: much_agree_code_review_good
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q37
+    prompt: "Which are your top 3 things that make a code review effective? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_things_that_make
+    required: true
+    options:
+      - id: "a"
+        label: "Small, focused changes"
+      - id: "b"
+        label: "Fast turnaround"
+      - id: "c"
+        label: "Clear description and context"
+      - id: "d"
+        label: "Constructive, specific feedback"
+      - id: "e"
+        label: "Automated checks handling style"
+      - id: "f"
+        label: "Reviewer domain knowledge"
+      - id: "g"
+        label: "Clear standards and guidelines"
+      - id: "h"
+        label: "Good tooling"
+  - id: q38
+    prompt: "Which code-review pain points do you experience? (Select all that apply)"
+    type: multi_choice
+    construct: code_review_pain_points_experience
+    required: true
+    options:
+      - id: "a"
+        label: "Slow turnaround"
+      - id: "b"
+        label: "Pull requests too large"
+      - id: "c"
+        label: "Nitpicky or unhelpful comments"
+      - id: "d"
+        label: "Unclear standards"
+      - id: "e"
+        label: "Reviews used as gatekeeping"
+      - id: "f"
+        label: "Not enough reviewers available"
+      - id: "g"
+        label: "No major pain points"
+  - id: q39
+    prompt: "How satisfied are you with your team's code-review process?"
+    type: single_choice
+    construct: satisfied_team_s_code_review
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q40
+    prompt: "How satisfied are you with code-review turnaround time in your team?"
+    type: single_choice
+    construct: satisfied_code_review_turnaround_time
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q41
+    prompt: "How likely are you to recommend your team's code-review process to another team? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_team_s_code
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q42
+    prompt: "How likely is your team to adopt AI-assisted code review within the next year?"
+    type: single_choice
+    construct: likely_team_adopt_ai_assisted
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q43
+    prompt: "How likely is your team to change its code-review process within the next year?"
+    type: single_choice
+    construct: likely_team_change_its_code
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q44
+    prompt: "What is one thing you would improve about your code-review process? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_code
+    required: false
+  - id: q45
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "DevOps or platform engineer"
+      - id: "e"
+        label: "QA or test engineer"
+      - id: "f"
+        label: "Engineering manager or lead"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Other"
+  - id: q46
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q47
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q48
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q49
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q50
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q51
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q52
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q53
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q54
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q55
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

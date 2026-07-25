@@ -1,0 +1,838 @@
+schemaVersion: "1.0"
+id: business_credit_cards_v1
+title: "Small Business Credit Card Survey"
+description: "How small business owners choose, use, and manage business credit cards for rewards and expense separation."
+questions:
+  - id: q0
+    prompt: "Do you own or help run a small business?"
+    type: single_choice
+    construct: own_help_run_small_business
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I am the sole owner"
+      - id: "b"
+        label: "Yes, I co-own it"
+      - id: "c"
+        label: "Yes, I manage finances but don't own it"
+      - id: "d"
+        label: "I'm a freelancer or independent contractor"
+      - id: "e"
+        label: "No, I don't run a business"
+  - id: q1
+    prompt: "Do you currently use a credit card for business expenses?"
+    type: single_choice
+    construct: currently_use_credit_card_business
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a dedicated business credit card"
+      - id: "b"
+        label: "Yes, but I use a personal card for business"
+      - id: "c"
+        label: "Yes, a mix of business and personal cards"
+      - id: "d"
+        label: "No, but I plan to get one"
+      - id: "e"
+        label: "No, I don't use credit cards for business"
+  - id: q2
+    prompt: "How long have you used a business credit card?"
+    type: single_choice
+    construct: long_have_used_business_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "I don't use one"
+  - id: q3
+    prompt: "How many business credit cards does your business currently have?"
+    type: single_choice
+    construct: many_business_credit_cards_does
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2 to 3"
+      - id: "d"
+        label: "4 to 5"
+      - id: "e"
+        label: "6 or more"
+  - id: q4
+    prompt: "Which business credit card issuers do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: business_credit_card_issuers_currently
+    required: true
+    options:
+      - id: "a"
+        label: "Chase (Ink Business)"
+      - id: "b"
+        label: "American Express (Business)"
+      - id: "c"
+        label: "Capital One (Spark Business)"
+      - id: "d"
+        label: "Bank of America (Business Advantage)"
+      - id: "e"
+        label: "U.S. Bank"
+      - id: "f"
+        label: "Wells Fargo"
+      - id: "g"
+        label: "Brex"
+      - id: "h"
+        label: "Ramp"
+      - id: "i"
+        label: "A local bank or credit union"
+      - id: "j"
+        label: "None"
+  - id: q5
+    prompt: "Which card do you use most often for business spending?"
+    type: single_choice
+    construct: card_use_most_often_business
+    required: true
+    options:
+      - id: "a"
+        label: "Chase Ink Business"
+      - id: "b"
+        label: "American Express Business"
+      - id: "c"
+        label: "Capital One Spark"
+      - id: "d"
+        label: "Bank of America Business"
+      - id: "e"
+        label: "Brex or Ramp"
+      - id: "f"
+        label: "A personal credit card"
+      - id: "g"
+        label: "Other"
+      - id: "h"
+        label: "I don't use one"
+  - id: q6
+    prompt: "What do you primarily use your business credit card for? (Select all that apply)"
+    type: multi_choice
+    construct: primarily_use_business_credit_card
+    required: true
+    options:
+      - id: "a"
+        label: "Office supplies and equipment"
+      - id: "b"
+        label: "Software and subscriptions"
+      - id: "c"
+        label: "Advertising and marketing"
+      - id: "d"
+        label: "Travel and lodging"
+      - id: "e"
+        label: "Inventory or materials"
+      - id: "f"
+        label: "Fuel and vehicle costs"
+      - id: "g"
+        label: "Utilities and phone"
+      - id: "h"
+        label: "Contractor or vendor payments"
+      - id: "i"
+        label: "Meals and entertainment"
+  - id: q7
+    prompt: "Which rewards type do you value most on a business card?"
+    type: single_choice
+    construct: rewards_type_value_most_business
+    required: true
+    options:
+      - id: "a"
+        label: "Cash back"
+      - id: "b"
+        label: "Travel points or miles"
+      - id: "c"
+        label: "Category bonuses (office, advertising, etc.)"
+      - id: "d"
+        label: "Statement credits"
+      - id: "e"
+        label: "0% introductory APR"
+      - id: "f"
+        label: "I don't focus on rewards"
+  - id: q8
+    prompt: "About how much does your business charge to credit cards in a typical month, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_does_business_charge_credit
+    required: true
+  - id: q9
+    prompt: "About how much did you earn in card rewards or cash back last year, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_did_earn_card_rewards
+    required: true
+  - id: q10
+    prompt: "How do you keep business and personal expenses separate? (Select all that apply)"
+    type: multi_choice
+    construct: keep_business_personal_expenses_separate
+    required: true
+    options:
+      - id: "a"
+        label: "A dedicated business credit card"
+      - id: "b"
+        label: "A separate business bank account"
+      - id: "c"
+        label: "Accounting software categorization"
+      - id: "d"
+        label: "Separate receipts and records"
+      - id: "e"
+        label: "An employee or bookkeeper handles it"
+      - id: "f"
+        label: "I don't fully separate them"
+  - id: q11
+    prompt: "Which accounting or expense tools do you use with your business card? (Select all that apply)"
+    type: multi_choice
+    construct: accounting_expense_tools_use_business
+    required: true
+    options:
+      - id: "a"
+        label: "QuickBooks"
+      - id: "b"
+        label: "Xero"
+      - id: "c"
+        label: "FreshBooks"
+      - id: "d"
+        label: "Wave"
+      - id: "e"
+        label: "Expensify"
+      - id: "f"
+        label: "A spreadsheet"
+      - id: "g"
+        label: "My card issuer's built-in tools"
+      - id: "h"
+        label: "None"
+  - id: q12
+    prompt: "Do you issue employee or authorized-user cards on your business account?"
+    type: single_choice
+    construct: issue_employee_authorized_user_cards
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, to several employees"
+      - id: "b"
+        label: "Yes, to one or two"
+      - id: "c"
+        label: "No, but I plan to"
+      - id: "d"
+        label: "No, and I don't plan to"
+      - id: "e"
+        label: "I have no employees"
+  - id: q13
+    prompt: "How do you typically pay your business card balance?"
+    type: single_choice
+    construct: typically_pay_business_card_balance
+    required: true
+    options:
+      - id: "a"
+        label: "In full every month"
+      - id: "b"
+        label: "More than the minimum, but carry a balance"
+      - id: "c"
+        label: "The minimum payment"
+      - id: "d"
+        label: "It varies month to month"
+  - id: q14
+    prompt: "How much do you agree: Keeping business expenses on a separate card makes bookkeeping easier."
+    type: single_choice
+    construct: much_agree_keeping_business_expenses
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: The rewards on my business card provide meaningful value."
+    type: single_choice
+    construct: much_agree_rewards_my_business
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: My business card's annual fee is worth what I get in return."
+    type: single_choice
+    construct: much_agree_my_business_card
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: I rely on my business card's credit line for cash flow."
+    type: single_choice
+    construct: much_agree_i_rely_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Managing my business card spending is easy."
+    type: single_choice
+    construct: much_agree_managing_my_business
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: I worry about mixing business and personal charges."
+    type: single_choice
+    construct: much_agree_i_worry_mixing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "When choosing a business card, how important is each factor: the rewards rate."
+    type: single_choice
+    construct: when_choosing_business_card_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "When choosing a business card, how important is each factor: no or low annual fee."
+    type: single_choice
+    construct: when_choosing_business_card_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When choosing a business card, how important is each factor: the size of the credit limit."
+    type: single_choice
+    construct: when_choosing_business_card_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing a business card, how important is each factor: expense management and reporting tools."
+    type: single_choice
+    construct: when_choosing_business_card_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a business card, how important is each factor: free employee cards."
+    type: single_choice
+    construct: when_choosing_business_card_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a business card, how important is each factor: the introductory bonus offer."
+    type: single_choice
+    construct: when_choosing_business_card_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How often do you redeem the rewards you earn on your business card?"
+    type: single_choice
+    construct: often_redeem_rewards_earn_business
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q27
+    prompt: "How often do you carry a balance on your business card from month to month?"
+    type: single_choice
+    construct: often_carry_balance_business_card
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q28
+    prompt: "Does your business card reporting to a business credit bureau (Dun & Bradstreet, etc.) matter to you?"
+    type: single_choice
+    construct: does_business_card_reporting_business
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, building business credit is a priority"
+      - id: "b"
+        label: "Somewhat"
+      - id: "c"
+        label: "No, it doesn't matter to me"
+      - id: "d"
+        label: "I'm not sure how it works"
+  - id: q29
+    prompt: "Which are your top 3 reasons for using a business credit card? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_reasons_using_business
+    required: true
+    options:
+      - id: "a"
+        label: "Earning rewards"
+      - id: "b"
+        label: "Separating business and personal spending"
+      - id: "c"
+        label: "Managing cash flow"
+      - id: "d"
+        label: "Simplifying bookkeeping and taxes"
+      - id: "e"
+        label: "Building business credit"
+      - id: "f"
+        label: "Employee spending control"
+      - id: "g"
+        label: "Purchase protections"
+      - id: "h"
+        label: "Convenience"
+  - id: q30
+    prompt: "Which challenges have you faced with business credit cards? (Select all that apply)"
+    type: multi_choice
+    construct: challenges_have_faced_business_credit
+    required: true
+    options:
+      - id: "a"
+        label: "High interest rates"
+      - id: "b"
+        label: "Annual fees"
+      - id: "c"
+        label: "Low credit limits"
+      - id: "d"
+        label: "Confusing rewards programs"
+      - id: "e"
+        label: "Difficulty qualifying"
+      - id: "f"
+        label: "Poor customer service"
+      - id: "g"
+        label: "Tracking many charges"
+      - id: "h"
+        label: "I've faced no major challenges"
+  - id: q31
+    prompt: "How satisfied are you with your primary business credit card?"
+    type: single_choice
+    construct: satisfied_primary_business_credit_card
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How satisfied are you with your card's rewards program?"
+    type: single_choice
+    construct: satisfied_card_s_rewards_program
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How satisfied are you with your card's expense management tools?"
+    type: single_choice
+    construct: satisfied_card_s_expense_management
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I don't use them"
+  - id: q34
+    prompt: "How likely are you to recommend your business card to another business owner? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_business_card_another
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "How likely are you to apply for a new business card in the next year?"
+    type: single_choice
+    construct: likely_apply_new_business_card
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q36
+    prompt: "How likely are you to switch your primary business card issuer in the next year?"
+    type: single_choice
+    construct: likely_switch_primary_business_card
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q37
+    prompt: "What would make a business credit card ideal for your business? (Optional short answer)"
+    type: free_text
+    construct: would_make_business_credit_card
+    required: false
+  - id: q38
+    prompt: "What type of business do you run?"
+    type: single_choice
+    construct: type_business_run
+    required: true
+    options:
+      - id: "a"
+        label: "Retail or e-commerce"
+      - id: "b"
+        label: "Professional services (consulting, legal, accounting)"
+      - id: "c"
+        label: "Food and hospitality"
+      - id: "d"
+        label: "Construction or trades"
+      - id: "e"
+        label: "Health or personal care"
+      - id: "f"
+        label: "Creative or media"
+      - id: "g"
+        label: "Technology"
+      - id: "h"
+        label: "Other"
+  - id: q39
+    prompt: "How many employees does your business have?"
+    type: single_choice
+    construct: many_employees_does_business_have
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 4"
+      - id: "c"
+        label: "5 to 9"
+      - id: "d"
+        label: "10 to 24"
+      - id: "e"
+        label: "25 to 99"
+      - id: "f"
+        label: "100 or more"
+  - id: q40
+    prompt: "What is your business's approximate annual revenue?"
+    type: single_choice
+    construct: business_s_approximate_annual_revenue
+    required: true
+    options:
+      - id: "a"
+        label: "Under $50,000"
+      - id: "b"
+        label: "$50,000 to $249,999"
+      - id: "c"
+        label: "$250,000 to $999,999"
+      - id: "d"
+        label: "$1 million to $4.9 million"
+      - id: "e"
+        label: "$5 million or more"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q42
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $50,000"
+      - id: "b"
+        label: "$50,000 to $99,999"
+      - id: "c"
+        label: "$100,000 to $149,999"
+      - id: "d"
+        label: "$150,000 to $249,999"
+      - id: "e"
+        label: "$250,000 or more"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q46
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "Which region of the United States is your business located in?"
+    type: single_choice
+    construct: region_united_states_business_located
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q48
+    prompt: "How would you describe the area where your business operates?"
+    type: single_choice
+    construct: would_describe_area_where_business
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

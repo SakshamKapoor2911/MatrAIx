@@ -1,0 +1,898 @@
+schemaVersion: "1.0"
+id: prompt_engineering_practices_v1
+title: "Prompt Engineering Practices Survey"
+description: "How people write, test, and refine prompts for large language models, including techniques, tools, and attitudes."
+questions:
+  - id: q0
+    prompt: "How often do you write prompts for large language models (LLMs)?"
+    type: single_choice
+    construct: often_write_prompts_large_language
+    required: true
+    options:
+      - id: "a"
+        label: "Many times a day"
+      - id: "b"
+        label: "A few times a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Occasionally"
+      - id: "e"
+        label: "Rarely"
+      - id: "f"
+        label: "I don't use LLMs"
+  - id: q1
+    prompt: "How long have you been working with LLM prompts?"
+    type: single_choice
+    construct: long_have_been_working_llm
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 2 years"
+      - id: "d"
+        label: "3 to 4 years"
+      - id: "e"
+        label: "More than 4 years"
+  - id: q2
+    prompt: "In what context do you primarily use LLMs?"
+    type: single_choice
+    construct: context_primarily_use_llms
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly for work"
+      - id: "b"
+        label: "Mostly for personal projects"
+      - id: "c"
+        label: "Equally for work and personal use"
+      - id: "d"
+        label: "Mostly for study or learning"
+  - id: q3
+    prompt: "Which LLM or assistant do you use most often for prompting?"
+    type: single_choice
+    construct: llm_assistant_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "ChatGPT (OpenAI)"
+      - id: "b"
+        label: "Claude (Anthropic)"
+      - id: "c"
+        label: "Gemini (Google)"
+      - id: "d"
+        label: "GitHub Copilot"
+      - id: "e"
+        label: "Microsoft Copilot"
+      - id: "f"
+        label: "Llama or another open model"
+      - id: "g"
+        label: "Perplexity"
+      - id: "h"
+        label: "Other"
+  - id: q4
+    prompt: "Which LLMs or assistants have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: llms_assistants_have_used_past
+    required: true
+    options:
+      - id: "a"
+        label: "ChatGPT (OpenAI)"
+      - id: "b"
+        label: "Claude (Anthropic)"
+      - id: "c"
+        label: "Gemini (Google)"
+      - id: "d"
+        label: "GitHub Copilot"
+      - id: "e"
+        label: "Microsoft Copilot"
+      - id: "f"
+        label: "Perplexity"
+      - id: "g"
+        label: "Llama models"
+      - id: "h"
+        label: "Mistral models"
+      - id: "i"
+        label: "Cursor"
+      - id: "j"
+        label: "A locally run model"
+  - id: q5
+    prompt: "For which tasks do you use LLM prompting? (Select all that apply)"
+    type: multi_choice
+    construct: tasks_use_llm_prompting_select
+    required: true
+    options:
+      - id: "a"
+        label: "Writing or editing code"
+      - id: "b"
+        label: "Writing or editing text"
+      - id: "c"
+        label: "Summarization"
+      - id: "d"
+        label: "Brainstorming and ideation"
+      - id: "e"
+        label: "Data extraction or transformation"
+      - id: "f"
+        label: "Translation"
+      - id: "g"
+        label: "Research and Q&A"
+      - id: "h"
+        label: "Building chatbots or agents"
+      - id: "i"
+        label: "Image-generation prompts"
+  - id: q6
+    prompt: "Which prompting techniques do you regularly use? (Select all that apply)"
+    type: multi_choice
+    construct: prompting_techniques_regularly_use_selec
+    required: true
+    options:
+      - id: "a"
+        label: "Few-shot examples"
+      - id: "b"
+        label: "Chain-of-thought or step-by-step reasoning"
+      - id: "c"
+        label: "Role or persona assignment"
+      - id: "d"
+        label: "System prompts or custom instructions"
+      - id: "e"
+        label: "Explicit output-format constraints"
+      - id: "f"
+        label: "Delimiters or structured input"
+      - id: "g"
+        label: "Retrieval or context injection (RAG)"
+      - id: "h"
+        label: "Self-critique or reflection"
+      - id: "i"
+        label: "I don't use specific techniques"
+  - id: q7
+    prompt: "Which tools do you use to write, test, or manage prompts? (Select all that apply)"
+    type: multi_choice
+    construct: tools_use_write_test_manage
+    required: true
+    options:
+      - id: "a"
+        label: "OpenAI Playground"
+      - id: "b"
+        label: "Anthropic Console"
+      - id: "c"
+        label: "LangChain"
+      - id: "d"
+        label: "LlamaIndex"
+      - id: "e"
+        label: "PromptLayer"
+      - id: "f"
+        label: "Helicone"
+      - id: "g"
+        label: "LangSmith"
+      - id: "h"
+        label: "DSPy"
+      - id: "i"
+        label: "Custom scripts or notebooks"
+      - id: "j"
+        label: "None; I use the chat interface directly"
+  - id: q8
+    prompt: "When a prompt isn't working, how do you typically iterate on it? (Select all that apply)"
+    type: multi_choice
+    construct: when_prompt_isn_t_working
+    required: true
+    options:
+      - id: "a"
+        label: "Rephrase the instruction"
+      - id: "b"
+        label: "Add examples"
+      - id: "c"
+        label: "Add explicit constraints"
+      - id: "d"
+        label: "Break the task into steps"
+      - id: "e"
+        label: "Switch to a different model"
+      - id: "f"
+        label: "Adjust temperature or other parameters"
+      - id: "g"
+        label: "Add or edit a system prompt"
+  - id: q9
+    prompt: "How many iterations does it typically take you to get a satisfactory result?"
+    type: single_choice
+    construct: many_iterations_does_it_typically
+    required: true
+    options:
+      - id: "a"
+        label: "Usually one"
+      - id: "b"
+        label: "2 to 3"
+      - id: "c"
+        label: "4 to 6"
+      - id: "d"
+        label: "7 or more"
+      - id: "e"
+        label: "It varies widely"
+  - id: q10
+    prompt: "About how many prompts do you write in a typical day? Please enter a number."
+    type: free_text
+    construct: many_prompts_write_typical_day
+    required: true
+  - id: q11
+    prompt: "About what percentage of your prompts produce a good result on the first try? Please enter a number from 0 to 100."
+    type: free_text
+    construct: percentage_prompts_produce_good_result
+    required: true
+  - id: q12
+    prompt: "Do you save or reuse prompt templates?"
+    type: single_choice
+    construct: save_reuse_prompt_templates
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I maintain an organized library"
+      - id: "b"
+        label: "Yes, I save a few informally"
+      - id: "c"
+        label: "No, I write each prompt from scratch"
+      - id: "d"
+        label: "I'm not sure what a prompt template is"
+  - id: q13
+    prompt: "Do you use system prompts or custom instructions?"
+    type: single_choice
+    construct: use_system_prompts_custom_instructions
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, routinely"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q14
+    prompt: "How do you evaluate whether a prompt is working well?"
+    type: single_choice
+    construct: evaluate_whether_prompt_working_well
+    required: true
+    options:
+      - id: "a"
+        label: "Manual eyeballing of outputs"
+      - id: "b"
+        label: "Systematic test cases"
+      - id: "c"
+        label: "Automated evaluation or scoring"
+      - id: "d"
+        label: "Quantitative metrics"
+      - id: "e"
+        label: "I don't formally evaluate prompts"
+  - id: q15
+    prompt: "Have you built any LLM-powered applications or agents?"
+    type: single_choice
+    construct: have_built_any_llm_powered
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, in production"
+      - id: "b"
+        label: "Yes, prototypes or side projects"
+      - id: "c"
+        label: "No, but I plan to"
+      - id: "d"
+        label: "No, and I have no plans to"
+  - id: q16
+    prompt: "How much do you agree: Prompt engineering is a skill worth investing in."
+    type: single_choice
+    construct: much_agree_prompt_engineering_skill
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: Well-crafted prompts substantially improve output quality."
+    type: single_choice
+    construct: much_agree_well_crafted_prompts
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Prompt engineering will matter less as models improve."
+    type: single_choice
+    construct: much_agree_prompt_engineering_will
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: I can usually predict how a model will respond to a prompt."
+    type: single_choice
+    construct: much_agree_i_can_usually
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: LLM outputs are reliable enough for my work."
+    type: single_choice
+    construct: much_agree_llm_outputs_reliable
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: I worry about LLMs producing incorrect or fabricated information."
+    type: single_choice
+    construct: much_agree_i_worry_llms
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "When crafting a prompt, how important is providing clear context and background?"
+    type: single_choice
+    construct: when_crafting_prompt_important_providing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When crafting a prompt, how important is specifying the desired output format?"
+    type: single_choice
+    construct: when_crafting_prompt_important_specifyin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When crafting a prompt, how important is including examples?"
+    type: single_choice
+    construct: when_crafting_prompt_important_including
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When crafting a prompt, how important is breaking the task into steps?"
+    type: single_choice
+    construct: when_crafting_prompt_important_breaking
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When crafting a prompt, how important is assigning a role or persona?"
+    type: single_choice
+    construct: when_crafting_prompt_important_assigning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When crafting a prompt, how important is iterating and refining the wording?"
+    type: single_choice
+    construct: when_crafting_prompt_important_iterating
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "How often do you use chain-of-thought or step-by-step prompting?"
+    type: single_choice
+    construct: often_use_chain_thought_step
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q29
+    prompt: "How often do the LLM outputs you receive require significant editing before use?"
+    type: single_choice
+    construct: often_llm_outputs_receive_require
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q30
+    prompt: "Which are the top 3 prompting techniques you find most effective? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_prompting_techniques_find
+    required: true
+    options:
+      - id: "a"
+        label: "Few-shot examples"
+      - id: "b"
+        label: "Chain-of-thought reasoning"
+      - id: "c"
+        label: "Role or persona assignment"
+      - id: "d"
+        label: "System prompts"
+      - id: "e"
+        label: "Output-format constraints"
+      - id: "f"
+        label: "Retrieval or context injection"
+      - id: "g"
+        label: "Self-critique or reflection"
+      - id: "h"
+        label: "Iterative refinement"
+  - id: q31
+    prompt: "How satisfied are you with the output quality of your primary LLM?"
+    type: single_choice
+    construct: satisfied_output_quality_primary_llm
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How satisfied are you with the tools you use to write and manage prompts?"
+    type: single_choice
+    construct: satisfied_tools_use_write_manage
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How confident are you in your prompt-engineering skills?"
+    type: single_choice
+    construct: confident_prompt_engineering_skills
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q34
+    prompt: "Overall, how satisfied are you with your experience prompting LLMs?"
+    type: single_choice
+    construct: overall_satisfied_experience_prompting_l
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "How likely are you to recommend your primary LLM to a colleague? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_llm_colleague
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q36
+    prompt: "How likely are you to invest more time learning prompt engineering over the next year?"
+    type: single_choice
+    construct: likely_invest_more_time_learning
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q37
+    prompt: "How likely are you to adopt a dedicated prompt-management tool in the next year?"
+    type: single_choice
+    construct: likely_adopt_dedicated_prompt_management
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "How do you keep up with prompt-engineering best practices? (Select all that apply)"
+    type: multi_choice
+    construct: keep_up_prompt_engineering_best
+    required: true
+    options:
+      - id: "a"
+        label: "Official model documentation"
+      - id: "b"
+        label: "Blogs and newsletters"
+      - id: "c"
+        label: "Social media"
+      - id: "d"
+        label: "Online courses"
+      - id: "e"
+        label: "Communities and forums"
+      - id: "f"
+        label: "Research papers"
+      - id: "g"
+        label: "Trial and error"
+  - id: q39
+    prompt: "What is your biggest challenge when engineering prompts? (Optional short answer)"
+    type: free_text
+    construct: biggest_challenge_when_engineering_promp
+    required: false
+  - id: q40
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Software developer or engineer"
+      - id: "b"
+        label: "Data scientist or machine-learning engineer"
+      - id: "c"
+        label: "Product or project manager"
+      - id: "d"
+        label: "Researcher"
+      - id: "e"
+        label: "Writer or content creator"
+      - id: "f"
+        label: "Analyst"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Other"
+  - id: q41
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q42
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q43
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q44
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q45
+    prompt: "How would you rate your programming ability?"
+    type: single_choice
+    construct: would_rate_programming_ability
+    required: true
+    options:
+      - id: "a"
+        label: "I don't program"
+      - id: "b"
+        label: "Beginner"
+      - id: "c"
+        label: "Intermediate"
+      - id: "d"
+        label: "Advanced"
+      - id: "e"
+        label: "Expert"
+  - id: q46
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q47
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q50
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q51
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

@@ -1,0 +1,682 @@
+schemaVersion: "1.0"
+id: medicare_navigation_v1
+title: "Medicare Navigation Survey"
+description: "How people understand, compare, and make decisions about Medicare coverage."
+questions:
+  - id: q0
+    prompt: "Which best describes your relationship to Medicare?"
+    type: single_choice
+    construct: best_describes_relationship_medicare
+    required: true
+    options:
+      - id: "a"
+        label: "I am enrolled in Medicare"
+      - id: "b"
+        label: "I will be eligible within a few years"
+      - id: "c"
+        label: "I help a family member with their Medicare"
+      - id: "d"
+        label: "I am not eligible and do not help anyone"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q1
+    prompt: "If you have Medicare, which type of coverage do you have?"
+    type: single_choice
+    construct: if_have_medicare_type_coverage
+    required: true
+    options:
+      - id: "a"
+        label: "Original Medicare (Parts A and B)"
+      - id: "b"
+        label: "Original Medicare plus a Medigap (supplement) plan"
+      - id: "c"
+        label: "A Medicare Advantage plan (Part C)"
+      - id: "d"
+        label: "I'm not sure"
+      - id: "e"
+        label: "Not applicable"
+  - id: q2
+    prompt: "Do you have Medicare prescription drug coverage (Part D)?"
+    type: single_choice
+    construct: have_medicare_prescription_drug_coverage
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, as part of a Medicare Advantage plan"
+      - id: "b"
+        label: "Yes, as a standalone Part D plan"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+      - id: "e"
+        label: "Not applicable"
+  - id: q3
+    prompt: "Which resources have you used to understand or choose Medicare coverage? (Select all that apply)"
+    type: multi_choice
+    construct: resources_have_used_understand_choose
+    required: true
+    options:
+      - id: "a"
+        label: "The official Medicare.gov website or Plan Finder"
+      - id: "b"
+        label: "The 1-800-MEDICARE phone line"
+      - id: "c"
+        label: "A State Health Insurance Assistance Program (SHIP) counselor"
+      - id: "d"
+        label: "An insurance broker or agent"
+      - id: "e"
+        label: "Advice from family or friends"
+      - id: "f"
+        label: "Printed materials like the Medicare & You handbook"
+      - id: "g"
+        label: "Seminars or informational meetings"
+  - id: q4
+    prompt: "Which parts of navigating Medicare have you found confusing? (Select all that apply)"
+    type: multi_choice
+    construct: parts_navigating_medicare_have_found
+    required: true
+    options:
+      - id: "a"
+        label: "The difference between Original Medicare and Medicare Advantage"
+      - id: "b"
+        label: "Understanding Medigap plans"
+      - id: "c"
+        label: "Choosing a Part D drug plan"
+      - id: "d"
+        label: "Knowing what is and is not covered"
+      - id: "e"
+        label: "Enrollment deadlines and penalties"
+      - id: "f"
+        label: "Comparing plan costs"
+      - id: "g"
+        label: "I have not found it confusing"
+  - id: q5
+    prompt: "About how many Medicare plan options did you compare before choosing, or would you compare? Please enter a number."
+    type: free_text
+    construct: many_medicare_plan_options_did
+    required: true
+  - id: q6
+    prompt: "How easy or difficult was it to compare Medicare plan options?"
+    type: single_choice
+    construct: easy_difficult_was_it_compare
+    required: true
+    options:
+      - id: "a"
+        label: "Very easy"
+      - id: "b"
+        label: "Somewhat easy"
+      - id: "c"
+        label: "Somewhat difficult"
+      - id: "d"
+        label: "Very difficult"
+      - id: "e"
+        label: "I have not compared plans"
+  - id: q7
+    prompt: "How well do you understand the enrollment periods and deadlines for Medicare?"
+    type: single_choice
+    construct: well_understand_enrollment_periods_deadl
+    required: true
+    options:
+      - id: "a"
+        label: "Very well"
+      - id: "b"
+        label: "Somewhat well"
+      - id: "c"
+        label: "Not very well"
+      - id: "d"
+        label: "Not at all"
+  - id: q8
+    prompt: "Which are the top 3 factors that matter most to you (or the person you help) in choosing Medicare coverage? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_that_matter
+    required: true
+    options:
+      - id: "a"
+        label: "Low monthly premium"
+      - id: "b"
+        label: "Low out-of-pocket costs"
+      - id: "c"
+        label: "Keeping preferred doctors"
+      - id: "d"
+        label: "Prescription drug coverage"
+      - id: "e"
+        label: "Dental, vision, or hearing benefits"
+      - id: "f"
+        label: "Simplicity of the plan"
+      - id: "g"
+        label: "Freedom to see any provider"
+      - id: "h"
+        label: "A trusted insurer"
+  - id: q9
+    prompt: "How much do you agree or disagree with the following statement about navigating Medicare — I understand what my Medicare coverage includes"
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree or disagree with the following statement about navigating Medicare — It is easy to find help when I have questions"
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree with the following statement about navigating Medicare — Comparing plans is straightforward"
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree with the following statement about navigating Medicare — I worry about missing an enrollment deadline"
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree with the following statement about navigating Medicare — I am confident I chose the right coverage"
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree with the following statement about navigating Medicare — The costs of my coverage are predictable"
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: There is too much marketing and too many mailings about Medicare plans."
+    type: single_choice
+    construct: much_agree_there_too_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How often do you feel you need help from someone else to make Medicare decisions?"
+    type: single_choice
+    construct: often_feel_need_help_from
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q17
+    prompt: "How important is it to keep your current doctors when choosing Medicare coverage?"
+    type: single_choice
+    construct: important_it_keep_current_doctors
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How satisfied are you (or the person you help) with the current Medicare coverage?"
+    type: single_choice
+    construct: satisfied_person_help_current_medicare
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q19
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your Medicare plan to someone who is newly eligible? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q20
+    prompt: "How likely are you to review and compare your Medicare options at the next open enrollment?"
+    type: single_choice
+    construct: likely_review_compare_medicare_options
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q21
+    prompt: "How confident are you in your ability to navigate Medicare decisions on your own?"
+    type: single_choice
+    construct: confident_ability_navigate_medicare_deci
+    required: true
+    options:
+      - id: "a"
+        label: "Very confident"
+      - id: "b"
+        label: "Somewhat confident"
+      - id: "c"
+        label: "Not very confident"
+      - id: "d"
+        label: "Not at all confident"
+  - id: q22
+    prompt: "Where do you turn first when you have a question about Medicare?"
+    type: single_choice
+    construct: where_turn_first_when_have
+    required: true
+    options:
+      - id: "a"
+        label: "Medicare.gov or 1-800-MEDICARE"
+      - id: "b"
+        label: "A SHIP counselor"
+      - id: "c"
+        label: "A broker or agent"
+      - id: "d"
+        label: "A family member"
+      - id: "e"
+        label: "A friend who has been through it"
+      - id: "f"
+        label: "I am not sure where to turn"
+  - id: q23
+    prompt: "Which extra benefits matter to you (or the person you help) in a Medicare plan? (Select all that apply)"
+    type: multi_choice
+    construct: extra_benefits_matter_person_help
+    required: true
+    options:
+      - id: "a"
+        label: "Dental coverage"
+      - id: "b"
+        label: "Vision coverage"
+      - id: "c"
+        label: "Hearing aids"
+      - id: "d"
+        label: "Prescription drug coverage"
+      - id: "e"
+        label: "Fitness programs like SilverSneakers"
+      - id: "f"
+        label: "Telehealth"
+      - id: "g"
+        label: "Transportation to appointments"
+      - id: "h"
+        label: "None of these"
+  - id: q24
+    prompt: "How much marketing about Medicare plans (mail, TV, calls) do you receive?"
+    type: single_choice
+    construct: much_marketing_medicare_plans_mail
+    required: true
+    options:
+      - id: "a"
+        label: "A great deal"
+      - id: "b"
+        label: "Some"
+      - id: "c"
+        label: "A little"
+      - id: "d"
+        label: "Almost none"
+  - id: q25
+    prompt: "How much do you agree: Medicare marketing makes it harder, not easier, to choose a plan."
+    type: single_choice
+    construct: much_agree_medicare_marketing_makes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q26
+    prompt: "How much do you agree: I know where to get trustworthy, unbiased Medicare help."
+    type: single_choice
+    construct: much_agree_i_know_where
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q27
+    prompt: "How often do costs under your Medicare coverage turn out differently than you expected?"
+    type: single_choice
+    construct: often_costs_under_medicare_coverage
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q28
+    prompt: "How important is it to have coverage that lets you see any provider you choose?"
+    type: single_choice
+    construct: important_it_have_coverage_that
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "How satisfied are you with the help and resources available for Medicare decisions?"
+    type: single_choice
+    construct: satisfied_help_resources_available_medic
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "What is the most confusing part of Medicare for you? Please answer briefly."
+    type: free_text
+    construct: most_confusing_part_medicare_please
+    required: true
+  - id: q31
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 to 74"
+      - id: "g"
+        label: "75 or older"
+  - id: q32
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino/a"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Another race or ethnicity"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q36
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Homemaker or caregiver"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q37
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q38
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Widowed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I do not live in the United States"
+  - id: q40
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

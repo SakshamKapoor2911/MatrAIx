@@ -1,0 +1,694 @@
+schemaVersion: "1.0"
+id: ira_contributions_v1
+title: "IRA Contributions Survey"
+description: "How individuals open, fund, and invest through individual retirement accounts (IRAs)."
+questions:
+  - id: q0
+    prompt: "Do you have an individual retirement account (IRA)?"
+    type: single_choice
+    construct: have_individual_retirement_account_ira
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one"
+      - id: "b"
+        label: "Yes, more than one"
+      - id: "c"
+        label: "No, but I am considering opening one"
+      - id: "d"
+        label: "No, and I am not considering one"
+      - id: "e"
+        label: "I am not sure what an IRA is"
+  - id: q1
+    prompt: "Which types of IRAs do you have? (Select all that apply)"
+    type: multi_choice
+    construct: types_iras_have_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Traditional IRA"
+      - id: "b"
+        label: "Roth IRA"
+      - id: "c"
+        label: "Rollover IRA (from a former employer plan)"
+      - id: "d"
+        label: "SEP IRA (self-employed)"
+      - id: "e"
+        label: "SIMPLE IRA"
+      - id: "f"
+        label: "I don't have an IRA"
+      - id: "g"
+        label: "Not sure of the type"
+  - id: q2
+    prompt: "How did you first open your IRA?"
+    type: single_choice
+    construct: did_first_open_ira
+    required: true
+    options:
+      - id: "a"
+        label: "I opened it myself online"
+      - id: "b"
+        label: "With help from a financial advisor"
+      - id: "c"
+        label: "By rolling over a workplace retirement plan"
+      - id: "d"
+        label: "At a bank or credit union branch"
+      - id: "e"
+        label: "Not applicable"
+  - id: q3
+    prompt: "Who is the provider for your primary IRA?"
+    type: single_choice
+    construct: who_provider_primary_ira
+    required: true
+    options:
+      - id: "a"
+        label: "Fidelity"
+      - id: "b"
+        label: "Vanguard"
+      - id: "c"
+        label: "Charles Schwab"
+      - id: "d"
+        label: "A robo-advisor (e.g., Betterment, Wealthfront)"
+      - id: "e"
+        label: "A bank or credit union"
+      - id: "f"
+        label: "Another brokerage or advisor"
+      - id: "g"
+        label: "Not applicable"
+  - id: q4
+    prompt: "Did you contribute to an IRA in the past year?"
+    type: single_choice
+    construct: did_contribute_ira_past_year
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I have contributed in prior years"
+      - id: "c"
+        label: "No, I have never contributed"
+      - id: "d"
+        label: "Not applicable"
+  - id: q5
+    prompt: "About how much did you contribute to your IRA(s) in the past year? Please enter a dollar amount."
+    type: free_text
+    construct: much_did_contribute_ira_s
+    required: true
+  - id: q6
+    prompt: "Did you contribute the maximum allowed amount last year?"
+    type: single_choice
+    construct: did_contribute_maximum_allowed_amount
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, the full annual limit"
+      - id: "b"
+        label: "Close to the limit"
+      - id: "c"
+        label: "Well below the limit"
+      - id: "d"
+        label: "I did not contribute"
+      - id: "e"
+        label: "Don't know"
+  - id: q7
+    prompt: "How do you usually make your IRA contributions?"
+    type: single_choice
+    construct: usually_make_ira_contributions
+    required: true
+    options:
+      - id: "a"
+        label: "Automatic recurring transfers throughout the year"
+      - id: "b"
+        label: "A single lump sum"
+      - id: "c"
+        label: "Occasional manual contributions when I can"
+      - id: "d"
+        label: "I have not contributed"
+      - id: "e"
+        label: "Not applicable"
+  - id: q8
+    prompt: "About how much do you currently have in all of your IRAs combined?"
+    type: single_choice
+    construct: much_currently_have_all_iras
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $10,000"
+      - id: "b"
+        label: "$10,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $99,999"
+      - id: "d"
+        label: "$100,000 to $249,999"
+      - id: "e"
+        label: "$250,000 to $499,999"
+      - id: "f"
+        label: "$500,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q9
+    prompt: "How are the investments in your IRA primarily held?"
+    type: single_choice
+    construct: investments_ira_primarily_held
+    required: true
+    options:
+      - id: "a"
+        label: "A target-date fund"
+      - id: "b"
+        label: "Index funds or ETFs"
+      - id: "c"
+        label: "Individual stocks"
+      - id: "d"
+        label: "Actively managed mutual funds"
+      - id: "e"
+        label: "Cash or a money market fund"
+      - id: "f"
+        label: "A robo-advisor manages it for me"
+      - id: "g"
+        label: "Don't know"
+  - id: q10
+    prompt: "Why do you contribute to an IRA in addition to or instead of a workplace plan? (Select all that apply)"
+    type: multi_choice
+    construct: why_contribute_ira_addition_instead
+    required: true
+    options:
+      - id: "a"
+        label: "I don't have access to a workplace plan"
+      - id: "b"
+        label: "More investment choices than my workplace plan"
+      - id: "c"
+        label: "Lower fees"
+      - id: "d"
+        label: "The tax advantages"
+      - id: "e"
+        label: "To save beyond my workplace plan limits"
+      - id: "f"
+        label: "For Roth (tax-free) growth"
+      - id: "g"
+        label: "Not applicable"
+  - id: q11
+    prompt: "Have you ever converted money from a Traditional IRA to a Roth IRA?"
+    type: single_choice
+    construct: have_ever_converted_money_from
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I have considered it"
+      - id: "c"
+        label: "No, and I have not considered it"
+      - id: "d"
+        label: "Don't know what this is"
+  - id: q12
+    prompt: "How often do you review your IRA investments?"
+    type: single_choice
+    construct: often_review_ira_investments
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "About once a year"
+      - id: "d"
+        label: "A few times a year"
+      - id: "e"
+        label: "Monthly or more often"
+  - id: q13
+    prompt: "How much do you agree: I understand the difference between a Traditional and a Roth IRA."
+    type: single_choice
+    construct: much_agree_i_understand_difference
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: Contributing to an IRA is an important part of my retirement plan."
+    type: single_choice
+    construct: much_agree_contributing_ira_important
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: I find it easy to contribute to my IRA consistently."
+    type: single_choice
+    construct: much_agree_i_find_it
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: I feel confident choosing the investments in my IRA."
+    type: single_choice
+    construct: much_agree_i_feel_confident
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: The annual contribution limits keep me from saving as much as I would like."
+    type: single_choice
+    construct: much_agree_annual_contribution_limits
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: The tax benefits are the main reason I use an IRA."
+    type: single_choice
+    construct: much_agree_tax_benefits_main
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "When choosing an IRA provider, how important is each factor: low fees and expense ratios."
+    type: single_choice
+    construct: when_choosing_ira_provider_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "When choosing an IRA provider, how important is each factor: a wide range of investment options."
+    type: single_choice
+    construct: when_choosing_ira_provider_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "When choosing an IRA provider, how important is each factor: an easy-to-use website or app."
+    type: single_choice
+    construct: when_choosing_ira_provider_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When choosing an IRA provider, how important is each factor: access to human advice or guidance."
+    type: single_choice
+    construct: when_choosing_ira_provider_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing an IRA provider, how important is each factor: the reputation and trustworthiness of the firm."
+    type: single_choice
+    construct: when_choosing_ira_provider_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "Which factors are your top 3 reasons for contributing to an IRA? (Select all that apply — choose up to 3)"
+    type: single_choice
+    construct: factors_top_3_reasons_contributing
+    required: true
+    options:
+      - id: "a"
+        label: "Tax advantages"
+      - id: "b"
+        label: "Tax-free growth in a Roth"
+      - id: "c"
+        label: "Building retirement savings"
+      - id: "d"
+        label: "More investment choices than a workplace plan"
+      - id: "e"
+        label: "Lower fees"
+      - id: "f"
+        label: "No access to a workplace plan"
+      - id: "g"
+        label: "Advice from an advisor or family"
+  - id: q25
+    prompt: "What is the biggest barrier keeping you from contributing more to an IRA?"
+    type: single_choice
+    construct: biggest_barrier_keeping_from_contributin
+    required: true
+    options:
+      - id: "a"
+        label: "Not enough income to spare"
+      - id: "b"
+        label: "Prioritizing other financial goals or debts"
+      - id: "c"
+        label: "I already max out my contributions"
+      - id: "d"
+        label: "Confusion about the rules"
+      - id: "e"
+        label: "I don't think about it much"
+      - id: "f"
+        label: "No barrier / not applicable"
+  - id: q26
+    prompt: "How confident are you that your IRA and other savings will support you in retirement?"
+    type: single_choice
+    construct: confident_that_ira_other_savings
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q27
+    prompt: "How likely are you to contribute to an IRA in the coming year?"
+    type: single_choice
+    construct: likely_contribute_ira_coming_year
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q28
+    prompt: "Overall, how satisfied are you with your IRA provider?"
+    type: single_choice
+    construct: overall_satisfied_ira_provider
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q29
+    prompt: "On a scale of 0 to 10, how likely are you to recommend opening an IRA to a friend or family member? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q30
+    prompt: "Is there anything else you would like to share about using an IRA? (Optional — you may leave a short comment.)"
+    type: free_text
+    construct: there_anything_else_would_like
+    required: false
+  - id: q31
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "Which best describes your race or ethnicity?"
+    type: single_choice
+    construct: best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Two or more races"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree or trade certificate"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q37
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q38
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q40
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q41
+    prompt: "Do you also have access to a workplace retirement plan (such as a 401(k))?"
+    type: single_choice
+    construct: also_have_access_workplace_retirement
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I contribute to it"
+      - id: "b"
+        label: "Yes, but I do not contribute"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not sure"

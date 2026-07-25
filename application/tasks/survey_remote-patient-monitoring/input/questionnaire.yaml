@@ -1,0 +1,828 @@
+schemaVersion: "1.0"
+id: remote_patient_monitoring_v1
+title: "Remote Patient Monitoring Survey"
+description: "Consumer experience with provider-run remote patient monitoring programs."
+questions:
+  - id: q0
+    prompt: "Have you ever taken part in a remote patient monitoring program where a provider reviewed health data you sent from home?"
+    type: single_choice
+    construct: have_ever_taken_part_remote
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I am currently enrolled"
+      - id: "b"
+        label: "Yes, in the past"
+      - id: "c"
+        label: "No, but I have been offered it"
+      - id: "d"
+        label: "No, never"
+      - id: "e"
+        label: "I'm not sure what this is"
+  - id: q1
+    prompt: "Which best describes your current status with remote monitoring?"
+    type: single_choice
+    construct: best_describes_current_status_remote
+    required: true
+    options:
+      - id: "a"
+        label: "Actively enrolled and using it"
+      - id: "b"
+        label: "Enrolled but not very active"
+      - id: "c"
+        label: "Completed a past program"
+      - id: "d"
+        label: "Considering enrolling"
+      - id: "e"
+        label: "Not applicable"
+  - id: q2
+    prompt: "What is the main focus of your remote monitoring program?"
+    type: single_choice
+    construct: main_focus_remote_monitoring_program
+    required: true
+    options:
+      - id: "a"
+        label: "Blood pressure or heart health"
+      - id: "b"
+        label: "Weight management"
+      - id: "c"
+        label: "Blood sugar or metabolic health"
+      - id: "d"
+        label: "General wellness and recovery"
+      - id: "e"
+        label: "Respiratory or activity tracking"
+      - id: "f"
+        label: "Not applicable"
+  - id: q3
+    prompt: "How did you first learn about remote patient monitoring? (Select all that apply)"
+    type: multi_choice
+    construct: did_first_learn_remote_patient
+    required: true
+    options:
+      - id: "a"
+        label: "My doctor or care team offered it"
+      - id: "b"
+        label: "My insurance plan"
+      - id: "c"
+        label: "A hospital or clinic"
+      - id: "d"
+        label: "Online research"
+      - id: "e"
+        label: "Friends or family"
+      - id: "f"
+        label: "Advertising"
+      - id: "g"
+        label: "Not applicable"
+  - id: q4
+    prompt: "How long have you been (or were you) enrolled in the program?"
+    type: single_choice
+    construct: long_have_been_were_enrolled
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 month"
+      - id: "b"
+        label: "1 to 3 months"
+      - id: "c"
+        label: "3 to 6 months"
+      - id: "d"
+        label: "6 to 12 months"
+      - id: "e"
+        label: "More than a year"
+      - id: "f"
+        label: "Not applicable"
+  - id: q5
+    prompt: "What kind of data does (or did) the program collect from you? (Select all that apply)"
+    type: multi_choice
+    construct: kind_data_does_did_program
+    required: true
+    options:
+      - id: "a"
+        label: "Blood pressure"
+      - id: "b"
+        label: "Weight"
+      - id: "c"
+        label: "Blood glucose"
+      - id: "d"
+        label: "Heart rate"
+      - id: "e"
+        label: "Oxygen level"
+      - id: "f"
+        label: "Activity or steps"
+      - id: "g"
+        label: "Symptom check-ins"
+      - id: "h"
+        label: "Not applicable"
+  - id: q6
+    prompt: "How are (or were) your readings sent to your provider?"
+    type: single_choice
+    construct: were_readings_sent_provider
+    required: true
+    options:
+      - id: "a"
+        label: "Automatically through a connected device"
+      - id: "b"
+        label: "I enter them into an app or portal"
+      - id: "c"
+        label: "By phone or messaging"
+      - id: "d"
+        label: "A mix of methods"
+      - id: "e"
+        label: "Not applicable"
+  - id: q7
+    prompt: "How often do (or did) you submit readings?"
+    type: single_choice
+    construct: often_did_submit_readings
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "Once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Weekly or less"
+      - id: "e"
+        label: "Not applicable"
+  - id: q8
+    prompt: "Who provided the monitoring equipment?"
+    type: single_choice
+    construct: who_provided_monitoring_equipment
+    required: true
+    options:
+      - id: "a"
+        label: "My provider or clinic"
+      - id: "b"
+        label: "My insurer"
+      - id: "c"
+        label: "I bought it myself"
+      - id: "d"
+        label: "A third-party monitoring company"
+      - id: "e"
+        label: "Not applicable"
+  - id: q9
+    prompt: "Roughly how much do (or did) you pay out of pocket for the program per month? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: roughly_much_did_pay_out
+    required: true
+  - id: q10
+    prompt: "Which devices are (or were) part of your monitoring program? (Select all that apply)"
+    type: multi_choice
+    construct: devices_were_part_monitoring_program
+    required: true
+    options:
+      - id: "a"
+        label: "Connected blood pressure cuff"
+      - id: "b"
+        label: "Connected scale"
+      - id: "c"
+        label: "Connected glucose meter"
+      - id: "d"
+        label: "Pulse oximeter"
+      - id: "e"
+        label: "Wearable band or watch"
+      - id: "f"
+        label: "A tablet or hub provided by the program"
+      - id: "g"
+        label: "Not applicable"
+  - id: q11
+    prompt: "How does your care team usually contact you about your readings? (Select all that apply)"
+    type: multi_choice
+    construct: does_care_team_usually_contact
+    required: true
+    options:
+      - id: "a"
+        label: "Phone calls"
+      - id: "b"
+        label: "Text messages"
+      - id: "c"
+        label: "App or portal messages"
+      - id: "d"
+        label: "Email"
+      - id: "e"
+        label: "Video visits"
+      - id: "f"
+        label: "They rarely contact me"
+      - id: "g"
+        label: "Not applicable"
+  - id: q12
+    prompt: "How responsive is (or was) your care team to the data you send?"
+    type: single_choice
+    construct: responsive_was_care_team_data
+    required: true
+    options:
+      - id: "a"
+        label: "Very responsive"
+      - id: "b"
+        label: "Somewhat responsive"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Not very responsive"
+      - id: "e"
+        label: "Not applicable"
+  - id: q13
+    prompt: "Has remote monitoring changed how often you visit your provider in person?"
+    type: single_choice
+    construct: has_remote_monitoring_changed_often
+    required: true
+    options:
+      - id: "a"
+        label: "Many fewer in-person visits"
+      - id: "b"
+        label: "Somewhat fewer visits"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "More visits"
+      - id: "e"
+        label: "Not sure"
+  - id: q14
+    prompt: "How much do you agree with the following statement about remote monitoring: The technology is easy to use."
+    type: single_choice
+    construct: much_agree_following_statement_remote
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement about remote monitoring: It saves me time compared with in-person care."
+    type: single_choice
+    construct: much_agree_following_statement_remote
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about remote monitoring: It makes me feel more connected to my care team."
+    type: single_choice
+    construct: much_agree_following_statement_remote
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about remote monitoring: It helps catch potential problems early."
+    type: single_choice
+    construct: much_agree_following_statement_remote
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about remote monitoring: The effort of sending readings is worth it."
+    type: single_choice
+    construct: much_agree_following_statement_remote
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about remote monitoring: I am confident my data is kept private."
+    type: single_choice
+    construct: much_agree_following_statement_remote
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement about remote monitoring: Keeping up with daily readings can feel like a burden."
+    type: single_choice
+    construct: much_agree_following_statement_remote
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How important is the following when choosing or judging a remote monitoring program: Ease of using the technology."
+    type: single_choice
+    construct: important_following_when_choosing_judgin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is the following when choosing or judging a remote monitoring program: Privacy of my health data."
+    type: single_choice
+    construct: important_following_when_choosing_judgin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is the following when choosing or judging a remote monitoring program: Out-of-pocket cost."
+    type: single_choice
+    construct: important_following_when_choosing_judgin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is the following when choosing or judging a remote monitoring program: Responsiveness of the care team."
+    type: single_choice
+    construct: important_following_when_choosing_judgin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is the following when choosing or judging a remote monitoring program: Accuracy of the devices."
+    type: single_choice
+    construct: important_following_when_choosing_judgin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important is the following when choosing or judging a remote monitoring program: Clear instructions and support."
+    type: single_choice
+    construct: important_following_when_choosing_judgin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Which benefits of remote monitoring matter most to you? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: benefits_remote_monitoring_matter_most
+    required: true
+    options:
+      - id: "a"
+        label: "Convenience"
+      - id: "b"
+        label: "Catching problems early"
+      - id: "c"
+        label: "Fewer trips to the clinic"
+      - id: "d"
+        label: "Feeling connected to my care team"
+      - id: "e"
+        label: "Better understanding of my health"
+      - id: "f"
+        label: "Saving time"
+      - id: "g"
+        label: "Lower overall costs"
+      - id: "h"
+        label: "Reassurance and peace of mind"
+  - id: q28
+    prompt: "How confident are you in using the monitoring technology on your own?"
+    type: single_choice
+    construct: confident_using_monitoring_technology_ow
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+  - id: q29
+    prompt: "What concerns do you have about remote monitoring? (Select all that apply)"
+    type: multi_choice
+    construct: concerns_have_remote_monitoring_select
+    required: true
+    options:
+      - id: "a"
+        label: "Data privacy"
+      - id: "b"
+        label: "Accuracy of readings"
+      - id: "c"
+        label: "Technical difficulties"
+      - id: "d"
+        label: "Cost"
+      - id: "e"
+        label: "Less personal contact with providers"
+      - id: "f"
+        label: "Too much responsibility on me"
+      - id: "g"
+        label: "No concerns"
+  - id: q30
+    prompt: "How often have you run into technical problems with the monitoring technology?"
+    type: single_choice
+    construct: often_have_run_into_technical
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Not applicable"
+  - id: q31
+    prompt: "How comfortable are you with your provider receiving health data from your home devices?"
+    type: single_choice
+    construct: comfortable_provider_receiving_health_da
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Somewhat uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat comfortable"
+      - id: "e"
+        label: "Very comfortable"
+  - id: q32
+    prompt: "Overall, how satisfied are you with your remote monitoring experience?"
+    type: single_choice
+    construct: overall_satisfied_remote_monitoring_expe
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "On a scale of 0 to 10, how likely are you to recommend remote monitoring to others in a similar situation? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q34
+    prompt: "How likely are you to continue with (or re-enroll in) remote monitoring?"
+    type: single_choice
+    construct: likely_continue_re_enroll_remote
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q35
+    prompt: "If your provider offered an expanded remote monitoring program, how likely would you be to join?"
+    type: single_choice
+    construct: if_provider_offered_expanded_remote
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q36
+    prompt: "What would make remote monitoring work better for you? Please describe briefly."
+    type: free_text
+    construct: would_make_remote_monitoring_work
+    required: true
+  - id: q37
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q38
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Which of the following best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Other"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college"
+      - id: "c"
+        label: "Associate's degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q42
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q43
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q44
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "Which region of the country do you live in?"
+    type: single_choice
+    construct: region_country_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q46
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q47
+    prompt: "What is your current health insurance status?"
+    type: single_choice
+    construct: current_health_insurance_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored insurance"
+      - id: "b"
+        label: "Plan purchased on my own or through the marketplace"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or VA coverage"
+      - id: "f"
+        label: "Uninsured"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "Does anyone in your household manage an ongoing health condition?"
+    type: single_choice
+    construct: does_anyone_household_manage_ongoing
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I do"
+      - id: "b"
+        label: "Yes, another household member does"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "In general, how comfortable are you using health-related technology?"
+    type: single_choice
+    construct: general_comfortable_using_health_related
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Completely comfortable"

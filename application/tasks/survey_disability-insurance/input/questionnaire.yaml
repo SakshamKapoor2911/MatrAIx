@@ -1,0 +1,689 @@
+schemaVersion: "1.0"
+id: disability_insurance_v1
+title: "Disability Insurance Survey"
+description: "Ownership of, attitudes toward, and confidence in disability insurance as a way to protect household income against illness or injury."
+questions:
+  - id: q0
+    prompt: "Do you currently have any form of disability insurance that would replace part of your income if you could not work?"
+    type: single_choice
+    construct: currently_have_any_form_disability
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, through my employer"
+      - id: "b"
+        label: "Yes, a policy I bought on my own"
+      - id: "c"
+        label: "Yes, both employer and individual coverage"
+      - id: "d"
+        label: "No, but I have looked into it"
+      - id: "e"
+        label: "No, and I have not looked into it"
+      - id: "f"
+        label: "Not sure"
+  - id: q1
+    prompt: "Which types of disability coverage do you currently have? (Select all that apply)"
+    type: multi_choice
+    construct: types_disability_coverage_currently_have
+    required: true
+    options:
+      - id: "a"
+        label: "Short-term disability"
+      - id: "b"
+        label: "Long-term disability"
+      - id: "c"
+        label: "Employer-paid group coverage"
+      - id: "d"
+        label: "Individual policy I pay for myself"
+      - id: "e"
+        label: "Coverage through a union or association"
+      - id: "f"
+        label: "Social Security Disability Insurance (SSDI) eligibility"
+      - id: "g"
+        label: "I do not have any disability coverage"
+  - id: q2
+    prompt: "How did you obtain your disability coverage?"
+    type: single_choice
+    construct: did_obtain_disability_coverage
+    required: true
+    options:
+      - id: "a"
+        label: "Automatically enrolled by my employer"
+      - id: "b"
+        label: "Chose it during open enrollment at work"
+      - id: "c"
+        label: "Bought it through an insurance agent or broker"
+      - id: "d"
+        label: "Bought it directly from an insurer online"
+      - id: "e"
+        label: "Through a professional or trade association"
+      - id: "f"
+        label: "I do not have coverage"
+  - id: q3
+    prompt: "Roughly what percentage of your income would your disability coverage replace if you could not work?"
+    type: single_choice
+    construct: roughly_percentage_income_would_disabili
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 40%"
+      - id: "b"
+        label: "40% to 50%"
+      - id: "c"
+        label: "51% to 60%"
+      - id: "d"
+        label: "61% to 70%"
+      - id: "e"
+        label: "More than 70%"
+      - id: "f"
+        label: "Don't know"
+      - id: "g"
+        label: "Not applicable — no coverage"
+  - id: q4
+    prompt: "About how much do you pay in premiums for disability insurance each month? Please enter a number of dollars (enter 0 if none or employer-paid)."
+    type: free_text
+    construct: much_pay_premiums_disability_insurance
+    required: true
+  - id: q5
+    prompt: "How long could your household cover essential expenses if you suddenly lost your income due to illness or injury?"
+    type: single_choice
+    construct: long_could_household_cover_essential
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 month"
+      - id: "b"
+        label: "1 to 3 months"
+      - id: "c"
+        label: "4 to 6 months"
+      - id: "d"
+        label: "7 to 12 months"
+      - id: "e"
+        label: "More than 12 months"
+      - id: "f"
+        label: "Don't know"
+  - id: q6
+    prompt: "How likely do you think it is that you will experience a disability lasting three months or longer at some point in your working life?"
+    type: single_choice
+    construct: likely_think_it_that_will
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q7
+    prompt: "How would you rate your understanding of how disability insurance works?"
+    type: single_choice
+    construct: would_rate_understanding_disability_insu
+    required: true
+    options:
+      - id: "a"
+        label: "I don't understand it at all"
+      - id: "b"
+        label: "Slight understanding"
+      - id: "c"
+        label: "Moderate understanding"
+      - id: "d"
+        label: "Good understanding"
+      - id: "e"
+        label: "Very good understanding"
+  - id: q8
+    prompt: "How important is disability insurance for someone in your financial situation?"
+    type: single_choice
+    construct: important_disability_insurance_someone_f
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q9
+    prompt: "How much do you agree with the following statement: My income is essential to my household's financial stability."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree with the following statement: Disability insurance is too expensive for the protection it provides."
+    type: single_choice
+    construct: much_agree_following_statement_disabilit
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: Social Security or savings would be enough if I became disabled."
+    type: single_choice
+    construct: much_agree_following_statement_social
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: My employer's coverage is enough; I don't need to buy my own."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: A disability is more likely to derail my finances than an early death."
+    type: single_choice
+    construct: much_agree_following_statement_disabilit
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How concerned are you about the following when it comes to income protection: a physical injury that prevents you from working?"
+    type: single_choice
+    construct: concerned_following_when_it_comes
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q15
+    prompt: "How concerned are you about the following when it comes to income protection: a serious illness such as cancer or a heart condition?"
+    type: single_choice
+    construct: concerned_following_when_it_comes
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q16
+    prompt: "How concerned are you about the following when it comes to income protection: a mental health condition that limits your ability to work?"
+    type: single_choice
+    construct: concerned_following_when_it_comes
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q17
+    prompt: "How concerned are you about the following when it comes to income protection: a pregnancy-related or maternity leave gap?"
+    type: single_choice
+    construct: concerned_following_when_it_comes
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+      - id: "f"
+        label: "Not applicable"
+  - id: q18
+    prompt: "How concerned are you about the following when it comes to income protection: losing coverage if you change jobs?"
+    type: single_choice
+    construct: concerned_following_when_it_comes
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q19
+    prompt: "Which factors most influence whether you buy or keep disability insurance? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: factors_most_influence_whether_buy
+    required: true
+    options:
+      - id: "a"
+        label: "Monthly premium cost"
+      - id: "b"
+        label: "Percentage of income replaced"
+      - id: "c"
+        label: "Length of the waiting period before benefits start"
+      - id: "d"
+        label: "How long benefits last"
+      - id: "e"
+        label: "Whether the policy is portable between jobs"
+      - id: "f"
+        label: "Definition of \"disability\" in the policy"
+      - id: "g"
+        label: "Employer subsidy or payroll convenience"
+      - id: "h"
+        label: "Advice from an agent or advisor"
+  - id: q20
+    prompt: "What is the main reason you do NOT have more disability coverage than you currently do?"
+    type: single_choice
+    construct: main_reason_not_have_more
+    required: true
+    options:
+      - id: "a"
+        label: "It costs too much"
+      - id: "b"
+        label: "I think my employer coverage is sufficient"
+      - id: "c"
+        label: "I don't think I'll need it"
+      - id: "d"
+        label: "I don't understand my options"
+      - id: "e"
+        label: "I've never been offered it"
+      - id: "f"
+        label: "I have all the coverage I want"
+      - id: "g"
+        label: "Other"
+  - id: q21
+    prompt: "Have you ever filed a claim on a disability insurance policy?"
+    type: single_choice
+    construct: have_ever_filed_claim_disability
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it was approved"
+      - id: "b"
+        label: "Yes, but it was denied or delayed"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable — no coverage"
+  - id: q22
+    prompt: "In the past year, how often have you thought about what would happen to your finances if you couldn't work?"
+    type: single_choice
+    construct: past_year_often_have_thought
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q23
+    prompt: "Where do you get information when making decisions about disability insurance? (Select all that apply)"
+    type: multi_choice
+    construct: where_get_information_when_making
+    required: true
+    options:
+      - id: "a"
+        label: "Employer HR or benefits materials"
+      - id: "b"
+        label: "Insurance agent or broker"
+      - id: "c"
+        label: "Financial advisor"
+      - id: "d"
+        label: "Insurance company websites"
+      - id: "e"
+        label: "Friends or family"
+      - id: "f"
+        label: "Online articles or social media"
+      - id: "g"
+        label: "I don't seek out information"
+  - id: q24
+    prompt: "How satisfied are you with your current level of income protection?"
+    type: single_choice
+    construct: satisfied_current_level_income_protectio
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q25
+    prompt: "How likely are you to purchase or increase disability coverage in the next 12 months?"
+    type: single_choice
+    construct: likely_purchase_increase_disability_cove
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q26
+    prompt: "On a scale of 0 to 10, how confident are you that your household could handle a two-year loss of your income? (0 = not at all confident, 10 = completely confident)"
+    type: single_choice
+    construct: scale_0_10_confident_that
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q27
+    prompt: "How physically demanding or risky is your current occupation?"
+    type: single_choice
+    construct: physically_demanding_risky_current_occup
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly desk or remote work"
+      - id: "b"
+        label: "Light physical activity"
+      - id: "c"
+        label: "Moderate physical activity"
+      - id: "d"
+        label: "Heavy physical or hazardous work"
+      - id: "e"
+        label: "Not currently working"
+  - id: q28
+    prompt: "Roughly what share of your household's total income do you personally provide?"
+    type: single_choice
+    construct: roughly_share_household_s_total
+    required: true
+    options:
+      - id: "a"
+        label: "I provide none of it"
+      - id: "b"
+        label: "Less than half"
+      - id: "c"
+        label: "About half"
+      - id: "d"
+        label: "More than half"
+      - id: "e"
+        label: "Nearly all of it"
+  - id: q29
+    prompt: "Please share any thoughts or concerns you have about protecting your income if you couldn't work."
+    type: free_text
+    construct: please_share_any_thoughts_concerns
+    required: true
+  - id: q30
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18-24"
+      - id: "b"
+        label: "25-34"
+      - id: "c"
+        label: "35-44"
+      - id: "d"
+        label: "45-54"
+      - id: "e"
+        label: "55-64"
+      - id: "f"
+        label: "65 or older"
+  - id: q31
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your total annual household income (before taxes)?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q35
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Homemaker or caregiver"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Unable to work"
+  - id: q36
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q37
+    prompt: "How many people depend on your income financially? Please enter a number."
+    type: free_text
+    construct: many_people_depend_income_financially
+    required: true
+  - id: q38
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q39
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q40
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q41
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own with a mortgage"
+      - id: "b"
+        label: "Own outright"
+      - id: "c"
+        label: "Rent"
+      - id: "d"
+        label: "Other arrangement"

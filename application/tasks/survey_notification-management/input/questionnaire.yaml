@@ -1,0 +1,795 @@
+schemaVersion: "1.0"
+id: notification_management_v1
+title: "Notification Management Survey"
+description: "How people receive, control, and feel about notifications across their phones, computers, and wearables."
+questions:
+  - id: q0
+    prompt: "In general, how do you feel about the notifications you receive on your devices?"
+    type: single_choice
+    construct: general_feel_notifications_receive_devic
+    required: true
+    options:
+      - id: "a"
+        label: "I have them well under control"
+      - id: "b"
+        label: "They're manageable most of the time"
+      - id: "c"
+        label: "They're a bit overwhelming"
+      - id: "d"
+        label: "They're completely overwhelming"
+      - id: "e"
+        label: "I don't really notice them"
+  - id: q1
+    prompt: "About how many notifications do you estimate you receive on your phone in a typical day?"
+    type: single_choice
+    construct: many_notifications_estimate_receive_phon
+    required: true
+    options:
+      - id: "a"
+        label: "Fewer than 10"
+      - id: "b"
+        label: "10-25"
+      - id: "c"
+        label: "26-50"
+      - id: "d"
+        label: "51-100"
+      - id: "e"
+        label: "More than 100"
+      - id: "f"
+        label: "I have no idea"
+  - id: q2
+    prompt: "Which types of apps do you allow to send you notifications? (Select all that apply)"
+    type: multi_choice
+    construct: types_apps_allow_send_notifications
+    required: true
+    options:
+      - id: "a"
+        label: "Messaging / chat apps"
+      - id: "b"
+        label: "Email"
+      - id: "c"
+        label: "Social media"
+      - id: "d"
+        label: "News apps"
+      - id: "e"
+        label: "Calendar and reminders"
+      - id: "f"
+        label: "Banking or payment apps"
+      - id: "g"
+        label: "Shopping / delivery apps"
+      - id: "h"
+        label: "Games"
+      - id: "i"
+        label: "Health / fitness apps"
+      - id: "j"
+        label: "Work / productivity apps"
+      - id: "k"
+        label: "I keep notifications off for almost everything"
+  - id: q3
+    prompt: "How proactively do you manage which apps can send you notifications?"
+    type: single_choice
+    construct: proactively_manage_apps_can_send
+    required: true
+    options:
+      - id: "a"
+        label: "Very proactively — I curate them carefully"
+      - id: "b"
+        label: "Somewhat — I turn off the worst offenders"
+      - id: "c"
+        label: "Rarely — I mostly leave defaults"
+      - id: "d"
+        label: "Never — I accept whatever an app asks for"
+  - id: q4
+    prompt: "When a new app asks permission to send notifications, what do you usually do?"
+    type: single_choice
+    construct: when_new_app_asks_permission
+    required: true
+    options:
+      - id: "a"
+        label: "Almost always deny"
+      - id: "b"
+        label: "Deny unless I think I'll need them"
+      - id: "c"
+        label: "Allow unless I expect it to be spammy"
+      - id: "d"
+        label: "Almost always allow"
+      - id: "e"
+        label: "I don't pay attention to the prompt"
+  - id: q5
+    prompt: "Which notification features do you use? (Select all that apply)"
+    type: multi_choice
+    construct: notification_features_use_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Do Not Disturb mode"
+      - id: "b"
+        label: "Focus modes / profiles"
+      - id: "c"
+        label: "Scheduled quiet hours"
+      - id: "d"
+        label: "Silencing specific apps"
+      - id: "e"
+        label: "Grouping / summarizing notifications"
+      - id: "f"
+        label: "Priority or VIP contacts only"
+      - id: "g"
+        label: "Notification history / log"
+      - id: "h"
+        label: "Turning off notification badges"
+      - id: "i"
+        label: "None of these"
+  - id: q6
+    prompt: "How do you prefer notifications to appear on your phone? (Select all that apply)"
+    type: multi_choice
+    construct: prefer_notifications_appear_phone_select
+    required: true
+    options:
+      - id: "a"
+        label: "Banner / pop-up on screen"
+      - id: "b"
+        label: "Sound"
+      - id: "c"
+        label: "Vibration"
+      - id: "d"
+        label: "Badge count on the app icon"
+      - id: "e"
+        label: "Lock screen only"
+      - id: "f"
+        label: "Silent / in notification center only"
+      - id: "g"
+        label: "LED or ambient light"
+  - id: q7
+    prompt: "Do you use Do Not Disturb or a Focus mode on a regular schedule?"
+    type: single_choice
+    construct: use_not_disturb_focus_mode
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, daily"
+      - id: "b"
+        label: "Yes, sometimes"
+      - id: "c"
+        label: "Only manually when needed"
+      - id: "d"
+        label: "No, never"
+  - id: q8
+    prompt: "During which times do you typically silence or limit notifications? (Select all that apply)"
+    type: multi_choice
+    construct: during_times_typically_silence_limit
+    required: true
+    options:
+      - id: "a"
+        label: "Overnight / while sleeping"
+      - id: "b"
+        label: "During work or focused tasks"
+      - id: "c"
+        label: "During meals"
+      - id: "d"
+        label: "In meetings"
+      - id: "e"
+        label: "While driving"
+      - id: "f"
+        label: "During personal / family time"
+      - id: "g"
+        label: "I never silence them"
+  - id: q9
+    prompt: "How quickly do you usually respond to notifications you care about?"
+    type: single_choice
+    construct: quickly_usually_respond_notifications_ca
+    required: true
+    options:
+      - id: "a"
+        label: "Immediately"
+      - id: "b"
+        label: "Within a few minutes"
+      - id: "c"
+        label: "Within the hour"
+      - id: "d"
+        label: "When I next check my phone"
+      - id: "e"
+        label: "Whenever I get around to it"
+  - id: q10
+    prompt: "How often do you clear or dismiss notifications without reading them?"
+    type: single_choice
+    construct: often_clear_dismiss_notifications_withou
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q11
+    prompt: "Approximately how many apps do you have notifications turned OFF for?"
+    type: free_text
+    construct: approximately_many_apps_have_notificatio
+    required: true
+  - id: q12
+    prompt: "About how many times per day do you check your phone primarily because of a notification?"
+    type: free_text
+    construct: many_times_per_day_check
+    required: true
+  - id: q13
+    prompt: "How much do you agree with the following statement: I get too many notifications."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: Notifications frequently interrupt me at bad times."
+    type: single_choice
+    construct: much_agree_following_statement_notificat
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: I feel anxious when I see a lot of unread notifications."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I worry I'll miss something important if I turn notifications off."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: Managing notification settings is more trouble than it's worth."
+    type: single_choice
+    construct: much_agree_following_statement_managing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement: Turning off unnecessary notifications has improved my focus."
+    type: single_choice
+    construct: much_agree_following_statement_turning
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How disruptive do you find notifications from the following: messaging and chat apps?"
+    type: single_choice
+    construct: disruptive_find_notifications_from_follo
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all disruptive"
+      - id: "b"
+        label: "Slightly disruptive"
+      - id: "c"
+        label: "Moderately disruptive"
+      - id: "d"
+        label: "Very disruptive"
+      - id: "e"
+        label: "Extremely disruptive"
+  - id: q20
+    prompt: "How disruptive do you find notifications from the following: social media apps?"
+    type: single_choice
+    construct: disruptive_find_notifications_from_follo
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all disruptive"
+      - id: "b"
+        label: "Slightly disruptive"
+      - id: "c"
+        label: "Moderately disruptive"
+      - id: "d"
+        label: "Very disruptive"
+      - id: "e"
+        label: "Extremely disruptive"
+  - id: q21
+    prompt: "How disruptive do you find notifications from the following: email?"
+    type: single_choice
+    construct: disruptive_find_notifications_from_follo
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all disruptive"
+      - id: "b"
+        label: "Slightly disruptive"
+      - id: "c"
+        label: "Moderately disruptive"
+      - id: "d"
+        label: "Very disruptive"
+      - id: "e"
+        label: "Extremely disruptive"
+  - id: q22
+    prompt: "How disruptive do you find notifications from the following: news and alert apps?"
+    type: single_choice
+    construct: disruptive_find_notifications_from_follo
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all disruptive"
+      - id: "b"
+        label: "Slightly disruptive"
+      - id: "c"
+        label: "Moderately disruptive"
+      - id: "d"
+        label: "Very disruptive"
+      - id: "e"
+        label: "Extremely disruptive"
+  - id: q23
+    prompt: "How disruptive do you find notifications from the following: shopping and promotional apps?"
+    type: single_choice
+    construct: disruptive_find_notifications_from_follo
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all disruptive"
+      - id: "b"
+        label: "Slightly disruptive"
+      - id: "c"
+        label: "Moderately disruptive"
+      - id: "d"
+        label: "Very disruptive"
+      - id: "e"
+        label: "Extremely disruptive"
+  - id: q24
+    prompt: "How disruptive do you find notifications from the following: work or productivity apps?"
+    type: single_choice
+    construct: disruptive_find_notifications_from_follo
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all disruptive"
+      - id: "b"
+        label: "Slightly disruptive"
+      - id: "c"
+        label: "Moderately disruptive"
+      - id: "d"
+        label: "Very disruptive"
+      - id: "e"
+        label: "Extremely disruptive"
+  - id: q25
+    prompt: "How do you handle notifications on your computer or laptop?"
+    type: single_choice
+    construct: handle_notifications_computer_laptop
+    required: true
+    options:
+      - id: "a"
+        label: "I allow most of them"
+      - id: "b"
+        label: "I allow only a few important ones"
+      - id: "c"
+        label: "I use focus/quiet modes"
+      - id: "d"
+        label: "I turn nearly all of them off"
+      - id: "e"
+        label: "I don't regularly use a computer"
+  - id: q26
+    prompt: "How do you handle web browser / website notification requests?"
+    type: single_choice
+    construct: handle_web_browser_website_notification
+    required: true
+    options:
+      - id: "a"
+        label: "Always block them"
+      - id: "b"
+        label: "Block unless I really want them"
+      - id: "c"
+        label: "Allow a few sites"
+      - id: "d"
+        label: "Usually allow them"
+      - id: "e"
+        label: "I don't notice these requests"
+  - id: q27
+    prompt: "Do you use a smartwatch or wearable to receive notifications?"
+    type: single_choice
+    construct: use_smartwatch_wearable_receive_notifica
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I rely on it heavily"
+      - id: "b"
+        label: "Yes, for a few key notifications"
+      - id: "c"
+        label: "I have one but keep notifications off"
+      - id: "d"
+        label: "No, I don't have one"
+  - id: q28
+    prompt: "Have you ever missed something important because a notification was silenced or turned off?"
+    type: single_choice
+    construct: have_ever_missed_something_important
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, never"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q29
+    prompt: "Have you ever done a major cleanup of your notification settings?"
+    type: single_choice
+    construct: have_ever_done_major_cleanup
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I maintain it regularly"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I plan to"
+      - id: "d"
+        label: "No, and I don't plan to"
+  - id: q30
+    prompt: "Which best describes your overall notification philosophy?"
+    type: single_choice
+    construct: best_describes_overall_notification_phil
+    required: true
+    options:
+      - id: "a"
+        label: "Minimal — only what's essential"
+      - id: "b"
+        label: "Selective — curated to what matters"
+      - id: "c"
+        label: "Permissive — I'd rather see everything"
+      - id: "d"
+        label: "Passive — I leave whatever the defaults are"
+  - id: q31
+    prompt: "Select your top 3 goals for managing notifications. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_goals_managing
+    required: true
+    options:
+      - id: "a"
+        label: "Reduce interruptions"
+      - id: "b"
+        label: "Improve focus and productivity"
+      - id: "c"
+        label: "Protect personal or family time"
+      - id: "d"
+        label: "Sleep better"
+      - id: "e"
+        label: "Reduce stress and anxiety"
+      - id: "f"
+        label: "Still catch truly important alerts"
+      - id: "g"
+        label: "Cut down on marketing and spam"
+      - id: "h"
+        label: "Check my phone less often"
+  - id: q32
+    prompt: "Overall, how satisfied are you with how you manage notifications?"
+    type: single_choice
+    construct: overall_satisfied_manage_notifications
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How likely are you to further reduce or restrict notifications over the next year?"
+    type: single_choice
+    construct: likely_further_reduce_restrict_notificat
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "On a scale of 0 to 10, how in control of your notifications do you feel? (0 = not at all in control, 10 = completely in control)"
+    type: single_choice
+    construct: scale_0_10_control_notifications
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "What would most help you manage notifications better?"
+    type: free_text
+    construct: would_most_help_manage_notifications
+    required: true
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18 years old"
+      - id: "b"
+        label: "18-24 years old"
+      - id: "c"
+        label: "25-34 years old"
+      - id: "d"
+        label: "35-44 years old"
+      - id: "e"
+        label: "45-54 years old"
+      - id: "f"
+        label: "55-64 years old"
+      - id: "g"
+        label: "65 years or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Unemployed, looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Homemaker or caregiver"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q43
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship, not married"
+      - id: "c"
+        label: "Married or domestic partnership"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "Which is your primary phone platform?"
+    type: single_choice
+    construct: primary_phone_platform
+    required: true
+    options:
+      - id: "a"
+        label: "iPhone (iOS)"
+      - id: "b"
+        label: "Android"
+      - id: "c"
+        label: "Other"
+      - id: "d"
+        label: "I don't use a smartphone"
+  - id: q47
+    prompt: "How would you rate your overall level of technology skill?"
+    type: single_choice
+    construct: would_rate_overall_level_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert / I work in technology"

@@ -1,0 +1,695 @@
+schemaVersion: "1.0"
+id: task_manager_apps_v1
+title: "Task Manager & To-Do Apps Survey"
+description: "How people use personal task manager and to-do list apps to organize their work and lives — which apps they choose, how they use them, and whether the apps make them more productive."
+questions:
+  - id: q0
+    prompt: "Do you use a dedicated task manager or to-do list app?"
+    type: single_choice
+    construct: use_dedicated_task_manager_list
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I use one consistently"
+      - id: "b"
+        label: "Yes, but not consistently"
+      - id: "c"
+        label: "No, I use paper lists or notes instead"
+      - id: "d"
+        label: "No, I keep track in my head"
+  - id: q1
+    prompt: "How long have you used a task manager app?"
+    type: single_choice
+    construct: long_have_used_task_manager
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "More than 5 years"
+      - id: "e"
+        label: "I don't use one"
+  - id: q2
+    prompt: "Which task manager apps have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: task_manager_apps_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Todoist"
+      - id: "b"
+        label: "Microsoft To Do"
+      - id: "c"
+        label: "Apple Reminders"
+      - id: "d"
+        label: "Google Tasks"
+      - id: "e"
+        label: "TickTick"
+      - id: "f"
+        label: "Things"
+      - id: "g"
+        label: "Any.do"
+      - id: "h"
+        label: "Notion"
+      - id: "i"
+        label: "OmniFocus"
+      - id: "j"
+        label: "Habitica"
+      - id: "k"
+        label: "A note-taking app used as a list"
+      - id: "l"
+        label: "Other (please specify)"
+  - id: q3
+    prompt: "Which task manager app do you use most often?"
+    type: single_choice
+    construct: task_manager_app_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Todoist"
+      - id: "b"
+        label: "Microsoft To Do"
+      - id: "c"
+        label: "Apple Reminders"
+      - id: "d"
+        label: "Google Tasks"
+      - id: "e"
+        label: "TickTick"
+      - id: "f"
+        label: "Things"
+      - id: "g"
+        label: "Notion"
+      - id: "h"
+        label: "Another app"
+      - id: "i"
+        label: "Pen and paper"
+  - id: q4
+    prompt: "How do you most often add and check tasks?"
+    type: single_choice
+    construct: most_often_add_check_tasks
+    required: true
+    options:
+      - id: "a"
+        label: "Phone app"
+      - id: "b"
+        label: "Computer app or web"
+      - id: "c"
+        label: "Both about equally"
+      - id: "d"
+        label: "Smartwatch"
+      - id: "e"
+        label: "Voice assistant"
+  - id: q5
+    prompt: "What do you track in your task manager? (Select all that apply)"
+    type: multi_choice
+    construct: track_task_manager_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Work tasks and projects"
+      - id: "b"
+        label: "Personal errands and chores"
+      - id: "c"
+        label: "Shopping or grocery lists"
+      - id: "d"
+        label: "Bills and payments"
+      - id: "e"
+        label: "Health and fitness goals"
+      - id: "f"
+        label: "Long-term goals or projects"
+      - id: "g"
+        label: "Habits and routines"
+      - id: "h"
+        label: "Reading, watching, or wish lists"
+      - id: "i"
+        label: "Family or household tasks"
+  - id: q6
+    prompt: "Approximately how many active tasks do you have at a typical time? Enter a whole number."
+    type: free_text
+    construct: approximately_many_active_tasks_have
+    required: true
+  - id: q7
+    prompt: "Which features do you regularly use? (Select all that apply)"
+    type: multi_choice
+    construct: features_regularly_use_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Due dates"
+      - id: "b"
+        label: "Reminders and notifications"
+      - id: "c"
+        label: "Recurring tasks"
+      - id: "d"
+        label: "Projects, lists, or folders"
+      - id: "e"
+        label: "Priorities or flags"
+      - id: "f"
+        label: "Labels or tags"
+      - id: "g"
+        label: "Subtasks"
+      - id: "h"
+        label: "Natural-language entry (e.g., \"every Monday at 9am\")"
+      - id: "i"
+        label: "Sharing or collaboration"
+      - id: "j"
+        label: "Calendar integration"
+  - id: q8
+    prompt: "Which task-management method or philosophy, if any, do you follow?"
+    type: single_choice
+    construct: task_management_method_philosophy_if
+    required: true
+    options:
+      - id: "a"
+        label: "Getting Things Done (GTD)"
+      - id: "b"
+        label: "Time blocking"
+      - id: "c"
+        label: "Eisenhower / priority matrix"
+      - id: "d"
+        label: "A simple daily list"
+      - id: "e"
+        label: "My own system"
+      - id: "f"
+        label: "No particular method"
+  - id: q9
+    prompt: "Do you review your task list on a regular schedule?"
+    type: single_choice
+    construct: review_task_list_regular_schedule
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, daily"
+      - id: "b"
+        label: "Yes, weekly"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "Only when something feels off"
+      - id: "e"
+        label: "No, I don't review it"
+  - id: q10
+    prompt: "Do you pay for a task manager app?"
+    type: single_choice
+    construct: pay_task_manager_app
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, I use a free version"
+      - id: "c"
+        label: "No, the app I use is free"
+      - id: "d"
+        label: "I don't use one"
+  - id: q11
+    prompt: "Approximately how much do you spend per year on task manager apps, in US dollars? Enter a whole number (enter 0 if none)."
+    type: free_text
+    construct: approximately_much_spend_per_year
+    required: true
+  - id: q12
+    prompt: "Do you use AI features in your task manager (e.g., task suggestions, auto-scheduling)?"
+    type: single_choice
+    construct: use_ai_features_task_manager
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I'm interested"
+      - id: "d"
+        label: "No, and I'm not interested"
+  - id: q13
+    prompt: "How much do you agree with the following statement? — My task manager helps me get more done."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement? — Using a task manager reduces my stress about forgetting things."
+    type: single_choice
+    construct: much_agree_following_statement_using
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement? — I often add tasks but don't complete them."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement? — I spend more time organizing tasks than I should."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement? — I trust my system enough to fully rely on it."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How often do you do each of the following? — Complete all the tasks you set for a day"
+    type: single_choice
+    construct: often_each_following_complete_all
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q19
+    prompt: "How often do you do each of the following? — Carry uncompleted tasks over to the next day"
+    type: single_choice
+    construct: often_each_following_carry_uncompleted
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q20
+    prompt: "How often do you do each of the following? — Abandon or delete tasks you never got to"
+    type: single_choice
+    construct: often_each_following_abandon_delete
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q21
+    prompt: "How often do you do each of the following? — Feel a sense of accomplishment from checking tasks off"
+    type: single_choice
+    construct: often_each_following_feel_sense
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "Select your top 3 reasons you use a task manager. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_use
+    required: true
+    options:
+      - id: "a"
+        label: "Remembering everything I need to do"
+      - id: "b"
+        label: "Reducing mental load and stress"
+      - id: "c"
+        label: "Prioritizing what matters"
+      - id: "d"
+        label: "Feeling more productive"
+      - id: "e"
+        label: "Keeping projects on track"
+      - id: "f"
+        label: "Building habits or routines"
+      - id: "g"
+        label: "Coordinating with others"
+      - id: "h"
+        label: "The satisfaction of checking things off"
+  - id: q23
+    prompt: "What frustrates you most about task manager apps? (Select all that apply)"
+    type: multi_choice
+    construct: frustrates_most_task_manager_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Too complicated to set up"
+      - id: "b"
+        label: "Too simple or limited"
+      - id: "c"
+        label: "I forget to check it"
+      - id: "d"
+        label: "The list grows faster than I finish"
+      - id: "e"
+        label: "Syncing problems across devices"
+      - id: "f"
+        label: "Too many notifications"
+      - id: "g"
+        label: "Doesn't fit how I work"
+      - id: "h"
+        label: "Nothing frustrates me"
+  - id: q24
+    prompt: "Have you switched task manager apps in the past two years?"
+    type: single_choice
+    construct: have_switched_task_manager_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, once"
+      - id: "b"
+        label: "Yes, more than once"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q25
+    prompt: "How satisfied are you overall with your primary task manager app?"
+    type: single_choice
+    construct: satisfied_overall_primary_task_manager
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q26
+    prompt: "How satisfied are you with how well your task manager helps your productivity?"
+    type: single_choice
+    construct: satisfied_well_task_manager_helps
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q27
+    prompt: "How likely are you to recommend your task manager app to others? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_task_manager_app
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q28
+    prompt: "How likely are you to switch task manager apps in the next year?"
+    type: single_choice
+    construct: likely_switch_task_manager_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q29
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q30
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which mobile platform do you primarily use?"
+    type: single_choice
+    construct: mobile_platform_primarily_use
+    required: true
+    options:
+      - id: "a"
+        label: "iPhone (iOS)"
+      - id: "b"
+        label: "Android"
+      - id: "c"
+        label: "Other"
+      - id: "d"
+        label: "I don't use a smartphone"
+  - id: q36
+    prompt: "Which best describes your household?"
+    type: single_choice
+    construct: best_describes_household
+    required: true
+    options:
+      - id: "a"
+        label: "Live alone"
+      - id: "b"
+        label: "Live with a partner or spouse"
+      - id: "c"
+        label: "Live with family, including children"
+      - id: "d"
+        label: "Live with roommates"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "How many people are in your household, including yourself? Enter a whole number."
+    type: free_text
+    construct: many_people_household_including_yourself
+    required: true
+  - id: q38
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q39
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q40
+    prompt: "Is there anything else you would like to share about how you use task manager apps?"
+    type: free_text
+    construct: there_anything_else_would_like
+    required: false

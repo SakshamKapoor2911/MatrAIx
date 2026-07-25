@@ -1,0 +1,7 @@
+# Senior Health Services
+
+Attitudes toward and use of health and wellness services aimed at older adults.
+
+## About this survey
+
+This survey captures whether respondents answer about themselves or an older adult they help, the older adult's age and living situation, and which senior-focused services have been used (Medicare wellness visits, senior center programs, medical transportation, meal delivery, in-home help, fall-prevention programs, pharmacy medication reviews). It measures the providers seen, checkup frequency, insurance type (Original Medicare, Medicare Advantage, Medigap, Medicaid), appointment scheduling and transportation methods, number of medications and tools used to manage them, health technology use and comfort, and how easily appointments can be booked. It runs Likert batteries on attitudes (services meeting needs, finding local services, cost barriers, providers listening, independence, care coordination) and on the importance of service attributes, plus a top-3 ranking of services to add, weekly wellness and social activities, mobility, need for daily help, who provides it, where information is found, confidence, satisfaction, intent to try new services, a 0–10 recommendation score, and an open comment. Question types include single-choice, multi-select, Likert scales, a matrix battery split per item, a top-3 ranking, and numeric free-text. Demographics captured: age, gender, race/ethnicity, household income, education, employment, household size, marital status, region, urban/rural, and home ownership or living arrangement.

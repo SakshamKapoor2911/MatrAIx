@@ -1,0 +1,838 @@
+schemaVersion: "1.0"
+id: video_editing_software_v1
+title: "Video Editing Software Survey"
+description: "Which video editing software people use, how they edit, and how satisfied they are with their tools."
+questions:
+  - id: q0
+    prompt: "Which best describes how you edit video?"
+    type: single_choice
+    construct: best_describes_edit_video
+    required: true
+    options:
+      - id: "a"
+        label: "Professional video editor (it is my main job)"
+      - id: "b"
+        label: "Content creator / YouTuber / streamer"
+      - id: "c"
+        label: "Editing is part of a broader role (marketing, social, etc.)"
+      - id: "d"
+        label: "Freelancer or side business"
+      - id: "e"
+        label: "Hobbyist / personal projects only"
+      - id: "f"
+        label: "I rarely or never edit video"
+  - id: q1
+    prompt: "How many years have you been editing video?"
+    type: free_text
+    construct: many_years_have_been_editing
+    required: true
+  - id: q2
+    prompt: "What kinds of video do you edit most? (Select all that apply)"
+    type: multi_choice
+    construct: kinds_video_edit_most_select
+    required: true
+    options:
+      - id: "a"
+        label: "Short-form social (Reels, TikTok, Shorts)"
+      - id: "b"
+        label: "Long-form YouTube videos"
+      - id: "c"
+        label: "Vlogs or personal videos"
+      - id: "d"
+        label: "Marketing / promotional / ads"
+      - id: "e"
+        label: "Corporate or training videos"
+      - id: "f"
+        label: "Films, documentaries, or narratives"
+      - id: "g"
+        label: "Gaming or stream highlights"
+      - id: "h"
+        label: "Event videos (weddings, etc.)"
+      - id: "i"
+        label: "Tutorials or educational content"
+  - id: q3
+    prompt: "Which video editing tools do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: video_editing_tools_currently_use
+    required: true
+    options:
+      - id: "a"
+        label: "Adobe Premiere Pro"
+      - id: "b"
+        label: "DaVinci Resolve"
+      - id: "c"
+        label: "Final Cut Pro"
+      - id: "d"
+        label: "CapCut"
+      - id: "e"
+        label: "iMovie"
+      - id: "f"
+        label: "Adobe After Effects"
+      - id: "g"
+        label: "Filmora (Wondershare)"
+      - id: "h"
+        label: "Vegas Pro"
+      - id: "i"
+        label: "HitFilm"
+      - id: "j"
+        label: "Camtasia"
+      - id: "k"
+        label: "Descript"
+      - id: "l"
+        label: "Canva Video"
+      - id: "m"
+        label: "Shotcut / OpenShot / Kdenlive (free/open-source)"
+      - id: "n"
+        label: "Other"
+  - id: q4
+    prompt: "Which tool do you use most often for video editing?"
+    type: single_choice
+    construct: tool_use_most_often_video
+    required: true
+    options:
+      - id: "a"
+        label: "Adobe Premiere Pro"
+      - id: "b"
+        label: "DaVinci Resolve"
+      - id: "c"
+        label: "Final Cut Pro"
+      - id: "d"
+        label: "CapCut"
+      - id: "e"
+        label: "iMovie"
+      - id: "f"
+        label: "Filmora"
+      - id: "g"
+        label: "Vegas Pro"
+      - id: "h"
+        label: "Descript"
+      - id: "i"
+        label: "Other"
+  - id: q5
+    prompt: "On which device do you primarily edit video?"
+    type: single_choice
+    construct: device_primarily_edit_video
+    required: true
+    options:
+      - id: "a"
+        label: "Windows desktop or laptop"
+      - id: "b"
+        label: "Mac desktop or laptop"
+      - id: "c"
+        label: "iPad or tablet"
+      - id: "d"
+        label: "Smartphone"
+      - id: "e"
+        label: "Web-based / cloud editor"
+  - id: q6
+    prompt: "How often do you edit video?"
+    type: single_choice
+    construct: often_edit_video
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "About once a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Less than monthly"
+  - id: q7
+    prompt: "About how many hours do you spend editing in a typical week?"
+    type: free_text
+    construct: many_hours_spend_editing_typical
+    required: true
+  - id: q8
+    prompt: "What resolution do you most often edit and export at?"
+    type: single_choice
+    construct: resolution_most_often_edit_export
+    required: true
+    options:
+      - id: "a"
+        label: "1080p (Full HD)"
+      - id: "b"
+        label: "4K"
+      - id: "c"
+        label: "720p or lower"
+      - id: "d"
+        label: "Vertical / mobile (e.g., 1080x1920)"
+      - id: "e"
+        label: "Don't know"
+  - id: q9
+    prompt: "Which editing tasks do you regularly perform? (Select all that apply)"
+    type: multi_choice
+    construct: editing_tasks_regularly_perform_select
+    required: true
+    options:
+      - id: "a"
+        label: "Cutting and trimming clips"
+      - id: "b"
+        label: "Color correction / grading"
+      - id: "c"
+        label: "Audio mixing / cleanup"
+      - id: "d"
+        label: "Adding titles and captions"
+      - id: "e"
+        label: "Motion graphics or visual effects"
+      - id: "f"
+        label: "Transitions and effects"
+      - id: "g"
+        label: "Multi-camera editing"
+      - id: "h"
+        label: "Green screen / keying"
+      - id: "i"
+        label: "Adding music and sound effects"
+      - id: "j"
+        label: "Speed ramping / slow motion"
+  - id: q10
+    prompt: "How did you learn to edit video? (Select all that apply)"
+    type: multi_choice
+    construct: did_learn_edit_video_select
+    required: true
+    options:
+      - id: "a"
+        label: "YouTube tutorials"
+      - id: "b"
+        label: "Online courses"
+      - id: "c"
+        label: "Formal education / film school"
+      - id: "d"
+        label: "On the job"
+      - id: "e"
+        label: "Official documentation"
+      - id: "f"
+        label: "Trial and error / self-taught"
+      - id: "g"
+        label: "Friends or colleagues"
+  - id: q11
+    prompt: "How do you pay for your primary editing tool?"
+    type: single_choice
+    construct: pay_primary_editing_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Free version only"
+      - id: "b"
+        label: "Personal paid subscription"
+      - id: "c"
+        label: "One-time license purchase"
+      - id: "d"
+        label: "Employer or client pays"
+      - id: "e"
+        label: "Student / education license"
+      - id: "f"
+        label: "Comes bundled with my device"
+  - id: q12
+    prompt: "Approximately how much do you spend per month on video editing software (US dollars)?"
+    type: free_text
+    construct: approximately_much_spend_per_month
+    required: true
+  - id: q13
+    prompt: "Which AI-assisted editing features have you used? (Select all that apply)"
+    type: multi_choice
+    construct: ai_assisted_editing_features_have
+    required: true
+    options:
+      - id: "a"
+        label: "Auto-captions / transcription"
+      - id: "b"
+        label: "Auto-reframe for different aspect ratios"
+      - id: "c"
+        label: "Text-based editing (edit by editing the transcript)"
+      - id: "d"
+        label: "AI background / noise removal"
+      - id: "e"
+        label: "Auto color grading"
+      - id: "f"
+        label: "AI-generated b-roll or stock"
+      - id: "g"
+        label: "Auto highlights / scene detection"
+      - id: "h"
+        label: "I have not used any AI editing features"
+  - id: q14
+    prompt: "Which best describes your hardware for editing?"
+    type: single_choice
+    construct: best_describes_hardware_editing
+    required: true
+    options:
+      - id: "a"
+        label: "High-end desktop built for editing"
+      - id: "b"
+        label: "A capable laptop"
+      - id: "c"
+        label: "An average consumer computer"
+      - id: "d"
+        label: "Mainly a phone or tablet"
+      - id: "e"
+        label: "It struggles with my projects"
+  - id: q15
+    prompt: "How much do you agree with the following statement about your primary editing tool? — It is easy to learn and use."
+    type: single_choice
+    construct: much_agree_following_statement_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about your primary editing tool? — It performs well and rarely crashes."
+    type: single_choice
+    construct: much_agree_following_statement_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about your primary editing tool? — Rendering and export times are acceptable."
+    type: single_choice
+    construct: much_agree_following_statement_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about your primary editing tool? — It has all the features I need."
+    type: single_choice
+    construct: much_agree_following_statement_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about your primary editing tool? — The price is fair for what I get."
+    type: single_choice
+    construct: much_agree_following_statement_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How satisfied are you with each aspect of your editing tool? — Performance and stability"
+    type: single_choice
+    construct: satisfied_each_aspect_editing_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q21
+    prompt: "How satisfied are you with each aspect of your editing tool? — Color grading tools"
+    type: single_choice
+    construct: satisfied_each_aspect_editing_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q22
+    prompt: "How satisfied are you with each aspect of your editing tool? — Audio tools"
+    type: single_choice
+    construct: satisfied_each_aspect_editing_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q23
+    prompt: "How satisfied are you with each aspect of your editing tool? — Export options and speed"
+    type: single_choice
+    construct: satisfied_each_aspect_editing_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q24
+    prompt: "How satisfied are you with each aspect of your editing tool? — Value for money"
+    type: single_choice
+    construct: satisfied_each_aspect_editing_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q25
+    prompt: "How important is each factor when choosing editing software? — Ease of use"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important is each factor when choosing editing software? — Performance / rendering speed"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important is each factor when choosing editing software? — Advanced features"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "How important is each factor when choosing editing software? — Price"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "Select the top 3 things you most want improved in your editing software. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_most
+    required: true
+    options:
+      - id: "a"
+        label: "Faster rendering / export"
+      - id: "b"
+        label: "Better stability (fewer crashes)"
+      - id: "c"
+        label: "Lower price"
+      - id: "d"
+        label: "More AI features"
+      - id: "e"
+        label: "Easier learning curve"
+      - id: "f"
+        label: "Better audio tools"
+      - id: "g"
+        label: "Better color tools"
+      - id: "h"
+        label: "More effects and templates"
+      - id: "i"
+        label: "Better mobile version"
+      - id: "j"
+        label: "Better collaboration"
+  - id: q30
+    prompt: "What frustrates you most about your editing software? (Select all that apply)"
+    type: multi_choice
+    construct: frustrates_most_editing_software_select
+    required: true
+    options:
+      - id: "a"
+        label: "Crashes or freezes"
+      - id: "b"
+        label: "Slow rendering"
+      - id: "c"
+        label: "Steep learning curve"
+      - id: "d"
+        label: "Expensive subscription"
+      - id: "e"
+        label: "Hardware requirements too high"
+      - id: "f"
+        label: "Missing features"
+      - id: "g"
+        label: "Confusing interface"
+      - id: "h"
+        label: "Nothing frustrates me"
+  - id: q31
+    prompt: "Have you switched your main editing software in the past three years?"
+    type: single_choice
+    construct: have_switched_main_editing_software
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, once"
+      - id: "b"
+        label: "Yes, more than once"
+      - id: "c"
+        label: "No, but I have considered it"
+      - id: "d"
+        label: "No, and I have not considered it"
+  - id: q32
+    prompt: "Where do you publish the videos you edit? (Select all that apply)"
+    type: multi_choice
+    construct: where_publish_videos_edit_select
+    required: true
+    options:
+      - id: "a"
+        label: "YouTube"
+      - id: "b"
+        label: "TikTok"
+      - id: "c"
+        label: "Instagram"
+      - id: "d"
+        label: "Facebook"
+      - id: "e"
+        label: "Client / corporate delivery"
+      - id: "f"
+        label: "Personal archive only"
+      - id: "g"
+        label: "Streaming or broadcast"
+  - id: q33
+    prompt: "How likely are you to recommend your primary editing tool to a peer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_editing_tool
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q34
+    prompt: "Overall, how satisfied are you with your current editing software?"
+    type: single_choice
+    construct: overall_satisfied_current_editing_softwa
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "How likely are you to change your main editing software in the next 12 months?"
+    type: single_choice
+    construct: likely_change_main_editing_software
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q36
+    prompt: "What is the biggest thing that would improve your video editing workflow?"
+    type: free_text
+    construct: biggest_thing_that_would_improve
+    required: true
+  - id: q37
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 25"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your annual household income (US dollars)?"
+    type: single_choice
+    construct: annual_household_income_us_dollars
+    required: true
+    options:
+      - id: "a"
+        label: "Under $35,000"
+      - id: "b"
+        label: "$35,000–$74,999"
+      - id: "c"
+        label: "$75,000–$124,999"
+      - id: "d"
+        label: "$125,000–$199,999"
+      - id: "e"
+        label: "$200,000 or more"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Professional or doctoral degree"
+  - id: q42
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed / freelancer"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+  - id: q43
+    prompt: "Which best describes your relationship to video editing professionally?"
+    type: single_choice
+    construct: best_describes_relationship_video_editin
+    required: true
+    options:
+      - id: "a"
+        label: "Full-time professional editor"
+      - id: "b"
+        label: "Full-time content creator"
+      - id: "c"
+        label: "Part-time / freelance editor"
+      - id: "d"
+        label: "Do it as part of another job"
+      - id: "e"
+        label: "Purely a hobby"
+  - id: q44
+    prompt: "How would you rate your own video editing skill level?"
+    type: single_choice
+    construct: would_rate_own_video_editing
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert / professional"
+  - id: q45
+    prompt: "How many people live in your household?"
+    type: free_text
+    construct: many_people_live_household
+    required: true
+  - id: q46
+    prompt: "What is your relationship status?"
+    type: single_choice
+    construct: relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q48
+    prompt: "How would you describe where you live?"
+    type: single_choice
+    construct: would_describe_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

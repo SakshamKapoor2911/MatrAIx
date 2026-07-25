@@ -1,0 +1,946 @@
+schemaVersion: "1.0"
+id: terminal_emulator_preference_v1
+title: "Terminal Emulator Preference Survey"
+description: "How developers and technical users choose, customize, and use terminal emulator applications."
+questions:
+  - id: q0
+    prompt: "How often do you use a terminal emulator?"
+    type: single_choice
+    construct: often_use_terminal_emulator
+    required: true
+    options:
+      - id: "a"
+        label: "Constantly throughout the day"
+      - id: "b"
+        label: "A few times a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "I don't use a terminal emulator"
+  - id: q1
+    prompt: "How long have you been using terminal emulators?"
+    type: single_choice
+    construct: long_have_been_using_terminal
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "What is your primary operating system for terminal work?"
+    type: single_choice
+    construct: primary_operating_system_terminal_work
+    required: true
+    options:
+      - id: "a"
+        label: "macOS"
+      - id: "b"
+        label: "Windows"
+      - id: "c"
+        label: "Linux"
+      - id: "d"
+        label: "Windows with WSL"
+      - id: "e"
+        label: "Other"
+  - id: q3
+    prompt: "Which terminal emulator do you use most often?"
+    type: single_choice
+    construct: terminal_emulator_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "iTerm2"
+      - id: "b"
+        label: "Windows Terminal"
+      - id: "c"
+        label: "Alacritty"
+      - id: "d"
+        label: "Warp"
+      - id: "e"
+        label: "Kitty"
+      - id: "f"
+        label: "Ghostty"
+      - id: "g"
+        label: "GNOME Terminal"
+      - id: "h"
+        label: "The default macOS Terminal.app"
+      - id: "i"
+        label: "Other"
+  - id: q4
+    prompt: "Which terminal emulators have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: terminal_emulators_have_used_past
+    required: true
+    options:
+      - id: "a"
+        label: "iTerm2"
+      - id: "b"
+        label: "Windows Terminal"
+      - id: "c"
+        label: "Alacritty"
+      - id: "d"
+        label: "Warp"
+      - id: "e"
+        label: "Kitty"
+      - id: "f"
+        label: "Ghostty"
+      - id: "g"
+        label: "WezTerm"
+      - id: "h"
+        label: "Hyper"
+      - id: "i"
+        label: "GNOME Terminal or Konsole"
+      - id: "j"
+        label: "Terminal.app"
+      - id: "k"
+        label: "None of these"
+  - id: q5
+    prompt: "Which terminal emulators are you interested in trying next? (Select all that apply)"
+    type: multi_choice
+    construct: terminal_emulators_interested_trying_nex
+    required: true
+    options:
+      - id: "a"
+        label: "Warp"
+      - id: "b"
+        label: "Ghostty"
+      - id: "c"
+        label: "Kitty"
+      - id: "d"
+        label: "Alacritty"
+      - id: "e"
+        label: "WezTerm"
+      - id: "f"
+        label: "iTerm2"
+      - id: "g"
+        label: "Windows Terminal"
+      - id: "h"
+        label: "I'm happy with what I use"
+  - id: q6
+    prompt: "How did you choose your current terminal emulator?"
+    type: single_choice
+    construct: did_choose_current_terminal_emulator
+    required: true
+    options:
+      - id: "a"
+        label: "It came with my operating system"
+      - id: "b"
+        label: "A colleague or friend recommended it"
+      - id: "c"
+        label: "I read about it online or on social media"
+      - id: "d"
+        label: "I tried several and picked my favorite"
+      - id: "e"
+        label: "It was required by my team or company"
+      - id: "f"
+        label: "I haven't really chosen — I use whatever is there"
+  - id: q7
+    prompt: "About how many hours per day do you spend in a terminal? Please enter a number."
+    type: free_text
+    construct: many_hours_per_day_spend
+    required: true
+  - id: q8
+    prompt: "Which shell do you use in your terminal most often?"
+    type: single_choice
+    construct: shell_use_terminal_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "bash"
+      - id: "b"
+        label: "zsh"
+      - id: "c"
+        label: "fish"
+      - id: "d"
+        label: "PowerShell"
+      - id: "e"
+        label: "Nushell"
+      - id: "f"
+        label: "Other"
+  - id: q9
+    prompt: "Do you use a terminal multiplexer such as tmux or GNU Screen?"
+    type: single_choice
+    construct: use_terminal_multiplexer_such_as
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, tmux"
+      - id: "b"
+        label: "Yes, GNU Screen"
+      - id: "c"
+        label: "Yes, my terminal's built-in multiplexing"
+      - id: "d"
+        label: "No"
+  - id: q10
+    prompt: "Which terminal features do you regularly use? (Select all that apply)"
+    type: multi_choice
+    construct: terminal_features_regularly_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Split panes"
+      - id: "b"
+        label: "Tabs"
+      - id: "c"
+        label: "Custom key bindings"
+      - id: "d"
+        label: "Search / find in scrollback"
+      - id: "e"
+        label: "Copy mode"
+      - id: "f"
+        label: "Ligatures"
+      - id: "g"
+        label: "Image or graphics protocols"
+      - id: "h"
+        label: "Session or window restore"
+      - id: "i"
+        label: "Command palette"
+  - id: q11
+    prompt: "Which font do you use in your terminal? (Select all that apply)"
+    type: multi_choice
+    construct: font_use_terminal_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "A Nerd Font (patched icons)"
+      - id: "b"
+        label: "JetBrains Mono"
+      - id: "c"
+        label: "Fira Code"
+      - id: "d"
+        label: "Cascadia Code"
+      - id: "e"
+        label: "Menlo or Monaco"
+      - id: "f"
+        label: "Hack"
+      - id: "g"
+        label: "Source Code Pro"
+      - id: "h"
+        label: "The system default"
+      - id: "i"
+        label: "Other"
+  - id: q12
+    prompt: "Do you use font ligatures in your terminal?"
+    type: single_choice
+    construct: use_font_ligatures_terminal
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I like them"
+      - id: "b"
+        label: "Yes, but I'm indifferent"
+      - id: "c"
+        label: "No, I turned them off"
+      - id: "d"
+        label: "I'm not sure what those are"
+  - id: q13
+    prompt: "How is your terminal color scheme set?"
+    type: single_choice
+    construct: terminal_color_scheme_set
+    required: true
+    options:
+      - id: "a"
+        label: "A popular theme (Dracula, Solarized, Gruvbox, etc.)"
+      - id: "b"
+        label: "A custom scheme I built myself"
+      - id: "c"
+        label: "The default theme"
+      - id: "d"
+        label: "It matches my system light/dark mode"
+  - id: q14
+    prompt: "How do you manage your terminal configuration? (Select all that apply)"
+    type: multi_choice
+    construct: manage_terminal_configuration_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Editing config files by hand"
+      - id: "b"
+        label: "A graphical settings/preferences panel"
+      - id: "c"
+        label: "A dotfiles repository"
+      - id: "d"
+        label: "Copying settings between machines manually"
+      - id: "e"
+        label: "I don't customize my configuration"
+  - id: q15
+    prompt: "About how many distinct terminal profiles or configurations do you maintain? Please enter a number."
+    type: free_text
+    construct: many_distinct_terminal_profiles_configur
+    required: true
+  - id: q16
+    prompt: "How often do you connect to remote machines over SSH from your terminal?"
+    type: single_choice
+    construct: often_connect_remote_machines_over
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Constantly"
+  - id: q17
+    prompt: "Which tasks do you primarily use your terminal for? (Select all that apply)"
+    type: multi_choice
+    construct: tasks_primarily_use_terminal_select
+    required: true
+    options:
+      - id: "a"
+        label: "Running builds and tests"
+      - id: "b"
+        label: "Version control (git)"
+      - id: "c"
+        label: "Editing files (Vim, Emacs, nano)"
+      - id: "d"
+        label: "System administration"
+      - id: "e"
+        label: "Package management"
+      - id: "f"
+        label: "Cloud or container tooling"
+      - id: "g"
+        label: "Running scripts and automation"
+      - id: "h"
+        label: "Database or REPL sessions"
+  - id: q18
+    prompt: "Do you use a GPU-accelerated terminal (Alacritty, Kitty, WezTerm, Ghostty)?"
+    type: single_choice
+    construct: use_gpu_accelerated_terminal_alacritty
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, primarily for the speed"
+      - id: "b"
+        label: "Yes, but speed isn't why"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q19
+    prompt: "How much do you agree: Terminal startup and rendering speed noticeably affects my workflow."
+    type: single_choice
+    construct: much_agree_terminal_startup_rendering
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: I value being able to deeply customize my terminal."
+    type: single_choice
+    construct: much_agree_i_value_being
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: I prefer a minimal terminal over one with many built-in features."
+    type: single_choice
+    construct: much_agree_i_prefer_minimal
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: A keyboard-driven workflow is important to me."
+    type: single_choice
+    construct: much_agree_keyboard_driven_workflow
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How much do you agree: Built-in AI or command-suggestion features (like Warp's) are useful to me."
+    type: single_choice
+    construct: much_agree_built_ai_command
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "How much do you agree: My terminal's appearance and theming matter to me."
+    type: single_choice
+    construct: much_agree_my_terminal_s
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "When choosing a terminal emulator, how important is rendering and scrolling performance?"
+    type: single_choice
+    construct: when_choosing_terminal_emulator_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a terminal emulator, how important is deep customizability?"
+    type: single_choice
+    construct: when_choosing_terminal_emulator_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a terminal emulator, how important is cross-platform availability?"
+    type: single_choice
+    construct: when_choosing_terminal_emulator_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing a terminal emulator, how important is low resource usage?"
+    type: single_choice
+    construct: when_choosing_terminal_emulator_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "When choosing a terminal emulator, how important are built-in features like splits and tabs?"
+    type: single_choice
+    construct: when_choosing_terminal_emulator_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "When choosing a terminal emulator, how important is visual polish and theming?"
+    type: single_choice
+    construct: when_choosing_terminal_emulator_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q31
+    prompt: "Which are your top 3 factors when choosing a terminal emulator? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Rendering performance"
+      - id: "b"
+        label: "Customizability"
+      - id: "c"
+        label: "Cross-platform availability"
+      - id: "d"
+        label: "Low resource usage"
+      - id: "e"
+        label: "Built-in features"
+      - id: "f"
+        label: "Theming and aesthetics"
+      - id: "g"
+        label: "Familiarity"
+      - id: "h"
+        label: "Active development and community"
+  - id: q32
+    prompt: "How often do you tweak or change your terminal configuration?"
+    type: single_choice
+    construct: often_tweak_change_terminal_configuratio
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q33
+    prompt: "How often do you run into rendering glitches or display issues in your terminal?"
+    type: single_choice
+    construct: often_run_into_rendering_glitches
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q34
+    prompt: "How often do you use split panes or tabs within a single terminal window?"
+    type: single_choice
+    construct: often_use_split_panes_tabs
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q35
+    prompt: "Do you sync your terminal settings across multiple machines?"
+    type: single_choice
+    construct: sync_terminal_settings_across_multiple
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, automatically via a dotfiles repo or sync"
+      - id: "b"
+        label: "Yes, but manually"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I only use one machine"
+  - id: q36
+    prompt: "How did you discover the terminal emulators you use? (Select all that apply)"
+    type: multi_choice
+    construct: did_discover_terminal_emulators_use
+    required: true
+    options:
+      - id: "a"
+        label: "Word of mouth from colleagues"
+      - id: "b"
+        label: "Social media (X, Reddit, Hacker News)"
+      - id: "c"
+        label: "Blog posts or articles"
+      - id: "d"
+        label: "YouTube or streamers"
+      - id: "e"
+        label: "Official documentation or project sites"
+      - id: "f"
+        label: "It shipped with my OS"
+  - id: q37
+    prompt: "How would you describe your terminal setup?"
+    type: single_choice
+    construct: would_describe_terminal_setup
+    required: true
+    options:
+      - id: "a"
+        label: "Heavily customized and personalized"
+      - id: "b"
+        label: "Moderately customized"
+      - id: "c"
+        label: "Lightly tweaked from defaults"
+      - id: "d"
+        label: "Completely stock"
+  - id: q38
+    prompt: "How satisfied are you with your primary terminal's performance?"
+    type: single_choice
+    construct: satisfied_primary_terminal_s_performance
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q39
+    prompt: "How satisfied are you with your terminal's customization options?"
+    type: single_choice
+    construct: satisfied_terminal_s_customization_optio
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q40
+    prompt: "Overall, how satisfied are you with your primary terminal emulator?"
+    type: single_choice
+    construct: overall_satisfied_primary_terminal_emula
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q41
+    prompt: "How likely are you to recommend your primary terminal emulator to another developer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_terminal_emulat
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q42
+    prompt: "How likely are you to switch your primary terminal emulator within the next year?"
+    type: single_choice
+    construct: likely_switch_primary_terminal_emulator
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q43
+    prompt: "What is one thing you would improve about your terminal emulator? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_terminal
+    required: false
+  - id: q44
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "DevOps or platform engineer"
+      - id: "e"
+        label: "Systems or infrastructure engineer"
+      - id: "f"
+        label: "Data engineer or scientist"
+      - id: "g"
+        label: "Engineering manager"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q45
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q46
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q47
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q48
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q49
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q50
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q52
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q53
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q54
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

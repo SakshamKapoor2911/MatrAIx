@@ -1,0 +1,611 @@
+schemaVersion: "1.0"
+id: hydration_app_usage_v1
+title: "Hydration App Usage Survey"
+description: "Consumer use of water-tracking and hydration reminder apps."
+questions:
+  - id: q0
+    prompt: "Do you currently use any app to track your water or fluid intake?"
+    type: single_choice
+    construct: currently_use_any_app_track
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I use one regularly"
+      - id: "b"
+        label: "Yes, but only occasionally"
+      - id: "c"
+        label: "No, but I have used one before"
+      - id: "d"
+        label: "No, I have never used one"
+  - id: q1
+    prompt: "How long have you used a hydration or water-tracking app?"
+    type: single_choice
+    construct: long_have_used_hydration_water
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 month"
+      - id: "b"
+        label: "1 to 6 months"
+      - id: "c"
+        label: "6 months to 1 year"
+      - id: "d"
+        label: "More than 1 year"
+      - id: "e"
+        label: "I do not use one"
+  - id: q2
+    prompt: "What kind of hydration tool do you mainly use?"
+    type: single_choice
+    construct: kind_hydration_tool_mainly_use
+    required: true
+    options:
+      - id: "a"
+        label: "A dedicated hydration or water-tracking app"
+      - id: "b"
+        label: "A hydration feature inside a broader health or fitness app"
+      - id: "c"
+        label: "A smart water bottle with an app"
+      - id: "d"
+        label: "A reminder or alarm on my phone"
+      - id: "e"
+        label: "I do not use any tool"
+  - id: q3
+    prompt: "Which app or platform do you mainly use for hydration tracking?"
+    type: single_choice
+    construct: app_platform_mainly_use_hydration
+    required: true
+    options:
+      - id: "a"
+        label: "A standalone hydration app (e.g., WaterMinder, Plant Nanny)"
+      - id: "b"
+        label: "Apple Health or Google Fit"
+      - id: "c"
+        label: "A fitness app (e.g., Fitbit, MyFitnessPal)"
+      - id: "d"
+        label: "A smart-bottle app (e.g., HidrateSpark)"
+      - id: "e"
+        label: "Phone reminders or another tool"
+      - id: "f"
+        label: "I do not use an app"
+  - id: q4
+    prompt: "What made you start using a hydration app? (Select all that apply)"
+    type: multi_choice
+    construct: made_start_using_hydration_app
+    required: true
+    options:
+      - id: "a"
+        label: "Wanted to drink more water"
+      - id: "b"
+        label: "A health or fitness goal"
+      - id: "c"
+        label: "Advice from a doctor or coach"
+      - id: "d"
+        label: "Recommendation from a friend or family member"
+      - id: "e"
+        label: "Curiosity or it looked fun"
+      - id: "f"
+        label: "Managing headaches, energy, or skin"
+      - id: "g"
+        label: "Not applicable"
+  - id: q5
+    prompt: "How often do you log or check your hydration in the app?"
+    type: single_choice
+    construct: often_log_check_hydration_app
+    required: true
+    options:
+      - id: "a"
+        label: "Several times a day"
+      - id: "b"
+        label: "Once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Almost never"
+  - id: q6
+    prompt: "How do you usually record your water intake in the app?"
+    type: single_choice
+    construct: usually_record_water_intake_app
+    required: true
+    options:
+      - id: "a"
+        label: "Tap a preset cup or bottle button"
+      - id: "b"
+        label: "Enter a custom amount"
+      - id: "c"
+        label: "It syncs automatically from a smart bottle"
+      - id: "d"
+        label: "It estimates based on reminders"
+      - id: "e"
+        label: "Not applicable"
+  - id: q7
+    prompt: "On a typical day, about how many cups or glasses of water do you drink? Please enter a number."
+    type: free_text
+    construct: typical_day_many_cups_glasses
+    required: true
+  - id: q8
+    prompt: "What is your daily hydration goal in the app, in cups or glasses? Please enter a number (enter 0 if you have not set one)."
+    type: free_text
+    construct: daily_hydration_goal_app_cups
+    required: true
+  - id: q9
+    prompt: "Which app features do you value most? (Select all that apply)"
+    type: multi_choice
+    construct: app_features_value_most_select
+    required: true
+    options:
+      - id: "a"
+        label: "Reminders or notifications to drink"
+      - id: "b"
+        label: "A daily goal based on my body or activity"
+      - id: "c"
+        label: "Progress charts and streaks"
+      - id: "d"
+        label: "Integration with a wearable or health app"
+      - id: "e"
+        label: "Logging other drinks besides water"
+      - id: "f"
+        label: "Customizable cup or bottle sizes"
+      - id: "g"
+        label: "Fun visuals or characters"
+  - id: q10
+    prompt: "Select your top 3 most important features in a hydration app. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_most_important
+    required: true
+    options:
+      - id: "a"
+        label: "Reminders"
+      - id: "b"
+        label: "Personalized daily goal"
+      - id: "c"
+        label: "Progress charts and streaks"
+      - id: "d"
+        label: "Wearable or health-app integration"
+      - id: "e"
+        label: "Easy quick logging"
+      - id: "f"
+        label: "Logging other drinks"
+      - id: "g"
+        label: "Fun or motivating design"
+  - id: q11
+    prompt: "Do the app's reminders actually get you to drink more water?"
+    type: single_choice
+    construct: app_s_reminders_actually_get
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, noticeably more"
+      - id: "b"
+        label: "Yes, a little more"
+      - id: "c"
+        label: "Not really"
+      - id: "d"
+        label: "Not sure"
+  - id: q12
+    prompt: "Does your hydration app connect to a wearable or your phone's health app?"
+    type: single_choice
+    construct: does_hydration_app_connect_wearable
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a smartwatch or fitness tracker"
+      - id: "b"
+        label: "Yes, my phone's built-in health app"
+      - id: "c"
+        label: "Yes, a smart water bottle"
+      - id: "d"
+        label: "No connection"
+      - id: "e"
+        label: "Not sure"
+  - id: q13
+    prompt: "How much do you agree with the following statement: Using a hydration app has helped me drink more water."
+    type: single_choice
+    construct: much_agree_following_statement_using
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: The app fits easily into my daily routine."
+    type: single_choice
+    construct: much_agree_following_statement_app
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: The reminders sometimes feel annoying."
+    type: single_choice
+    construct: much_agree_following_statement_reminders
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: Tracking my water makes me more aware of my hydration."
+    type: single_choice
+    construct: much_agree_following_statement_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: I would keep drinking enough water even without the app."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How motivating do you find hydration streaks, badges, or goal progress?"
+    type: single_choice
+    construct: motivating_find_hydration_streaks_badges
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all motivating"
+      - id: "b"
+        label: "Slightly motivating"
+      - id: "c"
+        label: "Moderately motivating"
+      - id: "d"
+        label: "Very motivating"
+  - id: q19
+    prompt: "Do you pay for a hydration app or premium features?"
+    type: single_choice
+    construct: pay_hydration_app_premium_features
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, I use only the free version"
+      - id: "c"
+        label: "Not applicable"
+  - id: q20
+    prompt: "How important is it to you that a hydration app is free?"
+    type: single_choice
+    construct: important_it_that_hydration_app
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+  - id: q21
+    prompt: "What most often stops you from using a hydration app more? (Select all that apply)"
+    type: multi_choice
+    construct: most_often_stops_from_using
+    required: true
+    options:
+      - id: "a"
+        label: "Forgetting to log drinks"
+      - id: "b"
+        label: "Too many notifications"
+      - id: "c"
+        label: "Lost interest or motivation"
+      - id: "d"
+        label: "Logging feels tedious"
+      - id: "e"
+        label: "Concerns about how my data is used"
+      - id: "f"
+        label: "I already drink enough"
+      - id: "g"
+        label: "Nothing in particular"
+  - id: q22
+    prompt: "How concerned are you about the privacy of the data in your hydration app?"
+    type: single_choice
+    construct: concerned_privacy_data_hydration_app
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+  - id: q23
+    prompt: "Have you stopped using a hydration app in the past year?"
+    type: single_choice
+    construct: have_stopped_using_hydration_app
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I did not replace it"
+      - id: "b"
+        label: "Yes, but I switched to a different one"
+      - id: "c"
+        label: "No, I kept using the same one"
+      - id: "d"
+        label: "Not applicable"
+  - id: q24
+    prompt: "Overall, how satisfied are you with the hydration app you use most?"
+    type: single_choice
+    construct: overall_satisfied_hydration_app_use
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q25
+    prompt: "How likely are you to recommend a hydration app to a friend, on a scale of 0 (not at all likely) to 10 (extremely likely)?"
+    type: single_choice
+    construct: likely_recommend_hydration_app_friend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q26
+    prompt: "How likely are you to keep using a hydration app over the next year?"
+    type: single_choice
+    construct: likely_keep_using_hydration_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Somewhat likely"
+      - id: "d"
+        label: "Very likely"
+  - id: q27
+    prompt: "In your own words, what would make a hydration app more useful for you?"
+    type: free_text
+    construct: own_words_would_make_hydration
+    required: true
+  - id: q28
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q29
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe or not to say"
+  - id: q30
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q33
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+  - id: q34
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q36
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q37
+    prompt: "How would you describe your overall interest in health and fitness tracking?"
+    type: single_choice
+    construct: would_describe_overall_interest_health
+    required: true
+    options:
+      - id: "a"
+        label: "Not interested"
+      - id: "b"
+        label: "Somewhat interested"
+      - id: "c"
+        label: "Interested"
+      - id: "d"
+        label: "Very interested"
+  - id: q38
+    prompt: "Do you use a wearable device (such as a smartwatch or fitness tracker)?"
+    type: single_choice
+    construct: use_wearable_device_such_as
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, daily"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No, and I would not"
+  - id: q39
+    prompt: "About how many other health or fitness apps do you use regularly? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: many_other_health_fitness_apps
+    required: true

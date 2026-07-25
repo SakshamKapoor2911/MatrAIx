@@ -1,0 +1,689 @@
+schemaVersion: "1.0"
+id: medical_debt_v1
+title: "Medical Debt Survey"
+description: "Consumers' experiences with medical bills and the burden of medical debt."
+questions:
+  - id: q0
+    prompt: "In the past 5 years, have you or someone in your household had medical bills you were unable to pay when they were due?"
+    type: single_choice
+    construct: past_5_years_have_someone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, in the past 12 months"
+      - id: "b"
+        label: "Yes, but more than a year ago"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not sure"
+  - id: q1
+    prompt: "Do you currently owe money on any medical or dental bills?"
+    type: single_choice
+    construct: currently_owe_money_any_medical
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q2
+    prompt: "About how much medical debt do you currently owe in total? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_medical_debt_currently_owe
+    required: true
+  - id: q3
+    prompt: "Which range best describes your current total medical debt?"
+    type: single_choice
+    construct: range_best_describes_current_total
+    required: true
+    options:
+      - id: "a"
+        label: "No current medical debt"
+      - id: "b"
+        label: "Under $500"
+      - id: "c"
+        label: "$500 to $999"
+      - id: "d"
+        label: "$1,000 to $2,499"
+      - id: "e"
+        label: "$2,500 to $4,999"
+      - id: "f"
+        label: "$5,000 to $9,999"
+      - id: "g"
+        label: "$10,000 or more"
+  - id: q4
+    prompt: "What kinds of care led to the medical bills you owe or struggled to pay? (Select all that apply)"
+    type: multi_choice
+    construct: kinds_care_led_medical_bills
+    required: true
+    options:
+      - id: "a"
+        label: "Emergency room visit"
+      - id: "b"
+        label: "Hospital stay or surgery"
+      - id: "c"
+        label: "Doctor or specialist visits"
+      - id: "d"
+        label: "Dental care"
+      - id: "e"
+        label: "Prescription medications"
+      - id: "f"
+        label: "Lab tests or imaging"
+      - id: "g"
+        label: "Mental health or therapy"
+      - id: "h"
+        label: "Childbirth or maternity care"
+      - id: "i"
+        label: "Not applicable"
+  - id: q5
+    prompt: "At the time these bills were incurred, what was your insurance situation?"
+    type: single_choice
+    construct: time_these_bills_were_incurred
+    required: true
+    options:
+      - id: "a"
+        label: "I had insurance that covered part of the cost"
+      - id: "b"
+        label: "I had insurance but the bill was still large"
+      - id: "c"
+        label: "The care was out of network"
+      - id: "d"
+        label: "I was uninsured"
+      - id: "e"
+        label: "Not sure"
+      - id: "f"
+        label: "Not applicable"
+  - id: q6
+    prompt: "How did you first learn you owed the medical bill? (Select all that apply)"
+    type: multi_choice
+    construct: did_first_learn_owed_medical
+    required: true
+    options:
+      - id: "a"
+        label: "A bill in the mail"
+      - id: "b"
+        label: "A statement in an online patient portal"
+      - id: "c"
+        label: "A phone call from the provider"
+      - id: "d"
+        label: "A call or letter from a collection agency"
+      - id: "e"
+        label: "A notice on my credit report"
+      - id: "f"
+        label: "Not applicable"
+  - id: q7
+    prompt: "What have you done to deal with medical bills you could not pay? (Select all that apply)"
+    type: multi_choice
+    construct: have_done_deal_medical_bills
+    required: true
+    options:
+      - id: "a"
+        label: "Set up a payment plan with the provider"
+      - id: "b"
+        label: "Negotiated a lower amount"
+      - id: "c"
+        label: "Applied for financial assistance or charity care"
+      - id: "d"
+        label: "Put the bill on a credit card"
+      - id: "e"
+        label: "Took out a loan or used medical financing (for example, CareCredit)"
+      - id: "f"
+        label: "Borrowed from family or friends"
+      - id: "g"
+        label: "Used savings or retirement funds"
+      - id: "h"
+        label: "Ignored it or let it go to collections"
+      - id: "i"
+        label: "Not applicable"
+  - id: q8
+    prompt: "Have any of your medical bills ever been sent to a collection agency?"
+    type: single_choice
+    construct: have_any_medical_bills_ever
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not sure"
+  - id: q9
+    prompt: "Have you ever applied for hospital financial assistance or charity care?"
+    type: single_choice
+    construct: have_ever_applied_hospital_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I received it"
+      - id: "b"
+        label: "Yes, but I was denied"
+      - id: "c"
+        label: "No, but I knew it was available"
+      - id: "d"
+        label: "No, I did not know it existed"
+      - id: "e"
+        label: "Not applicable"
+  - id: q10
+    prompt: "Do you currently have a payment plan for any medical bill?"
+    type: single_choice
+    construct: currently_have_payment_plan_any
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one plan"
+      - id: "b"
+        label: "Yes, more than one plan"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable"
+  - id: q11
+    prompt: "In the past 12 months, have you done any of the following because of medical costs? (Select all that apply)"
+    type: multi_choice
+    construct: past_12_months_have_done
+    required: true
+    options:
+      - id: "a"
+        label: "Delayed or skipped a doctor visit"
+      - id: "b"
+        label: "Did not fill a prescription"
+      - id: "c"
+        label: "Skipped a recommended test or procedure"
+      - id: "d"
+        label: "Cut back on food, heat, or other basics"
+      - id: "e"
+        label: "Used up most or all of my savings"
+      - id: "f"
+        label: "Took on other debt"
+      - id: "g"
+        label: "None of these"
+  - id: q12
+    prompt: "How much do you agree or disagree: Medical bills are a major source of financial stress for me."
+    type: single_choice
+    construct: much_agree_disagree_medical_bills
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I understood what I would owe before receiving care."
+    type: single_choice
+    construct: much_agree_disagree_i_understood
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: The billing process from providers was clear and easy to understand."
+    type: single_choice
+    construct: much_agree_disagree_billing_process
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: I worry that medical costs could put my household in serious debt."
+    type: single_choice
+    construct: much_agree_disagree_i_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: I know where to turn for help with medical bills I cannot afford."
+    type: single_choice
+    construct: much_agree_disagree_i_know
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How stressful has dealing with medical bills been for you overall?"
+    type: single_choice
+    construct: stressful_has_dealing_medical_bills
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all stressful"
+      - id: "b"
+        label: "Slightly stressful"
+      - id: "c"
+        label: "Moderately stressful"
+      - id: "d"
+        label: "Very stressful"
+      - id: "e"
+        label: "Extremely stressful"
+  - id: q18
+    prompt: "How has medical debt affected your ability to pay other bills — Rent or mortgage?"
+    type: single_choice
+    construct: has_medical_debt_affected_ability
+    required: true
+    options:
+      - id: "a"
+        label: "No effect"
+      - id: "b"
+        label: "Minor effect"
+      - id: "c"
+        label: "Moderate effect"
+      - id: "d"
+        label: "Major effect"
+      - id: "e"
+        label: "Not applicable"
+  - id: q19
+    prompt: "How has medical debt affected your ability to pay other bills — Credit card or loan payments?"
+    type: single_choice
+    construct: has_medical_debt_affected_ability
+    required: true
+    options:
+      - id: "a"
+        label: "No effect"
+      - id: "b"
+        label: "Minor effect"
+      - id: "c"
+        label: "Moderate effect"
+      - id: "d"
+        label: "Major effect"
+      - id: "e"
+        label: "Not applicable"
+  - id: q20
+    prompt: "How has medical debt affected your ability to pay other bills — Everyday living expenses like food and utilities?"
+    type: single_choice
+    construct: has_medical_debt_affected_ability
+    required: true
+    options:
+      - id: "a"
+        label: "No effect"
+      - id: "b"
+        label: "Minor effect"
+      - id: "c"
+        label: "Moderate effect"
+      - id: "d"
+        label: "Major effect"
+      - id: "e"
+        label: "Not applicable"
+  - id: q21
+    prompt: "How has medical debt affected your ability to pay other bills — Saving for the future?"
+    type: single_choice
+    construct: has_medical_debt_affected_ability
+    required: true
+    options:
+      - id: "a"
+        label: "No effect"
+      - id: "b"
+        label: "Minor effect"
+      - id: "c"
+        label: "Moderate effect"
+      - id: "d"
+        label: "Major effect"
+      - id: "e"
+        label: "Not applicable"
+  - id: q22
+    prompt: "Has medical debt ever affected your credit score, as far as you know?"
+    type: single_choice
+    construct: has_medical_debt_ever_affected
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, significantly"
+      - id: "b"
+        label: "Yes, somewhat"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not sure"
+  - id: q23
+    prompt: "How often do you feel anxious or overwhelmed when thinking about medical bills?"
+    type: single_choice
+    construct: often_feel_anxious_overwhelmed_when
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q24
+    prompt: "Please select your top 3 concerns about medical costs. (Select all that apply)"
+    type: multi_choice
+    construct: please_select_top_3_concerns
+    required: true
+    options:
+      - id: "a"
+        label: "Getting a surprise or unexpected bill"
+      - id: "b"
+        label: "Not being able to afford care I need"
+      - id: "c"
+        label: "Going into debt or bankruptcy"
+      - id: "d"
+        label: "Damage to my credit score"
+      - id: "e"
+        label: "Confusing or incorrect bills"
+      - id: "f"
+        label: "Dealing with collection agencies"
+      - id: "g"
+        label: "Costs rising faster than my income"
+      - id: "h"
+        label: "Insurance not covering enough"
+  - id: q25
+    prompt: "Have you ever disputed a medical bill you believed was incorrect?"
+    type: single_choice
+    construct: have_ever_disputed_medical_bill
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it was corrected"
+      - id: "b"
+        label: "Yes, but it was not corrected"
+      - id: "c"
+        label: "No, but I suspected an error"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "Not applicable"
+  - id: q26
+    prompt: "How confident are you that you could handle a $2,000 medical bill without going into debt?"
+    type: single_choice
+    construct: confident_that_could_handle_2
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q27
+    prompt: "How prepared do you feel to cover a major medical expense in the next year?"
+    type: single_choice
+    construct: prepared_feel_cover_major_medical
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all prepared"
+      - id: "b"
+        label: "Slightly prepared"
+      - id: "c"
+        label: "Moderately prepared"
+      - id: "d"
+        label: "Very prepared"
+      - id: "e"
+        label: "Extremely prepared"
+  - id: q28
+    prompt: "Overall, how satisfied are you with how affordable your medical care has been?"
+    type: single_choice
+    construct: overall_satisfied_affordable_medical_car
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "How likely are you to set aside more money for medical costs in the coming year?"
+    type: single_choice
+    construct: likely_set_aside_more_money
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q30
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $30,000"
+      - id: "b"
+        label: "$30,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Homemaker or full-time caregiver"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+  - id: q37
+    prompt: "What type of health insurance coverage do you currently have?"
+    type: single_choice
+    construct: type_health_insurance_coverage_currently
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored plan"
+      - id: "b"
+        label: "Plan purchased on my own or through the marketplace"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Other"
+      - id: "f"
+        label: "No health insurance"
+  - id: q38
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q40
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

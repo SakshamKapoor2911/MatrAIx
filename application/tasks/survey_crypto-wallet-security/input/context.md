@@ -1,0 +1,7 @@
+# Crypto Wallet Security
+
+How cryptocurrency owners secure their holdings across exchanges, software wallets, and self-custody.
+
+## About this survey
+
+This survey examines cryptocurrency security practices, beginning with a screener on ownership, tenure, and where respondents store their coins, then mapping their custody approach across exchanges, software wallets, and hardware wallets. It records the specific exchanges, wallets, and hardware devices used, the security measures adopted, and how seed phrases are stored and tested. Attitudes are captured through an agreement Likert battery on self-custody versus exchanges, a concern scale over hacks, insolvency, phishing, and physical theft, and a per-item importance matrix on storage-selection criteria, plus a top-three ranking of security priorities. Additional sections drill into cold-storage share, holdings value, past security incidents, review cadence, inheritance planning, two-factor methods, and satisfaction and confidence in the current setup, followed by recommendation likelihood and forward-looking intent. Question types include single-choice, multi-select, several Likert scales, agreement and importance matrices, a ranking item, and numeric free-text. The survey ends with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, U.S. region, urbanicity, and comfort with technology.

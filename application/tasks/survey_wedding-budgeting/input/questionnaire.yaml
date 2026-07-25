@@ -1,0 +1,668 @@
+schemaVersion: "1.0"
+id: wedding_budgeting_v1
+title: "Wedding Budgeting Survey"
+description: "How couples plan, budget for, and pay for a wedding, and their attitudes toward wedding spending."
+questions:
+  - id: q0
+    prompt: "What is your relationship to wedding planning?"
+    type: single_choice
+    construct: relationship_wedding_planning
+    required: true
+    options:
+      - id: "a"
+        label: "I am currently planning my own wedding"
+      - id: "b"
+        label: "I got married in the past 3 years"
+      - id: "c"
+        label: "I am engaged but haven't started planning"
+      - id: "d"
+        label: "I expect to plan a wedding in the future"
+      - id: "e"
+        label: "I am helping plan someone else's wedding"
+      - id: "f"
+        label: "None of these"
+  - id: q1
+    prompt: "What is (or was) your total wedding budget? Enter a dollar amount."
+    type: free_text
+    construct: was_total_wedding_budget_enter
+    required: true
+  - id: q2
+    prompt: "About how many guests are (or were) invited to the wedding? Enter a number."
+    type: free_text
+    construct: many_guests_were_invited_wedding
+    required: true
+  - id: q3
+    prompt: "Who is (or was) primarily paying for the wedding? (Select all that apply)"
+    type: multi_choice
+    construct: who_was_primarily_paying_wedding
+    required: true
+    options:
+      - id: "a"
+        label: "The couple themselves"
+      - id: "b"
+        label: "The bride's parents"
+      - id: "c"
+        label: "The groom's parents"
+      - id: "d"
+        label: "Both sets of parents"
+      - id: "e"
+        label: "Other family members"
+      - id: "f"
+        label: "A combination of sources"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q4
+    prompt: "Which of the following are (or were) the biggest expenses? (Select all that apply)"
+    type: multi_choice
+    construct: following_were_biggest_expenses_select
+    required: true
+    options:
+      - id: "a"
+        label: "Venue"
+      - id: "b"
+        label: "Catering and drinks"
+      - id: "c"
+        label: "Photography and videography"
+      - id: "d"
+        label: "Attire (dress, suit, etc.)"
+      - id: "e"
+        label: "Flowers and décor"
+      - id: "f"
+        label: "Music or entertainment (DJ, band)"
+      - id: "g"
+        label: "The engagement ring"
+      - id: "h"
+        label: "Honeymoon"
+      - id: "i"
+        label: "Invitations and stationery"
+      - id: "j"
+        label: "Hair and makeup"
+  - id: q5
+    prompt: "How are (or did) you fund the wedding? (Select all that apply)"
+    type: multi_choice
+    construct: did_fund_wedding_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Personal savings"
+      - id: "b"
+        label: "Contributions from family"
+      - id: "c"
+        label: "Credit cards"
+      - id: "d"
+        label: "A personal loan"
+      - id: "e"
+        label: "Buy now, pay later services"
+      - id: "f"
+        label: "Selling items or side income"
+      - id: "g"
+        label: "Cash gifts from guests"
+      - id: "h"
+        label: "None of these"
+  - id: q6
+    prompt: "Do you have (or did you set) a formal wedding budget?"
+    type: single_choice
+    construct: have_did_set_formal_wedding
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a detailed budget I track closely"
+      - id: "b"
+        label: "Yes, a rough budget"
+      - id: "c"
+        label: "No formal budget"
+      - id: "d"
+        label: "Not sure"
+  - id: q7
+    prompt: "How much do you agree with the following statement: Weddings have become too expensive."
+    type: single_choice
+    construct: much_agree_following_statement_weddings
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q8
+    prompt: "How much do you agree with the following statement: I feel pressure to have a certain kind of wedding."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q9
+    prompt: "How much do you agree with the following statement: It is worth going into debt for a memorable wedding."
+    type: single_choice
+    construct: much_agree_following_statement_it
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree with the following statement: I would rather spend less on the wedding and more on our future together."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: Social media influences how much people spend on weddings."
+    type: single_choice
+    construct: much_agree_following_statement_social
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Wedding vendors charge more just because it's a wedding."
+    type: single_choice
+    construct: much_agree_following_statement_wedding
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How important is each element to you: The venue?"
+    type: single_choice
+    construct: important_each_element_venue
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q14
+    prompt: "How important is each element to you: The food and drinks?"
+    type: single_choice
+    construct: important_each_element_food_drinks
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q15
+    prompt: "How important is each element to you: Photography and capturing memories?"
+    type: single_choice
+    construct: important_each_element_photography_captu
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "How important is each element to you: The guest experience?"
+    type: single_choice
+    construct: important_each_element_guest_experience
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "How important is each element to you: Staying within budget?"
+    type: single_choice
+    construct: important_each_element_staying_within
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each element to you: The honeymoon?"
+    type: single_choice
+    construct: important_each_element_honeymoon
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "Select the top 3 things you are (or were) most willing to splurge on. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_were
+    required: true
+    options:
+      - id: "a"
+        label: "Venue"
+      - id: "b"
+        label: "Catering and drinks"
+      - id: "c"
+        label: "Photography or videography"
+      - id: "d"
+        label: "Attire"
+      - id: "e"
+        label: "Flowers and décor"
+      - id: "f"
+        label: "Music or entertainment"
+      - id: "g"
+        label: "Honeymoon"
+      - id: "h"
+        label: "The ring"
+  - id: q20
+    prompt: "Which strategies are you using (or did you use) to save money? (Select all that apply)"
+    type: multi_choice
+    construct: strategies_using_did_use_save
+    required: true
+    options:
+      - id: "a"
+        label: "Choosing an off-peak date or day"
+      - id: "b"
+        label: "Trimming the guest list"
+      - id: "c"
+        label: "DIY décor or projects"
+      - id: "d"
+        label: "Using a less expensive venue"
+      - id: "e"
+        label: "Buying secondhand or renting attire"
+      - id: "f"
+        label: "Limiting or cutting the open bar"
+      - id: "g"
+        label: "Comparing multiple vendor quotes"
+      - id: "h"
+        label: "None of these"
+  - id: q21
+    prompt: "Which resources are you using (or did you use) to plan? (Select all that apply)"
+    type: multi_choice
+    construct: resources_using_did_use_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Wedding websites (The Knot, Zola, WeddingWire)"
+      - id: "b"
+        label: "A wedding planner or coordinator"
+      - id: "c"
+        label: "Social media (Pinterest, Instagram, TikTok)"
+      - id: "d"
+        label: "Friends and family"
+      - id: "e"
+        label: "Budgeting apps or spreadsheets"
+      - id: "f"
+        label: "Bridal shows or expos"
+      - id: "g"
+        label: "None of these"
+  - id: q22
+    prompt: "Do you expect to (or did you) go over budget?"
+    type: single_choice
+    construct: expect_did_go_over_budget
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, significantly over"
+      - id: "b"
+        label: "Yes, somewhat over"
+      - id: "c"
+        label: "Right on budget"
+      - id: "d"
+        label: "Under budget"
+      - id: "e"
+        label: "Not sure"
+  - id: q23
+    prompt: "How much wedding-related debt do you expect to take on (or did you take on)? Enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_wedding_related_debt_expect
+    required: true
+  - id: q24
+    prompt: "How stressful is (or was) managing the wedding budget?"
+    type: single_choice
+    construct: stressful_was_managing_wedding_budget
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all stressful"
+      - id: "b"
+        label: "Slightly stressful"
+      - id: "c"
+        label: "Moderately stressful"
+      - id: "d"
+        label: "Very stressful"
+      - id: "e"
+        label: "Extremely stressful"
+  - id: q25
+    prompt: "Has wedding spending caused any tension between you and your partner or families?"
+    type: single_choice
+    construct: has_wedding_spending_caused_any
+    required: true
+    options:
+      - id: "a"
+        label: "No tension at all"
+      - id: "b"
+        label: "A little tension"
+      - id: "c"
+        label: "A moderate amount of tension"
+      - id: "d"
+        label: "A lot of tension"
+      - id: "e"
+        label: "Not applicable"
+  - id: q26
+    prompt: "How has inflation or rising costs affected your wedding plans?"
+    type: single_choice
+    construct: has_inflation_rising_costs_affected
+    required: true
+    options:
+      - id: "a"
+        label: "Forced significant cutbacks"
+      - id: "b"
+        label: "Forced minor cutbacks"
+      - id: "c"
+        label: "No effect"
+      - id: "d"
+        label: "We increased the budget to keep up"
+      - id: "e"
+        label: "Not sure"
+  - id: q27
+    prompt: "Looking back or ahead, how do you feel about the amount spent (or planned)?"
+    type: single_choice
+    construct: looking_back_ahead_feel_amount
+    required: true
+    options:
+      - id: "a"
+        label: "I wish we could spend much less"
+      - id: "b"
+        label: "I wish we could spend a little less"
+      - id: "c"
+        label: "It feels about right"
+      - id: "d"
+        label: "I wish we could spend more"
+      - id: "e"
+        label: "Not sure"
+  - id: q28
+    prompt: "How satisfied are you with how you are managing (or managed) the wedding budget?"
+    type: single_choice
+    construct: satisfied_managing_managed_wedding_budge
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "How confident are you that the wedding will be (or was) worth the money spent?"
+    type: single_choice
+    construct: confident_that_wedding_will_be
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q30
+    prompt: "What is your biggest budgeting challenge (or lesson) for the wedding? Describe briefly. (Optional)"
+    type: free_text
+    construct: biggest_budgeting_challenge_lesson_weddi
+    required: false
+  - id: q31
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q32
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Another race or ethnicity"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your approximate annual household income before taxes?"
+    type: single_choice
+    construct: approximate_annual_household_income_befo
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $30,000"
+      - id: "b"
+        label: "$30,000 – $49,999"
+      - id: "c"
+        label: "$50,000 – $74,999"
+      - id: "d"
+        label: "$75,000 – $99,999"
+      - id: "e"
+        label: "$100,000 – $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school graduate or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q36
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+  - id: q37
+    prompt: "Including yourself, how many people live in your household? Enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q38
+    prompt: "What is your current marital or relationship status?"
+    type: single_choice
+    construct: current_marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Engaged"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "In a relationship, not engaged"
+      - id: "e"
+        label: "Single"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q40
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q41
+    prompt: "How would you describe your overall financial situation?"
+    type: single_choice
+    construct: would_describe_overall_financial_situati
+    required: true
+    options:
+      - id: "a"
+        label: "I struggle to make ends meet"
+      - id: "b"
+        label: "I get by but have little left over"
+      - id: "c"
+        label: "I am comfortable"
+      - id: "d"
+        label: "I am financially secure"

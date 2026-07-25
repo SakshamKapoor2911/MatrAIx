@@ -1,0 +1,731 @@
+schemaVersion: "1.0"
+id: hydration_habits_v1
+title: "Hydration Habits Survey"
+description: "Everyday drinking and hydration habits among adults."
+questions:
+  - id: q0
+    prompt: "On a typical day, about how many cups (8 oz) of plain water do you drink? Please enter a number."
+    type: free_text
+    construct: typical_day_many_cups_8
+    required: true
+  - id: q1
+    prompt: "How would you describe how well hydrated you usually feel?"
+    type: single_choice
+    construct: would_describe_well_hydrated_usually
+    required: true
+    options:
+      - id: "a"
+        label: "Rarely hydrated enough"
+      - id: "b"
+        label: "Somewhat under-hydrated"
+      - id: "c"
+        label: "About right"
+      - id: "d"
+        label: "Well hydrated"
+      - id: "e"
+        label: "Not sure"
+  - id: q2
+    prompt: "Which beverages do you drink regularly? (Select all that apply)"
+    type: multi_choice
+    construct: beverages_drink_regularly_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Plain water"
+      - id: "b"
+        label: "Sparkling or flavored water"
+      - id: "c"
+        label: "Coffee"
+      - id: "d"
+        label: "Tea"
+      - id: "e"
+        label: "Soda or soft drinks"
+      - id: "f"
+        label: "Juice"
+      - id: "g"
+        label: "Sports or electrolyte drinks"
+      - id: "h"
+        label: "Milk or milk alternatives"
+      - id: "i"
+        label: "Energy drinks"
+  - id: q3
+    prompt: "What is your main source of daily fluids?"
+    type: single_choice
+    construct: main_source_daily_fluids
+    required: true
+    options:
+      - id: "a"
+        label: "Plain water"
+      - id: "b"
+        label: "Coffee or tea"
+      - id: "c"
+        label: "Soda or soft drinks"
+      - id: "d"
+        label: "Juice or sweet drinks"
+      - id: "e"
+        label: "Sports or electrolyte drinks"
+      - id: "f"
+        label: "A mix of several"
+  - id: q4
+    prompt: "Where do you usually drink water during the day? (Select all that apply)"
+    type: multi_choice
+    construct: where_usually_drink_water_during
+    required: true
+    options:
+      - id: "a"
+        label: "At home"
+      - id: "b"
+        label: "At work or school"
+      - id: "c"
+        label: "During exercise"
+      - id: "d"
+        label: "While commuting or running errands"
+      - id: "e"
+        label: "At restaurants or cafes"
+      - id: "f"
+        label: "At the gym"
+  - id: q5
+    prompt: "Do you carry a reusable water bottle with you?"
+    type: single_choice
+    construct: carry_reusable_water_bottle
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, almost always"
+      - id: "b"
+        label: "Yes, sometimes"
+      - id: "c"
+        label: "No, but I have one"
+      - id: "d"
+        label: "No, I do not own one"
+  - id: q6
+    prompt: "Which type of water bottle or container do you use most?"
+    type: single_choice
+    construct: type_water_bottle_container_use
+    required: true
+    options:
+      - id: "a"
+        label: "An insulated bottle (for example, Stanley, Hydro Flask, Owala)"
+      - id: "b"
+        label: "A plastic reusable bottle"
+      - id: "c"
+        label: "A glass bottle"
+      - id: "d"
+        label: "Disposable plastic bottles"
+      - id: "e"
+        label: "A cup or glass"
+      - id: "f"
+        label: "I do not use a specific container"
+  - id: q7
+    prompt: "How often do you drink water first thing in the morning?"
+    type: single_choice
+    construct: often_drink_water_first_thing
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Every morning"
+  - id: q8
+    prompt: "How often do you feel thirsty during the day?"
+    type: single_choice
+    construct: often_feel_thirsty_during_day
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Constantly"
+  - id: q9
+    prompt: "Do you set a daily water goal for yourself?"
+    type: single_choice
+    construct: set_daily_water_goal_yourself
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I usually meet it"
+      - id: "b"
+        label: "Yes, but I often miss it"
+      - id: "c"
+        label: "No, but I keep it in mind"
+      - id: "d"
+        label: "No, I do not think about a goal"
+  - id: q10
+    prompt: "How do you keep track of how much you drink? (Select all that apply)"
+    type: multi_choice
+    construct: keep_track_much_drink_select
+    required: true
+    options:
+      - id: "a"
+        label: "I do not track"
+      - id: "b"
+        label: "By how many bottles or cups I refill"
+      - id: "c"
+        label: "A marked or measured bottle"
+      - id: "d"
+        label: "A phone app"
+      - id: "e"
+        label: "A smartwatch or wearable"
+      - id: "f"
+        label: "A rough estimate in my head"
+  - id: q11
+    prompt: "How much do you agree or disagree: Staying hydrated is important to me."
+    type: single_choice
+    construct: much_agree_disagree_staying_hydrated
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: I drink enough water most days."
+    type: single_choice
+    construct: much_agree_disagree_i_drink
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I notice a difference in how I feel when I am well hydrated."
+    type: single_choice
+    construct: much_agree_disagree_i_notice
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I often forget to drink water during a busy day."
+    type: single_choice
+    construct: much_agree_disagree_i_often
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: I would like to drink more water than I currently do."
+    type: single_choice
+    construct: much_agree_disagree_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How often does being under-hydrated affect your energy?"
+    type: single_choice
+    construct: often_does_being_under_hydrated
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q17
+    prompt: "How often does being under-hydrated affect your focus or headaches?"
+    type: single_choice
+    construct: often_does_being_under_hydrated
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q18
+    prompt: "How often does being under-hydrated affect your mood?"
+    type: single_choice
+    construct: often_does_being_under_hydrated
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q19
+    prompt: "What makes it hard for you to drink enough water? (Select all that apply)"
+    type: multi_choice
+    construct: makes_it_hard_drink_enough
+    required: true
+    options:
+      - id: "a"
+        label: "I forget"
+      - id: "b"
+        label: "I am too busy"
+      - id: "c"
+        label: "I do not like the taste of plain water"
+      - id: "d"
+        label: "I prefer other drinks"
+      - id: "e"
+        label: "I do not have easy access to water"
+      - id: "f"
+        label: "I do not want frequent bathroom trips"
+      - id: "g"
+        label: "Nothing, I drink plenty"
+  - id: q20
+    prompt: "What helps you drink more water? (Select all that apply)"
+    type: multi_choice
+    construct: helps_drink_more_water_select
+    required: true
+    options:
+      - id: "a"
+        label: "Keeping a bottle nearby"
+      - id: "b"
+        label: "Adding flavor or fruit"
+      - id: "c"
+        label: "Reminders or alarms"
+      - id: "d"
+        label: "Drinking at set times"
+      - id: "e"
+        label: "Sparkling water"
+      - id: "f"
+        label: "A goal or challenge"
+      - id: "g"
+        label: "Nothing in particular"
+  - id: q21
+    prompt: "How important is each factor for you: the taste of what you drink?"
+    type: single_choice
+    construct: important_each_factor_taste_drink
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each factor for you: convenience and access to water?"
+    type: single_choice
+    construct: important_each_factor_convenience_access
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each factor for you: the temperature of the water (cold, room temperature)?"
+    type: single_choice
+    construct: important_each_factor_temperature_water
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each factor for you: the health benefits of staying hydrated?"
+    type: single_choice
+    construct: important_each_factor_health_benefits
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How much more water do you drink on days you exercise?"
+    type: single_choice
+    construct: much_more_water_drink_days
+    required: true
+    options:
+      - id: "a"
+        label: "About the same"
+      - id: "b"
+        label: "A little more"
+      - id: "c"
+        label: "Noticeably more"
+      - id: "d"
+        label: "A lot more"
+      - id: "e"
+        label: "I do not exercise"
+  - id: q26
+    prompt: "How does hot weather affect how much you drink?"
+    type: single_choice
+    construct: does_hot_weather_affect_much
+    required: true
+    options:
+      - id: "a"
+        label: "No change"
+      - id: "b"
+        label: "I drink a little more"
+      - id: "c"
+        label: "I drink a lot more"
+      - id: "d"
+        label: "I drink less"
+      - id: "e"
+        label: "Not sure"
+  - id: q27
+    prompt: "Do you add anything to your water to encourage drinking it? (Select all that apply)"
+    type: multi_choice
+    construct: add_anything_water_encourage_drinking
+    required: true
+    options:
+      - id: "a"
+        label: "Lemon, fruit, or cucumber"
+      - id: "b"
+        label: "Flavor drops or powder"
+      - id: "c"
+        label: "Electrolyte mixes"
+      - id: "d"
+        label: "Ice"
+      - id: "e"
+        label: "Nothing, I drink it plain"
+  - id: q28
+    prompt: "How do you usually judge whether you are drinking enough?"
+    type: single_choice
+    construct: usually_judge_whether_drinking_enough
+    required: true
+    options:
+      - id: "a"
+        label: "By thirst"
+      - id: "b"
+        label: "By how I feel"
+      - id: "c"
+        label: "By counting bottles or cups"
+      - id: "d"
+        label: "By an app or device"
+      - id: "e"
+        label: "I do not really judge it"
+  - id: q29
+    prompt: "Overall, how satisfied are you with your hydration habits?"
+    type: single_choice
+    construct: overall_satisfied_hydration_habits
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How likely are you to try to drink more water in the next few months?"
+    type: single_choice
+    construct: likely_try_drink_more_water
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "Which would most help you stay better hydrated? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: would_most_help_stay_better
+    required: true
+    options:
+      - id: "a"
+        label: "A better water bottle"
+      - id: "b"
+        label: "Reminders or an app"
+      - id: "c"
+        label: "Better-tasting water"
+      - id: "d"
+        label: "Easier access to water"
+      - id: "e"
+        label: "A daily goal or challenge"
+      - id: "f"
+        label: "A habit tied to meals or routines"
+      - id: "g"
+        label: "Cutting back on other drinks"
+      - id: "h"
+        label: "Nothing, I am already well hydrated"
+  - id: q32
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65–74"
+      - id: "g"
+        label: "75 or older"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino/a"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your household's annual income before taxes?"
+    type: single_choice
+    construct: household_s_annual_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+      - id: "h"
+        label: "Unable to work"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q42
+    prompt: "Which best describes your typical daily activity level?"
+    type: single_choice
+    construct: best_describes_typical_daily_activity
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly sitting"
+      - id: "b"
+        label: "Some walking or standing"
+      - id: "c"
+        label: "On my feet much of the day"
+      - id: "d"
+        label: "Physically demanding"
+  - id: q43
+    prompt: "In general, how would you rate your overall health?"
+    type: single_choice
+    construct: general_would_rate_overall_health
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent"
+      - id: "b"
+        label: "Very good"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Fair"
+      - id: "e"
+        label: "Poor"

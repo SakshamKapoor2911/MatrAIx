@@ -1,0 +1,796 @@
+schemaVersion: "1.0"
+id: appointment_scheduling_apps_v1
+title: "Appointment Scheduling Apps Survey"
+description: "Consumer use of, experience with, and attitudes toward booking healthcare appointments online through apps and websites."
+questions:
+  - id: q0
+    prompt: "How do you usually book a healthcare appointment?"
+    type: single_choice
+    construct: usually_book_healthcare_appointment
+    required: true
+    options:
+      - id: "a"
+        label: "Online through an app or website"
+      - id: "b"
+        label: "By phone call"
+      - id: "c"
+        label: "In person"
+      - id: "d"
+        label: "A mix of methods"
+      - id: "e"
+        label: "Someone else books for me"
+  - id: q1
+    prompt: "In the past 12 months, have you booked a healthcare appointment online?"
+    type: single_choice
+    construct: past_12_months_have_booked
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, many times"
+      - id: "b"
+        label: "Yes, a few times"
+      - id: "c"
+        label: "Yes, once"
+      - id: "d"
+        label: "No, but I have in the past"
+      - id: "e"
+        label: "No, I have never booked online"
+  - id: q2
+    prompt: "How long have you been booking healthcare appointments online?"
+    type: single_choice
+    construct: long_have_been_booking_healthcare
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "More than 3 years"
+      - id: "e"
+        label: "I do not book online"
+  - id: q3
+    prompt: "Which tools have you used to book healthcare appointments online? (Select all that apply)"
+    type: multi_choice
+    construct: tools_have_used_book_healthcare
+    required: true
+    options:
+      - id: "a"
+        label: "My provider's patient portal (for example, MyChart)"
+      - id: "b"
+        label: "A hospital or health-system app"
+      - id: "c"
+        label: "Zocdoc"
+      - id: "d"
+        label: "A pharmacy app (for example, for vaccines)"
+      - id: "e"
+        label: "An urgent care or clinic app"
+      - id: "f"
+        label: "A general booking website"
+      - id: "g"
+        label: "I have not used any of these"
+  - id: q4
+    prompt: "Which types of appointments have you booked online? (Select all that apply)"
+    type: multi_choice
+    construct: types_appointments_have_booked_online
+    required: true
+    options:
+      - id: "a"
+        label: "Primary care visits"
+      - id: "b"
+        label: "Specialist visits"
+      - id: "c"
+        label: "Lab tests or bloodwork"
+      - id: "d"
+        label: "Imaging (for example, X-ray, MRI)"
+      - id: "e"
+        label: "Dental or vision appointments"
+      - id: "f"
+        label: "Vaccinations or flu shots"
+      - id: "g"
+        label: "Telehealth visits"
+      - id: "h"
+        label: "I have not booked any online"
+  - id: q5
+    prompt: "What device do you usually use to book appointments online?"
+    type: single_choice
+    construct: device_usually_use_book_appointments
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone app"
+      - id: "b"
+        label: "Smartphone web browser"
+      - id: "c"
+        label: "Laptop or desktop computer"
+      - id: "d"
+        label: "Tablet"
+      - id: "e"
+        label: "It varies"
+  - id: q6
+    prompt: "About how often do you book or manage appointments online?"
+    type: single_choice
+    construct: often_book_manage_appointments_online
+    required: true
+    options:
+      - id: "a"
+        label: "Weekly"
+      - id: "b"
+        label: "Monthly"
+      - id: "c"
+        label: "Every few months"
+      - id: "d"
+        label: "A few times a year"
+      - id: "e"
+        label: "Rarely"
+  - id: q7
+    prompt: "Which appointment features do you use online? (Select all that apply)"
+    type: multi_choice
+    construct: appointment_features_use_online_select
+    required: true
+    options:
+      - id: "a"
+        label: "Booking a new appointment"
+      - id: "b"
+        label: "Rescheduling or canceling"
+      - id: "c"
+        label: "Appointment reminders"
+      - id: "d"
+        label: "Adding appointments to my calendar"
+      - id: "e"
+        label: "Filling out forms before a visit"
+      - id: "f"
+        label: "Joining a waitlist for earlier slots"
+      - id: "g"
+        label: "Booking for a family member"
+      - id: "h"
+        label: "I do not use these features"
+  - id: q8
+    prompt: "How do you prefer to receive appointment reminders?"
+    type: single_choice
+    construct: prefer_receive_appointment_reminders
+    required: true
+    options:
+      - id: "a"
+        label: "Text message"
+      - id: "b"
+        label: "Email"
+      - id: "c"
+        label: "App notification"
+      - id: "d"
+        label: "Phone call"
+      - id: "e"
+        label: "I do not want reminders"
+  - id: q9
+    prompt: "When booking online, how easy is it to find an available time that works for you?"
+    type: single_choice
+    construct: when_booking_online_easy_it
+    required: true
+    options:
+      - id: "a"
+        label: "Very easy"
+      - id: "b"
+        label: "Somewhat easy"
+      - id: "c"
+        label: "Neither easy nor difficult"
+      - id: "d"
+        label: "Somewhat difficult"
+      - id: "e"
+        label: "Very difficult"
+  - id: q10
+    prompt: "How much do you agree with the following statement: Booking appointments online saves me time."
+    type: single_choice
+    construct: much_agree_following_statement_booking
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: The scheduling app is easy to use."
+    type: single_choice
+    construct: much_agree_following_statement_schedulin
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: I trust that my online booking will be honored correctly."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: I would rather book online than call the office."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: Online scheduling reduces the chance I miss appointments."
+    type: single_choice
+    construct: much_agree_following_statement_online
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: I worry about the privacy of my information in scheduling apps."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "Which problems, if any, have you had with online scheduling? (Select all that apply)"
+    type: multi_choice
+    construct: problems_if_any_have_had
+    required: true
+    options:
+      - id: "a"
+        label: "No convenient times available"
+      - id: "b"
+        label: "The app was confusing or buggy"
+      - id: "c"
+        label: "The booking was not recorded correctly"
+      - id: "d"
+        label: "Could not find the right provider"
+      - id: "e"
+        label: "Trouble logging in or verifying my identity"
+      - id: "f"
+        label: "Reminders did not arrive"
+      - id: "g"
+        label: "I have not had problems"
+  - id: q17
+    prompt: "How often are the available times shown online actually open when you try to book?"
+    type: single_choice
+    construct: often_available_times_shown_online
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q18
+    prompt: "When you cannot book what you need online, what do you usually do?"
+    type: single_choice
+    construct: when_cannot_book_need_online
+    required: true
+    options:
+      - id: "a"
+        label: "Call the office"
+      - id: "b"
+        label: "Try a different provider"
+      - id: "c"
+        label: "Wait and try again later"
+      - id: "d"
+        label: "Give up on the appointment"
+      - id: "e"
+        label: "This has not happened to me"
+  - id: q19
+    prompt: "How satisfied are you with each of the following in scheduling apps: Ease of booking."
+    type: single_choice
+    construct: satisfied_each_following_scheduling_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q20
+    prompt: "How satisfied are you with each of the following in scheduling apps: Availability of convenient times."
+    type: single_choice
+    construct: satisfied_each_following_scheduling_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q21
+    prompt: "How satisfied are you with each of the following in scheduling apps: Appointment reminders."
+    type: single_choice
+    construct: satisfied_each_following_scheduling_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q22
+    prompt: "How satisfied are you with each of the following in scheduling apps: Rescheduling or canceling."
+    type: single_choice
+    construct: satisfied_each_following_scheduling_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q23
+    prompt: "How satisfied are you with each of the following in scheduling apps: The pre-visit forms and check-in."
+    type: single_choice
+    construct: satisfied_each_following_scheduling_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q24
+    prompt: "How important is each of the following in a scheduling app: Seeing real-time available times."
+    type: single_choice
+    construct: important_each_following_scheduling_app
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is each of the following in a scheduling app: Easy rescheduling and cancellation."
+    type: single_choice
+    construct: important_each_following_scheduling_app
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important is each of the following in a scheduling app: Helpful reminders."
+    type: single_choice
+    construct: important_each_following_scheduling_app
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important is each of the following in a scheduling app: Booking for family members."
+    type: single_choice
+    construct: important_each_following_scheduling_app
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "How important is each of the following in a scheduling app: Strong protection of my personal data."
+    type: single_choice
+    construct: important_each_following_scheduling_app
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "Have you ever missed or forgotten an appointment in the past year?"
+    type: single_choice
+    construct: have_ever_missed_forgotten_appointment
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I have come close"
+      - id: "d"
+        label: "No, never"
+  - id: q30
+    prompt: "How helpful are appointment reminders in keeping you on track?"
+    type: single_choice
+    construct: helpful_appointment_reminders_keeping_tr
+    required: true
+    options:
+      - id: "a"
+        label: "Very helpful"
+      - id: "b"
+        label: "Somewhat helpful"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Not very helpful"
+      - id: "e"
+        label: "I do not get reminders"
+  - id: q31
+    prompt: "Select your top 3 features that matter most in a scheduling app. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_features_that
+    required: true
+    options:
+      - id: "a"
+        label: "Real-time availability"
+      - id: "b"
+        label: "Easy rescheduling"
+      - id: "c"
+        label: "Reminders"
+      - id: "d"
+        label: "Booking for family"
+      - id: "e"
+        label: "Pre-visit forms"
+      - id: "f"
+        label: "Waitlist for earlier slots"
+      - id: "g"
+        label: "Simple, clear design"
+      - id: "h"
+        label: "Data privacy"
+  - id: q32
+    prompt: "Overall, how satisfied are you with booking healthcare appointments online?"
+    type: single_choice
+    construct: overall_satisfied_booking_healthcare_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "On a scale of 0 to 10, how likely are you to recommend online appointment booking to a friend or family member? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q34
+    prompt: "Over the next 12 months, do you plan to book more appointments online than you do now?"
+    type: single_choice
+    construct: over_next_12_months_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Definitely yes"
+      - id: "b"
+        label: "Probably yes"
+      - id: "c"
+        label: "Not sure"
+      - id: "d"
+        label: "Probably not"
+      - id: "e"
+        label: "Definitely not"
+  - id: q35
+    prompt: "About how many appointments did you book online in the past 12 months? Please enter a number."
+    type: free_text
+    construct: many_appointments_did_book_online
+    required: true
+  - id: q36
+    prompt: "About how many minutes did it take to book your most recent appointment online? Please enter a number of minutes."
+    type: free_text
+    construct: many_minutes_did_it_take
+    required: true
+  - id: q37
+    prompt: "About how many days in advance did you book your most recent appointment? Please enter a number of days."
+    type: free_text
+    construct: many_days_advance_did_book
+    required: true
+  - id: q38
+    prompt: "What would make booking healthcare appointments online easier for you? (Optional)"
+    type: free_text
+    construct: would_make_booking_healthcare_appointmen
+    required: false
+  - id: q39
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q40
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe or not to say"
+  - id: q41
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q44
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q45
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q47
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q48
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q49
+    prompt: "How comfortable are you in general using apps and websites on your own?"
+    type: single_choice
+    construct: comfortable_general_using_apps_websites
+    required: true
+    options:
+      - id: "a"
+        label: "Very comfortable"
+      - id: "b"
+        label: "Somewhat comfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat uncomfortable"
+      - id: "e"
+        label: "Very uncomfortable"

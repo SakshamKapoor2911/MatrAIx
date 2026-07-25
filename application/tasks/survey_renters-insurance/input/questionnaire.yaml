@@ -1,0 +1,930 @@
+schemaVersion: "1.0"
+id: renters_insurance_v1
+title: "Renters Insurance Survey"
+description: "How renters obtain, understand, and evaluate renters insurance, and what drives their coverage, provider, and claims decisions."
+questions:
+  - id: q0
+    prompt: "Which best describes your current housing situation?"
+    type: single_choice
+    construct: best_describes_current_housing_situation
+    required: true
+    options:
+      - id: "a"
+        label: "I rent an apartment"
+      - id: "b"
+        label: "I rent a house or townhouse"
+      - id: "c"
+        label: "I rent a room or share a rental"
+      - id: "d"
+        label: "I own my home"
+      - id: "e"
+        label: "I live with family and do not pay rent"
+  - id: q1
+    prompt: "Do you currently have an active renters insurance policy?"
+    type: single_choice
+    construct: currently_have_active_renters_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I have an active renters insurance policy"
+      - id: "b"
+        label: "No, but I had one in the past"
+      - id: "c"
+        label: "No, I have never had renters insurance"
+      - id: "d"
+        label: "Not sure"
+  - id: q2
+    prompt: "How long have you had renters insurance (current or most recent policy)?"
+    type: single_choice
+    construct: long_have_had_renters_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "I have never had it"
+  - id: q3
+    prompt: "Does your lease or landlord require you to carry renters insurance?"
+    type: single_choice
+    construct: does_lease_landlord_require_carry
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, required with proof of coverage"
+      - id: "b"
+        label: "Recommended but not required"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not sure"
+  - id: q4
+    prompt: "For which reasons do you carry (or would you carry) renters insurance? (Select all that apply)"
+    type: multi_choice
+    construct: reasons_carry_would_carry_renters
+    required: true
+    options:
+      - id: "a"
+        label: "Protect my belongings from theft"
+      - id: "b"
+        label: "Protect belongings from fire or smoke"
+      - id: "c"
+        label: "Cover water damage"
+      - id: "d"
+        label: "Personal liability if someone is injured"
+      - id: "e"
+        label: "Required by my lease"
+      - id: "f"
+        label: "Temporary living costs if displaced"
+      - id: "g"
+        label: "Coverage for electronics and laptops"
+      - id: "h"
+        label: "Peace of mind"
+  - id: q5
+    prompt: "How often do you review your renters insurance coverage?"
+    type: single_choice
+    construct: often_review_renters_insurance_coverage
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Only when renewing"
+      - id: "c"
+        label: "Once a year"
+      - id: "d"
+        label: "A few times a year"
+      - id: "e"
+        label: "Whenever my situation changes"
+  - id: q6
+    prompt: "Who is your current renters insurance provider?"
+    type: single_choice
+    construct: who_current_renters_insurance_provider
+    required: true
+    options:
+      - id: "a"
+        label: "Lemonade"
+      - id: "b"
+        label: "State Farm"
+      - id: "c"
+        label: "Allstate"
+      - id: "d"
+        label: "GEICO"
+      - id: "e"
+        label: "Progressive"
+      - id: "f"
+        label: "USAA"
+      - id: "g"
+        label: "Liberty Mutual"
+      - id: "h"
+        label: "Nationwide"
+      - id: "i"
+        label: "Farmers"
+      - id: "j"
+        label: "Another company"
+      - id: "k"
+        label: "I do not have renters insurance"
+  - id: q7
+    prompt: "Which providers did you get quotes from before choosing a policy? (Select all that apply)"
+    type: multi_choice
+    construct: providers_did_get_quotes_from
+    required: true
+    options:
+      - id: "a"
+        label: "Lemonade"
+      - id: "b"
+        label: "State Farm"
+      - id: "c"
+        label: "Allstate"
+      - id: "d"
+        label: "GEICO"
+      - id: "e"
+        label: "Progressive"
+      - id: "f"
+        label: "USAA"
+      - id: "g"
+        label: "Liberty Mutual"
+      - id: "h"
+        label: "Nationwide"
+      - id: "i"
+        label: "An independent agent"
+      - id: "j"
+        label: "A comparison website such as Policygenius"
+      - id: "k"
+        label: "I did not compare quotes"
+  - id: q8
+    prompt: "How did you purchase your renters insurance policy?"
+    type: single_choice
+    construct: did_purchase_renters_insurance_policy
+    required: true
+    options:
+      - id: "a"
+        label: "Online directly from the insurer"
+      - id: "b"
+        label: "Through the insurer's mobile app"
+      - id: "c"
+        label: "Through a local or captive agent"
+      - id: "d"
+        label: "Through an independent broker"
+      - id: "e"
+        label: "Bundled with my auto insurance"
+      - id: "f"
+        label: "Arranged through my landlord or property manager"
+  - id: q9
+    prompt: "About how much do you pay for renters insurance per month?"
+    type: single_choice
+    construct: much_pay_renters_insurance_per
+    required: true
+    options:
+      - id: "a"
+        label: "Under $10"
+      - id: "b"
+        label: "$10 to $14"
+      - id: "c"
+        label: "$15 to $19"
+      - id: "d"
+        label: "$20 to $29"
+      - id: "e"
+        label: "$30 or more"
+      - id: "f"
+        label: "Not sure"
+  - id: q10
+    prompt: "About how much do you pay for renters insurance per month, in U.S. dollars? Please enter a whole number."
+    type: free_text
+    construct: much_pay_renters_insurance_per
+    required: true
+  - id: q11
+    prompt: "What is your personal property (belongings) coverage limit?"
+    type: single_choice
+    construct: personal_property_belongings_coverage_li
+    required: true
+    options:
+      - id: "a"
+        label: "Under $15,000"
+      - id: "b"
+        label: "$15,000 to $29,999"
+      - id: "c"
+        label: "$30,000 to $49,999"
+      - id: "d"
+        label: "$50,000 to $99,999"
+      - id: "e"
+        label: "$100,000 or more"
+      - id: "f"
+        label: "Not sure"
+  - id: q12
+    prompt: "What is your personal liability coverage limit?"
+    type: single_choice
+    construct: personal_liability_coverage_limit
+    required: true
+    options:
+      - id: "a"
+        label: "$100,000"
+      - id: "b"
+        label: "$300,000"
+      - id: "c"
+        label: "$500,000"
+      - id: "d"
+        label: "$1,000,000 or more"
+      - id: "e"
+        label: "Not sure"
+  - id: q13
+    prompt: "What deductible do you carry on your renters policy?"
+    type: single_choice
+    construct: deductible_carry_renters_policy
+    required: true
+    options:
+      - id: "a"
+        label: "$250 or less"
+      - id: "b"
+        label: "$500"
+      - id: "c"
+        label: "$1,000"
+      - id: "d"
+        label: "$2,500 or more"
+      - id: "e"
+        label: "Not sure"
+  - id: q14
+    prompt: "Does your policy pay claims at replacement cost or actual cash value?"
+    type: single_choice
+    construct: does_policy_pay_claims_replacement
+    required: true
+    options:
+      - id: "a"
+        label: "Replacement cost"
+      - id: "b"
+        label: "Actual cash value"
+      - id: "c"
+        label: "Not sure"
+  - id: q15
+    prompt: "Which optional coverages or endorsements do you have? (Select all that apply)"
+    type: multi_choice
+    construct: optional_coverages_endorsements_have_sel
+    required: true
+    options:
+      - id: "a"
+        label: "Scheduled jewelry or watches"
+      - id: "b"
+        label: "Electronics or computer coverage"
+      - id: "c"
+        label: "Identity theft protection"
+      - id: "d"
+        label: "Water or sewer backup"
+      - id: "e"
+        label: "Pet liability"
+      - id: "f"
+        label: "Earthquake"
+      - id: "g"
+        label: "Flood"
+      - id: "h"
+        label: "Additional replacement cost"
+      - id: "i"
+        label: "None of these"
+  - id: q16
+    prompt: "Is your renters insurance bundled with any other policy?"
+    type: single_choice
+    construct: renters_insurance_bundled_any_other
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, bundled with auto insurance"
+      - id: "b"
+        label: "Yes, bundled with another policy"
+      - id: "c"
+        label: "No, it is a standalone policy"
+      - id: "d"
+        label: "Not sure"
+  - id: q17
+    prompt: "About how many years have you rented your current home? Please enter a whole number."
+    type: free_text
+    construct: many_years_have_rented_current
+    required: true
+  - id: q18
+    prompt: "How much do you agree with the following statement about your renters insurance: My renters insurance is worth what I pay for it."
+    type: single_choice
+    construct: much_agree_following_statement_renters
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about your renters insurance: I clearly understand what my policy covers."
+    type: single_choice
+    construct: much_agree_following_statement_renters
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement about your renters insurance: I know my coverage limits and my deductible."
+    type: single_choice
+    construct: much_agree_following_statement_renters
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree with the following statement about your renters insurance: My coverage would fully replace my belongings after a major loss."
+    type: single_choice
+    construct: much_agree_following_statement_renters
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree with the following statement about your renters insurance: I trust my provider to pay a claim fairly."
+    type: single_choice
+    construct: much_agree_following_statement_renters
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How often do you keep an up-to-date inventory or photos of your belongings for insurance purposes?"
+    type: single_choice
+    construct: often_keep_up_date_inventory
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q24
+    prompt: "When choosing a renters insurance policy, how important is each of the following: Low monthly premium"
+    type: single_choice
+    construct: when_choosing_renters_insurance_policy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a renters insurance policy, how important is each of the following: High personal property coverage limits"
+    type: single_choice
+    construct: when_choosing_renters_insurance_policy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a renters insurance policy, how important is each of the following: Strong liability protection"
+    type: single_choice
+    construct: when_choosing_renters_insurance_policy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a renters insurance policy, how important is each of the following: Fast and easy claims process"
+    type: single_choice
+    construct: when_choosing_renters_insurance_policy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing a renters insurance policy, how important is each of the following: Brand reputation and financial strength"
+    type: single_choice
+    construct: when_choosing_renters_insurance_policy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "When choosing a renters insurance policy, how important is each of the following: Easy-to-use website or mobile app"
+    type: single_choice
+    construct: when_choosing_renters_insurance_policy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "Which are your top 3 factors when choosing a renters insurance policy? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Price or premium"
+      - id: "b"
+        label: "Coverage limits"
+      - id: "c"
+        label: "Deductible amount"
+      - id: "d"
+        label: "Claims reputation"
+      - id: "e"
+        label: "Brand or company reputation"
+      - id: "f"
+        label: "Mobile app or digital experience"
+      - id: "g"
+        label: "Bundling discount"
+      - id: "h"
+        label: "Recommendation from someone I trust"
+      - id: "i"
+        label: "Speed of getting covered"
+  - id: q31
+    prompt: "Have you ever filed a renters insurance claim?"
+    type: single_choice
+    construct: have_ever_filed_renters_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one claim"
+      - id: "b"
+        label: "Yes, more than one claim"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What did your renters insurance claim(s) involve? (Select all that apply)"
+    type: multi_choice
+    construct: did_renters_insurance_claim_s
+    required: true
+    options:
+      - id: "a"
+        label: "Theft or burglary"
+      - id: "b"
+        label: "Fire or smoke"
+      - id: "c"
+        label: "Water damage"
+      - id: "d"
+        label: "Storm or weather damage"
+      - id: "e"
+        label: "Vandalism"
+      - id: "f"
+        label: "Personal liability"
+      - id: "g"
+        label: "Loss of use or temporary housing"
+      - id: "h"
+        label: "I have never filed a claim"
+  - id: q33
+    prompt: "How satisfied were you with how your most recent claim was handled?"
+    type: single_choice
+    construct: satisfied_were_most_recent_claim
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I have never filed a claim"
+  - id: q34
+    prompt: "If you have filed a claim, about how much was your most recent claim payout, in U.S. dollars? Enter a whole number (enter 0 if none)."
+    type: free_text
+    construct: if_have_filed_claim_much
+    required: true
+  - id: q35
+    prompt: "How long did it take to resolve your most recent claim?"
+    type: single_choice
+    construct: long_did_it_take_resolve
+    required: true
+    options:
+      - id: "a"
+        label: "Less than a week"
+      - id: "b"
+        label: "1 to 2 weeks"
+      - id: "c"
+        label: "3 to 4 weeks"
+      - id: "d"
+        label: "More than a month"
+      - id: "e"
+        label: "I have never filed a claim"
+  - id: q36
+    prompt: "Overall, how satisfied are you with your current renters insurance provider?"
+    type: single_choice
+    construct: overall_satisfied_current_renters_insura
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "How satisfied are you with the price you pay for renters insurance?"
+    type: single_choice
+    construct: satisfied_price_pay_renters_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "Has your renters premium changed at your most recent renewal?"
+    type: single_choice
+    construct: has_renters_premium_changed_most
+    required: true
+    options:
+      - id: "a"
+        label: "It increased significantly"
+      - id: "b"
+        label: "It increased slightly"
+      - id: "c"
+        label: "It stayed about the same"
+      - id: "d"
+        label: "It decreased"
+      - id: "e"
+        label: "Not sure"
+  - id: q39
+    prompt: "How likely are you to renew your current renters insurance policy?"
+    type: single_choice
+    construct: likely_renew_current_renters_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q40
+    prompt: "How likely are you to shop for a new renters policy in the next 12 months?"
+    type: single_choice
+    construct: likely_shop_new_renters_policy
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q41
+    prompt: "Have you switched renters insurance providers in the past 3 years?"
+    type: single_choice
+    construct: have_switched_renters_insurance_provider
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, once"
+      - id: "b"
+        label: "Yes, more than once"
+      - id: "c"
+        label: "No, but I have considered it"
+      - id: "d"
+        label: "No, and I have not considered it"
+  - id: q42
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your current renters insurer to a friend or family member (0 = not at all likely, 10 = extremely likely)?"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q43
+    prompt: "What is your biggest concern about renters insurance? (Optional open response)"
+    type: free_text
+    construct: biggest_concern_renters_insurance_option
+    required: false
+  - id: q44
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic, Latino, or Spanish origin"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Some other race or origin"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+  - id: q49
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q50
+    prompt: "Including yourself, how many people live in your household? Please enter a whole number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q51
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Widowed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q52
+    prompt: "In which U.S. region do you live?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q54
+    prompt: "Which best describes your rental home?"
+    type: single_choice
+    construct: best_describes_rental_home
+    required: true
+    options:
+      - id: "a"
+        label: "Apartment in a large complex"
+      - id: "b"
+        label: "Apartment in a small building"
+      - id: "c"
+        label: "Rented single-family house"
+      - id: "d"
+        label: "Rented townhouse or condo"
+      - id: "e"
+        label: "Rented room"
+      - id: "f"
+        label: "Other"
+  - id: q55
+    prompt: "Do you share your rental with roommates (not a spouse, partner, or family)?"
+    type: single_choice
+    construct: share_rental_roommates_not_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"

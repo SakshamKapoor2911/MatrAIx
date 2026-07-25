@@ -1,0 +1,694 @@
+schemaVersion: "1.0"
+id: health_insurance_shopping_v1
+title: "Health Insurance Shopping Survey"
+description: "How people research, compare, and choose health insurance plans."
+questions:
+  - id: q0
+    prompt: "Do you currently have health insurance?"
+    type: single_choice
+    construct: currently_have_health_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, through an employer"
+      - id: "b"
+        label: "Yes, bought on my own (marketplace or private)"
+      - id: "c"
+        label: "Yes, Medicare"
+      - id: "d"
+        label: "Yes, Medicaid"
+      - id: "e"
+        label: "Yes, military or VA"
+      - id: "f"
+        label: "No, I am uninsured"
+  - id: q1
+    prompt: "When did you most recently shop for or compare health insurance plans?"
+    type: single_choice
+    construct: when_did_most_recently_shop
+    required: true
+    options:
+      - id: "a"
+        label: "Within the past year"
+      - id: "b"
+        label: "1 to 2 years ago"
+      - id: "c"
+        label: "3 to 5 years ago"
+      - id: "d"
+        label: "More than 5 years ago"
+      - id: "e"
+        label: "I have never shopped for a plan myself"
+  - id: q2
+    prompt: "How do you usually shop for or compare health insurance plans?"
+    type: single_choice
+    construct: usually_shop_compare_health_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Through my employer's enrollment system"
+      - id: "b"
+        label: "On HealthCare.gov or a state marketplace"
+      - id: "c"
+        label: "Directly on an insurer's website"
+      - id: "d"
+        label: "With a broker or agent"
+      - id: "e"
+        label: "With help from family"
+      - id: "f"
+        label: "I do not shop for plans myself"
+  - id: q3
+    prompt: "Which sources of information do you use when comparing health plans? (Select all that apply)"
+    type: multi_choice
+    construct: sources_information_use_when_comparing
+    required: true
+    options:
+      - id: "a"
+        label: "Plan summaries and benefit documents"
+      - id: "b"
+        label: "Online comparison tools"
+      - id: "c"
+        label: "A broker or insurance agent"
+      - id: "d"
+        label: "Advice from family or friends"
+      - id: "e"
+        label: "My employer's HR or benefits team"
+      - id: "f"
+        label: "Reviews or ratings of insurers"
+      - id: "g"
+        label: "Cost calculators or estimators"
+  - id: q4
+    prompt: "Which plan features do you compare most closely when shopping? (Select all that apply)"
+    type: multi_choice
+    construct: plan_features_compare_most_closely
+    required: true
+    options:
+      - id: "a"
+        label: "Monthly premium"
+      - id: "b"
+        label: "Deductible"
+      - id: "c"
+        label: "Copays and coinsurance"
+      - id: "d"
+        label: "Out-of-pocket maximum"
+      - id: "e"
+        label: "Whether my doctors are in-network"
+      - id: "f"
+        label: "Prescription drug coverage"
+      - id: "g"
+        label: "Coverage for specific services I need"
+  - id: q5
+    prompt: "About how many different health plans do you typically compare before choosing? Please enter a number."
+    type: free_text
+    construct: many_different_health_plans_typically
+    required: true
+  - id: q6
+    prompt: "How easy or difficult do you find it to compare health insurance plans?"
+    type: single_choice
+    construct: easy_difficult_find_it_compare
+    required: true
+    options:
+      - id: "a"
+        label: "Very easy"
+      - id: "b"
+        label: "Somewhat easy"
+      - id: "c"
+        label: "Somewhat difficult"
+      - id: "d"
+        label: "Very difficult"
+  - id: q7
+    prompt: "How well do you understand common insurance terms like deductible, coinsurance, and out-of-pocket maximum?"
+    type: single_choice
+    construct: well_understand_common_insurance_terms
+    required: true
+    options:
+      - id: "a"
+        label: "Very well"
+      - id: "b"
+        label: "Somewhat well"
+      - id: "c"
+        label: "Not very well"
+      - id: "d"
+        label: "Not at all"
+  - id: q8
+    prompt: "Which are the top 3 factors that most influence your choice of a health plan? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_that_most
+    required: true
+    options:
+      - id: "a"
+        label: "Low monthly premium"
+      - id: "b"
+        label: "Low deductible"
+      - id: "c"
+        label: "Keeping my current doctors"
+      - id: "d"
+        label: "Prescription drug coverage"
+      - id: "e"
+        label: "Low out-of-pocket maximum"
+      - id: "f"
+        label: "Brand or reputation of the insurer"
+      - id: "g"
+        label: "Coverage for a specific need"
+      - id: "h"
+        label: "Simplicity of the plan"
+  - id: q9
+    prompt: "How important is each of the following when you choose a health plan — A low monthly premium"
+    type: single_choice
+    construct: important_each_following_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q10
+    prompt: "How important is each of the following when you choose a health plan — A low deductible"
+    type: single_choice
+    construct: important_each_following_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q11
+    prompt: "How important is each of the following when you choose a health plan — Keeping my preferred doctors in-network"
+    type: single_choice
+    construct: important_each_following_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q12
+    prompt: "How important is each of the following when you choose a health plan — Good prescription drug coverage"
+    type: single_choice
+    construct: important_each_following_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q13
+    prompt: "How important is each of the following when you choose a health plan — A low out-of-pocket maximum"
+    type: single_choice
+    construct: important_each_following_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q14
+    prompt: "How important is each of the following when you choose a health plan — The reputation of the insurance company"
+    type: single_choice
+    construct: important_each_following_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q15
+    prompt: "How much do you agree: I feel confident choosing the right health plan for my needs."
+    type: single_choice
+    construct: much_agree_i_feel_confident
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: Comparing plans is more confusing than it should be."
+    type: single_choice
+    construct: much_agree_comparing_plans_more
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: I worry about picking a plan that will not cover something I need."
+    type: single_choice
+    construct: much_agree_i_worry_picking
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How often do you feel you have enough information to compare plans well?"
+    type: single_choice
+    construct: often_feel_have_enough_information
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q19
+    prompt: "How much do you consider premium versus deductible when weighing a plan?"
+    type: single_choice
+    construct: much_consider_premium_versus_deductible
+    required: true
+    options:
+      - id: "a"
+        label: "I focus mostly on the premium"
+      - id: "b"
+        label: "I weigh both about equally"
+      - id: "c"
+        label: "I focus mostly on the deductible"
+      - id: "d"
+        label: "I do not really consider these"
+  - id: q20
+    prompt: "How satisfied are you with your most recent health plan choice?"
+    type: single_choice
+    construct: satisfied_most_recent_health_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q21
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your current insurer to a friend or family member? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q22
+    prompt: "How likely are you to shop around and compare plans at your next open enrollment?"
+    type: single_choice
+    construct: likely_shop_around_compare_plans
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q23
+    prompt: "How confident are you that your current plan is a good value for what you pay?"
+    type: single_choice
+    construct: confident_that_current_plan_good
+    required: true
+    options:
+      - id: "a"
+        label: "Very confident"
+      - id: "b"
+        label: "Somewhat confident"
+      - id: "c"
+        label: "Not very confident"
+      - id: "d"
+        label: "Not at all confident"
+  - id: q24
+    prompt: "When shopping, how do you usually weigh a lower premium against a higher deductible?"
+    type: single_choice
+    construct: when_shopping_usually_weigh_lower
+    required: true
+    options:
+      - id: "a"
+        label: "I prefer a low premium even with a high deductible"
+      - id: "b"
+        label: "I prefer a low deductible even with a higher premium"
+      - id: "c"
+        label: "I look for the lowest total expected cost"
+      - id: "d"
+        label: "I am not sure how to weigh them"
+  - id: q25
+    prompt: "Which of the following have caused you to switch or consider switching plans? (Select all that apply)"
+    type: multi_choice
+    construct: following_have_caused_switch_consider
+    required: true
+    options:
+      - id: "a"
+        label: "A premium increase"
+      - id: "b"
+        label: "A doctor leaving my network"
+      - id: "c"
+        label: "A change in prescription coverage"
+      - id: "d"
+        label: "Poor customer service"
+      - id: "e"
+        label: "A change in my health needs"
+      - id: "f"
+        label: "A better plan becoming available"
+      - id: "g"
+        label: "I have never switched"
+  - id: q26
+    prompt: "How much do you agree: I compare the total yearly cost, not just the monthly premium."
+    type: single_choice
+    construct: much_agree_i_compare_total
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q27
+    prompt: "How much do you agree: Provider networks are hard to check accurately when shopping."
+    type: single_choice
+    construct: much_agree_provider_networks_hard
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q28
+    prompt: "How often do you read the full plan details before choosing a plan?"
+    type: single_choice
+    construct: often_read_full_plan_details
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q29
+    prompt: "How important is a plan's customer service reputation in your decision?"
+    type: single_choice
+    construct: important_plan_s_customer_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "How likely are you to use an online tool or calculator to estimate your total costs next time?"
+    type: single_choice
+    construct: likely_use_online_tool_calculator
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "What makes shopping for health insurance most difficult for you? Please answer briefly."
+    type: free_text
+    construct: makes_shopping_health_insurance_most
+    required: true
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 to 74"
+      - id: "g"
+        label: "75 or older"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino/a"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Another race or ethnicity"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Homemaker or caregiver"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Widowed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I do not live in the United States"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

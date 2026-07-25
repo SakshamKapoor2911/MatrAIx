@@ -1,0 +1,737 @@
+schemaVersion: "1.0"
+id: back_pain_management_v1
+title: "Everyday Back Comfort Survey"
+description: "Everyday back comfort and the general self-care approaches and products consumers use."
+questions:
+  - id: q0
+    prompt: "How often do you experience everyday back discomfort or stiffness?"
+    type: single_choice
+    construct: often_experience_everyday_back_discomfor
+    required: true
+    options:
+      - id: "a"
+        label: "Most days"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q1
+    prompt: "How long have you dealt with occasional back discomfort?"
+    type: single_choice
+    construct: long_have_dealt_occasional_back
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to a year"
+      - id: "c"
+        label: "1 to 5 years"
+      - id: "d"
+        label: "More than 5 years"
+      - id: "e"
+        label: "I don't experience it"
+  - id: q2
+    prompt: "When you notice back discomfort, what do you think usually contributes to it? (Select all that apply)"
+    type: multi_choice
+    construct: when_notice_back_discomfort_think
+    required: true
+    options:
+      - id: "a"
+        label: "Sitting for long periods"
+      - id: "b"
+        label: "Lifting or carrying things"
+      - id: "c"
+        label: "Poor posture"
+      - id: "d"
+        label: "Physical activity or exercise"
+      - id: "e"
+        label: "Sleeping position"
+      - id: "f"
+        label: "Stress or tension"
+      - id: "g"
+        label: "Not sure"
+  - id: q3
+    prompt: "Which everyday approaches do you use for back comfort? (Select all that apply)"
+    type: multi_choice
+    construct: everyday_approaches_use_back_comfort
+    required: true
+    options:
+      - id: "a"
+        label: "Stretching or gentle exercise"
+      - id: "b"
+        label: "Heat or cold packs"
+      - id: "c"
+        label: "Over-the-counter pain relief"
+      - id: "d"
+        label: "Massage or foam rolling"
+      - id: "e"
+        label: "Better posture or an ergonomic chair"
+      - id: "f"
+        label: "Supportive mattress or pillow"
+      - id: "g"
+        label: "I don't do anything specific"
+  - id: q4
+    prompt: "How often do you do stretches or exercises aimed at back comfort?"
+    type: single_choice
+    construct: often_stretches_exercises_aimed_back
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "A few times a week"
+      - id: "e"
+        label: "Daily"
+  - id: q5
+    prompt: "Have you purchased any products for back comfort in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: have_purchased_any_products_back
+    required: true
+    options:
+      - id: "a"
+        label: "Lumbar cushion or back support"
+      - id: "b"
+        label: "Supportive mattress or topper"
+      - id: "c"
+        label: "Ergonomic chair"
+      - id: "d"
+        label: "Heating pad or massage device"
+      - id: "e"
+        label: "Posture-support product"
+      - id: "f"
+        label: "Exercise or stretching equipment"
+      - id: "g"
+        label: "None"
+  - id: q6
+    prompt: "Roughly how much have you spent on back-comfort products in the past year? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: roughly_much_have_spent_back
+    required: true
+  - id: q7
+    prompt: "Have you ever seen a professional for back comfort or wellness advice? (Select all that apply)"
+    type: multi_choice
+    construct: have_ever_seen_professional_back
+    required: true
+    options:
+      - id: "a"
+        label: "Primary care doctor"
+      - id: "b"
+        label: "Physical therapist"
+      - id: "c"
+        label: "Chiropractor"
+      - id: "d"
+        label: "Massage therapist"
+      - id: "e"
+        label: "Fitness trainer or instructor"
+      - id: "f"
+        label: "No, I manage on my own"
+  - id: q8
+    prompt: "In the past month, on about how many days did you notice back discomfort? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: past_month_many_days_did
+    required: true
+  - id: q9
+    prompt: "Where do you usually look for information about back comfort? (Select all that apply)"
+    type: multi_choice
+    construct: where_usually_look_information_back
+    required: true
+    options:
+      - id: "a"
+        label: "A healthcare professional"
+      - id: "b"
+        label: "Websites or search engines"
+      - id: "c"
+        label: "Videos or apps"
+      - id: "d"
+        label: "Friends or family"
+      - id: "e"
+        label: "Fitness or wellness communities"
+      - id: "f"
+        label: "I don't look for information"
+  - id: q10
+    prompt: "How much attention do you pay to your posture during the day?"
+    type: single_choice
+    construct: much_attention_pay_posture_during
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "Some"
+      - id: "d"
+        label: "Quite a bit"
+      - id: "e"
+        label: "A lot"
+  - id: q11
+    prompt: "How often do you use over-the-counter pain relief for back comfort?"
+    type: single_choice
+    construct: often_use_over_counter_pain
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Not applicable"
+  - id: q12
+    prompt: "How much do you agree with the following statement: My current approaches keep me comfortable."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: Staying active helps my back feel better."
+    type: single_choice
+    construct: much_agree_following_statement_staying
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I know how to take care of my back day to day."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: Back discomfort affects my daily activities."
+    type: single_choice
+    construct: much_agree_following_statement_back
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I worry about my back discomfort getting worse."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: I prefer self-care over seeing a professional."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement: I'm willing to try new products or routines for back comfort."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How important do you find the following for your back comfort: Stretching or gentle exercise."
+    type: single_choice
+    construct: important_find_following_back_comfort
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important do you find the following for your back comfort: Good posture."
+    type: single_choice
+    construct: important_find_following_back_comfort
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important do you find the following for your back comfort: A supportive mattress or chair."
+    type: single_choice
+    construct: important_find_following_back_comfort
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important do you find the following for your back comfort: Staying generally active."
+    type: single_choice
+    construct: important_find_following_back_comfort
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important do you find the following for your back comfort: Over-the-counter relief when needed."
+    type: single_choice
+    construct: important_find_following_back_comfort
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important do you find the following for your back comfort: Advice from a professional."
+    type: single_choice
+    construct: important_find_following_back_comfort
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "Which approaches help your back comfort the most? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: approaches_help_back_comfort_most
+    required: true
+    options:
+      - id: "a"
+        label: "Stretching or exercise"
+      - id: "b"
+        label: "Good posture"
+      - id: "c"
+        label: "Heat or cold"
+      - id: "d"
+        label: "Massage or foam rolling"
+      - id: "e"
+        label: "A supportive chair or mattress"
+      - id: "f"
+        label: "Over-the-counter relief"
+      - id: "g"
+        label: "Staying active"
+      - id: "h"
+        label: "Professional advice"
+  - id: q26
+    prompt: "How much does back discomfort affect your daily activities?"
+    type: single_choice
+    construct: much_does_back_discomfort_affect
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Quite a bit"
+      - id: "e"
+        label: "A great deal"
+  - id: q27
+    prompt: "How well do your current approaches work for you?"
+    type: single_choice
+    construct: well_current_approaches_work
+    required: true
+    options:
+      - id: "a"
+        label: "Very poorly"
+      - id: "b"
+        label: "Poorly"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q28
+    prompt: "How confident are you in managing your everyday back comfort?"
+    type: single_choice
+    construct: confident_managing_everyday_back_comfort
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+  - id: q29
+    prompt: "How open are you to trying a new routine for back comfort?"
+    type: single_choice
+    construct: open_trying_new_routine_back
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all open"
+      - id: "b"
+        label: "Slightly open"
+      - id: "c"
+        label: "Moderately open"
+      - id: "d"
+        label: "Very open"
+      - id: "e"
+        label: "Extremely open"
+  - id: q30
+    prompt: "Overall, how satisfied are you with how you manage everyday back comfort?"
+    type: single_choice
+    construct: overall_satisfied_manage_everyday_back
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q31
+    prompt: "How likely are you to try a new product or routine for back comfort in the next year?"
+    type: single_choice
+    construct: likely_try_new_product_routine
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q32
+    prompt: "On a scale of 0 to 10, how likely are you to recommend an approach that worked for you to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q33
+    prompt: "What would help you feel more comfortable in your daily routine? Please describe briefly."
+    type: free_text
+    construct: would_help_feel_more_comfortable
+    required: true
+  - id: q34
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q35
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Which of the following best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Other"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college"
+      - id: "c"
+        label: "Associate's degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q39
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q40
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q41
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which region of the country do you live in?"
+    type: single_choice
+    construct: region_country_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q44
+    prompt: "How would you describe your usual level of physical activity?"
+    type: single_choice
+    construct: would_describe_usual_level_physical
+    required: true
+    options:
+      - id: "a"
+        label: "Not active"
+      - id: "b"
+        label: "Lightly active"
+      - id: "c"
+        label: "Moderately active"
+      - id: "d"
+        label: "Very active"
+  - id: q45
+    prompt: "Which best describes your typical daily activity?"
+    type: single_choice
+    construct: best_describes_typical_daily_activity
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly sitting"
+      - id: "b"
+        label: "A mix of sitting and moving"
+      - id: "c"
+        label: "Mostly on my feet"
+      - id: "d"
+        label: "Physically demanding"

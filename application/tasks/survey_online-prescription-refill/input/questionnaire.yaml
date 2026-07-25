@@ -1,0 +1,818 @@
+schemaVersion: "1.0"
+id: online_prescription_refill_v1
+title: "Online Prescription Refill Survey"
+description: "Consumer use of, experience with, and attitudes toward refilling prescriptions online or through apps."
+questions:
+  - id: q0
+    prompt: "Do you currently take any prescription medications regularly?"
+    type: single_choice
+    construct: currently_take_any_prescription_medicati
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one medication"
+      - id: "b"
+        label: "Yes, two or three medications"
+      - id: "c"
+        label: "Yes, four or more medications"
+      - id: "d"
+        label: "No, only occasionally"
+      - id: "e"
+        label: "No, none at all"
+  - id: q1
+    prompt: "In the past 12 months, have you refilled a prescription online or through an app?"
+    type: single_choice
+    construct: past_12_months_have_refilled
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, many times"
+      - id: "b"
+        label: "Yes, a few times"
+      - id: "c"
+        label: "Yes, once"
+      - id: "d"
+        label: "No, but I have in the past"
+      - id: "e"
+        label: "No, I have never refilled online"
+  - id: q2
+    prompt: "How long have you been refilling prescriptions online?"
+    type: single_choice
+    construct: long_have_been_refilling_prescriptions
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "More than 3 years"
+      - id: "e"
+        label: "I do not refill online"
+  - id: q3
+    prompt: "How do you usually request an online refill?"
+    type: single_choice
+    construct: usually_request_online_refill
+    required: true
+    options:
+      - id: "a"
+        label: "Pharmacy mobile app"
+      - id: "b"
+        label: "Pharmacy website"
+      - id: "c"
+        label: "My health system's patient portal"
+      - id: "d"
+        label: "Automatic refill or auto-fill program"
+      - id: "e"
+        label: "A text-message or reminder link"
+      - id: "f"
+        label: "I do not refill online"
+  - id: q4
+    prompt: "Which pharmacies or services do you use for online refills? (Select all that apply)"
+    type: multi_choice
+    construct: pharmacies_services_use_online_refills
+    required: true
+    options:
+      - id: "a"
+        label: "CVS"
+      - id: "b"
+        label: "Walgreens"
+      - id: "c"
+        label: "Walmart"
+      - id: "d"
+        label: "A grocery-store pharmacy (for example, Kroger, Publix)"
+      - id: "e"
+        label: "Amazon Pharmacy"
+      - id: "f"
+        label: "A mail-order or insurance pharmacy"
+      - id: "g"
+        label: "A local independent pharmacy"
+      - id: "h"
+        label: "I do not refill online"
+  - id: q5
+    prompt: "How do you usually receive prescriptions you refill online?"
+    type: single_choice
+    construct: usually_receive_prescriptions_refill_onl
+    required: true
+    options:
+      - id: "a"
+        label: "Pick up in store"
+      - id: "b"
+        label: "Drive-through pickup"
+      - id: "c"
+        label: "Home delivery by mail"
+      - id: "d"
+        label: "Same-day local delivery"
+      - id: "e"
+        label: "It varies"
+  - id: q6
+    prompt: "About how often do you refill a prescription online?"
+    type: single_choice
+    construct: often_refill_prescription_online
+    required: true
+    options:
+      - id: "a"
+        label: "Weekly"
+      - id: "b"
+        label: "Monthly"
+      - id: "c"
+        label: "Every few months"
+      - id: "d"
+        label: "A few times a year"
+      - id: "e"
+        label: "Rarely"
+  - id: q7
+    prompt: "Do you use automatic refills for any of your medications?"
+    type: single_choice
+    construct: use_automatic_refills_any_medications
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for all of them"
+      - id: "b"
+        label: "Yes, for some of them"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No, I prefer to request each refill"
+  - id: q8
+    prompt: "Which features of online refills do you use? (Select all that apply)"
+    type: multi_choice
+    construct: features_online_refills_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Refill reminders or notifications"
+      - id: "b"
+        label: "Auto-refill enrollment"
+      - id: "c"
+        label: "Order status tracking"
+      - id: "d"
+        label: "Refilling for family members"
+      - id: "e"
+        label: "Scanning a prescription barcode"
+      - id: "f"
+        label: "Chatting with a pharmacist online"
+      - id: "g"
+        label: "Managing insurance or payment"
+      - id: "h"
+        label: "I do not use these features"
+  - id: q9
+    prompt: "How do you usually pay for prescriptions refilled online?"
+    type: single_choice
+    construct: usually_pay_prescriptions_refilled_onlin
+    required: true
+    options:
+      - id: "a"
+        label: "Insurance copay saved in the app"
+      - id: "b"
+        label: "Enter payment each time"
+      - id: "c"
+        label: "Discount card or coupon (for example, GoodRx)"
+      - id: "d"
+        label: "Pay in person at pickup"
+      - id: "e"
+        label: "It varies"
+  - id: q10
+    prompt: "How often do you get a refill reminder before you run out?"
+    type: single_choice
+    construct: often_get_refill_reminder_before
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q11
+    prompt: "How much do you agree with the following statement: Refilling prescriptions online saves me time."
+    type: single_choice
+    construct: much_agree_following_statement_refilling
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: The online refill process is easy to use."
+    type: single_choice
+    construct: much_agree_following_statement_online
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: I trust that my refills will be filled correctly."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: Online refills help me stay on schedule with my medications."
+    type: single_choice
+    construct: much_agree_following_statement_online
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: I worry about the privacy of my prescription information online."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I would rather refill online than call or visit the pharmacy."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "Which problems, if any, have you had with online refills? (Select all that apply)"
+    type: multi_choice
+    construct: problems_if_any_have_had
+    required: true
+    options:
+      - id: "a"
+        label: "Refill was delayed"
+      - id: "b"
+        label: "Medication was out of stock"
+      - id: "c"
+        label: "Insurance or payment issue"
+      - id: "d"
+        label: "Confusing app or website"
+      - id: "e"
+        label: "Received the wrong quantity or medication"
+      - id: "f"
+        label: "Trouble reaching a pharmacist"
+      - id: "g"
+        label: "I have not had problems"
+  - id: q18
+    prompt: "When a problem happens with an online refill, how easy is it to get help?"
+    type: single_choice
+    construct: when_problem_happens_online_refill
+    required: true
+    options:
+      - id: "a"
+        label: "Very easy"
+      - id: "b"
+        label: "Somewhat easy"
+      - id: "c"
+        label: "Neither easy nor difficult"
+      - id: "d"
+        label: "Somewhat difficult"
+      - id: "e"
+        label: "Very difficult"
+  - id: q19
+    prompt: "How often is your medication ready when the app or pharmacy says it will be?"
+    type: single_choice
+    construct: often_medication_ready_when_app
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q20
+    prompt: "How satisfied are you with each of the following in online refills: Ease of requesting a refill."
+    type: single_choice
+    construct: satisfied_each_following_online_refills
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q21
+    prompt: "How satisfied are you with each of the following in online refills: Speed of getting the medication."
+    type: single_choice
+    construct: satisfied_each_following_online_refills
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q22
+    prompt: "How satisfied are you with each of the following in online refills: Refill reminders and notifications."
+    type: single_choice
+    construct: satisfied_each_following_online_refills
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q23
+    prompt: "How satisfied are you with each of the following in online refills: Access to a pharmacist when needed."
+    type: single_choice
+    construct: satisfied_each_following_online_refills
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q24
+    prompt: "How satisfied are you with each of the following in online refills: Clarity of cost and insurance information."
+    type: single_choice
+    construct: satisfied_each_following_online_refills
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q25
+    prompt: "What do you like most about refilling online?"
+    type: single_choice
+    construct: like_most_refilling_online
+    required: true
+    options:
+      - id: "a"
+        label: "Saves time"
+      - id: "b"
+        label: "Convenient reminders"
+      - id: "c"
+        label: "Home delivery"
+      - id: "d"
+        label: "Avoids waiting at the pharmacy"
+      - id: "e"
+        label: "Easy to manage multiple medications"
+      - id: "f"
+        label: "Nothing in particular"
+  - id: q26
+    prompt: "What is your biggest concern about refilling prescriptions online?"
+    type: single_choice
+    construct: biggest_concern_refilling_prescriptions_
+    required: true
+    options:
+      - id: "a"
+        label: "Delays or running out of medication"
+      - id: "b"
+        label: "Errors in the order"
+      - id: "c"
+        label: "Privacy of my health data"
+      - id: "d"
+        label: "Losing the personal touch of a pharmacist"
+      - id: "e"
+        label: "Cost or insurance confusion"
+      - id: "f"
+        label: "I have no major concerns"
+  - id: q27
+    prompt: "How important is each of the following in an online refill service: Fast turnaround."
+    type: single_choice
+    construct: important_each_following_online_refill
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "How important is each of the following in an online refill service: Clear refill reminders."
+    type: single_choice
+    construct: important_each_following_online_refill
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "How important is each of the following in an online refill service: Home delivery option."
+    type: single_choice
+    construct: important_each_following_online_refill
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "How important is each of the following in an online refill service: Being able to reach a pharmacist."
+    type: single_choice
+    construct: important_each_following_online_refill
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q31
+    prompt: "How important is each of the following in an online refill service: Strong protection of my personal data."
+    type: single_choice
+    construct: important_each_following_online_refill
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q32
+    prompt: "Select your top 3 reasons you refill prescriptions online. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_refill
+    required: true
+    options:
+      - id: "a"
+        label: "Saves time"
+      - id: "b"
+        label: "Convenience of reminders"
+      - id: "c"
+        label: "Home delivery"
+      - id: "d"
+        label: "Avoiding the pharmacy line"
+      - id: "e"
+        label: "Managing several medications easily"
+      - id: "f"
+        label: "Lower cost or discounts"
+      - id: "g"
+        label: "Staying on schedule"
+      - id: "h"
+        label: "Refilling for family members"
+  - id: q33
+    prompt: "Overall, how satisfied are you with refilling prescriptions online?"
+    type: single_choice
+    construct: overall_satisfied_refilling_prescription
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "On a scale of 0 to 10, how likely are you to recommend online prescription refills to a friend or family member? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "Over the next 12 months, do you plan to keep refilling prescriptions online?"
+    type: single_choice
+    construct: over_next_12_months_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Definitely yes"
+      - id: "b"
+        label: "Probably yes"
+      - id: "c"
+        label: "Not sure"
+      - id: "d"
+        label: "Probably not"
+      - id: "e"
+        label: "Definitely not"
+  - id: q36
+    prompt: "How many prescription medications do you currently refill on a regular basis? Please enter a number."
+    type: free_text
+    construct: many_prescription_medications_currently_
+    required: true
+  - id: q37
+    prompt: "About how many days ahead of running out do you usually request a refill? Please enter a number of days."
+    type: free_text
+    construct: many_days_ahead_running_out
+    required: true
+  - id: q38
+    prompt: "About how many online refills did you request in the past 12 months? Please enter a number."
+    type: free_text
+    construct: many_online_refills_did_request
+    required: true
+  - id: q39
+    prompt: "What would make refilling prescriptions online easier for you? (Optional)"
+    type: free_text
+    construct: would_make_refilling_prescriptions_onlin
+    required: false
+  - id: q40
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q41
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe or not to say"
+  - id: q42
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q46
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q48
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q49
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q50
+    prompt: "What type of health insurance do you primarily have?"
+    type: single_choice
+    construct: type_health_insurance_primarily_have
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored plan"
+      - id: "b"
+        label: "Plan bought on the marketplace or directly"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or veterans coverage"
+      - id: "f"
+        label: "I do not have health insurance"
+      - id: "g"
+        label: "Prefer not to say"

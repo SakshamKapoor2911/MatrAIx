@@ -1,0 +1,769 @@
+schemaVersion: "1.0"
+id: ad_blocker_usage_v1
+title: "Ad Blocker Usage Survey"
+description: "How people use ad blockers and other tools to manage online advertising across browsers, apps, and devices."
+questions:
+  - id: q0
+    prompt: "Do you currently use an ad blocker on any of your devices?"
+    type: single_choice
+    construct: currently_use_ad_blocker_any
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, on most or all of my devices"
+      - id: "b"
+        label: "Yes, on one device"
+      - id: "c"
+        label: "No, but I have used one before"
+      - id: "d"
+        label: "No, and I never have"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q1
+    prompt: "How long have you been using an ad blocker?"
+    type: single_choice
+    construct: long_have_been_using_ad
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+      - id: "f"
+        label: "I don't use one"
+  - id: q2
+    prompt: "What first made you install an ad blocker? (Select all that apply)"
+    type: multi_choice
+    construct: first_made_install_ad_blocker
+    required: true
+    options:
+      - id: "a"
+        label: "Too many ads while browsing"
+      - id: "b"
+        label: "Intrusive pop-ups and auto-playing videos"
+      - id: "c"
+        label: "Pages loading too slowly"
+      - id: "d"
+        label: "Privacy and tracking concerns"
+      - id: "e"
+        label: "Malicious ads (malvertising) or scams"
+      - id: "f"
+        label: "A friend or article recommended it"
+      - id: "g"
+        label: "To block YouTube or video ads"
+      - id: "h"
+        label: "I have never installed one"
+  - id: q3
+    prompt: "Which ad blockers or related tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: ad_blockers_related_tools_use
+    required: true
+    options:
+      - id: "a"
+        label: "uBlock Origin"
+      - id: "b"
+        label: "AdBlock"
+      - id: "c"
+        label: "Adblock Plus"
+      - id: "d"
+        label: "AdGuard"
+      - id: "e"
+        label: "Ghostery"
+      - id: "f"
+        label: "Privacy Badger"
+      - id: "g"
+        label: "Brave browser's built-in blocker"
+      - id: "h"
+        label: "Pi-hole (network-level)"
+      - id: "i"
+        label: "A blocker built into my browser (e.g., Safari, Firefox)"
+      - id: "j"
+        label: "A mobile content blocker app"
+      - id: "k"
+        label: "Other"
+      - id: "l"
+        label: "I don't use any"
+  - id: q4
+    prompt: "Which do you consider your primary ad blocker?"
+    type: single_choice
+    construct: consider_primary_ad_blocker
+    required: true
+    options:
+      - id: "a"
+        label: "uBlock Origin"
+      - id: "b"
+        label: "AdBlock or Adblock Plus"
+      - id: "c"
+        label: "AdGuard"
+      - id: "d"
+        label: "Ghostery or Privacy Badger"
+      - id: "e"
+        label: "Brave's built-in blocker"
+      - id: "f"
+        label: "Pi-hole"
+      - id: "g"
+        label: "A browser's built-in blocker"
+      - id: "h"
+        label: "A mobile content blocker"
+      - id: "i"
+        label: "Other"
+      - id: "j"
+        label: "Not applicable"
+  - id: q5
+    prompt: "On which devices or platforms do you block ads? (Select all that apply)"
+    type: multi_choice
+    construct: devices_platforms_block_ads_select
+    required: true
+    options:
+      - id: "a"
+        label: "Desktop web browser"
+      - id: "b"
+        label: "Mobile web browser"
+      - id: "c"
+        label: "Mobile apps"
+      - id: "d"
+        label: "Smart TV or streaming device"
+      - id: "e"
+        label: "Whole home network (router / Pi-hole)"
+      - id: "f"
+        label: "I don't block ads anywhere"
+      - id: "g"
+        label: "Not applicable"
+  - id: q6
+    prompt: "Where do ads bother you the most? (Select all that apply)"
+    type: multi_choice
+    construct: where_ads_bother_most_select
+    required: true
+    options:
+      - id: "a"
+        label: "News and article websites"
+      - id: "b"
+        label: "YouTube and video sites"
+      - id: "c"
+        label: "Social media feeds"
+      - id: "d"
+        label: "Mobile games"
+      - id: "e"
+        label: "Streaming apps"
+      - id: "f"
+        label: "Search engine results"
+      - id: "g"
+        label: "Shopping sites"
+      - id: "h"
+        label: "Podcasts"
+      - id: "i"
+        label: "Ads don't really bother me"
+  - id: q7
+    prompt: "About how many hours per day do you browse the web or use apps where you'd encounter ads? Enter a whole number."
+    type: free_text
+    construct: many_hours_per_day_browse
+    required: true
+  - id: q8
+    prompt: "Do you pay for any ad-free versions of services (e.g., YouTube Premium, Spotify Premium)?"
+    type: single_choice
+    construct: pay_any_ad_free_versions
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for several services"
+      - id: "b"
+        label: "Yes, for one or two"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No, and I wouldn't"
+      - id: "e"
+        label: "Not applicable"
+  - id: q9
+    prompt: "Approximately how much do you pay per month for ad-free versions of services, in U.S. dollars? Enter 0 if you pay nothing."
+    type: free_text
+    construct: approximately_much_pay_per_month
+    required: true
+  - id: q10
+    prompt: "How often do you allow (\"whitelist\") ads on sites you want to support?"
+    type: single_choice
+    construct: often_allow_whitelist_ads_sites
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always for sites I like"
+  - id: q11
+    prompt: "Please rate your agreement: Online ads have gotten out of control."
+    type: single_choice
+    construct: please_rate_agreement_online_ads
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "Please rate your agreement: An ad blocker makes browsing much faster and cleaner."
+    type: single_choice
+    construct: please_rate_agreement_ad_blocker
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "Please rate your agreement: I feel guilty blocking ads on sites that rely on ad revenue."
+    type: single_choice
+    construct: please_rate_agreement_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "Please rate your agreement: Blocking ads is mainly about protecting my privacy."
+    type: single_choice
+    construct: please_rate_agreement_blocking_ads
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "Please rate your agreement: I would pay a small amount to use my favorite sites ad-free."
+    type: single_choice
+    construct: please_rate_agreement_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "Please rate your agreement: Some websites break or nag me when my ad blocker is on."
+    type: single_choice
+    construct: please_rate_agreement_some_websites
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much does this bother you: Pop-up ads"
+    type: single_choice
+    construct: much_does_this_bother_pop
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Slightly"
+      - id: "c"
+        label: "Moderately"
+      - id: "d"
+        label: "Very much"
+      - id: "e"
+        label: "Extremely"
+  - id: q18
+    prompt: "How much does this bother you: Auto-playing video ads"
+    type: single_choice
+    construct: much_does_this_bother_auto
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Slightly"
+      - id: "c"
+        label: "Moderately"
+      - id: "d"
+        label: "Very much"
+      - id: "e"
+        label: "Extremely"
+  - id: q19
+    prompt: "How much does this bother you: Ads that track me across websites"
+    type: single_choice
+    construct: much_does_this_bother_ads
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Slightly"
+      - id: "c"
+        label: "Moderately"
+      - id: "d"
+        label: "Very much"
+      - id: "e"
+        label: "Extremely"
+  - id: q20
+    prompt: "How much does this bother you: Ads that slow down page loading"
+    type: single_choice
+    construct: much_does_this_bother_ads
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Slightly"
+      - id: "c"
+        label: "Moderately"
+      - id: "d"
+        label: "Very much"
+      - id: "e"
+        label: "Extremely"
+  - id: q21
+    prompt: "How much does this bother you: Ads in mobile apps and games"
+    type: single_choice
+    construct: much_does_this_bother_ads
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Slightly"
+      - id: "c"
+        label: "Moderately"
+      - id: "d"
+        label: "Very much"
+      - id: "e"
+        label: "Extremely"
+  - id: q22
+    prompt: "How much does this bother you: Sponsored or \"native\" ads disguised as content"
+    type: single_choice
+    construct: much_does_this_bother_sponsored
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Slightly"
+      - id: "c"
+        label: "Moderately"
+      - id: "d"
+        label: "Very much"
+      - id: "e"
+        label: "Extremely"
+  - id: q23
+    prompt: "How do you feel about websites that ask you to disable your ad blocker?"
+    type: single_choice
+    construct: feel_websites_that_ask_disable
+    required: true
+    options:
+      - id: "a"
+        label: "I disable it to support the site"
+      - id: "b"
+        label: "I disable it only for sites I really want"
+      - id: "c"
+        label: "I usually leave the site instead"
+      - id: "d"
+        label: "I find a way around the request"
+      - id: "e"
+        label: "I don't encounter this / not applicable"
+  - id: q24
+    prompt: "Have you ever stopped using an ad blocker? Why? (Select all that apply)"
+    type: multi_choice
+    construct: have_ever_stopped_using_ad
+    required: true
+    options:
+      - id: "a"
+        label: "Too many sites broke or blocked me"
+      - id: "b"
+        label: "It was hard to configure"
+      - id: "c"
+        label: "I wanted to support content creators"
+      - id: "d"
+        label: "I switched to paying for ad-free services"
+      - id: "e"
+        label: "It slowed my browser or device"
+      - id: "f"
+        label: "I have never stopped using one"
+      - id: "g"
+        label: "I have never used one"
+  - id: q25
+    prompt: "How acceptable do you find \"reasonable\" non-intrusive ads (e.g., static banners)?"
+    type: single_choice
+    construct: acceptable_find_reasonable_non_intrusive
+    required: true
+    options:
+      - id: "a"
+        label: "Completely unacceptable — I block everything"
+      - id: "b"
+        label: "Mostly unacceptable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Mostly acceptable"
+      - id: "e"
+        label: "Completely acceptable"
+  - id: q26
+    prompt: "Do you use additional privacy tools alongside your ad blocker? (Select all that apply)"
+    type: multi_choice
+    construct: use_additional_privacy_tools_alongside
+    required: true
+    options:
+      - id: "a"
+        label: "A tracker blocker"
+      - id: "b"
+        label: "A VPN"
+      - id: "c"
+        label: "A privacy-focused browser"
+      - id: "d"
+        label: "Cookie-consent auto-rejecters"
+      - id: "e"
+        label: "A private search engine"
+      - id: "f"
+        label: "None of these"
+      - id: "g"
+        label: "Not applicable"
+  - id: q27
+    prompt: "Select your top 3 reasons you use (or would use) an ad blocker. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_use
+    required: true
+    options:
+      - id: "a"
+        label: "Fewer distractions while browsing"
+      - id: "b"
+        label: "Faster page loading"
+      - id: "c"
+        label: "Better privacy and less tracking"
+      - id: "d"
+        label: "Protection from malicious ads and scams"
+      - id: "e"
+        label: "Blocking video and YouTube ads"
+      - id: "f"
+        label: "Cleaner mobile experience"
+      - id: "g"
+        label: "Saving data usage"
+      - id: "h"
+        label: "Reducing annoyance overall"
+  - id: q28
+    prompt: "Overall, how satisfied are you with your current approach to handling online ads?"
+    type: single_choice
+    construct: overall_satisfied_current_approach_handl
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "On a scale of 0 to 10, how likely are you to recommend using an ad blocker to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q30
+    prompt: "How likely are you to keep using an ad blocker over the next year?"
+    type: single_choice
+    construct: likely_keep_using_ad_blocker
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "If you could change one thing about how online ads or ad blockers work, what would it be? (Optional)"
+    type: free_text
+    construct: if_could_change_one_thing
+    required: false
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18 years old"
+      - id: "b"
+        label: "18-24 years old"
+      - id: "c"
+        label: "25-34 years old"
+      - id: "d"
+        label: "35-44 years old"
+      - id: "e"
+        label: "45-54 years old"
+      - id: "f"
+        label: "55-64 years old"
+      - id: "g"
+        label: "65 years or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed, looking for work"
+      - id: "f"
+        label: "Not employed, not looking for work"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "How many people live in your household, including you? Enter a whole number."
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or domestic partnership"
+      - id: "c"
+        label: "In a relationship, not living together"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "In which U.S. region do you live?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "How would you rate your overall comfort with technology?"
+    type: single_choice
+    construct: would_rate_overall_comfort_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Extremely comfortable — I'm the person others ask for help"
+  - id: q43
+    prompt: "Which best describes your relationship to technology work?"
+    type: single_choice
+    construct: best_describes_relationship_technology_w
+    required: true
+    options:
+      - id: "a"
+        label: "I work in an IT, software, or cybersecurity role"
+      - id: "b"
+        label: "I work in tech but not in a technical role"
+      - id: "c"
+        label: "I work outside the tech industry"
+      - id: "d"
+        label: "I'm a student"
+      - id: "e"
+        label: "I'm not currently working"
+      - id: "f"
+        label: "Prefer not to say"

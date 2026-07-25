@@ -1,0 +1,704 @@
+schemaVersion: "1.0"
+id: financial_confidence_v1
+title: "Financial Confidence Survey"
+description: "How confident and secure people feel about managing their money, handling setbacks, and reaching their financial goals."
+questions:
+  - id: q0
+    prompt: "Overall, how confident do you feel about managing your personal finances?"
+    type: single_choice
+    construct: overall_confident_feel_managing_personal
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q1
+    prompt: "How would you rate your overall financial situation today?"
+    type: single_choice
+    construct: would_rate_overall_financial_situation
+    required: true
+    options:
+      - id: "a"
+        label: "Poor"
+      - id: "b"
+        label: "Fair"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Very good"
+      - id: "e"
+        label: "Excellent"
+  - id: q2
+    prompt: "Compared with a year ago, how confident do you feel about your finances now?"
+    type: single_choice
+    construct: compared_year_ago_confident_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Much less confident"
+      - id: "b"
+        label: "Somewhat less confident"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat more confident"
+      - id: "e"
+        label: "Much more confident"
+  - id: q3
+    prompt: "In which areas of personal finance do you feel confident? (Select all that apply)"
+    type: multi_choice
+    construct: areas_personal_finance_feel_confident
+    required: true
+    options:
+      - id: "a"
+        label: "Budgeting and tracking spending"
+      - id: "b"
+        label: "Saving regularly"
+      - id: "c"
+        label: "Managing debt"
+      - id: "d"
+        label: "Investing"
+      - id: "e"
+        label: "Retirement planning"
+      - id: "f"
+        label: "Understanding taxes"
+      - id: "g"
+        label: "Choosing insurance"
+      - id: "h"
+        label: "I don't feel confident in any of these"
+  - id: q4
+    prompt: "In which areas of personal finance do you feel least confident or most anxious? (Select all that apply)"
+    type: multi_choice
+    construct: areas_personal_finance_feel_least
+    required: true
+    options:
+      - id: "a"
+        label: "Budgeting and tracking spending"
+      - id: "b"
+        label: "Saving regularly"
+      - id: "c"
+        label: "Managing debt"
+      - id: "d"
+        label: "Investing"
+      - id: "e"
+        label: "Retirement planning"
+      - id: "f"
+        label: "Understanding taxes"
+      - id: "g"
+        label: "Choosing insurance"
+      - id: "h"
+        label: "I feel confident in all of these"
+  - id: q5
+    prompt: "How confident are you: That you could handle a major unexpected expense (e.g., $1,000) without borrowing."
+    type: single_choice
+    construct: confident_that_could_handle_major
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q6
+    prompt: "How confident are you: That you are saving enough for retirement."
+    type: single_choice
+    construct: confident_that_saving_enough_retirement
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q7
+    prompt: "How confident are you: That you could make a good decision about investing your money."
+    type: single_choice
+    construct: confident_that_could_make_good
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q8
+    prompt: "How confident are you: That you understand the financial products you use (accounts, loans, cards)."
+    type: single_choice
+    construct: confident_that_understand_financial_prod
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q9
+    prompt: "How confident are you: That you are on track to meet your long-term financial goals."
+    type: single_choice
+    construct: confident_that_track_meet_long
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q10
+    prompt: "How much do you agree or disagree: I feel in control of my finances."
+    type: single_choice
+    construct: much_agree_disagree_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree: Thinking about my finances makes me anxious."
+    type: single_choice
+    construct: much_agree_disagree_thinking_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: I feel comfortable talking about money with others."
+    type: single_choice
+    construct: much_agree_disagree_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I know where to find trustworthy financial information when I need it."
+    type: single_choice
+    construct: much_agree_disagree_i_know
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: My financial confidence affects my overall well-being and stress levels."
+    type: single_choice
+    construct: much_agree_disagree_my_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How often do you feel worried about your finances?"
+    type: single_choice
+    construct: often_feel_worried_finances
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q16
+    prompt: "How often do you check your bank account or track your spending?"
+    type: single_choice
+    construct: often_check_bank_account_track
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Weekly"
+      - id: "d"
+        label: "Monthly"
+      - id: "e"
+        label: "Rarely"
+  - id: q17
+    prompt: "How often do you set specific financial goals for yourself?"
+    type: single_choice
+    construct: often_set_specific_financial_goals
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q18
+    prompt: "Do you follow a budget?"
+    type: single_choice
+    construct: follow_budget
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a detailed budget"
+      - id: "b"
+        label: "Yes, a rough budget"
+      - id: "c"
+        label: "No, but I keep track loosely"
+      - id: "d"
+        label: "No budget at all"
+  - id: q19
+    prompt: "Do you have an emergency fund?"
+    type: single_choice
+    construct: have_emergency_fund
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, 6 months of expenses or more"
+      - id: "b"
+        label: "Yes, 3 to 6 months of expenses"
+      - id: "c"
+        label: "Yes, less than 3 months of expenses"
+      - id: "d"
+        label: "No emergency fund"
+  - id: q20
+    prompt: "What most contributes to your financial confidence (or lack of it)? (Select all that apply)"
+    type: multi_choice
+    construct: most_contributes_financial_confidence_la
+    required: true
+    options:
+      - id: "a"
+        label: "My income level"
+      - id: "b"
+        label: "My level of debt"
+      - id: "c"
+        label: "My savings and investments"
+      - id: "d"
+        label: "My financial knowledge"
+      - id: "e"
+        label: "Support from a partner or family"
+      - id: "f"
+        label: "Guidance from a financial professional"
+      - id: "g"
+        label: "Past financial mistakes or successes"
+      - id: "h"
+        label: "The overall economy"
+  - id: q21
+    prompt: "Select the top 3 things that would most improve your financial confidence. (Select all that apply — choose up to 3)"
+    type: single_choice
+    construct: select_top_3_things_that
+    required: true
+    options:
+      - id: "a"
+        label: "Earning more income"
+      - id: "b"
+        label: "Paying off debt"
+      - id: "c"
+        label: "Building a bigger emergency fund"
+      - id: "d"
+        label: "Learning more about money"
+      - id: "e"
+        label: "Having a clear financial plan"
+      - id: "f"
+        label: "Working with a financial advisor"
+      - id: "g"
+        label: "Using better budgeting tools"
+      - id: "h"
+        label: "A more stable economy"
+  - id: q22
+    prompt: "Where do you turn for financial guidance or education? (Select all that apply)"
+    type: multi_choice
+    construct: where_turn_financial_guidance_education
+    required: true
+    options:
+      - id: "a"
+        label: "A financial advisor or planner"
+      - id: "b"
+        label: "Family and friends"
+      - id: "c"
+        label: "Online articles and websites"
+      - id: "d"
+        label: "Social media and financial influencers"
+      - id: "e"
+        label: "Books or courses"
+      - id: "f"
+        label: "Podcasts or YouTube"
+      - id: "g"
+        label: "My bank or employer"
+      - id: "h"
+        label: "I don't seek financial guidance"
+  - id: q23
+    prompt: "How would you rate your own financial knowledge?"
+    type: single_choice
+    construct: would_rate_own_financial_knowledge
+    required: true
+    options:
+      - id: "a"
+        label: "Very low"
+      - id: "b"
+        label: "Below average"
+      - id: "c"
+        label: "Average"
+      - id: "d"
+        label: "Above average"
+      - id: "e"
+        label: "Very high"
+  - id: q24
+    prompt: "Have you ever worked with a financial professional to build your confidence or plan?"
+    type: single_choice
+    construct: have_ever_worked_financial_professional
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, currently"
+      - id: "b"
+        label: "Yes, in the past"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No, and I haven't considered it"
+  - id: q25
+    prompt: "How confident are you that you understand basic concepts like interest, inflation, and diversification?"
+    type: single_choice
+    construct: confident_that_understand_basic_concepts
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q26
+    prompt: "Roughly how many months of expenses could you cover with your current savings? Please enter a number of months."
+    type: free_text
+    construct: roughly_many_months_expenses_could
+    required: true
+  - id: q27
+    prompt: "On a scale of 1 to 10, how would you rate your current financial stress level? (1 = no stress, 10 = extreme stress) Please enter a number."
+    type: free_text
+    construct: scale_1_10_would_rate
+    required: true
+  - id: q28
+    prompt: "How optimistic are you about your financial future over the next 5 years?"
+    type: single_choice
+    construct: optimistic_financial_future_over_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very pessimistic"
+      - id: "b"
+        label: "Somewhat pessimistic"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat optimistic"
+      - id: "e"
+        label: "Very optimistic"
+  - id: q29
+    prompt: "How likely are you to take a specific step to improve your finances in the next 6 months (e.g., start a budget, meet an advisor, open a savings account)?"
+    type: single_choice
+    construct: likely_take_specific_step_improve
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q30
+    prompt: "Overall, how satisfied are you with your financial life right now?"
+    type: single_choice
+    construct: overall_satisfied_financial_life_right
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q31
+    prompt: "On a scale of 0 to 10, how likely are you to say you feel financially secure? (0 = not at all secure, 10 = completely secure)"
+    type: single_choice
+    construct: scale_0_10_likely_say
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "In a few words, what would most help you feel more confident about your money? (Optional)"
+    type: free_text
+    construct: few_words_would_most_help
+    required: false
+  - id: q33
+    prompt: "What is your age? Please enter a number (years old)."
+    type: free_text
+    construct: age_please_enter_number_years
+    required: true
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q39
+    prompt: "What is your annual household income before taxes?"
+    type: single_choice
+    construct: annual_household_income_before_taxes
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+  - id: q41
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q42
+    prompt: "Do you have children or other dependents who rely on you financially?"
+    type: single_choice
+    construct: have_children_other_dependents_who
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q44
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

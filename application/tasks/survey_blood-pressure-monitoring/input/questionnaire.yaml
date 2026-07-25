@@ -1,0 +1,678 @@
+schemaVersion: "1.0"
+id: blood_pressure_monitoring_v1
+title: "Home Blood Pressure Monitoring Survey"
+description: "Consumer use of home blood pressure monitoring devices and how people track and act on their readings."
+questions:
+  - id: q0
+    prompt: "Do you ever check your blood pressure outside of a doctor's office?"
+    type: single_choice
+    construct: ever_check_blood_pressure_outside
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, at home with my own device"
+      - id: "b"
+        label: "Yes, at a pharmacy or store machine"
+      - id: "c"
+        label: "Yes, both at home and elsewhere"
+      - id: "d"
+        label: "No, only at the doctor's office"
+      - id: "e"
+        label: "No, I do not check my blood pressure"
+  - id: q1
+    prompt: "Do you own a home blood pressure monitor?"
+    type: single_choice
+    construct: own_home_blood_pressure_monitor
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I have used one"
+      - id: "c"
+        label: "No, never"
+  - id: q2
+    prompt: "What type of home blood pressure monitor do you use?"
+    type: single_choice
+    construct: type_home_blood_pressure_monitor
+    required: true
+    options:
+      - id: "a"
+        label: "Upper-arm cuff (automatic)"
+      - id: "b"
+        label: "Wrist monitor"
+      - id: "c"
+        label: "A smartwatch or wearable"
+      - id: "d"
+        label: "A manual cuff"
+      - id: "e"
+        label: "I do not use a home monitor"
+  - id: q3
+    prompt: "Which brand of home blood pressure monitor do you use, if any?"
+    type: single_choice
+    construct: brand_home_blood_pressure_monitor
+    required: true
+    options:
+      - id: "a"
+        label: "Omron"
+      - id: "b"
+        label: "Withings"
+      - id: "c"
+        label: "iHealth"
+      - id: "d"
+        label: "A&D Medical"
+      - id: "e"
+        label: "A store or pharmacy brand"
+      - id: "f"
+        label: "Another brand"
+      - id: "g"
+        label: "I do not use a home monitor"
+  - id: q4
+    prompt: "How long have you been checking your blood pressure at home?"
+    type: single_choice
+    construct: long_have_been_checking_blood
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 to 12 months"
+      - id: "c"
+        label: "1 to 2 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+      - id: "f"
+        label: "I do not check at home"
+  - id: q5
+    prompt: "How often do you check your blood pressure at home?"
+    type: single_choice
+    construct: often_check_blood_pressure_home
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "About once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "About once a week"
+      - id: "e"
+        label: "A few times a month"
+      - id: "f"
+        label: "Rarely or never"
+  - id: q6
+    prompt: "In a typical week, about how many times do you take a blood pressure reading? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: typical_week_many_times_take
+    required: true
+  - id: q7
+    prompt: "Why do you monitor your blood pressure at home? (Select all that apply)"
+    type: multi_choice
+    construct: why_monitor_blood_pressure_home
+    required: true
+    options:
+      - id: "a"
+        label: "A doctor recommended it"
+      - id: "b"
+        label: "To keep an eye on a known condition"
+      - id: "c"
+        label: "Family history"
+      - id: "d"
+        label: "General health awareness"
+      - id: "e"
+        label: "To see how lifestyle changes affect it"
+      - id: "f"
+        label: "Peace of mind"
+      - id: "g"
+        label: "To share readings with my doctor"
+      - id: "h"
+        label: "I do not monitor at home"
+  - id: q8
+    prompt: "Does your blood pressure monitor connect to an app or your phone?"
+    type: single_choice
+    construct: does_blood_pressure_monitor_connect
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I use the app"
+      - id: "b"
+        label: "Yes, but I do not use the app"
+      - id: "c"
+        label: "No, it does not connect"
+      - id: "d"
+        label: "Not sure"
+      - id: "e"
+        label: "I do not use a home monitor"
+  - id: q9
+    prompt: "How do you keep track of your readings? (Select all that apply)"
+    type: multi_choice
+    construct: keep_track_readings_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "An app that syncs with the device"
+      - id: "b"
+        label: "A separate health app I enter readings into"
+      - id: "c"
+        label: "A written log or notebook"
+      - id: "d"
+        label: "A spreadsheet or notes on my phone"
+      - id: "e"
+        label: "A patient portal"
+      - id: "f"
+        label: "I do not track my readings"
+      - id: "g"
+        label: "I rely on the device's memory"
+  - id: q10
+    prompt: "Do you share your home readings with a doctor or care team?"
+    type: single_choice
+    construct: share_home_readings_doctor_care
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I would like to"
+      - id: "d"
+        label: "No, and I do not plan to"
+      - id: "e"
+        label: "I do not take home readings"
+  - id: q11
+    prompt: "How do you share your readings with your doctor? (Select all that apply)"
+    type: multi_choice
+    construct: share_readings_doctor_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Bring a written log to appointments"
+      - id: "b"
+        label: "Show them on my phone or app"
+      - id: "c"
+        label: "Send them through a patient portal"
+      - id: "d"
+        label: "Report them verbally"
+      - id: "e"
+        label: "The device sends them automatically"
+      - id: "f"
+        label: "I do not share readings"
+  - id: q12
+    prompt: "How confident are you that you take your blood pressure readings correctly?"
+    type: single_choice
+    construct: confident_that_take_blood_pressure
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q13
+    prompt: "How much do you trust that your home monitor gives accurate readings?"
+    type: single_choice
+    construct: much_trust_that_home_monitor
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q14
+    prompt: "About how much did your home blood pressure monitor cost? Please enter a dollar amount (enter 0 if you do not own one)."
+    type: free_text
+    construct: much_did_home_blood_pressure
+    required: true
+  - id: q15
+    prompt: "How much do you agree or disagree: Checking my blood pressure at home helps me stay on top of my health."
+    type: single_choice
+    construct: much_agree_disagree_checking_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: Home monitoring gives me useful information between doctor visits."
+    type: single_choice
+    construct: much_agree_disagree_home_monitoring
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree or disagree: Checking my blood pressure sometimes makes me anxious."
+    type: single_choice
+    construct: much_agree_disagree_checking_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree or disagree: My home monitor is easy to use."
+    type: single_choice
+    construct: much_agree_disagree_my_home
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+      - id: "f"
+        label: "Not applicable, I do not use one"
+  - id: q19
+    prompt: "How much do you agree or disagree: The app or tracking helps me understand my readings over time."
+    type: single_choice
+    construct: much_agree_disagree_app_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+      - id: "f"
+        label: "Not applicable"
+  - id: q20
+    prompt: "How useful is each feature of a home blood pressure setup — Automatic saving of readings"
+    type: single_choice
+    construct: useful_each_feature_home_blood
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all useful"
+      - id: "b"
+        label: "Slightly useful"
+      - id: "c"
+        label: "Moderately useful"
+      - id: "d"
+        label: "Very useful"
+      - id: "e"
+        label: "Extremely useful"
+  - id: q21
+    prompt: "How useful is each feature of a home blood pressure setup — Charts or trends over time"
+    type: single_choice
+    construct: useful_each_feature_home_blood
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all useful"
+      - id: "b"
+        label: "Slightly useful"
+      - id: "c"
+        label: "Moderately useful"
+      - id: "d"
+        label: "Very useful"
+      - id: "e"
+        label: "Extremely useful"
+  - id: q22
+    prompt: "How useful is each feature of a home blood pressure setup — Sharing readings with a doctor"
+    type: single_choice
+    construct: useful_each_feature_home_blood
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all useful"
+      - id: "b"
+        label: "Slightly useful"
+      - id: "c"
+        label: "Moderately useful"
+      - id: "d"
+        label: "Very useful"
+      - id: "e"
+        label: "Extremely useful"
+  - id: q23
+    prompt: "How useful is each feature of a home blood pressure setup — Reminders to take a reading"
+    type: single_choice
+    construct: useful_each_feature_home_blood
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all useful"
+      - id: "b"
+        label: "Slightly useful"
+      - id: "c"
+        label: "Moderately useful"
+      - id: "d"
+        label: "Very useful"
+      - id: "e"
+        label: "Extremely useful"
+  - id: q24
+    prompt: "How useful is each feature of a home blood pressure setup — Easy-to-read display or interface"
+    type: single_choice
+    construct: useful_each_feature_home_blood
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all useful"
+      - id: "b"
+        label: "Slightly useful"
+      - id: "c"
+        label: "Moderately useful"
+      - id: "d"
+        label: "Very useful"
+      - id: "e"
+        label: "Extremely useful"
+  - id: q25
+    prompt: "What gets in the way of checking your blood pressure as often as you would like? (Select all that apply)"
+    type: multi_choice
+    construct: gets_way_checking_blood_pressure
+    required: true
+    options:
+      - id: "a"
+        label: "I forget"
+      - id: "b"
+        label: "It takes too much time"
+      - id: "c"
+        label: "I am not sure I am doing it right"
+      - id: "d"
+        label: "I do not want to worry about the numbers"
+      - id: "e"
+        label: "My device is inconvenient"
+      - id: "f"
+        label: "I do not see the point"
+      - id: "g"
+        label: "I do not own a device"
+      - id: "h"
+        label: "Nothing gets in the way"
+  - id: q26
+    prompt: "When you get an unexpected reading, what do you usually do?"
+    type: single_choice
+    construct: when_get_unexpected_reading_usually
+    required: true
+    options:
+      - id: "a"
+        label: "Take it again to double-check"
+      - id: "b"
+        label: "Wait and check later"
+      - id: "c"
+        label: "Look up what it means"
+      - id: "d"
+        label: "Contact my doctor or nurse"
+      - id: "e"
+        label: "Nothing in particular"
+      - id: "f"
+        label: "I do not take home readings"
+  - id: q27
+    prompt: "How much do you feel home monitoring has benefited your health awareness?"
+    type: single_choice
+    construct: much_feel_home_monitoring_has
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "A great deal"
+  - id: q28
+    prompt: "Which improvements would make home blood pressure monitoring more useful for you? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: improvements_would_make_home_blood
+    required: true
+    options:
+      - id: "a"
+        label: "A more accurate device"
+      - id: "b"
+        label: "Easier syncing with an app"
+      - id: "c"
+        label: "Simple charts and trends"
+      - id: "d"
+        label: "Automatic sharing with my doctor"
+      - id: "e"
+        label: "Clearer guidance on what readings mean"
+      - id: "f"
+        label: "Reminders to check"
+      - id: "g"
+        label: "A more comfortable cuff"
+      - id: "h"
+        label: "A lower-cost device"
+      - id: "i"
+        label: "A smaller or more portable device"
+      - id: "j"
+        label: "Integration with other health apps"
+  - id: q29
+    prompt: "Overall, how satisfied are you with your home blood pressure monitoring experience?"
+    type: single_choice
+    construct: overall_satisfied_home_blood_pressure
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q30
+    prompt: "How likely are you to keep monitoring your blood pressure at home over the next year?"
+    type: single_choice
+    construct: likely_keep_monitoring_blood_pressure
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "Overall, how likely are you to recommend home blood pressure monitoring to a friend or family member? Please use a 0 to 10 scale, where 0 is not at all likely and 10 is extremely likely. Please enter a number."
+    type: free_text
+    construct: overall_likely_recommend_home_blood
+    required: true
+  - id: q32
+    prompt: "What is your age? Please enter a number (years old)."
+    type: free_text
+    construct: age_please_enter_number_years
+    required: true
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q37
+    prompt: "How comfortable are you using computers, apps, and the internet in general?"
+    type: single_choice
+    construct: comfortable_using_computers_apps_interne
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Extremely comfortable"
+  - id: q38
+    prompt: "Do you currently have health insurance coverage?"
+    type: single_choice
+    construct: currently_have_health_insurance_coverage
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, through an employer"
+      - id: "b"
+        label: "Yes, through a government program (Medicare, Medicaid, etc.)"
+      - id: "c"
+        label: "Yes, purchased on my own"
+      - id: "d"
+        label: "No, I am uninsured"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q40
+    prompt: "In which region of the United States do you live?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q42
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"

@@ -1,0 +1,747 @@
+schemaVersion: "1.0"
+id: mobile_payment_usage_v1
+title: "Mobile Payment Usage Survey"
+description: "How consumers use mobile and contactless payments — the services they use, where and how often they pay, and their attitudes toward speed, security, and going walletless."
+questions:
+  - id: q0
+    prompt: "Do you use mobile payments (tapping your phone or watch, or paying in an app) to make purchases?"
+    type: single_choice
+    construct: use_mobile_payments_tapping_phone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "I tried it but stopped"
+      - id: "d"
+        label: "No, but I plan to start"
+      - id: "e"
+        label: "No, and I do not plan to"
+  - id: q1
+    prompt: "How long have you been using mobile payments?"
+    type: single_choice
+    construct: long_have_been_using_mobile
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "4 to 7 years"
+      - id: "e"
+        label: "More than 7 years"
+      - id: "f"
+        label: "I do not use mobile payments"
+  - id: q2
+    prompt: "Which mobile payment services do you use? (Select all that apply)"
+    type: multi_choice
+    construct: mobile_payment_services_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Apple Pay"
+      - id: "b"
+        label: "Google Pay"
+      - id: "c"
+        label: "Samsung Pay"
+      - id: "d"
+        label: "PayPal"
+      - id: "e"
+        label: "A store's own app (e.g., Starbucks, Walmart)"
+      - id: "f"
+        label: "A bank's mobile wallet"
+      - id: "g"
+        label: "Tap-to-pay with a contactless card"
+      - id: "h"
+        label: "I do not use mobile payments"
+  - id: q3
+    prompt: "Which do you use most often for mobile payments?"
+    type: single_choice
+    construct: use_most_often_mobile_payments
+    required: true
+    options:
+      - id: "a"
+        label: "Apple Pay"
+      - id: "b"
+        label: "Google Pay"
+      - id: "c"
+        label: "Samsung Pay"
+      - id: "d"
+        label: "PayPal"
+      - id: "e"
+        label: "A store-specific app"
+      - id: "f"
+        label: "Contactless card tap"
+      - id: "g"
+        label: "I do not use mobile payments"
+  - id: q4
+    prompt: "How often do you make a mobile payment?"
+    type: single_choice
+    construct: often_make_mobile_payment
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "About once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q5
+    prompt: "About how many mobile payments do you make in a typical week? Please enter a whole number."
+    type: free_text
+    construct: many_mobile_payments_make_typical
+    required: true
+  - id: q6
+    prompt: "Where do you use mobile payments? (Select all that apply)"
+    type: multi_choice
+    construct: where_use_mobile_payments_select
+    required: true
+    options:
+      - id: "a"
+        label: "Grocery stores"
+      - id: "b"
+        label: "Restaurants and cafes"
+      - id: "c"
+        label: "Retail and clothing stores"
+      - id: "d"
+        label: "Gas stations"
+      - id: "e"
+        label: "Public transit"
+      - id: "f"
+        label: "Online or in-app purchases"
+      - id: "g"
+        label: "Vending machines or small vendors"
+      - id: "h"
+        label: "Paying friends or individuals"
+  - id: q7
+    prompt: "What do you link to your mobile payment apps? (Select all that apply)"
+    type: multi_choice
+    construct: link_mobile_payment_apps_select
+    required: true
+    options:
+      - id: "a"
+        label: "A credit card"
+      - id: "b"
+        label: "A debit card"
+      - id: "c"
+        label: "A bank account"
+      - id: "d"
+        label: "A prepaid or reloadable card"
+      - id: "e"
+        label: "Store loyalty or rewards cards"
+      - id: "f"
+        label: "I don't link anything / don't use them"
+  - id: q8
+    prompt: "In a typical purchase, which payment method do you reach for first?"
+    type: single_choice
+    construct: typical_purchase_payment_method_reach
+    required: true
+    options:
+      - id: "a"
+        label: "Phone or watch tap"
+      - id: "b"
+        label: "Physical credit or debit card"
+      - id: "c"
+        label: "Cash"
+      - id: "d"
+        label: "It depends on the situation"
+  - id: q9
+    prompt: "How important is each factor in your decision to use mobile payments? — Speed and convenience"
+    type: single_choice
+    construct: important_each_factor_decision_use
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q10
+    prompt: "How important is each factor in your decision to use mobile payments? — Security compared to cards"
+    type: single_choice
+    construct: important_each_factor_decision_use
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q11
+    prompt: "How important is each factor in your decision to use mobile payments? — Earning rewards or cash back"
+    type: single_choice
+    construct: important_each_factor_decision_use
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q12
+    prompt: "How important is each factor in your decision to use mobile payments? — Being able to leave my wallet at home"
+    type: single_choice
+    construct: important_each_factor_decision_use
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q13
+    prompt: "How important is each factor in your decision to use mobile payments? — Tracking my spending easily"
+    type: single_choice
+    construct: important_each_factor_decision_use
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q14
+    prompt: "How much do you agree with the following statement: Mobile payments are faster than using cash or cards."
+    type: single_choice
+    construct: much_agree_following_statement_mobile
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: Mobile payments are more secure than swiping a physical card."
+    type: single_choice
+    construct: much_agree_following_statement_mobile
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I worry about my phone being lost or stolen with my payment info on it."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: I am comfortable leaving home without my physical wallet."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement: Not every place I shop accepts mobile payments."
+    type: single_choice
+    construct: much_agree_following_statement_not
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "What are the main reasons you use (or would use) mobile payments? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: main_reasons_use_would_use
+    required: true
+    options:
+      - id: "a"
+        label: "Convenience and speed"
+      - id: "b"
+        label: "Touch-free / hygienic payment"
+      - id: "c"
+        label: "Better security"
+      - id: "d"
+        label: "Earning rewards"
+      - id: "e"
+        label: "Not needing to carry a wallet"
+      - id: "f"
+        label: "Easy spending tracking"
+      - id: "g"
+        label: "It's what my card or phone offers"
+      - id: "h"
+        label: "Splitting or sending money to others"
+  - id: q20
+    prompt: "What has prevented you from using mobile payments more often? (Select all that apply)"
+    type: multi_choice
+    construct: has_prevented_from_using_mobile
+    required: true
+    options:
+      - id: "a"
+        label: "Not all stores accept them"
+      - id: "b"
+        label: "Security or privacy concerns"
+      - id: "c"
+        label: "I prefer cash or physical cards"
+      - id: "d"
+        label: "Habit — I forget to use them"
+      - id: "e"
+        label: "Setup felt complicated"
+      - id: "f"
+        label: "My phone or card doesn't support it well"
+      - id: "g"
+        label: "Nothing, I use them as much as I want"
+  - id: q21
+    prompt: "How often do you use each of the following? — Contactless tap-to-pay with your phone or watch"
+    type: single_choice
+    construct: often_use_each_following_contactless
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "How often do you use each of the following? — Physical cash"
+    type: single_choice
+    construct: often_use_each_following_physical
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q23
+    prompt: "How often do you use each of the following? — A physical credit or debit card"
+    type: single_choice
+    construct: often_use_each_following_physical
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q24
+    prompt: "How has your use of physical cash changed since you started using mobile payments?"
+    type: single_choice
+    construct: has_use_physical_cash_changed
+    required: true
+    options:
+      - id: "a"
+        label: "I use much less cash"
+      - id: "b"
+        label: "I use somewhat less cash"
+      - id: "c"
+        label: "No change"
+      - id: "d"
+        label: "I use more cash"
+      - id: "e"
+        label: "Not applicable"
+  - id: q25
+    prompt: "Have you experienced any of the following with mobile payments? (Select all that apply)"
+    type: multi_choice
+    construct: have_experienced_any_following_mobile
+    required: true
+    options:
+      - id: "a"
+        label: "A payment that failed to go through"
+      - id: "b"
+        label: "A terminal that didn't accept my phone"
+      - id: "c"
+        label: "An unauthorized or fraudulent charge"
+      - id: "d"
+        label: "Trouble getting a refund"
+      - id: "e"
+        label: "Difficulty setting it up"
+      - id: "f"
+        label: "None of these"
+  - id: q26
+    prompt: "How confident are you that your mobile payments are protected against fraud?"
+    type: single_choice
+    construct: confident_that_mobile_payments_protected
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q27
+    prompt: "How satisfied are you overall with mobile payments?"
+    type: single_choice
+    construct: satisfied_overall_mobile_payments
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q28
+    prompt: "How likely are you to use mobile payments more often over the next 12 months?"
+    type: single_choice
+    construct: likely_use_mobile_payments_more
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q29
+    prompt: "On a scale of 0 to 10, how likely are you to recommend mobile payments to a friend or family member (0 = not at all likely, 10 = extremely likely)?"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q30
+    prompt: "What would make you use mobile payments more? (Optional open response)"
+    type: free_text
+    construct: would_make_use_mobile_payments
+    required: false
+  - id: q31
+    prompt: "About what share of your in-person purchases do you make with mobile payments? Please enter a whole number from 0 to 100 (percent)."
+    type: free_text
+    construct: share_person_purchases_make_mobile
+    required: true
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic, Latino, or Spanish origin"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Some other race or origin"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a whole number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Widowed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "In which U.S. region do you live?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q42
+    prompt: "Which best describes your primary smartphone?"
+    type: single_choice
+    construct: best_describes_primary_smartphone
+    required: true
+    options:
+      - id: "a"
+        label: "iPhone (iOS)"
+      - id: "b"
+        label: "Android phone"
+      - id: "c"
+        label: "Other type of phone"
+      - id: "d"
+        label: "I do not own a smartphone"
+  - id: q43
+    prompt: "Do you own a smartwatch or wearable you can pay with?"
+    type: single_choice
+    construct: own_smartwatch_wearable_can_pay
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I use it to pay"
+      - id: "b"
+        label: "Yes, but I don't pay with it"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not sure"
+  - id: q44
+    prompt: "How would you rate your overall comfort with technology?"
+    type: single_choice
+    construct: would_rate_overall_comfort_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Somewhat uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat comfortable"
+      - id: "e"
+        label: "Very comfortable"

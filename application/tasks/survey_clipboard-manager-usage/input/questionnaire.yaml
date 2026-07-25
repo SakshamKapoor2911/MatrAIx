@@ -1,0 +1,781 @@
+schemaVersion: "1.0"
+id: clipboard_manager_usage_v1
+title: "Clipboard Manager Usage Survey"
+description: "How people use clipboard managers — tools that keep a searchable history of copied items."
+questions:
+  - id: q0
+    prompt: "Do you use a clipboard manager (a tool that stores a history of copied items)?"
+    type: single_choice
+    construct: use_clipboard_manager_tool_that
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, every day"
+      - id: "b"
+        label: "Yes, a few times a week"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "I tried one but stopped"
+      - id: "e"
+        label: "No, but I've heard of them"
+      - id: "f"
+        label: "No, I didn't know these existed"
+  - id: q1
+    prompt: "How long have you been using a clipboard manager?"
+    type: single_choice
+    construct: long_have_been_using_clipboard
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+      - id: "f"
+        label: "I don't use one"
+  - id: q2
+    prompt: "How often do you paste something from your clipboard history (rather than the most recent copy)?"
+    type: single_choice
+    construct: often_paste_something_from_clipboard
+    required: true
+    options:
+      - id: "a"
+        label: "Many times a day"
+      - id: "b"
+        label: "A few times a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never / not applicable"
+  - id: q3
+    prompt: "Which operating system do you primarily use?"
+    type: single_choice
+    construct: operating_system_primarily_use
+    required: true
+    options:
+      - id: "a"
+        label: "Windows"
+      - id: "b"
+        label: "macOS"
+      - id: "c"
+        label: "Linux"
+      - id: "d"
+        label: "ChromeOS"
+      - id: "e"
+        label: "Primarily mobile (iOS/Android)"
+  - id: q4
+    prompt: "Which clipboard managers have you used? (Select all that apply)"
+    type: multi_choice
+    construct: clipboard_managers_have_used_select
+    required: true
+    options:
+      - id: "a"
+        label: "Windows Clipboard History (Win+V)"
+      - id: "b"
+        label: "macOS built-in / Universal Clipboard"
+      - id: "c"
+        label: "Paste (macOS)"
+      - id: "d"
+        label: "Maccy"
+      - id: "e"
+        label: "Alfred"
+      - id: "f"
+        label: "Raycast"
+      - id: "g"
+        label: "Ditto (Windows)"
+      - id: "h"
+        label: "ClipboardFusion"
+      - id: "i"
+        label: "CopyQ"
+      - id: "j"
+        label: "Flycut / Clipy"
+      - id: "k"
+        label: "A mobile clipboard app"
+      - id: "l"
+        label: "None"
+  - id: q5
+    prompt: "Which clipboard manager do you use most often?"
+    type: single_choice
+    construct: clipboard_manager_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Windows Clipboard History (Win+V)"
+      - id: "b"
+        label: "macOS built-in"
+      - id: "c"
+        label: "Paste"
+      - id: "d"
+        label: "Maccy"
+      - id: "e"
+        label: "Alfred"
+      - id: "f"
+        label: "Raycast"
+      - id: "g"
+        label: "Ditto"
+      - id: "h"
+        label: "CopyQ"
+      - id: "i"
+        label: "Another tool"
+      - id: "j"
+        label: "I don't use one"
+  - id: q6
+    prompt: "What do you most often paste from your clipboard history? (Select all that apply)"
+    type: multi_choice
+    construct: most_often_paste_from_clipboard
+    required: true
+    options:
+      - id: "a"
+        label: "Plain text snippets"
+      - id: "b"
+        label: "Code"
+      - id: "c"
+        label: "URLs / links"
+      - id: "d"
+        label: "Email addresses or contact info"
+      - id: "e"
+        label: "Formatted text"
+      - id: "f"
+        label: "Images"
+      - id: "g"
+        label: "Files"
+      - id: "h"
+        label: "Frequently used phrases or templates"
+      - id: "i"
+        label: "Passwords or credentials"
+  - id: q7
+    prompt: "Which clipboard manager features do you use? (Select all that apply)"
+    type: multi_choice
+    construct: clipboard_manager_features_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Search through history"
+      - id: "b"
+        label: "Pinned or favorite items"
+      - id: "c"
+        label: "Paste as plain text"
+      - id: "d"
+        label: "Saved snippets / templates"
+      - id: "e"
+        label: "Image and file support"
+      - id: "f"
+        label: "Sync across devices"
+      - id: "g"
+        label: "Excluding sensitive apps (e.g., password managers)"
+      - id: "h"
+        label: "Keyboard shortcuts / quick access"
+      - id: "i"
+        label: "I just use the basics"
+  - id: q8
+    prompt: "On which devices do you use a clipboard manager? (Select all that apply)"
+    type: multi_choice
+    construct: devices_use_clipboard_manager_select
+    required: true
+    options:
+      - id: "a"
+        label: "Work laptop / desktop"
+      - id: "b"
+        label: "Personal laptop / desktop"
+      - id: "c"
+        label: "Tablet"
+      - id: "d"
+        label: "Smartphone"
+      - id: "e"
+        label: "Only one device"
+  - id: q9
+    prompt: "How did you first discover clipboard managers?"
+    type: single_choice
+    construct: did_first_discover_clipboard_managers
+    required: true
+    options:
+      - id: "a"
+        label: "Built into my operating system"
+      - id: "b"
+        label: "A colleague or friend recommended it"
+      - id: "c"
+        label: "A blog, video, or article"
+      - id: "d"
+        label: "Bundled with a launcher (Alfred, Raycast)"
+      - id: "e"
+        label: "Searching for a productivity tool"
+      - id: "f"
+        label: "I don't remember"
+  - id: q10
+    prompt: "Roughly how many items does your clipboard history keep at a time? Enter a whole number."
+    type: free_text
+    construct: roughly_many_items_does_clipboard
+    required: true
+  - id: q11
+    prompt: "On a typical day, roughly how many times do you paste from clipboard history? Enter a whole number."
+    type: free_text
+    construct: typical_day_roughly_many_times
+    required: true
+  - id: q12
+    prompt: "How much do you agree with the following statement about clipboard managers? A clipboard manager saves me significant time."
+    type: single_choice
+    construct: much_agree_following_statement_clipboard
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement about clipboard managers? I couldn't work efficiently without one."
+    type: single_choice
+    construct: much_agree_following_statement_clipboard
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement about clipboard managers? I worry about a clipboard manager storing sensitive data like passwords."
+    type: single_choice
+    construct: much_agree_following_statement_clipboard
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement about clipboard managers? My clipboard manager is easy to use."
+    type: single_choice
+    construct: much_agree_following_statement_clipboard
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about clipboard managers? The built-in OS clipboard history is good enough for my needs."
+    type: single_choice
+    construct: much_agree_following_statement_clipboard
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about clipboard managers? I wish my clipboard synced better across my devices."
+    type: single_choice
+    construct: much_agree_following_statement_clipboard
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How concerned are you about the security or privacy of your clipboard history?"
+    type: single_choice
+    construct: concerned_security_privacy_clipboard_his
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q19
+    prompt: "How important is each clipboard manager feature to you? Searching through history."
+    type: single_choice
+    construct: important_each_clipboard_manager_feature
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is each clipboard manager feature to you? Syncing across devices."
+    type: single_choice
+    construct: important_each_clipboard_manager_feature
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each clipboard manager feature to you? Saved snippets and templates."
+    type: single_choice
+    construct: important_each_clipboard_manager_feature
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each clipboard manager feature to you? Pasting as plain text."
+    type: single_choice
+    construct: important_each_clipboard_manager_feature
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each clipboard manager feature to you? Security controls (excluding sensitive data)."
+    type: single_choice
+    construct: important_each_clipboard_manager_feature
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "Select your top 3 reasons for using a clipboard manager. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_using
+    required: true
+    options:
+      - id: "a"
+        label: "Reuse text I copied earlier"
+      - id: "b"
+        label: "Copy several things and paste them in order"
+      - id: "c"
+        label: "Store frequently used snippets"
+      - id: "d"
+        label: "Avoid re-typing or re-copying"
+      - id: "e"
+        label: "Keep a searchable history"
+      - id: "f"
+        label: "Paste without formatting"
+      - id: "g"
+        label: "Move content between apps"
+      - id: "h"
+        label: "Boost overall productivity"
+  - id: q25
+    prompt: "What frustrates you or limits your clipboard manager? (Select all that apply)"
+    type: multi_choice
+    construct: frustrates_limits_clipboard_manager_sele
+    required: true
+    options:
+      - id: "a"
+        label: "Doesn't sync across devices"
+      - id: "b"
+        label: "Security or privacy concerns"
+      - id: "c"
+        label: "Clunky or slow interface"
+      - id: "d"
+        label: "Limited history length"
+      - id: "e"
+        label: "Doesn't handle images or files well"
+      - id: "f"
+        label: "Costs money for the good features"
+      - id: "g"
+        label: "Hard to find what I copied"
+      - id: "h"
+        label: "Nothing — it works well"
+  - id: q26
+    prompt: "Do you also use a text expansion or snippet tool (e.g., TextExpander, espanso, aText)?"
+    type: single_choice
+    construct: also_use_text_expansion_snippet
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Occasionally"
+      - id: "c"
+        label: "No, but I'd like to"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "Not sure what that is"
+  - id: q27
+    prompt: "Do you pay for your clipboard manager?"
+    type: single_choice
+    construct: pay_clipboard_manager
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a one-time purchase"
+      - id: "b"
+        label: "Yes, a subscription"
+      - id: "c"
+        label: "No, I use a free version"
+      - id: "d"
+        label: "No, I use the OS built-in tool"
+  - id: q28
+    prompt: "How would you rate your overall satisfaction with your clipboard manager?"
+    type: single_choice
+    construct: would_rate_overall_satisfaction_clipboar
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q29
+    prompt: "How much of a positive impact has a clipboard manager had on your productivity?"
+    type: single_choice
+    construct: much_positive_impact_has_clipboard
+    required: true
+    options:
+      - id: "a"
+        label: "No impact"
+      - id: "b"
+        label: "Slight impact"
+      - id: "c"
+        label: "Moderate impact"
+      - id: "d"
+        label: "Large impact"
+      - id: "e"
+        label: "Major impact"
+  - id: q30
+    prompt: "How likely are you to keep using a clipboard manager over the next year?"
+    type: single_choice
+    construct: likely_keep_using_clipboard_manager
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "On a scale of 0 to 10, how likely are you to recommend using a clipboard manager to a friend or colleague? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "If you could improve one thing about your clipboard manager, what would it be? (Optional short answer)"
+    type: free_text
+    construct: if_could_improve_one_thing
+    required: false
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18-24"
+      - id: "c"
+        label: "25-34"
+      - id: "d"
+        label: "35-44"
+      - id: "e"
+        label: "45-54"
+      - id: "f"
+        label: "55-64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000-$49,999"
+      - id: "c"
+        label: "$50,000-$74,999"
+      - id: "d"
+        label: "$75,000-$99,999"
+      - id: "e"
+        label: "$100,000-$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Homemaker"
+      - id: "f"
+        label: "Unemployed"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "How many people live in your household, including yourself? Enter a whole number."
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q40
+    prompt: "What is your relationship status?"
+    type: single_choice
+    construct: relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or domestic partnership"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q42
+    prompt: "How would you describe where you live?"
+    type: single_choice
+    construct: would_describe_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q43
+    prompt: "Which best describes your role or technical background?"
+    type: single_choice
+    construct: best_describes_role_technical_background
+    required: true
+    options:
+      - id: "a"
+        label: "Software developer / engineer"
+      - id: "b"
+        label: "IT or technology professional"
+      - id: "c"
+        label: "Designer or creative professional"
+      - id: "d"
+        label: "Writer / content professional"
+      - id: "e"
+        label: "Other office / knowledge worker"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "General home user"
+      - id: "h"
+        label: "Other"
+  - id: q44
+    prompt: "How would you describe your comfort with technology in general?"
+    type: single_choice
+    construct: would_describe_comfort_technology_genera
+    required: true
+    options:
+      - id: "a"
+        label: "I'm an early adopter who loves new tech"
+      - id: "b"
+        label: "Comfortable and fairly up to date"
+      - id: "c"
+        label: "Average — I use what I need"
+      - id: "d"
+        label: "A bit behind the curve"
+      - id: "e"
+        label: "I find new technology difficult"

@@ -1,0 +1,7 @@
+# Cycle Tracking App Usage
+
+How people use menstrual and cycle tracking apps, which features they rely on, and their attitudes toward usability, cost, and privacy.
+
+## About this survey
+
+This survey profiles cycle tracking app usage, opening with a screener on current use, tenure, the specific apps tried, and the main reason for using one. It records the features used, logging frequency, access device, subscription status, and how the app was discovered, all framed around app usage rather than clinical detail. Attitudes are captured with an agreement Likert battery on usability, organization, data concerns, and notifications, a matrix battery on perceptions of the app, and a per-item importance matrix over app-selection criteria, plus a top-three ranking of choice factors. Additional sections cover notification use, syncing with other apps, comfort with stored data, reasons for stopping, and satisfaction with features, privacy, and the app overall, followed by recommendation likelihood and retention and switching intent. Question types include single-choice, multi-select, varied Likert scales, two matrix batteries, a ranking item, an NPS-style 0-to-10 scale, and numeric and open free-text. The survey concludes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, U.S. region, urbanicity, and smartphone platform.

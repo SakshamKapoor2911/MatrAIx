@@ -1,0 +1,726 @@
+schemaVersion: "1.0"
+id: medical_billing_experience_v1
+title: "Medical Billing Experience Survey"
+description: "How consumers receive, understand, pay, and dispute their medical and dental bills."
+questions:
+  - id: q0
+    prompt: "In the past 12 months, have you received a bill for medical or dental care for yourself or your family?"
+    type: single_choice
+    construct: past_12_months_have_received
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several bills"
+      - id: "b"
+        label: "Yes, one or two bills"
+      - id: "c"
+        label: "No, I received care but no bills"
+      - id: "d"
+        label: "No, I did not receive any care"
+  - id: q1
+    prompt: "For which kinds of care did you receive bills in the past 12 months? (Select all that apply)"
+    type: multi_choice
+    construct: kinds_care_did_receive_bills
+    required: true
+    options:
+      - id: "a"
+        label: "Primary care or a routine visit"
+      - id: "b"
+        label: "A specialist visit"
+      - id: "c"
+        label: "Urgent care"
+      - id: "d"
+        label: "Emergency room"
+      - id: "e"
+        label: "A hospital stay or surgery"
+      - id: "f"
+        label: "Lab tests or imaging (X-ray, MRI, bloodwork)"
+      - id: "g"
+        label: "Dental care"
+      - id: "h"
+        label: "Prescription or pharmacy"
+      - id: "i"
+        label: "I did not receive any medical bills"
+  - id: q2
+    prompt: "About how many separate medical bills did you receive in the past 12 months? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: many_separate_medical_bills_did
+    required: true
+  - id: q3
+    prompt: "How do you usually receive your medical bills?"
+    type: single_choice
+    construct: usually_receive_medical_bills
+    required: true
+    options:
+      - id: "a"
+        label: "Paper bills in the mail"
+      - id: "b"
+        label: "Email or online patient portal"
+      - id: "c"
+        label: "A billing company's website or app"
+      - id: "d"
+        label: "A mix of paper and digital"
+      - id: "e"
+        label: "Text message reminders"
+  - id: q4
+    prompt: "Roughly how much did you personally owe across all your medical bills in the past 12 months (after insurance)? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: roughly_much_did_personally_owe
+    required: true
+  - id: q5
+    prompt: "How do you usually pay your medical bills? (Select all that apply)"
+    type: multi_choice
+    construct: usually_pay_medical_bills_select
+    required: true
+    options:
+      - id: "a"
+        label: "Full payment by card or bank transfer"
+      - id: "b"
+        label: "Provider payment plan (installments)"
+      - id: "c"
+        label: "HSA or FSA funds"
+      - id: "d"
+        label: "A medical credit card (for example, CareCredit)"
+      - id: "e"
+        label: "A regular credit card, carrying a balance"
+      - id: "f"
+        label: "Help from family or friends"
+      - id: "g"
+        label: "I have unpaid bills"
+  - id: q6
+    prompt: "Have you ever set up a payment plan for a medical bill?"
+    type: single_choice
+    construct: have_ever_set_up_payment
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No, never"
+  - id: q7
+    prompt: "Do you usually review an itemized bill (a line-by-line breakdown of charges)?"
+    type: single_choice
+    construct: usually_review_itemized_bill_line
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q8
+    prompt: "How well do you understand your Explanation of Benefits (EOB) from your insurer?"
+    type: single_choice
+    construct: well_understand_explanation_benefits_eob
+    required: true
+    options:
+      - id: "a"
+        label: "Very well"
+      - id: "b"
+        label: "Fairly well"
+      - id: "c"
+        label: "A little"
+      - id: "d"
+        label: "Not at all"
+      - id: "e"
+        label: "I don't receive or notice EOBs"
+  - id: q9
+    prompt: "Have you ever found an error on a medical bill?"
+    type: single_choice
+    construct: have_ever_found_error_medical
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I wasn't sure how to check"
+      - id: "d"
+        label: "No, my bills seemed correct"
+  - id: q10
+    prompt: "What kinds of billing problems have you experienced? (Select all that apply)"
+    type: multi_choice
+    construct: kinds_billing_problems_have_experienced
+    required: true
+    options:
+      - id: "a"
+        label: "Being charged for something I didn't receive"
+      - id: "b"
+        label: "A duplicate charge"
+      - id: "c"
+        label: "A higher amount than I expected"
+      - id: "d"
+        label: "A charge my insurance should have covered"
+      - id: "e"
+        label: "A bill sent to collections unexpectedly"
+      - id: "f"
+        label: "A bill that arrived very late"
+      - id: "g"
+        label: "I haven't experienced billing problems"
+  - id: q11
+    prompt: "Have you ever contacted a provider or insurer to dispute or question a bill?"
+    type: single_choice
+    construct: have_ever_contacted_provider_insurer
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it was resolved in my favor"
+      - id: "b"
+        label: "Yes, but it was not resolved in my favor"
+      - id: "c"
+        label: "Yes, it is still unresolved"
+      - id: "d"
+        label: "No, but I wanted to"
+      - id: "e"
+        label: "No, I've never needed to"
+  - id: q12
+    prompt: "Have you ever tried to negotiate a lower price or ask for a discount on a medical bill?"
+    type: single_choice
+    construct: have_ever_tried_negotiate_lower
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I got a reduction"
+      - id: "b"
+        label: "Yes, but I did not get a reduction"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No, I didn't know that was possible"
+  - id: q13
+    prompt: "Have you ever asked for a cost estimate before receiving care?"
+    type: single_choice
+    construct: have_ever_asked_cost_estimate
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, often"
+      - id: "b"
+        label: "Yes, once or twice"
+      - id: "c"
+        label: "No, but I would like to"
+      - id: "d"
+        label: "No, it didn't occur to me"
+  - id: q14
+    prompt: "How much do you agree or disagree: My medical bills are usually clear and easy to understand."
+    type: single_choice
+    construct: much_agree_disagree_my_medical
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: I can usually predict what I will owe before I get care."
+    type: single_choice
+    construct: much_agree_disagree_i_can
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: The amount I am billed often seems higher than it should be."
+    type: single_choice
+    construct: much_agree_disagree_amount_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree or disagree: It is easy to reach someone who can answer questions about my bill."
+    type: single_choice
+    construct: much_agree_disagree_it_easy
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree or disagree: Worrying about medical bills affects whether I seek care."
+    type: single_choice
+    construct: much_agree_disagree_worrying_medical
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree or disagree: I trust that my bills accurately reflect the care I received."
+    type: single_choice
+    construct: much_agree_disagree_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How stressful do you find dealing with medical bills overall?"
+    type: single_choice
+    construct: stressful_find_dealing_medical_bills
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all stressful"
+      - id: "b"
+        label: "Slightly stressful"
+      - id: "c"
+        label: "Moderately stressful"
+      - id: "d"
+        label: "Very stressful"
+      - id: "e"
+        label: "Extremely stressful"
+  - id: q21
+    prompt: "How often do you pay a medical bill without fully understanding the charges?"
+    type: single_choice
+    construct: often_pay_medical_bill_without
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "How quickly do you usually pay a medical bill once you receive it?"
+    type: single_choice
+    construct: quickly_usually_pay_medical_bill
+    required: true
+    options:
+      - id: "a"
+        label: "Right away"
+      - id: "b"
+        label: "Within a couple of weeks"
+      - id: "c"
+        label: "By the due date but not sooner"
+      - id: "d"
+        label: "After a reminder or second notice"
+      - id: "e"
+        label: "I often pay late"
+  - id: q23
+    prompt: "Have you ever delayed or skipped medical care because you were worried about the bill?"
+    type: single_choice
+    construct: have_ever_delayed_skipped_medical
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I've thought about it"
+      - id: "d"
+        label: "No, never"
+  - id: q24
+    prompt: "Have you ever had a medical bill sent to a collections agency?"
+    type: single_choice
+    construct: have_ever_had_medical_bill
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q25
+    prompt: "When understanding a charge on your bill, how important is a clear description of the service?"
+    type: single_choice
+    construct: when_understanding_charge_bill_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When understanding a charge on your bill, how important is seeing what insurance paid versus what you owe?"
+    type: single_choice
+    construct: when_understanding_charge_bill_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When understanding a charge on your bill, how important is knowing the price before the service?"
+    type: single_choice
+    construct: when_understanding_charge_bill_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When understanding a charge on your bill, how important is an easy way to ask questions or dispute a charge?"
+    type: single_choice
+    construct: when_understanding_charge_bill_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "Where do you turn for help understanding a confusing bill? (Select all that apply)"
+    type: multi_choice
+    construct: where_turn_help_understanding_confusing
+    required: true
+    options:
+      - id: "a"
+        label: "The provider's billing office"
+      - id: "b"
+        label: "My insurance company"
+      - id: "c"
+        label: "The patient portal or billing website"
+      - id: "d"
+        label: "Family or friends"
+      - id: "e"
+        label: "Online searches"
+      - id: "f"
+        label: "A patient advocate or billing advocate"
+      - id: "g"
+        label: "I usually figure it out on my own"
+  - id: q30
+    prompt: "Which method do you most prefer for paying medical bills?"
+    type: single_choice
+    construct: method_most_prefer_paying_medical
+    required: true
+    options:
+      - id: "a"
+        label: "Online portal or app"
+      - id: "b"
+        label: "Automatic payment"
+      - id: "c"
+        label: "Mailing a check"
+      - id: "d"
+        label: "Phone payment"
+      - id: "e"
+        label: "In person"
+  - id: q31
+    prompt: "Select your top 3 improvements that would most help with medical bills. (Select up to 3)"
+    type: single_choice
+    construct: select_top_3_improvements_that
+    required: true
+    options:
+      - id: "a"
+        label: "Upfront price estimates before care"
+      - id: "b"
+        label: "Simpler, plainer-language bills"
+      - id: "c"
+        label: "Faster, easier dispute process"
+      - id: "d"
+        label: "Consolidated bills instead of many separate ones"
+      - id: "e"
+        label: "More flexible payment plans"
+      - id: "f"
+        label: "A clear breakdown of what insurance covered"
+      - id: "g"
+        label: "Easier ways to reach a real person"
+      - id: "h"
+        label: "Digital bills and reminders"
+  - id: q32
+    prompt: "Overall, how satisfied are you with the medical billing process you've experienced?"
+    type: single_choice
+    construct: overall_satisfied_medical_billing_proces
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your main provider's billing experience to others? Please enter a number from 0 (not at all likely) to 10 (extremely likely)."
+    type: free_text
+    construct: scale_0_10_likely_recommend
+    required: true
+  - id: q34
+    prompt: "How confident are you that you could spot and correct a billing error if one occurred?"
+    type: single_choice
+    construct: confident_that_could_spot_correct
+    required: true
+    options:
+      - id: "a"
+        label: "Very confident"
+      - id: "b"
+        label: "Somewhat confident"
+      - id: "c"
+        label: "Not very confident"
+      - id: "d"
+        label: "Not at all confident"
+  - id: q35
+    prompt: "Is there one thing that would most improve your medical billing experience? Please describe briefly (or enter \"none\")."
+    type: free_text
+    construct: there_one_thing_that_would
+    required: true
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which best describes your race or ethnicity?"
+    type: single_choice
+    construct: best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian or Asian American"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Two or more races or another background"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q42
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q43
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+  - id: q44
+    prompt: "Which region of the country do you live in?"
+    type: single_choice
+    construct: region_country_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q45
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q46
+    prompt: "What is your primary source of health insurance?"
+    type: single_choice
+    construct: primary_source_health_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored plan"
+      - id: "b"
+        label: "Plan purchased on the marketplace or directly"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or veterans coverage (TRICARE / VA)"
+      - id: "f"
+        label: "I don't have health insurance"
+      - id: "g"
+        label: "Prefer not to say"

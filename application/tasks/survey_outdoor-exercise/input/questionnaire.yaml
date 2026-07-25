@@ -1,0 +1,866 @@
+schemaVersion: "1.0"
+id: outdoor_exercise_v1
+title: "Outdoor Exercise Survey"
+description: "Consumer habits, motivations, barriers, and satisfaction around exercising outdoors."
+questions:
+  - id: q0
+    prompt: "How often do you exercise outdoors?"
+    type: single_choice
+    construct: often_exercise_outdoors
+    required: true
+    options:
+      - id: "a"
+        label: "Almost every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "About once a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Rarely"
+      - id: "f"
+        label: "Never"
+  - id: q1
+    prompt: "How long have you been exercising outdoors on a regular basis?"
+    type: single_choice
+    construct: long_have_been_exercising_outdoors
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+      - id: "f"
+        label: "I do not exercise outdoors regularly"
+  - id: q2
+    prompt: "Compared with a year ago, how much do you exercise outdoors now?"
+    type: single_choice
+    construct: compared_year_ago_much_exercise
+    required: true
+    options:
+      - id: "a"
+        label: "Much more than before"
+      - id: "b"
+        label: "Somewhat more"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat less"
+      - id: "e"
+        label: "Much less than before"
+  - id: q3
+    prompt: "In a typical week, on how many days do you exercise outdoors?"
+    type: single_choice
+    construct: typical_week_many_days_exercise
+    required: true
+    options:
+      - id: "a"
+        label: "0 days"
+      - id: "b"
+        label: "1 day"
+      - id: "c"
+        label: "2 days"
+      - id: "d"
+        label: "3 days"
+      - id: "e"
+        label: "4 days"
+      - id: "f"
+        label: "5 days"
+      - id: "g"
+        label: "6 or 7 days"
+  - id: q4
+    prompt: "Which outdoor activities do you do for exercise? (Select all that apply)"
+    type: multi_choice
+    construct: outdoor_activities_exercise_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Walking or hiking"
+      - id: "b"
+        label: "Running or jogging"
+      - id: "c"
+        label: "Cycling or mountain biking"
+      - id: "d"
+        label: "Outdoor swimming or water sports"
+      - id: "e"
+        label: "Team or racquet sports"
+      - id: "f"
+        label: "Outdoor fitness or boot-camp classes"
+      - id: "g"
+        label: "Skiing, snowboarding, or other winter sports"
+      - id: "h"
+        label: "Gardening or heavy yard work"
+      - id: "i"
+        label: "None of these"
+  - id: q5
+    prompt: "Which one activity is your main form of outdoor exercise?"
+    type: single_choice
+    construct: one_activity_main_form_outdoor
+    required: true
+    options:
+      - id: "a"
+        label: "Walking or hiking"
+      - id: "b"
+        label: "Running or jogging"
+      - id: "c"
+        label: "Cycling"
+      - id: "d"
+        label: "Swimming or water sports"
+      - id: "e"
+        label: "Team or racquet sports"
+      - id: "f"
+        label: "Something else"
+  - id: q6
+    prompt: "Where do you most often exercise outdoors?"
+    type: single_choice
+    construct: where_most_often_exercise_outdoors
+    required: true
+    options:
+      - id: "a"
+        label: "Neighborhood streets or sidewalks"
+      - id: "b"
+        label: "Local park or green space"
+      - id: "c"
+        label: "Trails or nature areas"
+      - id: "d"
+        label: "Beach, lake, or waterfront"
+      - id: "e"
+        label: "Sports field or court"
+      - id: "f"
+        label: "My own yard or garden"
+  - id: q7
+    prompt: "How do you usually get to where you exercise outdoors?"
+    type: single_choice
+    construct: usually_get_where_exercise_outdoors
+    required: true
+    options:
+      - id: "a"
+        label: "I start right from my home"
+      - id: "b"
+        label: "I walk or bike there"
+      - id: "c"
+        label: "I drive there"
+      - id: "d"
+        label: "I take public transit"
+      - id: "e"
+        label: "It varies"
+  - id: q8
+    prompt: "What time of day do you usually exercise outdoors?"
+    type: single_choice
+    construct: time_day_usually_exercise_outdoors
+    required: true
+    options:
+      - id: "a"
+        label: "Early morning"
+      - id: "b"
+        label: "Midday"
+      - id: "c"
+        label: "Afternoon"
+      - id: "d"
+        label: "Evening"
+      - id: "e"
+        label: "It varies"
+  - id: q9
+    prompt: "Do you usually exercise outdoors alone or with others?"
+    type: single_choice
+    construct: usually_exercise_outdoors_alone_others
+    required: true
+    options:
+      - id: "a"
+        label: "Almost always alone"
+      - id: "b"
+        label: "Usually alone"
+      - id: "c"
+        label: "About half and half"
+      - id: "d"
+        label: "Usually with others"
+      - id: "e"
+        label: "Almost always with others"
+  - id: q10
+    prompt: "Which seasons are you most active outdoors? (Select all that apply)"
+    type: multi_choice
+    construct: seasons_most_active_outdoors_select
+    required: true
+    options:
+      - id: "a"
+        label: "Spring"
+      - id: "b"
+        label: "Summer"
+      - id: "c"
+        label: "Fall"
+      - id: "d"
+        label: "Winter"
+  - id: q11
+    prompt: "Which of the following do you use to track or support your outdoor exercise? (Select all that apply)"
+    type: multi_choice
+    construct: following_use_track_support_outdoor
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone fitness app (for example, Strava, Nike Run Club, AllTrails)"
+      - id: "b"
+        label: "Smartwatch or fitness tracker (for example, Apple Watch, Garmin, Fitbit)"
+      - id: "c"
+        label: "Basic pedometer or step counter"
+      - id: "d"
+        label: "Heart-rate monitor"
+      - id: "e"
+        label: "Music or podcast app"
+      - id: "f"
+        label: "I do not use any device or app"
+  - id: q12
+    prompt: "About how long is a typical outdoor exercise session for you?"
+    type: single_choice
+    construct: long_typical_outdoor_exercise_session
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 15 minutes"
+      - id: "b"
+        label: "15 to 29 minutes"
+      - id: "c"
+        label: "30 to 44 minutes"
+      - id: "d"
+        label: "45 to 59 minutes"
+      - id: "e"
+        label: "60 to 89 minutes"
+      - id: "f"
+        label: "90 minutes or more"
+  - id: q13
+    prompt: "How would you rate the intensity of your typical outdoor exercise?"
+    type: single_choice
+    construct: would_rate_intensity_typical_outdoor
+    required: true
+    options:
+      - id: "a"
+        label: "Light (easy pace, can talk freely)"
+      - id: "b"
+        label: "Moderate (breathing harder, can still talk)"
+      - id: "c"
+        label: "Vigorous (breathing hard, hard to talk)"
+      - id: "d"
+        label: "It varies a lot"
+  - id: q14
+    prompt: "What most motivates you to exercise outdoors? (Select all that apply)"
+    type: multi_choice
+    construct: most_motivates_exercise_outdoors_select
+    required: true
+    options:
+      - id: "a"
+        label: "Fresh air and being in nature"
+      - id: "b"
+        label: "Physical fitness or weight management"
+      - id: "c"
+        label: "Mental health and stress relief"
+      - id: "d"
+        label: "Saving money versus a gym"
+      - id: "e"
+        label: "Social time with friends or family"
+      - id: "f"
+        label: "Enjoying good weather"
+      - id: "g"
+        label: "Time with a pet"
+      - id: "h"
+        label: "Training for an event or race"
+  - id: q15
+    prompt: "How much do you agree with the following statement about exercising outdoors: Being outdoors improves my mood and reduces stress."
+    type: single_choice
+    construct: much_agree_following_statement_exercisin
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about exercising outdoors: I get more benefit outdoors than I would from the same workout indoors."
+    type: single_choice
+    construct: much_agree_following_statement_exercisin
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about exercising outdoors: Exercising outdoors helps me feel connected to my community."
+    type: single_choice
+    construct: much_agree_following_statement_exercisin
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about exercising outdoors: I find it easier to stay consistent when I exercise outdoors."
+    type: single_choice
+    construct: much_agree_following_statement_exercisin
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about exercising outdoors: Bad weather often keeps me from exercising outdoors."
+    type: single_choice
+    construct: much_agree_following_statement_exercisin
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement about exercising outdoors: I would exercise outdoors more if I had a safe, convenient place nearby."
+    type: single_choice
+    construct: much_agree_following_statement_exercisin
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How often does the following keep you from exercising outdoors: Bad or extreme weather."
+    type: single_choice
+    construct: often_does_following_keep_from
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "How often does the following keep you from exercising outdoors: Lack of time."
+    type: single_choice
+    construct: often_does_following_keep_from
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q23
+    prompt: "How often does the following keep you from exercising outdoors: Concerns about safety."
+    type: single_choice
+    construct: often_does_following_keep_from
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q24
+    prompt: "How often does the following keep you from exercising outdoors: Lack of motivation or energy."
+    type: single_choice
+    construct: often_does_following_keep_from
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q25
+    prompt: "When the weather is bad, what do you usually do instead?"
+    type: single_choice
+    construct: when_weather_bad_usually_instead
+    required: true
+    options:
+      - id: "a"
+        label: "Exercise indoors at home"
+      - id: "b"
+        label: "Go to a gym or fitness center"
+      - id: "c"
+        label: "Wait for better weather and skip it"
+      - id: "d"
+        label: "Exercise outdoors anyway"
+      - id: "e"
+        label: "It depends"
+  - id: q26
+    prompt: "How safe do you feel exercising outdoors in your area?"
+    type: single_choice
+    construct: safe_feel_exercising_outdoors_area
+    required: true
+    options:
+      - id: "a"
+        label: "Very safe"
+      - id: "b"
+        label: "Somewhat safe"
+      - id: "c"
+        label: "Neither safe nor unsafe"
+      - id: "d"
+        label: "Somewhat unsafe"
+      - id: "e"
+        label: "Very unsafe"
+  - id: q27
+    prompt: "Which precautions do you take when exercising outdoors? (Select all that apply)"
+    type: multi_choice
+    construct: precautions_take_when_exercising_outdoor
+    required: true
+    options:
+      - id: "a"
+        label: "Wear sunscreen or a hat"
+      - id: "b"
+        label: "Carry water for hydration"
+      - id: "c"
+        label: "Wear reflective or bright clothing"
+      - id: "d"
+        label: "Tell someone where I am going"
+      - id: "e"
+        label: "Carry a phone"
+      - id: "f"
+        label: "Stretch or warm up first"
+      - id: "g"
+        label: "Check the weather or air quality first"
+      - id: "h"
+        label: "None of these"
+  - id: q28
+    prompt: "How much of a barrier is air quality or pollution to your outdoor exercise?"
+    type: single_choice
+    construct: much_barrier_air_quality_pollution
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all a barrier"
+      - id: "b"
+        label: "A slight barrier"
+      - id: "c"
+        label: "A moderate barrier"
+      - id: "d"
+        label: "A major barrier"
+  - id: q29
+    prompt: "How satisfied are you with the parks, trails, and outdoor spaces available near you?"
+    type: single_choice
+    construct: satisfied_parks_trails_outdoor_spaces
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How important is the following in a place where you exercise outdoors: Safety and good lighting."
+    type: single_choice
+    construct: important_following_place_where_exercise
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q31
+    prompt: "How important is the following in a place where you exercise outdoors: Being close to home."
+    type: single_choice
+    construct: important_following_place_where_exercise
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q32
+    prompt: "How important is the following in a place where you exercise outdoors: Scenery and natural surroundings."
+    type: single_choice
+    construct: important_following_place_where_exercise
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q33
+    prompt: "How important is the following in a place where you exercise outdoors: Restrooms, water, and other amenities."
+    type: single_choice
+    construct: important_following_place_where_exercise
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q34
+    prompt: "Select your top 3 things that would help you exercise outdoors more often. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_that
+    required: true
+    options:
+      - id: "a"
+        label: "More free time"
+      - id: "b"
+        label: "Better weather"
+      - id: "c"
+        label: "Safer routes or better lighting"
+      - id: "d"
+        label: "Closer parks or trails"
+      - id: "e"
+        label: "A workout partner or group"
+      - id: "f"
+        label: "Better fitness or health"
+      - id: "g"
+        label: "More motivation"
+      - id: "h"
+        label: "Better gear or equipment"
+  - id: q35
+    prompt: "Have you taken part in an organized outdoor event in the past 12 months (for example, a 5K, charity walk, or group ride)?"
+    type: single_choice
+    construct: have_taken_part_organized_outdoor
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several"
+      - id: "b"
+        label: "Yes, one"
+      - id: "c"
+        label: "No, but I would like to"
+      - id: "d"
+        label: "No, and I am not interested"
+  - id: q36
+    prompt: "Overall, how satisfied are you with your current outdoor exercise routine?"
+    type: single_choice
+    construct: overall_satisfied_current_outdoor_exerci
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "On a scale of 0 to 10, how likely are you to recommend exercising outdoors to a friend or family member? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q38
+    prompt: "Over the next 12 months, do you plan to exercise outdoors...?"
+    type: single_choice
+    construct: over_next_12_months_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Much more than now"
+      - id: "b"
+        label: "Somewhat more"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat less"
+      - id: "e"
+        label: "Much less than now"
+  - id: q39
+    prompt: "About how many days in the past 7 did you exercise outdoors? Please enter a number from 0 to 7."
+    type: free_text
+    construct: many_days_past_7_did
+    required: true
+  - id: q40
+    prompt: "About how many minutes does your typical outdoor exercise session last? Please enter a number of minutes."
+    type: free_text
+    construct: many_minutes_does_typical_outdoor
+    required: true
+  - id: q41
+    prompt: "About how many minutes does it take you to get to where you usually exercise outdoors? Please enter a number of minutes."
+    type: free_text
+    construct: many_minutes_does_it_take
+    required: true
+  - id: q42
+    prompt: "In your own words, what would help you exercise outdoors more often? (Optional)"
+    type: free_text
+    construct: own_words_would_help_exercise
+    required: false
+  - id: q43
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q44
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe or not to say"
+  - id: q45
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q48
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q49
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q51
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q52
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q53
+    prompt: "Do you have a park, trail, or green space within a 10-minute walk of your home?"
+    type: single_choice
+    construct: have_park_trail_green_space
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"

@@ -1,0 +1,643 @@
+schemaVersion: "1.0"
+id: health_information_seeking_v1
+title: "Health Information Seeking Survey"
+description: "How people look for health information, which sources and devices they use, and how they act on what they find."
+questions:
+  - id: q0
+    prompt: "In the past 12 months, have you looked for health or medical information for yourself or someone else?"
+    type: single_choice
+    construct: past_12_months_have_looked
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q1
+    prompt: "In a typical month, about how often do you look for health information?"
+    type: single_choice
+    construct: typical_month_often_look_health
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Less than once a month"
+      - id: "c"
+        label: "About once a month"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "About once a week"
+      - id: "f"
+        label: "Several times a week or more"
+  - id: q2
+    prompt: "When you have a health question, where do you usually look first?"
+    type: single_choice
+    construct: when_have_health_question_where
+    required: true
+    options:
+      - id: "a"
+        label: "A general search engine (e.g., Google)"
+      - id: "b"
+        label: "A specific health website (e.g., WebMD, Mayo Clinic)"
+      - id: "c"
+        label: "My doctor or a nurse line"
+      - id: "d"
+        label: "An AI chatbot or assistant"
+      - id: "e"
+        label: "Family or friends"
+      - id: "f"
+        label: "Social media or online videos"
+      - id: "g"
+        label: "A patient portal or health app"
+  - id: q3
+    prompt: "Which sources have you used for health information in the past 12 months? (Select all that apply)"
+    type: multi_choice
+    construct: sources_have_used_health_information
+    required: true
+    options:
+      - id: "a"
+        label: "General search engines"
+      - id: "b"
+        label: "Health information websites (e.g., WebMD, Mayo Clinic, Healthline)"
+      - id: "c"
+        label: "Government health sites (e.g., CDC, NIH, MedlinePlus)"
+      - id: "d"
+        label: "My doctor or health care provider"
+      - id: "e"
+        label: "Pharmacist"
+      - id: "f"
+        label: "AI chatbots or assistants (e.g., ChatGPT)"
+      - id: "g"
+        label: "YouTube or other video sites"
+      - id: "h"
+        label: "Social media (e.g., Facebook, Instagram, TikTok)"
+      - id: "i"
+        label: "Online patient communities or forums"
+      - id: "j"
+        label: "Family or friends"
+      - id: "k"
+        label: "Podcasts"
+  - id: q4
+    prompt: "Which devices do you use to look for health information? (Select all that apply)"
+    type: multi_choice
+    construct: devices_use_look_health_information
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "Laptop or desktop computer"
+      - id: "c"
+        label: "Tablet"
+      - id: "d"
+        label: "Smart speaker (voice assistant)"
+      - id: "e"
+        label: "Smartwatch"
+  - id: q5
+    prompt: "Which health topics do you look up most often? (Select all that apply)"
+    type: multi_choice
+    construct: health_topics_look_up_most
+    required: true
+    options:
+      - id: "a"
+        label: "Symptoms or possible conditions"
+      - id: "b"
+        label: "A specific diagnosis or disease"
+      - id: "c"
+        label: "Medications or supplements"
+      - id: "d"
+        label: "Diet and nutrition"
+      - id: "e"
+        label: "Exercise and fitness"
+      - id: "f"
+        label: "Sleep"
+      - id: "g"
+        label: "Mental well-being or stress"
+      - id: "h"
+        label: "A doctor, hospital, or provider"
+      - id: "i"
+        label: "Insurance or cost of care"
+      - id: "j"
+        label: "Preventive care and screenings"
+  - id: q6
+    prompt: "In the past 12 months, how often did you search for information about your symptoms before deciding whether to see a doctor?"
+    type: single_choice
+    construct: past_12_months_often_did
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Almost always"
+  - id: q7
+    prompt: "Have you used an AI chatbot or assistant to ask a health question in the past 12 months?"
+    type: single_choice
+    construct: have_used_ai_chatbot_assistant
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several times"
+      - id: "b"
+        label: "Yes, once or twice"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No, and I would not"
+  - id: q8
+    prompt: "In a typical week, about how many times do you search for health information online? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: typical_week_many_times_search
+    required: true
+  - id: q9
+    prompt: "How do you usually judge whether health information is trustworthy? (Select all that apply)"
+    type: multi_choice
+    construct: usually_judge_whether_health_information
+    required: true
+    options:
+      - id: "a"
+        label: "The source is a known organization or expert"
+      - id: "b"
+        label: "It comes from a government or academic site"
+      - id: "c"
+        label: "It matches what my doctor has told me"
+      - id: "d"
+        label: "Multiple sources say the same thing"
+      - id: "e"
+        label: "It cites research or studies"
+      - id: "f"
+        label: "It is recent or up to date"
+      - id: "g"
+        label: "Reviews, ratings, or comments"
+      - id: "h"
+        label: "I do not usually check"
+  - id: q10
+    prompt: "How confident are you in your ability to find reliable health information online?"
+    type: single_choice
+    construct: confident_ability_find_reliable_health
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q11
+    prompt: "How much do you agree or disagree: It takes a lot of effort to find the health information I need."
+    type: single_choice
+    construct: much_agree_disagree_it_takes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: The health information I find is usually easy to understand."
+    type: single_choice
+    construct: much_agree_disagree_health_information
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I often feel overwhelmed by the amount of health information available."
+    type: single_choice
+    construct: much_agree_disagree_i_often
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: Health recommendations from experts seem to conflict with each other."
+    type: single_choice
+    construct: much_agree_disagree_health_recommendatio
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: Looking up health information gives me more control over my health."
+    type: single_choice
+    construct: much_agree_disagree_looking_up
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you trust health information from each source — Your own doctor"
+    type: single_choice
+    construct: much_trust_health_information_from
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q17
+    prompt: "How much do you trust health information from each source — Government health agencies"
+    type: single_choice
+    construct: much_trust_health_information_from
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q18
+    prompt: "How much do you trust health information from each source — General health websites"
+    type: single_choice
+    construct: much_trust_health_information_from
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q19
+    prompt: "How much do you trust health information from each source — Social media"
+    type: single_choice
+    construct: much_trust_health_information_from
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q20
+    prompt: "How much do you trust health information from each source — AI chatbots or assistants"
+    type: single_choice
+    construct: much_trust_health_information_from
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q21
+    prompt: "After finding health information online, how often do you discuss it with your doctor?"
+    type: single_choice
+    construct: after_finding_health_information_online
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "When online information and your doctor's advice conflict, what do you usually do?"
+    type: single_choice
+    construct: when_online_information_doctor_s
+    required: true
+    options:
+      - id: "a"
+        label: "Follow my doctor's advice"
+      - id: "b"
+        label: "Follow the online information"
+      - id: "c"
+        label: "Look for more sources to decide"
+      - id: "d"
+        label: "Ask my doctor about the difference"
+      - id: "e"
+        label: "It has never happened to me"
+  - id: q23
+    prompt: "Do you ever look up health information on behalf of someone else (e.g., a child, parent, or partner)?"
+    type: single_choice
+    construct: ever_look_up_health_information
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, often"
+      - id: "b"
+        label: "Yes, sometimes"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "Never"
+  - id: q24
+    prompt: "Has health information you found online ever led you to do any of the following? (Select all that apply)"
+    type: multi_choice
+    construct: has_health_information_found_online
+    required: true
+    options:
+      - id: "a"
+        label: "Decide to see a doctor"
+      - id: "b"
+        label: "Decide not to see a doctor"
+      - id: "c"
+        label: "Ask my doctor a specific question"
+      - id: "d"
+        label: "Change my diet or exercise"
+      - id: "e"
+        label: "Start or stop a supplement or over-the-counter product"
+      - id: "f"
+        label: "Feel more anxious about my health"
+      - id: "g"
+        label: "Feel reassured"
+      - id: "h"
+        label: "None of these"
+  - id: q25
+    prompt: "How often does searching for health information make you feel more anxious?"
+    type: single_choice
+    construct: often_does_searching_health_information
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q26
+    prompt: "Which qualities matter most to you in a health information source? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: qualities_matter_most_health_information
+    required: true
+    options:
+      - id: "a"
+        label: "Accuracy and being evidence-based"
+      - id: "b"
+        label: "Easy to understand"
+      - id: "c"
+        label: "Comes from a trusted institution"
+      - id: "d"
+        label: "Up to date"
+      - id: "e"
+        label: "Free of advertising or sales"
+      - id: "f"
+        label: "Quick to find answers"
+      - id: "g"
+        label: "Covers my specific situation"
+      - id: "h"
+        label: "Available in my language"
+      - id: "i"
+        label: "Includes real patient experiences"
+  - id: q27
+    prompt: "Overall, how satisfied are you with your ability to find the health information you need?"
+    type: single_choice
+    construct: overall_satisfied_ability_find_health
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q28
+    prompt: "Is there anything that would make it easier for you to find trustworthy health information? (Optional short answer)"
+    type: free_text
+    construct: there_anything_that_would_make
+    required: false
+  - id: q29
+    prompt: "What is your age? Please enter a number (years old)."
+    type: free_text
+    construct: age_please_enter_number_years
+    required: true
+  - id: q30
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q34
+    prompt: "How comfortable are you using computers, apps, and the internet in general?"
+    type: single_choice
+    construct: comfortable_using_computers_apps_interne
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Extremely comfortable"
+  - id: q35
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Homemaker or caregiver"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not currently employed"
+  - id: q36
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q37
+    prompt: "In which region of the United States do you live?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q38
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q39
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"

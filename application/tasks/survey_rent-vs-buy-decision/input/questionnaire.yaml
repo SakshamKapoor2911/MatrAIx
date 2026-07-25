@@ -1,0 +1,709 @@
+schemaVersion: "1.0"
+id: rent_vs_buy_decision_v1
+title: "Rent vs. Buy Decision Survey"
+description: "How people weigh renting versus buying a home — the factors, attitudes, barriers, and intentions behind the decision."
+questions:
+  - id: q0
+    prompt: "What is your current housing situation?"
+    type: single_choice
+    construct: current_housing_situation
+    required: true
+    options:
+      - id: "a"
+        label: "I rent my home"
+      - id: "b"
+        label: "I own my home with a mortgage"
+      - id: "c"
+        label: "I own my home outright (no mortgage)"
+      - id: "d"
+        label: "I live with family or others without paying rent"
+      - id: "e"
+        label: "Other"
+  - id: q1
+    prompt: "How long have you been in your current living situation?"
+    type: single_choice
+    construct: long_have_been_current_living
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1–2 years"
+      - id: "c"
+        label: "3–5 years"
+      - id: "d"
+        label: "6–10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "Are you currently considering a change between renting and buying?"
+    type: single_choice
+    construct: currently_considering_change_between_ren
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I am considering buying a home"
+      - id: "b"
+        label: "Yes, I am considering moving to a rental"
+      - id: "c"
+        label: "No, I plan to stay as I am"
+      - id: "d"
+        label: "Not sure"
+  - id: q3
+    prompt: "What is your approximate monthly housing cost (rent or mortgage)? Enter a dollar amount."
+    type: free_text
+    construct: approximate_monthly_housing_cost_rent
+    required: true
+  - id: q4
+    prompt: "About what percentage of your monthly income goes to housing costs?"
+    type: single_choice
+    construct: percentage_monthly_income_goes_housing
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 20%"
+      - id: "b"
+        label: "20–29%"
+      - id: "c"
+        label: "30–39%"
+      - id: "d"
+        label: "40–49%"
+      - id: "e"
+        label: "50% or more"
+      - id: "f"
+        label: "Not sure"
+  - id: q5
+    prompt: "If you were deciding today, which would you choose?"
+    type: single_choice
+    construct: if_were_deciding_today_would
+    required: true
+    options:
+      - id: "a"
+        label: "Definitely rent"
+      - id: "b"
+        label: "Probably rent"
+      - id: "c"
+        label: "Unsure / it depends"
+      - id: "d"
+        label: "Probably buy"
+      - id: "e"
+        label: "Definitely buy"
+  - id: q6
+    prompt: "Which factors make you lean toward RENTING? (Select all that apply)"
+    type: multi_choice
+    construct: factors_make_lean_toward_renting
+    required: true
+    options:
+      - id: "a"
+        label: "Flexibility to move easily"
+      - id: "b"
+        label: "Lower upfront cost"
+      - id: "c"
+        label: "No maintenance or repair responsibility"
+      - id: "d"
+        label: "Uncertain job or life situation"
+      - id: "e"
+        label: "Home prices are too high in my area"
+      - id: "f"
+        label: "I prefer to invest money elsewhere"
+      - id: "g"
+        label: "I can't afford a down payment"
+      - id: "h"
+        label: "None of these"
+  - id: q7
+    prompt: "Which factors make you lean toward BUYING? (Select all that apply)"
+    type: multi_choice
+    construct: factors_make_lean_toward_buying
+    required: true
+    options:
+      - id: "a"
+        label: "Building equity and wealth"
+      - id: "b"
+        label: "Stability and putting down roots"
+      - id: "c"
+        label: "Freedom to renovate or customize"
+      - id: "d"
+        label: "Protection from rising rents"
+      - id: "e"
+        label: "Potential tax benefits"
+      - id: "f"
+        label: "A sense of accomplishment or pride"
+      - id: "g"
+        label: "Room for a family"
+      - id: "h"
+        label: "None of these"
+  - id: q8
+    prompt: "Which barriers currently prevent you from buying a home? (Select all that apply)"
+    type: multi_choice
+    construct: barriers_currently_prevent_from_buying
+    required: true
+    options:
+      - id: "a"
+        label: "Not enough saved for a down payment"
+      - id: "b"
+        label: "High home prices"
+      - id: "c"
+        label: "High mortgage interest rates"
+      - id: "d"
+        label: "Insufficient or unstable income"
+      - id: "e"
+        label: "Poor or limited credit"
+      - id: "f"
+        label: "Existing debt (student loans, etc.)"
+      - id: "g"
+        label: "Low housing inventory in my area"
+      - id: "h"
+        label: "No barriers — I could buy if I wanted"
+      - id: "i"
+        label: "Not applicable"
+  - id: q9
+    prompt: "How much do you have saved toward a home down payment? Enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_have_saved_toward_home
+    required: true
+  - id: q10
+    prompt: "What down payment percentage do you think you would put down (or did put down)?"
+    type: single_choice
+    construct: down_payment_percentage_think_would
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 5%"
+      - id: "b"
+        label: "5–9%"
+      - id: "c"
+        label: "10–19%"
+      - id: "d"
+        label: "20%"
+      - id: "e"
+        label: "More than 20%"
+      - id: "f"
+        label: "Not sure"
+  - id: q11
+    prompt: "How much do you agree with the following statement: Owning a home is a good financial investment."
+    type: single_choice
+    construct: much_agree_following_statement_owning
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Owning a home is a core part of the American Dream."
+    type: single_choice
+    construct: much_agree_following_statement_owning
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: Renting is throwing money away."
+    type: single_choice
+    construct: much_agree_following_statement_renting
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I feel priced out of the housing market where I want to live."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: The flexibility of renting outweighs the benefits of owning for me right now."
+    type: single_choice
+    construct: much_agree_following_statement_flexibili
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I am confident I understand the true costs of homeownership (taxes, insurance, maintenance)."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "When choosing where and how to live, how important is: Monthly cost affordability?"
+    type: single_choice
+    construct: when_choosing_where_live_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "When choosing where and how to live, how important is: Building long-term wealth or equity?"
+    type: single_choice
+    construct: when_choosing_where_live_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "When choosing where and how to live, how important is: Flexibility to relocate?"
+    type: single_choice
+    construct: when_choosing_where_live_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "When choosing where and how to live, how important is: Freedom from maintenance responsibilities?"
+    type: single_choice
+    construct: when_choosing_where_live_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "When choosing where and how to live, how important is: School quality and neighborhood?"
+    type: single_choice
+    construct: when_choosing_where_live_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When choosing where and how to live, how important is: Space for a family or pets?"
+    type: single_choice
+    construct: when_choosing_where_live_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "Select the top 3 factors that matter most in your rent-vs-buy decision. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_that
+    required: true
+    options:
+      - id: "a"
+        label: "Monthly affordability"
+      - id: "b"
+        label: "Down payment and upfront costs"
+      - id: "c"
+        label: "Building equity"
+      - id: "d"
+        label: "Flexibility to move"
+      - id: "e"
+        label: "Home prices in my area"
+      - id: "f"
+        label: "Mortgage interest rates"
+      - id: "g"
+        label: "Job and income stability"
+      - id: "h"
+        label: "Family or lifestyle needs"
+  - id: q24
+    prompt: "How would you rate housing affordability in your local area?"
+    type: single_choice
+    construct: would_rate_housing_affordability_local
+    required: true
+    options:
+      - id: "a"
+        label: "Very affordable"
+      - id: "b"
+        label: "Somewhat affordable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat unaffordable"
+      - id: "e"
+        label: "Very unaffordable"
+  - id: q25
+    prompt: "How have rising home prices and interest rates affected your plans in the past 2 years?"
+    type: single_choice
+    construct: have_rising_home_prices_interest
+    required: true
+    options:
+      - id: "a"
+        label: "I delayed buying"
+      - id: "b"
+        label: "I decided to keep renting"
+      - id: "c"
+        label: "I bought sooner than planned"
+      - id: "d"
+        label: "I looked in a cheaper area"
+      - id: "e"
+        label: "No effect on my plans"
+  - id: q26
+    prompt: "Where do you go for information when weighing renting versus buying? (Select all that apply)"
+    type: multi_choice
+    construct: where_go_information_when_weighing
+    required: true
+    options:
+      - id: "a"
+        label: "Online calculators (rent vs. buy)"
+      - id: "b"
+        label: "Real estate websites (Zillow, Redfin)"
+      - id: "c"
+        label: "A real estate agent"
+      - id: "d"
+        label: "A mortgage lender or bank"
+      - id: "e"
+        label: "Friends and family"
+      - id: "f"
+        label: "Financial advisor"
+      - id: "g"
+        label: "Social media or personal finance content"
+      - id: "h"
+        label: "None of these"
+  - id: q27
+    prompt: "How long do you expect to stay in your next home?"
+    type: single_choice
+    construct: long_expect_stay_next_home
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 2 years"
+      - id: "b"
+        label: "2–4 years"
+      - id: "c"
+        label: "5–9 years"
+      - id: "d"
+        label: "10 years or more"
+      - id: "e"
+        label: "Not sure"
+  - id: q28
+    prompt: "How stressful do you find the decision between renting and buying?"
+    type: single_choice
+    construct: stressful_find_decision_between_renting
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all stressful"
+      - id: "b"
+        label: "Slightly stressful"
+      - id: "c"
+        label: "Moderately stressful"
+      - id: "d"
+        label: "Very stressful"
+      - id: "e"
+        label: "Extremely stressful"
+  - id: q29
+    prompt: "How confident are you that you are making the right housing choice for your situation?"
+    type: single_choice
+    construct: confident_that_making_right_housing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q30
+    prompt: "How satisfied are you with your current housing situation overall?"
+    type: single_choice
+    construct: satisfied_current_housing_situation_over
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q31
+    prompt: "How likely are you to buy a home in the next 3 years?"
+    type: single_choice
+    construct: likely_buy_home_next_3
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q32
+    prompt: "What is the biggest factor holding you back or pushing you toward your decision? Describe briefly. (Optional)"
+    type: free_text
+    construct: biggest_factor_holding_back_pushing
+    required: false
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Another race or ethnicity"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your approximate annual household income before taxes?"
+    type: single_choice
+    construct: approximate_annual_household_income_befo
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $30,000"
+      - id: "b"
+        label: "$30,000 – $49,999"
+      - id: "c"
+        label: "$50,000 – $74,999"
+      - id: "d"
+        label: "$75,000 – $99,999"
+      - id: "e"
+        label: "$100,000 – $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school graduate or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+  - id: q39
+    prompt: "Including yourself, how many people live in your household? Enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q40
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q41
+    prompt: "Do you have any children under 18 living in your household?"
+    type: single_choice
+    construct: have_any_children_under_18
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one"
+      - id: "b"
+        label: "Yes, two or more"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

@@ -1,0 +1,769 @@
+schemaVersion: "1.0"
+id: fitness_class_attendance_v1
+title: "Fitness Class Attendance Survey"
+description: "How consumers take part in group fitness classes."
+questions:
+  - id: q0
+    prompt: "Do you currently take part in any group fitness classes?"
+    type: single_choice
+    construct: currently_take_part_any_group
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "I used to but stopped"
+      - id: "d"
+        label: "No, but I'm interested"
+      - id: "e"
+        label: "No, and I'm not interested"
+  - id: q1
+    prompt: "In a typical week, how many fitness classes do you attend?"
+    type: single_choice
+    construct: typical_week_many_fitness_classes
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2 to 3"
+      - id: "d"
+        label: "4 to 5"
+      - id: "e"
+        label: "6 or more"
+  - id: q2
+    prompt: "Which types of fitness classes do you attend or have attended? (Select all that apply)"
+    type: multi_choice
+    construct: types_fitness_classes_attend_have
+    required: true
+    options:
+      - id: "a"
+        label: "Yoga"
+      - id: "b"
+        label: "Pilates"
+      - id: "c"
+        label: "Indoor cycling or spin"
+      - id: "d"
+        label: "HIIT or bootcamp"
+      - id: "e"
+        label: "Strength or weight training"
+      - id: "f"
+        label: "Dance-based (Zumba, barre)"
+      - id: "g"
+        label: "Water aerobics or swim"
+      - id: "h"
+        label: "Martial arts or kickboxing"
+      - id: "i"
+        label: "None of these"
+  - id: q3
+    prompt: "Where do you usually take fitness classes? (Select all that apply)"
+    type: multi_choice
+    construct: where_usually_take_fitness_classes
+    required: true
+    options:
+      - id: "a"
+        label: "A gym or health club"
+      - id: "b"
+        label: "A boutique fitness studio"
+      - id: "c"
+        label: "Community or recreation center"
+      - id: "d"
+        label: "At home via streaming or an app"
+      - id: "e"
+        label: "Outdoors or a park"
+      - id: "f"
+        label: "Workplace wellness program"
+      - id: "g"
+        label: "Not applicable"
+  - id: q4
+    prompt: "How long have you been attending fitness classes?"
+    type: single_choice
+    construct: long_have_been_attending_fitness
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "More than 3 years"
+      - id: "e"
+        label: "Not applicable"
+  - id: q5
+    prompt: "How do you usually pay for classes?"
+    type: single_choice
+    construct: usually_pay_classes
+    required: true
+    options:
+      - id: "a"
+        label: "Included in a gym membership"
+      - id: "b"
+        label: "Studio membership or package"
+      - id: "c"
+        label: "Pay per class (drop-in)"
+      - id: "d"
+        label: "A multi-studio app (e.g., ClassPass)"
+      - id: "e"
+        label: "Free through work or community"
+      - id: "f"
+        label: "Not applicable"
+  - id: q6
+    prompt: "About how much do you spend on fitness classes in a typical month? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_spend_fitness_classes_typical
+    required: true
+  - id: q7
+    prompt: "How do you usually book or sign up for classes?"
+    type: single_choice
+    construct: usually_book_sign_up_classes
+    required: true
+    options:
+      - id: "a"
+        label: "Studio or gym app"
+      - id: "b"
+        label: "Website"
+      - id: "c"
+        label: "In person at the front desk"
+      - id: "d"
+        label: "By phone"
+      - id: "e"
+        label: "A multi-studio booking app"
+      - id: "f"
+        label: "I just show up"
+  - id: q8
+    prompt: "What are your main reasons for taking fitness classes? (Select all that apply)"
+    type: multi_choice
+    construct: main_reasons_taking_fitness_classes
+    required: true
+    options:
+      - id: "a"
+        label: "Staying physically fit"
+      - id: "b"
+        label: "Losing or managing weight"
+      - id: "c"
+        label: "Stress relief and mental health"
+      - id: "d"
+        label: "Structure and motivation"
+      - id: "e"
+        label: "The social aspect"
+      - id: "f"
+        label: "Learning proper form from an instructor"
+      - id: "g"
+        label: "Trying something fun and new"
+      - id: "h"
+        label: "Other"
+  - id: q9
+    prompt: "What time of day do you usually attend classes?"
+    type: single_choice
+    construct: time_day_usually_attend_classes
+    required: true
+    options:
+      - id: "a"
+        label: "Early morning"
+      - id: "b"
+        label: "Midday"
+      - id: "c"
+        label: "Afternoon"
+      - id: "d"
+        label: "Evening"
+      - id: "e"
+        label: "It varies"
+  - id: q10
+    prompt: "How far do you usually travel to attend an in-person class? Please enter a number of miles (enter 0 if you attend from home)."
+    type: free_text
+    construct: far_usually_travel_attend_person
+    required: true
+  - id: q11
+    prompt: "How much does the instructor influence which classes you attend?"
+    type: single_choice
+    construct: much_does_instructor_influence_classes
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Quite a bit"
+      - id: "e"
+        label: "A great deal"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Classes keep me more motivated than working out alone."
+    type: single_choice
+    construct: much_agree_following_statement_classes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: The social side of classes is important to me."
+    type: single_choice
+    construct: much_agree_following_statement_social
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: The cost of classes is worth it for me."
+    type: single_choice
+    construct: much_agree_following_statement_cost
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: A good instructor makes a big difference."
+    type: single_choice
+    construct: much_agree_following_statement_good
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: Classes fit easily into my schedule."
+    type: single_choice
+    construct: much_agree_following_statement_classes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: I feel comfortable and welcome in the classes I attend."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How important is the following when choosing a fitness class: A convenient location."
+    type: single_choice
+    construct: important_following_when_choosing_fitnes
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is the following when choosing a fitness class: The class schedule and times."
+    type: single_choice
+    construct: important_following_when_choosing_fitnes
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is the following when choosing a fitness class: The instructor's quality."
+    type: single_choice
+    construct: important_following_when_choosing_fitnes
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is the following when choosing a fitness class: Price."
+    type: single_choice
+    construct: important_following_when_choosing_fitnes
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is the following when choosing a fitness class: The atmosphere and community."
+    type: single_choice
+    construct: important_following_when_choosing_fitnes
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is the following when choosing a fitness class: Cleanliness and facilities."
+    type: single_choice
+    construct: important_following_when_choosing_fitnes
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "Which factors matter most when choosing a fitness class? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: factors_matter_most_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Convenient location"
+      - id: "b"
+        label: "Schedule and class times"
+      - id: "c"
+        label: "Instructor quality"
+      - id: "d"
+        label: "Affordable price"
+      - id: "e"
+        label: "Atmosphere and community"
+      - id: "f"
+        label: "Clean facilities and equipment"
+      - id: "g"
+        label: "Variety of class types"
+      - id: "h"
+        label: "Class size"
+  - id: q25
+    prompt: "Which of these would make you attend classes more often? (Select all that apply)"
+    type: multi_choice
+    construct: these_would_make_attend_classes
+    required: true
+    options:
+      - id: "a"
+        label: "Lower cost"
+      - id: "b"
+        label: "More convenient times"
+      - id: "c"
+        label: "A location closer to me"
+      - id: "d"
+        label: "Better instructors"
+      - id: "e"
+        label: "More variety of classes"
+      - id: "f"
+        label: "A friend or partner to go with"
+      - id: "g"
+        label: "Easier booking"
+      - id: "h"
+        label: "Nothing would change my attendance"
+  - id: q26
+    prompt: "What has caused you to skip or stop attending classes? (Select all that apply)"
+    type: multi_choice
+    construct: has_caused_skip_stop_attending
+    required: true
+    options:
+      - id: "a"
+        label: "Cost"
+      - id: "b"
+        label: "Scheduling conflicts"
+      - id: "c"
+        label: "Travel or distance"
+      - id: "d"
+        label: "Losing motivation"
+      - id: "e"
+        label: "Feeling intimidated or out of place"
+      - id: "f"
+        label: "Injury or health reasons"
+      - id: "g"
+        label: "I don't typically skip classes"
+  - id: q27
+    prompt: "How consistent is your class attendance from week to week?"
+    type: single_choice
+    construct: consistent_class_attendance_from_week
+    required: true
+    options:
+      - id: "a"
+        label: "Very inconsistent"
+      - id: "b"
+        label: "Somewhat inconsistent"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat consistent"
+      - id: "e"
+        label: "Very consistent"
+  - id: q28
+    prompt: "Do you use any apps or wearables to track your class workouts?"
+    type: single_choice
+    construct: use_any_apps_wearables_track
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I'd consider it"
+      - id: "d"
+        label: "No"
+  - id: q29
+    prompt: "How well do fitness classes help you meet your health and fitness goals?"
+    type: single_choice
+    construct: well_fitness_classes_help_meet
+    required: true
+    options:
+      - id: "a"
+        label: "Very poorly"
+      - id: "b"
+        label: "Poorly"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q30
+    prompt: "How confident are you in sticking with a regular class routine?"
+    type: single_choice
+    construct: confident_sticking_regular_class_routine
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+  - id: q31
+    prompt: "Overall, how satisfied are you with the fitness classes you attend?"
+    type: single_choice
+    construct: overall_satisfied_fitness_classes_attend
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How likely are you to keep attending fitness classes over the next year?"
+    type: single_choice
+    construct: likely_keep_attending_fitness_classes
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q33
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your fitness classes to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q34
+    prompt: "What would make you enjoy or attend fitness classes more? Please describe briefly."
+    type: free_text
+    construct: would_make_enjoy_attend_fitness
+    required: true
+  - id: q35
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Which of the following best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Other"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college"
+      - id: "c"
+        label: "Associate's degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q40
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q41
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q42
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "Which region of the country do you live in?"
+    type: single_choice
+    construct: region_country_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q44
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q45
+    prompt: "How would you describe your overall fitness level?"
+    type: single_choice
+    construct: would_describe_overall_fitness_level
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Somewhat fit"
+      - id: "c"
+        label: "Moderately fit"
+      - id: "d"
+        label: "Very fit"
+      - id: "e"
+        label: "Athlete-level"
+  - id: q46
+    prompt: "Do you have a gym or studio membership?"
+    type: single_choice
+    construct: have_gym_studio_membership
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a gym membership"
+      - id: "b"
+        label: "Yes, a studio membership"
+      - id: "c"
+        label: "Yes, both"
+      - id: "d"
+        label: "No"

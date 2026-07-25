@@ -1,0 +1,716 @@
+schemaVersion: "1.0"
+id: college_529_savings_v1
+title: "College Savings (529 Plans) Survey"
+description: "How families save for future education costs, their use of 529 plans and other accounts, and their attitudes toward college saving."
+questions:
+  - id: q0
+    prompt: "Do you currently save money for a child's (or your own) future education?"
+    type: single_choice
+    construct: currently_save_money_child_s
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I plan to start"
+      - id: "d"
+        label: "No, and I have no plans to"
+      - id: "e"
+        label: "Not applicable — no education costs to plan for"
+  - id: q1
+    prompt: "Do you have a 529 college savings plan?"
+    type: single_choice
+    construct: have_529_college_savings_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one"
+      - id: "b"
+        label: "Yes, more than one"
+      - id: "c"
+        label: "No, but I am considering one"
+      - id: "d"
+        label: "No, and I am not considering one"
+      - id: "e"
+        label: "I am not familiar with 529 plans"
+  - id: q2
+    prompt: "For whom are you saving for education? (Select all that apply)"
+    type: multi_choice
+    construct: whom_saving_education_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "My child or children"
+      - id: "b"
+        label: "My grandchild or grandchildren"
+      - id: "c"
+        label: "Myself"
+      - id: "d"
+        label: "A niece, nephew, or other relative"
+      - id: "e"
+        label: "Not currently saving for anyone"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q3
+    prompt: "How many children or beneficiaries are you saving for? Enter a number (enter 0 if none)."
+    type: free_text
+    construct: many_children_beneficiaries_saving_enter
+    required: true
+  - id: q4
+    prompt: "Which types of education savings accounts do you use? (Select all that apply)"
+    type: multi_choice
+    construct: types_education_savings_accounts_use
+    required: true
+    options:
+      - id: "a"
+        label: "529 college savings plan"
+      - id: "b"
+        label: "529 prepaid tuition plan"
+      - id: "c"
+        label: "Coverdell Education Savings Account (ESA)"
+      - id: "d"
+        label: "Custodial account (UGMA/UTMA)"
+      - id: "e"
+        label: "A regular savings account"
+      - id: "f"
+        label: "A brokerage or investment account"
+      - id: "g"
+        label: "Savings bonds"
+      - id: "h"
+        label: "None of these"
+  - id: q5
+    prompt: "Approximately how much have you saved so far for education? Enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: approximately_much_have_saved_so
+    required: true
+  - id: q6
+    prompt: "About how much do you contribute to education savings each month? Enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_contribute_education_savings_each
+    required: true
+  - id: q7
+    prompt: "How do you make contributions to your education savings? (Select all that apply)"
+    type: multi_choice
+    construct: make_contributions_education_savings_sel
+    required: true
+    options:
+      - id: "a"
+        label: "Automatic recurring transfers"
+      - id: "b"
+        label: "Manual one-time deposits"
+      - id: "c"
+        label: "Payroll deduction"
+      - id: "d"
+        label: "Gifts from family (grandparents, etc.)"
+      - id: "e"
+        label: "Tax refunds or windfalls"
+      - id: "f"
+        label: "I don't currently contribute"
+  - id: q8
+    prompt: "Which provider or plan do you use (or would you consider)? (Select all that apply)"
+    type: multi_choice
+    construct: provider_plan_use_would_consider
+    required: true
+    options:
+      - id: "a"
+        label: "My home state's 529 plan"
+      - id: "b"
+        label: "Another state's 529 plan"
+      - id: "c"
+        label: "Vanguard"
+      - id: "d"
+        label: "Fidelity"
+      - id: "e"
+        label: "A financial advisor's recommended plan"
+      - id: "f"
+        label: "Not sure"
+      - id: "g"
+        label: "Not applicable"
+  - id: q9
+    prompt: "What primarily motivated you to save (or consider saving) for education? (Select all that apply)"
+    type: multi_choice
+    construct: primarily_motivated_save_consider_saving
+    required: true
+    options:
+      - id: "a"
+        label: "Rising cost of college"
+      - id: "b"
+        label: "Tax advantages of 529 plans"
+      - id: "c"
+        label: "Wanting to avoid student loans"
+      - id: "d"
+        label: "A state tax deduction or match"
+      - id: "e"
+        label: "Employer or family encouragement"
+      - id: "f"
+        label: "Financial advisor recommendation"
+      - id: "g"
+        label: "My own experience with student debt"
+      - id: "h"
+        label: "Not applicable"
+  - id: q10
+    prompt: "How much do you agree with the following statement: Saving for college is one of my top financial priorities."
+    type: single_choice
+    construct: much_agree_following_statement_saving
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: I understand how 529 plans and their tax benefits work."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: I worry I won't save enough to cover education costs."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: I would rather my child take on some loans than sacrifice my retirement savings."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: The flexibility of a 529 plan (e.g., changing beneficiaries) is important to me."
+    type: single_choice
+    construct: much_agree_following_statement_flexibili
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: I feel confident about my education savings plan."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "When choosing an education savings account, how important is: Tax advantages?"
+    type: single_choice
+    construct: when_choosing_education_savings_account
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "When choosing an education savings account, how important is: Low fees and expenses?"
+    type: single_choice
+    construct: when_choosing_education_savings_account
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "When choosing an education savings account, how important is: Investment options and performance?"
+    type: single_choice
+    construct: when_choosing_education_savings_account
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "When choosing an education savings account, how important is: A state tax deduction or match?"
+    type: single_choice
+    construct: when_choosing_education_savings_account
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "When choosing an education savings account, how important is: Flexibility of how funds can be used?"
+    type: single_choice
+    construct: when_choosing_education_savings_account
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "Select the top 3 concerns you have about saving for college. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_concerns_have
+    required: true
+    options:
+      - id: "a"
+        label: "Not saving enough in time"
+      - id: "b"
+        label: "Rising tuition costs"
+      - id: "c"
+        label: "Losing money to market swings"
+      - id: "d"
+        label: "What happens if the child doesn't go to college"
+      - id: "e"
+        label: "Impact on financial aid eligibility"
+      - id: "f"
+        label: "Penalties on non-qualified withdrawals"
+      - id: "g"
+        label: "Balancing it with retirement savings"
+      - id: "h"
+        label: "Understanding the rules"
+  - id: q22
+    prompt: "How is your 529 or education savings invested?"
+    type: single_choice
+    construct: 529_education_savings_invested
+    required: true
+    options:
+      - id: "a"
+        label: "An age-based / target-date portfolio"
+      - id: "b"
+        label: "A static or custom portfolio I chose"
+      - id: "c"
+        label: "A conservative or cash option"
+      - id: "d"
+        label: "I'm not sure how it's invested"
+      - id: "e"
+        label: "Not applicable"
+  - id: q23
+    prompt: "Have you received a state tax benefit for your 529 contributions?"
+    type: single_choice
+    construct: have_received_state_tax_benefit
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"
+      - id: "d"
+        label: "My state doesn't offer one"
+      - id: "e"
+        label: "Not applicable"
+  - id: q24
+    prompt: "How on-track do you feel toward your education savings goal?"
+    type: single_choice
+    construct: track_feel_toward_education_savings
+    required: true
+    options:
+      - id: "a"
+        label: "Well behind"
+      - id: "b"
+        label: "Somewhat behind"
+      - id: "c"
+        label: "About on track"
+      - id: "d"
+        label: "Somewhat ahead"
+      - id: "e"
+        label: "No specific goal set"
+  - id: q25
+    prompt: "How do you expect to cover education costs beyond your savings? (Select all that apply)"
+    type: multi_choice
+    construct: expect_cover_education_costs_beyond
+    required: true
+    options:
+      - id: "a"
+        label: "Financial aid or grants"
+      - id: "b"
+        label: "Scholarships"
+      - id: "c"
+        label: "Student loans"
+      - id: "d"
+        label: "Parent loans (e.g., PLUS loans)"
+      - id: "e"
+        label: "Current income at the time"
+      - id: "f"
+        label: "Help from other family"
+      - id: "g"
+        label: "The child working or contributing"
+      - id: "h"
+        label: "Not sure"
+  - id: q26
+    prompt: "Where do you get information about college savings? (Select all that apply)"
+    type: multi_choice
+    construct: where_get_information_college_savings
+    required: true
+    options:
+      - id: "a"
+        label: "A financial advisor"
+      - id: "b"
+        label: "Plan or provider websites"
+      - id: "c"
+        label: "Personal finance websites or articles"
+      - id: "d"
+        label: "Friends and family"
+      - id: "e"
+        label: "My employer"
+      - id: "f"
+        label: "Social media"
+      - id: "g"
+        label: "None of these"
+  - id: q27
+    prompt: "In the past 2 years, how has your education saving changed?"
+    type: single_choice
+    construct: past_2_years_has_education
+    required: true
+    options:
+      - id: "a"
+        label: "I'm saving much more"
+      - id: "b"
+        label: "I'm saving somewhat more"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "I'm saving somewhat less"
+      - id: "e"
+        label: "I'm saving much less or stopped"
+  - id: q28
+    prompt: "How stressful is planning and saving for education costs?"
+    type: single_choice
+    construct: stressful_planning_saving_education_cost
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all stressful"
+      - id: "b"
+        label: "Slightly stressful"
+      - id: "c"
+        label: "Moderately stressful"
+      - id: "d"
+        label: "Very stressful"
+      - id: "e"
+        label: "Extremely stressful"
+  - id: q29
+    prompt: "How satisfied are you with your progress on saving for education?"
+    type: single_choice
+    construct: satisfied_progress_saving_education
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How likely are you to increase your education savings contributions in the next 12 months?"
+    type: single_choice
+    construct: likely_increase_education_savings_contri
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "On a scale of 0 to 10, how likely are you to recommend using a 529 plan to another parent? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "What is your biggest question or challenge about saving for college? Describe briefly. (Optional)"
+    type: free_text
+    construct: biggest_question_challenge_saving_colleg
+    required: false
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Another race or ethnicity"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your approximate annual household income before taxes?"
+    type: single_choice
+    construct: approximate_annual_household_income_befo
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $30,000"
+      - id: "b"
+        label: "$30,000 – $49,999"
+      - id: "c"
+        label: "$50,000 – $74,999"
+      - id: "d"
+        label: "$75,000 – $99,999"
+      - id: "e"
+        label: "$100,000 – $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school graduate or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+  - id: q39
+    prompt: "Including yourself, how many people live in your household? Enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q40
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q41
+    prompt: "How many children under 18 do you have?"
+    type: single_choice
+    construct: many_children_under_18_have
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "One"
+      - id: "c"
+        label: "Two"
+      - id: "d"
+        label: "Three"
+      - id: "e"
+        label: "Four or more"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

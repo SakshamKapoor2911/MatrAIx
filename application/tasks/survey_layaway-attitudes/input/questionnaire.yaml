@@ -1,0 +1,653 @@
+schemaVersion: "1.0"
+id: layaway_attitudes_v1
+title: "Layaway Attitudes Survey"
+description: "Familiarity with and attitudes toward layaway plans and how they compare with credit cards, Buy Now Pay Later, and saving up."
+questions:
+  - id: q0
+    prompt: "How familiar are you with layaway, where you reserve an item and pay for it in installments before taking it home?"
+    type: single_choice
+    construct: familiar_layaway_where_reserve_item
+    required: true
+    options:
+      - id: "a"
+        label: "Very familiar — I have used it"
+      - id: "b"
+        label: "Familiar — I understand how it works"
+      - id: "c"
+        label: "Somewhat familiar"
+      - id: "d"
+        label: "I've heard of it but don't know how it works"
+      - id: "e"
+        label: "Not at all familiar"
+  - id: q1
+    prompt: "Have you ever used a layaway plan?"
+    type: single_choice
+    construct: have_ever_used_layaway_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, in the past year"
+      - id: "b"
+        label: "Yes, but more than a year ago"
+      - id: "c"
+        label: "No, but I have considered it"
+      - id: "d"
+        label: "No, and I have never considered it"
+  - id: q2
+    prompt: "About how many times have you used layaway in the past five years? Please enter a number."
+    type: free_text
+    construct: many_times_have_used_layaway
+    required: true
+  - id: q3
+    prompt: "For which types of purchases have you used or would you consider layaway? (Select all that apply)"
+    type: multi_choice
+    construct: types_purchases_have_used_would
+    required: true
+    options:
+      - id: "a"
+        label: "Holiday or birthday gifts"
+      - id: "b"
+        label: "Electronics"
+      - id: "c"
+        label: "Furniture or appliances"
+      - id: "d"
+        label: "Clothing or shoes"
+      - id: "e"
+        label: "Jewelry"
+      - id: "f"
+        label: "Toys"
+      - id: "g"
+        label: "Tools or equipment"
+      - id: "h"
+        label: "I would not use layaway for anything"
+  - id: q4
+    prompt: "Where have you used or seen layaway offered? (Select all that apply)"
+    type: multi_choice
+    construct: where_have_used_seen_layaway
+    required: true
+    options:
+      - id: "a"
+        label: "A department or big-box store"
+      - id: "b"
+        label: "An online retailer"
+      - id: "c"
+        label: "A jewelry store"
+      - id: "d"
+        label: "A furniture or appliance store"
+      - id: "e"
+        label: "A local or independent shop"
+      - id: "f"
+        label: "I have not seen it offered anywhere"
+      - id: "g"
+        label: "Not sure"
+  - id: q5
+    prompt: "How does layaway compare to other ways you might pay over time? Which have you used? (Select all that apply)"
+    type: multi_choice
+    construct: does_layaway_compare_other_ways
+    required: true
+    options:
+      - id: "a"
+        label: "Layaway"
+      - id: "b"
+        label: "Buy Now, Pay Later (e.g., Affirm, Klarna, Afterpay)"
+      - id: "c"
+        label: "A credit card carried over time"
+      - id: "d"
+        label: "A store financing or store credit card"
+      - id: "e"
+        label: "A personal loan"
+      - id: "f"
+        label: "Saving up and paying in full"
+      - id: "g"
+        label: "None of these"
+  - id: q6
+    prompt: "When paying for a larger purchase over time, which method would you most prefer?"
+    type: single_choice
+    construct: when_paying_larger_purchase_over
+    required: true
+    options:
+      - id: "a"
+        label: "Layaway (pay first, get the item later)"
+      - id: "b"
+        label: "Buy Now, Pay Later"
+      - id: "c"
+        label: "A credit card"
+      - id: "d"
+        label: "Store financing"
+      - id: "e"
+        label: "Saving up and paying cash"
+      - id: "f"
+        label: "No preference"
+  - id: q7
+    prompt: "How much do you agree with the following statement: Layaway helps people avoid taking on debt."
+    type: single_choice
+    construct: much_agree_following_statement_layaway
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q8
+    prompt: "How much do you agree with the following statement: Layaway is an outdated way to shop."
+    type: single_choice
+    construct: much_agree_following_statement_layaway
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q9
+    prompt: "How much do you agree with the following statement: I would rather pay for something over time than put it on a credit card."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree with the following statement: Waiting to receive an item until it's paid off is a fair trade-off."
+    type: single_choice
+    construct: much_agree_following_statement_waiting
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: Buy Now, Pay Later has largely replaced the need for layaway."
+    type: single_choice
+    construct: much_agree_following_statement_buy
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How appealing is each feature of layaway to you: no interest or finance charges?"
+    type: single_choice
+    construct: appealing_each_feature_layaway_no
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all appealing"
+      - id: "b"
+        label: "Slightly appealing"
+      - id: "c"
+        label: "Moderately appealing"
+      - id: "d"
+        label: "Very appealing"
+      - id: "e"
+        label: "Extremely appealing"
+  - id: q13
+    prompt: "How appealing is each feature of layaway to you: not needing a good credit score?"
+    type: single_choice
+    construct: appealing_each_feature_layaway_not
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all appealing"
+      - id: "b"
+        label: "Slightly appealing"
+      - id: "c"
+        label: "Moderately appealing"
+      - id: "d"
+        label: "Very appealing"
+      - id: "e"
+        label: "Extremely appealing"
+  - id: q14
+    prompt: "How appealing is each feature of layaway to you: locking in an item's price during a sale?"
+    type: single_choice
+    construct: appealing_each_feature_layaway_locking
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all appealing"
+      - id: "b"
+        label: "Slightly appealing"
+      - id: "c"
+        label: "Moderately appealing"
+      - id: "d"
+        label: "Very appealing"
+      - id: "e"
+        label: "Extremely appealing"
+  - id: q15
+    prompt: "How appealing is each feature of layaway to you: being forced to pay before you take the item home?"
+    type: single_choice
+    construct: appealing_each_feature_layaway_being
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all appealing"
+      - id: "b"
+        label: "Slightly appealing"
+      - id: "c"
+        label: "Moderately appealing"
+      - id: "d"
+        label: "Very appealing"
+      - id: "e"
+        label: "Extremely appealing"
+  - id: q16
+    prompt: "How appealing is each feature of layaway to you: getting money back if you cancel the plan?"
+    type: single_choice
+    construct: appealing_each_feature_layaway_getting
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all appealing"
+      - id: "b"
+        label: "Slightly appealing"
+      - id: "c"
+        label: "Moderately appealing"
+      - id: "d"
+        label: "Very appealing"
+      - id: "e"
+        label: "Extremely appealing"
+  - id: q17
+    prompt: "What concerns you most about layaway? (Select all that apply)"
+    type: multi_choice
+    construct: concerns_most_layaway_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Service or cancellation fees"
+      - id: "b"
+        label: "Not getting the item right away"
+      - id: "c"
+        label: "Losing money if I can't finish paying"
+      - id: "d"
+        label: "The item selling out or changing before pickup"
+      - id: "e"
+        label: "Remembering to make payments on time"
+      - id: "f"
+        label: "Fewer stores offering it"
+      - id: "g"
+        label: "I have no concerns"
+  - id: q18
+    prompt: "What would most encourage you to use layaway? (Select all that apply)"
+    type: multi_choice
+    construct: would_most_encourage_use_layaway
+    required: true
+    options:
+      - id: "a"
+        label: "No fees at all"
+      - id: "b"
+        label: "Flexible payment schedules"
+      - id: "c"
+        label: "Longer time to pay it off"
+      - id: "d"
+        label: "Being able to do it online"
+      - id: "e"
+        label: "A small discount for using it"
+      - id: "f"
+        label: "Automatic payment reminders"
+      - id: "g"
+        label: "Nothing would encourage me"
+  - id: q19
+    prompt: "In which situation would you be most likely to choose layaway?"
+    type: single_choice
+    construct: situation_would_be_most_likely
+    required: true
+    options:
+      - id: "a"
+        label: "For holiday shopping on a budget"
+      - id: "b"
+        label: "For a big-ticket item I couldn't pay for at once"
+      - id: "c"
+        label: "When I want to avoid credit card debt"
+      - id: "d"
+        label: "When I don't qualify for other financing"
+      - id: "e"
+        label: "I would not choose layaway in any situation"
+  - id: q20
+    prompt: "Select the top 3 factors that would matter most to you in a pay-over-time plan. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_that
+    required: true
+    options:
+      - id: "a"
+        label: "No interest or fees"
+      - id: "b"
+        label: "Getting the item immediately"
+      - id: "c"
+        label: "Flexible or low payments"
+      - id: "d"
+        label: "No impact on my credit"
+      - id: "e"
+        label: "Easy cancellation with a refund"
+      - id: "f"
+        label: "Ability to do it entirely online"
+      - id: "g"
+        label: "A clear, predictable schedule"
+      - id: "h"
+        label: "Locking in a sale price"
+  - id: q21
+    prompt: "How likely are you to use layaway in the next 12 months?"
+    type: single_choice
+    construct: likely_use_layaway_next_12
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q22
+    prompt: "How satisfied were you with your most recent layaway experience?"
+    type: single_choice
+    construct: satisfied_were_most_recent_layaway
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I have never used layaway"
+  - id: q23
+    prompt: "On a scale of 0 to 10, how likely are you to recommend layaway to a friend on a tight budget? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q24
+    prompt: "Please share any thoughts about layaway or paying for purchases over time."
+    type: free_text
+    construct: please_share_any_thoughts_layaway
+    required: true
+  - id: q25
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18-24"
+      - id: "b"
+        label: "25-34"
+      - id: "c"
+        label: "35-44"
+      - id: "d"
+        label: "45-54"
+      - id: "e"
+        label: "55-64"
+      - id: "f"
+        label: "65 or older"
+  - id: q26
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q27
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q28
+    prompt: "What is your total annual household income (before taxes)?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q29
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q30
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Homemaker or caregiver"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Unable to work"
+  - id: q31
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q32
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q33
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q34
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q35
+    prompt: "How would you describe your access to credit?"
+    type: single_choice
+    construct: would_describe_access_credit
+    required: true
+    options:
+      - id: "a"
+        label: "I have plenty of available credit"
+      - id: "b"
+        label: "I have some, but it's limited"
+      - id: "c"
+        label: "I have little or no access to credit"
+      - id: "d"
+        label: "I avoid using credit by choice"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "How would you describe your current financial situation?"
+    type: single_choice
+    construct: would_describe_current_financial_situati
+    required: true
+    options:
+      - id: "a"
+        label: "Comfortable, with money left over"
+      - id: "b"
+        label: "Getting by, breaking even"
+      - id: "c"
+        label: "Stretched, but managing"
+      - id: "d"
+        label: "Struggling to make ends meet"
+  - id: q37
+    prompt: "How many children under 18 live in your household? Please enter a number."
+    type: free_text
+    construct: many_children_under_18_live
+    required: true
+  - id: q38
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own with a mortgage"
+      - id: "b"
+        label: "Own outright"
+      - id: "c"
+        label: "Rent"
+      - id: "d"
+        label: "Other arrangement"
+  - id: q39
+    prompt: "Growing up, did your family use layaway or similar pay-over-time plans?"
+    type: single_choice
+    construct: growing_up_did_family_use
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not sure"

@@ -1,0 +1,628 @@
+schemaVersion: "1.0"
+id: meditation_app_usage_v1
+title: "Meditation and Mindfulness App Usage Survey"
+description: "Consumer adoption of, usage patterns for, and attitudes toward meditation and mindfulness apps."
+questions:
+  - id: q0
+    prompt: "Have you ever used a meditation or mindfulness app?"
+    type: single_choice
+    construct: have_ever_used_meditation_mindfulness
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I use one currently"
+      - id: "b"
+        label: "Yes, but not anymore"
+      - id: "c"
+        label: "No, but I am interested"
+      - id: "d"
+        label: "No, and I am not interested"
+  - id: q1
+    prompt: "How long have you been using (or did you use) meditation apps?"
+    type: single_choice
+    construct: long_have_been_using_did
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 month"
+      - id: "b"
+        label: "1 to 6 months"
+      - id: "c"
+        label: "7 to 12 months"
+      - id: "d"
+        label: "1 to 2 years"
+      - id: "e"
+        label: "More than 2 years"
+      - id: "f"
+        label: "I have never used one"
+  - id: q2
+    prompt: "Which meditation or mindfulness apps have you used? (Select all that apply)"
+    type: multi_choice
+    construct: meditation_mindfulness_apps_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Calm"
+      - id: "b"
+        label: "Headspace"
+      - id: "c"
+        label: "Insight Timer"
+      - id: "d"
+        label: "Balance"
+      - id: "e"
+        label: "Ten Percent Happier"
+      - id: "f"
+        label: "Simple Habit"
+      - id: "g"
+        label: "Smiling Mind"
+      - id: "h"
+        label: "A free app that came with my phone"
+      - id: "i"
+        label: "Another app"
+      - id: "j"
+        label: "I have never used one"
+  - id: q3
+    prompt: "Which app do you currently use most often?"
+    type: single_choice
+    construct: app_currently_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Calm"
+      - id: "b"
+        label: "Headspace"
+      - id: "c"
+        label: "Insight Timer"
+      - id: "d"
+        label: "Balance"
+      - id: "e"
+        label: "Ten Percent Happier"
+      - id: "f"
+        label: "Another app"
+      - id: "g"
+        label: "I do not currently use one"
+  - id: q4
+    prompt: "How often do you use a meditation app?"
+    type: single_choice
+    construct: often_use_meditation_app
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "About once a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Rarely"
+      - id: "f"
+        label: "Never anymore"
+  - id: q5
+    prompt: "About how long is a typical session? Please enter a number of minutes."
+    type: free_text
+    construct: long_typical_session_please_enter
+    required: true
+  - id: q6
+    prompt: "When do you most often use the app?"
+    type: single_choice
+    construct: when_most_often_use_app
+    required: true
+    options:
+      - id: "a"
+        label: "First thing in the morning"
+      - id: "b"
+        label: "During the workday or on breaks"
+      - id: "c"
+        label: "In the evening"
+      - id: "d"
+        label: "Right before bed"
+      - id: "e"
+        label: "When feeling stressed or anxious"
+      - id: "f"
+        label: "No regular time"
+  - id: q7
+    prompt: "Why did you first start using a meditation app? (Select all that apply)"
+    type: multi_choice
+    construct: why_did_first_start_using
+    required: true
+    options:
+      - id: "a"
+        label: "To reduce stress or anxiety"
+      - id: "b"
+        label: "To sleep better"
+      - id: "c"
+        label: "To improve focus or productivity"
+      - id: "d"
+        label: "To build a mindfulness habit"
+      - id: "e"
+        label: "A friend or family member recommended it"
+      - id: "f"
+        label: "A doctor or therapist suggested it"
+      - id: "g"
+        label: "Curiosity after seeing an ad"
+      - id: "h"
+        label: "It was free or included with another subscription"
+  - id: q8
+    prompt: "Which app features do you use most? (Select all that apply)"
+    type: multi_choice
+    construct: app_features_use_most_select
+    required: true
+    options:
+      - id: "a"
+        label: "Guided meditations"
+      - id: "b"
+        label: "Sleep stories or sleep sounds"
+      - id: "c"
+        label: "Breathing exercises"
+      - id: "d"
+        label: "Background or focus music"
+      - id: "e"
+        label: "Daily reminders or streaks"
+      - id: "f"
+        label: "Progress tracking or stats"
+      - id: "g"
+        label: "Courses or multi-day programs"
+      - id: "h"
+        label: "Timed unguided meditation"
+      - id: "i"
+        label: "Content for kids or family"
+  - id: q9
+    prompt: "Do you pay for a subscription to a meditation app?"
+    type: single_choice
+    construct: pay_subscription_meditation_app
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a paid monthly or annual subscription"
+      - id: "b"
+        label: "I use a free trial or promotion"
+      - id: "c"
+        label: "I use only the free version"
+      - id: "d"
+        label: "It is included with another service or benefit"
+      - id: "e"
+        label: "I do not use one"
+  - id: q10
+    prompt: "About how much do you spend on meditation apps per year? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_spend_meditation_apps_per
+    required: true
+  - id: q11
+    prompt: "How much do you agree or disagree: Using the app has helped reduce my stress."
+    type: single_choice
+    construct: much_agree_disagree_using_app
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: Using the app has improved my sleep."
+    type: single_choice
+    construct: much_agree_disagree_using_app
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: The app has improved my focus or attention."
+    type: single_choice
+    construct: much_agree_disagree_app_has
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: The app fits easily into my daily routine."
+    type: single_choice
+    construct: much_agree_disagree_app_fits
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: The subscription is worth the money."
+    type: single_choice
+    construct: much_agree_disagree_subscription_worth
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+      - id: "f"
+        label: "Not applicable, I use a free version"
+  - id: q16
+    prompt: "How helpful has the app been for each area — Everyday stress"
+    type: single_choice
+    construct: helpful_has_app_been_each
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all helpful"
+      - id: "b"
+        label: "Slightly helpful"
+      - id: "c"
+        label: "Moderately helpful"
+      - id: "d"
+        label: "Very helpful"
+      - id: "e"
+        label: "Extremely helpful"
+  - id: q17
+    prompt: "How helpful has the app been for each area — Sleep"
+    type: single_choice
+    construct: helpful_has_app_been_each
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all helpful"
+      - id: "b"
+        label: "Slightly helpful"
+      - id: "c"
+        label: "Moderately helpful"
+      - id: "d"
+        label: "Very helpful"
+      - id: "e"
+        label: "Extremely helpful"
+  - id: q18
+    prompt: "How helpful has the app been for each area — Focus and concentration"
+    type: single_choice
+    construct: helpful_has_app_been_each
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all helpful"
+      - id: "b"
+        label: "Slightly helpful"
+      - id: "c"
+        label: "Moderately helpful"
+      - id: "d"
+        label: "Very helpful"
+      - id: "e"
+        label: "Extremely helpful"
+  - id: q19
+    prompt: "How helpful has the app been for each area — Overall mood"
+    type: single_choice
+    construct: helpful_has_app_been_each
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all helpful"
+      - id: "b"
+        label: "Slightly helpful"
+      - id: "c"
+        label: "Moderately helpful"
+      - id: "d"
+        label: "Very helpful"
+      - id: "e"
+        label: "Extremely helpful"
+  - id: q20
+    prompt: "How helpful has the app been for each area — Building a consistent habit"
+    type: single_choice
+    construct: helpful_has_app_been_each
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all helpful"
+      - id: "b"
+        label: "Slightly helpful"
+      - id: "c"
+        label: "Moderately helpful"
+      - id: "d"
+        label: "Very helpful"
+      - id: "e"
+        label: "Extremely helpful"
+  - id: q21
+    prompt: "What most gets in the way of using the app regularly? (Select all that apply)"
+    type: multi_choice
+    construct: most_gets_way_using_app
+    required: true
+    options:
+      - id: "a"
+        label: "I forget to use it"
+      - id: "b"
+        label: "I do not have time"
+      - id: "c"
+        label: "I lose motivation"
+      - id: "d"
+        label: "I do not notice enough benefit"
+      - id: "e"
+        label: "I do not want to pay for it"
+      - id: "f"
+        label: "Too many notifications"
+      - id: "g"
+        label: "I prefer meditating without an app"
+      - id: "h"
+        label: "Nothing gets in the way"
+  - id: q22
+    prompt: "How important is each feature when choosing a meditation app? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: important_each_feature_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Quality of guided meditations"
+      - id: "b"
+        label: "Sleep content"
+      - id: "c"
+        label: "Variety of content"
+      - id: "d"
+        label: "Low price or free option"
+      - id: "e"
+        label: "Easy-to-use interface"
+      - id: "f"
+        label: "Progress tracking and streaks"
+      - id: "g"
+        label: "Offline access"
+      - id: "h"
+        label: "Well-known teachers or narrators"
+      - id: "i"
+        label: "Short sessions for busy days"
+      - id: "j"
+        label: "No ads"
+  - id: q23
+    prompt: "In a typical week, about how many days do you meditate using an app? Please enter a number."
+    type: free_text
+    construct: typical_week_many_days_meditate
+    required: true
+  - id: q24
+    prompt: "How satisfied are you overall with your meditation app?"
+    type: single_choice
+    construct: satisfied_overall_meditation_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q25
+    prompt: "How likely are you to keep using (or renew) your meditation app over the next year?"
+    type: single_choice
+    construct: likely_keep_using_renew_meditation
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q26
+    prompt: "Overall, how likely are you to recommend your meditation app to a friend? Please use a 0 to 10 scale, where 0 is not at all likely and 10 is extremely likely. Please enter a number."
+    type: free_text
+    construct: overall_likely_recommend_meditation_app
+    required: true
+  - id: q27
+    prompt: "What would most improve your experience with meditation apps? (Optional short answer)"
+    type: free_text
+    construct: would_most_improve_experience_meditation
+    required: false
+  - id: q28
+    prompt: "What is your age? Please enter a number (years old)."
+    type: free_text
+    construct: age_please_enter_number_years
+    required: true
+  - id: q29
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q30
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q33
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Homemaker or caregiver"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not currently employed"
+  - id: q34
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q36
+    prompt: "In which region of the United States do you live?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q37
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q38
+    prompt: "Which devices do you use for meditation apps? (Select all that apply)"
+    type: multi_choice
+    construct: devices_use_meditation_apps_select
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "Tablet"
+      - id: "c"
+        label: "Smart speaker (e.g., Amazon Echo, Google Nest)"
+      - id: "d"
+        label: "Smartwatch"
+      - id: "e"
+        label: "Computer or laptop"
+      - id: "f"
+        label: "Smart TV"
+  - id: q39
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"

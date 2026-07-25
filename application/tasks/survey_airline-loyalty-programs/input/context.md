@@ -1,0 +1,7 @@
+# Airline Loyalty Programs
+
+How people participate in airline frequent-flyer programs, earn and redeem miles, pursue elite status, and stay loyal to a carrier.
+
+## About this survey
+
+This survey profiles members of airline loyalty programs, opening with a screener on how many programs they belong to, how long they have participated, their primary program, and their current elite tier. It records the programs they hold across carriers such as Delta SkyMiles, United MileagePlus, American AAdvantage, Southwest Rapid Rewards, JetBlue, and Alaska, how they earn miles, flight frequency, the work-versus-personal split, co-branded card ownership, redemption methods, booking behavior, and which elite benefits they use. Attitudes are captured with an agreement Likert battery on value, loyalty, status effort, and devaluations, and a per-item importance matrix over airline-choice factors, plus a top-three ranking of loyalty reasons and a recommendation likelihood scale. Additional sections cover mile valuation, expiration, lounge access, tracking methods, and satisfaction with mile value, award availability, and service. Question types include single-choice, multi-select, agreement and importance matrices, satisfaction and likelihood Likert scales, an NPS-style 0–10 item, a ranking item, and numeric free-text. The survey closes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, U.S. region, and urbanicity.

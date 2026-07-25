@@ -1,0 +1,782 @@
+schemaVersion: "1.0"
+id: long_term_care_planning_v1
+title: "Long-Term Care Planning Survey"
+description: "How adults think about, plan for, and expect to pay for long-term care (in-home care, assisted living, and nursing homes) as they age."
+questions:
+  - id: q0
+    prompt: "Have you ever thought about how you would pay for long-term care (such as a nursing home, assisted living, or in-home care) if you needed it?"
+    type: single_choice
+    construct: have_ever_thought_would_pay
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I've thought about it a lot"
+      - id: "b"
+        label: "Yes, I've thought about it a little"
+      - id: "c"
+        label: "No, I haven't really thought about it"
+      - id: "d"
+        label: "No, and I prefer not to think about it"
+  - id: q1
+    prompt: "How familiar are you with what long-term care services actually cost?"
+    type: single_choice
+    construct: familiar_long_term_care_services
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all familiar"
+      - id: "b"
+        label: "Slightly familiar"
+      - id: "c"
+        label: "Moderately familiar"
+      - id: "d"
+        label: "Very familiar"
+  - id: q2
+    prompt: "Have you or your spouse/partner made any specific plans for long-term care needs?"
+    type: single_choice
+    construct: have_spouse_partner_made_any
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a detailed written plan"
+      - id: "b"
+        label: "Yes, some general plans"
+      - id: "c"
+        label: "We've talked about it but made no plans"
+      - id: "d"
+        label: "No plans at all"
+  - id: q3
+    prompt: "Do you currently have a long-term care insurance policy?"
+    type: single_choice
+    construct: currently_have_long_term_care
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a standalone long-term care insurance policy"
+      - id: "b"
+        label: "Yes, a hybrid life insurance or annuity policy with a long-term care rider"
+      - id: "c"
+        label: "No, but I've looked into it"
+      - id: "d"
+        label: "No, and I haven't looked into it"
+  - id: q4
+    prompt: "Have you ever helped provide care for, or manage the care of, an aging family member?"
+    type: single_choice
+    construct: have_ever_helped_provide_care
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I'm currently doing so"
+      - id: "b"
+        label: "Yes, in the past"
+      - id: "c"
+        label: "No, but I expect to in the future"
+      - id: "d"
+        label: "No, and I don't expect to"
+  - id: q5
+    prompt: "Which of the following long-term care arrangements are you aware of? (Select all that apply)"
+    type: multi_choice
+    construct: following_long_term_care_arrangements
+    required: true
+    options:
+      - id: "a"
+        label: "In-home care (home health aide or personal care aide)"
+      - id: "b"
+        label: "Adult day care centers"
+      - id: "c"
+        label: "Assisted living facilities"
+      - id: "d"
+        label: "Nursing homes / skilled nursing facilities"
+      - id: "e"
+        label: "Continuing care retirement communities (CCRCs)"
+      - id: "f"
+        label: "Memory care units"
+      - id: "g"
+        label: "Respite care for family caregivers"
+      - id: "h"
+        label: "I'm not aware of any of these"
+  - id: q6
+    prompt: "If you needed long-term care, where would you most prefer to receive it?"
+    type: single_choice
+    construct: if_needed_long_term_care
+    required: true
+    options:
+      - id: "a"
+        label: "In my own home"
+      - id: "b"
+        label: "In the home of a family member"
+      - id: "c"
+        label: "In an assisted living facility"
+      - id: "d"
+        label: "In a nursing home or skilled nursing facility"
+      - id: "e"
+        label: "In a continuing care retirement community"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q7
+    prompt: "Which sources do you expect to use to pay for long-term care if you need it? (Select all that apply)"
+    type: multi_choice
+    construct: sources_expect_use_pay_long
+    required: true
+    options:
+      - id: "a"
+        label: "Personal savings and investments"
+      - id: "b"
+        label: "Long-term care insurance"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Home equity (selling or borrowing against my home)"
+      - id: "f"
+        label: "Help from family members"
+      - id: "g"
+        label: "Veterans (VA) benefits"
+      - id: "h"
+        label: "Social Security income"
+      - id: "i"
+        label: "I don't know how I would pay for it"
+  - id: q8
+    prompt: "How confident are you that you could afford long-term care if you needed it for several years?"
+    type: single_choice
+    construct: confident_that_could_afford_long
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q9
+    prompt: "Do you believe Medicare covers the cost of long-term nursing home care?"
+    type: single_choice
+    construct: believe_medicare_covers_cost_long
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, it covers most of it"
+      - id: "b"
+        label: "It covers some of it"
+      - id: "c"
+        label: "No, it covers very little long-term care"
+      - id: "d"
+        label: "I don't know"
+  - id: q10
+    prompt: "How worried are you about the following: The cost of long-term care draining your savings."
+    type: single_choice
+    construct: worried_following_cost_long_term
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+  - id: q11
+    prompt: "How worried are you about the following: Becoming a physical or financial burden on your family."
+    type: single_choice
+    construct: worried_following_becoming_physical_fina
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+  - id: q12
+    prompt: "How worried are you about the following: Losing your independence and control over daily life."
+    type: single_choice
+    construct: worried_following_losing_independence_co
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+  - id: q13
+    prompt: "How worried are you about the following: Not being able to find quality care when you need it."
+    type: single_choice
+    construct: worried_following_not_being_able
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+  - id: q14
+    prompt: "How much do you agree or disagree: It is my own responsibility to plan and pay for my long-term care."
+    type: single_choice
+    construct: much_agree_disagree_it_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: The government should do more to help people afford long-term care."
+    type: single_choice
+    construct: much_agree_disagree_government_should
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: I would rather spend down my assets than pay for long-term care insurance."
+    type: single_choice
+    construct: much_agree_disagree_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree or disagree: My adult children (or other family) will take care of me if I need help."
+    type: single_choice
+    construct: much_agree_disagree_my_adult
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree or disagree: I would feel comfortable moving into an assisted living or nursing facility if needed."
+    type: single_choice
+    construct: much_agree_disagree_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How important is each factor when planning for long-term care: Staying in my own home as long as possible."
+    type: single_choice
+    construct: important_each_factor_when_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is each factor when planning for long-term care: Protecting my savings and assets for my heirs."
+    type: single_choice
+    construct: important_each_factor_when_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each factor when planning for long-term care: Being near my family."
+    type: single_choice
+    construct: important_each_factor_when_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each factor when planning for long-term care: The quality and reputation of the care provider."
+    type: single_choice
+    construct: important_each_factor_when_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each factor when planning for long-term care: Not being a burden on loved ones."
+    type: single_choice
+    construct: important_each_factor_when_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "Select your top 3 concerns about long-term care. (Select all that apply — choose up to 3)"
+    type: single_choice
+    construct: select_top_3_concerns_long
+    required: true
+    options:
+      - id: "a"
+        label: "The high cost"
+      - id: "b"
+        label: "Running out of money"
+      - id: "c"
+        label: "Poor quality of care"
+      - id: "d"
+        label: "Loss of independence"
+      - id: "e"
+        label: "Burdening my family"
+      - id: "f"
+        label: "Being isolated or lonely"
+      - id: "g"
+        label: "Not being able to choose where I receive care"
+      - id: "h"
+        label: "Losing my home"
+  - id: q25
+    prompt: "If you have considered long-term care insurance, what has held you back or concerned you? (Select all that apply)"
+    type: multi_choice
+    construct: if_have_considered_long_term
+    required: true
+    options:
+      - id: "a"
+        label: "Premiums are too expensive"
+      - id: "b"
+        label: "Premiums might increase over time"
+      - id: "c"
+        label: "I might pay for years and never use it"
+      - id: "d"
+        label: "The policies are confusing"
+      - id: "e"
+        label: "I don't trust the insurance company to pay"
+      - id: "f"
+        label: "I think I can self-fund my care"
+      - id: "g"
+        label: "I haven't gotten around to it"
+      - id: "h"
+        label: "Nothing has held me back"
+  - id: q26
+    prompt: "At roughly what age do you think people should start planning for long-term care?"
+    type: single_choice
+    construct: roughly_age_think_people_should
+    required: true
+    options:
+      - id: "a"
+        label: "In their 30s or earlier"
+      - id: "b"
+        label: "In their 40s"
+      - id: "c"
+        label: "In their 50s"
+      - id: "d"
+        label: "In their 60s"
+      - id: "e"
+        label: "In their 70s or later"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q27
+    prompt: "Have you discussed your long-term care wishes with family members?"
+    type: single_choice
+    construct: have_discussed_long_term_care
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, in detail"
+      - id: "b"
+        label: "Yes, briefly"
+      - id: "c"
+        label: "No, but I plan to"
+      - id: "d"
+        label: "No, and I don't plan to"
+  - id: q28
+    prompt: "Have you completed any of the following legal or planning documents? (Select all that apply)"
+    type: multi_choice
+    construct: have_completed_any_following_legal
+    required: true
+    options:
+      - id: "a"
+        label: "A will"
+      - id: "b"
+        label: "A durable power of attorney for finances"
+      - id: "c"
+        label: "A health care power of attorney or health care proxy"
+      - id: "d"
+        label: "A living will or advance directive"
+      - id: "e"
+        label: "A trust"
+      - id: "f"
+        label: "None of these"
+  - id: q29
+    prompt: "What is your best guess for the average monthly cost of a private room in a nursing home in the U.S. today? Please enter a dollar amount per month."
+    type: free_text
+    construct: best_guess_average_monthly_cost
+    required: true
+  - id: q30
+    prompt: "Roughly how much have you personally set aside specifically for potential long-term care or late-life health needs? Please enter a dollar amount."
+    type: free_text
+    construct: roughly_much_have_personally_set
+    required: true
+  - id: q31
+    prompt: "How likely are you to purchase (or add to) long-term care coverage in the next 5 years?"
+    type: single_choice
+    construct: likely_purchase_add_long_term
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q32
+    prompt: "Where would you turn for guidance on long-term care planning? (Select all that apply)"
+    type: multi_choice
+    construct: where_would_turn_guidance_long
+    required: true
+    options:
+      - id: "a"
+        label: "A financial advisor or planner"
+      - id: "b"
+        label: "An insurance agent"
+      - id: "c"
+        label: "An elder law attorney"
+      - id: "d"
+        label: "Family and friends"
+      - id: "e"
+        label: "My doctor or a social worker"
+      - id: "f"
+        label: "Online research"
+      - id: "g"
+        label: "Government resources (e.g., Medicare.gov, Area Agency on Aging)"
+      - id: "h"
+        label: "I wouldn't know where to turn"
+  - id: q33
+    prompt: "How much do you agree or disagree: I feel well-prepared for my potential long-term care needs."
+    type: single_choice
+    construct: much_agree_disagree_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q34
+    prompt: "Overall, how satisfied are you with your current level of long-term care planning?"
+    type: single_choice
+    construct: overall_satisfied_current_level_long
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "On a scale of 0 to 10, how likely are you to encourage a friend or family member your age to start planning for long-term care? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_encourage
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q36
+    prompt: "If you would like to share, what is the biggest obstacle to planning for your long-term care? (Optional — a few words)"
+    type: free_text
+    construct: if_would_like_share_biggest
+    required: false
+  - id: q37
+    prompt: "What is your age? Please enter a number (years old)."
+    type: free_text
+    construct: age_please_enter_number_years
+    required: true
+  - id: q38
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q42
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Homemaker or caregiver"
+      - id: "g"
+        label: "Unable to work"
+  - id: q43
+    prompt: "What is your annual household income before taxes?"
+    type: single_choice
+    construct: annual_household_income_before_taxes
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+  - id: q45
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q46
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own with a mortgage"
+      - id: "b"
+        label: "Own outright (no mortgage)"
+      - id: "c"
+        label: "Rent"
+      - id: "d"
+        label: "Other arrangement"
+  - id: q47
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q48
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q49
+    prompt: "Do you currently have any living parents or in-laws who may need care in the future?"
+    type: single_choice
+    construct: currently_have_any_living_parents
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"

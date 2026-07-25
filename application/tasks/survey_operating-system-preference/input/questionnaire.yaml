@@ -1,0 +1,888 @@
+schemaVersion: "1.0"
+id: operating_system_preference_v1
+title: "Operating System Preferences & Usage Survey"
+description: "How people choose, use, and feel about the desktop and laptop operating systems on their computers."
+questions:
+  - id: q0
+    prompt: "Do you personally use a desktop or laptop computer (not counting phones or tablets)?"
+    type: single_choice
+    construct: personally_use_desktop_laptop_computer
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, daily"
+      - id: "b"
+        label: "Yes, a few times a week"
+      - id: "c"
+        label: "Yes, occasionally"
+      - id: "d"
+        label: "No, I rarely or never use one"
+  - id: q1
+    prompt: "Which operating system do you use most often on your primary personal computer?"
+    type: single_choice
+    construct: operating_system_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Windows 11"
+      - id: "b"
+        label: "Windows 10 or earlier"
+      - id: "c"
+        label: "macOS"
+      - id: "d"
+        label: "A desktop Linux distribution"
+      - id: "e"
+        label: "ChromeOS"
+      - id: "f"
+        label: "Other"
+  - id: q2
+    prompt: "How many years have you been using your current primary operating system?"
+    type: free_text
+    construct: many_years_have_been_using
+    required: true
+  - id: q3
+    prompt: "How many desktop or laptop computers do you personally use on a regular basis?"
+    type: free_text
+    construct: many_desktop_laptop_computers_personally
+    required: true
+  - id: q4
+    prompt: "Which operating systems have you personally used on a laptop or desktop in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: operating_systems_have_personally_used
+    required: true
+    options:
+      - id: "a"
+        label: "Windows 11"
+      - id: "b"
+        label: "Windows 10 or earlier"
+      - id: "c"
+        label: "macOS"
+      - id: "d"
+        label: "Ubuntu"
+      - id: "e"
+        label: "Fedora"
+      - id: "f"
+        label: "Debian"
+      - id: "g"
+        label: "Arch Linux"
+      - id: "h"
+        label: "Linux Mint"
+      - id: "i"
+        label: "Another Linux distribution"
+      - id: "j"
+        label: "ChromeOS"
+      - id: "k"
+        label: "Windows Subsystem for Linux (WSL)"
+      - id: "l"
+        label: "A BSD variant (FreeBSD, OpenBSD, etc.)"
+  - id: q5
+    prompt: "How did you end up with the operating system on your main computer?"
+    type: single_choice
+    construct: did_end_up_operating_system
+    required: true
+    options:
+      - id: "a"
+        label: "It came pre-installed and I kept it"
+      - id: "b"
+        label: "I deliberately chose and installed it myself"
+      - id: "c"
+        label: "It was chosen for me by my employer or school"
+      - id: "d"
+        label: "A friend or family member set it up"
+      - id: "e"
+        label: "Not sure"
+  - id: q6
+    prompt: "Which operating system do you use most at work or school (if different from personal)?"
+    type: single_choice
+    construct: operating_system_use_most_work
+    required: true
+    options:
+      - id: "a"
+        label: "Windows"
+      - id: "b"
+        label: "macOS"
+      - id: "c"
+        label: "Linux"
+      - id: "d"
+        label: "ChromeOS"
+      - id: "e"
+        label: "Same as my personal computer"
+      - id: "f"
+        label: "Not applicable"
+  - id: q7
+    prompt: "Roughly how many hours per day do you spend actively using a desktop or laptop computer?"
+    type: free_text
+    construct: roughly_many_hours_per_day
+    required: true
+  - id: q8
+    prompt: "What do you primarily use your main computer for? (Select all that apply)"
+    type: multi_choice
+    construct: primarily_use_main_computer_select
+    required: true
+    options:
+      - id: "a"
+        label: "General web browsing and email"
+      - id: "b"
+        label: "Office and productivity work"
+      - id: "c"
+        label: "Software development or programming"
+      - id: "d"
+        label: "Gaming"
+      - id: "e"
+        label: "Creative work (photo, video, music, design)"
+      - id: "f"
+        label: "Media consumption (streaming, reading)"
+      - id: "g"
+        label: "School or academic work"
+      - id: "h"
+        label: "Managing finances or personal admin"
+      - id: "i"
+        label: "Running a home business"
+  - id: q9
+    prompt: "Which factors matter most when you choose an operating system? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: factors_matter_most_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Familiarity / what I already know"
+      - id: "b"
+        label: "Software and app compatibility"
+      - id: "c"
+        label: "Gaming support"
+      - id: "d"
+        label: "Price / cost of hardware"
+      - id: "e"
+        label: "Security and privacy"
+      - id: "f"
+        label: "Customization and control"
+      - id: "g"
+        label: "Ecosystem integration with my phone/other devices"
+      - id: "h"
+        label: "Stability and reliability"
+      - id: "i"
+        label: "Battery life and performance"
+      - id: "j"
+        label: "Required for work or school"
+  - id: q10
+    prompt: "How did you first learn to use your current operating system? (Select all that apply)"
+    type: multi_choice
+    construct: did_first_learn_use_current
+    required: true
+    options:
+      - id: "a"
+        label: "Trial and error on my own"
+      - id: "b"
+        label: "Formal schooling or courses"
+      - id: "c"
+        label: "Help from friends or family"
+      - id: "d"
+        label: "Online tutorials and videos"
+      - id: "e"
+        label: "At a workplace"
+      - id: "f"
+        label: "Official documentation or help pages"
+      - id: "g"
+        label: "I have used it so long I don't remember"
+  - id: q11
+    prompt: "Which of the following do you do on your computer? (Select all that apply)"
+    type: multi_choice
+    construct: following_computer_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Change themes or wallpapers"
+      - id: "b"
+        label: "Reinstall or wipe the OS from scratch"
+      - id: "c"
+        label: "Adjust privacy or telemetry settings"
+      - id: "d"
+        label: "Install third-party or non-store apps"
+      - id: "e"
+        label: "Use a package manager or app store"
+      - id: "f"
+        label: "Partition drives or manage storage"
+      - id: "g"
+        label: "Edit system files or the registry"
+      - id: "h"
+        label: "None of these"
+  - id: q12
+    prompt: "How comfortable are you using a command line / terminal?"
+    type: single_choice
+    construct: comfortable_using_command_line_terminal
+    required: true
+    options:
+      - id: "a"
+        label: "Never use it"
+      - id: "b"
+        label: "Rarely, only when instructions tell me to"
+      - id: "c"
+        label: "Occasionally for basic tasks"
+      - id: "d"
+        label: "Regularly and comfortably"
+      - id: "e"
+        label: "It is my main way of getting things done"
+  - id: q13
+    prompt: "When a major OS update becomes available, how do you usually handle it?"
+    type: single_choice
+    construct: when_major_os_update_becomes
+    required: true
+    options:
+      - id: "a"
+        label: "Install it as soon as it is offered"
+      - id: "b"
+        label: "Wait a few weeks and then install"
+      - id: "c"
+        label: "Install only after I hear it is stable"
+      - id: "d"
+        label: "Delay or avoid updates as long as possible"
+      - id: "e"
+        label: "Updates install automatically without my input"
+  - id: q14
+    prompt: "How often do you run into software you want to use but that is not available on your operating system?"
+    type: single_choice
+    construct: often_run_into_software_want
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "Frequently"
+  - id: q15
+    prompt: "How do you feel about running more than one operating system (dual-boot or virtual machines)?"
+    type: single_choice
+    construct: feel_running_more_than_one
+    required: true
+    options:
+      - id: "a"
+        label: "I actively run multiple OSes"
+      - id: "b"
+        label: "I have done it in the past"
+      - id: "c"
+        label: "I am interested but have not tried"
+      - id: "d"
+        label: "No interest"
+  - id: q16
+    prompt: "Have you ever switched from one operating system family to another (e.g. Windows to macOS, or to Linux)?"
+    type: single_choice
+    construct: have_ever_switched_from_one
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I am glad I did"
+      - id: "b"
+        label: "Yes, but I later switched back"
+      - id: "c"
+        label: "No, but I have considered it"
+      - id: "d"
+        label: "No, I have never considered switching"
+  - id: q17
+    prompt: "Which desktop features do you customize on your main computer? (Select all that apply)"
+    type: multi_choice
+    construct: desktop_features_customize_main_computer
+    required: true
+    options:
+      - id: "a"
+        label: "Wallpaper and themes"
+      - id: "b"
+        label: "Dark mode / light mode"
+      - id: "c"
+        label: "Taskbar / dock layout"
+      - id: "d"
+        label: "Keyboard shortcuts"
+      - id: "e"
+        label: "Default apps"
+      - id: "f"
+        label: "Startup programs"
+      - id: "g"
+        label: "Multiple desktops / workspaces"
+      - id: "h"
+        label: "I leave settings mostly at defaults"
+  - id: q18
+    prompt: "How often do you experience each of the following on your primary computer? — The system slows down or becomes unresponsive"
+    type: single_choice
+    construct: often_experience_each_following_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q19
+    prompt: "How often do you experience each of the following on your primary computer? — An update breaks something or changes behavior I didn't want"
+    type: single_choice
+    construct: often_experience_each_following_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q20
+    prompt: "How often do you experience each of the following on your primary computer? — You have to search online to fix a problem"
+    type: single_choice
+    construct: often_experience_each_following_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q21
+    prompt: "How often do you experience each of the following on your primary computer? — Hardware (printer, webcam, drivers) fails to work properly"
+    type: single_choice
+    construct: often_experience_each_following_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "How much do you agree with the following statement about your operating system? — My operating system is easy and intuitive to use"
+    type: single_choice
+    construct: much_agree_following_statement_operating
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How much do you agree with the following statement about your operating system? — I trust my operating system to protect my privacy and security"
+    type: single_choice
+    construct: much_agree_following_statement_operating
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "How much do you agree with the following statement about your operating system? — My operating system gives me enough control over how my computer works"
+    type: single_choice
+    construct: much_agree_following_statement_operating
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "How much do you agree with the following statement about your operating system? — I feel locked into my operating system's ecosystem"
+    type: single_choice
+    construct: much_agree_following_statement_operating
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q26
+    prompt: "How much do you agree with the following statement about your operating system? — The frequent updates and notifications annoy me"
+    type: single_choice
+    construct: much_agree_following_statement_operating
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q27
+    prompt: "How important is each of the following to you in an operating system? — Long-term software and security support"
+    type: single_choice
+    construct: important_each_following_operating_syste
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "How important is each of the following to you in an operating system? — Freedom from ads and built-in promotions"
+    type: single_choice
+    construct: important_each_following_operating_syste
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "How important is each of the following to you in an operating system? — Being open-source or free of licensing cost"
+    type: single_choice
+    construct: important_each_following_operating_syste
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "How important is each of the following to you in an operating system? — Smooth integration with my smartphone"
+    type: single_choice
+    construct: important_each_following_operating_syste
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q31
+    prompt: "How concerned are you about the data your operating system collects about you?"
+    type: single_choice
+    construct: concerned_data_operating_system_collects
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q32
+    prompt: "Which web browser do you use most on your computer?"
+    type: single_choice
+    construct: web_browser_use_most_computer
+    required: true
+    options:
+      - id: "a"
+        label: "Google Chrome"
+      - id: "b"
+        label: "Microsoft Edge"
+      - id: "c"
+        label: "Safari"
+      - id: "d"
+        label: "Mozilla Firefox"
+      - id: "e"
+        label: "Brave"
+      - id: "f"
+        label: "Another browser"
+  - id: q33
+    prompt: "How do you typically install new applications on your main computer? (Select all that apply)"
+    type: multi_choice
+    construct: typically_install_new_applications_main
+    required: true
+    options:
+      - id: "a"
+        label: "From the built-in app store (Microsoft Store, Mac App Store)"
+      - id: "b"
+        label: "Downloading installers from websites"
+      - id: "c"
+        label: "Using a package manager (Homebrew, apt, winget, etc.)"
+      - id: "d"
+        label: "I rarely install new applications"
+      - id: "e"
+        label: "Someone else installs software for me"
+  - id: q34
+    prompt: "Have you ever paid for your operating system (beyond the cost of the hardware)?"
+    type: single_choice
+    construct: have_ever_paid_operating_system
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I bought a license or upgrade"
+      - id: "b"
+        label: "No, it came free with my device"
+      - id: "c"
+        label: "I use a free operating system by choice"
+      - id: "d"
+        label: "Not sure"
+  - id: q35
+    prompt: "When your computer starts feeling slow or old, what are you most likely to do?"
+    type: single_choice
+    construct: when_computer_starts_feeling_slow
+    required: true
+    options:
+      - id: "a"
+        label: "Buy a new computer"
+      - id: "b"
+        label: "Upgrade parts (RAM, storage) on the current one"
+      - id: "c"
+        label: "Reinstall or switch to a lighter operating system"
+      - id: "d"
+        label: "Just keep using it as-is"
+      - id: "e"
+        label: "Not sure"
+  - id: q36
+    prompt: "How satisfied are you overall with your primary operating system?"
+    type: single_choice
+    construct: satisfied_overall_primary_operating_syst
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "How satisfied are you with the performance and speed of your operating system?"
+    type: single_choice
+    construct: satisfied_performance_speed_operating_sy
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "How likely are you to still be using the same operating system family two years from now?"
+    type: single_choice
+    construct: likely_still_be_using_same
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q39
+    prompt: "How likely are you to recommend your current operating system to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_current_operating_syste
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q40
+    prompt: "What is the single biggest thing you would change about your operating system, if anything?"
+    type: free_text
+    construct: single_biggest_thing_would_change
+    required: true
+  - id: q41
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Full-time student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q48
+    prompt: "What is your current relationship status?"
+    type: single_choice
+    construct: current_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship or partnered"
+      - id: "c"
+        label: "Married"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q50
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q51
+    prompt: "Which best describes your current occupation?"
+    type: single_choice
+    construct: best_describes_current_occupation
+    required: true
+    options:
+      - id: "a"
+        label: "Software developer / IT professional"
+      - id: "b"
+        label: "Other technical / engineering role"
+      - id: "c"
+        label: "Office / knowledge worker (non-technical)"
+      - id: "d"
+        label: "Creative / media professional"
+      - id: "e"
+        label: "Education"
+      - id: "f"
+        label: "Healthcare"
+      - id: "g"
+        label: "Trades, service, or manual work"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Not currently employed"
+      - id: "j"
+        label: "Retired"
+      - id: "k"
+        label: "Other"
+  - id: q52
+    prompt: "How would you rate your overall technical skill with computers?"
+    type: single_choice
+    construct: would_rate_overall_technical_skill
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert / power user"

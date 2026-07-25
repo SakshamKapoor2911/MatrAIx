@@ -1,0 +1,915 @@
+schemaVersion: "1.0"
+id: software_update_habits_v1
+title: "Software Update Habits Survey"
+description: "How people approach installing operating system, app, firmware, and security updates across their devices."
+questions:
+  - id: q0
+    prompt: "In general, how do you feel about installing software updates?"
+    type: single_choice
+    construct: general_feel_installing_software_updates
+    required: true
+    options:
+      - id: "a"
+        label: "I install them as soon as they are available"
+      - id: "b"
+        label: "I install them fairly promptly, but not immediately"
+      - id: "c"
+        label: "I install them eventually, when I get around to it"
+      - id: "d"
+        label: "I avoid or delay them as long as I can"
+      - id: "e"
+        label: "I never think about updates at all"
+  - id: q1
+    prompt: "How often do you install updates for the operating system on your main computer?"
+    type: single_choice
+    construct: often_install_updates_operating_system
+    required: true
+    options:
+      - id: "a"
+        label: "Automatically, without me doing anything"
+      - id: "b"
+        label: "As soon as I am notified"
+      - id: "c"
+        label: "Within a few days of being notified"
+      - id: "d"
+        label: "Only every few weeks or months"
+      - id: "e"
+        label: "Only when something stops working"
+      - id: "f"
+        label: "Rarely or never"
+  - id: q2
+    prompt: "For which of the following devices do you personally manage or install updates? (Select all that apply)"
+    type: multi_choice
+    construct: following_devices_personally_manage_inst
+    required: true
+    options:
+      - id: "a"
+        label: "Windows PC or laptop"
+      - id: "b"
+        label: "Mac (macOS)"
+      - id: "c"
+        label: "Linux computer"
+      - id: "d"
+        label: "iPhone or iPad"
+      - id: "e"
+        label: "Android phone or tablet"
+      - id: "f"
+        label: "Smart TV or streaming device"
+      - id: "g"
+        label: "Wi-Fi router or mesh system"
+      - id: "h"
+        label: "Smart home devices (thermostat, doorbell, speakers, etc.)"
+      - id: "i"
+        label: "Gaming console"
+      - id: "j"
+        label: "Wearable (smartwatch, fitness band)"
+      - id: "k"
+        label: "None of these"
+  - id: q3
+    prompt: "On your main computer, how are operating system updates configured?"
+    type: single_choice
+    construct: main_computer_operating_system_updates
+    required: true
+    options:
+      - id: "a"
+        label: "Fully automatic (download and install on their own)"
+      - id: "b"
+        label: "Automatic download, but I choose when to install"
+      - id: "c"
+        label: "Notify me only; I download and install manually"
+      - id: "d"
+        label: "Updates are disabled or deferred"
+      - id: "e"
+        label: "I don't know how they are configured"
+  - id: q4
+    prompt: "How are app updates configured on your primary phone?"
+    type: single_choice
+    construct: app_updates_configured_primary_phone
+    required: true
+    options:
+      - id: "a"
+        label: "Apps update automatically over any connection"
+      - id: "b"
+        label: "Apps update automatically only on Wi-Fi"
+      - id: "c"
+        label: "I update apps manually"
+      - id: "d"
+        label: "I rarely or never update apps"
+      - id: "e"
+        label: "I don't have a smartphone"
+  - id: q5
+    prompt: "After you become aware that an operating system update is available, how long do you typically wait before installing it?"
+    type: single_choice
+    construct: after_become_aware_that_operating
+    required: true
+    options:
+      - id: "a"
+        label: "I install it immediately"
+      - id: "b"
+        label: "Within a day"
+      - id: "c"
+        label: "Within a week"
+      - id: "d"
+        label: "Within a month"
+      - id: "e"
+        label: "Longer than a month"
+      - id: "f"
+        label: "I wait until I am forced to"
+  - id: q6
+    prompt: "Which types of updates do you tend to install promptly? (Select all that apply)"
+    type: multi_choice
+    construct: types_updates_tend_install_promptly
+    required: true
+    options:
+      - id: "a"
+        label: "Operating system security patches"
+      - id: "b"
+        label: "Operating system feature updates"
+      - id: "c"
+        label: "Web browser updates"
+      - id: "d"
+        label: "Antivirus / security software updates"
+      - id: "e"
+        label: "Everyday apps (email, messaging, social)"
+      - id: "f"
+        label: "Productivity software (office suite, editors)"
+      - id: "g"
+        label: "Games"
+      - id: "h"
+        label: "Router or firmware updates"
+      - id: "i"
+        label: "Driver updates (graphics, printer, etc.)"
+      - id: "j"
+        label: "None — I delay all of them"
+  - id: q7
+    prompt: "What are the main reasons you sometimes delay or postpone updates? (Select all that apply)"
+    type: multi_choice
+    construct: main_reasons_sometimes_delay_postpone
+    required: true
+    options:
+      - id: "a"
+        label: "I don't want to interrupt what I'm doing"
+      - id: "b"
+        label: "I'm worried the update will break something"
+      - id: "c"
+        label: "Updates take too long to install"
+      - id: "d"
+        label: "I've had bad experiences with past updates"
+      - id: "e"
+        label: "I don't want the interface or features to change"
+      - id: "f"
+        label: "My device slows down after updates"
+      - id: "g"
+        label: "Limited storage space"
+      - id: "h"
+        label: "Limited or metered internet connection"
+      - id: "i"
+        label: "I simply forget"
+      - id: "j"
+        label: "I don't delay updates"
+  - id: q8
+    prompt: "What motivates you to install updates when you do? (Select all that apply)"
+    type: multi_choice
+    construct: motivates_install_updates_when_select
+    required: true
+    options:
+      - id: "a"
+        label: "Security and protection from threats"
+      - id: "b"
+        label: "Bug fixes and stability"
+      - id: "c"
+        label: "New features"
+      - id: "d"
+        label: "Performance improvements"
+      - id: "e"
+        label: "A persistent notification or reminder"
+      - id: "f"
+        label: "An app stops working until I update"
+      - id: "g"
+        label: "Recommendation from a friend, article, or IT department"
+      - id: "h"
+        label: "I just like being on the latest version"
+  - id: q9
+    prompt: "How do you usually find out that an update is available? (Select all that apply)"
+    type: multi_choice
+    construct: usually_find_out_that_update
+    required: true
+    options:
+      - id: "a"
+        label: "Automatic pop-up or system notification"
+      - id: "b"
+        label: "A badge or banner inside an app or store"
+      - id: "c"
+        label: "I check for updates manually"
+      - id: "d"
+        label: "News articles or tech websites"
+      - id: "e"
+        label: "Social media or online communities"
+      - id: "f"
+        label: "Friends, family, or coworkers"
+      - id: "g"
+        label: "My workplace IT department"
+      - id: "h"
+        label: "I usually don't find out until something breaks"
+  - id: q10
+    prompt: "How often do you read the release notes or changelog before installing an update?"
+    type: single_choice
+    construct: often_read_release_notes_changelog
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q11
+    prompt: "Have you ever had a software update cause a problem on one of your devices?"
+    type: single_choice
+    construct: have_ever_had_software_update
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, never"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q12
+    prompt: "Which problems have you experienced after installing an update? (Select all that apply)"
+    type: multi_choice
+    construct: problems_have_experienced_after_installi
+    required: true
+    options:
+      - id: "a"
+        label: "Device or app became slower"
+      - id: "b"
+        label: "An app or feature stopped working"
+      - id: "c"
+        label: "Lost or changed settings"
+      - id: "d"
+        label: "Battery drained faster"
+      - id: "e"
+        label: "Interface changed in a way I disliked"
+      - id: "f"
+        label: "Device would not restart properly"
+      - id: "g"
+        label: "Lost compatibility with other hardware or software"
+      - id: "h"
+        label: "Data loss"
+      - id: "i"
+        label: "I have never had a problem"
+  - id: q13
+    prompt: "How do you typically respond when an update requires a device restart?"
+    type: single_choice
+    construct: typically_respond_when_update_requires
+    required: true
+    options:
+      - id: "a"
+        label: "I restart right away"
+      - id: "b"
+        label: "I restart at the next natural break"
+      - id: "c"
+        label: "I schedule it for later (overnight, end of day)"
+      - id: "d"
+        label: "I postpone it repeatedly for as long as possible"
+      - id: "e"
+        label: "I ignore it until forced"
+  - id: q14
+    prompt: "Approximately how many devices do you personally keep updated?"
+    type: free_text
+    construct: approximately_many_devices_personally_ke
+    required: true
+  - id: q15
+    prompt: "In a typical month, about how many times do you skip, postpone, or dismiss an update notification?"
+    type: free_text
+    construct: typical_month_many_times_skip
+    required: true
+  - id: q16
+    prompt: "How much do you agree with the following statement: Keeping my software up to date is essential for security."
+    type: single_choice
+    construct: much_agree_following_statement_keeping
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: I generally trust that updates will not break my devices."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement: Update notifications are an annoying interruption."
+    type: single_choice
+    construct: much_agree_following_statement_update
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement: I tend to put off updates longer than I probably should."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement: Automatic updates are the best approach for most people."
+    type: single_choice
+    construct: much_agree_following_statement_automatic
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree with the following statement: I worry that updates make my older devices run more slowly."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How often do you update the following: the operating system on your main computer?"
+    type: single_choice
+    construct: often_update_following_operating_system
+    required: true
+    options:
+      - id: "a"
+        label: "Automatically / continuously"
+      - id: "b"
+        label: "Within days of release"
+      - id: "c"
+        label: "Every few weeks"
+      - id: "d"
+        label: "Every few months"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q23
+    prompt: "How often do you update the following: the operating system on your phone?"
+    type: single_choice
+    construct: often_update_following_operating_system
+    required: true
+    options:
+      - id: "a"
+        label: "Automatically / continuously"
+      - id: "b"
+        label: "Within days of release"
+      - id: "c"
+        label: "Every few weeks"
+      - id: "d"
+        label: "Every few months"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q24
+    prompt: "How often do you update the following: the apps on your phone?"
+    type: single_choice
+    construct: often_update_following_apps_phone
+    required: true
+    options:
+      - id: "a"
+        label: "Automatically / continuously"
+      - id: "b"
+        label: "Within days of release"
+      - id: "c"
+        label: "Every few weeks"
+      - id: "d"
+        label: "Every few months"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q25
+    prompt: "How often do you update the following: your web browser?"
+    type: single_choice
+    construct: often_update_following_web_browser
+    required: true
+    options:
+      - id: "a"
+        label: "Automatically / continuously"
+      - id: "b"
+        label: "Within days of release"
+      - id: "c"
+        label: "Every few weeks"
+      - id: "d"
+        label: "Every few months"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q26
+    prompt: "How often do you update the following: your Wi-Fi router or home network firmware?"
+    type: single_choice
+    construct: often_update_following_wi_fi
+    required: true
+    options:
+      - id: "a"
+        label: "Automatically / continuously"
+      - id: "b"
+        label: "Within days of release"
+      - id: "c"
+        label: "Every few weeks"
+      - id: "d"
+        label: "Every few months"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q27
+    prompt: "How often do you update the following: your antivirus or security software?"
+    type: single_choice
+    construct: often_update_following_antivirus_securit
+    required: true
+    options:
+      - id: "a"
+        label: "Automatically / continuously"
+      - id: "b"
+        label: "Within days of release"
+      - id: "c"
+        label: "Every few weeks"
+      - id: "d"
+        label: "Every few months"
+      - id: "e"
+        label: "Rarely or never / I don't use any"
+  - id: q28
+    prompt: "When a security-critical patch is released, how quickly do you install it?"
+    type: single_choice
+    construct: when_security_critical_patch_released
+    required: true
+    options:
+      - id: "a"
+        label: "Immediately"
+      - id: "b"
+        label: "Within a day"
+      - id: "c"
+        label: "Within a week"
+      - id: "d"
+        label: "Whenever I get around to it"
+      - id: "e"
+        label: "I don't distinguish security patches from other updates"
+  - id: q29
+    prompt: "Do you allow updates to download over cellular / mobile data?"
+    type: single_choice
+    construct: allow_updates_download_over_cellular
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, always"
+      - id: "b"
+        label: "Only for small or important updates"
+      - id: "c"
+        label: "No, Wi-Fi only"
+      - id: "d"
+        label: "I don't know / not applicable"
+  - id: q30
+    prompt: "Do you keep older devices you no longer actively use updated?"
+    type: single_choice
+    construct: keep_older_devices_no_longer
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I keep everything updated"
+      - id: "b"
+        label: "Only the ones still connected to the internet"
+      - id: "c"
+        label: "No, I stop updating devices I rarely use"
+      - id: "d"
+        label: "Not applicable"
+  - id: q31
+    prompt: "How do you feel when a major update significantly redesigns an interface you were used to?"
+    type: single_choice
+    construct: feel_when_major_update_significantly
+    required: true
+    options:
+      - id: "a"
+        label: "Excited to try the new design"
+      - id: "b"
+        label: "Neutral — I adapt quickly"
+      - id: "c"
+        label: "Mildly annoyed but I get used to it"
+      - id: "d"
+        label: "Frustrated; I prefer things stay the same"
+      - id: "e"
+        label: "I actively look for ways to revert"
+  - id: q32
+    prompt: "Have you ever intentionally kept a device on an older software version to avoid an update?"
+    type: single_choice
+    construct: have_ever_intentionally_kept_device
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, currently"
+      - id: "b"
+        label: "Yes, in the past"
+      - id: "c"
+        label: "No, never"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q33
+    prompt: "Which of the following do you do to prepare before a major update? (Select all that apply)"
+    type: multi_choice
+    construct: following_prepare_before_major_update
+    required: true
+    options:
+      - id: "a"
+        label: "Back up my data"
+      - id: "b"
+        label: "Read reviews or wait for others to report issues"
+      - id: "c"
+        label: "Make sure my device is charged or plugged in"
+      - id: "d"
+        label: "Free up storage space"
+      - id: "e"
+        label: "Schedule it for a convenient time"
+      - id: "f"
+        label: "Nothing in particular"
+      - id: "g"
+        label: "I don't install major updates"
+  - id: q34
+    prompt: "Select your top 3 factors when deciding whether to install an update. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_when
+    required: true
+    options:
+      - id: "a"
+        label: "Security importance"
+      - id: "b"
+        label: "Bug fixes / stability"
+      - id: "c"
+        label: "New features"
+      - id: "d"
+        label: "Performance impact"
+      - id: "e"
+        label: "Risk of breaking something"
+      - id: "f"
+        label: "How disruptive the install is"
+      - id: "g"
+        label: "Whether it's required to keep using an app"
+      - id: "h"
+        label: "Recommendations from others"
+      - id: "i"
+        label: "Size / download time of the update"
+  - id: q35
+    prompt: "Overall, how satisfied are you with the update experience on your main device?"
+    type: single_choice
+    construct: overall_satisfied_update_experience_main
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "How disruptive do you find software updates to your daily use of your devices?"
+    type: single_choice
+    construct: disruptive_find_software_updates_daily
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all disruptive"
+      - id: "b"
+        label: "Slightly disruptive"
+      - id: "c"
+        label: "Moderately disruptive"
+      - id: "d"
+        label: "Very disruptive"
+      - id: "e"
+        label: "Extremely disruptive"
+  - id: q37
+    prompt: "How likely are you to enable fully automatic updates on all your devices over the next year?"
+    type: single_choice
+    construct: likely_enable_fully_automatic_updates
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "On a scale of 0 to 10, how strongly would you recommend that people keep their software up to date? (0 = would not recommend at all, 10 = would strongly recommend)"
+    type: single_choice
+    construct: scale_0_10_strongly_would
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q39
+    prompt: "Is there anything you would change about how software updates work on your devices?"
+    type: free_text
+    construct: there_anything_would_change_software
+    required: true
+  - id: q40
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18 years old"
+      - id: "b"
+        label: "18-24 years old"
+      - id: "c"
+        label: "25-34 years old"
+      - id: "d"
+        label: "35-44 years old"
+      - id: "e"
+        label: "45-54 years old"
+      - id: "f"
+        label: "55-64 years old"
+      - id: "g"
+        label: "65 years or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Unemployed, looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Homemaker or caregiver"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q47
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship, not married"
+      - id: "c"
+        label: "Married or domestic partnership"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "How would you rate your overall level of technology skill?"
+    type: single_choice
+    construct: would_rate_overall_level_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert / I work in technology"
+  - id: q51
+    prompt: "Which best describes your relationship to technology in your work or studies?"
+    type: single_choice
+    construct: best_describes_relationship_technology_w
+    required: true
+    options:
+      - id: "a"
+        label: "I work in an IT or software role"
+      - id: "b"
+        label: "I use technology heavily but it's not my main field"
+      - id: "c"
+        label: "I use technology for basic everyday tasks"
+      - id: "d"
+        label: "I use technology as little as possible"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q52
+    prompt: "Which is your primary personal computer platform?"
+    type: single_choice
+    construct: primary_personal_computer_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Windows"
+      - id: "b"
+        label: "macOS"
+      - id: "c"
+        label: "Linux"
+      - id: "d"
+        label: "Chromebook"
+      - id: "e"
+        label: "I mainly use a phone or tablet"
+      - id: "f"
+        label: "I don't use a personal computer"

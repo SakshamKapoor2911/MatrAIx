@@ -1,0 +1,772 @@
+schemaVersion: "1.0"
+id: multi_device_usage_v1
+title: "Multi-Device Usage Survey"
+description: "How people use, sync, and coordinate multiple computing devices across daily life."
+questions:
+  - id: q0
+    prompt: "How many personal computing devices do you actively use in a typical week?"
+    type: single_choice
+    construct: many_personal_computing_devices_actively
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q1
+    prompt: "Which devices do you use regularly? (Select all that apply)"
+    type: multi_choice
+    construct: devices_use_regularly_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "Laptop"
+      - id: "c"
+        label: "Desktop computer"
+      - id: "d"
+        label: "Tablet"
+      - id: "e"
+        label: "Smartwatch or fitness band"
+      - id: "f"
+        label: "Smart TV or streaming device"
+      - id: "g"
+        label: "Smart speaker / display"
+      - id: "h"
+        label: "E-reader"
+      - id: "i"
+        label: "Work-issued computer or phone"
+  - id: q2
+    prompt: "Which device is your primary one for everyday tasks?"
+    type: single_choice
+    construct: device_primary_one_everyday_tasks
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "Laptop"
+      - id: "c"
+        label: "Desktop computer"
+      - id: "d"
+        label: "Tablet"
+      - id: "e"
+        label: "It varies day to day"
+  - id: q3
+    prompt: "Are most of your devices from the same brand or ecosystem?"
+    type: single_choice
+    construct: most_devices_from_same_brand
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, almost all one ecosystem"
+      - id: "b"
+        label: "Mostly one, with a few exceptions"
+      - id: "c"
+        label: "A fairly even mix"
+      - id: "d"
+        label: "Deliberately mixed across brands"
+      - id: "e"
+        label: "Not sure"
+  - id: q4
+    prompt: "Which technology ecosystems do your devices belong to? (Select all that apply)"
+    type: multi_choice
+    construct: technology_ecosystems_devices_belong_sel
+    required: true
+    options:
+      - id: "a"
+        label: "Apple (iPhone, Mac, iPad, Watch)"
+      - id: "b"
+        label: "Google / Android"
+      - id: "c"
+        label: "Microsoft / Windows"
+      - id: "d"
+        label: "Samsung"
+      - id: "e"
+        label: "Amazon (Fire, Echo)"
+      - id: "f"
+        label: "Linux"
+      - id: "g"
+        label: "Other"
+  - id: q5
+    prompt: "Which cross-device / continuity features do you use? (Select all that apply)"
+    type: multi_choice
+    construct: cross_device_continuity_features_use
+    required: true
+    options:
+      - id: "a"
+        label: "Apple Handoff / Continuity"
+      - id: "b"
+        label: "Universal Clipboard (copy on one device, paste on another)"
+      - id: "c"
+        label: "AirDrop"
+      - id: "d"
+        label: "Android Nearby Share / Quick Share"
+      - id: "e"
+        label: "Microsoft Phone Link"
+      - id: "f"
+        label: "Browser sync (tabs, history, passwords)"
+      - id: "g"
+        label: "Messaging across devices (iMessage, WhatsApp Web, etc.)"
+      - id: "h"
+        label: "KDE Connect or similar"
+      - id: "i"
+        label: "None of these"
+  - id: q6
+    prompt: "Which tasks do you routinely start on one device and continue on another? (Select all that apply)"
+    type: multi_choice
+    construct: tasks_routinely_start_one_device
+    required: true
+    options:
+      - id: "a"
+        label: "Reading articles or web pages"
+      - id: "b"
+        label: "Writing documents or emails"
+      - id: "c"
+        label: "Watching videos"
+      - id: "d"
+        label: "Messaging / chat"
+      - id: "e"
+        label: "Browsing / shopping"
+      - id: "f"
+        label: "Editing photos"
+      - id: "g"
+        label: "Taking or reviewing notes"
+      - id: "h"
+        label: "Video calls"
+      - id: "i"
+        label: "I rarely continue tasks across devices"
+  - id: q7
+    prompt: "How do you keep your data in sync across devices? (Select all that apply)"
+    type: multi_choice
+    construct: keep_data_sync_across_devices
+    required: true
+    options:
+      - id: "a"
+        label: "Cloud storage (iCloud, Google Drive, OneDrive, Dropbox)"
+      - id: "b"
+        label: "Browser account sync"
+      - id: "c"
+        label: "Notes app sync (Notes, Keep, Notion, etc.)"
+      - id: "d"
+        label: "Password manager"
+      - id: "e"
+        label: "Native ecosystem sync"
+      - id: "f"
+        label: "Manually transferring files"
+      - id: "g"
+        label: "I don't really sync data"
+  - id: q8
+    prompt: "During a typical day, how often do you switch between devices?"
+    type: single_choice
+    construct: during_typical_day_often_switch
+    required: true
+    options:
+      - id: "a"
+        label: "Constantly — I move between them all day"
+      - id: "b"
+        label: "Several times a day"
+      - id: "c"
+        label: "Once or twice a day"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "I mostly stick to one device"
+  - id: q9
+    prompt: "How many separate technology ecosystems do your devices span? Enter a whole number."
+    type: free_text
+    construct: many_separate_technology_ecosystems_devi
+    required: true
+  - id: q10
+    prompt: "Counting all of them, how many connected devices do you personally own? Enter a whole number."
+    type: free_text
+    construct: counting_all_them_many_connected
+    required: true
+  - id: q11
+    prompt: "On an average day, how many total hours do you spend across all your devices combined? Enter a whole number."
+    type: free_text
+    construct: average_day_many_total_hours
+    required: true
+  - id: q12
+    prompt: "How much do you agree with the following statement about your devices? Switching between my devices feels seamless."
+    type: single_choice
+    construct: much_agree_following_statement_devices
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement about your devices? My devices sync data reliably."
+    type: single_choice
+    construct: much_agree_following_statement_devices
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement about your devices? I get frustrated when something doesn't carry over from one device to another."
+    type: single_choice
+    construct: much_agree_following_statement_devices
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement about your devices? Being locked into a single ecosystem bothers me."
+    type: single_choice
+    construct: much_agree_following_statement_devices
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about your devices? Having multiple devices makes me more productive."
+    type: single_choice
+    construct: much_agree_following_statement_devices
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about your devices? Notifications repeating across devices are overwhelming."
+    type: single_choice
+    construct: much_agree_following_statement_devices
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about your devices? I prefer sticking to one ecosystem for simplicity."
+    type: single_choice
+    construct: much_agree_following_statement_devices
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How often do you run into sync or continuity problems between your devices?"
+    type: single_choice
+    construct: often_run_into_sync_continuity
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q20
+    prompt: "How important is each of the following in a multi-device setup? Seamless handoff between devices."
+    type: single_choice
+    construct: important_each_following_multi_device
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each of the following in a multi-device setup? Reliable data syncing."
+    type: single_choice
+    construct: important_each_following_multi_device
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each of the following in a multi-device setup? Cross-platform compatibility (mixing brands)."
+    type: single_choice
+    construct: important_each_following_multi_device
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each of the following in a multi-device setup? Managing notifications across devices."
+    type: single_choice
+    construct: important_each_following_multi_device
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each of the following in a multi-device setup? A single sign-on / shared account across devices."
+    type: single_choice
+    construct: important_each_following_multi_device
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "Select your top 3 most valued cross-device capabilities. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_most_valued
+    required: true
+    options:
+      - id: "a"
+        label: "Universal clipboard"
+      - id: "b"
+        label: "File and photo sharing between devices"
+      - id: "c"
+        label: "Continuing a task where I left off"
+      - id: "d"
+        label: "Syncing browser tabs and passwords"
+      - id: "e"
+        label: "Messaging from any device"
+      - id: "f"
+        label: "Answering calls from any device"
+      - id: "g"
+        label: "Unified notifications"
+      - id: "h"
+        label: "Cross-device screen mirroring / extension"
+      - id: "i"
+        label: "None of these matter much to me"
+  - id: q26
+    prompt: "What frustrates you most about using multiple devices? (Select all that apply)"
+    type: multi_choice
+    construct: frustrates_most_using_multiple_devices
+    required: true
+    options:
+      - id: "a"
+        label: "Data doesn't sync properly"
+      - id: "b"
+        label: "Redundant or duplicate notifications"
+      - id: "c"
+        label: "Features only work within one brand"
+      - id: "d"
+        label: "Keeping everything charged"
+      - id: "e"
+        label: "Managing logins across devices"
+      - id: "f"
+        label: "Files ending up on the wrong device"
+      - id: "g"
+        label: "Inconsistent apps between devices"
+      - id: "h"
+        label: "Nothing frustrates me much"
+  - id: q27
+    prompt: "Which best describes your ecosystem preference?"
+    type: single_choice
+    construct: best_describes_ecosystem_preference
+    required: true
+    options:
+      - id: "a"
+        label: "I prefer everything in one ecosystem"
+      - id: "b"
+        label: "I lean toward one ecosystem but stay flexible"
+      - id: "c"
+        label: "I have no preference"
+      - id: "d"
+        label: "I prefer mixing brands to get the best of each"
+      - id: "e"
+        label: "Not sure"
+  - id: q28
+    prompt: "Which device do you reach for first when you have a quick task?"
+    type: single_choice
+    construct: device_reach_first_when_have
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "Tablet"
+      - id: "c"
+        label: "Laptop"
+      - id: "d"
+        label: "Desktop"
+      - id: "e"
+        label: "Smartwatch"
+      - id: "f"
+        label: "It depends"
+  - id: q29
+    prompt: "How would you rate your overall satisfaction with your multi-device experience?"
+    type: single_choice
+    construct: would_rate_overall_satisfaction_multi
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How likely are you to add another device to your setup in the next 12 months?"
+    type: single_choice
+    construct: likely_add_another_device_setup
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "How likely are you to consolidate down to fewer devices in the next 12 months?"
+    type: single_choice
+    construct: likely_consolidate_down_fewer_devices
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q32
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your primary device ecosystem to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q33
+    prompt: "If you could improve one thing about how your devices work together, what would it be? (Optional short answer)"
+    type: free_text
+    construct: if_could_improve_one_thing
+    required: false
+  - id: q34
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18-24"
+      - id: "c"
+        label: "25-34"
+      - id: "d"
+        label: "35-44"
+      - id: "e"
+        label: "45-54"
+      - id: "f"
+        label: "55-64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000-$49,999"
+      - id: "c"
+        label: "$50,000-$74,999"
+      - id: "d"
+        label: "$75,000-$99,999"
+      - id: "e"
+        label: "$100,000-$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Homemaker"
+      - id: "f"
+        label: "Unemployed"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "How many people live in your household, including yourself? Enter a whole number."
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q41
+    prompt: "What is your relationship status?"
+    type: single_choice
+    construct: relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or domestic partnership"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q43
+    prompt: "How would you describe where you live?"
+    type: single_choice
+    construct: would_describe_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q44
+    prompt: "Which best describes your work situation?"
+    type: single_choice
+    construct: best_describes_work_situation
+    required: true
+    options:
+      - id: "a"
+        label: "Fully remote"
+      - id: "b"
+        label: "Hybrid"
+      - id: "c"
+        label: "Fully in-person"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently working"
+      - id: "f"
+        label: "Retired"
+  - id: q45
+    prompt: "How would you describe your comfort with technology in general?"
+    type: single_choice
+    construct: would_describe_comfort_technology_genera
+    required: true
+    options:
+      - id: "a"
+        label: "I'm an early adopter who loves new tech"
+      - id: "b"
+        label: "Comfortable and fairly up to date"
+      - id: "c"
+        label: "Average — I use what I need"
+      - id: "d"
+        label: "A bit behind the curve"
+      - id: "e"
+        label: "I find new technology difficult"

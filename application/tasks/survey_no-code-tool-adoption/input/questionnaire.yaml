@@ -1,0 +1,846 @@
+schemaVersion: "1.0"
+id: no_code_tool_adoption_v1
+title: "No-Code & Low-Code Tool Adoption Survey"
+description: "How individuals and teams adopt no-code and low-code tools to build software without traditional programming."
+questions:
+  - id: q0
+    prompt: "Which best describes your use of no-code or low-code tools?"
+    type: single_choice
+    construct: best_describes_use_no_code
+    required: true
+    options:
+      - id: "a"
+        label: "I use them regularly"
+      - id: "b"
+        label: "I use them occasionally"
+      - id: "c"
+        label: "I have tried them but don't use them now"
+      - id: "d"
+        label: "I plan to start using them"
+      - id: "e"
+        label: "I don't use no-code or low-code tools"
+  - id: q1
+    prompt: "How long have you used no-code or low-code tools?"
+    type: single_choice
+    construct: long_have_used_no_code
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "More than 5 years"
+      - id: "e"
+        label: "I don't use them"
+  - id: q2
+    prompt: "Which best describes your technical background?"
+    type: single_choice
+    construct: best_describes_technical_background
+    required: true
+    options:
+      - id: "a"
+        label: "I am a professional software developer"
+      - id: "b"
+        label: "I can write some code but am not a developer"
+      - id: "c"
+        label: "I have little or no coding experience"
+      - id: "d"
+        label: "I have no coding experience at all"
+  - id: q3
+    prompt: "What do you build with no-code or low-code tools? (Select all that apply)"
+    type: multi_choice
+    construct: build_no_code_low_code
+    required: true
+    options:
+      - id: "a"
+        label: "Websites or landing pages"
+      - id: "b"
+        label: "Mobile or web apps"
+      - id: "c"
+        label: "Automations and workflows"
+      - id: "d"
+        label: "Forms and surveys"
+      - id: "e"
+        label: "Dashboards and reports"
+      - id: "f"
+        label: "Chatbots"
+      - id: "g"
+        label: "Online stores"
+      - id: "h"
+        label: "Internal business tools"
+      - id: "i"
+        label: "Databases or spreadsheets"
+  - id: q4
+    prompt: "Which no-code or low-code tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: no_code_low_code_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Airtable"
+      - id: "b"
+        label: "Notion"
+      - id: "c"
+        label: "Bubble"
+      - id: "d"
+        label: "Webflow"
+      - id: "e"
+        label: "Glide"
+      - id: "f"
+        label: "Softr"
+      - id: "g"
+        label: "Retool"
+      - id: "h"
+        label: "Microsoft Power Apps"
+      - id: "i"
+        label: "Google AppSheet"
+      - id: "j"
+        label: "Adalo"
+      - id: "k"
+        label: "Wix or Squarespace"
+      - id: "l"
+        label: "Shopify"
+      - id: "m"
+        label: "Other"
+  - id: q5
+    prompt: "Which automation tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: automation_tools_use_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Zapier"
+      - id: "b"
+        label: "Make (Integromat)"
+      - id: "c"
+        label: "Microsoft Power Automate"
+      - id: "d"
+        label: "n8n"
+      - id: "e"
+        label: "IFTTT"
+      - id: "f"
+        label: "None"
+  - id: q6
+    prompt: "Which website or app builders do you use? (Select all that apply)"
+    type: multi_choice
+    construct: website_app_builders_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Wix"
+      - id: "b"
+        label: "Squarespace"
+      - id: "c"
+        label: "Webflow"
+      - id: "d"
+        label: "WordPress"
+      - id: "e"
+        label: "Framer"
+      - id: "f"
+        label: "Carrd"
+      - id: "g"
+        label: "None"
+  - id: q7
+    prompt: "Do you use no-code tools mainly for personal or business purposes?"
+    type: single_choice
+    construct: use_no_code_tools_mainly
+    required: true
+    options:
+      - id: "a"
+        label: "Personal projects"
+      - id: "b"
+        label: "Business or work"
+      - id: "c"
+        label: "Both about equally"
+  - id: q8
+    prompt: "Who at your organization uses no-code tools? (Select all that apply)"
+    type: multi_choice
+    construct: who_organization_uses_no_code
+    required: true
+    options:
+      - id: "a"
+        label: "Me personally"
+      - id: "b"
+        label: "Non-technical colleagues"
+      - id: "c"
+        label: "Developers"
+      - id: "d"
+        label: "An entire team or department"
+      - id: "e"
+        label: "Not applicable"
+  - id: q9
+    prompt: "How did you discover no-code tools? (Select all that apply)"
+    type: multi_choice
+    construct: did_discover_no_code_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Online search"
+      - id: "b"
+        label: "Social media or influencers"
+      - id: "c"
+        label: "A colleague or friend"
+      - id: "d"
+        label: "Online courses or tutorials"
+      - id: "e"
+        label: "Advertising"
+      - id: "f"
+        label: "At work"
+  - id: q10
+    prompt: "About how many apps, sites, or automations have you built with no-code tools? Please enter a number."
+    type: free_text
+    construct: many_apps_sites_automations_have
+    required: true
+  - id: q11
+    prompt: "About how many different no-code tools do you use regularly? Please enter a number."
+    type: free_text
+    construct: many_different_no_code_tools
+    required: true
+  - id: q12
+    prompt: "Do you pay for any no-code tools?"
+    type: single_choice
+    construct: pay_any_no_code_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I pay personally"
+      - id: "b"
+        label: "Yes, my employer pays"
+      - id: "c"
+        label: "No, I use free tiers only"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q13
+    prompt: "About how much do you spend on no-code tools per month?"
+    type: single_choice
+    construct: much_spend_no_code_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Nothing"
+      - id: "b"
+        label: "Under $25"
+      - id: "c"
+        label: "$25 to $99"
+      - id: "d"
+        label: "$100 to $499"
+      - id: "e"
+        label: "$500 or more"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q14
+    prompt: "Have no-code tools replaced work you would otherwise have coded or hired a developer for?"
+    type: single_choice
+    construct: have_no_code_tools_replaced
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable"
+  - id: q15
+    prompt: "How much do you agree: No-code tools let me build things I couldn't otherwise build."
+    type: single_choice
+    construct: much_agree_no_code_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: No-code tools save me a lot of time."
+    type: single_choice
+    construct: much_agree_no_code_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: I frequently hit limits with no-code tools."
+    type: single_choice
+    construct: much_agree_i_frequently_hit
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: No-code tools are worth what they cost."
+    type: single_choice
+    construct: much_agree_no_code_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: I worry about being locked into a no-code platform."
+    type: single_choice
+    construct: much_agree_i_worry_being
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: No-code tools have made me more productive."
+    type: single_choice
+    construct: much_agree_no_code_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: I would rather use a no-code tool than hire a developer."
+    type: single_choice
+    construct: much_agree_i_would_rather
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "When choosing a no-code tool, how important is ease of use?"
+    type: single_choice
+    construct: when_choosing_no_code_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing a no-code tool, how important is price?"
+    type: single_choice
+    construct: when_choosing_no_code_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a no-code tool, how important are integrations with other apps?"
+    type: single_choice
+    construct: when_choosing_no_code_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a no-code tool, how important are templates and pre-built components?"
+    type: single_choice
+    construct: when_choosing_no_code_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a no-code tool, how important is flexibility and customization?"
+    type: single_choice
+    construct: when_choosing_no_code_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a no-code tool, how important is support and community?"
+    type: single_choice
+    construct: when_choosing_no_code_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Which are your top 3 reasons for using no-code tools? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_reasons_using_no
+    required: true
+    options:
+      - id: "a"
+        label: "Speed of building"
+      - id: "b"
+        label: "No coding required"
+      - id: "c"
+        label: "Cost savings"
+      - id: "d"
+        label: "Ease of use"
+      - id: "e"
+        label: "Flexibility"
+      - id: "f"
+        label: "Quick prototyping"
+      - id: "g"
+        label: "Empowering non-developers"
+      - id: "h"
+        label: "Automating repetitive tasks"
+  - id: q29
+    prompt: "What are the biggest limitations you experience with no-code tools? (Select all that apply)"
+    type: multi_choice
+    construct: biggest_limitations_experience_no_code
+    required: true
+    options:
+      - id: "a"
+        label: "Hitting a complexity ceiling"
+      - id: "b"
+        label: "Costs that scale poorly"
+      - id: "c"
+        label: "Vendor lock-in"
+      - id: "d"
+        label: "Performance issues"
+      - id: "e"
+        label: "Limited customization"
+      - id: "f"
+        label: "Weak integrations"
+      - id: "g"
+        label: "Data ownership and portability"
+      - id: "h"
+        label: "I haven't hit real limitations"
+  - id: q30
+    prompt: "How often do you hit limitations that force you to change approach?"
+    type: single_choice
+    construct: often_hit_limitations_that_force
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q31
+    prompt: "Do you combine no-code tools with custom code?"
+    type: single_choice
+    construct: combine_no_code_tools_custom
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I can't write code"
+  - id: q32
+    prompt: "Do you use AI features built into your no-code tools?"
+    type: single_choice
+    construct: use_ai_features_built_into
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "My tools don't offer AI features"
+  - id: q33
+    prompt: "How satisfied are you with your no-code tools' ease of use?"
+    type: single_choice
+    construct: satisfied_no_code_tools_ease
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How satisfied are you with your no-code tools' flexibility?"
+    type: single_choice
+    construct: satisfied_no_code_tools_flexibility
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "Overall, how satisfied are you with the no-code tools you use?"
+    type: single_choice
+    construct: overall_satisfied_no_code_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "How likely are you to recommend no-code tools to someone else? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_no_code_tools
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q37
+    prompt: "How likely is your use of no-code tools to increase over the next year?"
+    type: single_choice
+    construct: likely_use_no_code_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "How likely are you to build a new project with no-code tools in the next year?"
+    type: single_choice
+    construct: likely_build_new_project_no
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q39
+    prompt: "What is one thing you wish no-code tools did better? (Optional short answer)"
+    type: free_text
+    construct: one_thing_wish_no_code
+    required: false
+  - id: q40
+    prompt: "Which best describes your occupation or role?"
+    type: single_choice
+    construct: best_describes_occupation_role
+    required: true
+    options:
+      - id: "a"
+        label: "Business owner or entrepreneur"
+      - id: "b"
+        label: "Marketing or sales"
+      - id: "c"
+        label: "Operations or project management"
+      - id: "d"
+        label: "Software developer or engineer"
+      - id: "e"
+        label: "Designer"
+      - id: "f"
+        label: "Analyst or consultant"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Other"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q42
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q43
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q44
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q45
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q48
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q49
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

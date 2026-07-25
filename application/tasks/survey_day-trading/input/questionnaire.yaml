@@ -1,0 +1,731 @@
+schemaVersion: "1.0"
+id: day_trading_v1
+title: "Day Trading Survey"
+description: "How people engage in active and day trading of stocks and other assets, and how it affects them."
+questions:
+  - id: q0
+    prompt: "Which best describes your trading activity?"
+    type: single_choice
+    construct: best_describes_trading_activity
+    required: true
+    options:
+      - id: "a"
+        label: "I day trade (open and close positions within the same day) regularly"
+      - id: "b"
+        label: "I actively trade but usually hold for more than a day"
+      - id: "c"
+        label: "I trade occasionally"
+      - id: "d"
+        label: "I only invest for the long term"
+      - id: "e"
+        label: "I don't trade or invest"
+  - id: q1
+    prompt: "How long have you been day trading or actively trading?"
+    type: single_choice
+    construct: long_have_been_day_trading
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1–3 years"
+      - id: "d"
+        label: "4–10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "I don't actively trade"
+  - id: q2
+    prompt: "On a typical trading week, how many days do you actively trade?"
+    type: single_choice
+    construct: typical_trading_week_many_days
+    required: true
+    options:
+      - id: "a"
+        label: "5 or more days"
+      - id: "b"
+        label: "3–4 days"
+      - id: "c"
+        label: "1–2 days"
+      - id: "d"
+        label: "Less than once a week"
+      - id: "e"
+        label: "Not applicable"
+  - id: q3
+    prompt: "About how many trades do you place in a typical week? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: many_trades_place_typical_week
+    required: true
+  - id: q4
+    prompt: "About how many hours per week do you spend trading and researching trades? Please enter a number."
+    type: free_text
+    construct: many_hours_per_week_spend
+    required: true
+  - id: q5
+    prompt: "Which assets do you actively trade? (Select all that apply)"
+    type: multi_choice
+    construct: assets_actively_trade_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Individual stocks"
+      - id: "b"
+        label: "Options"
+      - id: "c"
+        label: "ETFs"
+      - id: "d"
+        label: "Cryptocurrency"
+      - id: "e"
+        label: "Futures"
+      - id: "f"
+        label: "Forex (currencies)"
+      - id: "g"
+        label: "Penny stocks"
+      - id: "h"
+        label: "None of these"
+  - id: q6
+    prompt: "Which platforms or brokers do you use for trading? (Select all that apply)"
+    type: multi_choice
+    construct: platforms_brokers_use_trading_select
+    required: true
+    options:
+      - id: "a"
+        label: "Robinhood"
+      - id: "b"
+        label: "Webull"
+      - id: "c"
+        label: "Fidelity"
+      - id: "d"
+        label: "Charles Schwab / thinkorswim"
+      - id: "e"
+        label: "E*TRADE"
+      - id: "f"
+        label: "Interactive Brokers"
+      - id: "g"
+        label: "A crypto exchange (e.g., Coinbase)"
+      - id: "h"
+        label: "Another platform"
+  - id: q7
+    prompt: "About how much money do you currently use for active trading? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_money_currently_use_active
+    required: true
+  - id: q8
+    prompt: "What is your main goal with active or day trading?"
+    type: single_choice
+    construct: main_goal_active_day_trading
+    required: true
+    options:
+      - id: "a"
+        label: "A primary source of income"
+      - id: "b"
+        label: "Extra income on the side"
+      - id: "c"
+        label: "Growing my long-term wealth faster"
+      - id: "d"
+        label: "Learning and building skill"
+      - id: "e"
+        label: "Entertainment or excitement"
+      - id: "f"
+        label: "Not applicable"
+  - id: q9
+    prompt: "Which trading approaches do you use? (Select all that apply)"
+    type: multi_choice
+    construct: trading_approaches_use_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Technical analysis (charts, patterns)"
+      - id: "b"
+        label: "Momentum or news-based trading"
+      - id: "c"
+        label: "Scalping (very short-term trades)"
+      - id: "d"
+        label: "Swing trading"
+      - id: "e"
+        label: "Options strategies"
+      - id: "f"
+        label: "Following alerts or signals from others"
+      - id: "g"
+        label: "Gut feeling"
+      - id: "h"
+        label: "Not applicable"
+  - id: q10
+    prompt: "Do you use margin or leverage in your trading?"
+    type: single_choice
+    construct: use_margin_leverage_trading
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, cash only"
+      - id: "d"
+        label: "Not applicable"
+  - id: q11
+    prompt: "How would you describe your trading results over the past year?"
+    type: single_choice
+    construct: would_describe_trading_results_over
+    required: true
+    options:
+      - id: "a"
+        label: "Significantly profitable"
+      - id: "b"
+        label: "Slightly profitable"
+      - id: "c"
+        label: "About break-even"
+      - id: "d"
+        label: "Slightly at a loss"
+      - id: "e"
+        label: "Significantly at a loss"
+      - id: "f"
+        label: "Not applicable"
+  - id: q12
+    prompt: "About what percentage return (or loss) did your trading account have over the past year? Please enter a percentage (use a negative number for a loss; enter 0 if not applicable)."
+    type: free_text
+    construct: percentage_return_loss_did_trading
+    required: true
+  - id: q13
+    prompt: "Do you use a written trading plan or rules?"
+    type: single_choice
+    construct: use_written_trading_plan_rules
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I follow it closely"
+      - id: "b"
+        label: "Yes, but I don't always follow it"
+      - id: "c"
+        label: "No formal plan"
+      - id: "d"
+        label: "Not applicable"
+  - id: q14
+    prompt: "How often do you use stop-loss orders to limit losses?"
+    type: single_choice
+    construct: often_use_stop_loss_orders
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+      - id: "f"
+        label: "Not applicable"
+  - id: q15
+    prompt: "How much do you agree with the following statement about your trading? I stick to my trading plan and risk rules."
+    type: single_choice
+    construct: much_agree_following_statement_trading
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about your trading? I sometimes trade on emotion or FOMO."
+    type: single_choice
+    construct: much_agree_following_statement_trading
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about your trading? I have the skills to trade profitably over time."
+    type: single_choice
+    construct: much_agree_following_statement_trading
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about your trading? Trading takes up a lot of my time and attention."
+    type: single_choice
+    construct: much_agree_following_statement_trading
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about your trading? Most people lose money day trading."
+    type: single_choice
+    construct: much_agree_following_statement_trading
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement about your trading? Trading has affected my stress or sleep."
+    type: single_choice
+    construct: much_agree_following_statement_trading
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "In the past month, how often did you feel each of the following while trading? Excitement or a thrill."
+    type: single_choice
+    construct: past_month_often_did_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "In the past month, how often did you feel each of the following while trading? Stress or anxiety."
+    type: single_choice
+    construct: past_month_often_did_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q23
+    prompt: "In the past month, how often did you feel each of the following while trading? Regret after a trade."
+    type: single_choice
+    construct: past_month_often_did_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q24
+    prompt: "In the past month, how often did you feel each of the following while trading? Confidence in your decisions."
+    type: single_choice
+    construct: past_month_often_did_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q25
+    prompt: "Have you ever chased losses by making bigger or riskier trades to recover?"
+    type: single_choice
+    construct: have_ever_chased_losses_by
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, often"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable"
+  - id: q26
+    prompt: "Where do you get your trading ideas and information? (Select all that apply)"
+    type: multi_choice
+    construct: where_get_trading_ideas_information
+    required: true
+    options:
+      - id: "a"
+        label: "My own chart and technical analysis"
+      - id: "b"
+        label: "Financial news"
+      - id: "c"
+        label: "YouTube or podcasts"
+      - id: "d"
+        label: "Social media (e.g., X/Twitter, Reddit, Discord)"
+      - id: "e"
+        label: "Paid alerts or trading services"
+      - id: "f"
+        label: "Friends or other traders"
+      - id: "g"
+        label: "I don't rely on outside sources"
+  - id: q27
+    prompt: "Are you aware of the pattern day trader (PDT) rule that requires a $25,000 minimum balance for frequent day trading in a margin account?"
+    type: single_choice
+    construct: aware_pattern_day_trader_pdt
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it affects how I trade"
+      - id: "b"
+        label: "Yes, but it doesn't affect me"
+      - id: "c"
+        label: "No, I wasn't aware"
+      - id: "d"
+        label: "Not applicable"
+  - id: q28
+    prompt: "Which factors matter most to your success as a trader? (Select up to 3)"
+    type: single_choice
+    construct: factors_matter_most_success_as
+    required: true
+    options:
+      - id: "a"
+        label: "Discipline and following rules"
+      - id: "b"
+        label: "Risk and loss management"
+      - id: "c"
+        label: "A good strategy or edge"
+      - id: "d"
+        label: "Controlling emotions"
+      - id: "e"
+        label: "Enough capital"
+      - id: "f"
+        label: "Good tools and data"
+      - id: "g"
+        label: "Time and practice"
+      - id: "h"
+        label: "Luck"
+  - id: q29
+    prompt: "How would you describe your risk tolerance as a trader?"
+    type: single_choice
+    construct: would_describe_risk_tolerance_as
+    required: true
+    options:
+      - id: "a"
+        label: "Very conservative"
+      - id: "b"
+        label: "Conservative"
+      - id: "c"
+        label: "Moderate"
+      - id: "d"
+        label: "Aggressive"
+      - id: "e"
+        label: "Very aggressive"
+  - id: q30
+    prompt: "How confident are you in your ability to make money trading over the long run?"
+    type: single_choice
+    construct: confident_ability_make_money_trading
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q31
+    prompt: "How has your trading activity changed over the past year?"
+    type: single_choice
+    construct: has_trading_activity_changed_over
+    required: true
+    options:
+      - id: "a"
+        label: "Increased a lot"
+      - id: "b"
+        label: "Increased somewhat"
+      - id: "c"
+        label: "Stayed about the same"
+      - id: "d"
+        label: "Decreased somewhat"
+      - id: "e"
+        label: "Decreased a lot"
+  - id: q32
+    prompt: "Overall, how satisfied are you with your trading experience so far?"
+    type: single_choice
+    construct: overall_satisfied_trading_experience_so
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q33
+    prompt: "Over the next 12 months, do you plan to..."
+    type: single_choice
+    construct: over_next_12_months_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Trade much more actively"
+      - id: "b"
+        label: "Trade somewhat more"
+      - id: "c"
+        label: "Keep trading about the same"
+      - id: "d"
+        label: "Trade less"
+      - id: "e"
+        label: "Stop trading"
+      - id: "f"
+        label: "Not sure"
+  - id: q34
+    prompt: "How likely are you to recommend active or day trading to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: likely_recommend_active_day_trading
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "Is there anything you'd like to share about your experience with trading? (Optional; write a short answer or enter \"none\".)"
+    type: free_text
+    construct: there_anything_d_like_share
+    required: false
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed, looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed and not looking"
+  - id: q42
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q43
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q45
+    prompt: "What type of area do you live in?"
+    type: single_choice
+    construct: type_area_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

@@ -1,0 +1,691 @@
+schemaVersion: "1.0"
+id: bank_fee_attitudes_v1
+title: "Bank Fees Survey"
+description: "How consumers experience, avoid, and feel about the fees their banks charge."
+questions:
+  - id: q0
+    prompt: "Where do you do most of your everyday banking?"
+    type: single_choice
+    construct: where_most_everyday_banking
+    required: true
+    options:
+      - id: "a"
+        label: "A large national bank (e.g., Chase, Bank of America, Wells Fargo)"
+      - id: "b"
+        label: "A regional or community bank"
+      - id: "c"
+        label: "A credit union"
+      - id: "d"
+        label: "An online-only bank or neobank (e.g., Ally, Chime, SoFi)"
+      - id: "e"
+        label: "I don't have a bank account"
+  - id: q1
+    prompt: "How many bank or credit-union accounts do you personally hold (checking and savings combined)?"
+    type: single_choice
+    construct: many_bank_credit_union_accounts
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q2
+    prompt: "How long have you banked with your current primary bank?"
+    type: single_choice
+    construct: long_have_banked_current_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 9 years"
+      - id: "d"
+        label: "10 years or more"
+  - id: q3
+    prompt: "Which of the following bank fees have you personally paid in the past 12 months? (Select all that apply)"
+    type: multi_choice
+    construct: following_bank_fees_have_personally
+    required: true
+    options:
+      - id: "a"
+        label: "Monthly account maintenance or service fee"
+      - id: "b"
+        label: "Overdraft or insufficient-funds (NSF) fee"
+      - id: "c"
+        label: "Out-of-network ATM fee"
+      - id: "d"
+        label: "Minimum-balance fee"
+      - id: "e"
+        label: "Wire transfer fee"
+      - id: "f"
+        label: "Foreign transaction fee"
+      - id: "g"
+        label: "Paper statement fee"
+      - id: "h"
+        label: "Card replacement or expedited-delivery fee"
+      - id: "i"
+        label: "None of these"
+  - id: q4
+    prompt: "Approximately how much did you pay in total bank fees over the past 12 months? Enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: approximately_much_did_pay_total
+    required: true
+  - id: q5
+    prompt: "Does your main checking account charge a monthly maintenance fee?"
+    type: single_choice
+    construct: does_main_checking_account_charge
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I pay it"
+      - id: "b"
+        label: "Yes, but I waive it by meeting requirements (balance, direct deposit, etc.)"
+      - id: "c"
+        label: "No, it is a free account"
+      - id: "d"
+        label: "I don't know"
+  - id: q6
+    prompt: "How closely do you pay attention to the fees your bank charges?"
+    type: single_choice
+    construct: closely_pay_attention_fees_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Very closely — I track every fee"
+      - id: "b"
+        label: "Somewhat closely"
+      - id: "c"
+        label: "Only when a fee is large"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q7
+    prompt: "How do you usually first find out about a fee you were charged?"
+    type: single_choice
+    construct: usually_first_find_out_fee
+    required: true
+    options:
+      - id: "a"
+        label: "A push notification in my bank's mobile app"
+      - id: "b"
+        label: "Checking my account statement"
+      - id: "c"
+        label: "An email alert"
+      - id: "d"
+        label: "A text message alert"
+      - id: "e"
+        label: "I usually don't notice until much later"
+  - id: q8
+    prompt: "Have you read your account's full fee schedule or disclosure?"
+    type: single_choice
+    construct: have_read_account_s_full
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I read it in full"
+      - id: "b"
+        label: "I skimmed it"
+      - id: "c"
+        label: "No, but I know it exists"
+      - id: "d"
+        label: "I didn't know one existed"
+  - id: q9
+    prompt: "Which fee-avoidance tactics do you personally use? (Select all that apply)"
+    type: multi_choice
+    construct: fee_avoidance_tactics_personally_use
+    required: true
+    options:
+      - id: "a"
+        label: "Keep a required minimum balance"
+      - id: "b"
+        label: "Set up qualifying direct deposit"
+      - id: "c"
+        label: "Use only in-network ATMs"
+      - id: "d"
+        label: "Enable low-balance alerts"
+      - id: "e"
+        label: "Link accounts for overdraft protection"
+      - id: "f"
+        label: "Use a no-fee online bank"
+      - id: "g"
+        label: "Keep an extra cash buffer in checking"
+      - id: "h"
+        label: "None of these"
+  - id: q10
+    prompt: "How much do you agree with the following statement about your bank: The fees it charges are fair for the services provided."
+    type: single_choice
+    construct: much_agree_following_statement_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement about your bank: It is transparent and upfront about its fees."
+    type: single_choice
+    construct: much_agree_following_statement_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement about your bank: Its fees have gotten worse over the past few years."
+    type: single_choice
+    construct: much_agree_following_statement_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement about your bank: I could avoid almost all fees if I paid closer attention."
+    type: single_choice
+    construct: much_agree_following_statement_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement about your bank: Its overdraft fees are unfairly high."
+    type: single_choice
+    construct: much_agree_following_statement_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How often do unexpected bank fees cause you financial stress?"
+    type: single_choice
+    construct: often_unexpected_bank_fees_cause
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q16
+    prompt: "Which are your top 3 factors when choosing a bank? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "No monthly maintenance fee"
+      - id: "b"
+        label: "No overdraft fees"
+      - id: "c"
+        label: "Large fee-free ATM network"
+      - id: "d"
+        label: "High interest rate on deposits"
+      - id: "e"
+        label: "Good mobile app"
+      - id: "f"
+        label: "Quality customer service"
+      - id: "g"
+        label: "Convenient branch locations"
+      - id: "h"
+        label: "Sign-up bonus"
+      - id: "i"
+        label: "Low minimum-balance requirement"
+  - id: q17
+    prompt: "When a transaction would overdraw your account, how does your bank usually handle it?"
+    type: single_choice
+    construct: when_transaction_would_overdraw_account
+    required: true
+    options:
+      - id: "a"
+        label: "Declines it with no fee"
+      - id: "b"
+        label: "Pays it and charges an overdraft fee"
+      - id: "c"
+        label: "Transfers money from a linked account"
+      - id: "d"
+        label: "I don't know"
+  - id: q18
+    prompt: "Have you opted in or out of debit-card overdraft coverage?"
+    type: single_choice
+    construct: have_opted_out_debit_card
+    required: true
+    options:
+      - id: "a"
+        label: "Opted in (transactions are covered for a fee)"
+      - id: "b"
+        label: "Opted out (transactions are declined instead)"
+      - id: "c"
+        label: "I don't know"
+  - id: q19
+    prompt: "How often do you use an ATM outside your bank's network?"
+    type: single_choice
+    construct: often_use_atm_outside_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+  - id: q20
+    prompt: "Do you use paperless statements to avoid a paper-statement fee?"
+    type: single_choice
+    construct: use_paperless_statements_avoid_paper
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "My bank does not charge a paper-statement fee"
+  - id: q21
+    prompt: "In the past 12 months, have you contacted your bank to ask for a fee to be waived or refunded?"
+    type: single_choice
+    construct: past_12_months_have_contacted
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it was waived"
+      - id: "b"
+        label: "Yes, but it was not waived"
+      - id: "c"
+        label: "No, but I considered it"
+      - id: "d"
+        label: "No, never"
+  - id: q22
+    prompt: "How much do you agree: Bank overdraft and maintenance fees should be capped or limited by regulation."
+    type: single_choice
+    construct: much_agree_bank_overdraft_maintenance
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "Which fees would you most want your bank to eliminate? Choose up to 3. (Select all that apply)"
+    type: multi_choice
+    construct: fees_would_most_want_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Monthly maintenance fee"
+      - id: "b"
+        label: "Overdraft/NSF fee"
+      - id: "c"
+        label: "Out-of-network ATM fee"
+      - id: "d"
+        label: "Minimum-balance fee"
+      - id: "e"
+        label: "Wire transfer fee"
+      - id: "f"
+        label: "Foreign transaction fee"
+      - id: "g"
+        label: "Paper statement fee"
+      - id: "h"
+        label: "Account closure fee"
+  - id: q24
+    prompt: "How satisfied are you with the overall level of fees your bank charges?"
+    type: single_choice
+    construct: satisfied_overall_level_fees_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q25
+    prompt: "Compared with other banks, how would you describe your bank's fees?"
+    type: single_choice
+    construct: compared_other_banks_would_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Much lower"
+      - id: "b"
+        label: "Somewhat lower"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat higher"
+      - id: "e"
+        label: "Much higher"
+      - id: "f"
+        label: "I don't know"
+  - id: q26
+    prompt: "In the past two years, have you switched banks primarily because of fees?"
+    type: single_choice
+    construct: past_two_years_have_switched
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I seriously considered it"
+      - id: "c"
+        label: "No"
+  - id: q27
+    prompt: "How likely are you to switch banks in the next 12 months because of fees?"
+    type: single_choice
+    construct: likely_switch_banks_next_12
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q28
+    prompt: "Would you pay a monthly fee for a premium account with extra perks (higher interest, ATM rebates, no other fees)?"
+    type: single_choice
+    construct: would_pay_monthly_fee_premium
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, definitely"
+      - id: "b"
+        label: "Maybe, depending on the perks"
+      - id: "c"
+        label: "No"
+  - id: q29
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your primary bank to a friend (0 = not at all likely, 10 = extremely likely)?"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q30
+    prompt: "If you have any final thoughts about bank fees, please share them here (optional)."
+    type: free_text
+    construct: if_have_any_final_thoughts
+    required: false
+  - id: q31
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q32
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "Which of the following best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000–$199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q36
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force (student, homemaker)"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Unable to work"
+  - id: q37
+    prompt: "Including yourself, how many people live in your household? Enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q38
+    prompt: "How many children under 18 live in your household? Enter a number."
+    type: free_text
+    construct: many_children_under_18_live
+    required: true
+  - id: q39
+    prompt: "What is your marital status?"
+    type: single_choice
+    construct: marital_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q40
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q42
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"
+  - id: q43
+    prompt: "Which best describes your primary bank account?"
+    type: single_choice
+    construct: best_describes_primary_bank_account
+    required: true
+    options:
+      - id: "a"
+        label: "Free checking with no monthly fee"
+      - id: "b"
+        label: "Checking with a monthly fee I waive"
+      - id: "c"
+        label: "Checking with a monthly fee I pay"
+      - id: "d"
+        label: "Premium or interest checking"
+      - id: "e"
+        label: "I don't have a checking account"

@@ -1,0 +1,692 @@
+schemaVersion: "1.0"
+id: calendar_app_usage_v1
+title: "Calendar App Usage Survey"
+description: "How people use digital calendar apps to manage their time — which apps they choose, what they track, which features they rely on, and how well calendars keep them organized."
+questions:
+  - id: q0
+    prompt: "Do you use a digital calendar app?"
+    type: single_choice
+    construct: use_digital_calendar_app
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I rely on it heavily"
+      - id: "b"
+        label: "Yes, but only lightly"
+      - id: "c"
+        label: "No, I use paper or memory instead"
+      - id: "d"
+        label: "No, I don't keep a calendar"
+  - id: q1
+    prompt: "How long have you regularly used a digital calendar?"
+    type: single_choice
+    construct: long_have_regularly_used_digital
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 9 years"
+      - id: "d"
+        label: "10 years or more"
+      - id: "e"
+        label: "I don't use one"
+  - id: q2
+    prompt: "Which calendar apps do you use? (Select all that apply)"
+    type: multi_choice
+    construct: calendar_apps_use_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Google Calendar"
+      - id: "b"
+        label: "Microsoft Outlook Calendar"
+      - id: "c"
+        label: "Apple Calendar"
+      - id: "d"
+        label: "Fantastical"
+      - id: "e"
+        label: "Notion Calendar (formerly Cron)"
+      - id: "f"
+        label: "Proton Calendar"
+      - id: "g"
+        label: "A calendar built into another app"
+      - id: "h"
+        label: "Other (please specify)"
+  - id: q3
+    prompt: "Which calendar app do you use most often?"
+    type: single_choice
+    construct: calendar_app_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Google Calendar"
+      - id: "b"
+        label: "Microsoft Outlook Calendar"
+      - id: "c"
+        label: "Apple Calendar"
+      - id: "d"
+        label: "Fantastical"
+      - id: "e"
+        label: "Notion Calendar"
+      - id: "f"
+        label: "Another app"
+  - id: q4
+    prompt: "How do you most often access your calendar?"
+    type: single_choice
+    construct: most_often_access_calendar
+    required: true
+    options:
+      - id: "a"
+        label: "Phone app"
+      - id: "b"
+        label: "Computer app or web"
+      - id: "c"
+        label: "Both about equally"
+      - id: "d"
+        label: "Smartwatch"
+      - id: "e"
+        label: "Voice assistant"
+  - id: q5
+    prompt: "Do you keep separate calendars for different areas of your life?"
+    type: single_choice
+    construct: keep_separate_calendars_different_areas
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, separate work and personal calendars"
+      - id: "b"
+        label: "Yes, multiple calendars (work, personal, family, etc.)"
+      - id: "c"
+        label: "No, everything is in one calendar"
+      - id: "d"
+        label: "I only use it for one area"
+  - id: q6
+    prompt: "What do you track in your calendar? (Select all that apply)"
+    type: multi_choice
+    construct: track_calendar_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Work meetings"
+      - id: "b"
+        label: "Personal appointments"
+      - id: "c"
+        label: "Deadlines and reminders"
+      - id: "d"
+        label: "Family or household events"
+      - id: "e"
+        label: "Birthdays and anniversaries"
+      - id: "f"
+        label: "Travel and trips"
+      - id: "g"
+        label: "Recurring routines or habits"
+      - id: "h"
+        label: "Blocked focus / work time"
+      - id: "i"
+        label: "Bills or payments"
+      - id: "j"
+        label: "Fitness or health activities"
+  - id: q7
+    prompt: "Approximately how many events do you have in a typical week? Enter a whole number."
+    type: free_text
+    construct: approximately_many_events_have_typical
+    required: true
+  - id: q8
+    prompt: "Which calendar features do you regularly use? (Select all that apply)"
+    type: multi_choice
+    construct: calendar_features_regularly_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Event reminders and notifications"
+      - id: "b"
+        label: "Recurring events"
+      - id: "c"
+        label: "Inviting others / sharing events"
+      - id: "d"
+        label: "Sharing a full calendar with others"
+      - id: "e"
+        label: "Color coding"
+      - id: "f"
+        label: "Multiple time zones"
+      - id: "g"
+        label: "Scheduling links (e.g., Calendly)"
+      - id: "h"
+        label: "Integration with video meetings"
+      - id: "i"
+        label: "Tasks or to-dos in the calendar"
+      - id: "j"
+        label: "Natural-language event entry"
+  - id: q9
+    prompt: "Do you use a separate scheduling tool to let others book time with you (e.g., Calendly)?"
+    type: single_choice
+    construct: use_separate_scheduling_tool_let
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I'm interested"
+      - id: "d"
+        label: "No, and I'm not interested"
+  - id: q10
+    prompt: "Do you use AI features to help manage your calendar (e.g., smart scheduling, meeting suggestions)?"
+    type: single_choice
+    construct: use_ai_features_help_manage
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I'm interested"
+      - id: "d"
+        label: "No, and I'm not interested"
+  - id: q11
+    prompt: "How far in advance do you typically schedule and plan?"
+    type: single_choice
+    construct: far_advance_typically_schedule_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Just today"
+      - id: "b"
+        label: "A few days ahead"
+      - id: "c"
+        label: "About a week ahead"
+      - id: "d"
+        label: "A few weeks ahead"
+      - id: "e"
+        label: "A month or more ahead"
+  - id: q12
+    prompt: "How often do you check your calendar?"
+    type: single_choice
+    construct: often_check_calendar
+    required: true
+    options:
+      - id: "a"
+        label: "Many times a day"
+      - id: "b"
+        label: "A few times a day"
+      - id: "c"
+        label: "Once a day"
+      - id: "d"
+        label: "A few times a week"
+      - id: "e"
+        label: "Rarely"
+  - id: q13
+    prompt: "How much do you agree with the following statement? — My calendar helps me stay organized and on top of my time."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement? — I would feel lost without my digital calendar."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement? — My calendar often feels too full or overwhelming."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement? — I trust my calendar reminders to keep me from missing things."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement? — I block out time on my calendar for focused work."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How useful is each calendar feature to you? — Reminders and notifications"
+    type: single_choice
+    construct: useful_each_calendar_feature_reminders
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all useful"
+      - id: "b"
+        label: "Slightly useful"
+      - id: "c"
+        label: "Moderately useful"
+      - id: "d"
+        label: "Very useful"
+      - id: "e"
+        label: "Extremely useful"
+  - id: q19
+    prompt: "How useful is each calendar feature to you? — Sharing calendars with others"
+    type: single_choice
+    construct: useful_each_calendar_feature_sharing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all useful"
+      - id: "b"
+        label: "Slightly useful"
+      - id: "c"
+        label: "Moderately useful"
+      - id: "d"
+        label: "Very useful"
+      - id: "e"
+        label: "Extremely useful"
+  - id: q20
+    prompt: "How useful is each calendar feature to you? — Color coding and categories"
+    type: single_choice
+    construct: useful_each_calendar_feature_color
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all useful"
+      - id: "b"
+        label: "Slightly useful"
+      - id: "c"
+        label: "Moderately useful"
+      - id: "d"
+        label: "Very useful"
+      - id: "e"
+        label: "Extremely useful"
+  - id: q21
+    prompt: "How useful is each calendar feature to you? — Time-zone handling"
+    type: single_choice
+    construct: useful_each_calendar_feature_time
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all useful"
+      - id: "b"
+        label: "Slightly useful"
+      - id: "c"
+        label: "Moderately useful"
+      - id: "d"
+        label: "Very useful"
+      - id: "e"
+        label: "Extremely useful"
+  - id: q22
+    prompt: "How useful is each calendar feature to you? — Scheduling links for booking time"
+    type: single_choice
+    construct: useful_each_calendar_feature_scheduling
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all useful"
+      - id: "b"
+        label: "Slightly useful"
+      - id: "c"
+        label: "Moderately useful"
+      - id: "d"
+        label: "Very useful"
+      - id: "e"
+        label: "Extremely useful"
+  - id: q23
+    prompt: "Select your top 3 reasons you rely on a calendar app. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_rely
+    required: true
+    options:
+      - id: "a"
+        label: "Not missing appointments"
+      - id: "b"
+        label: "Coordinating with others"
+      - id: "c"
+        label: "Managing a busy schedule"
+      - id: "d"
+        label: "Reducing mental load"
+      - id: "e"
+        label: "Planning ahead"
+      - id: "f"
+        label: "Protecting focus time"
+      - id: "g"
+        label: "Keeping work and personal life balanced"
+      - id: "h"
+        label: "Tracking recurring routines"
+  - id: q24
+    prompt: "What frustrates you most about calendar apps? (Select all that apply)"
+    type: multi_choice
+    construct: frustrates_most_calendar_apps_select
+    required: true
+    options:
+      - id: "a"
+        label: "Too many notifications"
+      - id: "b"
+        label: "Syncing issues across devices"
+      - id: "c"
+        label: "Double-booking or conflicts"
+      - id: "d"
+        label: "Hard to see the big picture"
+      - id: "e"
+        label: "Time-zone confusion"
+      - id: "f"
+        label: "Cluttered with too many events"
+      - id: "g"
+        label: "Poor integration with other tools"
+      - id: "h"
+        label: "Nothing frustrates me"
+  - id: q25
+    prompt: "How often do you miss or forget a scheduled event despite using your calendar?"
+    type: single_choice
+    construct: often_miss_forget_scheduled_event
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q26
+    prompt: "How satisfied are you overall with your primary calendar app?"
+    type: single_choice
+    construct: satisfied_overall_primary_calendar_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q27
+    prompt: "How satisfied are you with how well your calendar helps you manage your time?"
+    type: single_choice
+    construct: satisfied_well_calendar_helps_manage
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q28
+    prompt: "How likely are you to recommend your calendar app to others? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_calendar_app_others
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q29
+    prompt: "How likely are you to switch calendar apps in the next year?"
+    type: single_choice
+    construct: likely_switch_calendar_apps_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q30
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Which mobile platform do you primarily use?"
+    type: single_choice
+    construct: mobile_platform_primarily_use
+    required: true
+    options:
+      - id: "a"
+        label: "iPhone (iOS)"
+      - id: "b"
+        label: "Android"
+      - id: "c"
+        label: "Other"
+      - id: "d"
+        label: "I don't use a smartphone"
+  - id: q37
+    prompt: "How many people are in your household, including yourself? Enter a whole number."
+    type: free_text
+    construct: many_people_household_including_yourself
+    required: true
+  - id: q38
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q39
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q40
+    prompt: "Is there anything else you would like to share about how you use calendar apps?"
+    type: free_text
+    construct: there_anything_else_would_like
+    required: false

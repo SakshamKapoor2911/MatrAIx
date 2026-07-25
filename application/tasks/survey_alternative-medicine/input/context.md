@@ -1,0 +1,7 @@
+# Alternative and Complementary Medicine
+
+Consumer use of and attitudes toward complementary and alternative health approaches.
+
+## About this survey
+
+This survey covers whether respondents use complementary or alternative approaches, which ones they have tried and currently use (herbal supplements, vitamins, acupuncture, massage, yoga and tai chi, meditation, chiropractic, aromatherapy), what they use them for, how long and how often, monthly spend, where they buy products, and how they decide what to try. It measures whether they tell their doctor, and how they view these approaches relative to conventional care. It runs Likert batteries on attitudes (well-being, preferring natural options, trusting conventional care for serious issues, uncertainty about what works, safety concerns, insurance coverage, value for money) and on the importance of factors when trying an approach, plus a top-3 ranking of influencing factors, practitioners seen, how they vet product trustworthiness, satisfaction with results, confidence, goal fit, overall satisfaction, intent to try new approaches, a 0–10 recommendation score, and an open comment. Question types include single-choice, multi-select, Likert scales, a matrix battery split per item, a top-3 ranking, and numeric free-text. Demographics captured: age, gender, race/ethnicity, household income, education, employment, household size, marital status, region, urban/rural, insurance status, and overall health orientation.

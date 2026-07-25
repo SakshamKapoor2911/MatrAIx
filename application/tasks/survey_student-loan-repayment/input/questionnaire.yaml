@@ -1,0 +1,841 @@
+schemaVersion: "1.0"
+id: student_loan_repayment_v1
+title: "Student Loan Repayment Survey"
+description: "How borrowers manage, repay, and feel about their student loan debt."
+questions:
+  - id: q0
+    prompt: "Do you currently have any student loan debt?"
+    type: single_choice
+    construct: currently_have_any_student_loan
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, in my own name"
+      - id: "b"
+        label: "Yes, as a co-signer or parent borrower (e.g., Parent PLUS) for someone else"
+      - id: "c"
+        label: "Yes, both my own and loans I co-signed"
+      - id: "d"
+        label: "No, I paid off my student loans"
+      - id: "e"
+        label: "No, I never had student loans"
+  - id: q1
+    prompt: "Whose education did your student loans pay for? (Select all that apply)"
+    type: multi_choice
+    construct: whose_education_did_student_loans
+    required: true
+    options:
+      - id: "a"
+        label: "My own undergraduate education"
+      - id: "b"
+        label: "My own graduate or professional education"
+      - id: "c"
+        label: "My child's education"
+      - id: "d"
+        label: "A spouse's or partner's education"
+      - id: "e"
+        label: "Not applicable"
+  - id: q2
+    prompt: "What types of student loans do you currently hold? (Select all that apply)"
+    type: multi_choice
+    construct: types_student_loans_currently_hold
+    required: true
+    options:
+      - id: "a"
+        label: "Federal Direct Subsidized loans"
+      - id: "b"
+        label: "Federal Direct Unsubsidized loans"
+      - id: "c"
+        label: "Federal PLUS loans (Parent or Grad PLUS)"
+      - id: "d"
+        label: "Private student loans"
+      - id: "e"
+        label: "Refinanced loans (consolidated with a private lender)"
+      - id: "f"
+        label: "Not sure of the type"
+  - id: q3
+    prompt: "What was the highest degree your student loans helped you pursue?"
+    type: single_choice
+    construct: was_highest_degree_student_loans
+    required: true
+    options:
+      - id: "a"
+        label: "Associate degree or certificate"
+      - id: "b"
+        label: "Bachelor's degree"
+      - id: "c"
+        label: "Master's degree"
+      - id: "d"
+        label: "Doctoral or professional degree (e.g., JD, MD, PhD)"
+      - id: "e"
+        label: "Did not complete a degree"
+      - id: "f"
+        label: "Not applicable"
+  - id: q4
+    prompt: "Did you complete the degree or program your loans funded?"
+    type: single_choice
+    construct: did_complete_degree_program_loans
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, completed"
+      - id: "b"
+        label: "No, did not complete"
+      - id: "c"
+        label: "Still enrolled"
+      - id: "d"
+        label: "Not applicable"
+  - id: q5
+    prompt: "About how much student loan debt do you currently owe in total?"
+    type: single_choice
+    construct: much_student_loan_debt_currently
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $10,000"
+      - id: "b"
+        label: "$10,000 to $24,999"
+      - id: "c"
+        label: "$25,000 to $49,999"
+      - id: "d"
+        label: "$50,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $199,999"
+      - id: "f"
+        label: "$200,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q6
+    prompt: "About how much did you originally borrow in total (principal)? Please enter a dollar amount."
+    type: free_text
+    construct: much_did_originally_borrow_total
+    required: true
+  - id: q7
+    prompt: "About how much is your current required monthly student loan payment? Please enter a dollar amount."
+    type: free_text
+    construct: much_current_required_monthly_student
+    required: true
+  - id: q8
+    prompt: "What is the approximate interest rate on your largest student loan?"
+    type: single_choice
+    construct: approximate_interest_rate_largest_studen
+    required: true
+    options:
+      - id: "a"
+        label: "Under 4%"
+      - id: "b"
+        label: "4% to 5.9%"
+      - id: "c"
+        label: "6% to 7.9%"
+      - id: "d"
+        label: "8% to 9.9%"
+      - id: "e"
+        label: "10% or higher"
+      - id: "f"
+        label: "Don't know"
+  - id: q9
+    prompt: "Who is your primary loan servicer or lender?"
+    type: single_choice
+    construct: who_primary_loan_servicer_lender
+    required: true
+    options:
+      - id: "a"
+        label: "MOHELA"
+      - id: "b"
+        label: "Nelnet"
+      - id: "c"
+        label: "Aidvantage"
+      - id: "d"
+        label: "EdFinancial"
+      - id: "e"
+        label: "A private lender (e.g., SoFi, Sallie Mae, Earnest)"
+      - id: "f"
+        label: "Don't know"
+      - id: "g"
+        label: "Not applicable"
+  - id: q10
+    prompt: "Which repayment plan are you currently on?"
+    type: single_choice
+    construct: repayment_plan_currently
+    required: true
+    options:
+      - id: "a"
+        label: "Standard 10-year plan"
+      - id: "b"
+        label: "Graduated or extended plan"
+      - id: "c"
+        label: "An income-driven repayment plan (e.g., IDR, SAVE, IBR, PAYE)"
+      - id: "d"
+        label: "Private lender's repayment schedule"
+      - id: "e"
+        label: "Not currently in repayment"
+      - id: "f"
+        label: "Don't know"
+  - id: q11
+    prompt: "How long have you been repaying your student loans?"
+    type: single_choice
+    construct: long_have_been_repaying_student
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 7 years"
+      - id: "d"
+        label: "8 to 15 years"
+      - id: "e"
+        label: "More than 15 years"
+      - id: "f"
+        label: "Not yet in repayment"
+  - id: q12
+    prompt: "What is the current status of your student loans?"
+    type: single_choice
+    construct: current_status_student_loans
+    required: true
+    options:
+      - id: "a"
+        label: "In active repayment"
+      - id: "b"
+        label: "In deferment"
+      - id: "c"
+        label: "In forbearance"
+      - id: "d"
+        label: "In default or seriously past due"
+      - id: "e"
+        label: "In an in-school or grace period"
+      - id: "f"
+        label: "Paid off"
+  - id: q13
+    prompt: "How do you typically make your student loan payments?"
+    type: single_choice
+    construct: typically_make_student_loan_payments
+    required: true
+    options:
+      - id: "a"
+        label: "Automatic payment (autopay) with the servicer"
+      - id: "b"
+        label: "Manual online payment each month"
+      - id: "c"
+        label: "By phone or mail"
+      - id: "d"
+        label: "Someone else pays for me"
+      - id: "e"
+        label: "Not currently making payments"
+  - id: q14
+    prompt: "In the past 2 years, how often have you made a late or missed student loan payment?"
+    type: single_choice
+    construct: past_2_years_often_have
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Not applicable"
+  - id: q15
+    prompt: "Do you regularly make extra payments beyond the minimum to pay down your loans faster?"
+    type: single_choice
+    construct: regularly_make_extra_payments_beyond
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, most months"
+      - id: "b"
+        label: "Occasionally"
+      - id: "c"
+        label: "No, only the minimum"
+      - id: "d"
+        label: "Not currently making payments"
+  - id: q16
+    prompt: "Which loan forgiveness or assistance programs have you pursued or benefited from? (Select all that apply)"
+    type: multi_choice
+    construct: loan_forgiveness_assistance_programs_hav
+    required: true
+    options:
+      - id: "a"
+        label: "Public Service Loan Forgiveness (PSLF)"
+      - id: "b"
+        label: "Income-driven repayment forgiveness"
+      - id: "c"
+        label: "Teacher Loan Forgiveness"
+      - id: "d"
+        label: "Employer student loan repayment benefit"
+      - id: "e"
+        label: "A state or profession-specific forgiveness program"
+      - id: "f"
+        label: "None of these"
+  - id: q17
+    prompt: "Have you refinanced or seriously considered refinancing your student loans?"
+    type: single_choice
+    construct: have_refinanced_seriously_considered_ref
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I have refinanced"
+      - id: "b"
+        label: "No, but I am seriously considering it"
+      - id: "c"
+        label: "No, and I am not considering it"
+      - id: "d"
+        label: "I looked into it but decided against it"
+  - id: q18
+    prompt: "For which reasons, if any, have you used deferment or forbearance? (Select all that apply)"
+    type: multi_choice
+    construct: reasons_if_any_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Financial hardship or job loss"
+      - id: "b"
+        label: "Returning to school"
+      - id: "c"
+        label: "Medical or family situation"
+      - id: "d"
+        label: "The federal payment pause"
+      - id: "e"
+        label: "I have never used deferment or forbearance"
+  - id: q19
+    prompt: "How much do you agree: My student loan debt is a significant burden on my life."
+    type: single_choice
+    construct: much_agree_my_student_loan
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: I clearly understand the terms and payoff timeline of my loans."
+    type: single_choice
+    construct: much_agree_i_clearly_understand
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: My education was worth the amount I borrowed."
+    type: single_choice
+    construct: much_agree_my_education_was
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: I regret taking on the student loans I have."
+    type: single_choice
+    construct: much_agree_i_regret_taking
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How much do you agree: I am confident I will pay off my student loans."
+    type: single_choice
+    construct: much_agree_i_am_confident
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "How much do you agree: My student loan payments are manageable given my income."
+    type: single_choice
+    construct: much_agree_my_student_loan
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "How much do you agree: My student loans have delayed important life goals."
+    type: single_choice
+    construct: much_agree_my_student_loans
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q26
+    prompt: "How much do you agree: I feel well informed about the forgiveness options available to me."
+    type: single_choice
+    construct: much_agree_i_feel_well
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q27
+    prompt: "When managing your loans, how important is each goal: paying them off as quickly as possible."
+    type: single_choice
+    construct: when_managing_loans_important_each
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When managing your loans, how important is each goal: keeping the monthly payment as low as possible."
+    type: single_choice
+    construct: when_managing_loans_important_each
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "When managing your loans, how important is each goal: qualifying for loan forgiveness."
+    type: single_choice
+    construct: when_managing_loans_important_each
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "When managing your loans, how important is each goal: minimizing the total interest I pay."
+    type: single_choice
+    construct: when_managing_loans_important_each
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q31
+    prompt: "When managing your loans, how important is each goal: protecting my credit score."
+    type: single_choice
+    construct: when_managing_loans_important_each
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q32
+    prompt: "Which life decisions, if any, have your student loans caused you to delay or reconsider? (Select all that apply — choose up to 3)"
+    type: single_choice
+    construct: life_decisions_if_any_have
+    required: true
+    options:
+      - id: "a"
+        label: "Buying a home"
+      - id: "b"
+        label: "Getting married"
+      - id: "c"
+        label: "Having children"
+      - id: "d"
+        label: "Saving for retirement"
+      - id: "e"
+        label: "Changing careers or going back to school"
+      - id: "f"
+        label: "Starting a business"
+      - id: "g"
+        label: "None of these"
+  - id: q33
+    prompt: "How often does your student loan debt cause you stress or anxiety?"
+    type: single_choice
+    construct: often_does_student_loan_debt
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q34
+    prompt: "How much have your student loan payments reduced how much you save for retirement?"
+    type: single_choice
+    construct: much_have_student_loan_payments
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "I am not able to save for retirement because of them"
+  - id: q35
+    prompt: "How much do you support broad federal student loan forgiveness as a policy?"
+    type: single_choice
+    construct: much_support_broad_federal_student
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly oppose"
+      - id: "b"
+        label: "Oppose"
+      - id: "c"
+        label: "Neither support nor oppose"
+      - id: "d"
+        label: "Support"
+      - id: "e"
+        label: "Strongly support"
+  - id: q36
+    prompt: "Overall, how satisfied are you with your student loan servicer?"
+    type: single_choice
+    construct: overall_satisfied_student_loan_servicer
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q37
+    prompt: "How likely are you to have your student loans fully paid off within the next 5 years?"
+    type: single_choice
+    construct: likely_have_student_loans_fully
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your loan servicer to someone else? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q39
+    prompt: "How confident do you feel about your overall ability to manage your student loan debt?"
+    type: single_choice
+    construct: confident_feel_overall_ability_manage
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q40
+    prompt: "Is there anything else you would like to share about your experience repaying student loans? (Optional — you may leave a short comment.)"
+    type: free_text
+    construct: there_anything_else_would_like
+    required: false
+  - id: q41
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "Which best describes your race or ethnicity?"
+    type: single_choice
+    construct: best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Two or more races"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree or trade certificate"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q47
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q48
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q50
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q51
+    prompt: "Do you own or rent your primary residence?"
+    type: single_choice
+    construct: own_rent_primary_residence
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"
+      - id: "d"
+        label: "Prefer not to say"

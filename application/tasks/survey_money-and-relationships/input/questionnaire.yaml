@@ -1,0 +1,739 @@
+schemaVersion: "1.0"
+id: money_and_relationships_v1
+title: "Money and Relationships Survey"
+description: "How money affects romantic relationships — communication, conflict, financial compatibility, and shared goals."
+questions:
+  - id: q0
+    prompt: "What is your current relationship status?"
+    type: single_choice
+    construct: current_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "In a committed relationship, living apart"
+      - id: "d"
+        label: "Dating, not serious"
+      - id: "e"
+        label: "Single, not dating"
+      - id: "f"
+        label: "Divorced, separated, or widowed"
+  - id: q1
+    prompt: "How long have you been with your current partner?"
+    type: single_choice
+    construct: long_have_been_current_partner
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 9 years"
+      - id: "d"
+        label: "10 years or more"
+      - id: "e"
+        label: "Not applicable (no current partner)"
+  - id: q2
+    prompt: "How often do you and your partner talk about money?"
+    type: single_choice
+    construct: often_partner_talk_money
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+      - id: "f"
+        label: "Not applicable"
+  - id: q3
+    prompt: "How comfortable are you discussing finances with your partner?"
+    type: single_choice
+    construct: comfortable_discussing_finances_partner
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Somewhat uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat comfortable"
+      - id: "e"
+        label: "Very comfortable"
+      - id: "f"
+        label: "Not applicable"
+  - id: q4
+    prompt: "How do you and your partner generally manage your money?"
+    type: single_choice
+    construct: partner_generally_manage_money
+    required: true
+    options:
+      - id: "a"
+        label: "Fully combined finances"
+      - id: "b"
+        label: "Mostly combined, some separate"
+      - id: "c"
+        label: "Split evenly but kept separate"
+      - id: "d"
+        label: "Mostly separate finances"
+      - id: "e"
+        label: "Completely separate"
+      - id: "f"
+        label: "Not applicable"
+  - id: q5
+    prompt: "Which financial accounts do you share with your partner? (Select all that apply)"
+    type: multi_choice
+    construct: financial_accounts_share_partner_select
+    required: true
+    options:
+      - id: "a"
+        label: "Joint checking account"
+      - id: "b"
+        label: "Joint savings account"
+      - id: "c"
+        label: "Joint credit card"
+      - id: "d"
+        label: "Shared investment or retirement accounts"
+      - id: "e"
+        label: "Shared budgeting app"
+      - id: "f"
+        label: "A shared mortgage or lease"
+      - id: "g"
+        label: "We don't share any accounts"
+      - id: "h"
+        label: "Not applicable"
+  - id: q6
+    prompt: "How often do disagreements about money come up in your relationship?"
+    type: single_choice
+    construct: often_disagreements_money_come_up
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+      - id: "f"
+        label: "Not applicable"
+  - id: q7
+    prompt: "What do you and your partner argue about most when it comes to money? (Select all that apply)"
+    type: multi_choice
+    construct: partner_argue_most_when_it
+    required: true
+    options:
+      - id: "a"
+        label: "Spending too much"
+      - id: "b"
+        label: "Saving too little"
+      - id: "c"
+        label: "Debt"
+      - id: "d"
+        label: "Different financial priorities"
+      - id: "e"
+        label: "One partner earning or contributing more"
+      - id: "f"
+        label: "Big purchases"
+      - id: "g"
+        label: "Financial secrecy or hidden spending"
+      - id: "h"
+        label: "Supporting family members"
+      - id: "i"
+        label: "We don't really argue about money"
+  - id: q8
+    prompt: "How aligned are you and your partner on financial goals and values?"
+    type: single_choice
+    construct: aligned_partner_financial_goals_values
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all aligned"
+      - id: "b"
+        label: "Slightly aligned"
+      - id: "c"
+        label: "Moderately aligned"
+      - id: "d"
+        label: "Very aligned"
+      - id: "e"
+        label: "Completely aligned"
+      - id: "f"
+        label: "Not applicable"
+  - id: q9
+    prompt: "Who typically handles the day-to-day finances in your household?"
+    type: single_choice
+    construct: who_typically_handles_day_day
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly me"
+      - id: "b"
+        label: "Mostly my partner"
+      - id: "c"
+        label: "We share it roughly equally"
+      - id: "d"
+        label: "We each handle our own"
+      - id: "e"
+        label: "Not applicable"
+  - id: q10
+    prompt: "How much do you agree or disagree: My partner and I are a good financial match."
+    type: single_choice
+    construct: much_agree_disagree_my_partner
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree: Money is a source of stress in my relationship."
+    type: single_choice
+    construct: much_agree_disagree_money_source
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: I trust my partner to make good financial decisions."
+    type: single_choice
+    construct: much_agree_disagree_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: We are transparent with each other about our spending."
+    type: single_choice
+    construct: much_agree_disagree_we_transparent
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I would feel comfortable if my partner earned much more than me."
+    type: single_choice
+    construct: much_agree_disagree_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much does each of the following cause tension in your relationship: Differences in spending habits"
+    type: single_choice
+    construct: much_does_each_following_cause
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "Quite a bit"
+      - id: "e"
+        label: "A great deal"
+  - id: q16
+    prompt: "How much does each of the following cause tension in your relationship: Differences in income"
+    type: single_choice
+    construct: much_does_each_following_cause
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "Quite a bit"
+      - id: "e"
+        label: "A great deal"
+  - id: q17
+    prompt: "How much does each of the following cause tension in your relationship: Debt one or both partners carry"
+    type: single_choice
+    construct: much_does_each_following_cause
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "Quite a bit"
+      - id: "e"
+        label: "A great deal"
+  - id: q18
+    prompt: "How much does each of the following cause tension in your relationship: Financial support for family or children"
+    type: single_choice
+    construct: much_does_each_following_cause
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "Quite a bit"
+      - id: "e"
+        label: "A great deal"
+  - id: q19
+    prompt: "How much does each of the following cause tension in your relationship: Long-term financial goals"
+    type: single_choice
+    construct: much_does_each_following_cause
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "Quite a bit"
+      - id: "e"
+        label: "A great deal"
+  - id: q20
+    prompt: "Have you ever hidden a purchase, account, or debt from your partner?"
+    type: single_choice
+    construct: have_ever_hidden_purchase_account
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, never"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q21
+    prompt: "Do you know your partner's approximate income?"
+    type: single_choice
+    construct: know_partner_s_approximate_income
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, exactly"
+      - id: "b"
+        label: "Yes, roughly"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable"
+  - id: q22
+    prompt: "Do you know your partner's approximate debt level?"
+    type: single_choice
+    construct: know_partner_s_approximate_debt
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, in detail"
+      - id: "b"
+        label: "Yes, roughly"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable"
+  - id: q23
+    prompt: "Before or early in a serious relationship, how important is it to discuss finances?"
+    type: single_choice
+    construct: before_early_serious_relationship_import
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "Would a partner's financial habits be a dealbreaker for you? (Select all that apply)"
+    type: multi_choice
+    construct: would_partner_s_financial_habits
+    required: true
+    options:
+      - id: "a"
+        label: "Large amounts of debt"
+      - id: "b"
+        label: "Poor credit score"
+      - id: "c"
+        label: "Overspending or lack of savings"
+      - id: "d"
+        label: "Being overly frugal or controlling with money"
+      - id: "e"
+        label: "Financial dishonesty"
+      - id: "f"
+        label: "Very different financial goals"
+      - id: "g"
+        label: "None of these would be a dealbreaker"
+  - id: q25
+    prompt: "How do you and your partner make large financial decisions (e.g., big purchases)?"
+    type: single_choice
+    construct: partner_make_large_financial_decisions
+    required: true
+    options:
+      - id: "a"
+        label: "We decide together"
+      - id: "b"
+        label: "One of us decides after discussion"
+      - id: "c"
+        label: "We each decide for our own money"
+      - id: "d"
+        label: "It's often a source of conflict"
+      - id: "e"
+        label: "Not applicable"
+  - id: q26
+    prompt: "How much do you agree or disagree: Talking about money with my partner brings us closer."
+    type: single_choice
+    construct: much_agree_disagree_talking_money
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q27
+    prompt: "Have money problems ever led to a breakup or serious relationship trouble for you?"
+    type: single_choice
+    construct: have_money_problems_ever_led
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q28
+    prompt: "Select the top 3 financial traits you value most in a partner. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_financial_traits
+    required: true
+    options:
+      - id: "a"
+        label: "Financial honesty"
+      - id: "b"
+        label: "Good saving habits"
+      - id: "c"
+        label: "Stable income"
+      - id: "d"
+        label: "Being debt-free or managing debt well"
+      - id: "e"
+        label: "Shared financial goals"
+      - id: "f"
+        label: "Generosity"
+      - id: "g"
+        label: "Being careful with spending"
+      - id: "h"
+        label: "Financial independence"
+  - id: q29
+    prompt: "How satisfied are you with how you and your partner handle money together?"
+    type: single_choice
+    construct: satisfied_partner_handle_money_together
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q30
+    prompt: "How likely are you to seek help (counseling, an advisor) for money issues in your relationship?"
+    type: single_choice
+    construct: likely_seek_help_counseling_advisor
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Somewhat likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "Overall, how would you rate the financial health of your relationship?"
+    type: single_choice
+    construct: overall_would_rate_financial_health
+    required: true
+    options:
+      - id: "a"
+        label: "Very poor"
+      - id: "b"
+        label: "Poor"
+      - id: "c"
+        label: "Fair"
+      - id: "d"
+        label: "Good"
+      - id: "e"
+        label: "Very good"
+      - id: "f"
+        label: "Not applicable"
+  - id: q32
+    prompt: "About how many serious money conversations do you have with your partner in a typical month? Please enter a number."
+    type: free_text
+    construct: many_serious_money_conversations_have
+    required: true
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q39
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+      - id: "h"
+        label: "Unable to work"
+  - id: q40
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q41
+    prompt: "Do you have children living in your household?"
+    type: single_choice
+    construct: have_children_living_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q44
+    prompt: "Who is the primary earner in your household?"
+    type: single_choice
+    construct: who_primary_earner_household
+    required: true
+    options:
+      - id: "a"
+        label: "I am"
+      - id: "b"
+        label: "My partner is"
+      - id: "c"
+        label: "We earn about the same"
+      - id: "d"
+        label: "Not applicable"

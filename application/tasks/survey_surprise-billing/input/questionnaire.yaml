@@ -1,0 +1,663 @@
+schemaVersion: "1.0"
+id: surprise_billing_v1
+title: "Surprise & Out-of-Network Billing Survey"
+description: "Consumers' experiences with, awareness of, and attitudes toward surprise and out-of-network medical bills."
+questions:
+  - id: q0
+    prompt: "How familiar are you with the term \"surprise medical bill\" (an unexpected bill from an out-of-network provider)?"
+    type: single_choice
+    construct: familiar_term_surprise_medical_bill
+    required: true
+    options:
+      - id: "a"
+        label: "Very familiar"
+      - id: "b"
+        label: "Somewhat familiar"
+      - id: "c"
+        label: "I've heard the term but don't know the details"
+      - id: "d"
+        label: "Not at all familiar"
+  - id: q1
+    prompt: "Have you ever received a medical bill that was much higher than you expected because a provider was out of your insurance network?"
+    type: single_choice
+    construct: have_ever_received_medical_bill
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "I'm not sure"
+      - id: "d"
+        label: "No, never"
+  - id: q2
+    prompt: "In what setting did your most recent surprise or out-of-network bill happen?"
+    type: single_choice
+    construct: setting_did_most_recent_surprise
+    required: true
+    options:
+      - id: "a"
+        label: "Emergency room visit"
+      - id: "b"
+        label: "A hospital stay or surgery"
+      - id: "c"
+        label: "Anesthesia, radiology, or lab services during a covered visit"
+      - id: "d"
+        label: "An ambulance or air ambulance ride"
+      - id: "e"
+        label: "A specialist or urgent care visit"
+      - id: "f"
+        label: "I have never received one"
+  - id: q3
+    prompt: "Which types of unexpected charges have you experienced? (Select all that apply)"
+    type: multi_choice
+    construct: types_unexpected_charges_have_experience
+    required: true
+    options:
+      - id: "a"
+        label: "An out-of-network doctor at an in-network hospital"
+      - id: "b"
+        label: "An out-of-network lab or imaging center"
+      - id: "c"
+        label: "Ambulance charges"
+      - id: "d"
+        label: "Higher-than-expected facility fees"
+      - id: "e"
+        label: "A service my insurer denied as not covered"
+      - id: "f"
+        label: "Balance billing (billed for the difference between the charge and what insurance paid)"
+      - id: "g"
+        label: "I have not experienced these charges"
+  - id: q4
+    prompt: "Roughly how much was your largest surprise or out-of-network bill? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: roughly_much_was_largest_surprise
+    required: true
+  - id: q5
+    prompt: "Before receiving care, how often do you check whether a provider or facility is in your insurance network?"
+    type: single_choice
+    construct: before_receiving_care_often_check
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q6
+    prompt: "How do you usually check whether a provider is in-network? (Select all that apply)"
+    type: multi_choice
+    construct: usually_check_whether_provider_network
+    required: true
+    options:
+      - id: "a"
+        label: "My insurer's website or app"
+      - id: "b"
+        label: "Calling my insurance company"
+      - id: "c"
+        label: "Asking the provider's office"
+      - id: "d"
+        label: "A third-party directory or search"
+      - id: "e"
+        label: "I don't usually check"
+  - id: q7
+    prompt: "How confident are you that you can tell in advance whether care will be covered in-network?"
+    type: single_choice
+    construct: confident_that_can_tell_advance
+    required: true
+    options:
+      - id: "a"
+        label: "Very confident"
+      - id: "b"
+        label: "Somewhat confident"
+      - id: "c"
+        label: "Not very confident"
+      - id: "d"
+        label: "Not at all confident"
+  - id: q8
+    prompt: "Have you heard of the federal No Surprises Act, which limits certain surprise bills?"
+    type: single_choice
+    construct: have_heard_federal_no_surprises
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I understand what it covers"
+      - id: "b"
+        label: "Yes, but I don't know the details"
+      - id: "c"
+        label: "No, I haven't heard of it"
+  - id: q9
+    prompt: "When you received a surprise bill, what did you do? (Select all that apply)"
+    type: multi_choice
+    construct: when_received_surprise_bill_did
+    required: true
+    options:
+      - id: "a"
+        label: "Paid it in full"
+      - id: "b"
+        label: "Called the provider to question it"
+      - id: "c"
+        label: "Called my insurer to appeal or clarify"
+      - id: "d"
+        label: "Negotiated a lower amount"
+      - id: "e"
+        label: "Set up a payment plan"
+      - id: "f"
+        label: "Filed a formal complaint or dispute"
+      - id: "g"
+        label: "Ignored it or left it unpaid"
+      - id: "h"
+        label: "I have never received one"
+  - id: q10
+    prompt: "If you disputed a surprise bill, what was the outcome?"
+    type: single_choice
+    construct: if_disputed_surprise_bill_was
+    required: true
+    options:
+      - id: "a"
+        label: "The bill was reduced or removed"
+      - id: "b"
+        label: "Part of it was reduced"
+      - id: "c"
+        label: "No change, I still owed the full amount"
+      - id: "d"
+        label: "It is still unresolved"
+      - id: "e"
+        label: "I have never disputed one"
+  - id: q11
+    prompt: "How much do you agree or disagree: Surprise bills are a serious problem for people like me."
+    type: single_choice
+    construct: much_agree_disagree_surprise_bills
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: It is unfair to be billed by a provider I didn't choose."
+    type: single_choice
+    construct: much_agree_disagree_it_unfair
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I feel confident I could avoid a surprise bill with enough planning."
+    type: single_choice
+    construct: much_agree_disagree_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: The rules about network coverage are too confusing."
+    type: single_choice
+    construct: much_agree_disagree_rules_network
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: In an emergency, checking network status is not realistic."
+    type: single_choice
+    construct: much_agree_disagree_emergency_checking
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: I trust my insurer to protect me from surprise bills."
+    type: single_choice
+    construct: much_agree_disagree_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How worried are you about receiving a surprise medical bill in the future?"
+    type: single_choice
+    construct: worried_receiving_surprise_medical_bill
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+  - id: q18
+    prompt: "How much has the possibility of a surprise bill affected your decisions about when or where to get care?"
+    type: single_choice
+    construct: much_has_possibility_surprise_bill
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "A lot"
+  - id: q19
+    prompt: "Whose responsibility do you think it mostly is to prevent surprise bills?"
+    type: single_choice
+    construct: whose_responsibility_think_it_mostly
+    required: true
+    options:
+      - id: "a"
+        label: "The insurance company"
+      - id: "b"
+        label: "The hospital or provider"
+      - id: "c"
+        label: "The government or regulators"
+      - id: "d"
+        label: "The patient"
+      - id: "e"
+        label: "Shared responsibility"
+  - id: q20
+    prompt: "When protecting against surprise bills, how important is a clear list of in-network providers?"
+    type: single_choice
+    construct: when_protecting_against_surprise_bills
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "When protecting against surprise bills, how important is an upfront estimate before care?"
+    type: single_choice
+    construct: when_protecting_against_surprise_bills
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When protecting against surprise bills, how important is a simple way to dispute a bill?"
+    type: single_choice
+    construct: when_protecting_against_surprise_bills
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When protecting against surprise bills, how important is a cap on how much out-of-network providers can charge?"
+    type: single_choice
+    construct: when_protecting_against_surprise_bills
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "Have you ever asked a provider in advance whether everyone involved in your care (for example, anesthesiologist) would be in-network?"
+    type: single_choice
+    construct: have_ever_asked_provider_advance
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, often"
+      - id: "b"
+        label: "Yes, once or twice"
+      - id: "c"
+        label: "No, but I would now"
+      - id: "d"
+        label: "No, it didn't occur to me"
+  - id: q25
+    prompt: "How likely are you to appeal or dispute a surprise bill you believe is unfair?"
+    type: single_choice
+    construct: likely_appeal_dispute_surprise_bill
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q26
+    prompt: "Have you ever avoided or delayed care specifically because you feared an out-of-network charge?"
+    type: single_choice
+    construct: have_ever_avoided_delayed_care
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I've thought about it"
+      - id: "d"
+        label: "No, never"
+  - id: q27
+    prompt: "How did receiving (or fearing) a surprise bill affect your trust in the healthcare system?"
+    type: single_choice
+    construct: did_receiving_fearing_surprise_bill
+    required: true
+    options:
+      - id: "a"
+        label: "Greatly decreased it"
+      - id: "b"
+        label: "Somewhat decreased it"
+      - id: "c"
+        label: "No effect"
+      - id: "d"
+        label: "It did not apply to me"
+  - id: q28
+    prompt: "Select your top 3 protections you would most want against surprise bills. (Select up to 3)"
+    type: single_choice
+    construct: select_top_3_protections_would
+    required: true
+    options:
+      - id: "a"
+        label: "Guaranteed in-network billing at in-network facilities"
+      - id: "b"
+        label: "Upfront price estimates"
+      - id: "c"
+        label: "A cap on out-of-network charges"
+      - id: "d"
+        label: "Easy dispute and appeal process"
+      - id: "e"
+        label: "Better insurer directories"
+      - id: "f"
+        label: "Protection for emergency and ambulance care"
+      - id: "g"
+        label: "Clear notice before any out-of-network service"
+      - id: "h"
+        label: "A single point of contact to resolve billing issues"
+  - id: q29
+    prompt: "Overall, how satisfied are you with the protections that exist today against surprise bills?"
+    type: single_choice
+    construct: overall_satisfied_protections_that_exist
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "On a scale of 0 to 10, how likely are you to warn a friend to check network status before care? Please enter a number from 0 (not at all likely) to 10 (extremely likely)."
+    type: free_text
+    construct: scale_0_10_likely_warn
+    required: true
+  - id: q31
+    prompt: "Is there one thing that would most help protect people from surprise bills? Please describe briefly (or enter \"none\")."
+    type: free_text
+    construct: there_one_thing_that_would
+    required: true
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Which best describes your race or ethnicity?"
+    type: single_choice
+    construct: best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian or Asian American"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Two or more races or another background"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+  - id: q40
+    prompt: "Which region of the country do you live in?"
+    type: single_choice
+    construct: region_country_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q42
+    prompt: "What is your primary source of health insurance?"
+    type: single_choice
+    construct: primary_source_health_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored plan"
+      - id: "b"
+        label: "Plan purchased on the marketplace or directly"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or veterans coverage (TRICARE / VA)"
+      - id: "f"
+        label: "I don't have health insurance"
+      - id: "g"
+        label: "Prefer not to say"

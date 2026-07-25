@@ -1,0 +1,668 @@
+schemaVersion: "1.0"
+id: automatic_bill_pay_v1
+title: "Automatic Bill Pay Survey"
+description: "How households use automatic bill payment to manage recurring bills, and their experiences, trust, and concerns with autopay."
+questions:
+  - id: q0
+    prompt: "Do you use automatic bill payment (autopay) for any of your recurring bills?"
+    type: single_choice
+    construct: use_automatic_bill_payment_autopay
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for most or all of my bills"
+      - id: "b"
+        label: "Yes, for some of my bills"
+      - id: "c"
+        label: "No, but I have in the past"
+      - id: "d"
+        label: "No, and I never have"
+  - id: q1
+    prompt: "How long have you been using automatic bill payment?"
+    type: single_choice
+    construct: long_have_been_using_automatic
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "More than 5 years"
+      - id: "e"
+        label: "I don't use autopay"
+  - id: q2
+    prompt: "About how many of your recurring bills are on autopay? Please enter a number."
+    type: free_text
+    construct: many_recurring_bills_autopay_please
+    required: true
+  - id: q3
+    prompt: "Which bills do you pay automatically? (Select all that apply)"
+    type: multi_choice
+    construct: bills_pay_automatically_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Rent or mortgage"
+      - id: "b"
+        label: "Electricity, gas, or water"
+      - id: "c"
+        label: "Internet or cable"
+      - id: "d"
+        label: "Cell phone"
+      - id: "e"
+        label: "Credit card payments"
+      - id: "f"
+        label: "Loan payments (auto, student, personal)"
+      - id: "g"
+        label: "Insurance premiums"
+      - id: "h"
+        label: "Streaming or other subscriptions"
+  - id: q4
+    prompt: "How do you usually set up automatic payments? (Select all that apply)"
+    type: multi_choice
+    construct: usually_set_up_automatic_payments
+    required: true
+    options:
+      - id: "a"
+        label: "Directly with the biller (merchant autopay)"
+      - id: "b"
+        label: "Through my bank's bill-pay service"
+      - id: "c"
+        label: "Linked to a credit card"
+      - id: "d"
+        label: "Linked to a debit card or checking account"
+      - id: "e"
+        label: "Through a payment app or digital wallet"
+      - id: "f"
+        label: "I don't set up automatic payments"
+  - id: q5
+    prompt: "What funding source do you most often use for automatic payments?"
+    type: single_choice
+    construct: funding_source_most_often_use
+    required: true
+    options:
+      - id: "a"
+        label: "Checking account (bank draft / ACH)"
+      - id: "b"
+        label: "Credit card"
+      - id: "c"
+        label: "Debit card"
+      - id: "d"
+        label: "A digital wallet or payment app"
+      - id: "e"
+        label: "It varies by bill"
+      - id: "f"
+        label: "Not applicable"
+  - id: q6
+    prompt: "What is the main reason you use (or would use) automatic bill payment?"
+    type: single_choice
+    construct: main_reason_use_would_use
+    required: true
+    options:
+      - id: "a"
+        label: "Convenience and saving time"
+      - id: "b"
+        label: "Avoiding late fees"
+      - id: "c"
+        label: "Protecting my credit score"
+      - id: "d"
+        label: "Peace of mind / not forgetting"
+      - id: "e"
+        label: "Earning credit card rewards"
+      - id: "f"
+        label: "A discount for enrolling in autopay"
+      - id: "g"
+        label: "I don't use autopay"
+  - id: q7
+    prompt: "How often do you review your automatic payments to make sure they are correct?"
+    type: single_choice
+    construct: often_review_automatic_payments_make
+    required: true
+    options:
+      - id: "a"
+        label: "After every payment"
+      - id: "b"
+        label: "Monthly"
+      - id: "c"
+        label: "Every few months"
+      - id: "d"
+        label: "Once a year"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q8
+    prompt: "Have you ever experienced any of the following with autopay? (Select all that apply)"
+    type: multi_choice
+    construct: have_ever_experienced_any_following
+    required: true
+    options:
+      - id: "a"
+        label: "An overdraft or bounced payment"
+      - id: "b"
+        label: "Being charged for a subscription I forgot about"
+      - id: "c"
+        label: "A duplicate or incorrect charge"
+      - id: "d"
+        label: "Difficulty canceling an automatic payment"
+      - id: "e"
+        label: "A payment failing due to an expired card"
+      - id: "f"
+        label: "None of these"
+  - id: q9
+    prompt: "How much do you agree with the following statement: Automatic bill pay makes managing my finances easier."
+    type: single_choice
+    construct: much_agree_following_statement_automatic
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree with the following statement: Autopay makes it harder to keep track of where my money goes."
+    type: single_choice
+    construct: much_agree_following_statement_autopay
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: I worry about a payment coming out when my balance is low."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: I trust billers to charge me the correct amount automatically."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: I prefer to review and approve each bill before paying it."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How important is each benefit of autopay to you: never paying a late fee?"
+    type: single_choice
+    construct: important_each_benefit_autopay_never
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q15
+    prompt: "How important is each benefit of autopay to you: saving time each month?"
+    type: single_choice
+    construct: important_each_benefit_autopay_saving
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "How important is each benefit of autopay to you: protecting your credit score?"
+    type: single_choice
+    construct: important_each_benefit_autopay_protectin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "How important is each benefit of autopay to you: earning credit card or bank rewards?"
+    type: single_choice
+    construct: important_each_benefit_autopay_earning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each benefit of autopay to you: getting a discount for enrolling?"
+    type: single_choice
+    construct: important_each_benefit_autopay_getting
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "What is your biggest concern about automatic bill payment?"
+    type: single_choice
+    construct: biggest_concern_automatic_bill_payment
+    required: true
+    options:
+      - id: "a"
+        label: "Overdrawing my account"
+      - id: "b"
+        label: "Being overcharged or billed incorrectly"
+      - id: "c"
+        label: "Losing track of my spending"
+      - id: "d"
+        label: "Forgetting about subscriptions I no longer use"
+      - id: "e"
+        label: "Difficulty stopping a payment"
+      - id: "f"
+        label: "Data security or fraud"
+      - id: "g"
+        label: "I have no major concerns"
+  - id: q20
+    prompt: "Which bills do you deliberately keep OFF autopay so you can review them? (Select all that apply)"
+    type: multi_choice
+    construct: bills_deliberately_keep_off_autopay
+    required: true
+    options:
+      - id: "a"
+        label: "Utilities that vary month to month"
+      - id: "b"
+        label: "Credit card bills"
+      - id: "c"
+        label: "Medical bills"
+      - id: "d"
+        label: "Large or irregular bills"
+      - id: "e"
+        label: "Subscriptions I'm reconsidering"
+      - id: "f"
+        label: "I keep everything on autopay"
+      - id: "g"
+        label: "I don't use autopay at all"
+  - id: q21
+    prompt: "Do you use payment reminders or alerts alongside (or instead of) autopay?"
+    type: single_choice
+    construct: use_payment_reminders_alerts_alongside
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I rely on alerts and reminders"
+      - id: "b"
+        label: "Yes, in addition to autopay"
+      - id: "c"
+        label: "No, autopay is enough for me"
+      - id: "d"
+        label: "No, I track bills manually"
+  - id: q22
+    prompt: "Have you ever canceled autopay on a bill? If so, why? (Select all that apply)"
+    type: multi_choice
+    construct: have_ever_canceled_autopay_bill
+    required: true
+    options:
+      - id: "a"
+        label: "I had an overdraft or cash-flow problem"
+      - id: "b"
+        label: "I wanted more control over timing"
+      - id: "c"
+        label: "I was overcharged or billed incorrectly"
+      - id: "d"
+        label: "I was canceling the service itself"
+      - id: "e"
+        label: "I switched banks or cards"
+      - id: "f"
+        label: "I have never canceled autopay"
+      - id: "g"
+        label: "I have never used autopay"
+  - id: q23
+    prompt: "Select the top 3 factors that most influence whether you put a bill on autopay. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_that
+    required: true
+    options:
+      - id: "a"
+        label: "Avoiding late fees"
+      - id: "b"
+        label: "Convenience"
+      - id: "c"
+        label: "Whether the amount is predictable"
+      - id: "d"
+        label: "Earning rewards"
+      - id: "e"
+        label: "A discount for enrolling"
+      - id: "f"
+        label: "Trust in the biller"
+      - id: "g"
+        label: "Protecting my credit"
+      - id: "h"
+        label: "How easy it is to cancel later"
+  - id: q24
+    prompt: "How satisfied are you with your current approach to paying recurring bills?"
+    type: single_choice
+    construct: satisfied_current_approach_paying_recurr
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q25
+    prompt: "How likely are you to add more bills to autopay in the next year?"
+    type: single_choice
+    construct: likely_add_more_bills_autopay
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q26
+    prompt: "On a scale of 0 to 10, how likely are you to recommend automatic bill pay to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q27
+    prompt: "Please share any thoughts about how you manage recurring bills and automatic payments."
+    type: free_text
+    construct: please_share_any_thoughts_manage
+    required: true
+  - id: q28
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18-24"
+      - id: "b"
+        label: "25-34"
+      - id: "c"
+        label: "35-44"
+      - id: "d"
+        label: "45-54"
+      - id: "e"
+        label: "55-64"
+      - id: "f"
+        label: "65 or older"
+  - id: q29
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q30
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is your total annual household income (before taxes)?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q33
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Homemaker or caregiver"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Unable to work"
+  - id: q34
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q35
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q36
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q37
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q38
+    prompt: "How would you describe your comfort with managing money through digital and online tools?"
+    type: single_choice
+    construct: would_describe_comfort_managing_money
+    required: true
+    options:
+      - id: "a"
+        label: "Very comfortable"
+      - id: "b"
+        label: "Somewhat comfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat uncomfortable"
+      - id: "e"
+        label: "Very uncomfortable"
+  - id: q39
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own with a mortgage"
+      - id: "b"
+        label: "Own outright"
+      - id: "c"
+        label: "Rent"
+      - id: "d"
+        label: "Other arrangement"

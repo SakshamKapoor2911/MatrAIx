@@ -1,0 +1,7 @@
+# Physical Therapy Experience
+
+Consumer experiences with and attitudes toward physical therapy.
+
+## About this survey
+
+This survey covers whether respondents have gone to physical therapy, the main reason and body area, how they got connected (referral or direct access), where they received care (outpatient clinic, hospital, home, telehealth), total sessions, frequency, how it was paid for, and out-of-pocket cost per session. It measures the treatment types included (guided exercises, manual therapy, modalities, balance and strength training, home programs), adherence to home exercises, scheduling ease, and wait times. It runs Likert batteries on attitudes (clear plan, listening, improvement, reasonable cost, adequate covered sessions, motivation) and on the importance of provider attributes, plus a top-3 ranking of what matters most in choosing a provider, goal attainment, attendance consistency, barriers to sticking with therapy, course completion, continued exercise, confidence, satisfaction, intent to return, a 0–10 recommendation score, and an open comment. Question types include single-choice, multi-select, Likert scales, a matrix battery split per item, a top-3 ranking, and numeric free-text. Demographics captured: age, gender, race/ethnicity, household income, education, employment, household size, marital status, region, urban/rural, insurance status, and activity level.

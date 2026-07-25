@@ -1,0 +1,714 @@
+schemaVersion: "1.0"
+id: pension_attitudes_v1
+title: "Pension Attitudes Survey"
+description: "Attitudes toward traditional defined-benefit pensions and how people weigh them against modern 401(k)-style retirement plans."
+questions:
+  - id: q0
+    prompt: "Do you currently have, or expect to receive, a traditional pension (a defined-benefit plan that pays a set monthly amount in retirement)?"
+    type: single_choice
+    construct: currently_have_expect_receive_traditiona
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I currently receive pension payments"
+      - id: "b"
+        label: "Yes, I am earning or vested in a pension but not yet collecting"
+      - id: "c"
+        label: "No, but I expect to have one in the future"
+      - id: "d"
+        label: "No, and I do not expect to have one"
+      - id: "e"
+        label: "Not sure"
+  - id: q1
+    prompt: "Which best describes the sector where you currently work (or most recently worked)?"
+    type: single_choice
+    construct: best_describes_sector_where_currently
+    required: true
+    options:
+      - id: "a"
+        label: "Private company"
+      - id: "b"
+        label: "Federal government"
+      - id: "c"
+        label: "State or local government"
+      - id: "d"
+        label: "Public education (teacher, professor, school staff)"
+      - id: "e"
+        label: "Military"
+      - id: "f"
+        label: "Nonprofit organization"
+      - id: "g"
+        label: "Self-employed"
+      - id: "h"
+        label: "Not currently employed"
+  - id: q2
+    prompt: "How many total years have you worked for an employer that offered a defined-benefit pension? Please enter a number of years."
+    type: free_text
+    construct: many_total_years_have_worked
+    required: true
+  - id: q3
+    prompt: "Which of the following retirement plans have you ever participated in? (Select all that apply)"
+    type: multi_choice
+    construct: following_retirement_plans_have_ever
+    required: true
+    options:
+      - id: "a"
+        label: "Traditional defined-benefit pension"
+      - id: "b"
+        label: "401(k) plan"
+      - id: "c"
+        label: "403(b) or 457 plan"
+      - id: "d"
+        label: "Traditional or Roth IRA"
+      - id: "e"
+        label: "Federal Thrift Savings Plan (TSP)"
+      - id: "f"
+        label: "Cash-balance plan"
+      - id: "g"
+        label: "Union or multi-employer pension"
+      - id: "h"
+        label: "None of these"
+  - id: q4
+    prompt: "How did you first learn the details of your pension benefit?"
+    type: single_choice
+    construct: did_first_learn_details_pension
+    required: true
+    options:
+      - id: "a"
+        label: "Employer HR or benefits department"
+      - id: "b"
+        label: "Union representative"
+      - id: "c"
+        label: "Plan documents or benefits website"
+      - id: "d"
+        label: "Coworkers, friends, or family"
+      - id: "e"
+        label: "A financial advisor"
+      - id: "f"
+        label: "I have not learned the details"
+      - id: "g"
+        label: "Not applicable — I do not have a pension"
+  - id: q5
+    prompt: "At what age do you expect to begin (or did you begin) collecting pension benefits?"
+    type: single_choice
+    construct: age_expect_begin_did_begin
+    required: true
+    options:
+      - id: "a"
+        label: "Before 55"
+      - id: "b"
+        label: "55 to 59"
+      - id: "c"
+        label: "60 to 62"
+      - id: "d"
+        label: "63 to 65"
+      - id: "e"
+        label: "66 to 69"
+      - id: "f"
+        label: "70 or older"
+      - id: "g"
+        label: "Not applicable"
+  - id: q6
+    prompt: "If given the choice, how would you prefer to receive your pension?"
+    type: single_choice
+    construct: if_given_choice_would_prefer
+    required: true
+    options:
+      - id: "a"
+        label: "A guaranteed monthly payment for life"
+      - id: "b"
+        label: "A one-time lump sum I invest and manage myself"
+      - id: "c"
+        label: "A mix of a partial lump sum and monthly payments"
+      - id: "d"
+        label: "Not sure"
+  - id: q7
+    prompt: "How would you rate your understanding of the difference between a defined-benefit pension and a 401(k)-style account?"
+    type: single_choice
+    construct: would_rate_understanding_difference_betw
+    required: true
+    options:
+      - id: "a"
+        label: "I don't understand the difference at all"
+      - id: "b"
+        label: "Slight understanding"
+      - id: "c"
+        label: "Moderate understanding"
+      - id: "d"
+        label: "Good understanding"
+      - id: "e"
+        label: "I understand it very well and could explain it to others"
+  - id: q8
+    prompt: "How confident are you that the pension benefits you have been promised will actually be paid in full?"
+    type: single_choice
+    construct: confident_that_pension_benefits_have
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+      - id: "f"
+        label: "Not applicable — I have no pension"
+  - id: q9
+    prompt: "How concerned are you about the following regarding pensions: the plan being underfunded?"
+    type: single_choice
+    construct: concerned_following_regarding_pensions_p
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q10
+    prompt: "How concerned are you about the following regarding pensions: your employer going bankrupt before you collect?"
+    type: single_choice
+    construct: concerned_following_regarding_pensions_e
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q11
+    prompt: "How concerned are you about the following regarding pensions: inflation eroding the value of fixed monthly payments?"
+    type: single_choice
+    construct: concerned_following_regarding_pensions_i
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q12
+    prompt: "How concerned are you about the following regarding pensions: losing benefits if you change jobs (portability)?"
+    type: single_choice
+    construct: concerned_following_regarding_pensions_l
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q13
+    prompt: "How concerned are you about the following regarding pensions: government or policy changes reducing benefits?"
+    type: single_choice
+    construct: concerned_following_regarding_pensions_g
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q14
+    prompt: "How concerned are you about the following regarding pensions: outliving your retirement income?"
+    type: single_choice
+    construct: concerned_following_regarding_pensions_o
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q15
+    prompt: "How much do you agree with the following statement: A guaranteed pension is a major reason to stay with an employer."
+    type: single_choice
+    construct: much_agree_following_statement_guarantee
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: Guaranteed lifetime income is worth accepting a somewhat lower salary."
+    type: single_choice
+    construct: much_agree_following_statement_guarantee
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: Private-sector employers should bring back traditional pensions."
+    type: single_choice
+    construct: much_agree_following_statement_private
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement: I trust my employer to keep its pension promises."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement: Pensions are outdated compared with 401(k)-style plans."
+    type: single_choice
+    construct: much_agree_following_statement_pensions
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement: I would rather control my own retirement investments than rely on a pension."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "Which of the following do you rely on to plan your retirement income? (Select all that apply)"
+    type: multi_choice
+    construct: following_rely_plan_retirement_income
+    required: true
+    options:
+      - id: "a"
+        label: "A traditional pension"
+      - id: "b"
+        label: "A 401(k), 403(b), or similar account"
+      - id: "c"
+        label: "An IRA"
+      - id: "d"
+        label: "Social Security"
+      - id: "e"
+        label: "Personal savings or brokerage accounts"
+      - id: "f"
+        label: "Real estate or rental income"
+      - id: "g"
+        label: "Continuing to work part-time"
+      - id: "h"
+        label: "I have no clear retirement income plan"
+  - id: q22
+    prompt: "Select your top 3 factors that matter most when evaluating retirement income options. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_that
+    required: true
+    options:
+      - id: "a"
+        label: "Guaranteed monthly amount for life"
+      - id: "b"
+        label: "Protection against inflation"
+      - id: "c"
+        label: "Ability to leave money to heirs"
+      - id: "d"
+        label: "Control over how the money is invested"
+      - id: "e"
+        label: "Portability if I change jobs"
+      - id: "f"
+        label: "Simplicity and low effort"
+      - id: "g"
+        label: "Protection from market downturns"
+      - id: "h"
+        label: "Access to a lump sum if needed"
+  - id: q23
+    prompt: "What do you expect to be your single largest source of income in retirement?"
+    type: single_choice
+    construct: expect_be_single_largest_source
+    required: true
+    options:
+      - id: "a"
+        label: "A traditional pension"
+      - id: "b"
+        label: "Social Security"
+      - id: "c"
+        label: "A 401(k), IRA, or similar account"
+      - id: "d"
+        label: "Personal savings or investments"
+      - id: "e"
+        label: "Real estate or rental income"
+      - id: "f"
+        label: "Continued work"
+      - id: "g"
+        label: "Not sure"
+  - id: q24
+    prompt: "Have you ever lost or seen a reduction in a promised pension or retirement benefit?"
+    type: single_choice
+    construct: have_ever_lost_seen_reduction
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"
+  - id: q25
+    prompt: "How often do you follow news about pensions, Social Security, or retirement policy?"
+    type: single_choice
+    construct: often_follow_news_pensions_social
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q26
+    prompt: "How important is a strong retirement or pension benefit when you evaluate a job offer?"
+    type: single_choice
+    construct: important_strong_retirement_pension_bene
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How satisfied are you with the retirement benefits offered by your current or most recent employer?"
+    type: single_choice
+    construct: satisfied_retirement_benefits_offered_by
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q28
+    prompt: "How likely are you to factor pension or retirement benefits into your next job decision?"
+    type: single_choice
+    construct: likely_factor_pension_retirement_benefit
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q29
+    prompt: "On a scale of 0 to 10, how confident are you that you will have enough guaranteed income to cover your basic needs in retirement? (0 = not at all confident, 10 = completely confident)"
+    type: single_choice
+    construct: scale_0_10_confident_that
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q30
+    prompt: "At what age do you expect to fully retire? Please enter a number (years old)."
+    type: free_text
+    construct: age_expect_fully_retire_please
+    required: true
+  - id: q31
+    prompt: "Roughly what monthly income (in today's dollars) do you think you will need in retirement? Please enter a number of dollars per month."
+    type: free_text
+    construct: roughly_monthly_income_today_s
+    required: true
+  - id: q32
+    prompt: "Please share any hopes or concerns you have about your retirement income."
+    type: free_text
+    construct: please_share_any_hopes_concerns
+    required: true
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18-24"
+      - id: "b"
+        label: "25-34"
+      - id: "c"
+        label: "35-44"
+      - id: "d"
+        label: "45-54"
+      - id: "e"
+        label: "55-64"
+      - id: "f"
+        label: "65-74"
+      - id: "g"
+        label: "75 or older"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your total annual household income (before taxes)?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Homemaker or caregiver"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Unable to work"
+  - id: q39
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q40
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q41
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q43
+    prompt: "Are you currently a member of a labor union?"
+    type: single_choice
+    construct: currently_member_labor_union
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I was in the past"
+      - id: "c"
+        label: "No, never"

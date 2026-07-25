@@ -1,0 +1,857 @@
+schemaVersion: "1.0"
+id: pharmacy_loyalty_programs_v1
+title: "Pharmacy Loyalty Programs Survey"
+description: "How consumers enroll in, use, and value retail pharmacy loyalty and rewards programs."
+questions:
+  - id: q0
+    prompt: "Do you currently fill prescriptions or buy health and personal-care products at a retail pharmacy?"
+    type: single_choice
+    construct: currently_fill_prescriptions_buy_health
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "No, I do not use a retail pharmacy"
+  - id: q1
+    prompt: "Which pharmacy do you use most often?"
+    type: single_choice
+    construct: pharmacy_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "CVS Pharmacy"
+      - id: "b"
+        label: "Walgreens"
+      - id: "c"
+        label: "Rite Aid"
+      - id: "d"
+        label: "Walmart Pharmacy"
+      - id: "e"
+        label: "A grocery-store pharmacy (Kroger, Publix, Safeway, etc.)"
+      - id: "f"
+        label: "Costco or Sam's Club pharmacy"
+      - id: "g"
+        label: "An independent or local pharmacy"
+      - id: "h"
+        label: "A mail-order or online pharmacy (Amazon Pharmacy, etc.)"
+  - id: q2
+    prompt: "Do you take one or more prescription medications on a regular basis?"
+    type: single_choice
+    construct: take_one_more_prescription_medications
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one medication"
+      - id: "b"
+        label: "Yes, two or more medications"
+      - id: "c"
+        label: "No, only occasionally"
+      - id: "d"
+        label: "No, none at all"
+  - id: q3
+    prompt: "Are you enrolled in any pharmacy loyalty or rewards program?"
+    type: single_choice
+    construct: enrolled_any_pharmacy_loyalty_rewards
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, in one program"
+      - id: "b"
+        label: "Yes, in more than one program"
+      - id: "c"
+        label: "No, but I am aware they exist"
+      - id: "d"
+        label: "No, I have never heard of them"
+  - id: q4
+    prompt: "About how long have you been a member of your main pharmacy loyalty program?"
+    type: single_choice
+    construct: long_have_been_member_main
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+      - id: "f"
+        label: "I am not a member of any program"
+  - id: q5
+    prompt: "How often do you shop at or fill prescriptions with your main pharmacy?"
+    type: single_choice
+    construct: often_shop_fill_prescriptions_main
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a week"
+      - id: "b"
+        label: "About once a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "About once a month"
+      - id: "e"
+        label: "A few times a year"
+  - id: q6
+    prompt: "Which pharmacy loyalty or rewards programs are you a member of? (Select all that apply)"
+    type: multi_choice
+    construct: pharmacy_loyalty_rewards_programs_member
+    required: true
+    options:
+      - id: "a"
+        label: "CVS ExtraCare"
+      - id: "b"
+        label: "myWalgreens"
+      - id: "c"
+        label: "Rite Aid Rewards"
+      - id: "d"
+        label: "Walmart Rewards or Walmart+"
+      - id: "e"
+        label: "Kroger Plus or another grocery pharmacy program"
+      - id: "f"
+        label: "Costco or Sam's Club membership benefits"
+      - id: "g"
+        label: "Amazon Pharmacy or Prime prescription savings"
+      - id: "h"
+        label: "GoodRx Gold or SingleCare"
+      - id: "i"
+        label: "An independent pharmacy's rewards program"
+      - id: "j"
+        label: "None of these"
+  - id: q7
+    prompt: "How do you typically access or use your loyalty rewards? (Select all that apply)"
+    type: multi_choice
+    construct: typically_access_use_loyalty_rewards
+    required: true
+    options:
+      - id: "a"
+        label: "The pharmacy's mobile app"
+      - id: "b"
+        label: "A physical loyalty card or key tag"
+      - id: "c"
+        label: "A phone number linked to my account"
+      - id: "d"
+        label: "The pharmacy's website"
+      - id: "e"
+        label: "Emailed or texted digital coupons"
+      - id: "f"
+        label: "Coupons printed at the register"
+      - id: "g"
+        label: "I don't actively use my rewards"
+  - id: q8
+    prompt: "What do you typically redeem your rewards or points on? (Select all that apply)"
+    type: multi_choice
+    construct: typically_redeem_rewards_points_select
+    required: true
+    options:
+      - id: "a"
+        label: "Prescription co-pays"
+      - id: "b"
+        label: "Over-the-counter medicines"
+      - id: "c"
+        label: "Vitamins and supplements"
+      - id: "d"
+        label: "Personal care and beauty products"
+      - id: "e"
+        label: "Household goods or groceries"
+      - id: "f"
+        label: "Photo prints or gifts"
+      - id: "g"
+        label: "Seasonal or general merchandise"
+      - id: "h"
+        label: "I rarely redeem rewards"
+  - id: q9
+    prompt: "Do you use your main pharmacy's mobile app?"
+    type: single_choice
+    construct: use_main_pharmacy_s_mobile
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "I have it installed but rarely use it"
+      - id: "d"
+        label: "No, I do not use the app"
+  - id: q10
+    prompt: "Which app or online features do you use? (Select all that apply)"
+    type: multi_choice
+    construct: app_online_features_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Refilling prescriptions"
+      - id: "b"
+        label: "Tracking points or rewards"
+      - id: "c"
+        label: "Loading digital coupons"
+      - id: "d"
+        label: "Viewing the weekly ad or deals"
+      - id: "e"
+        label: "Medication or pill reminders"
+      - id: "f"
+        label: "Checking prescription status or pickup"
+      - id: "g"
+        label: "Ordering photos or other products"
+      - id: "h"
+        label: "I do not use any online features"
+  - id: q11
+    prompt: "Roughly how much do you spend at your main pharmacy in a typical month, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: roughly_much_spend_main_pharmacy
+    required: true
+  - id: q12
+    prompt: "In a typical month, about how many dollars' worth of rewards or points do you earn? Please enter a number."
+    type: free_text
+    construct: typical_month_many_dollars_worth
+    required: true
+  - id: q13
+    prompt: "Thinking about your main pharmacy loyalty program, how much do you agree or disagree: The rewards are easy to redeem."
+    type: single_choice
+    construct: thinking_main_pharmacy_loyalty_program
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "Thinking about your main pharmacy loyalty program, how much do you agree or disagree: The program saves me a meaningful amount of money."
+    type: single_choice
+    construct: thinking_main_pharmacy_loyalty_program
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "Thinking about your main pharmacy loyalty program, how much do you agree or disagree: The program influences which pharmacy I choose."
+    type: single_choice
+    construct: thinking_main_pharmacy_loyalty_program
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "Thinking about your main pharmacy loyalty program, how much do you agree or disagree: The coupons and offers I receive are relevant to me."
+    type: single_choice
+    construct: thinking_main_pharmacy_loyalty_program
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "Thinking about your main pharmacy loyalty program, how much do you agree or disagree: I trust the pharmacy to handle my personal data responsibly."
+    type: single_choice
+    construct: thinking_main_pharmacy_loyalty_program
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "Thinking about your main pharmacy loyalty program, how much do you agree or disagree: Signing up for the program was quick and easy."
+    type: single_choice
+    construct: thinking_main_pharmacy_loyalty_program
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "Overall, how satisfied are you with your main pharmacy loyalty program?"
+    type: single_choice
+    construct: overall_satisfied_main_pharmacy_loyalty
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q20
+    prompt: "How important is a good loyalty or rewards program when you choose which pharmacy to use?"
+    type: single_choice
+    construct: important_good_loyalty_rewards_program
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your main pharmacy's loyalty program to a friend or family member? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q22
+    prompt: "How often do you manage to redeem your rewards before they expire?"
+    type: single_choice
+    construct: often_manage_redeem_rewards_before
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q23
+    prompt: "What were your main reasons for joining a pharmacy loyalty program? (Select all that apply)"
+    type: multi_choice
+    construct: were_main_reasons_joining_pharmacy
+    required: true
+    options:
+      - id: "a"
+        label: "To save money on prescriptions"
+      - id: "b"
+        label: "To earn cash back or points"
+      - id: "c"
+        label: "To get digital coupons and deals"
+      - id: "d"
+        label: "It was offered at checkout and easy to join"
+      - id: "e"
+        label: "For free or discounted delivery"
+      - id: "f"
+        label: "For personalized offers and reminders"
+      - id: "g"
+        label: "A friend or family member recommended it"
+  - id: q24
+    prompt: "Have your rewards ever expired before you could use them?"
+    type: single_choice
+    construct: have_rewards_ever_expired_before
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, often"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, rarely or never"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q25
+    prompt: "Select your top 3 factors that matter most in a pharmacy loyalty program. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_that
+    required: true
+    options:
+      - id: "a"
+        label: "Discounts on prescription co-pays"
+      - id: "b"
+        label: "Cash back or reward points"
+      - id: "c"
+        label: "Digital coupons and personalized offers"
+      - id: "d"
+        label: "Free or fast delivery"
+      - id: "e"
+        label: "Prescription price matching"
+      - id: "f"
+        label: "An easy-to-use app"
+      - id: "g"
+        label: "Bonus reward days or events"
+      - id: "h"
+        label: "Extra pharmacist or health services"
+      - id: "i"
+        label: "Option to donate rewards to charity"
+      - id: "j"
+        label: "No membership fee"
+  - id: q26
+    prompt: "Do you compare prescription prices across different pharmacies before filling?"
+    type: single_choice
+    construct: compare_prescription_prices_across_diffe
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, almost always"
+      - id: "b"
+        label: "Yes, sometimes"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "Never"
+  - id: q27
+    prompt: "Do you use prescription discount tools or apps such as GoodRx or SingleCare?"
+    type: single_choice
+    construct: use_prescription_discount_tools_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "I've tried them but don't use them now"
+      - id: "d"
+        label: "No, never"
+  - id: q28
+    prompt: "Have you switched your main pharmacy in the past two years?"
+    type: single_choice
+    construct: have_switched_main_pharmacy_past
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q29
+    prompt: "What would most likely make you switch pharmacies?"
+    type: single_choice
+    construct: would_most_likely_make_switch
+    required: true
+    options:
+      - id: "a"
+        label: "Better prices or rewards elsewhere"
+      - id: "b"
+        label: "More convenient location or hours"
+      - id: "c"
+        label: "Faster or more reliable service"
+      - id: "d"
+        label: "Better app or online experience"
+      - id: "e"
+        label: "Insurance or plan requirements"
+      - id: "f"
+        label: "Nothing would make me switch"
+  - id: q30
+    prompt: "What is your preferred way to receive offers and coupons from your pharmacy?"
+    type: single_choice
+    construct: preferred_way_receive_offers_coupons
+    required: true
+    options:
+      - id: "a"
+        label: "Mobile app notifications"
+      - id: "b"
+        label: "Email"
+      - id: "c"
+        label: "Text message"
+      - id: "d"
+        label: "Printed at the register"
+      - id: "e"
+        label: "Physical mail"
+      - id: "f"
+        label: "I prefer not to receive offers"
+  - id: q31
+    prompt: "Do you pay for a premium membership or tier for extra pharmacy savings (for example, GoodRx Gold or a Prime membership)?"
+    type: single_choice
+    construct: pay_premium_membership_tier_extra
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I've considered it"
+      - id: "c"
+        label: "No, and I would not"
+  - id: q32
+    prompt: "How likely would you be to pay a small monthly fee for a program with significantly better rewards?"
+    type: single_choice
+    construct: likely_would_be_pay_small
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q33
+    prompt: "How concerned are you that your pharmacy loyalty program tracks your purchase history?"
+    type: single_choice
+    construct: concerned_that_pharmacy_loyalty_program
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q34
+    prompt: "How concerned are you that your pharmacy loyalty program shares your data with third parties?"
+    type: single_choice
+    construct: concerned_that_pharmacy_loyalty_program
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q35
+    prompt: "How concerned are you that your pharmacy loyalty program uses your data for targeted advertising?"
+    type: single_choice
+    construct: concerned_that_pharmacy_loyalty_program
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q36
+    prompt: "Roughly how much do you think your loyalty program saved you over the past year?"
+    type: single_choice
+    construct: roughly_much_think_loyalty_program
+    required: true
+    options:
+      - id: "a"
+        label: "Nothing or almost nothing"
+      - id: "b"
+        label: "Under $25"
+      - id: "c"
+        label: "$25 to $99"
+      - id: "d"
+        label: "$100 to $249"
+      - id: "e"
+        label: "$250 or more"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q37
+    prompt: "How likely are you to keep using your main pharmacy loyalty program over the next year?"
+    type: single_choice
+    construct: likely_keep_using_main_pharmacy
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "How likely are you to enroll in a new pharmacy's program if it offered clearly better rewards?"
+    type: single_choice
+    construct: likely_enroll_new_pharmacy_s
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q39
+    prompt: "Would you recommend your main pharmacy to friends and family?"
+    type: single_choice
+    construct: would_recommend_main_pharmacy_friends
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, definitely"
+      - id: "b"
+        label: "Probably"
+      - id: "c"
+        label: "Probably not"
+      - id: "d"
+        label: "Definitely not"
+  - id: q40
+    prompt: "Is there anything you would change about your pharmacy's loyalty program? (Optional)"
+    type: free_text
+    construct: there_anything_would_change_pharmacy
+    required: false
+  - id: q41
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 to 74"
+      - id: "g"
+        label: "75 or older"
+  - id: q42
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q47
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q48
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q49
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+  - id: q50
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q51
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q52
+    prompt: "What is your health insurance status?"
+    type: single_choice
+    construct: health_insurance_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored insurance"
+      - id: "b"
+        label: "Marketplace or individually purchased plan"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Other coverage"
+      - id: "f"
+        label: "No insurance"
+      - id: "g"
+        label: "Prefer not to say"

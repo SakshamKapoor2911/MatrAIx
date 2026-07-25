@@ -1,0 +1,794 @@
+schemaVersion: "1.0"
+id: smartphone_usage_habits_v1
+title: "Smartphone Usage Habits Survey"
+description: "How people use their smartphones day to day, and how they feel about the amount and impact of that use."
+questions:
+  - id: q0
+    prompt: "Do you own or regularly use a smartphone?"
+    type: single_choice
+    construct: own_regularly_use_smartphone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, it's my main personal device"
+      - id: "b"
+        label: "Yes, but I also use other devices heavily"
+      - id: "c"
+        label: "Yes, but I use it lightly"
+      - id: "d"
+        label: "No, I use a basic/feature phone"
+      - id: "e"
+        label: "No, I don't use a mobile phone"
+  - id: q1
+    prompt: "Which smartphone platform do you primarily use?"
+    type: single_choice
+    construct: smartphone_platform_primarily_use
+    required: true
+    options:
+      - id: "a"
+        label: "iPhone (iOS)"
+      - id: "b"
+        label: "Android"
+      - id: "c"
+        label: "Both about equally"
+      - id: "d"
+        label: "Other"
+      - id: "e"
+        label: "Not applicable"
+  - id: q2
+    prompt: "About how many hours per day do you spend on your smartphone? Enter a whole number."
+    type: free_text
+    construct: many_hours_per_day_spend
+    required: true
+  - id: q3
+    prompt: "About how many times per day do you pick up or unlock your phone?"
+    type: single_choice
+    construct: many_times_per_day_pick
+    required: true
+    options:
+      - id: "a"
+        label: "Fewer than 10 times"
+      - id: "b"
+        label: "10 to 25 times"
+      - id: "c"
+        label: "26 to 50 times"
+      - id: "d"
+        label: "51 to 100 times"
+      - id: "e"
+        label: "More than 100 times"
+      - id: "f"
+        label: "I have no idea"
+  - id: q4
+    prompt: "What is the first thing you typically do with your phone in the morning?"
+    type: single_choice
+    construct: first_thing_typically_phone_morning
+    required: true
+    options:
+      - id: "a"
+        label: "Check messages or social media"
+      - id: "b"
+        label: "Check email"
+      - id: "c"
+        label: "Check news or weather"
+      - id: "d"
+        label: "Turn off my alarm and get up"
+      - id: "e"
+        label: "Check work notifications"
+      - id: "f"
+        label: "I don't reach for my phone first thing"
+  - id: q5
+    prompt: "What do you use your smartphone for most? (Select all that apply)"
+    type: multi_choice
+    construct: use_smartphone_most_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Texting and messaging"
+      - id: "b"
+        label: "Social media"
+      - id: "c"
+        label: "Phone and video calls"
+      - id: "d"
+        label: "Email"
+      - id: "e"
+        label: "Web browsing"
+      - id: "f"
+        label: "Watching videos"
+      - id: "g"
+        label: "Listening to music or podcasts"
+      - id: "h"
+        label: "Gaming"
+      - id: "i"
+        label: "Navigation and maps"
+      - id: "j"
+        label: "Shopping"
+      - id: "k"
+        label: "Photos and camera"
+      - id: "l"
+        label: "Banking and finance"
+      - id: "m"
+        label: "Work or productivity"
+  - id: q6
+    prompt: "Which categories of apps do you use daily? (Select all that apply)"
+    type: multi_choice
+    construct: categories_apps_use_daily_select
+    required: true
+    options:
+      - id: "a"
+        label: "Messaging"
+      - id: "b"
+        label: "Social media"
+      - id: "c"
+        label: "Email"
+      - id: "d"
+        label: "Streaming video"
+      - id: "e"
+        label: "Music or podcasts"
+      - id: "f"
+        label: "Games"
+      - id: "g"
+        label: "News"
+      - id: "h"
+        label: "Maps or navigation"
+      - id: "i"
+        label: "Shopping"
+      - id: "j"
+        label: "Banking"
+      - id: "k"
+        label: "Health or fitness"
+      - id: "l"
+        label: "Camera or photos"
+  - id: q7
+    prompt: "Where do you use your smartphone the most? (Select all that apply)"
+    type: multi_choice
+    construct: where_use_smartphone_most_select
+    required: true
+    options:
+      - id: "a"
+        label: "At home"
+      - id: "b"
+        label: "At work or school"
+      - id: "c"
+        label: "While commuting or traveling"
+      - id: "d"
+        label: "In bed"
+      - id: "e"
+        label: "While watching TV"
+      - id: "f"
+        label: "In social settings"
+      - id: "g"
+        label: "Everywhere"
+  - id: q8
+    prompt: "How often do you check your phone during meals with others?"
+    type: single_choice
+    construct: often_check_phone_during_meals
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q9
+    prompt: "How often do you use your phone within a few minutes of going to bed?"
+    type: single_choice
+    construct: often_use_phone_within_few
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q10
+    prompt: "How often do you feel you check your phone more than you'd like?"
+    type: single_choice
+    construct: often_feel_check_phone_more
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q11
+    prompt: "Please rate your agreement: I would feel anxious if I forgot my phone at home."
+    type: single_choice
+    construct: please_rate_agreement_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "Please rate your agreement: My phone helps me stay productive and organized."
+    type: single_choice
+    construct: please_rate_agreement_my_phone
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "Please rate your agreement: I spend too much time on my phone."
+    type: single_choice
+    construct: please_rate_agreement_i_spend
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "Please rate your agreement: My phone use interferes with my sleep."
+    type: single_choice
+    construct: please_rate_agreement_my_phone
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "Please rate your agreement: My phone helps me stay connected with people I care about."
+    type: single_choice
+    construct: please_rate_agreement_my_phone
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "Please rate your agreement: I often pick up my phone without a clear reason."
+    type: single_choice
+    construct: please_rate_agreement_i_often
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How often do you do this: Check social media"
+    type: single_choice
+    construct: often_this_check_social_media
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Daily"
+      - id: "d"
+        label: "Several times a day"
+      - id: "e"
+        label: "Constantly throughout the day"
+  - id: q18
+    prompt: "How often do you do this: Send text or chat messages"
+    type: single_choice
+    construct: often_this_send_text_chat
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Daily"
+      - id: "d"
+        label: "Several times a day"
+      - id: "e"
+        label: "Constantly throughout the day"
+  - id: q19
+    prompt: "How often do you do this: Watch short videos (e.g., Reels, TikTok, Shorts)"
+    type: single_choice
+    construct: often_this_watch_short_videos
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Daily"
+      - id: "d"
+        label: "Several times a day"
+      - id: "e"
+        label: "Constantly throughout the day"
+  - id: q20
+    prompt: "How often do you do this: Check work email or messages"
+    type: single_choice
+    construct: often_this_check_work_email
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Daily"
+      - id: "d"
+        label: "Several times a day"
+      - id: "e"
+        label: "Constantly throughout the day"
+  - id: q21
+    prompt: "How often do you do this: Play mobile games"
+    type: single_choice
+    construct: often_this_play_mobile_games
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Daily"
+      - id: "d"
+        label: "Several times a day"
+      - id: "e"
+        label: "Constantly throughout the day"
+  - id: q22
+    prompt: "How often do you do this: Take or edit photos"
+    type: single_choice
+    construct: often_this_take_edit_photos
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Daily"
+      - id: "d"
+        label: "Several times a day"
+      - id: "e"
+        label: "Constantly throughout the day"
+  - id: q23
+    prompt: "Do you use any tools or settings to manage your screen time? (Select all that apply)"
+    type: multi_choice
+    construct: use_any_tools_settings_manage
+    required: true
+    options:
+      - id: "a"
+        label: "Built-in Screen Time / Digital Wellbeing dashboards"
+      - id: "b"
+        label: "App time limits"
+      - id: "c"
+        label: "Focus or Do Not Disturb modes"
+      - id: "d"
+        label: "Grayscale or reduced-color mode"
+      - id: "e"
+        label: "Removing apps from my home screen"
+      - id: "f"
+        label: "A separate app-blocking tool"
+      - id: "g"
+        label: "I don't use any such tools"
+  - id: q24
+    prompt: "How do you manage notifications on your phone?"
+    type: single_choice
+    construct: manage_notifications_phone
+    required: true
+    options:
+      - id: "a"
+        label: "I allow almost all notifications"
+      - id: "b"
+        label: "I allow notifications only from important apps"
+      - id: "c"
+        label: "I keep my phone on silent most of the time"
+      - id: "d"
+        label: "I use Do Not Disturb or Focus modes heavily"
+      - id: "e"
+        label: "I rarely change notification settings"
+  - id: q25
+    prompt: "How often do you feel your phone is a distraction from what you should be doing?"
+    type: single_choice
+    construct: often_feel_phone_distraction_from
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q26
+    prompt: "Have you ever taken a deliberate break from your smartphone (a \"digital detox\")?"
+    type: single_choice
+    construct: have_ever_taken_deliberate_break
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, once or twice"
+      - id: "c"
+        label: "No, but I'd like to"
+      - id: "d"
+        label: "No, and I don't feel the need"
+  - id: q27
+    prompt: "How do you feel about the amount of time you spend on your phone?"
+    type: single_choice
+    construct: feel_amount_time_spend_phone
+    required: true
+    options:
+      - id: "a"
+        label: "I'd like to spend much less"
+      - id: "b"
+        label: "I'd like to spend somewhat less"
+      - id: "c"
+        label: "It's about right"
+      - id: "d"
+        label: "I'm comfortable with it"
+      - id: "e"
+        label: "I don't think about it"
+  - id: q28
+    prompt: "Where do you typically keep your phone while sleeping?"
+    type: single_choice
+    construct: where_typically_keep_phone_while
+    required: true
+    options:
+      - id: "a"
+        label: "On my nightstand within reach"
+      - id: "b"
+        label: "In the same room but across the room"
+      - id: "c"
+        label: "Outside the bedroom"
+      - id: "d"
+        label: "Under my pillow or in bed"
+      - id: "e"
+        label: "It varies"
+  - id: q29
+    prompt: "Select the top 3 things you value most about your smartphone. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_value
+    required: true
+    options:
+      - id: "a"
+        label: "Staying in touch with people"
+      - id: "b"
+        label: "Entertainment on the go"
+      - id: "c"
+        label: "Productivity and organization"
+      - id: "d"
+        label: "Navigation and getting around"
+      - id: "e"
+        label: "Camera and capturing moments"
+      - id: "f"
+        label: "Access to information anytime"
+      - id: "g"
+        label: "Shopping and payments"
+      - id: "h"
+        label: "Managing my health and fitness"
+  - id: q30
+    prompt: "Overall, how satisfied are you with your relationship with your smartphone?"
+    type: single_choice
+    construct: overall_satisfied_relationship_smartphon
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q31
+    prompt: "On a scale of 0 to 10, how healthy would you rate your current phone habits? (0 = Very unhealthy, 10 = Very healthy)"
+    type: single_choice
+    construct: scale_0_10_healthy_would
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "How likely are you to try to reduce your phone use in the next year?"
+    type: single_choice
+    construct: likely_try_reduce_phone_use
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q33
+    prompt: "If you could change one thing about your phone habits, what would it be? (Optional)"
+    type: free_text
+    construct: if_could_change_one_thing
+    required: false
+  - id: q34
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18 years old"
+      - id: "b"
+        label: "18-24 years old"
+      - id: "c"
+        label: "25-34 years old"
+      - id: "d"
+        label: "35-44 years old"
+      - id: "e"
+        label: "45-54 years old"
+      - id: "f"
+        label: "55-64 years old"
+      - id: "g"
+        label: "65 years or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed, looking for work"
+      - id: "f"
+        label: "Not employed, not looking for work"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "How many people live in your household, including you? Enter a whole number."
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q41
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or domestic partnership"
+      - id: "c"
+        label: "In a relationship, not living together"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Do you have children under 18 living in your household?"
+    type: single_choice
+    construct: have_children_under_18_living
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "In which U.S. region do you live?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "How would you rate your overall comfort with technology?"
+    type: single_choice
+    construct: would_rate_overall_comfort_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Extremely comfortable — I'm the person others ask for help"

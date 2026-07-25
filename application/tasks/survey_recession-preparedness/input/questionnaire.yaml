@@ -1,0 +1,795 @@
+schemaVersion: "1.0"
+id: recession_preparedness_v1
+title: "Recession Preparedness Survey"
+description: "How prepared households feel for an economic downturn and the steps they take to protect their finances."
+questions:
+  - id: q0
+    prompt: "How likely do you think a recession is in the United States in the next 12 months?"
+    type: single_choice
+    construct: likely_think_recession_united_states
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "About 50/50"
+      - id: "d"
+        label: "Somewhat likely"
+      - id: "e"
+        label: "Very likely"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q1
+    prompt: "Overall, how prepared do you feel your household is to weather a recession?"
+    type: single_choice
+    construct: overall_prepared_feel_household_weather
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all prepared"
+      - id: "b"
+        label: "Slightly prepared"
+      - id: "c"
+        label: "Moderately prepared"
+      - id: "d"
+        label: "Well prepared"
+      - id: "e"
+        label: "Very well prepared"
+  - id: q2
+    prompt: "Have you personally lived through a recession as an adult (for example, 2008–2009 or the 2020 downturn)?"
+    type: single_choice
+    construct: have_personally_lived_through_recession
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it affected me significantly"
+      - id: "b"
+        label: "Yes, but it had little effect on me"
+      - id: "c"
+        label: "No, not as an adult"
+      - id: "d"
+        label: "Not sure"
+  - id: q3
+    prompt: "If you lost your main source of income today, how long could your household cover essential expenses from savings?"
+    type: single_choice
+    construct: if_lost_main_source_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 2 weeks"
+      - id: "b"
+        label: "About 1 month"
+      - id: "c"
+        label: "About 3 months"
+      - id: "d"
+        label: "About 6 months"
+      - id: "e"
+        label: "More than 6 months"
+  - id: q4
+    prompt: "How closely do you follow news about the economy (inflation, jobs, interest rates)?"
+    type: single_choice
+    construct: closely_follow_news_economy_inflation
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "Closely"
+      - id: "e"
+        label: "Very closely"
+  - id: q5
+    prompt: "How stable do you consider your current job or main income source?"
+    type: single_choice
+    construct: stable_consider_current_job_main
+    required: true
+    options:
+      - id: "a"
+        label: "Very unstable"
+      - id: "b"
+        label: "Somewhat unstable"
+      - id: "c"
+        label: "Somewhat stable"
+      - id: "d"
+        label: "Very stable"
+      - id: "e"
+        label: "Not applicable (not employed)"
+  - id: q6
+    prompt: "How worried are you about losing your job or main income in the next year?"
+    type: single_choice
+    construct: worried_losing_job_main_income
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Not applicable (not employed)"
+  - id: q7
+    prompt: "Which steps have you already taken to prepare for a possible downturn? (Select all that apply)"
+    type: multi_choice
+    construct: steps_have_already_taken_prepare
+    required: true
+    options:
+      - id: "a"
+        label: "Built up or added to an emergency fund"
+      - id: "b"
+        label: "Paid down high-interest debt"
+      - id: "c"
+        label: "Cut back on discretionary spending"
+      - id: "d"
+        label: "Diversified my investments"
+      - id: "e"
+        label: "Moved money into safer or more liquid assets"
+      - id: "f"
+        label: "Picked up extra income or a side job"
+      - id: "g"
+        label: "Updated my resume or networked for job security"
+      - id: "h"
+        label: "Delayed a major purchase"
+      - id: "i"
+        label: "Reviewed or cut recurring subscriptions"
+      - id: "j"
+        label: "I haven't taken any steps yet"
+  - id: q8
+    prompt: "In a recession, which expenses would you cut first? (Select all that apply)"
+    type: multi_choice
+    construct: recession_expenses_would_cut_first
+    required: true
+    options:
+      - id: "a"
+        label: "Dining out and takeout"
+      - id: "b"
+        label: "Streaming and subscriptions"
+      - id: "c"
+        label: "Travel and vacations"
+      - id: "d"
+        label: "Clothing and personal shopping"
+      - id: "e"
+        label: "Gym or fitness memberships"
+      - id: "f"
+        label: "Entertainment and hobbies"
+      - id: "g"
+        label: "Charitable donations"
+      - id: "h"
+        label: "Groceries (switch to cheaper brands)"
+      - id: "i"
+        label: "Nothing — my budget is already tight"
+  - id: q9
+    prompt: "If you needed emergency cash during a downturn, which sources would you rely on? (Select all that apply)"
+    type: multi_choice
+    construct: if_needed_emergency_cash_during
+    required: true
+    options:
+      - id: "a"
+        label: "Emergency savings account"
+      - id: "b"
+        label: "Regular checking or savings"
+      - id: "c"
+        label: "Credit cards"
+      - id: "d"
+        label: "A personal loan or line of credit"
+      - id: "e"
+        label: "Borrowing from family or friends"
+      - id: "f"
+        label: "Selling investments"
+      - id: "g"
+        label: "Withdrawing from a retirement account"
+      - id: "h"
+        label: "Selling personal belongings"
+      - id: "i"
+        label: "I don't have a clear source"
+  - id: q10
+    prompt: "About how many months of essential expenses do you currently have saved in an emergency fund? Please enter a number of months."
+    type: free_text
+    construct: many_months_essential_expenses_currently
+    required: true
+  - id: q11
+    prompt: "Roughly how much do you currently have in cash or easily accessible savings? Please enter a dollar amount."
+    type: free_text
+    construct: roughly_much_currently_have_cash
+    required: true
+  - id: q12
+    prompt: "In the past 6 months, have you changed how much you spend each month?"
+    type: single_choice
+    construct: past_6_months_have_changed
+    required: true
+    options:
+      - id: "a"
+        label: "Spending a lot less"
+      - id: "b"
+        label: "Spending a little less"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Spending a little more"
+      - id: "e"
+        label: "Spending a lot more"
+  - id: q13
+    prompt: "In the past 6 months, have you changed how much you save each month?"
+    type: single_choice
+    construct: past_6_months_have_changed
+    required: true
+    options:
+      - id: "a"
+        label: "Saving a lot less"
+      - id: "b"
+        label: "Saving a little less"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Saving a little more"
+      - id: "e"
+        label: "Saving a lot more"
+  - id: q14
+    prompt: "How much high-interest debt (credit cards, payday loans) does your household currently carry?"
+    type: single_choice
+    construct: much_high_interest_debt_credit
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "A small amount I could pay off quickly"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A large amount"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q15
+    prompt: "How much do you agree or disagree: I have a clear plan for what I would do if my income dropped sharply."
+    type: single_choice
+    construct: much_agree_disagree_i_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: Thinking about the economy makes me anxious."
+    type: single_choice
+    construct: much_agree_disagree_thinking_economy
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree or disagree: I could quickly find new work if I lost my job."
+    type: single_choice
+    construct: much_agree_disagree_i_could
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree or disagree: My household lives paycheck to paycheck."
+    type: single_choice
+    construct: much_agree_disagree_my_household
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree or disagree: I feel confident managing my money during uncertain times."
+    type: single_choice
+    construct: much_agree_disagree_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Thinking about a recession, how worried are you about each of the following: Losing my job or income"
+    type: single_choice
+    construct: thinking_recession_worried_each_followin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+  - id: q21
+    prompt: "Thinking about a recession, how worried are you about each of the following: Not being able to pay rent or mortgage"
+    type: single_choice
+    construct: thinking_recession_worried_each_followin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+  - id: q22
+    prompt: "Thinking about a recession, how worried are you about each of the following: The value of my investments or retirement dropping"
+    type: single_choice
+    construct: thinking_recession_worried_each_followin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+  - id: q23
+    prompt: "Thinking about a recession, how worried are you about each of the following: Rising prices making everyday costs unaffordable"
+    type: single_choice
+    construct: thinking_recession_worried_each_followin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+  - id: q24
+    prompt: "Thinking about a recession, how worried are you about each of the following: Falling into or deeper into debt"
+    type: single_choice
+    construct: thinking_recession_worried_each_followin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+  - id: q25
+    prompt: "Thinking about a recession, how worried are you about each of the following: Being unable to help family members financially"
+    type: single_choice
+    construct: thinking_recession_worried_each_followin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+  - id: q26
+    prompt: "Which of these do you plan to do in the next 12 months to prepare further? (Select all that apply)"
+    type: multi_choice
+    construct: these_plan_next_12_months
+    required: true
+    options:
+      - id: "a"
+        label: "Increase my emergency savings"
+      - id: "b"
+        label: "Pay down debt faster"
+      - id: "c"
+        label: "Create or update a household budget"
+      - id: "d"
+        label: "Look for a higher-paying or more secure job"
+      - id: "e"
+        label: "Start a side income"
+      - id: "f"
+        label: "Rebalance my investments"
+      - id: "g"
+        label: "Cut a major recurring expense"
+      - id: "h"
+        label: "Talk to a financial advisor"
+      - id: "i"
+        label: "Nothing planned right now"
+  - id: q27
+    prompt: "Select your top 3 priorities for protecting your finances in a downturn. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_priorities_protecting
+    required: true
+    options:
+      - id: "a"
+        label: "Keeping enough cash on hand"
+      - id: "b"
+        label: "Keeping my job secure"
+      - id: "c"
+        label: "Avoiding new debt"
+      - id: "d"
+        label: "Protecting my retirement savings"
+      - id: "e"
+        label: "Keeping up with housing payments"
+      - id: "f"
+        label: "Maintaining health insurance coverage"
+      - id: "g"
+        label: "Being able to support my family"
+      - id: "h"
+        label: "Keeping my credit score healthy"
+  - id: q28
+    prompt: "How would you most likely change your investing during a recession?"
+    type: single_choice
+    construct: would_most_likely_change_investing
+    required: true
+    options:
+      - id: "a"
+        label: "Move to cash or safer assets"
+      - id: "b"
+        label: "Keep investing as usual"
+      - id: "c"
+        label: "Buy more while prices are low"
+      - id: "d"
+        label: "Stop contributing but hold what I have"
+      - id: "e"
+        label: "I don't have investments"
+  - id: q29
+    prompt: "How confident are you that you could find a new job within 3 months if you lost yours?"
+    type: single_choice
+    construct: confident_that_could_find_new
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Not applicable (not seeking work)"
+  - id: q30
+    prompt: "Do you currently have any of the following as a financial safety net? (Select all that apply)"
+    type: multi_choice
+    construct: currently_have_any_following_as
+    required: true
+    options:
+      - id: "a"
+        label: "Unemployment insurance eligibility"
+      - id: "b"
+        label: "A working partner or second household income"
+      - id: "c"
+        label: "Family who could help financially"
+      - id: "d"
+        label: "Home equity I could borrow against"
+      - id: "e"
+        label: "A severance package or emergency employer benefit"
+      - id: "f"
+        label: "None of these"
+  - id: q31
+    prompt: "How much do you trust the government to support people financially during a recession?"
+    type: single_choice
+    construct: much_trust_government_support_people
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Not sure"
+  - id: q32
+    prompt: "Compared with a year ago, how prepared do you feel for an economic downturn now?"
+    type: single_choice
+    construct: compared_year_ago_prepared_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Much less prepared"
+      - id: "b"
+        label: "Somewhat less prepared"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat more prepared"
+      - id: "e"
+        label: "Much more prepared"
+  - id: q33
+    prompt: "How likely are you to make a major financial decision (buying a home, changing jobs, large purchase) in the next 12 months given the economic outlook?"
+    type: single_choice
+    construct: likely_make_major_financial_decision
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Somewhat likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "Overall, how satisfied are you with your current level of financial preparedness?"
+    type: single_choice
+    construct: overall_satisfied_current_level_financia
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "What is the one thing you most wish you had done to be better prepared for a downturn? Please describe briefly."
+    type: free_text
+    construct: one_thing_most_wish_had
+    required: true
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q42
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+      - id: "h"
+        label: "Unable to work"
+  - id: q43
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q44
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q47
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own with a mortgage"
+      - id: "b"
+        label: "Own outright"
+      - id: "c"
+        label: "Rent"
+      - id: "d"
+        label: "Other arrangement"
+  - id: q48
+    prompt: "Do you have children or other dependents who rely on you financially?"
+    type: single_choice
+    construct: have_children_other_dependents_who
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"

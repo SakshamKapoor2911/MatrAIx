@@ -1,0 +1,928 @@
+schemaVersion: "1.0"
+id: ci_cd_adoption_v1
+title: "CI/CD Adoption Survey"
+description: "How software teams adopt and operate continuous integration and continuous delivery pipelines."
+questions:
+  - id: q0
+    prompt: "Which best describes your team's use of continuous integration and delivery (CI/CD)?"
+    type: single_choice
+    construct: best_describes_team_s_use
+    required: true
+    options:
+      - id: "a"
+        label: "We have mature, widely used CI/CD pipelines"
+      - id: "b"
+        label: "We use basic CI/CD for some projects"
+      - id: "c"
+        label: "We are actively adopting CI/CD"
+      - id: "d"
+        label: "We don't use CI/CD"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q1
+    prompt: "How long has your team used CI/CD?"
+    type: single_choice
+    construct: long_has_team_used_ci
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "More than 5 years"
+      - id: "e"
+        label: "We don't use CI/CD"
+  - id: q2
+    prompt: "What is your relationship to CI/CD pipelines?"
+    type: single_choice
+    construct: relationship_ci_cd_pipelines
+    required: true
+    options:
+      - id: "a"
+        label: "I build and maintain the pipelines"
+      - id: "b"
+        label: "I use pipelines others maintain"
+      - id: "c"
+        label: "I both build and use pipelines"
+      - id: "d"
+        label: "I don't interact with pipelines directly"
+  - id: q3
+    prompt: "Which CI/CD tool does your team primarily use?"
+    type: single_choice
+    construct: ci_cd_tool_does_team
+    required: true
+    options:
+      - id: "a"
+        label: "GitHub Actions"
+      - id: "b"
+        label: "GitLab CI/CD"
+      - id: "c"
+        label: "Jenkins"
+      - id: "d"
+        label: "CircleCI"
+      - id: "e"
+        label: "Azure Pipelines"
+      - id: "f"
+        label: "Bitbucket Pipelines"
+      - id: "g"
+        label: "Argo CD"
+      - id: "h"
+        label: "Buildkite"
+      - id: "i"
+        label: "TeamCity"
+      - id: "j"
+        label: "Other"
+  - id: q4
+    prompt: "Which CI/CD tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: ci_cd_tools_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "GitHub Actions"
+      - id: "b"
+        label: "GitLab CI/CD"
+      - id: "c"
+        label: "Jenkins"
+      - id: "d"
+        label: "CircleCI"
+      - id: "e"
+        label: "Azure Pipelines"
+      - id: "f"
+        label: "Bitbucket Pipelines"
+      - id: "g"
+        label: "Argo CD"
+      - id: "h"
+        label: "Buildkite"
+      - id: "i"
+        label: "Travis CI"
+      - id: "j"
+        label: "TeamCity"
+      - id: "k"
+        label: "Other"
+  - id: q5
+    prompt: "What do your pipelines automate? (Select all that apply)"
+    type: multi_choice
+    construct: pipelines_automate_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Building the application"
+      - id: "b"
+        label: "Unit tests"
+      - id: "c"
+        label: "Integration or end-to-end tests"
+      - id: "d"
+        label: "Linting and formatting"
+      - id: "e"
+        label: "Security scanning"
+      - id: "f"
+        label: "Deploying to staging"
+      - id: "g"
+        label: "Deploying to production"
+      - id: "h"
+        label: "Building container images"
+      - id: "i"
+        label: "Infrastructure as code"
+      - id: "j"
+        label: "Versioning and releases"
+  - id: q6
+    prompt: "How often does your team deploy to production?"
+    type: single_choice
+    construct: often_does_team_deploy_production
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "About once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Weekly"
+      - id: "e"
+        label: "Monthly or less often"
+  - id: q7
+    prompt: "Where do your pipelines deploy? (Select all that apply)"
+    type: multi_choice
+    construct: where_pipelines_deploy_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Cloud virtual machines"
+      - id: "b"
+        label: "Kubernetes clusters"
+      - id: "c"
+        label: "Serverless / functions"
+      - id: "d"
+        label: "Platform-as-a-service (Heroku, Vercel, etc.)"
+      - id: "e"
+        label: "On-premises servers"
+      - id: "f"
+        label: "Mobile app stores"
+      - id: "g"
+        label: "Container registries"
+      - id: "h"
+        label: "We don't deploy through pipelines"
+  - id: q8
+    prompt: "How are your pipelines triggered? (Select all that apply)"
+    type: multi_choice
+    construct: pipelines_triggered_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "On every push"
+      - id: "b"
+        label: "On pull / merge requests"
+      - id: "c"
+        label: "On a schedule"
+      - id: "d"
+        label: "Manually"
+      - id: "e"
+        label: "On tags or releases"
+  - id: q9
+    prompt: "Which best describes your delivery automation?"
+    type: single_choice
+    construct: best_describes_delivery_automation
+    required: true
+    options:
+      - id: "a"
+        label: "Continuous integration only (no automated deploy)"
+      - id: "b"
+        label: "Automated deploy to staging, manual to production"
+      - id: "c"
+        label: "Fully automated deploy to production"
+      - id: "d"
+        label: "We don't automate deployment"
+  - id: q10
+    prompt: "Which deployment strategy do you primarily use?"
+    type: single_choice
+    construct: deployment_strategy_primarily_use
+    required: true
+    options:
+      - id: "a"
+        label: "Rolling deployment"
+      - id: "b"
+        label: "Blue-green deployment"
+      - id: "c"
+        label: "Canary releases"
+      - id: "d"
+        label: "Recreate / stop-and-replace"
+      - id: "e"
+        label: "Manual deployment"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q11
+    prompt: "How do you typically roll back a bad deployment?"
+    type: single_choice
+    construct: typically_roll_back_bad_deployment
+    required: true
+    options:
+      - id: "a"
+        label: "Automated rollback in the pipeline"
+      - id: "b"
+        label: "Redeploy a previous version manually"
+      - id: "c"
+        label: "Revert the commit and redeploy"
+      - id: "d"
+        label: "We rarely need to roll back"
+      - id: "e"
+        label: "We don't have a rollback process"
+  - id: q12
+    prompt: "About how many pipelines or workflows do you personally maintain? Please enter a number."
+    type: free_text
+    construct: many_pipelines_workflows_personally_main
+    required: true
+  - id: q13
+    prompt: "About how many minutes does your typical build-and-test pipeline take to run? Please enter a number."
+    type: free_text
+    construct: many_minutes_does_typical_build
+    required: true
+  - id: q14
+    prompt: "Roughly what share of your codebase is covered by automated tests?"
+    type: single_choice
+    construct: roughly_share_codebase_covered_by
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "Less than 25%"
+      - id: "c"
+        label: "25% to 50%"
+      - id: "d"
+        label: "51% to 75%"
+      - id: "e"
+        label: "More than 75%"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q15
+    prompt: "Which infrastructure-as-code tools do your pipelines use? (Select all that apply)"
+    type: multi_choice
+    construct: infrastructure_as_code_tools_pipelines
+    required: true
+    options:
+      - id: "a"
+        label: "Terraform / OpenTofu"
+      - id: "b"
+        label: "AWS CloudFormation"
+      - id: "c"
+        label: "Pulumi"
+      - id: "d"
+        label: "Ansible"
+      - id: "e"
+        label: "Helm"
+      - id: "f"
+        label: "None of these"
+  - id: q16
+    prompt: "How much do you agree: CI/CD has improved how fast we ship changes."
+    type: single_choice
+    construct: much_agree_ci_cd_has
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: Our pipelines are reliable and rarely fail for the wrong reasons."
+    type: single_choice
+    construct: much_agree_our_pipelines_reliable
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Flaky tests are a significant problem for us."
+    type: single_choice
+    construct: much_agree_flaky_tests_significant
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: Setting up and maintaining CI/CD is difficult."
+    type: single_choice
+    construct: much_agree_setting_up_maintaining
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: I trust our automated deployments to production."
+    type: single_choice
+    construct: much_agree_i_trust_our
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: Our pipelines are too slow."
+    type: single_choice
+    construct: much_agree_our_pipelines_too
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: CI/CD has improved the overall quality of our code."
+    type: single_choice
+    construct: much_agree_ci_cd_has
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "When choosing a CI/CD tool, how important is ease of setup?"
+    type: single_choice
+    construct: when_choosing_ci_cd_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a CI/CD tool, how important is build and pipeline speed?"
+    type: single_choice
+    construct: when_choosing_ci_cd_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a CI/CD tool, how important is integration with your version control?"
+    type: single_choice
+    construct: when_choosing_ci_cd_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a CI/CD tool, how important is cost?"
+    type: single_choice
+    construct: when_choosing_ci_cd_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a CI/CD tool, how important is extensibility (plugins, marketplace)?"
+    type: single_choice
+    construct: when_choosing_ci_cd_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing a CI/CD tool, how important are security features?"
+    type: single_choice
+    construct: when_choosing_ci_cd_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "Which are the top 3 benefits your team gets from CI/CD? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_benefits_team_gets
+    required: true
+    options:
+      - id: "a"
+        label: "Faster releases"
+      - id: "b"
+        label: "Fewer bugs in production"
+      - id: "c"
+        label: "Consistency and repeatability"
+      - id: "d"
+        label: "Less manual work"
+      - id: "e"
+        label: "Faster feedback on changes"
+      - id: "f"
+        label: "Easier rollbacks"
+      - id: "g"
+        label: "Better team collaboration"
+      - id: "h"
+        label: "Confidence to change code"
+  - id: q30
+    prompt: "What are your biggest CI/CD challenges? (Select all that apply)"
+    type: multi_choice
+    construct: biggest_ci_cd_challenges_select
+    required: true
+    options:
+      - id: "a"
+        label: "Flaky or unreliable tests"
+      - id: "b"
+        label: "Slow build times"
+      - id: "c"
+        label: "Cost of compute or licenses"
+      - id: "d"
+        label: "Pipeline complexity"
+      - id: "e"
+        label: "Ongoing maintenance"
+      - id: "f"
+        label: "Security concerns"
+      - id: "g"
+        label: "Debugging failures"
+      - id: "h"
+        label: "Getting the team to adopt it"
+  - id: q31
+    prompt: "How often do your pipelines fail for reasons unrelated to real code problems?"
+    type: single_choice
+    construct: often_pipelines_fail_reasons_unrelated
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q32
+    prompt: "How often does a deployment cause a production issue?"
+    type: single_choice
+    construct: often_does_deployment_cause_production
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q33
+    prompt: "Do your pipelines integrate with monitoring or observability tools?"
+    type: single_choice
+    construct: pipelines_integrate_monitoring_observabi
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, tightly integrated"
+      - id: "b"
+        label: "Somewhat integrated"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q34
+    prompt: "Do your pipelines include automated security scanning?"
+    type: single_choice
+    construct: pipelines_include_automated_security_sca
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, on every run"
+      - id: "b"
+        label: "Yes, on some runs"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q35
+    prompt: "Do you use cloud-hosted or self-hosted CI/CD runners?"
+    type: single_choice
+    construct: use_cloud_hosted_self_hosted
+    required: true
+    options:
+      - id: "a"
+        label: "Cloud-hosted runners"
+      - id: "b"
+        label: "Self-hosted runners"
+      - id: "c"
+        label: "A mix of both"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q36
+    prompt: "How satisfied are you with your pipelines' build and test speed?"
+    type: single_choice
+    construct: satisfied_pipelines_build_test_speed
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "How satisfied are you with your pipelines' reliability?"
+    type: single_choice
+    construct: satisfied_pipelines_reliability
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "Overall, how satisfied are you with your CI/CD setup?"
+    type: single_choice
+    construct: overall_satisfied_ci_cd_setup
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q39
+    prompt: "How likely are you to recommend your primary CI/CD tool to another team? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_ci_cd
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q40
+    prompt: "How likely is your team to invest more in CI/CD over the next year?"
+    type: single_choice
+    construct: likely_team_invest_more_ci
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q41
+    prompt: "How likely are you to switch CI/CD tools within the next year?"
+    type: single_choice
+    construct: likely_switch_ci_cd_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What is one thing you would improve about your CI/CD pipelines? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_ci
+    required: false
+  - id: q43
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "DevOps or platform engineer"
+      - id: "e"
+        label: "Site reliability engineer"
+      - id: "f"
+        label: "Data or ML engineer"
+      - id: "g"
+        label: "Engineering manager"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q44
+    prompt: "How many years have you coded professionally (not counting education)?"
+    type: single_choice
+    construct: many_years_have_coded_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't code professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q46
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q47
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q48
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q49
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q52
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

@@ -1,0 +1,777 @@
+schemaVersion: "1.0"
+id: project_management_tools_v1
+title: "Project Management Tools Survey"
+description: "How individuals and teams use project management tools to plan, track, and report on work — which tools they choose, how they use them, and how satisfied they are."
+questions:
+  - id: q0
+    prompt: "Do you use a dedicated project management tool for work?"
+    type: single_choice
+    construct: use_dedicated_project_management_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, daily"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but my team does and I sometimes look at it"
+      - id: "d"
+        label: "No, I don't use one"
+  - id: q1
+    prompt: "How long have you been using project management tools?"
+    type: single_choice
+    construct: long_have_been_using_project
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "More than 5 years"
+      - id: "e"
+        label: "I don't use them"
+  - id: q2
+    prompt: "How often do you interact with your project management tool?"
+    type: single_choice
+    construct: often_interact_project_management_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "About once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Rarely"
+  - id: q3
+    prompt: "Approximately how many active projects or boards do you currently track? Enter a whole number."
+    type: free_text
+    construct: approximately_many_active_projects_board
+    required: true
+  - id: q4
+    prompt: "Which project management tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: project_management_tools_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Jira"
+      - id: "b"
+        label: "Asana"
+      - id: "c"
+        label: "Monday.com"
+      - id: "d"
+        label: "Trello"
+      - id: "e"
+        label: "ClickUp"
+      - id: "f"
+        label: "Notion"
+      - id: "g"
+        label: "Microsoft Project"
+      - id: "h"
+        label: "Microsoft Planner"
+      - id: "i"
+        label: "Wrike"
+      - id: "j"
+        label: "Smartsheet"
+      - id: "k"
+        label: "Basecamp"
+      - id: "l"
+        label: "Linear"
+      - id: "m"
+        label: "Airtable"
+      - id: "n"
+        label: "Other (please specify)"
+  - id: q5
+    prompt: "Which project management tool do you use most often?"
+    type: single_choice
+    construct: project_management_tool_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Jira"
+      - id: "b"
+        label: "Asana"
+      - id: "c"
+        label: "Monday.com"
+      - id: "d"
+        label: "Trello"
+      - id: "e"
+        label: "ClickUp"
+      - id: "f"
+        label: "Notion"
+      - id: "g"
+        label: "Microsoft Project or Planner"
+      - id: "h"
+        label: "Another tool"
+      - id: "i"
+        label: "I don't have a regular tool"
+  - id: q6
+    prompt: "Who selected the project management tool you use most?"
+    type: single_choice
+    construct: who_selected_project_management_tool
+    required: true
+    options:
+      - id: "a"
+        label: "I chose it myself"
+      - id: "b"
+        label: "My team chose it together"
+      - id: "c"
+        label: "My manager or team lead"
+      - id: "d"
+        label: "IT or leadership mandated it"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q7
+    prompt: "Which views or layouts do you use most? (Select all that apply)"
+    type: multi_choice
+    construct: views_layouts_use_most_select
+    required: true
+    options:
+      - id: "a"
+        label: "List / table"
+      - id: "b"
+        label: "Kanban board"
+      - id: "c"
+        label: "Calendar"
+      - id: "d"
+        label: "Gantt chart / timeline"
+      - id: "e"
+        label: "Dashboard"
+      - id: "f"
+        label: "Workload / resource view"
+      - id: "g"
+        label: "Mind map or whiteboard"
+      - id: "h"
+        label: "I only use the default view"
+  - id: q8
+    prompt: "Which features do you regularly use? (Select all that apply)"
+    type: multi_choice
+    construct: features_regularly_use_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Task assignments and due dates"
+      - id: "b"
+        label: "Subtasks and dependencies"
+      - id: "c"
+        label: "Comments and mentions"
+      - id: "d"
+        label: "File attachments"
+      - id: "e"
+        label: "Time tracking"
+      - id: "f"
+        label: "Custom fields"
+      - id: "g"
+        label: "Automations or rules"
+      - id: "h"
+        label: "Reporting and analytics"
+      - id: "i"
+        label: "Integrations with other apps"
+      - id: "j"
+        label: "Templates"
+  - id: q9
+    prompt: "In what context do you primarily use project management tools?"
+    type: single_choice
+    construct: context_primarily_use_project_management
+    required: true
+    options:
+      - id: "a"
+        label: "Software development"
+      - id: "b"
+        label: "Marketing or creative projects"
+      - id: "c"
+        label: "Operations or administration"
+      - id: "d"
+        label: "Product management"
+      - id: "e"
+        label: "Consulting or client work"
+      - id: "f"
+        label: "Personal projects"
+      - id: "g"
+        label: "Other"
+  - id: q10
+    prompt: "How large is the team you collaborate with in the tool?"
+    type: single_choice
+    construct: large_team_collaborate_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2–5 people"
+      - id: "c"
+        label: "6–15 people"
+      - id: "d"
+        label: "16–50 people"
+      - id: "e"
+        label: "More than 50 people"
+  - id: q11
+    prompt: "Do you use a mobile app version of your project management tool?"
+    type: single_choice
+    construct: use_mobile_app_version_project
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, only desktop or web"
+      - id: "d"
+        label: "I didn't know there was one"
+  - id: q12
+    prompt: "Do you pay for your project management tool?"
+    type: single_choice
+    construct: pay_project_management_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, personally"
+      - id: "b"
+        label: "Yes, my employer pays"
+      - id: "c"
+        label: "No, I use a free tier"
+      - id: "d"
+        label: "No, I don't use one"
+  - id: q13
+    prompt: "Approximately how much is spent per user per month on your primary tool, in US dollars? Enter a whole number (enter 0 if free)."
+    type: free_text
+    construct: approximately_much_spent_per_user
+    required: true
+  - id: q14
+    prompt: "How much do you agree with the following statement? — The tool helps my team stay organized and on track."
+    type: single_choice
+    construct: much_agree_following_statement_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement? — The tool is easy to learn and use."
+    type: single_choice
+    construct: much_agree_following_statement_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement? — Keeping the tool updated feels like extra busywork."
+    type: single_choice
+    construct: much_agree_following_statement_keeping
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement? — The tool gives leadership good visibility into project status."
+    type: single_choice
+    construct: much_agree_following_statement_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement? — My whole team actually keeps the tool up to date."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How important is each factor when your team chooses a project management tool? — Ease of use"
+    type: single_choice
+    construct: important_each_factor_when_team
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is each factor when your team chooses a project management tool? — Price"
+    type: single_choice
+    construct: important_each_factor_when_team
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each factor when your team chooses a project management tool? — Integrations with other tools"
+    type: single_choice
+    construct: important_each_factor_when_team
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each factor when your team chooses a project management tool? — Flexibility and customization"
+    type: single_choice
+    construct: important_each_factor_when_team
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each factor when your team chooses a project management tool? — Reporting and dashboards"
+    type: single_choice
+    construct: important_each_factor_when_team
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each factor when your team chooses a project management tool? — Collaboration and communication features"
+    type: single_choice
+    construct: important_each_factor_when_team
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "Select your top 3 factors that matter most when choosing a project management tool. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_that
+    required: true
+    options:
+      - id: "a"
+        label: "Ease of use"
+      - id: "b"
+        label: "Price"
+      - id: "c"
+        label: "Integrations"
+      - id: "d"
+        label: "Flexibility and customization"
+      - id: "e"
+        label: "Reporting and dashboards"
+      - id: "f"
+        label: "Collaboration features"
+      - id: "g"
+        label: "Mobile experience"
+      - id: "h"
+        label: "Scalability for larger teams"
+  - id: q26
+    prompt: "What frustrates you most about your project management tool? (Select all that apply)"
+    type: multi_choice
+    construct: frustrates_most_project_management_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Too complex or cluttered"
+      - id: "b"
+        label: "Too rigid or limited"
+      - id: "c"
+        label: "Team doesn't keep it updated"
+      - id: "d"
+        label: "Too many notifications"
+      - id: "e"
+        label: "Slow performance"
+      - id: "f"
+        label: "Expensive as the team grows"
+      - id: "g"
+        label: "Poor mobile experience"
+      - id: "h"
+        label: "Weak reporting"
+      - id: "i"
+        label: "Nothing frustrates me"
+  - id: q27
+    prompt: "Have you switched primary project management tools in the past two years?"
+    type: single_choice
+    construct: have_switched_primary_project_management
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, once"
+      - id: "b"
+        label: "Yes, more than once"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q28
+    prompt: "How do you primarily learn to use your project management tool? (Select all that apply)"
+    type: multi_choice
+    construct: primarily_learn_use_project_management
+    required: true
+    options:
+      - id: "a"
+        label: "Official documentation or help center"
+      - id: "b"
+        label: "Video tutorials"
+      - id: "c"
+        label: "Coworkers"
+      - id: "d"
+        label: "Templates"
+      - id: "e"
+        label: "Trial and error"
+      - id: "f"
+        label: "Formal training"
+      - id: "g"
+        label: "Community forums"
+  - id: q29
+    prompt: "How satisfied are you overall with your primary project management tool?"
+    type: single_choice
+    construct: satisfied_overall_primary_project_manage
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How satisfied are you with how well the tool improves your team's productivity?"
+    type: single_choice
+    construct: satisfied_well_tool_improves_team
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q31
+    prompt: "How likely are you to recommend your project management tool to another team? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_project_management_tool
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "How likely are you to switch project management tools in the next year?"
+    type: single_choice
+    construct: likely_switch_project_management_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Which best describes your role?"
+    type: single_choice
+    construct: best_describes_role
+    required: true
+    options:
+      - id: "a"
+        label: "Individual contributor"
+      - id: "b"
+        label: "Team lead"
+      - id: "c"
+        label: "Project or program manager"
+      - id: "d"
+        label: "Manager of managers"
+      - id: "e"
+        label: "Executive or business owner"
+      - id: "f"
+        label: "Other"
+  - id: q40
+    prompt: "How many years of professional work experience do you have? Enter a whole number."
+    type: free_text
+    construct: many_years_professional_work_experience
+    required: true
+  - id: q41
+    prompt: "How many people work at your organization?"
+    type: single_choice
+    construct: many_people_work_organization
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2–9"
+      - id: "c"
+        label: "10–49"
+      - id: "d"
+        label: "50–249"
+      - id: "e"
+        label: "250–999"
+      - id: "f"
+        label: "1,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q42
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q44
+    prompt: "Is there anything else you would like to share about how you use project management tools?"
+    type: free_text
+    construct: there_anything_else_would_like
+    required: false

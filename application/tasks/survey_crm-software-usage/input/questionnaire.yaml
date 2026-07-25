@@ -1,0 +1,761 @@
+schemaVersion: "1.0"
+id: crm_software_usage_v1
+title: "CRM Software Usage Survey"
+description: "How people and teams use customer relationship management (CRM) software to manage contacts, leads, and sales pipelines — which platforms they choose, how they use them, and how satisfied they are."
+questions:
+  - id: q0
+    prompt: "Do you use CRM software as part of your work?"
+    type: single_choice
+    construct: use_crm_software_as_part
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, daily"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but my organization uses one"
+      - id: "d"
+        label: "No, I don't use a CRM"
+  - id: q1
+    prompt: "How long have you used CRM software?"
+    type: single_choice
+    construct: long_have_used_crm_software
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 7 years"
+      - id: "d"
+        label: "More than 7 years"
+      - id: "e"
+        label: "I don't use one"
+  - id: q2
+    prompt: "Which CRM platforms have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: crm_platforms_have_used_past
+    required: true
+    options:
+      - id: "a"
+        label: "Salesforce"
+      - id: "b"
+        label: "HubSpot"
+      - id: "c"
+        label: "Zoho CRM"
+      - id: "d"
+        label: "Microsoft Dynamics 365"
+      - id: "e"
+        label: "Pipedrive"
+      - id: "f"
+        label: "Freshsales / Freshworks"
+      - id: "g"
+        label: "Monday CRM"
+      - id: "h"
+        label: "Copper"
+      - id: "i"
+        label: "Insightly"
+      - id: "j"
+        label: "Close"
+      - id: "k"
+        label: "A spreadsheet used as a CRM"
+      - id: "l"
+        label: "Other (please specify)"
+  - id: q3
+    prompt: "Which CRM platform do you use most often?"
+    type: single_choice
+    construct: crm_platform_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Salesforce"
+      - id: "b"
+        label: "HubSpot"
+      - id: "c"
+        label: "Zoho CRM"
+      - id: "d"
+        label: "Microsoft Dynamics 365"
+      - id: "e"
+        label: "Pipedrive"
+      - id: "f"
+        label: "Another platform"
+      - id: "g"
+        label: "A spreadsheet"
+  - id: q4
+    prompt: "What is your primary role in relation to the CRM?"
+    type: single_choice
+    construct: primary_role_relation_crm
+    required: true
+    options:
+      - id: "a"
+        label: "Sales representative"
+      - id: "b"
+        label: "Sales manager or leader"
+      - id: "c"
+        label: "Marketing"
+      - id: "d"
+        label: "Customer support or success"
+      - id: "e"
+        label: "CRM administrator"
+      - id: "f"
+        label: "Operations or analytics"
+      - id: "g"
+        label: "Business owner or executive"
+      - id: "h"
+        label: "Other"
+  - id: q5
+    prompt: "Which CRM functions do you regularly use? (Select all that apply)"
+    type: multi_choice
+    construct: crm_functions_regularly_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Contact and account management"
+      - id: "b"
+        label: "Lead management"
+      - id: "c"
+        label: "Sales pipeline / deal tracking"
+      - id: "d"
+        label: "Email tracking and templates"
+      - id: "e"
+        label: "Task and activity management"
+      - id: "f"
+        label: "Reporting and dashboards"
+      - id: "g"
+        label: "Marketing automation"
+      - id: "h"
+        label: "Customer support / ticketing"
+      - id: "i"
+        label: "Forecasting"
+      - id: "j"
+        label: "Quotes or invoicing"
+  - id: q6
+    prompt: "How often do you personally update records in the CRM?"
+    type: single_choice
+    construct: often_personally_update_records_crm
+    required: true
+    options:
+      - id: "a"
+        label: "Many times a day"
+      - id: "b"
+        label: "About once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Rarely"
+  - id: q7
+    prompt: "Approximately how many contacts or accounts are in the CRM you use? Enter a whole number."
+    type: free_text
+    construct: approximately_many_contacts_accounts_crm
+    required: true
+  - id: q8
+    prompt: "How do you most often enter data into the CRM? (Select all that apply)"
+    type: multi_choice
+    construct: most_often_enter_data_into
+    required: true
+    options:
+      - id: "a"
+        label: "Manual entry"
+      - id: "b"
+        label: "Email or calendar sync"
+      - id: "c"
+        label: "Web forms"
+      - id: "d"
+        label: "Imports from spreadsheets"
+      - id: "e"
+        label: "Integrations with other tools"
+      - id: "f"
+        label: "Mobile app on the go"
+      - id: "g"
+        label: "Automatic capture / enrichment"
+  - id: q9
+    prompt: "Which other tools does your CRM integrate with? (Select all that apply)"
+    type: multi_choice
+    construct: other_tools_does_crm_integrate
+    required: true
+    options:
+      - id: "a"
+        label: "Email (Gmail / Outlook)"
+      - id: "b"
+        label: "Calendar"
+      - id: "c"
+        label: "Marketing tools"
+      - id: "d"
+        label: "Team chat (Slack / Teams)"
+      - id: "e"
+        label: "Phone or dialer systems"
+      - id: "f"
+        label: "E-commerce or billing"
+      - id: "g"
+        label: "Support / helpdesk"
+      - id: "h"
+        label: "Analytics or BI tools"
+      - id: "i"
+        label: "None that I know of"
+  - id: q10
+    prompt: "Do you use AI features in your CRM (e.g., lead scoring, email drafting, forecasting)?"
+    type: single_choice
+    construct: use_ai_features_crm_e
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I'm interested"
+      - id: "d"
+        label: "No, and I'm not interested"
+  - id: q11
+    prompt: "Do you use a mobile app for your CRM?"
+    type: single_choice
+    construct: use_mobile_app_crm
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, only desktop or web"
+      - id: "d"
+        label: "I didn't know there was one"
+  - id: q12
+    prompt: "How much do you agree with the following statement? — The CRM helps me manage customer relationships more effectively."
+    type: single_choice
+    construct: much_agree_following_statement_crm
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement? — The CRM is easy to use for someone in my role."
+    type: single_choice
+    construct: much_agree_following_statement_crm
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement? — Entering data into the CRM takes too much of my time."
+    type: single_choice
+    construct: much_agree_following_statement_entering
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement? — The data in our CRM is accurate and up to date."
+    type: single_choice
+    construct: much_agree_following_statement_data
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement? — The CRM gives leadership useful visibility into the pipeline."
+    type: single_choice
+    construct: much_agree_following_statement_crm
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How well does your CRM perform on each of the following? — Ease of use"
+    type: single_choice
+    construct: well_does_crm_perform_each
+    required: true
+    options:
+      - id: "a"
+        label: "Very poorly"
+      - id: "b"
+        label: "Poorly"
+      - id: "c"
+        label: "Adequately"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q18
+    prompt: "How well does your CRM perform on each of the following? — Reporting and analytics"
+    type: single_choice
+    construct: well_does_crm_perform_each
+    required: true
+    options:
+      - id: "a"
+        label: "Very poorly"
+      - id: "b"
+        label: "Poorly"
+      - id: "c"
+        label: "Adequately"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q19
+    prompt: "How well does your CRM perform on each of the following? — Integrations with other tools"
+    type: single_choice
+    construct: well_does_crm_perform_each
+    required: true
+    options:
+      - id: "a"
+        label: "Very poorly"
+      - id: "b"
+        label: "Poorly"
+      - id: "c"
+        label: "Adequately"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q20
+    prompt: "How well does your CRM perform on each of the following? — Customization to fit our process"
+    type: single_choice
+    construct: well_does_crm_perform_each
+    required: true
+    options:
+      - id: "a"
+        label: "Very poorly"
+      - id: "b"
+        label: "Poorly"
+      - id: "c"
+        label: "Adequately"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q21
+    prompt: "How well does your CRM perform on each of the following? — Value for the price"
+    type: single_choice
+    construct: well_does_crm_perform_each
+    required: true
+    options:
+      - id: "a"
+        label: "Very poorly"
+      - id: "b"
+        label: "Poorly"
+      - id: "c"
+        label: "Adequately"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q22
+    prompt: "Select your top 3 factors that matter most when choosing a CRM. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_that
+    required: true
+    options:
+      - id: "a"
+        label: "Ease of use"
+      - id: "b"
+        label: "Price"
+      - id: "c"
+        label: "Integrations"
+      - id: "d"
+        label: "Customization and flexibility"
+      - id: "e"
+        label: "Reporting and analytics"
+      - id: "f"
+        label: "Automation and AI features"
+      - id: "g"
+        label: "Mobile experience"
+      - id: "h"
+        label: "Customer support and onboarding"
+  - id: q23
+    prompt: "What frustrates you most about your CRM? (Select all that apply)"
+    type: multi_choice
+    construct: frustrates_most_crm_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Too much manual data entry"
+      - id: "b"
+        label: "Poor or messy data quality"
+      - id: "c"
+        label: "Too complex or hard to learn"
+      - id: "d"
+        label: "Expensive licensing"
+      - id: "e"
+        label: "Weak reporting"
+      - id: "f"
+        label: "Missing integrations"
+      - id: "g"
+        label: "Slow performance"
+      - id: "h"
+        label: "Low adoption across the team"
+      - id: "i"
+        label: "Nothing frustrates me"
+  - id: q24
+    prompt: "How would you describe adoption of the CRM across your team or organization?"
+    type: single_choice
+    construct: would_describe_adoption_crm_across
+    required: true
+    options:
+      - id: "a"
+        label: "Almost no one uses it consistently"
+      - id: "b"
+        label: "Some people use it"
+      - id: "c"
+        label: "Most people use it"
+      - id: "d"
+        label: "Everyone uses it consistently"
+      - id: "e"
+        label: "Not applicable"
+  - id: q25
+    prompt: "Who pays for the CRM you use?"
+    type: single_choice
+    construct: who_pays_crm_use
+    required: true
+    options:
+      - id: "a"
+        label: "My employer"
+      - id: "b"
+        label: "I pay for it (self-employed or small business)"
+      - id: "c"
+        label: "We use a free tier"
+      - id: "d"
+        label: "I don't know"
+  - id: q26
+    prompt: "Approximately how much is spent per user per month on your CRM, in US dollars? Enter a whole number (enter 0 if free)."
+    type: free_text
+    construct: approximately_much_spent_per_user
+    required: true
+  - id: q27
+    prompt: "Have you switched CRM platforms in the past three years?"
+    type: single_choice
+    construct: have_switched_crm_platforms_past
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, once"
+      - id: "b"
+        label: "Yes, more than once"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q28
+    prompt: "How satisfied are you overall with your CRM?"
+    type: single_choice
+    construct: satisfied_overall_crm
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "How satisfied are you with how well the CRM supports your day-to-day work?"
+    type: single_choice
+    construct: satisfied_well_crm_supports_day
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How likely are you to recommend your CRM to a colleague or peer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_crm_colleague_peer
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "How likely is your organization to switch CRM platforms in the next year?"
+    type: single_choice
+    construct: likely_organization_switch_crm_platforms
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "How many years of professional experience do you have? Enter a whole number."
+    type: free_text
+    construct: many_years_professional_experience_have
+    required: true
+  - id: q39
+    prompt: "In which industry does your organization operate?"
+    type: single_choice
+    construct: industry_does_organization_operate
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Financial services"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Real estate"
+      - id: "e"
+        label: "Retail or e-commerce"
+      - id: "f"
+        label: "Manufacturing"
+      - id: "g"
+        label: "Professional services or consulting"
+      - id: "h"
+        label: "Media or marketing"
+      - id: "i"
+        label: "Other"
+  - id: q40
+    prompt: "How many people work at your organization?"
+    type: single_choice
+    construct: many_people_work_organization
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2–9"
+      - id: "c"
+        label: "10–49"
+      - id: "d"
+        label: "50–249"
+      - id: "e"
+        label: "250–999"
+      - id: "f"
+        label: "1,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q41
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q43
+    prompt: "Is there anything else you would like to share about how you use CRM software?"
+    type: free_text
+    construct: there_anything_else_would_like
+    required: false

@@ -1,0 +1,932 @@
+schemaVersion: "1.0"
+id: css_framework_usage_v1
+title: "CSS Framework Usage Survey"
+description: "How developers choose and use CSS frameworks, methodologies, and component libraries to style user interfaces."
+questions:
+  - id: q0
+    prompt: "How often do you write CSS or style user interfaces?"
+    type: single_choice
+    construct: often_write_css_style_user
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "I am just learning CSS"
+      - id: "e"
+        label: "I rarely work with CSS"
+  - id: q1
+    prompt: "How long have you been working with CSS?"
+    type: single_choice
+    construct: long_have_been_working_css
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "What best describes your relationship to styling and CSS?"
+    type: single_choice
+    construct: best_describes_relationship_styling_css
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Full-stack developer"
+      - id: "c"
+        label: "UI or design engineer"
+      - id: "d"
+        label: "Designer who also writes code"
+      - id: "e"
+        label: "I write CSS occasionally"
+  - id: q3
+    prompt: "Which CSS approach do you use most often?"
+    type: single_choice
+    construct: css_approach_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Tailwind CSS"
+      - id: "b"
+        label: "Bootstrap"
+      - id: "c"
+        label: "Plain / vanilla CSS"
+      - id: "d"
+        label: "CSS Modules"
+      - id: "e"
+        label: "CSS-in-JS (styled-components, Emotion, etc.)"
+      - id: "f"
+        label: "Sass / SCSS"
+      - id: "g"
+        label: "Other"
+  - id: q4
+    prompt: "Which CSS frameworks or UI libraries have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: css_frameworks_ui_libraries_have
+    required: true
+    options:
+      - id: "a"
+        label: "Tailwind CSS"
+      - id: "b"
+        label: "Bootstrap"
+      - id: "c"
+        label: "Bulma"
+      - id: "d"
+        label: "Foundation"
+      - id: "e"
+        label: "Material UI (MUI)"
+      - id: "f"
+        label: "Chakra UI"
+      - id: "g"
+        label: "Ant Design"
+      - id: "h"
+        label: "Open Props"
+      - id: "i"
+        label: "None"
+  - id: q5
+    prompt: "Which CSS methodologies or approaches do you use? (Select all that apply)"
+    type: multi_choice
+    construct: css_methodologies_approaches_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Utility-first CSS"
+      - id: "b"
+        label: "BEM"
+      - id: "c"
+        label: "CSS Modules"
+      - id: "d"
+        label: "CSS-in-JS"
+      - id: "e"
+        label: "Atomic CSS"
+      - id: "f"
+        label: "Plain global CSS"
+      - id: "g"
+        label: "None of these"
+  - id: q6
+    prompt: "Which CSS preprocessors or processors do you use? (Select all that apply)"
+    type: multi_choice
+    construct: css_preprocessors_processors_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Sass / SCSS"
+      - id: "b"
+        label: "Less"
+      - id: "c"
+        label: "PostCSS"
+      - id: "d"
+        label: "Stylus"
+      - id: "e"
+        label: "None"
+  - id: q7
+    prompt: "Which CSS-in-JS libraries have you used? (Select all that apply)"
+    type: multi_choice
+    construct: css_js_libraries_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "styled-components"
+      - id: "b"
+        label: "Emotion"
+      - id: "c"
+        label: "vanilla-extract"
+      - id: "d"
+        label: "Stitches"
+      - id: "e"
+        label: "Linaria"
+      - id: "f"
+        label: "None"
+  - id: q8
+    prompt: "Which component libraries do you use? (Select all that apply)"
+    type: multi_choice
+    construct: component_libraries_use_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Material UI (MUI)"
+      - id: "b"
+        label: "Chakra UI"
+      - id: "c"
+        label: "Ant Design"
+      - id: "d"
+        label: "shadcn/ui"
+      - id: "e"
+        label: "Radix UI"
+      - id: "f"
+        label: "Headless UI"
+      - id: "g"
+        label: "DaisyUI"
+      - id: "h"
+        label: "None"
+  - id: q9
+    prompt: "Which build tools process your CSS? (Select all that apply)"
+    type: multi_choice
+    construct: build_tools_process_css_select
+    required: true
+    options:
+      - id: "a"
+        label: "Vite"
+      - id: "b"
+        label: "webpack"
+      - id: "c"
+        label: "PostCSS"
+      - id: "d"
+        label: "Parcel"
+      - id: "e"
+        label: "esbuild"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q10
+    prompt: "How do you primarily handle responsive design?"
+    type: single_choice
+    construct: primarily_handle_responsive_design
+    required: true
+    options:
+      - id: "a"
+        label: "Framework breakpoint utilities"
+      - id: "b"
+        label: "Hand-written media queries"
+      - id: "c"
+        label: "Container queries"
+      - id: "d"
+        label: "CSS grid and flexbox with fluid units"
+      - id: "e"
+        label: "A mix of these"
+  - id: q11
+    prompt: "How do you primarily handle theming and design tokens?"
+    type: single_choice
+    construct: primarily_handle_theming_design_tokens
+    required: true
+    options:
+      - id: "a"
+        label: "CSS custom properties (variables)"
+      - id: "b"
+        label: "A framework's theme configuration"
+      - id: "c"
+        label: "Sass variables"
+      - id: "d"
+        label: "A JS design-token system"
+      - id: "e"
+        label: "I don't use a formal theming system"
+  - id: q12
+    prompt: "How do you implement dark mode?"
+    type: single_choice
+    construct: implement_dark_mode
+    required: true
+    options:
+      - id: "a"
+        label: "Framework dark-mode utilities"
+      - id: "b"
+        label: "CSS custom properties with a toggle"
+      - id: "c"
+        label: "A `prefers-color-scheme` media query"
+      - id: "d"
+        label: "I don't implement dark mode"
+      - id: "e"
+        label: "Not applicable"
+  - id: q13
+    prompt: "Which approach to CSS resets or normalization do you use?"
+    type: single_choice
+    construct: approach_css_resets_normalization_use
+    required: true
+    options:
+      - id: "a"
+        label: "A framework's built-in reset"
+      - id: "b"
+        label: "Normalize.css or a modern reset"
+      - id: "c"
+        label: "My own custom reset"
+      - id: "d"
+        label: "No reset"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q14
+    prompt: "About how many projects are you currently building with your primary CSS approach? Please enter a number."
+    type: free_text
+    construct: many_projects_currently_building_primary
+    required: true
+  - id: q15
+    prompt: "How many years of experience do you have writing CSS? Please enter a number."
+    type: free_text
+    construct: many_years_experience_have_writing
+    required: true
+  - id: q16
+    prompt: "How did you learn CSS? (Select all that apply)"
+    type: multi_choice
+    construct: did_learn_css_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "On the job"
+      - id: "b"
+        label: "Online courses or documentation"
+      - id: "c"
+        label: "A course or bootcamp"
+      - id: "d"
+        label: "School or university"
+      - id: "e"
+        label: "A colleague or mentor"
+      - id: "f"
+        label: "Trial and error"
+  - id: q17
+    prompt: "How would you rate your CSS proficiency?"
+    type: single_choice
+    construct: would_rate_css_proficiency
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert"
+  - id: q18
+    prompt: "Thinking about your primary CSS approach, how much do you agree: it lets me build UIs quickly."
+    type: single_choice
+    construct: thinking_primary_css_approach_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "Thinking about your primary CSS approach, how much do you agree: it is easy to maintain over time."
+    type: single_choice
+    construct: thinking_primary_css_approach_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Thinking about your primary CSS approach, how much do you agree: it works well across a team."
+    type: single_choice
+    construct: thinking_primary_css_approach_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "Thinking about your primary CSS approach, how much do you agree: it produces a small CSS bundle."
+    type: single_choice
+    construct: thinking_primary_css_approach_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "Thinking about your primary CSS approach, how much do you agree: it is easy for newcomers to pick up."
+    type: single_choice
+    construct: thinking_primary_css_approach_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "Thinking about your primary CSS approach, how much do you agree: it produces consistent designs."
+    type: single_choice
+    construct: thinking_primary_css_approach_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "Thinking about your primary CSS approach, how much do you agree: it is easy to customize."
+    type: single_choice
+    construct: thinking_primary_css_approach_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "When choosing a CSS approach, how important is development speed?"
+    type: single_choice
+    construct: when_choosing_css_approach_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a CSS approach, how important is long-term maintainability?"
+    type: single_choice
+    construct: when_choosing_css_approach_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a CSS approach, how important is final bundle size?"
+    type: single_choice
+    construct: when_choosing_css_approach_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing a CSS approach, how important is design flexibility?"
+    type: single_choice
+    construct: when_choosing_css_approach_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "When choosing a CSS approach, how important is the learning curve?"
+    type: single_choice
+    construct: when_choosing_css_approach_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "When choosing a CSS approach, how important is the component and ecosystem support?"
+    type: single_choice
+    construct: when_choosing_css_approach_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q31
+    prompt: "When choosing a CSS approach, how important is built-in accessibility support?"
+    type: single_choice
+    construct: when_choosing_css_approach_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q32
+    prompt: "How often do you write custom CSS from scratch rather than using a framework?"
+    type: single_choice
+    construct: often_write_custom_css_from
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q33
+    prompt: "How much do you agree: utility-first CSS is the best approach for most projects."
+    type: single_choice
+    construct: much_agree_utility_first_css
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q34
+    prompt: "How much do you agree: CSS-in-JS adds more complexity than it is worth."
+    type: single_choice
+    construct: much_agree_css_js_adds
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q35
+    prompt: "How much do you agree: I prefer using a component library over writing raw CSS."
+    type: single_choice
+    construct: much_agree_i_prefer_using
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q36
+    prompt: "Which are your top 3 factors when choosing a CSS approach? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Development speed"
+      - id: "b"
+        label: "Maintainability"
+      - id: "c"
+        label: "Bundle size and performance"
+      - id: "d"
+        label: "Design flexibility"
+      - id: "e"
+        label: "Low learning curve"
+      - id: "f"
+        label: "Component ecosystem"
+      - id: "g"
+        label: "Team familiarity"
+      - id: "h"
+        label: "Accessibility support"
+  - id: q37
+    prompt: "Which challenges do you face with your CSS workflow? (Select all that apply)"
+    type: multi_choice
+    construct: challenges_face_css_workflow_select
+    required: true
+    options:
+      - id: "a"
+        label: "Naming and organization"
+      - id: "b"
+        label: "Specificity conflicts"
+      - id: "c"
+        label: "Large or bloated stylesheets"
+      - id: "d"
+        label: "Inconsistent design across the app"
+      - id: "e"
+        label: "Browser compatibility"
+      - id: "f"
+        label: "Build or tooling configuration"
+      - id: "g"
+        label: "No major challenges"
+  - id: q38
+    prompt: "How satisfied are you with your primary CSS approach?"
+    type: single_choice
+    construct: satisfied_primary_css_approach
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q39
+    prompt: "How satisfied are you with your CSS tooling and build setup?"
+    type: single_choice
+    construct: satisfied_css_tooling_build_setup
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q40
+    prompt: "How likely are you to recommend your primary CSS approach to another developer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_css_approach
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q41
+    prompt: "How likely are you to try a new CSS framework within the next year?"
+    type: single_choice
+    construct: likely_try_new_css_framework
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "How likely are you to switch your primary CSS approach within the next year?"
+    type: single_choice
+    construct: likely_switch_primary_css_approach
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q43
+    prompt: "What is one thing you would improve about the CSS tools you use? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_css
+    required: false
+  - id: q44
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Full-stack developer"
+      - id: "c"
+        label: "UI or design engineer"
+      - id: "d"
+        label: "Designer"
+      - id: "e"
+        label: "Back-end developer"
+      - id: "f"
+        label: "Engineering manager"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Other"
+  - id: q45
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q46
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q47
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q48
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q49
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q50
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q52
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q53
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q54
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

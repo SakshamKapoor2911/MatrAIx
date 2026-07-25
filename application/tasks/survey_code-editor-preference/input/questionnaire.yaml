@@ -1,0 +1,961 @@
+schemaVersion: "1.0"
+id: code_editor_preference_v1
+title: "Code Editor & IDE Preference Survey"
+description: "Which code editors and IDEs developers use, how they configure them, and how satisfied they are."
+questions:
+  - id: q0
+    prompt: "Which best describes how you write code?"
+    type: single_choice
+    construct: best_describes_write_code
+    required: true
+    options:
+      - id: "a"
+        label: "I write code as a professional software developer"
+      - id: "b"
+        label: "I write code sometimes as part of a non-developer role"
+      - id: "c"
+        label: "I write code as a hobby"
+      - id: "d"
+        label: "I am learning to code"
+      - id: "e"
+        label: "I do not write code"
+  - id: q1
+    prompt: "Including any education, how many years have you been writing code in total? Please enter a number."
+    type: free_text
+    construct: including_any_education_many_years
+    required: true
+  - id: q2
+    prompt: "On a typical working day, about how many hours do you spend in a code editor or IDE? Please enter a number."
+    type: free_text
+    construct: typical_working_day_many_hours
+    required: true
+  - id: q3
+    prompt: "Which code editor or IDE do you use most often?"
+    type: single_choice
+    construct: code_editor_ide_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Visual Studio Code"
+      - id: "b"
+        label: "A JetBrains IDE (IntelliJ, PyCharm, WebStorm, etc.)"
+      - id: "c"
+        label: "Neovim or Vim"
+      - id: "d"
+        label: "Sublime Text"
+      - id: "e"
+        label: "Emacs"
+      - id: "f"
+        label: "Visual Studio"
+      - id: "g"
+        label: "Xcode"
+      - id: "h"
+        label: "Zed"
+      - id: "i"
+        label: "Notepad++"
+      - id: "j"
+        label: "Nano"
+      - id: "k"
+        label: "Other"
+  - id: q4
+    prompt: "Which code editors or IDEs have you used regularly in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: code_editors_ides_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Visual Studio Code"
+      - id: "b"
+        label: "IntelliJ IDEA"
+      - id: "c"
+        label: "PyCharm"
+      - id: "d"
+        label: "WebStorm"
+      - id: "e"
+        label: "Neovim or Vim"
+      - id: "f"
+        label: "Sublime Text"
+      - id: "g"
+        label: "Emacs"
+      - id: "h"
+        label: "Visual Studio"
+      - id: "i"
+        label: "Xcode"
+      - id: "j"
+        label: "Zed"
+      - id: "k"
+        label: "Notepad++"
+      - id: "l"
+        label: "Android Studio"
+      - id: "m"
+        label: "Cursor"
+      - id: "n"
+        label: "Other"
+  - id: q5
+    prompt: "Which code editors or IDEs would you like to try or use more over the next year? (Select all that apply)"
+    type: multi_choice
+    construct: code_editors_ides_would_like
+    required: true
+    options:
+      - id: "a"
+        label: "Visual Studio Code"
+      - id: "b"
+        label: "A JetBrains IDE"
+      - id: "c"
+        label: "Neovim or Vim"
+      - id: "d"
+        label: "Sublime Text"
+      - id: "e"
+        label: "Emacs"
+      - id: "f"
+        label: "Zed"
+      - id: "g"
+        label: "Cursor"
+      - id: "h"
+        label: "Helix"
+      - id: "i"
+        label: "I'm happy with my current setup"
+      - id: "j"
+        label: "Other"
+  - id: q6
+    prompt: "Why did you choose your primary editor? (Select all that apply)"
+    type: multi_choice
+    construct: why_did_choose_primary_editor
+    required: true
+    options:
+      - id: "a"
+        label: "It is the team or company standard"
+      - id: "b"
+        label: "Speed and performance"
+      - id: "c"
+        label: "Extension or plugin ecosystem"
+      - id: "d"
+        label: "Familiarity / habit"
+      - id: "e"
+        label: "It is free"
+      - id: "f"
+        label: "Built-in AI features"
+      - id: "g"
+        label: "Strong language or framework support"
+      - id: "h"
+        label: "Debugging tools"
+      - id: "i"
+        label: "It was recommended to me"
+  - id: q7
+    prompt: "On which operating systems do you write code? (Select all that apply)"
+    type: multi_choice
+    construct: operating_systems_write_code_select
+    required: true
+    options:
+      - id: "a"
+        label: "Windows"
+      - id: "b"
+        label: "macOS"
+      - id: "c"
+        label: "Linux"
+      - id: "d"
+        label: "Windows Subsystem for Linux (WSL)"
+      - id: "e"
+        label: "ChromeOS"
+  - id: q8
+    prompt: "Which programming languages do you work in regularly? (Select all that apply)"
+    type: multi_choice
+    construct: programming_languages_work_regularly_sel
+    required: true
+    options:
+      - id: "a"
+        label: "JavaScript / TypeScript"
+      - id: "b"
+        label: "Python"
+      - id: "c"
+        label: "Java"
+      - id: "d"
+        label: "C#"
+      - id: "e"
+        label: "C / C++"
+      - id: "f"
+        label: "Go"
+      - id: "g"
+        label: "Rust"
+      - id: "h"
+        label: "PHP"
+      - id: "i"
+        label: "Ruby"
+      - id: "j"
+        label: "Swift or Kotlin"
+      - id: "k"
+        label: "SQL"
+      - id: "l"
+        label: "HTML / CSS"
+      - id: "m"
+        label: "Other"
+  - id: q9
+    prompt: "Approximately how many extensions or plugins do you have installed in your primary editor?"
+    type: single_choice
+    construct: approximately_many_extensions_plugins_ha
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1 to 5"
+      - id: "c"
+        label: "6 to 15"
+      - id: "d"
+        label: "16 to 30"
+      - id: "e"
+        label: "More than 30"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q10
+    prompt: "Have you customized your editor's keyboard shortcuts?"
+    type: single_choice
+    construct: have_customized_editor_s_keyboard
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, extensively"
+      - id: "b"
+        label: "Yes, a few"
+      - id: "c"
+        label: "No, I use the defaults"
+  - id: q11
+    prompt: "Which color theme do you use in your editor?"
+    type: single_choice
+    construct: color_theme_use_editor
+    required: true
+    options:
+      - id: "a"
+        label: "A dark theme"
+      - id: "b"
+        label: "A light theme"
+      - id: "c"
+        label: "I switch depending on time or setting"
+      - id: "d"
+        label: "I use the default and don't think about it"
+  - id: q12
+    prompt: "Do you use a dedicated programming font (with features like ligatures or fixed width)?"
+    type: single_choice
+    construct: use_dedicated_programming_font_features
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a font with ligatures"
+      - id: "b"
+        label: "Yes, a monospace font without ligatures"
+      - id: "c"
+        label: "No, I use the default font"
+  - id: q13
+    prompt: "How do you primarily use a terminal while coding?"
+    type: single_choice
+    construct: primarily_use_terminal_while_coding
+    required: true
+    options:
+      - id: "a"
+        label: "The terminal integrated into my editor"
+      - id: "b"
+        label: "A separate standalone terminal app"
+      - id: "c"
+        label: "Both about equally"
+      - id: "d"
+        label: "I rarely use a terminal"
+  - id: q14
+    prompt: "Do you use Vim or modal keybindings inside your editor?"
+    type: single_choice
+    construct: use_vim_modal_keybindings_inside
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, Vim is my main editor"
+      - id: "b"
+        label: "Yes, I use Vim keybindings inside another editor"
+      - id: "c"
+        label: "No, but I have tried them"
+      - id: "d"
+        label: "No, never"
+  - id: q15
+    prompt: "How often do you switch between different editors during your work?"
+    type: single_choice
+    construct: often_switch_between_different_editors
+    required: true
+    options:
+      - id: "a"
+        label: "Never — I use one editor for everything"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Constantly"
+  - id: q16
+    prompt: "Which editor features do you rely on most? (Select all that apply)"
+    type: multi_choice
+    construct: editor_features_rely_most_select
+    required: true
+    options:
+      - id: "a"
+        label: "Syntax highlighting"
+      - id: "b"
+        label: "Autocomplete / IntelliSense"
+      - id: "c"
+        label: "Integrated debugger"
+      - id: "d"
+        label: "Git / version control integration"
+      - id: "e"
+        label: "AI code completion"
+      - id: "f"
+        label: "Linting and formatting"
+      - id: "g"
+        label: "Refactoring tools"
+      - id: "h"
+        label: "Remote / SSH development"
+      - id: "i"
+        label: "Multi-cursor editing"
+      - id: "j"
+        label: "Code snippets"
+      - id: "k"
+        label: "Integrated terminal"
+  - id: q17
+    prompt: "Which AI coding features do you use in your editor, if any? (Select all that apply)"
+    type: multi_choice
+    construct: ai_coding_features_use_editor
+    required: true
+    options:
+      - id: "a"
+        label: "GitHub Copilot"
+      - id: "b"
+        label: "Cursor's built-in AI"
+      - id: "c"
+        label: "JetBrains AI Assistant"
+      - id: "d"
+        label: "Codeium / Windsurf"
+      - id: "e"
+        label: "Tabnine"
+      - id: "f"
+        label: "Amazon Q Developer"
+      - id: "g"
+        label: "A ChatGPT or Claude extension"
+      - id: "h"
+        label: "I don't use AI features in my editor"
+  - id: q18
+    prompt: "How much do you agree: My editor makes me noticeably more productive."
+    type: single_choice
+    construct: much_agree_my_editor_makes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: I have deeply customized my editor to fit how I work."
+    type: single_choice
+    construct: much_agree_i_have_deeply
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: I would switch editors if a clearly better one appeared."
+    type: single_choice
+    construct: much_agree_i_would_switch
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: My editor's startup speed and responsiveness matter a lot to me."
+    type: single_choice
+    construct: much_agree_my_editor_s
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: I prefer a lightweight editor over a full-featured IDE."
+    type: single_choice
+    construct: much_agree_i_prefer_lightweight
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How much do you agree: AI features have become essential to my editing workflow."
+    type: single_choice
+    construct: much_agree_ai_features_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "How much do you agree: I rarely leave my primary editor for other tools."
+    type: single_choice
+    construct: much_agree_i_rarely_leave
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "When choosing an editor, how important is speed and performance?"
+    type: single_choice
+    construct: when_choosing_editor_important_speed
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing an editor, how important is the extension or plugin ecosystem?"
+    type: single_choice
+    construct: when_choosing_editor_important_extension
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing an editor, how important is language and framework support?"
+    type: single_choice
+    construct: when_choosing_editor_important_language
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing an editor, how important are AI and autocomplete features?"
+    type: single_choice
+    construct: when_choosing_editor_important_ai
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "When choosing an editor, how important are debugging tools?"
+    type: single_choice
+    construct: when_choosing_editor_important_debugging
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "When choosing an editor, how important is that it is free or low cost?"
+    type: single_choice
+    construct: when_choosing_editor_important_that
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q31
+    prompt: "When choosing an editor, how important is cross-platform availability?"
+    type: single_choice
+    construct: when_choosing_editor_important_cross
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q32
+    prompt: "Which are your top 3 factors when choosing a code editor? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Speed and performance"
+      - id: "b"
+        label: "Extension ecosystem"
+      - id: "c"
+        label: "Language and framework support"
+      - id: "d"
+        label: "AI and autocomplete features"
+      - id: "e"
+        label: "Debugging tools"
+      - id: "f"
+        label: "Free or low cost"
+      - id: "g"
+        label: "Cross-platform availability"
+      - id: "h"
+        label: "User interface and aesthetics"
+      - id: "i"
+        label: "Familiarity"
+      - id: "j"
+        label: "Git integration"
+  - id: q33
+    prompt: "How satisfied are you with your editor's performance?"
+    type: single_choice
+    construct: satisfied_editor_s_performance
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How satisfied are you with your editor's extensions and customization?"
+    type: single_choice
+    construct: satisfied_editor_s_extensions_customizat
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "How often does your editor crash, freeze, or slow down noticeably?"
+    type: single_choice
+    construct: often_does_editor_crash_freeze
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q36
+    prompt: "Do you pay for your primary editor or IDE (a license or subscription)?"
+    type: single_choice
+    construct: pay_primary_editor_ide_license
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I pay personally"
+      - id: "b"
+        label: "Yes, my employer pays"
+      - id: "c"
+        label: "No, it is free"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q37
+    prompt: "About how much do you spend on editor or IDE licenses and AI coding subscriptions per year, in US dollars? Enter 0 if none."
+    type: free_text
+    construct: much_spend_editor_ide_licenses
+    required: true
+  - id: q38
+    prompt: "Do you use your code editor for non-coding tasks (notes, writing, config files)?"
+    type: single_choice
+    construct: use_code_editor_non_coding
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No"
+  - id: q39
+    prompt: "Do you use remote or cloud-based development environments? (Select all that apply)"
+    type: multi_choice
+    construct: use_remote_cloud_based_development
+    required: true
+    options:
+      - id: "a"
+        label: "SSH remote development"
+      - id: "b"
+        label: "Dev containers"
+      - id: "c"
+        label: "GitHub Codespaces"
+      - id: "d"
+        label: "A cloud IDE (Replit, Gitpod, etc.)"
+      - id: "e"
+        label: "No, I develop locally only"
+  - id: q40
+    prompt: "Overall, how satisfied are you with your primary code editor?"
+    type: single_choice
+    construct: overall_satisfied_primary_code_editor
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q41
+    prompt: "How likely are you to recommend your primary editor to another developer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_editor_another
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q42
+    prompt: "How likely are you to switch your primary editor within the next year?"
+    type: single_choice
+    construct: likely_switch_primary_editor_within
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q43
+    prompt: "What is one feature or improvement you wish your editor had? (Optional short answer)"
+    type: free_text
+    construct: one_feature_improvement_wish_editor
+    required: false
+  - id: q44
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "Mobile developer"
+      - id: "e"
+        label: "Data scientist or ML engineer"
+      - id: "f"
+        label: "DevOps or platform engineer"
+      - id: "g"
+        label: "Engineering manager"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q45
+    prompt: "How many years have you coded professionally (not counting education)?"
+    type: single_choice
+    construct: many_years_have_coded_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't code professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q46
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q47
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q48
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q49
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q50
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q52
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q53
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q54
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

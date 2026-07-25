@@ -1,0 +1,7 @@
+# Health App Privacy
+
+Consumer attitudes and behaviors around privacy in health and wellness apps.
+
+## About this survey
+
+This survey covers whether respondents use health or wellness apps, which types (fitness, nutrition, sleep, mental wellness, period tracking, patient portals, medication reminders), how many they have installed, and what personal information those apps collect. It measures privacy behaviors such as reading policies, reviewing permissions, turning off tracking, limiting sharing, or deleting apps, along with concern about data use and beliefs about who can access the data. It runs Likert batteries on attitudes (understanding data use, over- collection, trust, policy readability, benefit-versus-privacy tradeoffs, need for stronger rules), a comfort battery on sharing data with different parties (doctor, insurer, app company, researchers, advertisers, chosen family), and an importance battery on privacy features, plus a top-3 ranking of the most valued features, whether they have avoided an app over privacy, willingness to pay for a private app, how much privacy affects app choice, confidence, satisfaction, intent to check practices before downloading, a 0–10 recommendation score, and an open comment. Question types include single-choice, multi-select, Likert scales, matrix batteries split per item, a top-3 ranking, and numeric free-text. Demographics captured: age, gender, race/ethnicity, household income, education, employment, household size, marital status, region, urban/rural, tech comfort, and phone type.

@@ -1,0 +1,742 @@
+schemaVersion: "1.0"
+id: phishing_awareness_v1
+title: "Phishing & Online Scam Awareness Survey"
+description: "How aware people are of phishing and online scams, how they respond to suspicious messages, and how protected they feel."
+questions:
+  - id: q0
+    prompt: "How familiar are you with the term \"phishing\"?"
+    type: single_choice
+    construct: familiar_term_phishing
+    required: true
+    options:
+      - id: "a"
+        label: "Very familiar — I can explain it in detail"
+      - id: "b"
+        label: "Familiar — I know what it means"
+      - id: "c"
+        label: "Somewhat familiar"
+      - id: "d"
+        label: "I've heard of it but I'm unsure"
+      - id: "e"
+        label: "Not familiar at all"
+  - id: q1
+    prompt: "How confident are you in your ability to recognize a phishing attempt?"
+    type: single_choice
+    construct: confident_ability_recognize_phishing_att
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q2
+    prompt: "How often do you receive suspicious messages that might be phishing or scams?"
+    type: single_choice
+    construct: often_receive_suspicious_messages_that
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "About once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Rarely"
+      - id: "f"
+        label: "Never / I don't notice them"
+  - id: q3
+    prompt: "Through which channels do you receive suspicious or scam messages? (Select all that apply)"
+    type: multi_choice
+    construct: through_channels_receive_suspicious_scam
+    required: true
+    options:
+      - id: "a"
+        label: "Email"
+      - id: "b"
+        label: "Text message (SMS)"
+      - id: "c"
+        label: "Phone calls"
+      - id: "d"
+        label: "Social media messages"
+      - id: "e"
+        label: "Messaging apps (WhatsApp, Messenger, etc.)"
+      - id: "f"
+        label: "Pop-ups or websites"
+      - id: "g"
+        label: "QR codes"
+      - id: "h"
+        label: "I don't receive any"
+  - id: q4
+    prompt: "Which types of scams have you personally encountered? (Select all that apply)"
+    type: multi_choice
+    construct: types_scams_have_personally_encountered
+    required: true
+    options:
+      - id: "a"
+        label: "Fake package / delivery notifications"
+      - id: "b"
+        label: "Bank or account \"security alert\" messages"
+      - id: "c"
+        label: "Fake invoices or payment requests"
+      - id: "d"
+        label: "Prize / lottery / \"you've won\" messages"
+      - id: "e"
+        label: "Tech support scams"
+      - id: "f"
+        label: "Job offer scams"
+      - id: "g"
+        label: "Romance scams"
+      - id: "h"
+        label: "Cryptocurrency or investment scams"
+      - id: "i"
+        label: "Impersonation of a boss, friend, or family member"
+      - id: "j"
+        label: "IRS / government impersonation"
+      - id: "k"
+        label: "None of these"
+  - id: q5
+    prompt: "Which of these do you check to decide whether a message is legitimate? (Select all that apply)"
+    type: multi_choice
+    construct: these_check_decide_whether_message
+    required: true
+    options:
+      - id: "a"
+        label: "The sender's email address or phone number"
+      - id: "b"
+        label: "Spelling and grammar"
+      - id: "c"
+        label: "Whether it creates urgency or pressure"
+      - id: "d"
+        label: "Where a link actually leads (hovering / previewing)"
+      - id: "e"
+        label: "Whether it asks for personal or financial info"
+      - id: "f"
+        label: "Generic greetings (\"Dear customer\")"
+      - id: "g"
+        label: "Whether I was expecting it"
+      - id: "h"
+        label: "I contact the company directly to verify"
+      - id: "i"
+        label: "I don't really check"
+  - id: q6
+    prompt: "Have you ever clicked a link or opened an attachment in a message that turned out to be a scam?"
+    type: single_choice
+    construct: have_ever_clicked_link_opened
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "I almost did but caught it"
+      - id: "d"
+        label: "No, never"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q7
+    prompt: "Have you ever lost money or had information stolen as a result of a phishing or scam message?"
+    type: single_choice
+    construct: have_ever_lost_money_had
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, lost money"
+      - id: "b"
+        label: "Yes, had information stolen"
+      - id: "c"
+        label: "Yes, both"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q8
+    prompt: "When you get a message you think is a phishing attempt, what do you usually do? (Select all that apply)"
+    type: multi_choice
+    construct: when_get_message_think_phishing
+    required: true
+    options:
+      - id: "a"
+        label: "Delete it"
+      - id: "b"
+        label: "Report it as spam or phishing"
+      - id: "c"
+        label: "Block the sender"
+      - id: "d"
+        label: "Verify by contacting the company directly"
+      - id: "e"
+        label: "Ignore it"
+      - id: "f"
+        label: "Warn others (family, colleagues)"
+      - id: "g"
+        label: "Forward it to a reporting service (e.g., report to the FTC or my bank)"
+  - id: q9
+    prompt: "How often do you report phishing or scam messages to the relevant company or authorities?"
+    type: single_choice
+    construct: often_report_phishing_scam_messages
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q10
+    prompt: "Roughly how many phishing or scam messages do you think you receive in a typical week?"
+    type: free_text
+    construct: roughly_many_phishing_scam_messages
+    required: true
+  - id: q11
+    prompt: "How much do you agree with the following statement? — Phishing messages are getting harder to tell apart from real ones."
+    type: single_choice
+    construct: much_agree_following_statement_phishing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement? — I would be embarrassed to admit if I fell for a scam."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement? — I know what to do if I think I've been phished."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement? — AI is making scams more convincing and harder to spot."
+    type: single_choice
+    construct: much_agree_following_statement_ai
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement? — Email providers and phone carriers do enough to block scams."
+    type: single_choice
+    construct: much_agree_following_statement_email
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How confident are you that you could correctly identify each of the following as a scam? — A fake bank \"security alert\" text"
+    type: single_choice
+    construct: confident_that_could_correctly_identify
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q17
+    prompt: "How confident are you that you could correctly identify each of the following as a scam? — A fake package delivery notification"
+    type: single_choice
+    construct: confident_that_could_correctly_identify
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q18
+    prompt: "How confident are you that you could correctly identify each of the following as a scam? — A phone call impersonating tech support"
+    type: single_choice
+    construct: confident_that_could_correctly_identify
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q19
+    prompt: "How confident are you that you could correctly identify each of the following as a scam? — An email that looks like it's from your boss"
+    type: single_choice
+    construct: confident_that_could_correctly_identify
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q20
+    prompt: "How confident are you that you could correctly identify each of the following as a scam? — A convincing AI-generated voice or video message"
+    type: single_choice
+    construct: confident_that_could_correctly_identify
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q21
+    prompt: "How worried are you about each of the following? — Yourself falling for a scam"
+    type: single_choice
+    construct: worried_each_following_yourself_falling
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+  - id: q22
+    prompt: "How worried are you about each of the following? — An older relative falling for a scam"
+    type: single_choice
+    construct: worried_each_following_older_relative
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+      - id: "f"
+        label: "Not applicable"
+  - id: q23
+    prompt: "How worried are you about each of the following? — A child or teen in your life falling for a scam"
+    type: single_choice
+    construct: worried_each_following_child_teen
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+      - id: "f"
+        label: "Not applicable"
+  - id: q24
+    prompt: "Which protective measures do you use against phishing and scams? (Select all that apply)"
+    type: multi_choice
+    construct: protective_measures_use_against_phishing
+    required: true
+    options:
+      - id: "a"
+        label: "Spam filters"
+      - id: "b"
+        label: "Caller ID / spam-call blocking"
+      - id: "c"
+        label: "Two-factor authentication on important accounts"
+      - id: "d"
+        label: "A password manager"
+      - id: "e"
+        label: "Not clicking links in messages, going to sites directly"
+      - id: "f"
+        label: "Checking with family or friends when unsure"
+      - id: "g"
+        label: "Security software that flags malicious sites"
+      - id: "h"
+        label: "None of these"
+  - id: q25
+    prompt: "Have you received training on recognizing phishing (at work, school, or elsewhere)?"
+    type: single_choice
+    construct: have_received_training_recognizing_phish
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, in the past year"
+      - id: "b"
+        label: "Yes, but more than a year ago"
+      - id: "c"
+        label: "No, but it's available to me"
+      - id: "d"
+        label: "No, never"
+      - id: "e"
+        label: "Not sure"
+  - id: q26
+    prompt: "Where do you learn about new scam tactics? (Select all that apply)"
+    type: multi_choice
+    construct: where_learn_new_scam_tactics
+    required: true
+    options:
+      - id: "a"
+        label: "News media"
+      - id: "b"
+        label: "Friends or family"
+      - id: "c"
+        label: "Workplace / school"
+      - id: "d"
+        label: "Social media"
+      - id: "e"
+        label: "Bank or service provider alerts"
+      - id: "f"
+        label: "Government / consumer-protection resources"
+      - id: "g"
+        label: "I don't actively follow scam news"
+  - id: q27
+    prompt: "Select the top 3 signs you rely on most to spot a scam. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_signs_rely
+    required: true
+    options:
+      - id: "a"
+        label: "A sense of urgency or threats"
+      - id: "b"
+        label: "Requests for personal or financial info"
+      - id: "c"
+        label: "Suspicious sender address or number"
+      - id: "d"
+        label: "Poor spelling or grammar"
+      - id: "e"
+        label: "Links that don't match the real site"
+      - id: "f"
+        label: "Offers that seem too good to be true"
+      - id: "g"
+        label: "Unexpected attachments"
+      - id: "h"
+        label: "Generic or impersonal greetings"
+      - id: "i"
+        label: "Requests for unusual payment (gift cards, crypto, wire)"
+  - id: q28
+    prompt: "How has the volume of scam messages you receive changed over the past year?"
+    type: single_choice
+    construct: has_volume_scam_messages_receive
+    required: true
+    options:
+      - id: "a"
+        label: "Increased a lot"
+      - id: "b"
+        label: "Increased somewhat"
+      - id: "c"
+        label: "Stayed about the same"
+      - id: "d"
+        label: "Decreased somewhat"
+      - id: "e"
+        label: "Decreased a lot"
+      - id: "f"
+        label: "Not sure"
+  - id: q29
+    prompt: "How likely are you to double-check with the real company before acting on an unexpected urgent message?"
+    type: single_choice
+    construct: likely_double_check_real_company
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q30
+    prompt: "Overall, how well-protected do you feel against phishing and online scams?"
+    type: single_choice
+    construct: overall_well_protected_feel_against
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all protected"
+      - id: "b"
+        label: "Slightly protected"
+      - id: "c"
+        label: "Moderately protected"
+      - id: "d"
+        label: "Very protected"
+      - id: "e"
+        label: "Extremely protected"
+  - id: q31
+    prompt: "What would help you feel more confident against phishing and scams? Describe in your own words."
+    type: free_text
+    construct: would_help_feel_more_confident
+    required: true
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 25"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your annual household income (US dollars)?"
+    type: single_choice
+    construct: annual_household_income_us_dollars
+    required: true
+    options:
+      - id: "a"
+        label: "Under $35,000"
+      - id: "b"
+        label: "$35,000–$74,999"
+      - id: "c"
+        label: "$75,000–$124,999"
+      - id: "d"
+        label: "$125,000–$199,999"
+      - id: "e"
+        label: "$200,000 or more"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Professional or doctoral degree"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+  - id: q38
+    prompt: "Do you work in an IT, technology, or security field?"
+    type: single_choice
+    construct: work_it_technology_security_field
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "How would you rate your overall comfort with technology?"
+    type: single_choice
+    construct: would_rate_overall_comfort_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Very comfortable"
+      - id: "b"
+        label: "Comfortable"
+      - id: "c"
+        label: "Somewhat comfortable"
+      - id: "d"
+        label: "Not very comfortable"
+      - id: "e"
+        label: "Not comfortable at all"
+  - id: q40
+    prompt: "How many people live in your household?"
+    type: free_text
+    construct: many_people_live_household
+    required: true
+  - id: q41
+    prompt: "What is your relationship status?"
+    type: single_choice
+    construct: relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q43
+    prompt: "How would you describe where you live?"
+    type: single_choice
+    construct: would_describe_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

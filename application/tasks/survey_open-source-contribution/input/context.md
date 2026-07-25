@@ -1,0 +1,7 @@
+# Open Source Contribution
+
+How people contribute to open source software, including the frequency, motivations, and types of contributions they make.
+
+## About this survey
+
+This survey profiles open source contribution, opening with a screener on frequency, tenure, and level of involvement. It records the most common contribution type alongside contributions made, the platforms used, motivations, project types, license preferences, barriers faced, how projects and issues are found, and any payment or sponsorship received. Attitudes are captured with an agreement Likert battery covering career benefit, feeling welcomed, maintainer burnout, corporate funding, time constraints, first-PR intimidation, and hiring recognition, plus a per-item importance matrix over contribution motivations, a top-three ranking of reasons for contributing, and multi-selects of contribution types and barriers. Further sections examine project scale, merge rates, employer support, interest in maintaining, event participation, and discouragement, followed by satisfaction, a recommendation scale, and intent to contribute more or start maintaining. Question types include single-choice, multi-select, several Likert scales, an importance matrix, a ranking item, a 0–10 recommendation scale, and numeric free-text. The survey ends with a demographic block covering role, professional experience, employment, company size, industry, age, gender, race and ethnicity, education, U.S. region, and urbanicity.

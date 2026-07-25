@@ -1,0 +1,795 @@
+schemaVersion: "1.0"
+id: health_podcast_consumption_v1
+title: "Health Podcast Consumption Survey"
+description: "How people listen to, engage with, and act on health and wellness podcasts."
+questions:
+  - id: q0
+    prompt: "Do you listen to podcasts of any kind?"
+    type: single_choice
+    construct: listen_podcasts_any_kind
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "No, never"
+  - id: q1
+    prompt: "Do you listen to health, wellness, fitness, or medical podcasts specifically?"
+    type: single_choice
+    construct: listen_health_wellness_fitness_medical
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, sometimes"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "No, never"
+  - id: q2
+    prompt: "About how long have you been listening to health or wellness podcasts?"
+    type: single_choice
+    construct: long_have_been_listening_health
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 2 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+      - id: "f"
+        label: "I don't listen to them"
+  - id: q3
+    prompt: "How often do you listen to health or wellness podcasts?"
+    type: single_choice
+    construct: often_listen_health_wellness_podcasts
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "About once a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Less than once a month"
+  - id: q4
+    prompt: "Which app or platform do you most often use to listen to podcasts?"
+    type: single_choice
+    construct: app_platform_most_often_use
+    required: true
+    options:
+      - id: "a"
+        label: "Spotify"
+      - id: "b"
+        label: "Apple Podcasts"
+      - id: "c"
+        label: "YouTube or YouTube Music"
+      - id: "d"
+        label: "Amazon Music or Audible"
+      - id: "e"
+        label: "iHeartRadio"
+      - id: "f"
+        label: "Google Podcasts or Pocket Casts"
+      - id: "g"
+        label: "A podcast's own website"
+      - id: "h"
+        label: "Another app"
+  - id: q5
+    prompt: "Which types of health and wellness podcasts do you listen to? (Select all that apply)"
+    type: multi_choice
+    construct: types_health_wellness_podcasts_listen
+    required: true
+    options:
+      - id: "a"
+        label: "General health and medicine"
+      - id: "b"
+        label: "Fitness and exercise"
+      - id: "c"
+        label: "Nutrition and diet"
+      - id: "d"
+        label: "Mental well-being and mindfulness"
+      - id: "e"
+        label: "Sleep and relaxation"
+      - id: "f"
+        label: "Longevity and biohacking"
+      - id: "g"
+        label: "Women's or men's health"
+      - id: "h"
+        label: "Chronic condition management"
+      - id: "i"
+        label: "Health news and current events"
+  - id: q6
+    prompt: "Where do you usually listen to health podcasts? (Select all that apply)"
+    type: multi_choice
+    construct: where_usually_listen_health_podcasts
+    required: true
+    options:
+      - id: "a"
+        label: "While commuting or driving"
+      - id: "b"
+        label: "While exercising or walking"
+      - id: "c"
+        label: "While doing chores or cooking"
+      - id: "d"
+        label: "While relaxing at home"
+      - id: "e"
+        label: "Before falling asleep"
+      - id: "f"
+        label: "At work or while multitasking"
+      - id: "g"
+        label: "During travel"
+  - id: q7
+    prompt: "On which device do you most often listen?"
+    type: single_choice
+    construct: device_most_often_listen
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "Smart speaker (Amazon Echo, Google Nest, etc.)"
+      - id: "c"
+        label: "Computer or laptop"
+      - id: "d"
+        label: "Tablet"
+      - id: "e"
+        label: "Car audio system"
+      - id: "f"
+        label: "Headphones or earbuds connected to any device"
+  - id: q8
+    prompt: "In a typical week, about how many hours do you spend listening to health or wellness podcasts? Please enter a number."
+    type: free_text
+    construct: typical_week_many_hours_spend
+    required: true
+  - id: q9
+    prompt: "About how many different health or wellness podcasts do you follow or subscribe to? Please enter a number."
+    type: free_text
+    construct: many_different_health_wellness_podcasts
+    required: true
+  - id: q10
+    prompt: "How do you usually discover new health podcasts? (Select all that apply)"
+    type: multi_choice
+    construct: usually_discover_new_health_podcasts
+    required: true
+    options:
+      - id: "a"
+        label: "App recommendations or charts"
+      - id: "b"
+        label: "Social media"
+      - id: "c"
+        label: "Friends or family"
+      - id: "d"
+        label: "A host or guest I already follow"
+      - id: "e"
+        label: "Search for a specific topic"
+      - id: "f"
+        label: "Ads or promotions"
+      - id: "g"
+        label: "News articles or websites"
+  - id: q11
+    prompt: "When listening to an episode, do you typically listen to the whole thing?"
+    type: single_choice
+    construct: when_listening_episode_typically_listen
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, almost always the full episode"
+      - id: "b"
+        label: "Usually most of it"
+      - id: "c"
+        label: "Often just part of it"
+      - id: "d"
+        label: "I skip around to sections I care about"
+  - id: q12
+    prompt: "Do you usually listen to episodes at their normal speed?"
+    type: single_choice
+    construct: usually_listen_episodes_their_normal
+    required: true
+    options:
+      - id: "a"
+        label: "Normal speed"
+      - id: "b"
+        label: "Slightly faster (1.25x–1.5x)"
+      - id: "c"
+        label: "Much faster (1.75x or more)"
+      - id: "d"
+        label: "It varies"
+  - id: q13
+    prompt: "Which of these do you do related to health podcasts? (Select all that apply)"
+    type: multi_choice
+    construct: these_related_health_podcasts_select
+    required: true
+    options:
+      - id: "a"
+        label: "Follow the host on social media"
+      - id: "b"
+        label: "Take notes or save takeaways"
+      - id: "c"
+        label: "Look up or buy products mentioned"
+      - id: "d"
+        label: "Discuss episodes with friends or family"
+      - id: "e"
+        label: "Leave ratings or reviews"
+      - id: "f"
+        label: "Support a show financially (Patreon, membership)"
+      - id: "g"
+        label: "None of these"
+  - id: q14
+    prompt: "How much do you agree or disagree: Health podcasts have helped me learn something useful about my health."
+    type: single_choice
+    construct: much_agree_disagree_health_podcasts
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: Health podcasts have motivated me to change a health habit."
+    type: single_choice
+    construct: much_agree_disagree_health_podcasts
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: I trust the health information I hear on the podcasts I listen to."
+    type: single_choice
+    construct: much_agree_disagree_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree or disagree: I check whether the host or guest has relevant credentials."
+    type: single_choice
+    construct: much_agree_disagree_i_check
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree or disagree: I sometimes find the health advice on podcasts confusing or contradictory."
+    type: single_choice
+    construct: much_agree_disagree_i_sometimes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree or disagree: Listening to health podcasts is an enjoyable part of my routine."
+    type: single_choice
+    construct: much_agree_disagree_listening_health
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How important is each factor when choosing a health podcast: The host's expertise or credentials."
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each factor when choosing a health podcast: The specific topic or theme."
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each factor when choosing a health podcast: Entertainment value or hosts' personality."
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each factor when choosing a health podcast: Episode length."
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each factor when choosing a health podcast: Recommendations or reviews from others."
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "What is your preferred episode length?"
+    type: single_choice
+    construct: preferred_episode_length
+    required: true
+    options:
+      - id: "a"
+        label: "Under 20 minutes"
+      - id: "b"
+        label: "20 to 40 minutes"
+      - id: "c"
+        label: "40 to 60 minutes"
+      - id: "d"
+        label: "1 to 2 hours"
+      - id: "e"
+        label: "Longer than 2 hours"
+      - id: "f"
+        label: "No preference"
+  - id: q26
+    prompt: "Select your top 3 reasons you listen to health podcasts. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_listen
+    required: true
+    options:
+      - id: "a"
+        label: "To learn new health information"
+      - id: "b"
+        label: "To stay motivated for fitness or wellness goals"
+      - id: "c"
+        label: "For entertainment and enjoyment"
+      - id: "d"
+        label: "To manage stress or relax"
+      - id: "e"
+        label: "To help manage a specific health condition"
+      - id: "f"
+        label: "To hear expert interviews"
+      - id: "g"
+        label: "To keep up with health news"
+      - id: "h"
+        label: "To pass the time while doing other things"
+  - id: q27
+    prompt: "Have you ever made a change to your diet, exercise, or health routine because of something you heard on a podcast?"
+    type: single_choice
+    construct: have_ever_made_change_diet
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several times"
+      - id: "b"
+        label: "Yes, once or twice"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No, never"
+  - id: q28
+    prompt: "Have you ever discussed something you heard on a health podcast with a doctor or health professional?"
+    type: single_choice
+    construct: have_ever_discussed_something_heard
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I would consider it"
+      - id: "c"
+        label: "No, and I would not"
+  - id: q29
+    prompt: "How do you feel about advertisements or sponsored segments in health podcasts?"
+    type: single_choice
+    construct: feel_advertisements_sponsored_segments_h
+    required: true
+    options:
+      - id: "a"
+        label: "I don't mind them at all"
+      - id: "b"
+        label: "I tolerate them"
+      - id: "c"
+        label: "I find them annoying"
+      - id: "d"
+        label: "I skip them whenever possible"
+  - id: q30
+    prompt: "How often do you fact-check or look up claims made on health podcasts?"
+    type: single_choice
+    construct: often_fact_check_look_up
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q31
+    prompt: "How concerned are you about misinformation in health and wellness podcasts?"
+    type: single_choice
+    construct: concerned_misinformation_health_wellness
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q32
+    prompt: "Do you pay for any podcast subscriptions or ad-free listening?"
+    type: single_choice
+    construct: pay_any_podcast_subscriptions_ad
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I would consider it"
+      - id: "c"
+        label: "No, and I would not"
+  - id: q33
+    prompt: "Overall, how satisfied are you with the health podcasts you listen to?"
+    type: single_choice
+    construct: overall_satisfied_health_podcasts_listen
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "On a scale of 0 to 10, how likely are you to recommend a favorite health podcast to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "How likely are you to continue listening to health podcasts over the next year?"
+    type: single_choice
+    construct: likely_continue_listening_health_podcast
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q36
+    prompt: "Compared with a year ago, how has your health podcast listening changed?"
+    type: single_choice
+    construct: compared_year_ago_has_health
+    required: true
+    options:
+      - id: "a"
+        label: "Increased a lot"
+      - id: "b"
+        label: "Increased somewhat"
+      - id: "c"
+        label: "Stayed about the same"
+      - id: "d"
+        label: "Decreased somewhat"
+      - id: "e"
+        label: "Decreased a lot"
+  - id: q37
+    prompt: "What is your favorite health or wellness podcast, or what topic would you like more shows about? (Optional)"
+    type: free_text
+    construct: favorite_health_wellness_podcast_topic
+    required: false
+  - id: q38
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 to 74"
+      - id: "g"
+        label: "75 or older"
+  - id: q39
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q44
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q45
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q46
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+  - id: q47
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q48
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q49
+    prompt: "How would you rate your overall interest in health and wellness topics?"
+    type: single_choice
+    construct: would_rate_overall_interest_health
+    required: true
+    options:
+      - id: "a"
+        label: "Very low"
+      - id: "b"
+        label: "Low"
+      - id: "c"
+        label: "Moderate"
+      - id: "d"
+        label: "High"
+      - id: "e"
+        label: "Very high"

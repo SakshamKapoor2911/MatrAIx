@@ -1,0 +1,778 @@
+schemaVersion: "1.0"
+id: vr_ar_adoption_v1
+title: "VR and AR Adoption Survey"
+description: "How people adopt and use virtual reality (VR) and augmented reality (AR) technology, including headset ownership, use cases, comfort, and attitudes toward the technology."
+questions:
+  - id: q0
+    prompt: "Have you ever used a virtual reality (VR) or augmented reality (AR) headset?"
+    type: single_choice
+    construct: have_ever_used_virtual_reality
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I own one"
+      - id: "b"
+        label: "Yes, I've used someone else's"
+      - id: "c"
+        label: "Yes, I've tried one at a store or event"
+      - id: "d"
+        label: "No, but I'm interested"
+      - id: "e"
+        label: "No, and I'm not interested"
+  - id: q1
+    prompt: "Do you currently own a VR or AR headset?"
+    type: single_choice
+    construct: currently_own_vr_ar_headset
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one"
+      - id: "b"
+        label: "Yes, more than one"
+      - id: "c"
+        label: "No, but I've owned one before"
+      - id: "d"
+        label: "No, never"
+  - id: q2
+    prompt: "Which VR or AR headsets have you used? (Select all that apply)"
+    type: multi_choice
+    construct: vr_ar_headsets_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Meta Quest 3 or Quest 3S"
+      - id: "b"
+        label: "Meta Quest 2"
+      - id: "c"
+        label: "Apple Vision Pro"
+      - id: "d"
+        label: "PlayStation VR2"
+      - id: "e"
+        label: "Valve Index"
+      - id: "f"
+        label: "HTC Vive"
+      - id: "g"
+        label: "Meta (Ray-Ban) smart glasses"
+      - id: "h"
+        label: "A phone-based VR viewer (e.g., cardboard)"
+      - id: "i"
+        label: "Another headset"
+      - id: "j"
+        label: "None"
+  - id: q3
+    prompt: "Which headset do you use most (or would most like to own)?"
+    type: single_choice
+    construct: headset_use_most_would_most
+    required: true
+    options:
+      - id: "a"
+        label: "Meta Quest 3 / 3S"
+      - id: "b"
+        label: "Meta Quest 2"
+      - id: "c"
+        label: "Apple Vision Pro"
+      - id: "d"
+        label: "PlayStation VR2"
+      - id: "e"
+        label: "Valve Index"
+      - id: "f"
+        label: "HTC Vive"
+      - id: "g"
+        label: "Smart glasses"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "None / not sure"
+  - id: q4
+    prompt: "How long have you been using VR or AR?"
+    type: single_choice
+    construct: long_have_been_using_vr
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "More than 3 years"
+      - id: "e"
+        label: "I don't currently use it"
+  - id: q5
+    prompt: "On a typical week, about how many hours do you spend using VR or AR?"
+    type: single_choice
+    construct: typical_week_many_hours_spend
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "Less than 1 hour"
+      - id: "c"
+        label: "1 to 3 hours"
+      - id: "d"
+        label: "4 to 7 hours"
+      - id: "e"
+        label: "More than 7 hours"
+  - id: q6
+    prompt: "What do you (or would you) use VR or AR for? (Select all that apply)"
+    type: multi_choice
+    construct: would_use_vr_ar_select
+    required: true
+    options:
+      - id: "a"
+        label: "Gaming"
+      - id: "b"
+        label: "Watching movies or videos"
+      - id: "c"
+        label: "Fitness and exercise"
+      - id: "d"
+        label: "Social or virtual hangouts"
+      - id: "e"
+        label: "Creative work (3D design, art)"
+      - id: "f"
+        label: "Productivity (virtual monitors, meetings)"
+      - id: "g"
+        label: "Education and training"
+      - id: "h"
+        label: "Travel and virtual tours"
+      - id: "i"
+        label: "Meditation and relaxation"
+      - id: "j"
+        label: "Just to experience the technology"
+  - id: q7
+    prompt: "What do you use VR or AR for most often?"
+    type: single_choice
+    construct: use_vr_ar_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Gaming"
+      - id: "b"
+        label: "Watching media"
+      - id: "c"
+        label: "Fitness"
+      - id: "d"
+        label: "Social experiences"
+      - id: "e"
+        label: "Productivity or work"
+      - id: "f"
+        label: "Creative or educational uses"
+      - id: "g"
+        label: "I don't use it regularly"
+  - id: q8
+    prompt: "Roughly how much did you spend on VR/AR hardware and content in the past year?"
+    type: free_text
+    construct: roughly_much_did_spend_vr
+    required: true
+  - id: q9
+    prompt: "Where did you (or would you) mainly use VR or AR?"
+    type: single_choice
+    construct: where_did_would_mainly_use
+    required: true
+    options:
+      - id: "a"
+        label: "At home"
+      - id: "b"
+        label: "At work or school"
+      - id: "c"
+        label: "At friends' or family's homes"
+      - id: "d"
+        label: "At an arcade, store, or event"
+      - id: "e"
+        label: "I don't use it"
+  - id: q10
+    prompt: "How often do you use VR or AR now?"
+    type: single_choice
+    construct: often_use_vr_ar_now
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never / no longer"
+  - id: q11
+    prompt: "How often do you experience the following with VR or AR — Motion sickness or nausea"
+    type: single_choice
+    construct: often_experience_following_vr_ar
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q12
+    prompt: "How often do you experience the following with VR or AR — Discomfort from the headset's weight or fit"
+    type: single_choice
+    construct: often_experience_following_vr_ar
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q13
+    prompt: "How often do you experience the following with VR or AR — Eye strain or fatigue"
+    type: single_choice
+    construct: often_experience_following_vr_ar
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q14
+    prompt: "How often do you experience the following with VR or AR — Running out of battery too quickly"
+    type: single_choice
+    construct: often_experience_following_vr_ar
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q15
+    prompt: "How often do you experience the following with VR or AR — Not enough content or apps I want"
+    type: single_choice
+    construct: often_experience_following_vr_ar
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q16
+    prompt: "Please rate your agreement — VR and AR are exciting technologies with a lot of potential"
+    type: single_choice
+    construct: please_rate_agreement_vr_ar
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "Please rate your agreement — Current VR and AR headsets are too expensive"
+    type: single_choice
+    construct: please_rate_agreement_current_vr
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "Please rate your agreement — I find VR headsets comfortable to wear for long periods"
+    type: single_choice
+    construct: please_rate_agreement_i_find
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "Please rate your agreement — There isn't enough good content to justify buying a headset"
+    type: single_choice
+    construct: please_rate_agreement_there_isn
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Please rate your agreement — VR and AR will become a normal part of everyday life"
+    type: single_choice
+    construct: please_rate_agreement_vr_ar
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "Please rate your agreement — I have privacy concerns about cameras and sensors in AR/VR devices"
+    type: single_choice
+    construct: please_rate_agreement_i_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "What are the biggest barriers to you using VR or AR more? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: biggest_barriers_using_vr_ar
+    required: true
+    options:
+      - id: "a"
+        label: "Price of the hardware"
+      - id: "b"
+        label: "Limited or repetitive content"
+      - id: "c"
+        label: "Physical discomfort or motion sickness"
+      - id: "d"
+        label: "Not enough time"
+      - id: "e"
+        label: "Bulky or awkward to wear"
+      - id: "f"
+        label: "Concerns about privacy"
+      - id: "g"
+        label: "No one else I know uses it"
+      - id: "h"
+        label: "Setup and space requirements"
+      - id: "i"
+        label: "Battery life"
+      - id: "j"
+        label: "I just don't see the point"
+  - id: q23
+    prompt: "How important are the following in a VR or AR headset — Comfort and fit"
+    type: single_choice
+    construct: important_following_vr_ar_headset
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important are the following in a VR or AR headset — Price"
+    type: single_choice
+    construct: important_following_vr_ar_headset
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important are the following in a VR or AR headset — Selection of games and apps"
+    type: single_choice
+    construct: important_following_vr_ar_headset
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important are the following in a VR or AR headset — Visual quality (resolution, field of view)"
+    type: single_choice
+    construct: important_following_vr_ar_headset
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important are the following in a VR or AR headset — Wireless / standalone (no PC or cables needed)"
+    type: single_choice
+    construct: important_following_vr_ar_headset
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Which best describes your VR/AR headset setup (if you have one)?"
+    type: single_choice
+    construct: best_describes_vr_ar_headset
+    required: true
+    options:
+      - id: "a"
+        label: "Standalone headset (no computer needed)"
+      - id: "b"
+        label: "Headset tethered to a gaming PC"
+      - id: "c"
+        label: "Headset connected to a game console"
+      - id: "d"
+        label: "Phone-based viewer"
+      - id: "e"
+        label: "I don't own one"
+  - id: q29
+    prompt: "Have you used AR features on your phone (e.g., filters, navigation, shopping try-ons, AR games)?"
+    type: single_choice
+    construct: have_used_ar_features_phone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "Never"
+  - id: q30
+    prompt: "How interested are you in buying a new VR or AR device in the next two years?"
+    type: single_choice
+    construct: interested_buying_new_vr_ar
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all interested"
+      - id: "b"
+        label: "Slightly interested"
+      - id: "c"
+        label: "Moderately interested"
+      - id: "d"
+        label: "Very interested"
+      - id: "e"
+        label: "Extremely interested"
+  - id: q31
+    prompt: "What is the most you would be willing to pay for a VR or AR headset?"
+    type: single_choice
+    construct: most_would_be_willing_pay
+    required: true
+    options:
+      - id: "a"
+        label: "I wouldn't buy one"
+      - id: "b"
+        label: "Under $200"
+      - id: "c"
+        label: "$200 to $499"
+      - id: "d"
+        label: "$500 to $999"
+      - id: "e"
+        label: "$1,000 to $1,999"
+      - id: "f"
+        label: "$2,000 or more"
+  - id: q32
+    prompt: "Over the next year, how do you expect your VR or AR usage to change?"
+    type: single_choice
+    construct: over_next_year_expect_vr
+    required: true
+    options:
+      - id: "a"
+        label: "Decrease a lot"
+      - id: "b"
+        label: "Decrease somewhat"
+      - id: "c"
+        label: "Stay about the same"
+      - id: "d"
+        label: "Increase somewhat"
+      - id: "e"
+        label: "Increase a lot"
+  - id: q33
+    prompt: "Overall, how satisfied are you with VR and AR technology today (or your impression of it)?"
+    type: single_choice
+    construct: overall_satisfied_vr_ar_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How likely are you to recommend a VR or AR headset to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_vr_ar_headset
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "What would make VR or AR more appealing or useful to you?"
+    type: free_text
+    construct: would_make_vr_ar_more
+    required: true
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelance"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed, looking for work"
+      - id: "f"
+        label: "Not employed, not looking"
+      - id: "g"
+        label: "Retired"
+  - id: q42
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q43
+    prompt: "Are there children under 18 living in your household?"
+    type: single_choice
+    construct: there_children_under_18_living
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q45
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

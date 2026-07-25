@@ -1,0 +1,739 @@
+schemaVersion: "1.0"
+id: meal_planning_v1
+title: "Meal Planning Survey"
+description: "How people plan, shop for, and prepare their meals week to week."
+questions:
+  - id: q0
+    prompt: "How often do you plan your meals in advance?"
+    type: single_choice
+    construct: often_plan_meals_advance
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Most weeks"
+      - id: "e"
+        label: "Every week"
+  - id: q1
+    prompt: "How far ahead do you usually plan your meals?"
+    type: single_choice
+    construct: far_ahead_usually_plan_meals
+    required: true
+    options:
+      - id: "a"
+        label: "I do not plan ahead"
+      - id: "b"
+        label: "A day at a time"
+      - id: "c"
+        label: "A few days at a time"
+      - id: "d"
+        label: "A full week"
+      - id: "e"
+        label: "Two weeks or more"
+  - id: q2
+    prompt: "Which planning methods do you use? (Select all that apply)"
+    type: multi_choice
+    construct: planning_methods_use_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "A written or printed list"
+      - id: "b"
+        label: "A notes or reminders app"
+      - id: "c"
+        label: "A dedicated meal-planning app or website"
+      - id: "d"
+        label: "A calendar or spreadsheet"
+      - id: "e"
+        label: "A whiteboard or fridge planner"
+      - id: "f"
+        label: "I keep it in my head"
+      - id: "g"
+        label: "I do not plan"
+  - id: q3
+    prompt: "Do you use any meal-planning or recipe apps or services? (Select all that apply)"
+    type: multi_choice
+    construct: use_any_meal_planning_recipe
+    required: true
+    options:
+      - id: "a"
+        label: "Paprika or a recipe manager"
+      - id: "b"
+        label: "Mealime or PlateJoy"
+      - id: "c"
+        label: "A grocery store's app or website"
+      - id: "d"
+        label: "Pinterest or recipe blogs"
+      - id: "e"
+        label: "A meal-kit service (for example, HelloFresh, Blue Apron)"
+      - id: "f"
+        label: "A prepared-meal delivery service (for example, Factor)"
+      - id: "g"
+        label: "None of these"
+  - id: q4
+    prompt: "How often do you make a grocery list before shopping?"
+    type: single_choice
+    construct: often_make_grocery_list_before
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q5
+    prompt: "How do you usually get your groceries? (Select all that apply)"
+    type: multi_choice
+    construct: usually_get_groceries_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Shopping in person at a store"
+      - id: "b"
+        label: "Online order for pickup"
+      - id: "c"
+        label: "Online order for delivery"
+      - id: "d"
+        label: "A meal-kit or subscription box"
+      - id: "e"
+        label: "Farmers markets or local sources"
+      - id: "f"
+        label: "Warehouse or bulk stores"
+  - id: q6
+    prompt: "How many days per week do you cook at home? Please enter a number."
+    type: free_text
+    construct: many_days_per_week_cook
+    required: true
+  - id: q7
+    prompt: "Do you practice meal prep (cooking meals or components ahead of time)?"
+    type: single_choice
+    construct: practice_meal_prep_cooking_meals
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, most weeks"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I would like to"
+      - id: "d"
+        label: "No, and I do not plan to"
+  - id: q8
+    prompt: "What are your main reasons for planning meals? (Select all that apply)"
+    type: multi_choice
+    construct: main_reasons_planning_meals_select
+    required: true
+    options:
+      - id: "a"
+        label: "Save money"
+      - id: "b"
+        label: "Save time"
+      - id: "c"
+        label: "Eat healthier"
+      - id: "d"
+        label: "Reduce food waste"
+      - id: "e"
+        label: "Reduce daily stress or decisions"
+      - id: "f"
+        label: "Manage a specific diet or health need"
+      - id: "g"
+        label: "Feed a family or household"
+      - id: "h"
+        label: "I do not plan meals"
+  - id: q9
+    prompt: "About how much do you spend on groceries per week for your household? Please enter a number in dollars."
+    type: free_text
+    construct: much_spend_groceries_per_week
+    required: true
+  - id: q10
+    prompt: "How much do you agree or disagree: Planning meals saves me money."
+    type: single_choice
+    construct: much_agree_disagree_planning_meals
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree: Planning meals helps me eat healthier."
+    type: single_choice
+    construct: much_agree_disagree_planning_meals
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: Planning meals reduces my daily stress."
+    type: single_choice
+    construct: much_agree_disagree_planning_meals
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: Planning meals helps me waste less food."
+    type: single_choice
+    construct: much_agree_disagree_planning_meals
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: Sticking to my meal plan is difficult."
+    type: single_choice
+    construct: much_agree_disagree_sticking_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: I would like to plan meals more than I do now."
+    type: single_choice
+    construct: much_agree_disagree_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "Which challenges make meal planning difficult for you? (Select all that apply)"
+    type: multi_choice
+    construct: challenges_make_meal_planning_difficult
+    required: true
+    options:
+      - id: "a"
+        label: "Lack of time"
+      - id: "b"
+        label: "Unpredictable schedule"
+      - id: "c"
+        label: "Different tastes in the household"
+      - id: "d"
+        label: "Running out of recipe ideas"
+      - id: "e"
+        label: "Cost of ingredients"
+      - id: "f"
+        label: "Not enough cooking skills"
+      - id: "g"
+        label: "Getting bored of the same meals"
+      - id: "h"
+        label: "Nothing, it works well for me"
+  - id: q17
+    prompt: "How often do you end up not following your meal plan?"
+    type: single_choice
+    construct: often_end_up_not_following
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Almost always"
+  - id: q18
+    prompt: "When your plan falls through, what do you usually do?"
+    type: single_choice
+    construct: when_plan_falls_through_usually
+    required: true
+    options:
+      - id: "a"
+        label: "Cook something else at home"
+      - id: "b"
+        label: "Order takeout or delivery"
+      - id: "c"
+        label: "Eat out"
+      - id: "d"
+        label: "Have a quick or frozen meal"
+      - id: "e"
+        label: "Skip the meal"
+  - id: q19
+    prompt: "How important is each factor in your meal planning: saving money?"
+    type: single_choice
+    construct: important_each_factor_meal_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is each factor in your meal planning: eating healthy?"
+    type: single_choice
+    construct: important_each_factor_meal_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each factor in your meal planning: saving time?"
+    type: single_choice
+    construct: important_each_factor_meal_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each factor in your meal planning: variety and enjoyment?"
+    type: single_choice
+    construct: important_each_factor_meal_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each factor in your meal planning: reducing food waste?"
+    type: single_choice
+    construct: important_each_factor_meal_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "Where do you find most of your recipes or meal ideas? (Select all that apply)"
+    type: multi_choice
+    construct: where_find_most_recipes_meal
+    required: true
+    options:
+      - id: "a"
+        label: "Recipe websites or blogs"
+      - id: "b"
+        label: "Social media (for example, Instagram, TikTok, Pinterest)"
+      - id: "c"
+        label: "Cookbooks"
+      - id: "d"
+        label: "Family and friends"
+      - id: "e"
+        label: "A meal-planning app or service"
+      - id: "f"
+        label: "Grocery store suggestions"
+      - id: "g"
+        label: "I reuse the same recipes I know"
+  - id: q25
+    prompt: "How often do you throw away food that spoiled before you used it?"
+    type: single_choice
+    construct: often_throw_away_food_that
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q26
+    prompt: "Have you ever tried a meal-kit or prepared-meal delivery service?"
+    type: single_choice
+    construct: have_ever_tried_meal_kit
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I use one regularly"
+      - id: "b"
+        label: "Yes, but I no longer use one"
+      - id: "c"
+        label: "No, but I am interested"
+      - id: "d"
+        label: "No, and I am not interested"
+  - id: q27
+    prompt: "How many meals do you typically prepare at once when you meal prep?"
+    type: single_choice
+    construct: many_meals_typically_prepare_once
+    required: true
+    options:
+      - id: "a"
+        label: "I do not meal prep"
+      - id: "b"
+        label: "1 to 2 meals"
+      - id: "c"
+        label: "3 to 4 meals"
+      - id: "d"
+        label: "5 to 6 meals"
+      - id: "e"
+        label: "A week or more of meals"
+  - id: q28
+    prompt: "How satisfied are you with your current approach to meal planning?"
+    type: single_choice
+    construct: satisfied_current_approach_meal_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "How likely are you to plan meals more consistently in the next few months?"
+    type: single_choice
+    construct: likely_plan_meals_more_consistently
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q30
+    prompt: "Which would most help you plan meals better? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: would_most_help_plan_meals
+    required: true
+    options:
+      - id: "a"
+        label: "More time"
+      - id: "b"
+        label: "Easier recipes"
+      - id: "c"
+        label: "A better planning app or tool"
+      - id: "d"
+        label: "Cheaper ingredients"
+      - id: "e"
+        label: "More variety of ideas"
+      - id: "f"
+        label: "Grocery delivery or pickup"
+      - id: "g"
+        label: "Better cooking skills"
+      - id: "h"
+        label: "Meals the whole household enjoys"
+  - id: q31
+    prompt: "On a scale of 0 to 10, how likely are you to recommend meal planning to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65–74"
+      - id: "g"
+        label: "75 or older"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino/a"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your household's annual income before taxes?"
+    type: single_choice
+    construct: household_s_annual_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+      - id: "h"
+        label: "Unable to work"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "How many children under 18 live in your household? Please enter a number."
+    type: free_text
+    construct: many_children_under_18_live
+    required: true
+  - id: q40
+    prompt: "Who usually plans and prepares meals in your household?"
+    type: single_choice
+    construct: who_usually_plans_prepares_meals
+    required: true
+    options:
+      - id: "a"
+        label: "I do most of it"
+      - id: "b"
+        label: "Someone else does most of it"
+      - id: "c"
+        label: "We share it fairly evenly"
+      - id: "d"
+        label: "We mostly rely on prepared or takeout food"
+  - id: q41
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q44
+    prompt: "In general, how would you rate your overall health?"
+    type: single_choice
+    construct: general_would_rate_overall_health
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent"
+      - id: "b"
+        label: "Very good"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Fair"
+      - id: "e"
+        label: "Poor"

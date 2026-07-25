@@ -1,0 +1,679 @@
+schemaVersion: "1.0"
+id: dental_insurance_v1
+title: "Dental Insurance Survey"
+description: "How consumers choose, use, understand, and feel about dental insurance and dental benefit plans."
+questions:
+  - id: q0
+    prompt: "Do you currently have dental insurance or a dental benefit plan?"
+    type: single_choice
+    construct: currently_have_dental_insurance_dental
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I had it in the past"
+      - id: "c"
+        label: "No, I have never had it"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q1
+    prompt: "How do you get your dental coverage?"
+    type: single_choice
+    construct: get_dental_coverage
+    required: true
+    options:
+      - id: "a"
+        label: "Through my employer"
+      - id: "b"
+        label: "Through a spouse's or family member's employer"
+      - id: "c"
+        label: "I bought it on my own"
+      - id: "d"
+        label: "Through the health insurance marketplace"
+      - id: "e"
+        label: "Through Medicaid or a public program"
+      - id: "f"
+        label: "I do not have dental coverage"
+  - id: q2
+    prompt: "What type of dental plan do you have?"
+    type: single_choice
+    construct: type_dental_plan_have
+    required: true
+    options:
+      - id: "a"
+        label: "A PPO plan"
+      - id: "b"
+        label: "An HMO or DHMO plan"
+      - id: "c"
+        label: "A dental savings or discount plan"
+      - id: "d"
+        label: "A standalone individual plan"
+      - id: "e"
+        label: "I do not know"
+      - id: "f"
+        label: "I do not have a plan"
+  - id: q3
+    prompt: "How long have you had your current dental coverage? Please enter a number of years."
+    type: free_text
+    construct: long_have_had_current_dental
+    required: true
+  - id: q4
+    prompt: "Which of the following does your plan cover? (Select all that apply)"
+    type: multi_choice
+    construct: following_does_plan_cover_select
+    required: true
+    options:
+      - id: "a"
+        label: "Routine cleanings and exams"
+      - id: "b"
+        label: "X-rays"
+      - id: "c"
+        label: "Fillings"
+      - id: "d"
+        label: "Crowns, bridges, or dentures"
+      - id: "e"
+        label: "Root canals"
+      - id: "f"
+        label: "Orthodontics (braces)"
+      - id: "g"
+        label: "I do not know what is covered"
+      - id: "h"
+        label: "I do not have a plan"
+  - id: q5
+    prompt: "About how much do you pay in dental insurance premiums each month? Please enter a number in dollars."
+    type: free_text
+    construct: much_pay_dental_insurance_premiums
+    required: true
+  - id: q6
+    prompt: "When choosing a dental plan, which factors mattered most to you? (Select all that apply)"
+    type: multi_choice
+    construct: when_choosing_dental_plan_factors
+    required: true
+    options:
+      - id: "a"
+        label: "Monthly premium"
+      - id: "b"
+        label: "What services are covered"
+      - id: "c"
+        label: "Whether my dentist is in network"
+      - id: "d"
+        label: "The annual coverage maximum"
+      - id: "e"
+        label: "Deductibles and copays"
+      - id: "f"
+        label: "Waiting periods for major work"
+      - id: "g"
+        label: "I did not get to choose my plan"
+  - id: q7
+    prompt: "How well do you understand what your dental plan covers?"
+    type: single_choice
+    construct: well_understand_dental_plan_covers
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q8
+    prompt: "How much do you agree or disagree: My dental insurance is worth what I pay for it."
+    type: single_choice
+    construct: much_agree_disagree_my_dental
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q9
+    prompt: "How much do you agree or disagree: My plan covers enough of my dental costs."
+    type: single_choice
+    construct: much_agree_disagree_my_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree or disagree: It is easy to understand what my plan pays for."
+    type: single_choice
+    construct: much_agree_disagree_it_easy
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree: The annual coverage maximum on my plan runs out too quickly."
+    type: single_choice
+    construct: much_agree_disagree_annual_coverage
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: I would keep dental coverage even if my employer stopped offering it."
+    type: single_choice
+    construct: much_agree_disagree_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How satisfied are you with each aspect of your plan: monthly cost?"
+    type: single_choice
+    construct: satisfied_each_aspect_plan_monthly
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q14
+    prompt: "How satisfied are you with each aspect of your plan: services covered?"
+    type: single_choice
+    construct: satisfied_each_aspect_plan_services
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q15
+    prompt: "How satisfied are you with each aspect of your plan: the network of dentists?"
+    type: single_choice
+    construct: satisfied_each_aspect_plan_network
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q16
+    prompt: "How satisfied are you with each aspect of your plan: out-of-pocket costs when you get care?"
+    type: single_choice
+    construct: satisfied_each_aspect_plan_out
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q17
+    prompt: "How satisfied are you with each aspect of your plan: the claims process?"
+    type: single_choice
+    construct: satisfied_each_aspect_plan_claims
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q18
+    prompt: "In the past year, did your dentist accept your dental insurance?"
+    type: single_choice
+    construct: past_year_did_dentist_accept
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, in network"
+      - id: "b"
+        label: "Yes, but out of network"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I did not go to a dentist"
+      - id: "e"
+        label: "I do not have coverage"
+  - id: q19
+    prompt: "Have you ever had a dental claim denied or paid less than you expected?"
+    type: single_choice
+    construct: have_ever_had_dental_claim
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q20
+    prompt: "In the past year, did you avoid or delay a dental treatment because it was not covered or the coverage was limited?"
+    type: single_choice
+    construct: past_year_did_avoid_delay
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable"
+  - id: q21
+    prompt: "How do you usually check what your plan covers before a visit? (Select all that apply)"
+    type: multi_choice
+    construct: usually_check_plan_covers_before
+    required: true
+    options:
+      - id: "a"
+        label: "Call the insurer"
+      - id: "b"
+        label: "Use the insurer's website or app"
+      - id: "c"
+        label: "Ask the dental office"
+      - id: "d"
+        label: "Review my plan documents"
+      - id: "e"
+        label: "I do not check in advance"
+  - id: q22
+    prompt: "How important is having dental insurance to you?"
+    type: single_choice
+    construct: important_having_dental_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How confident are you that you know your annual coverage maximum?"
+    type: single_choice
+    construct: confident_that_know_annual_coverage
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "A little confident"
+      - id: "c"
+        label: "Somewhat confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+  - id: q24
+    prompt: "How likely are you to keep or renew your dental coverage next year?"
+    type: single_choice
+    construct: likely_keep_renew_dental_coverage
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q25
+    prompt: "How likely are you to shop around for a different dental plan next enrollment period?"
+    type: single_choice
+    construct: likely_shop_around_different_dental
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q26
+    prompt: "Overall, how satisfied are you with your dental insurance?"
+    type: single_choice
+    construct: overall_satisfied_dental_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q27
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your dental plan to a friend or family member? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q28
+    prompt: "Which improvements would you most want in a dental plan? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: improvements_would_most_want_dental
+    required: true
+    options:
+      - id: "a"
+        label: "Lower monthly premium"
+      - id: "b"
+        label: "Higher annual coverage maximum"
+      - id: "c"
+        label: "More services covered"
+      - id: "d"
+        label: "A larger network of dentists"
+      - id: "e"
+        label: "Lower out-of-pocket costs"
+      - id: "f"
+        label: "No waiting periods"
+      - id: "g"
+        label: "Simpler, clearer coverage information"
+      - id: "h"
+        label: "An easier claims process"
+  - id: q29
+    prompt: "About how much did your dental insurance pay toward your care in the past year? Please enter a number in dollars."
+    type: free_text
+    construct: much_did_dental_insurance_pay
+    required: true
+  - id: q30
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65–74"
+      - id: "g"
+        label: "75 or older"
+  - id: q31
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino/a"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your household's annual income before taxes?"
+    type: single_choice
+    construct: household_s_annual_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q35
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+      - id: "h"
+        label: "Unable to work"
+  - id: q36
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q37
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q39
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q40
+    prompt: "Do you have dependents covered under your dental plan?"
+    type: single_choice
+    construct: have_dependents_covered_under_dental
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a spouse or partner"
+      - id: "b"
+        label: "Yes, children"
+      - id: "c"
+        label: "Yes, both"
+      - id: "d"
+        label: "No dependents on my plan"
+      - id: "e"
+        label: "Not applicable"
+  - id: q41
+    prompt: "In general, how would you rate your overall health?"
+    type: single_choice
+    construct: general_would_rate_overall_health
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent"
+      - id: "b"
+        label: "Very good"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Fair"
+      - id: "e"
+        label: "Poor"

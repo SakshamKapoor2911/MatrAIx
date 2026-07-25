@@ -1,0 +1,790 @@
+schemaVersion: "1.0"
+id: file_sync_habits_v1
+title: "File Sync & Transfer Habits Survey"
+description: "How people keep files synchronized and move files between their devices, and the reliability, conflict, and privacy issues they run into."
+questions:
+  - id: q0
+    prompt: "Do you keep files synchronized across more than one device?"
+    type: single_choice
+    construct: keep_files_synchronized_across_more
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, across many devices"
+      - id: "b"
+        label: "Yes, across a couple of devices"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "No, my files stay on one device"
+      - id: "e"
+        label: "Not sure what this means"
+  - id: q1
+    prompt: "How many devices do you regularly move or sync files between?"
+    type: free_text
+    construct: many_devices_regularly_move_sync
+    required: true
+  - id: q2
+    prompt: "Which tools do you use to keep files in sync across devices? (Select all that apply)"
+    type: multi_choice
+    construct: tools_use_keep_files_sync
+    required: true
+    options:
+      - id: "a"
+        label: "Dropbox"
+      - id: "b"
+        label: "Google Drive"
+      - id: "c"
+        label: "Microsoft OneDrive"
+      - id: "d"
+        label: "Apple iCloud Drive"
+      - id: "e"
+        label: "Syncthing"
+      - id: "f"
+        label: "Resilio Sync"
+      - id: "g"
+        label: "A NAS (Synology, etc.)"
+      - id: "h"
+        label: "Git or a code repository"
+      - id: "i"
+        label: "I manually copy files"
+      - id: "j"
+        label: "I don't sync files"
+  - id: q3
+    prompt: "Which method do you use most often to move a file from one device to another?"
+    type: single_choice
+    construct: method_use_most_often_move
+    required: true
+    options:
+      - id: "a"
+        label: "A cloud sync folder"
+      - id: "b"
+        label: "Emailing it to myself"
+      - id: "c"
+        label: "A USB drive or external disk"
+      - id: "d"
+        label: "AirDrop / Nearby Share / Quick Share"
+      - id: "e"
+        label: "A messaging app (WhatsApp, Telegram, etc.)"
+      - id: "f"
+        label: "A local network transfer"
+      - id: "g"
+        label: "I rarely move files between devices"
+  - id: q4
+    prompt: "On which devices do you sync or transfer files? (Select all that apply)"
+    type: multi_choice
+    construct: devices_sync_transfer_files_select
+    required: true
+    options:
+      - id: "a"
+        label: "Windows PC"
+      - id: "b"
+        label: "Mac"
+      - id: "c"
+        label: "Linux computer"
+      - id: "d"
+        label: "iPhone"
+      - id: "e"
+        label: "Android phone"
+      - id: "f"
+        label: "Tablet"
+      - id: "g"
+        label: "Work computer"
+      - id: "h"
+        label: "A home server or NAS"
+  - id: q5
+    prompt: "Which types of files do you most often sync between devices? (Select all that apply)"
+    type: multi_choice
+    construct: types_files_most_often_sync
+    required: true
+    options:
+      - id: "a"
+        label: "Documents"
+      - id: "b"
+        label: "Photos and videos"
+      - id: "c"
+        label: "Music"
+      - id: "d"
+        label: "Work project files"
+      - id: "e"
+        label: "App settings or configuration"
+      - id: "f"
+        label: "Code or development files"
+      - id: "g"
+        label: "Downloads"
+      - id: "h"
+        label: "E-books or PDFs"
+  - id: q6
+    prompt: "How often do you transfer or sync files between your devices?"
+    type: single_choice
+    construct: often_transfer_sync_files_between
+    required: true
+    options:
+      - id: "a"
+        label: "Constantly / it's automatic"
+      - id: "b"
+        label: "Several times a day"
+      - id: "c"
+        label: "Daily"
+      - id: "d"
+        label: "A few times a week"
+      - id: "e"
+        label: "Rarely"
+  - id: q7
+    prompt: "Do you use selective sync (choosing which folders sync to which device)?"
+    type: single_choice
+    construct: use_selective_sync_choosing_folders
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I set it up carefully"
+      - id: "b"
+        label: "Yes, but only a little"
+      - id: "c"
+        label: "No, everything syncs everywhere"
+      - id: "d"
+        label: "I didn't know this was an option"
+      - id: "e"
+        label: "Not applicable"
+  - id: q8
+    prompt: "Do you use \"files on-demand\" / online-only files (files that download only when opened)?"
+    type: single_choice
+    construct: use_files_demand_online_only
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, on purpose"
+      - id: "b"
+        label: "Yes, but I didn't set it up"
+      - id: "c"
+        label: "No, I keep everything downloaded"
+      - id: "d"
+        label: "Not sure"
+  - id: q9
+    prompt: "How do you transfer large files (bigger than an email attachment)? (Select all that apply)"
+    type: multi_choice
+    construct: transfer_large_files_bigger_than
+    required: true
+    options:
+      - id: "a"
+        label: "Cloud storage share link"
+      - id: "b"
+        label: "WeTransfer or a similar service"
+      - id: "c"
+        label: "USB drive or external disk"
+      - id: "d"
+        label: "Local network / NAS"
+      - id: "e"
+        label: "Compress and split them"
+      - id: "f"
+        label: "I rarely need to transfer large files"
+  - id: q10
+    prompt: "How often do you run into file sync conflicts (two versions of the same file)?"
+    type: single_choice
+    construct: often_run_into_file_sync
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Constantly"
+  - id: q11
+    prompt: "When a sync conflict happens, how do you usually resolve it?"
+    type: single_choice
+    construct: when_sync_conflict_happens_usually
+    required: true
+    options:
+      - id: "a"
+        label: "Keep the newest version"
+      - id: "b"
+        label: "Manually compare and merge"
+      - id: "c"
+        label: "Keep both copies"
+      - id: "d"
+        label: "I just pick one and hope"
+      - id: "e"
+        label: "I don't notice conflicts"
+      - id: "f"
+        label: "This hasn't happened to me"
+  - id: q12
+    prompt: "Have you ever lost or overwritten a file because of a sync problem?"
+    type: single_choice
+    construct: have_ever_lost_overwritten_file
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it was a real loss"
+      - id: "b"
+        label: "Yes, but I recovered it"
+      - id: "c"
+        label: "No, never"
+      - id: "d"
+        label: "Not sure"
+  - id: q13
+    prompt: "Do you use version history to recover previous versions of files?"
+    type: single_choice
+    construct: use_version_history_recover_previous
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but my tool supports it"
+      - id: "d"
+        label: "No, my tool doesn't support it"
+      - id: "e"
+        label: "Not sure"
+  - id: q14
+    prompt: "How do you handle syncing sensitive or private files? (Select all that apply)"
+    type: multi_choice
+    construct: handle_syncing_sensitive_private_files
+    required: true
+    options:
+      - id: "a"
+        label: "I keep them out of any sync folder"
+      - id: "b"
+        label: "I encrypt them before syncing"
+      - id: "c"
+        label: "I use an end-to-end encrypted service"
+      - id: "d"
+        label: "I only keep them on local devices"
+      - id: "e"
+        label: "I use a password-protected archive"
+      - id: "f"
+        label: "I don't treat them differently"
+  - id: q15
+    prompt: "Do you sync app settings or configuration between devices (browser, editor, dotfiles, etc.)?"
+    type: single_choice
+    construct: sync_app_settings_configuration_between
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for many apps"
+      - id: "b"
+        label: "Yes, for a few"
+      - id: "c"
+        label: "No, but I'd like to"
+      - id: "d"
+        label: "No, and I don't care to"
+  - id: q16
+    prompt: "How much do you agree with the following statement about file syncing? — My files are available whenever and wherever I need them"
+    type: single_choice
+    construct: much_agree_following_statement_file
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about file syncing? — My sync setup is reliable and rarely gives me trouble"
+    type: single_choice
+    construct: much_agree_following_statement_file
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about file syncing? — I worry about sync errors causing me to lose files"
+    type: single_choice
+    construct: much_agree_following_statement_file
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about file syncing? — I find it confusing to keep track of where my files actually are"
+    type: single_choice
+    construct: much_agree_following_statement_file
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement about file syncing? — I trust my sync tool to keep every device up to date"
+    type: single_choice
+    construct: much_agree_following_statement_file
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How important is each of the following in a file sync setup? — Reliability (files always match across devices)"
+    type: single_choice
+    construct: important_each_following_file_sync
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each of the following in a file sync setup? — Speed of syncing"
+    type: single_choice
+    construct: important_each_following_file_sync
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each of the following in a file sync setup? — Privacy and encryption"
+    type: single_choice
+    construct: important_each_following_file_sync
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each of the following in a file sync setup? — Selective control over what syncs where"
+    type: single_choice
+    construct: important_each_following_file_sync
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is each of the following in a file sync setup? — Version history and recovery"
+    type: single_choice
+    construct: important_each_following_file_sync
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How often do you experience each of the following? — Sync taking too long or getting stuck"
+    type: single_choice
+    construct: often_experience_each_following_sync
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q27
+    prompt: "How often do you experience each of the following? — Running out of local disk space because of synced files"
+    type: single_choice
+    construct: often_experience_each_following_running
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q28
+    prompt: "How often do you experience each of the following? — Not being sure whether a file has finished syncing"
+    type: single_choice
+    construct: often_experience_each_following_not
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q29
+    prompt: "Which factors matter most in a file sync solution? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: factors_matter_most_file_sync
+    required: true
+    options:
+      - id: "a"
+        label: "Reliability"
+      - id: "b"
+        label: "Speed"
+      - id: "c"
+        label: "Privacy and encryption"
+      - id: "d"
+        label: "Selective sync control"
+      - id: "e"
+        label: "Version history"
+      - id: "f"
+        label: "Cost"
+      - id: "g"
+        label: "Works across all my platforms"
+      - id: "h"
+        label: "Automatic conflict handling"
+      - id: "i"
+        label: "Large storage capacity"
+  - id: q30
+    prompt: "How concerned are you about the privacy of files that sync automatically to the cloud?"
+    type: single_choice
+    construct: concerned_privacy_files_that_sync
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q31
+    prompt: "Have you ever changed or stopped using a sync tool because of problems with it?"
+    type: single_choice
+    construct: have_ever_changed_stopped_using
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No, never"
+  - id: q32
+    prompt: "How satisfied are you overall with how your files stay in sync across devices?"
+    type: single_choice
+    construct: satisfied_overall_files_stay_sync
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How satisfied are you with the reliability of your current sync setup?"
+    type: single_choice
+    construct: satisfied_reliability_current_sync_setup
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How likely are you to recommend your main sync tool or method to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_main_sync_tool
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "What one thing would most improve how you keep files in sync?"
+    type: free_text
+    construct: one_thing_would_most_improve
+    required: true
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Full-time student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q43
+    prompt: "What is your current relationship status?"
+    type: single_choice
+    construct: current_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship or partnered"
+      - id: "c"
+        label: "Married"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q45
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q46
+    prompt: "How would you rate your overall technical skill with computers?"
+    type: single_choice
+    construct: would_rate_overall_technical_skill
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert / power user"

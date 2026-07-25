@@ -1,0 +1,775 @@
+schemaVersion: "1.0"
+id: sleep_tracking_v1
+title: "Sleep Tracking Survey"
+description: "Consumer use of devices and apps to track and measure sleep."
+questions:
+  - id: q0
+    prompt: "Do you track your sleep with any device or app?"
+    type: single_choice
+    construct: track_sleep_any_device_app
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, most nights"
+      - id: "b"
+        label: "Yes, some nights"
+      - id: "c"
+        label: "No, but I used to"
+      - id: "d"
+        label: "No, I have never tracked my sleep"
+  - id: q1
+    prompt: "How long have you been tracking your sleep? Please enter a number of months."
+    type: free_text
+    construct: long_have_been_tracking_sleep
+    required: true
+  - id: q2
+    prompt: "What do you use to track your sleep? (Select all that apply)"
+    type: multi_choice
+    construct: use_track_sleep_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "A smartwatch (for example, Apple Watch, Samsung Galaxy Watch)"
+      - id: "b"
+        label: "A fitness band (for example, Fitbit)"
+      - id: "c"
+        label: "A smart ring (for example, Oura)"
+      - id: "d"
+        label: "A recovery wearable (for example, Whoop)"
+      - id: "e"
+        label: "A phone app that uses the microphone or motion (for example, Sleep Cycle)"
+      - id: "f"
+        label: "A bedside or under-mattress sensor"
+      - id: "g"
+        label: "Another device or app"
+  - id: q3
+    prompt: "Which one do you rely on most for sleep data?"
+    type: single_choice
+    construct: one_rely_most_sleep_data
+    required: true
+    options:
+      - id: "a"
+        label: "A smartwatch"
+      - id: "b"
+        label: "A fitness band"
+      - id: "c"
+        label: "A smart ring"
+      - id: "d"
+        label: "A recovery wearable"
+      - id: "e"
+        label: "A phone app"
+      - id: "f"
+        label: "A bedside or under-mattress sensor"
+  - id: q4
+    prompt: "What first led you to start tracking your sleep? (Select all that apply)"
+    type: multi_choice
+    construct: first_led_start_tracking_sleep
+    required: true
+    options:
+      - id: "a"
+        label: "Curiosity about my sleep"
+      - id: "b"
+        label: "Trouble sleeping or feeling tired"
+      - id: "c"
+        label: "I already had a device that offered it"
+      - id: "d"
+        label: "Wanting to improve my health"
+      - id: "e"
+        label: "Training or athletic recovery"
+      - id: "f"
+        label: "A friend or family member's recommendation"
+      - id: "g"
+        label: "A doctor's or coach's suggestion"
+  - id: q5
+    prompt: "How often do you check your sleep data?"
+    type: single_choice
+    construct: often_check_sleep_data
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Every morning"
+      - id: "e"
+        label: "Several times a day"
+  - id: q6
+    prompt: "Which sleep metrics do you pay attention to? (Select all that apply)"
+    type: multi_choice
+    construct: sleep_metrics_pay_attention_select
+    required: true
+    options:
+      - id: "a"
+        label: "Total sleep time"
+      - id: "b"
+        label: "Sleep stages (light, deep, REM)"
+      - id: "c"
+        label: "A sleep score"
+      - id: "d"
+        label: "Time to fall asleep"
+      - id: "e"
+        label: "Night wakings or restlessness"
+      - id: "f"
+        label: "Heart rate or heart-rate variability"
+      - id: "g"
+        label: "Blood oxygen"
+      - id: "h"
+        label: "Breathing or snoring"
+  - id: q7
+    prompt: "Does your device or app give you a single nightly sleep score?"
+    type: single_choice
+    construct: does_device_app_give_single
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I look at it every day"
+      - id: "b"
+        label: "Yes, but I rarely look at it"
+      - id: "c"
+        label: "No, it does not"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q8
+    prompt: "Do you pay for a subscription for sleep insights (for example, Oura membership, Fitbit Premium)?"
+    type: single_choice
+    construct: pay_subscription_sleep_insights_example
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but the device offers one"
+      - id: "c"
+        label: "No subscription is offered"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q9
+    prompt: "How much do you agree or disagree: Tracking my sleep has helped me sleep better."
+    type: single_choice
+    construct: much_agree_disagree_tracking_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree or disagree: I trust the sleep data my device reports."
+    type: single_choice
+    construct: much_agree_disagree_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree: I have changed a habit based on my sleep data."
+    type: single_choice
+    construct: much_agree_disagree_i_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: Checking my sleep score sometimes makes me anxious."
+    type: single_choice
+    construct: much_agree_disagree_checking_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I am concerned about the privacy of my sleep data."
+    type: single_choice
+    construct: much_agree_disagree_i_am
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: The insights and tips I get are useful."
+    type: single_choice
+    construct: much_agree_disagree_insights_tips
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "Which changes have you made because of your sleep tracking? (Select all that apply)"
+    type: multi_choice
+    construct: changes_have_made_because_sleep
+    required: true
+    options:
+      - id: "a"
+        label: "Going to bed earlier"
+      - id: "b"
+        label: "Keeping a more consistent schedule"
+      - id: "c"
+        label: "Reducing caffeine"
+      - id: "d"
+        label: "Limiting screens before bed"
+      - id: "e"
+        label: "Adjusting room temperature or light"
+      - id: "f"
+        label: "Cutting back on alcohol in the evening"
+      - id: "g"
+        label: "Adding wind-down or relaxation time"
+      - id: "h"
+        label: "I have not changed anything"
+  - id: q16
+    prompt: "How satisfied are you with the accuracy of your sleep tracking?"
+    type: single_choice
+    construct: satisfied_accuracy_sleep_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q17
+    prompt: "How satisfied are you with how clearly the data is presented?"
+    type: single_choice
+    construct: satisfied_clearly_data_presented
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q18
+    prompt: "How satisfied are you with the usefulness of the insights or recommendations?"
+    type: single_choice
+    construct: satisfied_usefulness_insights_recommenda
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q19
+    prompt: "How satisfied are you with the comfort of wearing or using the tracker overnight?"
+    type: single_choice
+    construct: satisfied_comfort_wearing_using_tracker
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q20
+    prompt: "How satisfied are you with the value for the money?"
+    type: single_choice
+    construct: satisfied_value_money
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable, I do not pay anything"
+  - id: q21
+    prompt: "How important is each feature to you: accurate total sleep time?"
+    type: single_choice
+    construct: important_each_feature_accurate_total
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each feature to you: a simple daily sleep score?"
+    type: single_choice
+    construct: important_each_feature_simple_daily
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each feature to you: detailed sleep-stage breakdowns?"
+    type: single_choice
+    construct: important_each_feature_detailed_sleep
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each feature to you: personalized tips to improve sleep?"
+    type: single_choice
+    construct: important_each_feature_personalized_tips
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is each feature to you: a smart alarm that wakes you at a good time?"
+    type: single_choice
+    construct: important_each_feature_smart_alarm
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How often does the tracking match how you actually feel in the morning?"
+    type: single_choice
+    construct: often_does_tracking_match_actually
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q27
+    prompt: "Have you shared your sleep data with a doctor or health provider?"
+    type: single_choice
+    construct: have_shared_sleep_data_doctor
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I would be willing to"
+      - id: "c"
+        label: "No, and I would not want to"
+      - id: "d"
+        label: "I'm not sure how"
+  - id: q28
+    prompt: "Which have frustrated you about sleep tracking? (Select all that apply)"
+    type: multi_choice
+    construct: have_frustrated_sleep_tracking_select
+    required: true
+    options:
+      - id: "a"
+        label: "Readings that seem inaccurate"
+      - id: "b"
+        label: "Uncomfortable to wear overnight"
+      - id: "c"
+        label: "Battery needs charging at inconvenient times"
+      - id: "d"
+        label: "Too much data to make sense of"
+      - id: "e"
+        label: "Feeling judged by a low score"
+      - id: "f"
+        label: "Privacy concerns"
+      - id: "g"
+        label: "Subscription cost"
+      - id: "h"
+        label: "Nothing has frustrated me"
+  - id: q29
+    prompt: "Have you ever stopped tracking your sleep after starting?"
+    type: single_choice
+    construct: have_ever_stopped_tracking_sleep
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I did not go back to it"
+      - id: "b"
+        label: "Yes, but I later started again"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable"
+  - id: q30
+    prompt: "How likely are you to keep tracking your sleep over the next year?"
+    type: single_choice
+    construct: likely_keep_tracking_sleep_over
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "Overall, how satisfied are you with your sleep-tracking experience?"
+    type: single_choice
+    construct: overall_satisfied_sleep_tracking_experie
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "On a scale of 0 to 10, how likely are you to recommend sleep tracking to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q33
+    prompt: "Which improvements would make sleep tracking more valuable to you? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: improvements_would_make_sleep_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Better accuracy"
+      - id: "b"
+        label: "Clearer, simpler summaries"
+      - id: "c"
+        label: "More useful recommendations"
+      - id: "d"
+        label: "A more comfortable device"
+      - id: "e"
+        label: "Longer battery life"
+      - id: "f"
+        label: "Lower cost or no subscription"
+      - id: "g"
+        label: "Stronger privacy protections"
+      - id: "h"
+        label: "Better integration with my other health data"
+  - id: q34
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65–74"
+      - id: "g"
+        label: "75 or older"
+  - id: q35
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino/a"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your household's annual income before taxes?"
+    type: single_choice
+    construct: household_s_annual_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q39
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+      - id: "h"
+        label: "Unable to work"
+  - id: q40
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q41
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q44
+    prompt: "Which best describes how comfortable you are with technology?"
+    type: single_choice
+    construct: best_describes_comfortable_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Very comfortable, an early adopter"
+      - id: "b"
+        label: "Comfortable with mainstream technology"
+      - id: "c"
+        label: "Somewhat cautious"
+      - id: "d"
+        label: "I avoid new technology when I can"
+  - id: q45
+    prompt: "In general, how would you rate your overall health?"
+    type: single_choice
+    construct: general_would_rate_overall_health
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent"
+      - id: "b"
+        label: "Very good"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Fair"
+      - id: "e"
+        label: "Poor"

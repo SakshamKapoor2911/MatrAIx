@@ -1,0 +1,801 @@
+schemaVersion: "1.0"
+id: preventive_care_attitudes_v1
+title: "Preventive Care Attitudes Survey"
+description: "Consumer attitudes toward preventive health care and how those attitudes translate into routine checkups, screenings, and healthy-lifestyle habits."
+questions:
+  - id: q0
+    prompt: "Do you have a regular doctor or clinic you go to for routine checkups and preventive care?"
+    type: single_choice
+    construct: have_regular_doctor_clinic_go
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a specific doctor"
+      - id: "b"
+        label: "Yes, a specific clinic or practice but not one specific doctor"
+      - id: "c"
+        label: "No regular source of care"
+      - id: "d"
+        label: "I use urgent care or the emergency room when needed"
+  - id: q1
+    prompt: "When did you last have a routine preventive or wellness visit (not a visit for a specific illness or injury)?"
+    type: single_choice
+    construct: when_did_last_have_routine
+    required: true
+    options:
+      - id: "a"
+        label: "Within the past 6 months"
+      - id: "b"
+        label: "6 to 12 months ago"
+      - id: "c"
+        label: "1 to 2 years ago"
+      - id: "d"
+        label: "3 to 5 years ago"
+      - id: "e"
+        label: "More than 5 years ago"
+      - id: "f"
+        label: "Never"
+  - id: q2
+    prompt: "In the past two years, which of the following preventive services have you received? (Select all that apply)"
+    type: multi_choice
+    construct: past_two_years_following_preventive
+    required: true
+    options:
+      - id: "a"
+        label: "General physical or wellness exam"
+      - id: "b"
+        label: "Blood pressure check"
+      - id: "c"
+        label: "Cholesterol or blood panel"
+      - id: "d"
+        label: "A recommended cancer screening"
+      - id: "e"
+        label: "A vaccination or booster"
+      - id: "f"
+        label: "Dental cleaning or checkup"
+      - id: "g"
+        label: "Vision or eye exam"
+      - id: "h"
+        label: "None of these"
+  - id: q3
+    prompt: "In general, how often do you seek preventive care even when you feel completely healthy?"
+    type: single_choice
+    construct: general_often_seek_preventive_care
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q4
+    prompt: "What most often prompts you to schedule preventive care?"
+    type: single_choice
+    construct: most_often_prompts_schedule_preventive
+    required: true
+    options:
+      - id: "a"
+        label: "A reminder from my doctor's office"
+      - id: "b"
+        label: "My own routine or calendar"
+      - id: "c"
+        label: "A prompt from a family member"
+      - id: "d"
+        label: "A requirement from work or insurance"
+      - id: "e"
+        label: "Noticing a symptom or concern"
+      - id: "f"
+        label: "I rarely schedule preventive care"
+  - id: q5
+    prompt: "Where do you most often receive preventive care?"
+    type: single_choice
+    construct: where_most_often_receive_preventive
+    required: true
+    options:
+      - id: "a"
+        label: "A primary care physician's office"
+      - id: "b"
+        label: "A community health center or clinic"
+      - id: "c"
+        label: "A retail or pharmacy clinic (for example, CVS MinuteClinic)"
+      - id: "d"
+        label: "An urgent care center"
+      - id: "e"
+        label: "A workplace or on-site clinic"
+      - id: "f"
+        label: "I do not have a usual place"
+  - id: q6
+    prompt: "How do you keep track of when preventive services are due? (Select all that apply)"
+    type: multi_choice
+    construct: keep_track_when_preventive_services
+    required: true
+    options:
+      - id: "a"
+        label: "Reminders from my provider's office"
+      - id: "b"
+        label: "My patient portal or health app"
+      - id: "c"
+        label: "Reminders from my insurance company"
+      - id: "d"
+        label: "My own notes or calendar"
+      - id: "e"
+        label: "Family or friends remind me"
+      - id: "f"
+        label: "I do not track this"
+  - id: q7
+    prompt: "In a typical year, how many preventive or wellness visits do you have? Please enter a number."
+    type: free_text
+    construct: typical_year_many_preventive_wellness
+    required: true
+  - id: q8
+    prompt: "Which sources do you rely on for guidance about recommended preventive care? (Select all that apply)"
+    type: multi_choice
+    construct: sources_rely_guidance_recommended_preven
+    required: true
+    options:
+      - id: "a"
+        label: "My doctor or nurse"
+      - id: "b"
+        label: "Government health websites (for example, CDC)"
+      - id: "c"
+        label: "Health websites like WebMD or Mayo Clinic"
+      - id: "d"
+        label: "My health insurer"
+      - id: "e"
+        label: "Family or friends"
+      - id: "f"
+        label: "Social media or online videos"
+      - id: "g"
+        label: "I do not seek out this guidance"
+  - id: q9
+    prompt: "How much do you agree or disagree: Preventing illness is better than treating it after it happens."
+    type: single_choice
+    construct: much_agree_disagree_preventing_illness
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree or disagree: Preventive care saves money in the long run."
+    type: single_choice
+    construct: much_agree_disagree_preventive_care
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree: I know which preventive screenings are recommended for someone my age."
+    type: single_choice
+    construct: much_agree_disagree_i_know
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: Preventive care is worth the time it takes."
+    type: single_choice
+    construct: much_agree_disagree_preventive_care
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I would still get regular checkups even if I felt perfectly healthy."
+    type: single_choice
+    construct: much_agree_disagree_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I trust my doctor's recommendations about preventive screenings."
+    type: single_choice
+    construct: much_agree_disagree_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How important is it to you to stay up to date with: routine blood pressure checks?"
+    type: single_choice
+    construct: important_it_stay_up_date
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "How important is it to you to stay up to date with: routine cholesterol or blood tests?"
+    type: single_choice
+    construct: important_it_stay_up_date
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "How important is it to you to stay up to date with: cancer screenings appropriate for your age?"
+    type: single_choice
+    construct: important_it_stay_up_date
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is it to you to stay up to date with: an annual dental cleaning?"
+    type: single_choice
+    construct: important_it_stay_up_date
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is it to you to stay up to date with: recommended vaccinations and boosters?"
+    type: single_choice
+    construct: important_it_stay_up_date
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is it to you to stay up to date with: routine vision or eye exams?"
+    type: single_choice
+    construct: important_it_stay_up_date
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "Which of the following have kept you from getting preventive care? (Select all that apply)"
+    type: multi_choice
+    construct: following_have_kept_from_getting
+    required: true
+    options:
+      - id: "a"
+        label: "Cost or lack of insurance coverage"
+      - id: "b"
+        label: "Not enough time"
+      - id: "c"
+        label: "Difficulty getting an appointment"
+      - id: "d"
+        label: "I feel healthy, so I don't see the need"
+      - id: "e"
+        label: "Worry about what might be found"
+      - id: "f"
+        label: "Dislike or distrust of medical settings"
+      - id: "g"
+        label: "Distance or lack of transportation"
+      - id: "h"
+        label: "Nothing has kept me from preventive care"
+  - id: q22
+    prompt: "How much does cost influence your decisions about whether to get preventive care?"
+    type: single_choice
+    construct: much_does_cost_influence_decisions
+    required: true
+    options:
+      - id: "a"
+        label: "A great deal"
+      - id: "b"
+        label: "A lot"
+      - id: "c"
+        label: "Some"
+      - id: "d"
+        label: "A little"
+      - id: "e"
+        label: "Not at all"
+  - id: q23
+    prompt: "How much do you agree or disagree: I sometimes avoid preventive visits because I worry about what they might find."
+    type: single_choice
+    construct: much_agree_disagree_i_sometimes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "How much do you agree or disagree: It is hard to find time in my schedule for preventive appointments."
+    type: single_choice
+    construct: much_agree_disagree_it_hard
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "How confident are you that you know your key health numbers (such as blood pressure and cholesterol)?"
+    type: single_choice
+    construct: confident_that_know_key_health
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "A little confident"
+      - id: "c"
+        label: "Somewhat confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+  - id: q26
+    prompt: "Do you follow a checklist or schedule of recommended preventive services for your age?"
+    type: single_choice
+    construct: follow_checklist_schedule_recommended_pr
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, closely"
+      - id: "b"
+        label: "Yes, somewhat"
+      - id: "c"
+        label: "No, but I would like to"
+      - id: "d"
+        label: "No, and I have not considered it"
+  - id: q27
+    prompt: "Which lifestyle steps do you actively take to prevent illness? (Select all that apply)"
+    type: multi_choice
+    construct: lifestyle_steps_actively_take_prevent
+    required: true
+    options:
+      - id: "a"
+        label: "Regular physical activity"
+      - id: "b"
+        label: "Eating a balanced diet"
+      - id: "c"
+        label: "Getting enough sleep"
+      - id: "d"
+        label: "Managing stress"
+      - id: "e"
+        label: "Limiting alcohol"
+      - id: "f"
+        label: "Not using tobacco"
+      - id: "g"
+        label: "Maintaining a healthy weight"
+      - id: "h"
+        label: "None of these"
+  - id: q28
+    prompt: "If your provider sent you a reminder that a screening was due, how likely would you be to act on it?"
+    type: single_choice
+    construct: if_provider_sent_reminder_that
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q29
+    prompt: "In the past two years, have you delayed or skipped a recommended preventive screening?"
+    type: single_choice
+    construct: past_two_years_have_delayed
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I was not due for any screenings"
+  - id: q30
+    prompt: "Overall, how satisfied are you with your access to preventive care?"
+    type: single_choice
+    construct: overall_satisfied_access_preventive_care
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q31
+    prompt: "How would you rate the quality of the preventive care you currently receive?"
+    type: single_choice
+    construct: would_rate_quality_preventive_care
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent"
+      - id: "b"
+        label: "Very good"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Fair"
+      - id: "e"
+        label: "Poor"
+  - id: q32
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your current provider for preventive care to a friend or family member? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q33
+    prompt: "How likely are you to keep up with your recommended preventive care over the next year?"
+    type: single_choice
+    construct: likely_keep_up_recommended_preventive
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "Which would most encourage you to get more preventive care? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: would_most_encourage_get_more
+    required: true
+    options:
+      - id: "a"
+        label: "Lower out-of-pocket costs"
+      - id: "b"
+        label: "Easier scheduling and shorter waits"
+      - id: "c"
+        label: "Reminders from my provider"
+      - id: "d"
+        label: "Evening or weekend availability"
+      - id: "e"
+        label: "Telehealth options for some visits"
+      - id: "f"
+        label: "A provider I trust"
+      - id: "g"
+        label: "Clearer information about what I need"
+      - id: "h"
+        label: "Incentives or rewards from my insurer"
+  - id: q35
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65–74"
+      - id: "g"
+        label: "75 or older"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino/a"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your household's annual income before taxes?"
+    type: single_choice
+    construct: household_s_annual_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q40
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+      - id: "h"
+        label: "Unable to work"
+  - id: q41
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q42
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q44
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q45
+    prompt: "What is your current health insurance situation?"
+    type: single_choice
+    construct: current_health_insurance_situation
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored insurance"
+      - id: "b"
+        label: "Insurance purchased on my own or through the marketplace"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or veterans coverage"
+      - id: "f"
+        label: "Uninsured"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "In general, how would you rate your overall health?"
+    type: single_choice
+    construct: general_would_rate_overall_health
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent"
+      - id: "b"
+        label: "Very good"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Fair"
+      - id: "e"
+        label: "Poor"

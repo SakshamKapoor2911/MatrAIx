@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0",
+  "sources": [],
+  "defaultMode": "stratified",
+  "dimensionFilters": {
+    "age_bracket": [
+      "18-24",
+      "25-34",
+      "35-44",
+      "45-54",
+      "55-64",
+      "65+"
+    ],
+    "tech_savviness": [
+      "Digital native",
+      "Comfortable",
+      "Cautious adopter",
+      "Reluctant",
+      "Avoidant"
+    ],
+    "economic_motivation": [
+      "Cost-sensitive",
+      "Value-driven",
+      "Premium-seeking",
+      "Indifferent"
+    ]
+  },
+  "stratifyFields": [
+    "tech_savviness",
+    "economic_motivation"
+  ],
+  "sampleSize": 20
+}

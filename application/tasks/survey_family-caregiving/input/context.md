@@ -1,0 +1,7 @@
+# Family Caregiving
+
+The everyday experiences and attitudes of people who help care for a family member.
+
+## About this survey
+
+This survey covers whether respondents currently provide unpaid care, who they help, how long they have done so, weekly hours, and how close they live to the person. It measures the caregiving tasks they handle (errands, meals, housekeeping, transportation, medications, personal care, money and paperwork, companionship) and health-coordination tasks (scheduling, talking with providers, insurance, tracking symptoms, patient portals), whether care is shared, monthly out-of-pocket spend, effects on paid work, and resources used (support groups, respite care, employer benefits, apps). It runs Likert batteries on attitudes (reward, feeling stretched, support, financial strain, time for self, knowing where to turn, coordination difficulty) and on the importance of possible supports, plus a top-3 ranking of the supports that would help most, technology used, work-life balance, effect on the relationship, preparedness, confidence, satisfaction, intent to seek new resources, a 0–10 recommendation score, and an open comment. Question types include single-choice, multi-select, Likert scales, a matrix battery split per item, a top-3 ranking, and numeric free-text. Demographics captured: age, gender, race/ethnicity, household income, education, employment, household size, marital status, region, urban/rural, and children in the household.

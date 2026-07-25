@@ -1,0 +1,826 @@
+schemaVersion: "1.0"
+id: patient_satisfaction_v1
+title: "Patient Satisfaction Survey"
+description: "Consumer satisfaction with the healthcare they receive, including provider, staff, access, and overall experience."
+questions:
+  - id: q0
+    prompt: "In the past 12 months, about how many times did you visit a doctor or other health professional for your own care?"
+    type: single_choice
+    construct: past_12_months_many_times
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1 time"
+      - id: "c"
+        label: "2 to 3 times"
+      - id: "d"
+        label: "4 to 6 times"
+      - id: "e"
+        label: "7 to 10 times"
+      - id: "f"
+        label: "More than 10 times"
+  - id: q1
+    prompt: "What kind of provider do you see most often for your care?"
+    type: single_choice
+    construct: kind_provider_see_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Primary care doctor"
+      - id: "b"
+        label: "A specialist"
+      - id: "c"
+        label: "A nurse practitioner or physician assistant"
+      - id: "d"
+        label: "An urgent care or walk-in clinic"
+      - id: "e"
+        label: "A community health center"
+      - id: "f"
+        label: "I do not have a regular provider"
+  - id: q2
+    prompt: "How long have you been seeing your current main provider?"
+    type: single_choice
+    construct: long_have_been_seeing_current
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "More than 5 years"
+      - id: "e"
+        label: "I do not have a regular provider"
+  - id: q3
+    prompt: "Overall, how would you rate the quality of healthcare you have received in the past 12 months?"
+    type: single_choice
+    construct: overall_would_rate_quality_healthcare
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent"
+      - id: "b"
+        label: "Very good"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Fair"
+      - id: "e"
+        label: "Poor"
+  - id: q4
+    prompt: "How satisfied are you with your most recent healthcare visit overall?"
+    type: single_choice
+    construct: satisfied_most_recent_healthcare_visit
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q5
+    prompt: "Thinking about your provider, how often did they: Explain things in a way you could understand."
+    type: single_choice
+    construct: thinking_provider_often_did_they
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Usually"
+      - id: "e"
+        label: "Always"
+  - id: q6
+    prompt: "Thinking about your provider, how often did they: Listen carefully to you."
+    type: single_choice
+    construct: thinking_provider_often_did_they
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Usually"
+      - id: "e"
+        label: "Always"
+  - id: q7
+    prompt: "Thinking about your provider, how often did they: Show respect for what you had to say."
+    type: single_choice
+    construct: thinking_provider_often_did_they
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Usually"
+      - id: "e"
+        label: "Always"
+  - id: q8
+    prompt: "Thinking about your provider, how often did they: Spend enough time with you."
+    type: single_choice
+    construct: thinking_provider_often_did_they
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Usually"
+      - id: "e"
+        label: "Always"
+  - id: q9
+    prompt: "Thinking about your provider, how often did they: Involve you in decisions about your care."
+    type: single_choice
+    construct: thinking_provider_often_did_they
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Usually"
+      - id: "e"
+        label: "Always"
+  - id: q10
+    prompt: "Thinking about your provider, how often did they: Give you clear instructions for follow-up care."
+    type: single_choice
+    construct: thinking_provider_often_did_they
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Usually"
+      - id: "e"
+        label: "Always"
+  - id: q11
+    prompt: "How satisfied are you with each of the following: The friendliness and courtesy of the front-desk staff."
+    type: single_choice
+    construct: satisfied_each_following_friendliness_co
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q12
+    prompt: "How satisfied are you with each of the following: The ease of scheduling appointments."
+    type: single_choice
+    construct: satisfied_each_following_ease_scheduling
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q13
+    prompt: "How satisfied are you with each of the following: The wait time in the waiting room."
+    type: single_choice
+    construct: satisfied_each_following_wait_time
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q14
+    prompt: "How satisfied are you with each of the following: The cleanliness and comfort of the office."
+    type: single_choice
+    construct: satisfied_each_following_cleanliness_com
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q15
+    prompt: "How satisfied are you with each of the following: How your billing and payments were handled."
+    type: single_choice
+    construct: satisfied_each_following_billing_payment
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q16
+    prompt: "How long did you typically wait past your appointment time to be seen?"
+    type: single_choice
+    construct: long_did_typically_wait_past
+    required: true
+    options:
+      - id: "a"
+        label: "I was seen on time"
+      - id: "b"
+        label: "Less than 15 minutes"
+      - id: "c"
+        label: "15 to 29 minutes"
+      - id: "d"
+        label: "30 to 59 minutes"
+      - id: "e"
+        label: "An hour or more"
+  - id: q17
+    prompt: "How easy is it to get an appointment when you need one?"
+    type: single_choice
+    construct: easy_it_get_appointment_when
+    required: true
+    options:
+      - id: "a"
+        label: "Very easy"
+      - id: "b"
+        label: "Somewhat easy"
+      - id: "c"
+        label: "Neither easy nor difficult"
+      - id: "d"
+        label: "Somewhat difficult"
+      - id: "e"
+        label: "Very difficult"
+  - id: q18
+    prompt: "How do you usually communicate with your provider's office between visits? (Select all that apply)"
+    type: multi_choice
+    construct: usually_communicate_provider_s_office
+    required: true
+    options:
+      - id: "a"
+        label: "Phone calls"
+      - id: "b"
+        label: "Patient portal messages"
+      - id: "c"
+        label: "Email"
+      - id: "d"
+        label: "Text messages"
+      - id: "e"
+        label: "In person"
+      - id: "f"
+        label: "I do not communicate between visits"
+  - id: q19
+    prompt: "How satisfied are you with how quickly your questions are answered between visits?"
+    type: single_choice
+    construct: satisfied_quickly_questions_answered_bet
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q20
+    prompt: "How much do you agree with the following statement: I trust my provider to act in my best interest."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree with the following statement: My provider knows my medical history well."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree with the following statement: I feel comfortable asking my provider questions."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How much do you agree with the following statement: The care I receive is well coordinated among providers."
+    type: single_choice
+    construct: much_agree_following_statement_care
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "How much do you agree with the following statement: I am treated with dignity and respect at my provider's office."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "Which aspects of your care do you value the most? (Select all that apply)"
+    type: multi_choice
+    construct: aspects_care_value_most_select
+    required: true
+    options:
+      - id: "a"
+        label: "Provider listens and communicates well"
+      - id: "b"
+        label: "Short wait times"
+      - id: "c"
+        label: "Easy scheduling"
+      - id: "d"
+        label: "Friendly staff"
+      - id: "e"
+        label: "Clear costs and billing"
+      - id: "f"
+        label: "Convenient location and hours"
+      - id: "g"
+        label: "Coordinated, thorough care"
+      - id: "h"
+        label: "Access to my records online"
+  - id: q26
+    prompt: "How important is each of the following to your satisfaction: Provider communication."
+    type: single_choice
+    construct: important_each_following_satisfaction_pr
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important is each of the following to your satisfaction: Short wait times."
+    type: single_choice
+    construct: important_each_following_satisfaction_sh
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "How important is each of the following to your satisfaction: Convenient access and hours."
+    type: single_choice
+    construct: important_each_following_satisfaction_co
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "How important is each of the following to your satisfaction: Clear and fair billing."
+    type: single_choice
+    construct: important_each_following_satisfaction_cl
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "Have you ever switched providers because you were dissatisfied?"
+    type: single_choice
+    construct: have_ever_switched_providers_because
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I have considered it"
+      - id: "d"
+        label: "No, never"
+  - id: q31
+    prompt: "When you have a good or bad experience, how do you usually respond? (Select all that apply)"
+    type: multi_choice
+    construct: when_have_good_bad_experience
+    required: true
+    options:
+      - id: "a"
+        label: "Tell friends or family"
+      - id: "b"
+        label: "Leave an online review"
+      - id: "c"
+        label: "Fill out a satisfaction survey"
+      - id: "d"
+        label: "Contact the office directly"
+      - id: "e"
+        label: "Switch providers"
+      - id: "f"
+        label: "I do not usually respond"
+  - id: q32
+    prompt: "Select your top 3 things that matter most to your satisfaction with care. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_that
+    required: true
+    options:
+      - id: "a"
+        label: "Good communication from the provider"
+      - id: "b"
+        label: "Short wait times"
+      - id: "c"
+        label: "Easy scheduling"
+      - id: "d"
+        label: "Friendly staff"
+      - id: "e"
+        label: "Clear costs and billing"
+      - id: "f"
+        label: "Convenient location and hours"
+      - id: "g"
+        label: "Coordinated care"
+      - id: "h"
+        label: "Being treated with respect"
+  - id: q33
+    prompt: "Overall, how satisfied are you with your regular healthcare provider?"
+    type: single_choice
+    construct: overall_satisfied_regular_healthcare_pro
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your provider to a friend or family member? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "How likely are you to stay with your current provider over the next 12 months?"
+    type: single_choice
+    construct: likely_stay_current_provider_over
+    required: true
+    options:
+      - id: "a"
+        label: "Very likely"
+      - id: "b"
+        label: "Somewhat likely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Somewhat unlikely"
+      - id: "e"
+        label: "Very unlikely"
+  - id: q36
+    prompt: "About how many minutes did you wait past your appointment time at your most recent visit? Please enter a number of minutes."
+    type: free_text
+    construct: many_minutes_did_wait_past
+    required: true
+  - id: q37
+    prompt: "About how many minutes did your most recent visit with the provider last? Please enter a number of minutes."
+    type: free_text
+    construct: many_minutes_did_most_recent
+    required: true
+  - id: q38
+    prompt: "About how many days did it take to get your most recent appointment after you requested it? Please enter a number of days."
+    type: free_text
+    construct: many_days_did_it_take
+    required: true
+  - id: q39
+    prompt: "In your own words, what would most improve your satisfaction with your healthcare? (Optional)"
+    type: free_text
+    construct: own_words_would_most_improve
+    required: false
+  - id: q40
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q41
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe or not to say"
+  - id: q42
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q46
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q48
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q49
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q50
+    prompt: "What type of health insurance do you primarily have?"
+    type: single_choice
+    construct: type_health_insurance_primarily_have
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored plan"
+      - id: "b"
+        label: "Plan bought on the marketplace or directly"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or veterans coverage"
+      - id: "f"
+        label: "I do not have health insurance"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "How is your overall health?"
+    type: single_choice
+    construct: overall_health
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent"
+      - id: "b"
+        label: "Very good"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Fair"
+      - id: "e"
+        label: "Poor"

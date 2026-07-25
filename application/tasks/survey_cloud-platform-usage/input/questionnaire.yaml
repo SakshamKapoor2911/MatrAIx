@@ -1,0 +1,928 @@
+schemaVersion: "1.0"
+id: cloud_platform_usage_v1
+title: "Cloud Platform Usage Survey"
+description: "How developers and teams adopt and use public cloud platforms such as AWS, Azure, and Google Cloud."
+questions:
+  - id: q0
+    prompt: "Do you use public cloud platforms (such as AWS, Azure, or Google Cloud)?"
+    type: single_choice
+    construct: use_public_cloud_platforms_such
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for work"
+      - id: "b"
+        label: "Yes, for personal projects"
+      - id: "c"
+        label: "Yes, for both work and personal projects"
+      - id: "d"
+        label: "I am just learning cloud platforms"
+      - id: "e"
+        label: "No, I don't use cloud platforms"
+  - id: q1
+    prompt: "How long have you worked with cloud platforms?"
+    type: single_choice
+    construct: long_have_worked_cloud_platforms
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "What is your relationship to cloud infrastructure?"
+    type: single_choice
+    construct: relationship_cloud_infrastructure
+    required: true
+    options:
+      - id: "a"
+        label: "I make architecture or purchasing decisions"
+      - id: "b"
+        label: "I build and deploy on the cloud"
+      - id: "c"
+        label: "I operate and maintain cloud systems"
+      - id: "d"
+        label: "I use cloud resources occasionally"
+  - id: q3
+    prompt: "Which cloud provider do you use most often?"
+    type: single_choice
+    construct: cloud_provider_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Amazon Web Services (AWS)"
+      - id: "b"
+        label: "Microsoft Azure"
+      - id: "c"
+        label: "Google Cloud (GCP)"
+      - id: "d"
+        label: "Oracle Cloud"
+      - id: "e"
+        label: "IBM Cloud"
+      - id: "f"
+        label: "DigitalOcean"
+      - id: "g"
+        label: "Cloudflare"
+      - id: "h"
+        label: "Alibaba Cloud"
+      - id: "i"
+        label: "Other"
+  - id: q4
+    prompt: "Which cloud providers have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: cloud_providers_have_used_past
+    required: true
+    options:
+      - id: "a"
+        label: "Amazon Web Services (AWS)"
+      - id: "b"
+        label: "Microsoft Azure"
+      - id: "c"
+        label: "Google Cloud (GCP)"
+      - id: "d"
+        label: "Oracle Cloud"
+      - id: "e"
+        label: "IBM Cloud"
+      - id: "f"
+        label: "DigitalOcean"
+      - id: "g"
+        label: "Cloudflare"
+      - id: "h"
+        label: "Linode / Akamai"
+      - id: "i"
+        label: "Vercel or Netlify"
+      - id: "j"
+        label: "Alibaba Cloud"
+      - id: "k"
+        label: "Other"
+  - id: q5
+    prompt: "Which cloud providers would you like to use more over the next year? (Select all that apply)"
+    type: multi_choice
+    construct: cloud_providers_would_like_use
+    required: true
+    options:
+      - id: "a"
+        label: "Amazon Web Services (AWS)"
+      - id: "b"
+        label: "Microsoft Azure"
+      - id: "c"
+        label: "Google Cloud (GCP)"
+      - id: "d"
+        label: "Oracle Cloud"
+      - id: "e"
+        label: "DigitalOcean"
+      - id: "f"
+        label: "Cloudflare"
+      - id: "g"
+        label: "Vercel or Netlify"
+      - id: "h"
+        label: "I'm happy with my current provider"
+  - id: q6
+    prompt: "Which categories of cloud services do you use? (Select all that apply)"
+    type: multi_choice
+    construct: categories_cloud_services_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Virtual machines / compute"
+      - id: "b"
+        label: "Serverless functions"
+      - id: "c"
+        label: "Managed databases"
+      - id: "d"
+        label: "Object storage"
+      - id: "e"
+        label: "Container orchestration (Kubernetes, ECS)"
+      - id: "f"
+        label: "Content delivery / CDN"
+      - id: "g"
+        label: "Machine learning / AI services"
+      - id: "h"
+        label: "Networking (VPC, load balancers)"
+      - id: "i"
+        label: "Messaging and queues"
+      - id: "j"
+        label: "Monitoring and observability"
+      - id: "k"
+        label: "Identity and access management"
+      - id: "l"
+        label: "Data warehouse / analytics"
+  - id: q7
+    prompt: "Which deployment model best describes your cloud usage?"
+    type: single_choice
+    construct: deployment_model_best_describes_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Single public cloud only"
+      - id: "b"
+        label: "Multi-cloud (multiple public providers)"
+      - id: "c"
+        label: "Hybrid (public cloud plus on-premises)"
+      - id: "d"
+        label: "Mostly private cloud or on-premises"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q8
+    prompt: "How do you provision and manage cloud infrastructure? (Select all that apply)"
+    type: multi_choice
+    construct: provision_manage_cloud_infrastructure_se
+    required: true
+    options:
+      - id: "a"
+        label: "The web console"
+      - id: "b"
+        label: "The command line (CLI)"
+      - id: "c"
+        label: "Infrastructure as code (Terraform, CloudFormation, etc.)"
+      - id: "d"
+        label: "SDKs in application code"
+      - id: "e"
+        label: "A platform or internal tooling layer"
+  - id: q9
+    prompt: "About how much does your organization spend on cloud per month?"
+    type: single_choice
+    construct: much_does_organization_spend_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Under $100"
+      - id: "b"
+        label: "$100 to $999"
+      - id: "c"
+        label: "$1,000 to $9,999"
+      - id: "d"
+        label: "$10,000 to $99,999"
+      - id: "e"
+        label: "$100,000 or more"
+      - id: "f"
+        label: "I don't know"
+  - id: q10
+    prompt: "How many cloud accounts or projects do you personally manage? Please enter a number."
+    type: free_text
+    construct: many_cloud_accounts_projects_personally
+    required: true
+  - id: q11
+    prompt: "About how many distinct cloud services do you use regularly? Please enter a number."
+    type: free_text
+    construct: many_distinct_cloud_services_use
+    required: true
+  - id: q12
+    prompt: "Who pays for the cloud resources you primarily use?"
+    type: single_choice
+    construct: who_pays_cloud_resources_primarily
+    required: true
+    options:
+      - id: "a"
+        label: "My employer"
+      - id: "b"
+        label: "I pay personally"
+      - id: "c"
+        label: "A mix of both"
+      - id: "d"
+        label: "They are free-tier resources"
+  - id: q13
+    prompt: "Which cost management practices do you use? (Select all that apply)"
+    type: multi_choice
+    construct: cost_management_practices_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Budgets and spending alerts"
+      - id: "b"
+        label: "Reserved instances or savings plans"
+      - id: "c"
+        label: "Autoscaling"
+      - id: "d"
+        label: "Spot / preemptible instances"
+      - id: "e"
+        label: "Resource tagging"
+      - id: "f"
+        label: "A dedicated FinOps process"
+      - id: "g"
+        label: "None of these"
+  - id: q14
+    prompt: "How did you learn to use cloud platforms? (Select all that apply)"
+    type: multi_choice
+    construct: did_learn_use_cloud_platforms
+    required: true
+    options:
+      - id: "a"
+        label: "On the job"
+      - id: "b"
+        label: "Online courses or documentation"
+      - id: "c"
+        label: "Vendor certification programs"
+      - id: "d"
+        label: "School or university"
+      - id: "e"
+        label: "A colleague or mentor"
+      - id: "f"
+        label: "Trial and error"
+  - id: q15
+    prompt: "Which cloud certifications do you hold, if any? (Select all that apply)"
+    type: multi_choice
+    construct: cloud_certifications_hold_if_any
+    required: true
+    options:
+      - id: "a"
+        label: "An AWS certification"
+      - id: "b"
+        label: "A Microsoft Azure certification"
+      - id: "c"
+        label: "A Google Cloud certification"
+      - id: "d"
+        label: "A Kubernetes (CKA/CKAD) certification"
+      - id: "e"
+        label: "None"
+  - id: q16
+    prompt: "How much do you agree: Using the cloud saves my organization money."
+    type: single_choice
+    construct: much_agree_using_cloud_saves
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: Cloud infrastructure is more reliable than running our own hardware."
+    type: single_choice
+    construct: much_agree_cloud_infrastructure_more
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Cloud costs are hard to predict and control."
+    type: single_choice
+    construct: much_agree_cloud_costs_hard
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: Vendor lock-in is a real concern for me."
+    type: single_choice
+    construct: much_agree_vendor_lock_real
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: The cloud has improved our ability to scale."
+    type: single_choice
+    construct: much_agree_cloud_has_improved
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: Managing security in the cloud is challenging."
+    type: single_choice
+    construct: much_agree_managing_security_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: I feel confident in how our cloud environment is set up."
+    type: single_choice
+    construct: much_agree_i_feel_confident
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "When choosing a cloud provider, how important is price?"
+    type: single_choice
+    construct: when_choosing_cloud_provider_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a cloud provider, how important is reliability and uptime?"
+    type: single_choice
+    construct: when_choosing_cloud_provider_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a cloud provider, how important is the breadth of available services?"
+    type: single_choice
+    construct: when_choosing_cloud_provider_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a cloud provider, how important is ease of use?"
+    type: single_choice
+    construct: when_choosing_cloud_provider_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a cloud provider, how important are security and compliance?"
+    type: single_choice
+    construct: when_choosing_cloud_provider_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing a cloud provider, how important is support quality?"
+    type: single_choice
+    construct: when_choosing_cloud_provider_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "Which are your top 3 reasons for using the cloud? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_reasons_using_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Scalability"
+      - id: "b"
+        label: "Cost savings"
+      - id: "c"
+        label: "Speed to market"
+      - id: "d"
+        label: "Reliability"
+      - id: "e"
+        label: "Managed services (less to run ourselves)"
+      - id: "f"
+        label: "Global reach"
+      - id: "g"
+        label: "No hardware to buy or maintain"
+      - id: "h"
+        label: "Disaster recovery and backup"
+  - id: q30
+    prompt: "What are your biggest concerns about the cloud? (Select all that apply)"
+    type: multi_choice
+    construct: biggest_concerns_cloud_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Cost"
+      - id: "b"
+        label: "Security"
+      - id: "c"
+        label: "Complexity"
+      - id: "d"
+        label: "Vendor lock-in"
+      - id: "e"
+        label: "Compliance and data residency"
+      - id: "f"
+        label: "Downtime and outages"
+      - id: "g"
+        label: "Skills gap on the team"
+  - id: q31
+    prompt: "How often do you encounter unexpected or surprise cloud costs?"
+    type: single_choice
+    construct: often_encounter_unexpected_surprise_clou
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q32
+    prompt: "How often do provider outages affect your work?"
+    type: single_choice
+    construct: often_provider_outages_affect_work
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q33
+    prompt: "Do you run containers or Kubernetes in the cloud?"
+    type: single_choice
+    construct: run_containers_kubernetes_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, Kubernetes"
+      - id: "b"
+        label: "Yes, containers without Kubernetes"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q34
+    prompt: "Do you use serverless functions?"
+    type: single_choice
+    construct: use_serverless_functions
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, extensively"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No"
+  - id: q35
+    prompt: "Does your cloud usage have strict security or compliance requirements?"
+    type: single_choice
+    construct: does_cloud_usage_have_strict
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, strict requirements (HIPAA, SOC 2, PCI, etc.)"
+      - id: "b"
+        label: "Some requirements"
+      - id: "c"
+        label: "No special requirements"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q36
+    prompt: "How satisfied are you with your provider's reliability?"
+    type: single_choice
+    construct: satisfied_provider_s_reliability
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "How satisfied are you with your cloud costs relative to value?"
+    type: single_choice
+    construct: satisfied_cloud_costs_relative_value
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "Overall, how satisfied are you with your primary cloud provider?"
+    type: single_choice
+    construct: overall_satisfied_primary_cloud_provider
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q39
+    prompt: "How likely are you to recommend your primary cloud provider to another team? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_cloud_provider
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q40
+    prompt: "How likely is your cloud usage to increase over the next year?"
+    type: single_choice
+    construct: likely_cloud_usage_increase_over
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q41
+    prompt: "How likely are you to switch your primary cloud provider within the next year?"
+    type: single_choice
+    construct: likely_switch_primary_cloud_provider
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What is one thing you would change about your cloud experience? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_change_cloud
+    required: false
+  - id: q43
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Software developer"
+      - id: "b"
+        label: "Cloud or infrastructure engineer"
+      - id: "c"
+        label: "DevOps or platform engineer"
+      - id: "d"
+        label: "Site reliability engineer"
+      - id: "e"
+        label: "Data or ML engineer"
+      - id: "f"
+        label: "Solutions architect"
+      - id: "g"
+        label: "Engineering manager"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q44
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q46
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q47
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q48
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q49
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q52
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

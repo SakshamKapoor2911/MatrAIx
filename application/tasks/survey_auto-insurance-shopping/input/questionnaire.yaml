@@ -1,0 +1,736 @@
+schemaVersion: "1.0"
+id: auto_insurance_shopping_v1
+title: "Auto Insurance Shopping Survey"
+description: "How consumers shop for, choose, and switch auto insurance, and what drives their decisions about price, coverage, and providers."
+questions:
+  - id: q0
+    prompt: "Do you currently have an auto insurance policy?"
+    type: single_choice
+    construct: currently_have_auto_insurance_policy
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, in my own name"
+      - id: "b"
+        label: "Yes, on a shared or household policy"
+      - id: "c"
+        label: "No, but I own or drive a vehicle"
+      - id: "d"
+        label: "No, I do not own or drive a vehicle"
+  - id: q1
+    prompt: "Who is your current auto insurance provider?"
+    type: single_choice
+    construct: who_current_auto_insurance_provider
+    required: true
+    options:
+      - id: "a"
+        label: "State Farm"
+      - id: "b"
+        label: "GEICO"
+      - id: "c"
+        label: "Progressive"
+      - id: "d"
+        label: "Allstate"
+      - id: "e"
+        label: "USAA"
+      - id: "f"
+        label: "Liberty Mutual"
+      - id: "g"
+        label: "Farmers"
+      - id: "h"
+        label: "Another company"
+      - id: "i"
+        label: "I do not have auto insurance"
+  - id: q2
+    prompt: "How long have you been with your current auto insurance provider?"
+    type: single_choice
+    construct: long_have_been_current_auto
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "I do not have auto insurance"
+  - id: q3
+    prompt: "About how much do you pay for auto insurance per month, in U.S. dollars? Please enter a whole number."
+    type: free_text
+    construct: much_pay_auto_insurance_per
+    required: true
+  - id: q4
+    prompt: "How many vehicles are covered on your policy? Please enter a whole number."
+    type: free_text
+    construct: many_vehicles_covered_policy_please
+    required: true
+  - id: q5
+    prompt: "When did you most recently shop around or compare auto insurance quotes?"
+    type: single_choice
+    construct: when_did_most_recently_shop
+    required: true
+    options:
+      - id: "a"
+        label: "Within the past 3 months"
+      - id: "b"
+        label: "3 to 6 months ago"
+      - id: "c"
+        label: "6 to 12 months ago"
+      - id: "d"
+        label: "1 to 2 years ago"
+      - id: "e"
+        label: "More than 2 years ago"
+      - id: "f"
+        label: "I have never compared quotes"
+  - id: q6
+    prompt: "How often do you shop around for a better auto insurance rate?"
+    type: single_choice
+    construct: often_shop_around_better_auto
+    required: true
+    options:
+      - id: "a"
+        label: "Every renewal period"
+      - id: "b"
+        label: "About once a year"
+      - id: "c"
+        label: "Every couple of years"
+      - id: "d"
+        label: "Only when my rate increases"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q7
+    prompt: "Which methods do you use to get auto insurance quotes? (Select all that apply)"
+    type: multi_choice
+    construct: methods_use_get_auto_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Insurance company websites directly"
+      - id: "b"
+        label: "Online comparison sites (e.g., The Zebra, Insurify)"
+      - id: "c"
+        label: "A mobile app"
+      - id: "d"
+        label: "Calling agents on the phone"
+      - id: "e"
+        label: "Visiting a local agent in person"
+      - id: "f"
+        label: "An independent insurance broker"
+      - id: "g"
+        label: "Referrals from friends or family"
+  - id: q8
+    prompt: "What coverage types do you currently carry? (Select all that apply)"
+    type: multi_choice
+    construct: coverage_types_currently_carry_select
+    required: true
+    options:
+      - id: "a"
+        label: "Liability (bodily injury and property damage)"
+      - id: "b"
+        label: "Collision"
+      - id: "c"
+        label: "Comprehensive"
+      - id: "d"
+        label: "Uninsured/underinsured motorist"
+      - id: "e"
+        label: "Personal injury protection (PIP) or medical payments"
+      - id: "f"
+        label: "Roadside assistance"
+      - id: "g"
+        label: "Rental car reimbursement"
+      - id: "h"
+        label: "Not sure what coverage I have"
+  - id: q9
+    prompt: "What deductible do you carry for collision or comprehensive coverage?"
+    type: single_choice
+    construct: deductible_carry_collision_comprehensive
+    required: true
+    options:
+      - id: "a"
+        label: "$250 or less"
+      - id: "b"
+        label: "$500"
+      - id: "c"
+        label: "$1,000"
+      - id: "d"
+        label: "More than $1,000"
+      - id: "e"
+        label: "I don't carry that coverage"
+      - id: "f"
+        label: "Not sure"
+  - id: q10
+    prompt: "When choosing auto insurance, how important is each factor? — Monthly premium / price"
+    type: single_choice
+    construct: when_choosing_auto_insurance_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q11
+    prompt: "When choosing auto insurance, how important is each factor? — Company reputation and financial stability"
+    type: single_choice
+    construct: when_choosing_auto_insurance_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q12
+    prompt: "When choosing auto insurance, how important is each factor? — Quality of customer service"
+    type: single_choice
+    construct: when_choosing_auto_insurance_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q13
+    prompt: "When choosing auto insurance, how important is each factor? — Speed and ease of the claims process"
+    type: single_choice
+    construct: when_choosing_auto_insurance_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q14
+    prompt: "When choosing auto insurance, how important is each factor? — Available discounts"
+    type: single_choice
+    construct: when_choosing_auto_insurance_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q15
+    prompt: "When choosing auto insurance, how important is each factor? — Quality of the mobile app and digital tools"
+    type: single_choice
+    construct: when_choosing_auto_insurance_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "Which discounts do you currently receive? (Select all that apply)"
+    type: multi_choice
+    construct: discounts_currently_receive_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Multi-policy / bundling (e.g., with home or renters)"
+      - id: "b"
+        label: "Multi-vehicle"
+      - id: "c"
+        label: "Safe driver / good driving record"
+      - id: "d"
+        label: "Good student"
+      - id: "e"
+        label: "Usage-based / telematics program"
+      - id: "f"
+        label: "Paid-in-full or paperless billing"
+      - id: "g"
+        label: "Military or affiliation discount"
+      - id: "h"
+        label: "I don't receive any discounts"
+  - id: q17
+    prompt: "Do you participate in a usage-based or telematics program that tracks your driving (e.g., Progressive Snapshot, State Farm Drive Safe & Save)?"
+    type: single_choice
+    construct: participate_usage_based_telematics_progr
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, currently"
+      - id: "b"
+        label: "I tried it but opted out"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No, and I would not consider it"
+  - id: q18
+    prompt: "How do you bundle your insurance policies, if at all?"
+    type: single_choice
+    construct: bundle_insurance_policies_if_all
+    required: true
+    options:
+      - id: "a"
+        label: "Auto and home/renters with the same company"
+      - id: "b"
+        label: "Auto and other policies (e.g., life, umbrella) bundled"
+      - id: "c"
+        label: "I keep my auto policy separate on purpose"
+      - id: "d"
+        label: "I only have auto insurance"
+  - id: q19
+    prompt: "Have you filed an auto insurance claim in the past 3 years?"
+    type: single_choice
+    construct: have_filed_auto_insurance_claim
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one claim"
+      - id: "b"
+        label: "Yes, more than one claim"
+      - id: "c"
+        label: "No claims"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q20
+    prompt: "How much do you agree with the following statement: I understand what my auto insurance policy actually covers."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree with the following statement: Comparing auto insurance quotes is confusing and time-consuming."
+    type: single_choice
+    construct: much_agree_following_statement_comparing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree with the following statement: I feel I am getting a fair price for my auto insurance."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How much do you agree with the following statement: I would switch providers to save even a small amount of money."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "Has your auto insurance premium changed at your most recent renewal?"
+    type: single_choice
+    construct: has_auto_insurance_premium_changed
+    required: true
+    options:
+      - id: "a"
+        label: "It increased significantly"
+      - id: "b"
+        label: "It increased slightly"
+      - id: "c"
+        label: "It stayed about the same"
+      - id: "d"
+        label: "It decreased"
+      - id: "e"
+        label: "Not sure"
+  - id: q25
+    prompt: "Have you switched auto insurance providers in the past 3 years?"
+    type: single_choice
+    construct: have_switched_auto_insurance_providers
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, once"
+      - id: "b"
+        label: "Yes, more than once"
+      - id: "c"
+        label: "No, but I have considered it"
+      - id: "d"
+        label: "No, and I have not considered it"
+  - id: q26
+    prompt: "What would most likely make you switch auto insurance providers? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: would_most_likely_make_switch
+    required: true
+    options:
+      - id: "a"
+        label: "A lower price elsewhere"
+      - id: "b"
+        label: "A premium increase at renewal"
+      - id: "c"
+        label: "Poor claims experience"
+      - id: "d"
+        label: "Poor customer service"
+      - id: "e"
+        label: "Better coverage options"
+      - id: "f"
+        label: "A better mobile app or digital tools"
+      - id: "g"
+        label: "A recommendation from someone I trust"
+      - id: "h"
+        label: "Better discounts"
+      - id: "i"
+        label: "A major life change (move, new car, marriage)"
+  - id: q27
+    prompt: "How much of a premium increase would it take before you seriously shopped for a new provider?"
+    type: single_choice
+    construct: much_premium_increase_would_it
+    required: true
+    options:
+      - id: "a"
+        label: "Any increase at all"
+      - id: "b"
+        label: "A 5% to 10% increase"
+      - id: "c"
+        label: "An 11% to 25% increase"
+      - id: "d"
+        label: "More than a 25% increase"
+      - id: "e"
+        label: "I would shop regardless of increases"
+  - id: q28
+    prompt: "How satisfied are you with your current auto insurance provider overall?"
+    type: single_choice
+    construct: satisfied_current_auto_insurance_provide
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "How satisfied are you with the price you pay for your auto insurance?"
+    type: single_choice
+    construct: satisfied_price_pay_auto_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How likely are you to shop for a new auto insurance policy in the next 12 months?"
+    type: single_choice
+    construct: likely_shop_new_auto_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your current auto insurer to a friend or family member (0 = not at all likely, 10 = extremely likely)?"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "What matters most to you when shopping for auto insurance? (Optional open response)"
+    type: free_text
+    construct: matters_most_when_shopping_auto
+    required: false
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic, Latino, or Spanish origin"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Some other race or origin"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q39
+    prompt: "Including yourself, how many people live in your household? Please enter a whole number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q40
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Widowed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "In which U.S. region do you live?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q43
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "How many licensed drivers are in your household? Please enter a whole number."
+    type: free_text
+    construct: many_licensed_drivers_household_please
+    required: true

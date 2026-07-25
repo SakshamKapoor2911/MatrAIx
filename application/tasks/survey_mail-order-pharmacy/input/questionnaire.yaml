@@ -1,0 +1,674 @@
+schemaVersion: "1.0"
+id: mail_order_pharmacy_v1
+title: "Mail-Order Pharmacy Usage Survey"
+description: "How consumers use mail-order and home-delivery pharmacies and how they weigh them against local pharmacies."
+questions:
+  - id: q0
+    prompt: "Do you currently get any prescriptions delivered by mail or home delivery?"
+    type: single_choice
+    construct: currently_get_any_prescriptions_delivere
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, all or most of my prescriptions"
+      - id: "b"
+        label: "Yes, some of my prescriptions"
+      - id: "c"
+        label: "I did in the past but not now"
+      - id: "d"
+        label: "No, but I've considered it"
+      - id: "e"
+        label: "No, and I haven't considered it"
+  - id: q1
+    prompt: "How long have you used a mail-order or home-delivery pharmacy?"
+    type: single_choice
+    construct: long_have_used_mail_order
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "More than 3 years"
+      - id: "e"
+        label: "I don't currently use one"
+  - id: q2
+    prompt: "Which mail-order or delivery pharmacy do you use?"
+    type: single_choice
+    construct: mail_order_delivery_pharmacy_use
+    required: true
+    options:
+      - id: "a"
+        label: "Express Scripts"
+      - id: "b"
+        label: "OptumRx"
+      - id: "c"
+        label: "CVS Caremark mail service"
+      - id: "d"
+        label: "Amazon Pharmacy"
+      - id: "e"
+        label: "A grocery or retail chain's delivery service"
+      - id: "f"
+        label: "Another service"
+      - id: "g"
+        label: "I don't use one"
+  - id: q3
+    prompt: "How did you start using mail-order delivery? (Select all that apply)"
+    type: multi_choice
+    construct: did_start_using_mail_order
+    required: true
+    options:
+      - id: "a"
+        label: "My insurance or plan encouraged or required it"
+      - id: "b"
+        label: "My doctor suggested it"
+      - id: "c"
+        label: "I wanted the convenience"
+      - id: "d"
+        label: "It was cheaper than my local pharmacy"
+      - id: "e"
+        label: "I saw an ad or promotion"
+      - id: "f"
+        label: "A friend or family member recommended it"
+      - id: "g"
+        label: "Not applicable"
+  - id: q4
+    prompt: "Which kinds of medications do you receive by mail? (Select all that apply)"
+    type: multi_choice
+    construct: kinds_medications_receive_by_mail
+    required: true
+    options:
+      - id: "a"
+        label: "Long-term or maintenance medications"
+      - id: "b"
+        label: "Occasional or short-term prescriptions"
+      - id: "c"
+        label: "Over-the-counter items"
+      - id: "d"
+        label: "Vitamins or supplements"
+      - id: "e"
+        label: "Medical supplies"
+      - id: "f"
+        label: "I don't receive any by mail"
+  - id: q5
+    prompt: "How many prescriptions do you typically receive by mail per delivery? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: many_prescriptions_typically_receive_by
+    required: true
+  - id: q6
+    prompt: "How often do you receive a mail-order delivery?"
+    type: single_choice
+    construct: often_receive_mail_order_delivery
+    required: true
+    options:
+      - id: "a"
+        label: "Every few weeks"
+      - id: "b"
+        label: "About once a month"
+      - id: "c"
+        label: "Every 2 to 3 months"
+      - id: "d"
+        label: "A few times a year"
+      - id: "e"
+        label: "Rarely"
+  - id: q7
+    prompt: "What supply length do you usually receive by mail?"
+    type: single_choice
+    construct: supply_length_usually_receive_by
+    required: true
+    options:
+      - id: "a"
+        label: "30-day supply"
+      - id: "b"
+        label: "60-day supply"
+      - id: "c"
+        label: "90-day supply"
+      - id: "d"
+        label: "It varies"
+      - id: "e"
+        label: "Not sure"
+  - id: q8
+    prompt: "How do you manage refills for your mail-order prescriptions? (Select all that apply)"
+    type: multi_choice
+    construct: manage_refills_mail_order_prescriptions
+    required: true
+    options:
+      - id: "a"
+        label: "Automatic refills"
+      - id: "b"
+        label: "The pharmacy's app"
+      - id: "c"
+        label: "The pharmacy's website"
+      - id: "d"
+        label: "Phone or text reminders"
+      - id: "e"
+        label: "I request each one manually"
+      - id: "f"
+        label: "Not applicable"
+  - id: q9
+    prompt: "Have you ever had a delivery arrive late enough to affect your medication supply?"
+    type: single_choice
+    construct: have_ever_had_delivery_arrive
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, never"
+      - id: "d"
+        label: "Not applicable"
+  - id: q10
+    prompt: "Which problems have you experienced with mail-order delivery? (Select all that apply)"
+    type: multi_choice
+    construct: problems_have_experienced_mail_order
+    required: true
+    options:
+      - id: "a"
+        label: "Late deliveries"
+      - id: "b"
+        label: "A lost or missing package"
+      - id: "c"
+        label: "Concerns about temperature or heat exposure"
+      - id: "d"
+        label: "Wrong medication or quantity"
+      - id: "e"
+        label: "Trouble reaching customer service"
+      - id: "f"
+        label: "Running out before the refill arrived"
+      - id: "g"
+        label: "I haven't had problems"
+  - id: q11
+    prompt: "Roughly how much do you think mail order saves you per month compared with a local pharmacy? Please enter a dollar amount (enter 0 if none or unsure)."
+    type: free_text
+    construct: roughly_much_think_mail_order
+    required: true
+  - id: q12
+    prompt: "How much do you agree or disagree: Mail order is more convenient than picking up in person."
+    type: single_choice
+    construct: much_agree_disagree_mail_order
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: Mail order saves me money."
+    type: single_choice
+    construct: much_agree_disagree_mail_order
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I trust my medications to arrive safely and on time."
+    type: single_choice
+    construct: much_agree_disagree_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: I miss being able to talk to a pharmacist in person."
+    type: single_choice
+    construct: much_agree_disagree_i_miss
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: Managing mail-order refills is easy."
+    type: single_choice
+    construct: much_agree_disagree_managing_mail
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree or disagree: I worry about my package being left unattended or exposed to heat."
+    type: single_choice
+    construct: much_agree_disagree_i_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How reliable have your mail-order deliveries been overall?"
+    type: single_choice
+    construct: reliable_have_mail_order_deliveries
+    required: true
+    options:
+      - id: "a"
+        label: "Very reliable"
+      - id: "b"
+        label: "Somewhat reliable"
+      - id: "c"
+        label: "Neither reliable nor unreliable"
+      - id: "d"
+        label: "Somewhat unreliable"
+      - id: "e"
+        label: "Very unreliable"
+  - id: q19
+    prompt: "How do you talk to a pharmacist about a mail-order medication when you need to?"
+    type: single_choice
+    construct: talk_pharmacist_mail_order_medication
+    required: true
+    options:
+      - id: "a"
+        label: "Phone line"
+      - id: "b"
+        label: "App or website chat"
+      - id: "c"
+        label: "Email"
+      - id: "d"
+        label: "I visit a local pharmacy instead"
+      - id: "e"
+        label: "I don't usually need to"
+  - id: q20
+    prompt: "When using a mail-order pharmacy, how important is on-time delivery?"
+    type: single_choice
+    construct: when_using_mail_order_pharmacy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "When using a mail-order pharmacy, how important is cost savings?"
+    type: single_choice
+    construct: when_using_mail_order_pharmacy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When using a mail-order pharmacy, how important is easy access to a pharmacist?"
+    type: single_choice
+    construct: when_using_mail_order_pharmacy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When using a mail-order pharmacy, how important is a good app or website?"
+    type: single_choice
+    construct: when_using_mail_order_pharmacy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When using a mail-order pharmacy, how important is packaging that protects the medication?"
+    type: single_choice
+    construct: when_using_mail_order_pharmacy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How does mail order compare with using a local pharmacy for you overall?"
+    type: single_choice
+    construct: does_mail_order_compare_using
+    required: true
+    options:
+      - id: "a"
+        label: "Much better"
+      - id: "b"
+        label: "Somewhat better"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat worse"
+      - id: "e"
+        label: "Much worse"
+  - id: q26
+    prompt: "For which situations do you still prefer a local pharmacy? (Select all that apply)"
+    type: multi_choice
+    construct: situations_still_prefer_local_pharmacy
+    required: true
+    options:
+      - id: "a"
+        label: "New or first-time prescriptions"
+      - id: "b"
+        label: "Urgent or same-day needs"
+      - id: "c"
+        label: "When I have questions for a pharmacist"
+      - id: "d"
+        label: "Short-term medications"
+      - id: "e"
+        label: "Over-the-counter purchases"
+      - id: "f"
+        label: "I don't use a local pharmacy anymore"
+  - id: q27
+    prompt: "Select your top 3 things that matter most in a mail-order pharmacy. (Select up to 3)"
+    type: single_choice
+    construct: select_top_3_things_that
+    required: true
+    options:
+      - id: "a"
+        label: "On-time, reliable delivery"
+      - id: "b"
+        label: "Lower prices"
+      - id: "c"
+        label: "Easy refill management"
+      - id: "d"
+        label: "Access to a pharmacist"
+      - id: "e"
+        label: "Safe, protective packaging"
+      - id: "f"
+        label: "A good app or website"
+      - id: "g"
+        label: "Responsive customer service"
+      - id: "h"
+        label: "Automatic refills"
+  - id: q28
+    prompt: "Overall, how satisfied are you with your mail-order pharmacy?"
+    type: single_choice
+    construct: overall_satisfied_mail_order_pharmacy
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "On a scale of 0 to 10, how likely are you to recommend mail-order delivery to a friend? Please enter a number from 0 (not at all likely) to 10 (extremely likely)."
+    type: free_text
+    construct: scale_0_10_likely_recommend
+    required: true
+  - id: q30
+    prompt: "How likely are you to keep using mail-order delivery next year?"
+    type: single_choice
+    construct: likely_keep_using_mail_order
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "Is there one thing that would most improve your mail-order pharmacy experience? Please describe briefly (or enter \"none\")."
+    type: free_text
+    construct: there_one_thing_that_would
+    required: true
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Which best describes your race or ethnicity?"
+    type: single_choice
+    construct: best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian or Asian American"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Two or more races or another background"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+  - id: q40
+    prompt: "Which region of the country do you live in?"
+    type: single_choice
+    construct: region_country_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q42
+    prompt: "What is your primary source of health insurance?"
+    type: single_choice
+    construct: primary_source_health_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored plan"
+      - id: "b"
+        label: "Plan purchased on the marketplace or directly"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or veterans coverage (TRICARE / VA)"
+      - id: "f"
+        label: "I don't have health insurance"
+      - id: "g"
+        label: "Prefer not to say"

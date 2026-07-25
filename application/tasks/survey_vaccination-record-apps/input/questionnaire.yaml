@@ -1,0 +1,667 @@
+schemaVersion: "1.0"
+id: vaccination_record_apps_v1
+title: "Vaccination Record Apps Survey"
+description: "How consumers use apps and digital tools to store, access, and share their vaccination and immunization records."
+questions:
+  - id: q0
+    prompt: "How do you currently keep track of your vaccination records?"
+    type: single_choice
+    construct: currently_keep_track_vaccination_records
+    required: true
+    options:
+      - id: "a"
+        label: "A dedicated app or digital wallet"
+      - id: "b"
+        label: "My health provider's patient portal or app"
+      - id: "c"
+        label: "A paper card or printout"
+      - id: "d"
+        label: "A photo or file saved on my phone or computer"
+      - id: "e"
+        label: "I do not keep track of them"
+      - id: "f"
+        label: "Not sure"
+  - id: q1
+    prompt: "Have you ever used an app specifically to store or show vaccination records?"
+    type: single_choice
+    construct: have_ever_used_app_specifically
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I use one regularly"
+      - id: "b"
+        label: "Yes, but only occasionally"
+      - id: "c"
+        label: "No, but I have considered it"
+      - id: "d"
+        label: "No, and I have not considered it"
+  - id: q2
+    prompt: "How long have you used a digital vaccination record app or wallet?"
+    type: single_choice
+    construct: long_have_used_digital_vaccination
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "More than 3 years"
+      - id: "e"
+        label: "I do not use one"
+  - id: q3
+    prompt: "Which app or platform do you mainly use for vaccination records?"
+    type: single_choice
+    construct: app_platform_mainly_use_vaccination
+    required: true
+    options:
+      - id: "a"
+        label: "My health system's patient portal app (e.g., MyChart)"
+      - id: "b"
+        label: "Apple Health or Google Health/Wallet"
+      - id: "c"
+        label: "A state or public-health immunization app"
+      - id: "d"
+        label: "A pharmacy app (e.g., CVS, Walgreens)"
+      - id: "e"
+        label: "A standalone vaccination-record app"
+      - id: "f"
+        label: "I do not use an app"
+  - id: q4
+    prompt: "Which types of records do you keep in a vaccination or immunization app? (Select all that apply)"
+    type: multi_choice
+    construct: types_records_keep_vaccination_immunizat
+    required: true
+    options:
+      - id: "a"
+        label: "Routine adult vaccinations"
+      - id: "b"
+        label: "Travel-related vaccinations"
+      - id: "c"
+        label: "Seasonal flu shots"
+      - id: "d"
+        label: "Childhood or family members' records"
+      - id: "e"
+        label: "Records needed for work or school"
+      - id: "f"
+        label: "Records needed for events or travel"
+      - id: "g"
+        label: "I do not use such an app"
+  - id: q5
+    prompt: "Where does your vaccination app get its records from? (Select all that apply)"
+    type: multi_choice
+    construct: where_does_vaccination_app_get
+    required: true
+    options:
+      - id: "a"
+        label: "Automatically from my health provider"
+      - id: "b"
+        label: "From a state or public-health immunization registry"
+      - id: "c"
+        label: "From a pharmacy"
+      - id: "d"
+        label: "I entered them manually"
+      - id: "e"
+        label: "I uploaded a photo of a paper card"
+      - id: "f"
+        label: "Not applicable"
+  - id: q6
+    prompt: "How did you first start using a vaccination record app?"
+    type: single_choice
+    construct: did_first_start_using_vaccination
+    required: true
+    options:
+      - id: "a"
+        label: "A provider or pharmacy set it up"
+      - id: "b"
+        label: "It came with an app I already used"
+      - id: "c"
+        label: "A travel or event requirement prompted me"
+      - id: "d"
+        label: "I sought one out on my own"
+      - id: "e"
+        label: "A friend or family member recommended it"
+      - id: "f"
+        label: "Not applicable"
+  - id: q7
+    prompt: "How often do you open or check a vaccination record app?"
+    type: single_choice
+    construct: often_open_check_vaccination_record
+    required: true
+    options:
+      - id: "a"
+        label: "At least monthly"
+      - id: "b"
+        label: "A few times a year"
+      - id: "c"
+        label: "Only when I need to show a record"
+      - id: "d"
+        label: "Rarely or never"
+  - id: q8
+    prompt: "For what situations have you needed to show a digital vaccination record? (Select all that apply)"
+    type: multi_choice
+    construct: situations_have_needed_show_digital
+    required: true
+    options:
+      - id: "a"
+        label: "Travel or border crossing"
+      - id: "b"
+        label: "Starting a new job"
+      - id: "c"
+        label: "Enrolling in school or a program"
+      - id: "d"
+        label: "A doctor or pharmacy visit"
+      - id: "e"
+        label: "An event or venue requirement"
+      - id: "f"
+        label: "I have never needed to show one"
+  - id: q9
+    prompt: "How do you usually share a vaccination record when asked?"
+    type: single_choice
+    construct: usually_share_vaccination_record_when
+    required: true
+    options:
+      - id: "a"
+        label: "Show a screen or QR code from an app"
+      - id: "b"
+        label: "Show a paper card"
+      - id: "c"
+        label: "Email or message a file"
+      - id: "d"
+        label: "Print a copy"
+      - id: "e"
+        label: "I have not needed to share one"
+  - id: q10
+    prompt: "About how many times in the past year did you need to show a vaccination record? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: many_times_past_year_did
+    required: true
+  - id: q11
+    prompt: "About how many separate vaccination records do you keep in digital form? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: many_separate_vaccination_records_keep
+    required: true
+  - id: q12
+    prompt: "How easy is it to find and show a record when you need it?"
+    type: single_choice
+    construct: easy_it_find_show_record
+    required: true
+    options:
+      - id: "a"
+        label: "Very difficult"
+      - id: "b"
+        label: "Somewhat difficult"
+      - id: "c"
+        label: "Somewhat easy"
+      - id: "d"
+        label: "Very easy"
+  - id: q13
+    prompt: "How confident are you that the records in your app are complete and accurate?"
+    type: single_choice
+    construct: confident_that_records_app_complete
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+  - id: q14
+    prompt: "How much do you agree with the following statement about vaccination record apps: They make it easier to manage my health paperwork."
+    type: single_choice
+    construct: much_agree_following_statement_vaccinati
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement about vaccination record apps: They save me time compared with paper records."
+    type: single_choice
+    construct: much_agree_following_statement_vaccinati
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about vaccination record apps: I trust them to keep my information accurate."
+    type: single_choice
+    construct: much_agree_following_statement_vaccinati
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about vaccination record apps: I worry about the privacy of my data in them."
+    type: single_choice
+    construct: much_agree_following_statement_vaccinati
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about vaccination record apps: They are widely accepted where I need to show records."
+    type: single_choice
+    construct: much_agree_following_statement_vaccinati
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "Which features matter most to you in a vaccination record app? (Select all that apply)"
+    type: multi_choice
+    construct: features_matter_most_vaccination_record
+    required: true
+    options:
+      - id: "a"
+        label: "Automatic syncing from providers"
+      - id: "b"
+        label: "Easy sharing or QR code display"
+      - id: "c"
+        label: "Reminders for upcoming or due vaccinations"
+      - id: "d"
+        label: "Storing records for family members"
+      - id: "e"
+        label: "Offline access without internet"
+      - id: "f"
+        label: "Strong privacy and security"
+      - id: "g"
+        label: "Combining records from many sources"
+  - id: q20
+    prompt: "Select your top 3 most important features in a vaccination record app. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_most_important
+    required: true
+    options:
+      - id: "a"
+        label: "Automatic syncing from providers"
+      - id: "b"
+        label: "Easy sharing or QR code display"
+      - id: "c"
+        label: "Reminders for due vaccinations"
+      - id: "d"
+        label: "Family members' records"
+      - id: "e"
+        label: "Offline access"
+      - id: "f"
+        label: "Privacy and security"
+      - id: "g"
+        label: "Accuracy and completeness"
+  - id: q21
+    prompt: "How important is it to you that a vaccination app can store records for your whole family?"
+    type: single_choice
+    construct: important_it_that_vaccination_app
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Not applicable"
+  - id: q22
+    prompt: "How concerned are you about the privacy of vaccination data stored in an app?"
+    type: single_choice
+    construct: concerned_privacy_vaccination_data_store
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+  - id: q23
+    prompt: "How much do you trust vaccination record apps to keep your data secure?"
+    type: single_choice
+    construct: much_trust_vaccination_record_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A great deal"
+  - id: q24
+    prompt: "What has made using a vaccination record app difficult? (Select all that apply)"
+    type: multi_choice
+    construct: has_made_using_vaccination_record
+    required: true
+    options:
+      - id: "a"
+        label: "Records missing or out of date"
+      - id: "b"
+        label: "Hard to set up or log in"
+      - id: "c"
+        label: "Not accepted where I needed it"
+      - id: "d"
+        label: "Privacy or security worries"
+      - id: "e"
+        label: "Duplicate or conflicting entries"
+      - id: "f"
+        label: "Records scattered across different apps"
+      - id: "g"
+        label: "Nothing in particular"
+  - id: q25
+    prompt: "Do you also keep a paper backup of your vaccination records?"
+    type: single_choice
+    construct: also_keep_paper_backup_vaccination
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, always"
+      - id: "b"
+        label: "Sometimes"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not sure"
+  - id: q26
+    prompt: "How often do the reminders in a vaccination app help you stay up to date on shots?"
+    type: single_choice
+    construct: often_reminders_vaccination_app_help
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "My app does not send reminders"
+  - id: q27
+    prompt: "Overall, how satisfied are you with the vaccination record app you use most?"
+    type: single_choice
+    construct: overall_satisfied_vaccination_record_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q28
+    prompt: "How likely are you to recommend a vaccination record app to others, on a scale of 0 (not at all likely) to 10 (extremely likely)?"
+    type: single_choice
+    construct: likely_recommend_vaccination_record_app
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q29
+    prompt: "How likely are you to use a vaccination record app in the next year?"
+    type: single_choice
+    construct: likely_use_vaccination_record_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Somewhat likely"
+      - id: "d"
+        label: "Very likely"
+  - id: q30
+    prompt: "In your own words, what would make a vaccination record app more useful for you?"
+    type: free_text
+    construct: own_words_would_make_vaccination
+    required: true
+  - id: q31
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q32
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe or not to say"
+  - id: q33
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q36
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+  - id: q37
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "Do you have children under 18 in your household?"
+    type: single_choice
+    construct: have_children_under_18_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q42
+    prompt: "How comfortable are you overall using health apps on a phone or computer?"
+    type: single_choice
+    construct: comfortable_overall_using_health_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"

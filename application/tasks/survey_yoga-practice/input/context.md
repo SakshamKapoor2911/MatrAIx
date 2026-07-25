@@ -1,0 +1,7 @@
+# Yoga Practice
+
+How people practice yoga, including their styles, studio-versus-home settings, apps, and attitudes.
+
+## About this survey
+
+This survey profiles yoga practitioners, starting with a screener on whether and how long they have practiced, how often, session length, and where they practice. It records main motivation, yoga styles, settings used, apps such as Down Dog, Alo Moves, and Yoga with Adriene, gear owned, apparel and mat brands such as Lululemon and Manduka, workshop or teacher-training experience, and numeric items on session length and monthly spend. Attitudes are captured through an agreement Likert battery on routine, stress, flexibility, home practice, and cost, and an importance matrix over criteria for choosing where to practice, plus a top-three ranking of reasons and a barrier multi-select. Additional sections cover studio-versus-online frequency, membership type, paired wellness activities, and satisfaction with practice, instruction, and value, followed by an overall satisfaction rating, a recommendation-likelihood scale, and intent to practice more, try new styles, or continue. Question types include single-choice, multi-select, several Likert scales, two matrix batteries, a ranking item, and numeric free-text. The survey concludes with a demographic block covering experience level, age, gender, race and ethnicity, income, education, employment, household size, marital status, U.S. region, and urbanicity.

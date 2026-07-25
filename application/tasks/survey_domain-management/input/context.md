@@ -1,0 +1,7 @@
+# Domain Management
+
+How people register domain names and manage DNS across registrars such as Namecheap, Cloudflare, GoDaddy, and Porkbun.
+
+## About this survey
+
+This survey profiles domain registration and DNS management, starting with a screener on how often the respondent manages domains, tenure, primary registrar, and registrars used and wanted. It records where DNS is managed, number of domains owned, annual spend, what domains are used for, the top-level domains and DNS record types configured, reasons for the registrar choice, WHOIS privacy handling, renewal management, email hosting, and transfer history. Attitudes are captured through an agreement Likert battery on renewal pricing, separating DNS from registration, DNS complexity, free WHOIS privacy, expiration worries, and upselling, an importance matrix over registrar-selection criteria, and frequency scales for editing DNS, registering domains, and expiration worries, plus a top-three ranking of decision factors. Later sections cover two-factor authentication, transfer locks, discovery channels, satisfaction with pricing and management tools, overall satisfaction, recommendation likelihood, transfer intent, and an optional open comment. Question types include single-choice, multi-select, several Likert scales, an importance matrix, a ranking item, an NPS-style 0–10 scale, and numeric free-text. The survey concludes with a demographic block covering role, professional experience, employment, company size, industry, age, gender, race and ethnicity, education, U.S. region, and urbanicity.

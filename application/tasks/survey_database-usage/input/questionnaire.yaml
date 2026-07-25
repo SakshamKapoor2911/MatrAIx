@@ -1,0 +1,942 @@
+schemaVersion: "1.0"
+id: database_usage_v1
+title: "Database Usage Survey"
+description: "How developers and data professionals choose, use, and manage databases."
+questions:
+  - id: q0
+    prompt: "How often do you work with databases?"
+    type: single_choice
+    construct: often_work_databases
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "I am just learning databases"
+      - id: "e"
+        label: "I don't work with databases"
+  - id: q1
+    prompt: "How long have you worked with databases?"
+    type: single_choice
+    construct: long_have_worked_databases
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "What is your relationship to databases?"
+    type: single_choice
+    construct: relationship_databases
+    required: true
+    options:
+      - id: "a"
+        label: "Database administrator (DBA)"
+      - id: "b"
+        label: "Developer who uses databases in applications"
+      - id: "c"
+        label: "Data engineer"
+      - id: "d"
+        label: "Data analyst or scientist"
+      - id: "e"
+        label: "I use databases occasionally"
+  - id: q3
+    prompt: "Which database do you use most often?"
+    type: single_choice
+    construct: database_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "PostgreSQL"
+      - id: "b"
+        label: "MySQL"
+      - id: "c"
+        label: "Microsoft SQL Server"
+      - id: "d"
+        label: "Oracle Database"
+      - id: "e"
+        label: "SQLite"
+      - id: "f"
+        label: "MongoDB"
+      - id: "g"
+        label: "Redis"
+      - id: "h"
+        label: "MariaDB"
+      - id: "i"
+        label: "Other"
+  - id: q4
+    prompt: "Which relational databases have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: relational_databases_have_used_past
+    required: true
+    options:
+      - id: "a"
+        label: "PostgreSQL"
+      - id: "b"
+        label: "MySQL"
+      - id: "c"
+        label: "MariaDB"
+      - id: "d"
+        label: "Microsoft SQL Server"
+      - id: "e"
+        label: "Oracle Database"
+      - id: "f"
+        label: "SQLite"
+      - id: "g"
+        label: "IBM Db2"
+      - id: "h"
+        label: "CockroachDB"
+      - id: "i"
+        label: "None"
+  - id: q5
+    prompt: "Which NoSQL or specialized databases have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: nosql_specialized_databases_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "MongoDB"
+      - id: "b"
+        label: "Redis"
+      - id: "c"
+        label: "Cassandra"
+      - id: "d"
+        label: "DynamoDB"
+      - id: "e"
+        label: "Elasticsearch"
+      - id: "f"
+        label: "Neo4j"
+      - id: "g"
+        label: "Snowflake"
+      - id: "h"
+        label: "BigQuery"
+      - id: "i"
+        label: "InfluxDB"
+      - id: "j"
+        label: "None"
+  - id: q6
+    prompt: "Which databases would you like to use more over the next year? (Select all that apply)"
+    type: multi_choice
+    construct: databases_would_like_use_more
+    required: true
+    options:
+      - id: "a"
+        label: "PostgreSQL"
+      - id: "b"
+        label: "MySQL"
+      - id: "c"
+        label: "MongoDB"
+      - id: "d"
+        label: "Redis"
+      - id: "e"
+        label: "Snowflake or BigQuery"
+      - id: "f"
+        label: "DynamoDB"
+      - id: "g"
+        label: "Elasticsearch"
+      - id: "h"
+        label: "I'm happy with what I use"
+  - id: q7
+    prompt: "How do you typically interact with databases? (Select all that apply)"
+    type: multi_choice
+    construct: typically_interact_databases_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Writing raw SQL"
+      - id: "b"
+        label: "Through an ORM or query builder"
+      - id: "c"
+        label: "A database GUI client"
+      - id: "d"
+        label: "The command-line client"
+      - id: "e"
+        label: "BI or analytics tools"
+      - id: "f"
+        label: "Notebooks (Jupyter, etc.)"
+  - id: q8
+    prompt: "Which database GUI or client tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: database_gui_client_tools_use
+    required: true
+    options:
+      - id: "a"
+        label: "DBeaver"
+      - id: "b"
+        label: "DataGrip"
+      - id: "c"
+        label: "pgAdmin"
+      - id: "d"
+        label: "TablePlus"
+      - id: "e"
+        label: "MySQL Workbench"
+      - id: "f"
+        label: "Azure Data Studio"
+      - id: "g"
+        label: "The psql / mysql command line"
+      - id: "h"
+        label: "MongoDB Compass"
+      - id: "i"
+        label: "None"
+  - id: q9
+    prompt: "Which ORMs or query builders do you use? (Select all that apply)"
+    type: multi_choice
+    construct: orms_query_builders_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Prisma"
+      - id: "b"
+        label: "SQLAlchemy"
+      - id: "c"
+        label: "Hibernate / JPA"
+      - id: "d"
+        label: "Entity Framework"
+      - id: "e"
+        label: "ActiveRecord"
+      - id: "f"
+        label: "Sequelize or Drizzle"
+      - id: "g"
+        label: "None — I write raw SQL"
+  - id: q10
+    prompt: "Where are the databases you work with hosted? (Select all that apply)"
+    type: multi_choice
+    construct: where_databases_work_hosted_select
+    required: true
+    options:
+      - id: "a"
+        label: "On-premises servers"
+      - id: "b"
+        label: "Self-managed on cloud VMs"
+      - id: "c"
+        label: "Managed cloud services (RDS, Cloud SQL, etc.)"
+      - id: "d"
+        label: "Serverless databases"
+      - id: "e"
+        label: "Local development machine"
+  - id: q11
+    prompt: "Which managed database services do you use? (Select all that apply)"
+    type: multi_choice
+    construct: managed_database_services_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Amazon RDS or Aurora"
+      - id: "b"
+        label: "Google Cloud SQL"
+      - id: "c"
+        label: "Azure SQL Database"
+      - id: "d"
+        label: "MongoDB Atlas"
+      - id: "e"
+        label: "PlanetScale"
+      - id: "f"
+        label: "Supabase"
+      - id: "g"
+        label: "Neon"
+      - id: "h"
+        label: "None"
+  - id: q12
+    prompt: "About how many databases do you actively work with? Please enter a number."
+    type: free_text
+    construct: many_databases_actively_work_please
+    required: true
+  - id: q13
+    prompt: "About how large is the biggest database you work with, in gigabytes? Please enter a number."
+    type: free_text
+    construct: large_biggest_database_work_gigabytes
+    required: true
+  - id: q14
+    prompt: "How would you rate your SQL proficiency?"
+    type: single_choice
+    construct: would_rate_sql_proficiency
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert"
+  - id: q15
+    prompt: "How did you learn to work with databases? (Select all that apply)"
+    type: multi_choice
+    construct: did_learn_work_databases_select
+    required: true
+    options:
+      - id: "a"
+        label: "On the job"
+      - id: "b"
+        label: "Online courses or documentation"
+      - id: "c"
+        label: "A course or bootcamp"
+      - id: "d"
+        label: "School or university"
+      - id: "e"
+        label: "A colleague or mentor"
+      - id: "f"
+        label: "Trial and error"
+  - id: q16
+    prompt: "How much do you agree: I feel confident writing SQL."
+    type: single_choice
+    construct: much_agree_i_feel_confident
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: NoSQL databases fit my use cases better than relational ones."
+    type: single_choice
+    construct: much_agree_nosql_databases_fit
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Database performance tuning is difficult."
+    type: single_choice
+    construct: much_agree_database_performance_tuning
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: I worry about database security and backups."
+    type: single_choice
+    construct: much_agree_i_worry_database
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: Managed database services are worth their cost."
+    type: single_choice
+    construct: much_agree_managed_database_services
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: I generally prefer relational databases over NoSQL."
+    type: single_choice
+    construct: much_agree_i_generally_prefer
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: The database schemas I work with are well maintained."
+    type: single_choice
+    construct: much_agree_database_schemas_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "When choosing a database, how important is performance?"
+    type: single_choice
+    construct: when_choosing_database_important_perform
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a database, how important is scalability?"
+    type: single_choice
+    construct: when_choosing_database_important_scalabi
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a database, how important is reliability and durability?"
+    type: single_choice
+    construct: when_choosing_database_important_reliabi
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a database, how important is ease of use?"
+    type: single_choice
+    construct: when_choosing_database_important_ease
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a database, how important is cost?"
+    type: single_choice
+    construct: when_choosing_database_important_cost
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing a database, how important is the ecosystem and tooling?"
+    type: single_choice
+    construct: when_choosing_database_important_ecosyst
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "Which are your top 3 factors when choosing a database? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Performance"
+      - id: "b"
+        label: "Scalability"
+      - id: "c"
+        label: "Reliability and durability"
+      - id: "d"
+        label: "Familiarity"
+      - id: "e"
+        label: "Cost"
+      - id: "f"
+        label: "Ecosystem and tooling"
+      - id: "g"
+        label: "Query flexibility"
+      - id: "h"
+        label: "Consistency and ACID guarantees"
+  - id: q30
+    prompt: "Which database tasks do you regularly perform? (Select all that apply)"
+    type: multi_choice
+    construct: database_tasks_regularly_perform_select
+    required: true
+    options:
+      - id: "a"
+        label: "Schema design"
+      - id: "b"
+        label: "Writing queries"
+      - id: "c"
+        label: "Query optimization"
+      - id: "d"
+        label: "Schema migrations"
+      - id: "e"
+        label: "Backups and recovery"
+      - id: "f"
+        label: "Replication or sharding"
+      - id: "g"
+        label: "Administration and configuration"
+      - id: "h"
+        label: "Monitoring"
+  - id: q31
+    prompt: "How often do you run into database performance problems?"
+    type: single_choice
+    construct: often_run_into_database_performance
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q32
+    prompt: "Which best describes your database backup practices?"
+    type: single_choice
+    construct: best_describes_database_backup_practices
+    required: true
+    options:
+      - id: "a"
+        label: "Automated, regularly tested backups"
+      - id: "b"
+        label: "Automated backups, rarely tested"
+      - id: "c"
+        label: "Manual backups"
+      - id: "d"
+        label: "Backups are handled by a managed service"
+      - id: "e"
+        label: "No formal backups"
+  - id: q33
+    prompt: "Do you use a schema migration tool (Flyway, Liquibase, Alembic, etc.)?"
+    type: single_choice
+    construct: use_schema_migration_tool_flyway
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for all schema changes"
+      - id: "b"
+        label: "Yes, for some changes"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q34
+    prompt: "Roughly how much data do the databases you work with hold?"
+    type: single_choice
+    construct: roughly_much_data_databases_work
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 GB"
+      - id: "b"
+        label: "1 GB to 100 GB"
+      - id: "c"
+        label: "100 GB to 1 TB"
+      - id: "d"
+        label: "1 TB to 100 TB"
+      - id: "e"
+        label: "More than 100 TB"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q35
+    prompt: "Do you use a caching layer (Redis, Memcached) in front of your databases?"
+    type: single_choice
+    construct: use_caching_layer_redis_memcached
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, extensively"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No"
+  - id: q36
+    prompt: "How satisfied are you with your primary database's performance?"
+    type: single_choice
+    construct: satisfied_primary_database_s_performance
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "How satisfied are you with your database tooling?"
+    type: single_choice
+    construct: satisfied_database_tooling
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "Overall, how satisfied are you with your primary database?"
+    type: single_choice
+    construct: overall_satisfied_primary_database
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q39
+    prompt: "How likely are you to recommend your primary database to another developer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_database_anothe
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q40
+    prompt: "How likely are you to adopt a new database within the next year?"
+    type: single_choice
+    construct: likely_adopt_new_database_within
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q41
+    prompt: "How likely are you to switch your primary database within the next year?"
+    type: single_choice
+    construct: likely_switch_primary_database_within
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What is one thing you would improve about the databases you work with? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_databases
+    required: false
+  - id: q43
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "Data engineer"
+      - id: "e"
+        label: "Data scientist or analyst"
+      - id: "f"
+        label: "Database administrator"
+      - id: "g"
+        label: "Engineering manager"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q44
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q46
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q47
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q48
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q49
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q52
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

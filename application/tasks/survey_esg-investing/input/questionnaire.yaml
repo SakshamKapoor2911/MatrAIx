@@ -1,0 +1,676 @@
+schemaVersion: "1.0"
+id: esg_investing_v1
+title: "ESG Investing Survey"
+description: "How investors understand, use, and feel about ESG and sustainable investing."
+questions:
+  - id: q0
+    prompt: "Do you currently invest in the stock market or funds (in any account, including retirement)?"
+    type: single_choice
+    construct: currently_invest_stock_market_funds
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I plan to"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q1
+    prompt: "Before today, how familiar were you with ESG or sustainable investing?"
+    type: single_choice
+    construct: before_today_familiar_were_esg
+    required: true
+    options:
+      - id: "a"
+        label: "Very familiar"
+      - id: "b"
+        label: "Somewhat familiar"
+      - id: "c"
+        label: "I've heard the term only"
+      - id: "d"
+        label: "Not familiar at all"
+  - id: q2
+    prompt: "Do you currently hold any ESG, sustainable, or socially responsible investments?"
+    type: single_choice
+    construct: currently_hold_any_esg_sustainable
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, intentionally"
+      - id: "b"
+        label: "Yes, but I'm not sure how much"
+      - id: "c"
+        label: "No, but I'm interested"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "I don't know what's in my portfolio"
+  - id: q3
+    prompt: "Which of these values matter most to you in how you invest? (Select all that apply)"
+    type: multi_choice
+    construct: these_values_matter_most_invest
+    required: true
+    options:
+      - id: "a"
+        label: "Environmental protection and climate"
+      - id: "b"
+        label: "Clean or renewable energy"
+      - id: "c"
+        label: "Fair labor and human rights"
+      - id: "d"
+        label: "Diversity and inclusion"
+      - id: "e"
+        label: "Corporate governance and ethics"
+      - id: "f"
+        label: "Avoiding weapons, tobacco, or fossil fuels"
+      - id: "g"
+        label: "Community and social impact"
+      - id: "h"
+        label: "None of these"
+  - id: q4
+    prompt: "How did you first learn about ESG or sustainable investing?"
+    type: single_choice
+    construct: did_first_learn_esg_sustainable
+    required: true
+    options:
+      - id: "a"
+        label: "A financial advisor"
+      - id: "b"
+        label: "News or financial media"
+      - id: "c"
+        label: "My employer's retirement plan"
+      - id: "d"
+        label: "Social media or influencers"
+      - id: "e"
+        label: "A brokerage or investing app"
+      - id: "f"
+        label: "Friends or family"
+      - id: "g"
+        label: "I'm not familiar with it"
+  - id: q5
+    prompt: "Approximately what share of your investment portfolio is in ESG or sustainable investments?"
+    type: single_choice
+    construct: approximately_share_investment_portfolio
+    required: true
+    options:
+      - id: "a"
+        label: "0%"
+      - id: "b"
+        label: "Less than 10%"
+      - id: "c"
+        label: "10% to 25%"
+      - id: "d"
+        label: "26% to 50%"
+      - id: "e"
+        label: "More than 50%"
+      - id: "f"
+        label: "I don't know"
+  - id: q6
+    prompt: "Which types of ESG investments do you hold or would consider? (Select all that apply)"
+    type: multi_choice
+    construct: types_esg_investments_hold_would
+    required: true
+    options:
+      - id: "a"
+        label: "ESG-focused mutual funds or ETFs"
+      - id: "b"
+        label: "Individual stocks of sustainable companies"
+      - id: "c"
+        label: "Green or social bonds"
+      - id: "d"
+        label: "Clean-energy or thematic funds"
+      - id: "e"
+        label: "Community investing or credit unions"
+      - id: "f"
+        label: "Direct or impact investments"
+      - id: "g"
+        label: "None of these"
+  - id: q7
+    prompt: "How much do you agree with the following statement: Investing in line with my values is important to me."
+    type: single_choice
+    construct: much_agree_following_statement_investing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q8
+    prompt: "How much do you agree with the following statement: ESG investments can perform as well as traditional investments."
+    type: single_choice
+    construct: much_agree_following_statement_esg
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q9
+    prompt: "How much do you agree with the following statement: I would accept somewhat lower returns to invest sustainably."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree with the following statement: Companies with strong ESG practices are less risky over the long term."
+    type: single_choice
+    construct: much_agree_following_statement_companies
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: A lot of ESG investing is just marketing or 'greenwashing'."
+    type: single_choice
+    construct: much_agree_following_statement_lot
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you trust ESG ratings and labels on funds?"
+    type: single_choice
+    construct: much_trust_esg_ratings_labels
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q13
+    prompt: "How important is each of the following in an ESG investment — environmental impact?"
+    type: single_choice
+    construct: important_each_following_esg_investment
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q14
+    prompt: "How important is each of the following in an ESG investment — social impact (labor, community, diversity)?"
+    type: single_choice
+    construct: important_each_following_esg_investment
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q15
+    prompt: "How important is each of the following in an ESG investment — corporate governance and ethics?"
+    type: single_choice
+    construct: important_each_following_esg_investment
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "How important is each of the following in an ESG investment — competitive financial returns?"
+    type: single_choice
+    construct: important_each_following_esg_investment
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "Which are the top 3 factors that matter most when you consider an ESG investment? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_that_matter
+    required: true
+    options:
+      - id: "a"
+        label: "Strong financial returns"
+      - id: "b"
+        label: "Genuine environmental impact"
+      - id: "c"
+        label: "Social and community impact"
+      - id: "d"
+        label: "Low fees"
+      - id: "e"
+        label: "Transparency about holdings"
+      - id: "f"
+        label: "Trustworthy ESG ratings"
+      - id: "g"
+        label: "Avoiding specific industries"
+      - id: "h"
+        label: "Alignment with my personal values"
+      - id: "i"
+        label: "Recommendation from an advisor"
+  - id: q18
+    prompt: "What is the biggest barrier keeping you from investing more sustainably?"
+    type: single_choice
+    construct: biggest_barrier_keeping_from_investing
+    required: true
+    options:
+      - id: "a"
+        label: "Concern about lower returns"
+      - id: "b"
+        label: "Higher fees on ESG funds"
+      - id: "c"
+        label: "Doubt about real impact (greenwashing)"
+      - id: "d"
+        label: "Not knowing which funds to choose"
+      - id: "e"
+        label: "Lack of options in my accounts"
+      - id: "f"
+        label: "I don't face any barriers"
+      - id: "g"
+        label: "I'm not interested in ESG investing"
+  - id: q19
+    prompt: "How do you research whether an investment is genuinely sustainable? (Select all that apply)"
+    type: multi_choice
+    construct: research_whether_investment_genuinely_su
+    required: true
+    options:
+      - id: "a"
+        label: "ESG ratings from providers (MSCI, Morningstar)"
+      - id: "b"
+        label: "Fund prospectus and holdings"
+      - id: "c"
+        label: "News and media coverage"
+      - id: "d"
+        label: "My financial advisor"
+      - id: "e"
+        label: "Investing apps or websites"
+      - id: "f"
+        label: "Social media"
+      - id: "g"
+        label: "I don't research it"
+  - id: q20
+    prompt: "Does your employer's retirement plan offer ESG or sustainable fund options?"
+    type: single_choice
+    construct: does_employer_s_retirement_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I use them"
+      - id: "b"
+        label: "Yes, but I don't use them"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I don't know"
+      - id: "e"
+        label: "I don't have an employer plan"
+  - id: q21
+    prompt: "How much do you agree: I want more ESG investment options available to me."
+    type: single_choice
+    construct: much_agree_i_want_more
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How has recent political debate about ESG affected your views?"
+    type: single_choice
+    construct: has_recent_political_debate_esg
+    required: true
+    options:
+      - id: "a"
+        label: "Made me more supportive of ESG"
+      - id: "b"
+        label: "Made me less supportive of ESG"
+      - id: "c"
+        label: "No effect on my views"
+      - id: "d"
+        label: "I'm not aware of the debate"
+  - id: q23
+    prompt: "Have you changed your investments in the past two years for ESG or values-based reasons?"
+    type: single_choice
+    construct: have_changed_investments_past_two
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, moved money into ESG investments"
+      - id: "b"
+        label: "Yes, moved money out of certain industries"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No"
+  - id: q24
+    prompt: "How satisfied are you with the ESG or sustainable investment options available to you?"
+    type: single_choice
+    construct: satisfied_esg_sustainable_investment_opt
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q25
+    prompt: "On a scale of 0 to 10, how likely are you to recommend ESG investing to a friend (0 = not at all likely, 10 = extremely likely)?"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q26
+    prompt: "How likely are you to increase your ESG or sustainable investments over the next 12 months?"
+    type: single_choice
+    construct: likely_increase_esg_sustainable_investme
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q27
+    prompt: "If you have any final thoughts about ESG or sustainable investing, please share them here (optional)."
+    type: free_text
+    construct: if_have_any_final_thoughts
+    required: false
+  - id: q28
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q29
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q30
+    prompt: "Which of the following best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000–$199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q33
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force (student, homemaker)"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Unable to work"
+  - id: q34
+    prompt: "Including yourself, how many people live in your household? Enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q35
+    prompt: "How many children under 18 live in your household? Enter a number."
+    type: free_text
+    construct: many_children_under_18_live
+    required: true
+  - id: q36
+    prompt: "What is your marital status?"
+    type: single_choice
+    construct: marital_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q37
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q38
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q39
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"
+  - id: q40
+    prompt: "How would you describe your overall investing experience?"
+    type: single_choice
+    construct: would_describe_overall_investing_experie
+    required: true
+    options:
+      - id: "a"
+        label: "No investing experience"
+      - id: "b"
+        label: "Beginner"
+      - id: "c"
+        label: "Intermediate"
+      - id: "d"
+        label: "Advanced"
+      - id: "e"
+        label: "Prefer not to say"

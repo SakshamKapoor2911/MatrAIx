@@ -1,0 +1,674 @@
+schemaVersion: "1.0"
+id: holiday_spending_v1
+title: "Holiday Spending Survey"
+description: "How people budget for and spend money during the winter holiday season — on gifts, travel, food, and celebrations."
+questions:
+  - id: q0
+    prompt: "Do you typically celebrate a winter holiday that involves gift-giving or extra spending?"
+    type: single_choice
+    construct: typically_celebrate_winter_holiday_that
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I spend a lot"
+      - id: "b"
+        label: "Yes, and I spend a moderate amount"
+      - id: "c"
+        label: "Yes, but I spend very little"
+      - id: "d"
+        label: "No, I don't celebrate with extra spending"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q1
+    prompt: "Approximately how much do you plan to spend in total this holiday season? Enter a dollar amount."
+    type: free_text
+    construct: approximately_much_plan_spend_total
+    required: true
+  - id: q2
+    prompt: "Which categories will you spend on this holiday season? (Select all that apply)"
+    type: multi_choice
+    construct: categories_will_spend_this_holiday
+    required: true
+    options:
+      - id: "a"
+        label: "Gifts for family"
+      - id: "b"
+        label: "Gifts for friends"
+      - id: "c"
+        label: "Gifts for coworkers or others"
+      - id: "d"
+        label: "Holiday travel"
+      - id: "e"
+        label: "Food and entertaining"
+      - id: "f"
+        label: "Decorations"
+      - id: "g"
+        label: "Charitable donations"
+      - id: "h"
+        label: "Gift cards"
+      - id: "i"
+        label: "Something for myself"
+      - id: "j"
+        label: "None of these"
+  - id: q3
+    prompt: "About how much do you plan to spend on gifts alone? Enter a dollar amount."
+    type: free_text
+    construct: much_plan_spend_gifts_alone
+    required: true
+  - id: q4
+    prompt: "For about how many people do you plan to buy gifts? Enter a number."
+    type: free_text
+    construct: many_people_plan_buy_gifts
+    required: true
+  - id: q5
+    prompt: "How do you plan to pay for most of your holiday spending?"
+    type: single_choice
+    construct: plan_pay_most_holiday_spending
+    required: true
+    options:
+      - id: "a"
+        label: "Cash or debit (money I already have)"
+      - id: "b"
+        label: "Credit card, paid off right away"
+      - id: "c"
+        label: "Credit card, carried as a balance"
+      - id: "d"
+        label: "Buy now, pay later (Klarna, Afterpay, etc.)"
+      - id: "e"
+        label: "Savings set aside for the holidays"
+      - id: "f"
+        label: "A mix of methods"
+  - id: q6
+    prompt: "Where do you plan to do most of your holiday shopping? (Select all that apply)"
+    type: multi_choice
+    construct: where_plan_most_holiday_shopping
+    required: true
+    options:
+      - id: "a"
+        label: "Amazon"
+      - id: "b"
+        label: "Big-box stores (Walmart, Target)"
+      - id: "c"
+        label: "Department stores"
+      - id: "d"
+        label: "Local or small businesses"
+      - id: "e"
+        label: "Online marketplaces (Etsy, eBay)"
+      - id: "f"
+        label: "Warehouse clubs (Costco, Sam's Club)"
+      - id: "g"
+        label: "Direct from brand websites"
+      - id: "h"
+        label: "Discount or dollar stores"
+  - id: q7
+    prompt: "When do you typically do most of your holiday shopping?"
+    type: single_choice
+    construct: when_typically_most_holiday_shopping
+    required: true
+    options:
+      - id: "a"
+        label: "Before November"
+      - id: "b"
+        label: "Black Friday / Cyber Monday week"
+      - id: "c"
+        label: "Early December"
+      - id: "d"
+        label: "Mid-to-late December"
+      - id: "e"
+        label: "Last minute (final days)"
+      - id: "f"
+        label: "After the holidays (for next year)"
+  - id: q8
+    prompt: "Do you set a budget for holiday spending?"
+    type: single_choice
+    construct: set_budget_holiday_spending
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I stick to it closely"
+      - id: "b"
+        label: "Yes, but I often go over"
+      - id: "c"
+        label: "I have a rough idea but no firm budget"
+      - id: "d"
+        label: "No, I don't budget for the holidays"
+  - id: q9
+    prompt: "How much do you agree with the following statement: I feel pressure to spend a lot during the holidays."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree with the following statement: Holiday spending puts a strain on my finances."
+    type: single_choice
+    construct: much_agree_following_statement_holiday
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: I usually spend more than I planned during the holidays."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: The amount I spend reflects how much I care about people."
+    type: single_choice
+    construct: much_agree_following_statement_amount
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: I plan ahead and save specifically for holiday spending."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I look forward to holiday shopping."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How important is each factor when buying holiday gifts: Getting the lowest price or best deal?"
+    type: single_choice
+    construct: important_each_factor_when_buying
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "How important is each factor when buying holiday gifts: Quality of the gift?"
+    type: single_choice
+    construct: important_each_factor_when_buying
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "How important is each factor when buying holiday gifts: Free or fast shipping?"
+    type: single_choice
+    construct: important_each_factor_when_buying
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each factor when buying holiday gifts: Supporting local or small businesses?"
+    type: single_choice
+    construct: important_each_factor_when_buying
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is each factor when buying holiday gifts: Staying within my budget?"
+    type: single_choice
+    construct: important_each_factor_when_buying
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "Which deals or promotions do you use during the holidays? (Select all that apply)"
+    type: multi_choice
+    construct: deals_promotions_use_during_holidays
+    required: true
+    options:
+      - id: "a"
+        label: "Black Friday deals"
+      - id: "b"
+        label: "Cyber Monday deals"
+      - id: "c"
+        label: "Coupons or promo codes"
+      - id: "d"
+        label: "Cashback or rewards apps"
+      - id: "e"
+        label: "Store loyalty programs"
+      - id: "f"
+        label: "Credit card rewards"
+      - id: "g"
+        label: "Price-comparison tools"
+      - id: "h"
+        label: "None of these"
+  - id: q21
+    prompt: "Select the top 3 categories you prioritize in your holiday budget. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_categories_prioritize
+    required: true
+    options:
+      - id: "a"
+        label: "Gifts for immediate family"
+      - id: "b"
+        label: "Gifts for extended family"
+      - id: "c"
+        label: "Gifts for friends"
+      - id: "d"
+        label: "Travel to see loved ones"
+      - id: "e"
+        label: "Food and hosting"
+      - id: "f"
+        label: "Decorations"
+      - id: "g"
+        label: "Charitable giving"
+      - id: "h"
+        label: "Treats for myself"
+  - id: q22
+    prompt: "Compared to last year, how much do you plan to spend this holiday season?"
+    type: single_choice
+    construct: compared_last_year_much_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Much less"
+      - id: "b"
+        label: "Somewhat less"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat more"
+      - id: "e"
+        label: "Much more"
+  - id: q23
+    prompt: "How has inflation or the cost of living affected your holiday spending plans?"
+    type: single_choice
+    construct: has_inflation_cost_living_affected
+    required: true
+    options:
+      - id: "a"
+        label: "I'm cutting back significantly"
+      - id: "b"
+        label: "I'm cutting back a little"
+      - id: "c"
+        label: "No change"
+      - id: "d"
+        label: "I'm spending a bit more to keep up"
+      - id: "e"
+        label: "Not sure"
+  - id: q24
+    prompt: "Do you expect to go into debt to cover holiday spending?"
+    type: single_choice
+    construct: expect_go_into_debt_cover
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a significant amount"
+      - id: "b"
+        label: "Yes, a small amount"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not sure"
+  - id: q25
+    prompt: "How long does it typically take you to pay off holiday-related debt?"
+    type: single_choice
+    construct: long_does_it_typically_take
+    required: true
+    options:
+      - id: "a"
+        label: "I don't take on holiday debt"
+      - id: "b"
+        label: "Within 1 month"
+      - id: "c"
+        label: "2–3 months"
+      - id: "d"
+        label: "4–6 months"
+      - id: "e"
+        label: "More than 6 months"
+  - id: q26
+    prompt: "How stressful do you find holiday spending?"
+    type: single_choice
+    construct: stressful_find_holiday_spending
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all stressful"
+      - id: "b"
+        label: "Slightly stressful"
+      - id: "c"
+        label: "Moderately stressful"
+      - id: "d"
+        label: "Very stressful"
+      - id: "e"
+        label: "Extremely stressful"
+  - id: q27
+    prompt: "How much do you enjoy the gift-giving part of the holidays?"
+    type: single_choice
+    construct: much_enjoy_gift_giving_part
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+  - id: q28
+    prompt: "After past holidays, how often have you regretted how much you spent?"
+    type: single_choice
+    construct: after_past_holidays_often_have
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q29
+    prompt: "How satisfied are you with how you manage your holiday spending?"
+    type: single_choice
+    construct: satisfied_manage_holiday_spending
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How likely are you to start saving earlier for next year's holidays?"
+    type: single_choice
+    construct: likely_start_saving_earlier_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "What is your biggest challenge with holiday spending? Describe briefly. (Optional)"
+    type: free_text
+    construct: biggest_challenge_holiday_spending_descr
+    required: false
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Another race or ethnicity"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your approximate annual household income before taxes?"
+    type: single_choice
+    construct: approximate_annual_household_income_befo
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $30,000"
+      - id: "b"
+        label: "$30,000 – $49,999"
+      - id: "c"
+        label: "$50,000 – $74,999"
+      - id: "d"
+        label: "$75,000 – $99,999"
+      - id: "e"
+        label: "$100,000 – $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school graduate or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q40
+    prompt: "Do you have any children under 18 living in your household?"
+    type: single_choice
+    construct: have_any_children_under_18
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one"
+      - id: "b"
+        label: "Yes, two or more"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

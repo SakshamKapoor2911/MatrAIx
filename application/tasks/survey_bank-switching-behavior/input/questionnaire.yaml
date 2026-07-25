@@ -1,0 +1,669 @@
+schemaVersion: "1.0"
+id: bank_switching_behavior_v1
+title: "Bank Switching Behavior Survey"
+description: "Whether, why, and how often people switch their primary bank, and what keeps them loyal or drives them to leave."
+questions:
+  - id: q0
+    prompt: "Do you currently have a primary checking account that you use for most of your banking?"
+    type: single_choice
+    construct: currently_have_primary_checking_account
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "I use more than one about equally"
+  - id: q1
+    prompt: "What type of institution is your primary bank?"
+    type: single_choice
+    construct: type_institution_primary_bank
+    required: true
+    options:
+      - id: "a"
+        label: "A large national bank (e.g., Chase, Bank of America, Wells Fargo)"
+      - id: "b"
+        label: "A regional or community bank"
+      - id: "c"
+        label: "A credit union"
+      - id: "d"
+        label: "An online-only bank (e.g., Ally, Capital One 360)"
+      - id: "e"
+        label: "A neobank or fintech app (e.g., Chime, SoFi)"
+  - id: q2
+    prompt: "How long have you been with your current primary bank?"
+    type: single_choice
+    construct: long_have_been_current_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 10 years"
+      - id: "d"
+        label: "More than 10 years"
+  - id: q3
+    prompt: "Have you switched your primary bank in the past 3 years?"
+    type: single_choice
+    construct: have_switched_primary_bank_past
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, once"
+      - id: "b"
+        label: "Yes, more than once"
+      - id: "c"
+        label: "No, but I've seriously considered it"
+      - id: "d"
+        label: "No, and I haven't considered it"
+  - id: q4
+    prompt: "How many different banks or credit unions do you currently have accounts with? Please enter a number."
+    type: free_text
+    construct: many_different_banks_credit_unions
+    required: true
+  - id: q5
+    prompt: "If you have switched banks, what triggered your most recent switch? (Select all that apply)"
+    type: multi_choice
+    construct: if_have_switched_banks_triggered
+    required: true
+    options:
+      - id: "a"
+        label: "High or unexpected fees"
+      - id: "b"
+        label: "Poor customer service"
+      - id: "c"
+        label: "Better interest rates elsewhere"
+      - id: "d"
+        label: "A sign-up bonus or promotion"
+      - id: "e"
+        label: "A move to a new area"
+      - id: "f"
+        label: "Wanting better mobile or online banking"
+      - id: "g"
+        label: "A bad experience (e.g., overdraft, dispute)"
+      - id: "h"
+        label: "I have not switched banks"
+  - id: q6
+    prompt: "How satisfied are you with your current primary bank overall?"
+    type: single_choice
+    construct: satisfied_current_primary_bank_overall
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q7
+    prompt: "How likely are you to switch your primary bank in the next 12 months?"
+    type: single_choice
+    construct: likely_switch_primary_bank_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q8
+    prompt: "Which features matter most to you in a bank? (Select all that apply)"
+    type: multi_choice
+    construct: features_matter_most_bank_select
+    required: true
+    options:
+      - id: "a"
+        label: "Low or no fees"
+      - id: "b"
+        label: "High interest on savings"
+      - id: "c"
+        label: "A good mobile app"
+      - id: "d"
+        label: "Convenient branch or ATM access"
+      - id: "e"
+        label: "Strong customer service"
+      - id: "f"
+        label: "A wide range of products (loans, credit cards, investing)"
+      - id: "g"
+        label: "Sign-up bonuses and rewards"
+      - id: "h"
+        label: "Security and fraud protection"
+  - id: q9
+    prompt: "How important is each factor in keeping you with your bank: Low fees."
+    type: single_choice
+    construct: important_each_factor_keeping_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q10
+    prompt: "How important is each factor in keeping you with your bank: Interest rates on deposits."
+    type: single_choice
+    construct: important_each_factor_keeping_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q11
+    prompt: "How important is each factor in keeping you with your bank: Quality of the mobile app and online banking."
+    type: single_choice
+    construct: important_each_factor_keeping_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q12
+    prompt: "How important is each factor in keeping you with your bank: Branch and ATM convenience."
+    type: single_choice
+    construct: important_each_factor_keeping_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q13
+    prompt: "How important is each factor in keeping you with your bank: Customer service quality."
+    type: single_choice
+    construct: important_each_factor_keeping_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q14
+    prompt: "How much do you agree or disagree: Switching banks is too much of a hassle."
+    type: single_choice
+    construct: much_agree_disagree_switching_banks
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: I stay with my bank mostly out of habit or loyalty."
+    type: single_choice
+    construct: much_agree_disagree_i_stay
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: I would switch banks for a better savings interest rate."
+    type: single_choice
+    construct: much_agree_disagree_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree or disagree: A cash sign-up bonus would make me consider switching."
+    type: single_choice
+    construct: much_agree_disagree_cash_sign
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree or disagree: My direct deposit and automatic payments make switching complicated."
+    type: single_choice
+    construct: much_agree_disagree_my_direct
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "Select the top 3 things that would most likely make you switch banks. (Select all that apply — choose up to 3)"
+    type: single_choice
+    construct: select_top_3_things_that
+    required: true
+    options:
+      - id: "a"
+        label: "Lower fees"
+      - id: "b"
+        label: "A higher savings rate"
+      - id: "c"
+        label: "A large sign-up bonus"
+      - id: "d"
+        label: "A better mobile app"
+      - id: "e"
+        label: "Better customer service"
+      - id: "f"
+        label: "More branches or ATMs near me"
+      - id: "g"
+        label: "A bad experience with my current bank"
+      - id: "h"
+        label: "A recommendation from someone I trust"
+  - id: q20
+    prompt: "What has stopped you from switching banks, even if you were tempted? (Select all that apply)"
+    type: multi_choice
+    construct: has_stopped_from_switching_banks
+    required: true
+    options:
+      - id: "a"
+        label: "The hassle of moving direct deposits and bills"
+      - id: "b"
+        label: "Long history with my current bank"
+      - id: "c"
+        label: "No clearly better option"
+      - id: "d"
+        label: "Concern about closing/opening accounts"
+      - id: "e"
+        label: "Bundled products (mortgage, loans, credit cards)"
+      - id: "f"
+        label: "Fear of something going wrong"
+      - id: "g"
+        label: "Nothing — I would switch if it made sense"
+  - id: q21
+    prompt: "Have you ever opened a new bank account mainly to get a sign-up bonus?"
+    type: single_choice
+    construct: have_ever_opened_new_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I kept the account"
+      - id: "b"
+        label: "Yes, and I closed it after getting the bonus"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No, and I wouldn't do that"
+  - id: q22
+    prompt: "How do you research banks before switching or opening an account? (Select all that apply)"
+    type: multi_choice
+    construct: research_banks_before_switching_opening
+    required: true
+    options:
+      - id: "a"
+        label: "Comparison sites (e.g., Bankrate, NerdWallet)"
+      - id: "b"
+        label: "Reviews and ratings online"
+      - id: "c"
+        label: "Recommendations from friends or family"
+      - id: "d"
+        label: "The bank's own website"
+      - id: "e"
+        label: "Social media or financial influencers"
+      - id: "f"
+        label: "I don't research — I go with what's convenient"
+  - id: q23
+    prompt: "Have you ever been charged a fee that made you seriously reconsider your bank?"
+    type: single_choice
+    construct: have_ever_been_charged_fee
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, an overdraft fee"
+      - id: "b"
+        label: "Yes, a monthly maintenance fee"
+      - id: "c"
+        label: "Yes, an ATM or foreign transaction fee"
+      - id: "d"
+        label: "Yes, another kind of fee"
+      - id: "e"
+        label: "No"
+  - id: q24
+    prompt: "About how much do you pay in bank fees in a typical year? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_pay_bank_fees_typical
+    required: true
+  - id: q25
+    prompt: "If you switched banks, how did the process go?"
+    type: single_choice
+    construct: if_switched_banks_did_process
+    required: true
+    options:
+      - id: "a"
+        label: "Very difficult"
+      - id: "b"
+        label: "Somewhat difficult"
+      - id: "c"
+        label: "Neither easy nor difficult"
+      - id: "d"
+        label: "Somewhat easy"
+      - id: "e"
+        label: "Very easy"
+      - id: "f"
+        label: "I have not switched banks"
+  - id: q26
+    prompt: "Do you keep an account at your old bank even after switching your primary one?"
+    type: single_choice
+    construct: keep_account_old_bank_even
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "I have not switched banks"
+  - id: q27
+    prompt: "How many primary-bank switches have you made in your lifetime? Please enter a number."
+    type: free_text
+    construct: many_primary_bank_switches_have
+    required: true
+  - id: q28
+    prompt: "How would you rate your loyalty to your current bank?"
+    type: single_choice
+    construct: would_rate_loyalty_current_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all loyal"
+      - id: "b"
+        label: "Slightly loyal"
+      - id: "c"
+        label: "Moderately loyal"
+      - id: "d"
+        label: "Very loyal"
+      - id: "e"
+        label: "Extremely loyal"
+  - id: q29
+    prompt: "Overall, how do you feel about the effort involved in switching banks?"
+    type: single_choice
+    construct: overall_feel_effort_involved_switching
+    required: true
+    options:
+      - id: "a"
+        label: "Not worth it at all"
+      - id: "b"
+        label: "Usually not worth it"
+      - id: "c"
+        label: "It depends"
+      - id: "d"
+        label: "Often worth it"
+      - id: "e"
+        label: "Almost always worth it"
+  - id: q30
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your current bank to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "In a few words, what would it take for you to switch banks? (Optional)"
+    type: free_text
+    construct: few_words_would_it_take
+    required: false
+  - id: q32
+    prompt: "What is your age? Please enter a number (years old)."
+    type: free_text
+    construct: age_please_enter_number_years
+    required: true
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q38
+    prompt: "What is your annual household income before taxes?"
+    type: single_choice
+    construct: annual_household_income_before_taxes
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+  - id: q40
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q41
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q43
+    prompt: "How would you describe your comfort with online and mobile banking?"
+    type: single_choice
+    construct: would_describe_comfort_online_mobile
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Somewhat uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat comfortable"
+      - id: "e"
+        label: "Very comfortable"

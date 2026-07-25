@@ -1,0 +1,780 @@
+schemaVersion: "1.0"
+id: health_app_privacy_v1
+title: "Health App Privacy Survey"
+description: "Consumer attitudes and behaviors around privacy in health and wellness apps."
+questions:
+  - id: q0
+    prompt: "Do you use any health or wellness apps on your phone or other devices?"
+    type: single_choice
+    construct: use_any_health_wellness_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several"
+      - id: "b"
+        label: "Yes, one or two"
+      - id: "c"
+        label: "I used to but stopped"
+      - id: "d"
+        label: "No, but I'm considering it"
+      - id: "e"
+        label: "No, and I don't plan to"
+  - id: q1
+    prompt: "Which types of health or wellness apps do you use? (Select all that apply)"
+    type: multi_choice
+    construct: types_health_wellness_apps_use
+    required: true
+    options:
+      - id: "a"
+        label: "Fitness or activity tracking"
+      - id: "b"
+        label: "Nutrition or calorie tracking"
+      - id: "c"
+        label: "Sleep tracking"
+      - id: "d"
+        label: "Meditation or mental wellness"
+      - id: "e"
+        label: "Period or fertility tracking"
+      - id: "f"
+        label: "A patient portal from a provider"
+      - id: "g"
+        label: "Medication reminders"
+      - id: "h"
+        label: "None of these"
+  - id: q2
+    prompt: "About how many health or wellness apps do you currently have installed? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: many_health_wellness_apps_currently
+    required: true
+  - id: q3
+    prompt: "Which types of personal information do your health apps collect from you? (Select all that apply)"
+    type: multi_choice
+    construct: types_personal_information_health_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Name and email"
+      - id: "b"
+        label: "Age, height, or weight"
+      - id: "c"
+        label: "Activity and location data"
+      - id: "d"
+        label: "Heart rate or other health metrics"
+      - id: "e"
+        label: "Diet or eating information"
+      - id: "f"
+        label: "Sleep data"
+      - id: "g"
+        label: "I'm not sure what they collect"
+  - id: q4
+    prompt: "How often do you read the privacy policy before using a health app?"
+    type: single_choice
+    construct: often_read_privacy_policy_before
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q5
+    prompt: "How closely do you review the permissions a health app requests (location, contacts, etc.)?"
+    type: single_choice
+    construct: closely_review_permissions_health_app
+    required: true
+    options:
+      - id: "a"
+        label: "Very closely"
+      - id: "b"
+        label: "Somewhat closely"
+      - id: "c"
+        label: "A little"
+      - id: "d"
+        label: "Not at all"
+  - id: q6
+    prompt: "Which privacy steps have you taken with health apps? (Select all that apply)"
+    type: multi_choice
+    construct: privacy_steps_have_taken_health
+    required: true
+    options:
+      - id: "a"
+        label: "Turned off location tracking"
+      - id: "b"
+        label: "Limited data-sharing settings"
+      - id: "c"
+        label: "Declined certain permissions"
+      - id: "d"
+        label: "Deleted an app over privacy concerns"
+      - id: "e"
+        label: "Used a fake or alternate email"
+      - id: "f"
+        label: "Read reviews about privacy"
+      - id: "g"
+        label: "None of these"
+  - id: q7
+    prompt: "How concerned are you about how health apps use your personal data?"
+    type: single_choice
+    construct: concerned_health_apps_use_personal
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q8
+    prompt: "Who do you think can access the data from your health apps? (Select all that apply)"
+    type: multi_choice
+    construct: who_think_can_access_data
+    required: true
+    options:
+      - id: "a"
+        label: "The app company itself"
+      - id: "b"
+        label: "Advertisers"
+      - id: "c"
+        label: "Other companies the data is sold to"
+      - id: "d"
+        label: "My health care provider"
+      - id: "e"
+        label: "My insurance company"
+      - id: "f"
+        label: "Almost anyone"
+      - id: "g"
+        label: "I'm not sure"
+  - id: q9
+    prompt: "How much do you agree with the following statement: I understand what happens to my data in health apps."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree with the following statement: Health apps collect more data than they need."
+    type: single_choice
+    construct: much_agree_following_statement_health
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: I trust health app companies to protect my data."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Privacy policies are too long and hard to understand."
+    type: single_choice
+    construct: much_agree_following_statement_privacy
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: The benefits of health apps are worth the privacy tradeoffs."
+    type: single_choice
+    construct: much_agree_following_statement_benefits
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: There should be stronger rules on how health apps handle data."
+    type: single_choice
+    construct: much_agree_following_statement_there
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How comfortable are you sharing health app data with the following: Your doctor or health care provider."
+    type: single_choice
+    construct: comfortable_sharing_health_app_data
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Comfortable"
+      - id: "e"
+        label: "Very comfortable"
+  - id: q16
+    prompt: "How comfortable are you sharing health app data with the following: Your health insurance company."
+    type: single_choice
+    construct: comfortable_sharing_health_app_data
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Comfortable"
+      - id: "e"
+        label: "Very comfortable"
+  - id: q17
+    prompt: "How comfortable are you sharing health app data with the following: The app company for improving its product."
+    type: single_choice
+    construct: comfortable_sharing_health_app_data
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Comfortable"
+      - id: "e"
+        label: "Very comfortable"
+  - id: q18
+    prompt: "How comfortable are you sharing health app data with the following: Researchers for medical studies."
+    type: single_choice
+    construct: comfortable_sharing_health_app_data
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Comfortable"
+      - id: "e"
+        label: "Very comfortable"
+  - id: q19
+    prompt: "How comfortable are you sharing health app data with the following: Advertisers or marketing companies."
+    type: single_choice
+    construct: comfortable_sharing_health_app_data
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Comfortable"
+      - id: "e"
+        label: "Very comfortable"
+  - id: q20
+    prompt: "How comfortable are you sharing health app data with the following: Family members you choose."
+    type: single_choice
+    construct: comfortable_sharing_health_app_data
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Comfortable"
+      - id: "e"
+        label: "Very comfortable"
+  - id: q21
+    prompt: "How important is the following privacy feature in a health app: Clear, plain-language privacy policy."
+    type: single_choice
+    construct: important_following_privacy_feature_heal
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is the following privacy feature in a health app: Control over what data is collected."
+    type: single_choice
+    construct: important_following_privacy_feature_heal
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is the following privacy feature in a health app: Not selling data to third parties."
+    type: single_choice
+    construct: important_following_privacy_feature_heal
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is the following privacy feature in a health app: The ability to delete my data."
+    type: single_choice
+    construct: important_following_privacy_feature_heal
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is the following privacy feature in a health app: Strong security and encryption."
+    type: single_choice
+    construct: important_following_privacy_feature_heal
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important is the following privacy feature in a health app: A trusted brand or developer."
+    type: single_choice
+    construct: important_following_privacy_feature_heal
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Which privacy features matter most to you in a health app? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: privacy_features_matter_most_health
+    required: true
+    options:
+      - id: "a"
+        label: "Plain-language privacy policy"
+      - id: "b"
+        label: "Control over data collection"
+      - id: "c"
+        label: "No selling of data"
+      - id: "d"
+        label: "Ability to delete my data"
+      - id: "e"
+        label: "Strong security"
+      - id: "f"
+        label: "Trusted developer"
+      - id: "g"
+        label: "Anonymous or minimal sign-up"
+      - id: "h"
+        label: "No targeted ads"
+  - id: q28
+    prompt: "Have you ever avoided or stopped using a health app because of privacy concerns?"
+    type: single_choice
+    construct: have_ever_avoided_stopped_using
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I've thought about it"
+      - id: "d"
+        label: "No"
+  - id: q29
+    prompt: "Would you pay a small fee for a health app that promised not to share your data?"
+    type: single_choice
+    construct: would_pay_small_fee_health
+    required: true
+    options:
+      - id: "a"
+        label: "Definitely not"
+      - id: "b"
+        label: "Probably not"
+      - id: "c"
+        label: "Maybe"
+      - id: "d"
+        label: "Probably yes"
+      - id: "e"
+        label: "Definitely yes"
+  - id: q30
+    prompt: "How much do privacy concerns affect which health apps you choose?"
+    type: single_choice
+    construct: much_privacy_concerns_affect_health
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Quite a bit"
+      - id: "e"
+        label: "A great deal"
+  - id: q31
+    prompt: "How confident are you in your ability to protect your privacy when using health apps?"
+    type: single_choice
+    construct: confident_ability_protect_privacy_when
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+  - id: q32
+    prompt: "Overall, how satisfied are you with the privacy protections of the health apps you use?"
+    type: single_choice
+    construct: overall_satisfied_privacy_protections_he
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How likely are you to check an app's privacy practices before downloading it in the future?"
+    type: single_choice
+    construct: likely_check_app_s_privacy
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "On a scale of 0 to 10, how likely are you to recommend a health app that respects privacy to others? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "What would make you trust a health app more with your data? Please describe briefly."
+    type: free_text
+    construct: would_make_trust_health_app
+    required: true
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which of the following best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Other"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college"
+      - id: "c"
+        label: "Associate's degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q42
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q43
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which region of the country do you live in?"
+    type: single_choice
+    construct: region_country_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q45
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q46
+    prompt: "How would you rate your general comfort with technology?"
+    type: single_choice
+    construct: would_rate_general_comfort_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Extremely comfortable"
+  - id: q47
+    prompt: "Which type of phone do you primarily use?"
+    type: single_choice
+    construct: type_phone_primarily_use
+    required: true
+    options:
+      - id: "a"
+        label: "iPhone (iOS)"
+      - id: "b"
+        label: "Android phone"
+      - id: "c"
+        label: "Other"
+      - id: "d"
+        label: "I don't use a smartphone"

@@ -1,0 +1,816 @@
+schemaVersion: "1.0"
+id: backup_habits_v1
+title: "Data Backup Habits Survey"
+description: "How people back up, protect, and recover their personal and work data."
+questions:
+  - id: q0
+    prompt: "Do you currently back up your important files and data?"
+    type: single_choice
+    construct: currently_back_up_important_files
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, with automatic backups"
+      - id: "b"
+        label: "Yes, but I back up manually"
+      - id: "c"
+        label: "Sometimes / occasionally"
+      - id: "d"
+        label: "No, but I plan to start"
+      - id: "e"
+        label: "No, and I have no plans to"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q1
+    prompt: "How often do your backups happen?"
+    type: single_choice
+    construct: often_backups_happen
+    required: true
+    options:
+      - id: "a"
+        label: "Continuously / in real time"
+      - id: "b"
+        label: "Daily"
+      - id: "c"
+        label: "Weekly"
+      - id: "d"
+        label: "Monthly"
+      - id: "e"
+        label: "Only occasionally when I remember"
+      - id: "f"
+        label: "Never / not applicable"
+  - id: q2
+    prompt: "Have you ever permanently lost important data (photos, documents, etc.)?"
+    type: single_choice
+    construct: have_ever_permanently_lost_important
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it was significant"
+      - id: "b"
+        label: "Yes, but it was minor"
+      - id: "c"
+        label: "I had a scare but recovered it"
+      - id: "d"
+        label: "No, never"
+      - id: "e"
+        label: "Not sure"
+  - id: q3
+    prompt: "When did you last confirm that a backup actually worked (test a restore)?"
+    type: single_choice
+    construct: when_did_last_confirm_that
+    required: true
+    options:
+      - id: "a"
+        label: "Within the last month"
+      - id: "b"
+        label: "Within the last 6 months"
+      - id: "c"
+        label: "Within the last year"
+      - id: "d"
+        label: "More than a year ago"
+      - id: "e"
+        label: "Never"
+      - id: "f"
+        label: "Not applicable"
+  - id: q4
+    prompt: "Which backup methods do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: backup_methods_currently_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "External hard drive or SSD"
+      - id: "b"
+        label: "Cloud backup service"
+      - id: "c"
+        label: "Network-attached storage (NAS)"
+      - id: "d"
+        label: "USB flash drive"
+      - id: "e"
+        label: "A second computer or spare drive"
+      - id: "f"
+        label: "Optical discs (CD/DVD/Blu-ray)"
+      - id: "g"
+        label: "Automatic phone backup"
+      - id: "h"
+        label: "I don't back up"
+  - id: q5
+    prompt: "Which cloud storage or backup services do you use? (Select all that apply)"
+    type: multi_choice
+    construct: cloud_storage_backup_services_use
+    required: true
+    options:
+      - id: "a"
+        label: "iCloud"
+      - id: "b"
+        label: "Google Drive / Google One"
+      - id: "c"
+        label: "Microsoft OneDrive"
+      - id: "d"
+        label: "Dropbox"
+      - id: "e"
+        label: "Backblaze"
+      - id: "f"
+        label: "Carbonite"
+      - id: "g"
+        label: "IDrive"
+      - id: "h"
+        label: "Amazon Photos / AWS"
+      - id: "i"
+        label: "Synology / self-hosted cloud"
+      - id: "j"
+        label: "None"
+  - id: q6
+    prompt: "Which local backup software or tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: local_backup_software_tools_use
+    required: true
+    options:
+      - id: "a"
+        label: "Apple Time Machine"
+      - id: "b"
+        label: "Windows File History"
+      - id: "c"
+        label: "Windows Backup / system image"
+      - id: "d"
+        label: "Acronis True Image / Cyber Protect"
+      - id: "e"
+        label: "Macrium Reflect"
+      - id: "f"
+        label: "rsync / command-line scripts"
+      - id: "g"
+        label: "Duplicati / restic / Duplicacy"
+      - id: "h"
+        label: "Manufacturer software (e.g., Seagate, WD)"
+      - id: "i"
+        label: "None / I just copy files manually"
+  - id: q7
+    prompt: "What types of data do you back up? (Select all that apply)"
+    type: multi_choice
+    construct: types_data_back_up_select
+    required: true
+    options:
+      - id: "a"
+        label: "Photos"
+      - id: "b"
+        label: "Videos"
+      - id: "c"
+        label: "Documents and spreadsheets"
+      - id: "d"
+        label: "Music"
+      - id: "e"
+        label: "Email"
+      - id: "f"
+        label: "Passwords / password vault"
+      - id: "g"
+        label: "Application data or game saves"
+      - id: "h"
+        label: "A full system / disk image"
+      - id: "i"
+        label: "Work or business files"
+      - id: "j"
+        label: "I don't back anything up"
+  - id: q8
+    prompt: "Which devices do you back up? (Select all that apply)"
+    type: multi_choice
+    construct: devices_back_up_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Laptop"
+      - id: "b"
+        label: "Desktop computer"
+      - id: "c"
+        label: "Smartphone"
+      - id: "d"
+        label: "Tablet"
+      - id: "e"
+        label: "NAS or home server"
+      - id: "f"
+        label: "External drives"
+      - id: "g"
+        label: "None"
+  - id: q9
+    prompt: "Are you familiar with, and do you follow, the \"3-2-1\" backup rule (3 copies, 2 media types, 1 off-site)?"
+    type: single_choice
+    construct: familiar_follow_3_2_1
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I follow it fully"
+      - id: "b"
+        label: "I follow it partially"
+      - id: "c"
+        label: "I know it but don't follow it"
+      - id: "d"
+        label: "I've never heard of it"
+      - id: "e"
+        label: "Not sure"
+  - id: q10
+    prompt: "Do you keep at least one backup copy off-site or disconnected from your network?"
+    type: single_choice
+    construct: keep_least_one_backup_copy
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, an off-site copy (cloud or another location)"
+      - id: "b"
+        label: "Yes, an offline / air-gapped drive"
+      - id: "c"
+        label: "No, all copies are on-site and connected"
+      - id: "d"
+        label: "I only have one copy"
+      - id: "e"
+        label: "Not sure"
+  - id: q11
+    prompt: "Approximately how much total data do you back up, in gigabytes (GB)? Enter a whole number."
+    type: free_text
+    construct: approximately_much_total_data_back
+    required: true
+  - id: q12
+    prompt: "Approximately how much do you pay per month for backup or cloud storage, in US dollars? Enter a whole number (0 if free)."
+    type: free_text
+    construct: approximately_much_pay_per_month
+    required: true
+  - id: q13
+    prompt: "How many separate copies of your most important files do you keep? Enter a whole number."
+    type: free_text
+    construct: many_separate_copies_most_important
+    required: true
+  - id: q14
+    prompt: "How much do you agree with the following statement about your backups? I am confident I could fully recover my files if my main device failed today."
+    type: single_choice
+    construct: much_agree_following_statement_backups
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement about your backups? Backing up my data feels like too much hassle."
+    type: single_choice
+    construct: much_agree_following_statement_backups
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about your backups? I worry about ransomware or malware destroying my files."
+    type: single_choice
+    construct: much_agree_following_statement_backups
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about your backups? My backups run automatically, so I rarely think about them."
+    type: single_choice
+    construct: much_agree_following_statement_backups
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about your backups? Storing my data in the cloud raises privacy concerns for me."
+    type: single_choice
+    construct: much_agree_following_statement_backups
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about your backups? Losing my data would be devastating to me."
+    type: single_choice
+    construct: much_agree_following_statement_backups
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement about your backups? I trust cloud providers to keep my data safe and available."
+    type: single_choice
+    construct: much_agree_following_statement_backups
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "Are your backups encrypted?"
+    type: single_choice
+    construct: backups_encrypted
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, all of them"
+      - id: "b"
+        label: "Some of them"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I don't know"
+  - id: q22
+    prompt: "How important is each of the following in your backup approach? Protecting against hardware failure."
+    type: single_choice
+    construct: important_each_following_backup_approach
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each of the following in your backup approach? Protecting against accidental deletion."
+    type: single_choice
+    construct: important_each_following_backup_approach
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each of the following in your backup approach? Protecting against ransomware or malware."
+    type: single_choice
+    construct: important_each_following_backup_approach
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is each of the following in your backup approach? Protecting against theft, fire, or disaster."
+    type: single_choice
+    construct: important_each_following_backup_approach
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important is each of the following in your backup approach? Keeping backups low-cost."
+    type: single_choice
+    construct: important_each_following_backup_approach
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Select your top 3 reasons for backing up your data. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_backing
+    required: true
+    options:
+      - id: "a"
+        label: "Protect irreplaceable photos and memories"
+      - id: "b"
+        label: "Protect important documents"
+      - id: "c"
+        label: "Protect work or business files"
+      - id: "d"
+        label: "Guard against hardware failure"
+      - id: "e"
+        label: "Guard against ransomware or hacking"
+      - id: "f"
+        label: "Peace of mind"
+      - id: "g"
+        label: "Move data between devices"
+      - id: "h"
+        label: "Keep long-term archives"
+      - id: "i"
+        label: "I don't back up"
+  - id: q28
+    prompt: "What are the main reasons you don't back up more thoroughly? (Select all that apply)"
+    type: multi_choice
+    construct: main_reasons_don_t_back
+    required: true
+    options:
+      - id: "a"
+        label: "It's too time-consuming"
+      - id: "b"
+        label: "It costs too much"
+      - id: "c"
+        label: "I don't know how"
+      - id: "d"
+        label: "I don't think I need it"
+      - id: "e"
+        label: "I forget to do it"
+      - id: "f"
+        label: "I don't have enough storage"
+      - id: "g"
+        label: "Privacy concerns with the cloud"
+      - id: "h"
+        label: "Nothing is stopping me; my backups are solid"
+  - id: q29
+    prompt: "If your primary computer or phone stopped working today, how would you recover your files?"
+    type: single_choice
+    construct: if_primary_computer_phone_stopped
+    required: true
+    options:
+      - id: "a"
+        label: "Restore from an automatic cloud backup"
+      - id: "b"
+        label: "Restore from a local backup drive"
+      - id: "c"
+        label: "Piece it together from scattered copies"
+      - id: "d"
+        label: "I would lose most of it"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q30
+    prompt: "How frequently do you clean up or manage old backups?"
+    type: single_choice
+    construct: frequently_clean_up_manage_old
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always keep them tidy"
+  - id: q31
+    prompt: "How would you rate your overall satisfaction with your current backup setup?"
+    type: single_choice
+    construct: would_rate_overall_satisfaction_current
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How confident are you that you could recover from a total data loss event?"
+    type: single_choice
+    construct: confident_that_could_recover_from
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q33
+    prompt: "How likely are you to improve your backup setup in the next 12 months?"
+    type: single_choice
+    construct: likely_improve_backup_setup_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "On a scale of 0 to 10, how likely are you to recommend regular backups to a friend or family member? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "If you could change one thing about how you back up your data, what would it be? (Optional short answer)"
+    type: free_text
+    construct: if_could_change_one_thing
+    required: false
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18-24"
+      - id: "c"
+        label: "25-34"
+      - id: "d"
+        label: "35-44"
+      - id: "e"
+        label: "45-54"
+      - id: "f"
+        label: "55-64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000-$49,999"
+      - id: "c"
+        label: "$50,000-$74,999"
+      - id: "d"
+        label: "$75,000-$99,999"
+      - id: "e"
+        label: "$100,000-$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Homemaker"
+      - id: "f"
+        label: "Unemployed"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "How many people live in your household, including yourself? Enter a whole number."
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q43
+    prompt: "What is your relationship status?"
+    type: single_choice
+    construct: relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or domestic partnership"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q45
+    prompt: "How would you describe where you live?"
+    type: single_choice
+    construct: would_describe_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q46
+    prompt: "Which best describes your role or technical background?"
+    type: single_choice
+    construct: best_describes_role_technical_background
+    required: true
+    options:
+      - id: "a"
+        label: "IT or technology professional"
+      - id: "b"
+        label: "Software developer / engineer"
+      - id: "c"
+        label: "Other professional / office worker"
+      - id: "d"
+        label: "Creative professional (photo, video, design)"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Hobbyist / enthusiast"
+      - id: "g"
+        label: "General home user"
+      - id: "h"
+        label: "Other"
+  - id: q47
+    prompt: "How would you describe your comfort with technology in general?"
+    type: single_choice
+    construct: would_describe_comfort_technology_genera
+    required: true
+    options:
+      - id: "a"
+        label: "I'm an early adopter who loves new tech"
+      - id: "b"
+        label: "Comfortable and fairly up to date"
+      - id: "c"
+        label: "Average — I use what I need"
+      - id: "d"
+        label: "A bit behind the curve"
+      - id: "e"
+        label: "I find new technology difficult"

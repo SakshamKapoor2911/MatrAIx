@@ -1,0 +1,7 @@
+# Pension Attitudes
+
+Attitudes toward traditional defined-benefit pensions and how people weigh them against modern 401(k)-style retirement plans.
+
+## About this survey
+
+This survey opens by screening whether respondents have, are earning, or expect a traditional pension, and captures their employment sector, years of covered service, and the mix of retirement plans they have used. It then measures how people would prefer to collect benefits (lifetime annuity, lump sum, or blend), how well they understand pensions versus defined-contribution accounts, and how confident they are that promised benefits will be paid. Attitudes are probed through a concern battery (underfunding, employer bankruptcy, inflation, portability, policy changes, longevity) and an agreement battery about the value of guaranteed income, employer trust, and reviving private-sector pensions. Additional items cover reliance on different income sources, a top-3 priority ranking, past benefit losses, news attention, job-choice importance, satisfaction, future intent, a 0-10 retirement-income confidence scale, and open numeric and text fields on retirement age, needed income, and personal concerns. It closes with a comprehensive demographic block including age, gender, race or ethnicity, household income, education, employment status, household size, marital status, U.S. region, community type, and union membership.

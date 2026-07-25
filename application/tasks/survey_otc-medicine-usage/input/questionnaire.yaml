@@ -1,0 +1,682 @@
+schemaVersion: "1.0"
+id: otc_medicine_usage_v1
+title: "Over-the-Counter Medicine Usage Survey"
+description: "How consumers buy, choose, and use over-the-counter (non-prescription) medicines for everyday needs."
+questions:
+  - id: q0
+    prompt: "How often do you use over-the-counter (OTC) medicines?"
+    type: single_choice
+    construct: often_use_over_counter_otc
+    required: true
+    options:
+      - id: "a"
+        label: "Several times a week"
+      - id: "b"
+        label: "About once a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "A few times a year"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q1
+    prompt: "Which types of OTC products do you keep at home? (Select all that apply)"
+    type: multi_choice
+    construct: types_otc_products_keep_home
+    required: true
+    options:
+      - id: "a"
+        label: "Pain relievers (for example, Tylenol, Advil, Aleve)"
+      - id: "b"
+        label: "Cold and flu remedies"
+      - id: "c"
+        label: "Allergy medicines (for example, Claritin, Zyrtec, Allegra)"
+      - id: "d"
+        label: "Antacids or heartburn relief"
+      - id: "e"
+        label: "Cough drops or throat lozenges"
+      - id: "f"
+        label: "Sleep aids"
+      - id: "g"
+        label: "Anti-diarrheal or digestive aids"
+      - id: "h"
+        label: "First-aid items (antibiotic ointment, bandages)"
+      - id: "i"
+        label: "Eye drops"
+      - id: "j"
+        label: "None of these"
+  - id: q2
+    prompt: "About how many different OTC products do you currently have at home? Please enter a number."
+    type: free_text
+    construct: many_different_otc_products_currently
+    required: true
+  - id: q3
+    prompt: "Roughly how much do you spend on OTC medicines in a typical month? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: roughly_much_spend_otc_medicines
+    required: true
+  - id: q4
+    prompt: "Where do you usually buy OTC medicines? (Select all that apply)"
+    type: multi_choice
+    construct: where_usually_buy_otc_medicines
+    required: true
+    options:
+      - id: "a"
+        label: "Pharmacy or drugstore"
+      - id: "b"
+        label: "Grocery store"
+      - id: "c"
+        label: "Big-box store (for example, Walmart or Target)"
+      - id: "d"
+        label: "Warehouse club (for example, Costco)"
+      - id: "e"
+        label: "Online (for example, Amazon)"
+      - id: "f"
+        label: "Convenience store or dollar store"
+  - id: q5
+    prompt: "When buying OTC medicine, which do you usually choose?"
+    type: single_choice
+    construct: when_buying_otc_medicine_usually
+    required: true
+    options:
+      - id: "a"
+        label: "The name brand"
+      - id: "b"
+        label: "The store or generic brand"
+      - id: "c"
+        label: "Whichever is cheaper"
+      - id: "d"
+        label: "It depends on the product"
+      - id: "e"
+        label: "Whatever is in stock"
+  - id: q6
+    prompt: "What do you rely on when choosing an OTC product? (Select all that apply)"
+    type: multi_choice
+    construct: rely_when_choosing_otc_product
+    required: true
+    options:
+      - id: "a"
+        label: "Reading the label and active ingredients"
+      - id: "b"
+        label: "A pharmacist's recommendation"
+      - id: "c"
+        label: "A doctor's advice"
+      - id: "d"
+        label: "Past experience with the product"
+      - id: "e"
+        label: "Brand familiarity"
+      - id: "f"
+        label: "Price"
+      - id: "g"
+        label: "Online reviews or searches"
+      - id: "h"
+        label: "Friends or family recommendations"
+  - id: q7
+    prompt: "How often do you read the label before taking an OTC medicine?"
+    type: single_choice
+    construct: often_read_label_before_taking
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q8
+    prompt: "How often do you check the active ingredients to avoid taking the same one twice?"
+    type: single_choice
+    construct: often_check_active_ingredients_avoid
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q9
+    prompt: "Have you ever asked a pharmacist which OTC product to choose?"
+    type: single_choice
+    construct: have_ever_asked_pharmacist_otc
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, often"
+      - id: "b"
+        label: "Yes, once or twice"
+      - id: "c"
+        label: "No, but I would"
+      - id: "d"
+        label: "No, I prefer to decide myself"
+  - id: q10
+    prompt: "For which reasons have you used OTC medicines in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: reasons_have_used_otc_medicines
+    required: true
+    options:
+      - id: "a"
+        label: "Headaches or minor pain"
+      - id: "b"
+        label: "Colds or congestion"
+      - id: "c"
+        label: "Seasonal allergies"
+      - id: "d"
+        label: "Heartburn or upset stomach"
+      - id: "e"
+        label: "Trouble sleeping"
+      - id: "f"
+        label: "Minor cuts or skin issues"
+      - id: "g"
+        label: "Muscle or joint soreness"
+      - id: "h"
+        label: "None of these"
+  - id: q11
+    prompt: "How often do you use an OTC medicine before deciding whether to see a doctor?"
+    type: single_choice
+    construct: often_use_otc_medicine_before
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q12
+    prompt: "How much do you agree or disagree: OTC medicines are a convenient first step for minor issues."
+    type: single_choice
+    construct: much_agree_disagree_otc_medicines
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: Store-brand OTC products work just as well as name brands."
+    type: single_choice
+    construct: much_agree_disagree_store_brand
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I feel confident choosing the right OTC product for a symptom."
+    type: single_choice
+    construct: much_agree_disagree_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: OTC medicine labels are easy to understand."
+    type: single_choice
+    construct: much_agree_disagree_otc_medicine
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: I am careful about following the recommended dose."
+    type: single_choice
+    construct: much_agree_disagree_i_am
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree or disagree: Using OTC medicines saves me trips to the doctor."
+    type: single_choice
+    construct: much_agree_disagree_using_otc
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How confident are you that you can choose the right OTC medicine without help?"
+    type: single_choice
+    construct: confident_that_can_choose_right
+    required: true
+    options:
+      - id: "a"
+        label: "Very confident"
+      - id: "b"
+        label: "Somewhat confident"
+      - id: "c"
+        label: "Not very confident"
+      - id: "d"
+        label: "Not at all confident"
+  - id: q19
+    prompt: "How often do you check the expiration date on OTC medicines you have at home?"
+    type: single_choice
+    construct: often_check_expiration_date_otc
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q20
+    prompt: "When choosing an OTC product, how important is price?"
+    type: single_choice
+    construct: when_choosing_otc_product_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "When choosing an OTC product, how important is brand name?"
+    type: single_choice
+    construct: when_choosing_otc_product_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When choosing an OTC product, how important is how fast it works?"
+    type: single_choice
+    construct: when_choosing_otc_product_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing an OTC product, how important is a pharmacist's recommendation?"
+    type: single_choice
+    construct: when_choosing_otc_product_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing an OTC product, how important is avoiding drowsiness or other effects?"
+    type: single_choice
+    construct: when_choosing_otc_product_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "Do you keep a stocked medicine cabinet for when you need something quickly?"
+    type: single_choice
+    construct: keep_stocked_medicine_cabinet_when
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, well stocked"
+      - id: "b"
+        label: "Somewhat stocked"
+      - id: "c"
+        label: "Only a few basics"
+      - id: "d"
+        label: "No, I buy as needed"
+  - id: q26
+    prompt: "Have you ever bought an OTC product and found it didn't help?"
+    type: single_choice
+    construct: have_ever_bought_otc_product
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, they usually help"
+  - id: q27
+    prompt: "How do you decide when a symptom needs a doctor instead of an OTC remedy?"
+    type: single_choice
+    construct: decide_when_symptom_needs_doctor
+    required: true
+    options:
+      - id: "a"
+        label: "When it lasts longer than a few days"
+      - id: "b"
+        label: "When it gets worse"
+      - id: "c"
+        label: "When OTC products don't help"
+      - id: "d"
+        label: "I usually see a doctor first"
+      - id: "e"
+        label: "I mostly manage on my own"
+  - id: q28
+    prompt: "Select your top 3 things that matter most when buying OTC medicine. (Select up to 3)"
+    type: single_choice
+    construct: select_top_3_things_that
+    required: true
+    options:
+      - id: "a"
+        label: "Effectiveness"
+      - id: "b"
+        label: "Price"
+      - id: "c"
+        label: "Trusted brand"
+      - id: "d"
+        label: "Fast relief"
+      - id: "e"
+        label: "Clear labeling and instructions"
+      - id: "f"
+        label: "Few or no side effects"
+      - id: "g"
+        label: "Pharmacist guidance"
+      - id: "h"
+        label: "Availability where I shop"
+  - id: q29
+    prompt: "Overall, how satisfied are you with the OTC medicines available to you?"
+    type: single_choice
+    construct: overall_satisfied_otc_medicines_availabl
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "On a scale of 0 to 10, how likely are you to recommend a store-brand OTC product to a friend to save money? Please enter a number from 0 (not at all likely) to 10 (extremely likely)."
+    type: free_text
+    construct: scale_0_10_likely_recommend
+    required: true
+  - id: q31
+    prompt: "Is there one thing that would make choosing or using OTC medicines easier? Please describe briefly (or enter \"none\")."
+    type: free_text
+    construct: there_one_thing_that_would
+    required: true
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Which best describes your race or ethnicity?"
+    type: single_choice
+    construct: best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian or Asian American"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Two or more races or another background"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+  - id: q40
+    prompt: "Do you have children under 18 living in your household?"
+    type: single_choice
+    construct: have_children_under_18_living
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q41
+    prompt: "Which region of the country do you live in?"
+    type: single_choice
+    construct: region_country_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q43
+    prompt: "What is your primary source of health insurance?"
+    type: single_choice
+    construct: primary_source_health_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored plan"
+      - id: "b"
+        label: "Plan purchased on the marketplace or directly"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or veterans coverage (TRICARE / VA)"
+      - id: "f"
+        label: "I don't have health insurance"
+      - id: "g"
+        label: "Prefer not to say"

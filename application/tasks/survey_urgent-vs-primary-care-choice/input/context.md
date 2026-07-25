@@ -1,0 +1,7 @@
+# Urgent Care vs. Primary Care Choice
+
+How consumers decide between urgent care, primary care, and other options for non-emergency needs.
+
+## About this survey
+
+This survey measures whether respondents have a regular primary care provider, where they go first for minor issues, how often they use urgent care and primary care, and which care options they have used in the past year. It captures the factors driving the urgent-versus-primary choice (speed, hours, severity, cost, distance, availability, coverage), typical wait times, situations favoring urgent care, decision-making when unsure, and how much cost, wait time, and convenience weigh in, plus a top-three factor ranking. An agreement-scale attitude battery covers preference for one's own provider, urgent-care convenience, perceived quality, cost worry, and care coordination, alongside the importance of continuity, satisfaction with recent urgent and primary visits, value-for-money ratings, effects on primary-care use, follow-up behavior, what would shift the choice, and future urgent-care and telehealth intent, plus open comments. Numeric free-text captures visit counts, wait days, and household size. A comprehensive demographic block captures age, gender, race and ethnicity, education, employment, insurance type, marital status, household size, income, region, and urban or rural setting. Content is framed attitudinally and kept consumer-oriented.

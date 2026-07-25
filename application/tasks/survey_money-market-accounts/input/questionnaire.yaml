@@ -1,0 +1,669 @@
+schemaVersion: "1.0"
+id: money_market_accounts_v1
+title: "Money Market Accounts Survey"
+description: "How people use money market accounts and money market funds to hold cash while earning interest and keeping easy access."
+questions:
+  - id: q0
+    prompt: "How familiar are you with money market accounts?"
+    type: single_choice
+    construct: familiar_money_market_accounts
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all familiar"
+      - id: "b"
+        label: "Slightly familiar"
+      - id: "c"
+        label: "Moderately familiar"
+      - id: "d"
+        label: "Very familiar"
+  - id: q1
+    prompt: "Do you know the difference between a money market account (a bank deposit account) and a money market fund (an investment)?"
+    type: single_choice
+    construct: know_difference_between_money_market
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, clearly"
+      - id: "b"
+        label: "Somewhat"
+      - id: "c"
+        label: "No, I thought they were the same"
+      - id: "d"
+        label: "I've never heard of either"
+  - id: q2
+    prompt: "Do you currently have a money market account or money market fund?"
+    type: single_choice
+    construct: currently_have_money_market_account
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a money market deposit account at a bank or credit union"
+      - id: "b"
+        label: "Yes, a money market fund through a brokerage"
+      - id: "c"
+        label: "Yes, both"
+      - id: "d"
+        label: "No, but I've had one before"
+      - id: "e"
+        label: "No, and I never have"
+  - id: q3
+    prompt: "Where do you hold (or would you hold) a money market account or fund? (Select all that apply)"
+    type: multi_choice
+    construct: where_hold_would_hold_money
+    required: true
+    options:
+      - id: "a"
+        label: "A traditional bank"
+      - id: "b"
+        label: "An online bank"
+      - id: "c"
+        label: "A credit union"
+      - id: "d"
+        label: "A brokerage (e.g., Fidelity, Vanguard, Charles Schwab)"
+      - id: "e"
+        label: "I don't have one"
+  - id: q4
+    prompt: "What is the main reason you use (or would use) a money market account?"
+    type: single_choice
+    construct: main_reason_use_would_use
+    required: true
+    options:
+      - id: "a"
+        label: "Higher interest than a regular savings account"
+      - id: "b"
+        label: "Easy access to my money (checks or debit card)"
+      - id: "c"
+        label: "A safe place to park cash"
+      - id: "d"
+        label: "Holding cash between investments"
+      - id: "e"
+        label: "Emergency fund"
+      - id: "f"
+        label: "I don't use one"
+  - id: q5
+    prompt: "Roughly how much do you currently keep in money market accounts or funds? Please enter a dollar amount."
+    type: free_text
+    construct: roughly_much_currently_keep_money
+    required: true
+  - id: q6
+    prompt: "What annual percentage yield (APY) are you currently earning on your money market balance? Please enter a percentage."
+    type: free_text
+    construct: annual_percentage_yield_apy_currently
+    required: true
+  - id: q7
+    prompt: "Which features does your money market account offer (or which would you want)? (Select all that apply)"
+    type: multi_choice
+    construct: features_does_money_market_account
+    required: true
+    options:
+      - id: "a"
+        label: "Check-writing privileges"
+      - id: "b"
+        label: "A debit or ATM card"
+      - id: "c"
+        label: "Online and mobile access"
+      - id: "d"
+        label: "Tiered interest rates based on balance"
+      - id: "e"
+        label: "No monthly maintenance fee"
+      - id: "f"
+        label: "FDIC or NCUA insurance"
+      - id: "g"
+        label: "I'm not sure"
+  - id: q8
+    prompt: "How often do you move money in or out of your money market account?"
+    type: single_choice
+    construct: often_move_money_out_money
+    required: true
+    options:
+      - id: "a"
+        label: "Several times a month"
+      - id: "b"
+        label: "About once a month"
+      - id: "c"
+        label: "A few times a year"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "I don't have one"
+  - id: q9
+    prompt: "How does your money market account compare to a regular savings account in interest, in your experience?"
+    type: single_choice
+    construct: does_money_market_account_compare
+    required: true
+    options:
+      - id: "a"
+        label: "Money market pays clearly more"
+      - id: "b"
+        label: "About the same"
+      - id: "c"
+        label: "Regular savings pays more"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q10
+    prompt: "How much do you agree or disagree: A money market account is a safe place for my money."
+    type: single_choice
+    construct: much_agree_disagree_money_market
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree: The ability to write checks or use a debit card makes money market accounts convenient."
+    type: single_choice
+    construct: much_agree_disagree_ability_write
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: The minimum balance requirements on money market accounts are a drawback."
+    type: single_choice
+    construct: much_agree_disagree_minimum_balance
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I could earn more by keeping my cash somewhere else."
+    type: single_choice
+    construct: much_agree_disagree_i_could
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I understand how money market funds differ from a bank deposit in terms of risk."
+    type: single_choice
+    construct: much_agree_disagree_i_understand
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How important is each factor when choosing a money market account: The interest rate (APY)."
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "How important is each factor when choosing a money market account: Easy access to my money."
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "How important is each factor when choosing a money market account: No or low fees."
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each factor when choosing a money market account: The minimum balance requirement."
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is each factor when choosing a money market account: FDIC or NCUA insurance."
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "Select your top 3 reasons for using a money market account. (Select all that apply — choose up to 3)"
+    type: single_choice
+    construct: select_top_3_reasons_using
+    required: true
+    options:
+      - id: "a"
+        label: "Competitive interest rate"
+      - id: "b"
+        label: "Easy access to cash"
+      - id: "c"
+        label: "Safety of principal"
+      - id: "d"
+        label: "Check-writing or debit access"
+      - id: "e"
+        label: "A place to hold my emergency fund"
+      - id: "f"
+        label: "Parking cash between investments"
+      - id: "g"
+        label: "Higher rate than my checking account"
+  - id: q21
+    prompt: "What concerns you about money market accounts? (Select all that apply)"
+    type: multi_choice
+    construct: concerns_money_market_accounts_select
+    required: true
+    options:
+      - id: "a"
+        label: "High minimum balance requirements"
+      - id: "b"
+        label: "Monthly fees"
+      - id: "c"
+        label: "Limits on the number of withdrawals"
+      - id: "d"
+        label: "Rates can drop when interest rates fall"
+      - id: "e"
+        label: "Lower returns than investments"
+      - id: "f"
+        label: "Confusion between accounts and funds"
+      - id: "g"
+        label: "I have no concerns"
+  - id: q22
+    prompt: "Are you aware that some money market accounts limit the number of certain withdrawals or transfers per month?"
+    type: single_choice
+    construct: aware_that_some_money_market
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it affects how I use my account"
+      - id: "b"
+        label: "Yes, but it doesn't affect me"
+      - id: "c"
+        label: "No, I wasn't aware"
+      - id: "d"
+        label: "Not applicable"
+  - id: q23
+    prompt: "Do you use your money market account as your primary emergency fund?"
+    type: single_choice
+    construct: use_money_market_account_as
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, I keep my emergency fund elsewhere"
+      - id: "c"
+        label: "I don't have a dedicated emergency fund"
+      - id: "d"
+        label: "I don't have a money market account"
+  - id: q24
+    prompt: "What is the minimum balance you're required to keep in your money market account? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: minimum_balance_re_required_keep
+    required: true
+  - id: q25
+    prompt: "How did you decide where to open your money market account? (Select all that apply)"
+    type: multi_choice
+    construct: did_decide_where_open_money
+    required: true
+    options:
+      - id: "a"
+        label: "I compared rates across institutions"
+      - id: "b"
+        label: "I used my existing bank"
+      - id: "c"
+        label: "My brokerage offered one"
+      - id: "d"
+        label: "A recommendation from an advisor or friend"
+      - id: "e"
+        label: "I chose the highest advertised rate"
+      - id: "f"
+        label: "Not applicable"
+  - id: q26
+    prompt: "Compared with other places you keep cash, how would you rank a money market account for balancing yield and access?"
+    type: single_choice
+    construct: compared_other_places_keep_cash
+    required: true
+    options:
+      - id: "a"
+        label: "The best option for me"
+      - id: "b"
+        label: "Among the better options"
+      - id: "c"
+        label: "About average"
+      - id: "d"
+        label: "Not one of my preferred options"
+  - id: q27
+    prompt: "Where do you learn about money market rates and options? (Select all that apply)"
+    type: multi_choice
+    construct: where_learn_money_market_rates
+    required: true
+    options:
+      - id: "a"
+        label: "Bank or brokerage websites"
+      - id: "b"
+        label: "Rate comparison sites (e.g., Bankrate, NerdWallet)"
+      - id: "c"
+        label: "My financial advisor"
+      - id: "d"
+        label: "Friends or family"
+      - id: "e"
+        label: "Financial news or newsletters"
+      - id: "f"
+        label: "Social media"
+      - id: "g"
+        label: "I don't research these"
+  - id: q28
+    prompt: "How likely are you to open or add to a money market account in the next 12 months?"
+    type: single_choice
+    construct: likely_open_add_money_market
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q29
+    prompt: "Overall, how satisfied are you with money market accounts as part of your finances?"
+    type: single_choice
+    construct: overall_satisfied_money_market_accounts
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I don't use one"
+  - id: q30
+    prompt: "On a scale of 0 to 10, how likely are you to recommend a money market account to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "In a few words, what would make money market accounts more useful to you? (Optional)"
+    type: free_text
+    construct: few_words_would_make_money
+    required: false
+  - id: q32
+    prompt: "What is your age? Please enter a number (years old)."
+    type: free_text
+    construct: age_please_enter_number_years
+    required: true
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q38
+    prompt: "What is your annual household income before taxes?"
+    type: single_choice
+    construct: annual_household_income_before_taxes
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+  - id: q40
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q41
+    prompt: "Roughly how much do you have in total savings and investments (excluding your home)?"
+    type: single_choice
+    construct: roughly_much_have_total_savings
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $1,000"
+      - id: "b"
+        label: "$1,000–$9,999"
+      - id: "c"
+        label: "$10,000–$49,999"
+      - id: "d"
+        label: "$50,000–$249,999"
+      - id: "e"
+        label: "$250,000 or more"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

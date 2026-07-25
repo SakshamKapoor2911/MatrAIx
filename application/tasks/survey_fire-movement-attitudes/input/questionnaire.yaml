@@ -1,0 +1,914 @@
+schemaVersion: "1.0"
+id: fire_movement_attitudes_v1
+title: "Financial Independence, Retire Early (FIRE) Survey"
+description: "Attitudes, savings behavior, and targets among people engaging with the Financial Independence, Retire Early movement."
+questions:
+  - id: q0
+    prompt: "How familiar are you with the Financial Independence, Retire Early (FIRE) movement?"
+    type: single_choice
+    construct: familiar_financial_independence_retire_e
+    required: true
+    options:
+      - id: "a"
+        label: "Very familiar — I actively pursue it"
+      - id: "b"
+        label: "Familiar and interested in pursuing it"
+      - id: "c"
+        label: "Somewhat familiar"
+      - id: "d"
+        label: "I have heard of it but know little"
+      - id: "e"
+        label: "I have never heard of it before now"
+  - id: q1
+    prompt: "Which best describes your relationship to FIRE?"
+    type: single_choice
+    construct: best_describes_relationship_fire
+    required: true
+    options:
+      - id: "a"
+        label: "I have already reached financial independence"
+      - id: "b"
+        label: "I am actively pursuing FIRE"
+      - id: "c"
+        label: "I follow some FIRE principles casually"
+      - id: "d"
+        label: "I am interested but not yet acting on it"
+      - id: "e"
+        label: "I am not pursuing FIRE"
+  - id: q2
+    prompt: "How long have you been pursuing financial independence?"
+    type: single_choice
+    construct: long_have_been_pursuing_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "I am not pursuing it"
+  - id: q3
+    prompt: "Which flavor of FIRE best matches your approach?"
+    type: single_choice
+    construct: flavor_fire_best_matches_approach
+    required: true
+    options:
+      - id: "a"
+        label: "Lean FIRE (minimal expenses)"
+      - id: "b"
+        label: "Regular FIRE"
+      - id: "c"
+        label: "Fat FIRE (high spending)"
+      - id: "d"
+        label: "Barista FIRE (part-time work)"
+      - id: "e"
+        label: "Coast FIRE (let investments grow)"
+      - id: "f"
+        label: "I do not identify with a specific type"
+  - id: q4
+    prompt: "What is your current savings rate (share of after-tax income you save or invest)?"
+    type: single_choice
+    construct: current_savings_rate_share_after
+    required: true
+    options:
+      - id: "a"
+        label: "Under 10 percent"
+      - id: "b"
+        label: "10 to 19 percent"
+      - id: "c"
+        label: "20 to 29 percent"
+      - id: "d"
+        label: "30 to 39 percent"
+      - id: "e"
+        label: "40 to 49 percent"
+      - id: "f"
+        label: "50 to 64 percent"
+      - id: "g"
+        label: "65 percent or more"
+  - id: q5
+    prompt: "What is your target retirement age?"
+    type: single_choice
+    construct: target_retirement_age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 35"
+      - id: "b"
+        label: "35 to 39"
+      - id: "c"
+        label: "40 to 44"
+      - id: "d"
+        label: "45 to 49"
+      - id: "e"
+        label: "50 to 54"
+      - id: "f"
+        label: "55 to 59"
+      - id: "g"
+        label: "60 or older"
+  - id: q6
+    prompt: "What motivates you to pursue financial independence? (Select all that apply)"
+    type: multi_choice
+    construct: motivates_pursue_financial_independence_
+    required: true
+    options:
+      - id: "a"
+        label: "Freedom to leave a job I dislike"
+      - id: "b"
+        label: "More time with family"
+      - id: "c"
+        label: "Ability to travel"
+      - id: "d"
+        label: "Reduced financial stress"
+      - id: "e"
+        label: "Pursuing passion projects"
+      - id: "f"
+        label: "Escaping burnout"
+      - id: "g"
+        label: "Security against layoffs or emergencies"
+      - id: "h"
+        label: "Retiring earlier than normal"
+  - id: q7
+    prompt: "Which strategies do you use to reach your goal? (Select all that apply)"
+    type: multi_choice
+    construct: strategies_use_reach_goal_select
+    required: true
+    options:
+      - id: "a"
+        label: "Aggressive saving and budgeting"
+      - id: "b"
+        label: "Index fund investing"
+      - id: "c"
+        label: "Real estate investing"
+      - id: "d"
+        label: "Side hustles or extra income"
+      - id: "e"
+        label: "Maximizing tax-advantaged accounts"
+      - id: "f"
+        label: "Frugality and minimalism"
+      - id: "g"
+        label: "Increasing my primary income"
+      - id: "h"
+        label: "Geographic arbitrage (living somewhere cheaper)"
+  - id: q8
+    prompt: "Which accounts do you use to build toward FIRE? (Select all that apply)"
+    type: multi_choice
+    construct: accounts_use_build_toward_fire
+    required: true
+    options:
+      - id: "a"
+        label: "401(k) or 403(b)"
+      - id: "b"
+        label: "Traditional or Roth IRA"
+      - id: "c"
+        label: "Taxable brokerage account"
+      - id: "d"
+        label: "Health Savings Account (HSA)"
+      - id: "e"
+        label: "Real estate"
+      - id: "f"
+        label: "High-yield savings account"
+      - id: "g"
+        label: "529 or other accounts"
+  - id: q9
+    prompt: "What is your FIRE number — the portfolio size you are targeting, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: fire_number_portfolio_size_targeting
+    required: true
+  - id: q10
+    prompt: "What annual spending do you expect in early retirement, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: annual_spending_expect_early_retirement
+    required: true
+  - id: q11
+    prompt: "About what percentage of the way to your FIRE number are you today?"
+    type: single_choice
+    construct: percentage_way_fire_number_today
+    required: true
+    options:
+      - id: "a"
+        label: "0 to 10 percent"
+      - id: "b"
+        label: "11 to 25 percent"
+      - id: "c"
+        label: "26 to 50 percent"
+      - id: "d"
+        label: "51 to 75 percent"
+      - id: "e"
+        label: "76 to 99 percent"
+      - id: "f"
+        label: "I have reached or passed it"
+  - id: q12
+    prompt: "What withdrawal rate do you plan to use in retirement?"
+    type: single_choice
+    construct: withdrawal_rate_plan_use_retirement
+    required: true
+    options:
+      - id: "a"
+        label: "Under 3 percent"
+      - id: "b"
+        label: "3 to 3.5 percent"
+      - id: "c"
+        label: "About 4 percent"
+      - id: "d"
+        label: "More than 4 percent"
+      - id: "e"
+        label: "I have not decided"
+      - id: "f"
+        label: "I am not familiar with withdrawal rates"
+  - id: q13
+    prompt: "How much do you agree: Financial independence is worth significant sacrifices now."
+    type: single_choice
+    construct: much_agree_financial_independence_worth
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: I would rather retire early than earn a higher income."
+    type: single_choice
+    construct: much_agree_i_would_rather
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: Frugality is a core part of my lifestyle."
+    type: single_choice
+    construct: much_agree_frugality_core_part
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: I feel confident I will reach financial independence."
+    type: single_choice
+    construct: much_agree_i_feel_confident
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: Pursuing FIRE has caused tension with people close to me."
+    type: single_choice
+    construct: much_agree_pursuing_fire_has
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: I could happily stop working entirely once I reach my number."
+    type: single_choice
+    construct: much_agree_i_could_happily
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How concerned are you about outliving your money?"
+    type: single_choice
+    construct: concerned_outliving_money
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q20
+    prompt: "How concerned are you about a stock market downturn derailing your plan?"
+    type: single_choice
+    construct: concerned_stock_market_downturn_derailin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q21
+    prompt: "How concerned are you about healthcare costs before Medicare eligibility?"
+    type: single_choice
+    construct: concerned_healthcare_costs_before_medica
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q22
+    prompt: "How concerned are you about inflation eroding your savings?"
+    type: single_choice
+    construct: concerned_inflation_eroding_savings
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q23
+    prompt: "How concerned are you about boredom or loss of purpose after retiring early?"
+    type: single_choice
+    construct: concerned_boredom_loss_purpose_after
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q24
+    prompt: "How important to your FIRE plan is a high savings rate?"
+    type: single_choice
+    construct: important_fire_plan_high_savings
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important to your FIRE plan is low-cost index fund investing?"
+    type: single_choice
+    construct: important_fire_plan_low_cost
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important to your FIRE plan is minimizing your living expenses?"
+    type: single_choice
+    construct: important_fire_plan_minimizing_living
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important to your FIRE plan is growing your income?"
+    type: single_choice
+    construct: important_fire_plan_growing_income
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "How important to your FIRE plan is generating passive or side income?"
+    type: single_choice
+    construct: important_fire_plan_generating_passive
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "How important to your FIRE plan is tax optimization?"
+    type: single_choice
+    construct: important_fire_plan_tax_optimization
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "Which are your top 3 levers for reaching financial independence? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_levers_reaching_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Raising your savings rate"
+      - id: "b"
+        label: "Cutting expenses"
+      - id: "c"
+        label: "Increasing income"
+      - id: "d"
+        label: "Investing in index funds"
+      - id: "e"
+        label: "Real estate income"
+      - id: "f"
+        label: "Side hustles"
+      - id: "g"
+        label: "Tax-advantaged accounts"
+      - id: "h"
+        label: "Geographic arbitrage"
+  - id: q31
+    prompt: "Which FIRE resources do you follow? (Select all that apply)"
+    type: multi_choice
+    construct: fire_resources_follow_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Blogs like Mr. Money Mustache"
+      - id: "b"
+        label: "The ChooseFI podcast or community"
+      - id: "c"
+        label: "Reddit communities (r/financialindependence, etc.)"
+      - id: "d"
+        label: "YouTube personal finance channels"
+      - id: "e"
+        label: "Books on FIRE or personal finance"
+      - id: "f"
+        label: "Local FIRE meetups"
+      - id: "g"
+        label: "I do not follow any resources"
+  - id: q32
+    prompt: "How often do you track your net worth or progress?"
+    type: single_choice
+    construct: often_track_net_worth_progress
+    required: true
+    options:
+      - id: "a"
+        label: "Weekly or more"
+      - id: "b"
+        label: "Monthly"
+      - id: "c"
+        label: "Quarterly"
+      - id: "d"
+        label: "A few times a year"
+      - id: "e"
+        label: "Rarely"
+  - id: q33
+    prompt: "Do you plan to work at all after reaching financial independence?"
+    type: single_choice
+    construct: plan_work_all_after_reaching
+    required: true
+    options:
+      - id: "a"
+        label: "No, I plan to fully stop working"
+      - id: "b"
+        label: "Yes, part-time or seasonal work"
+      - id: "c"
+        label: "Yes, on passion projects only"
+      - id: "d"
+        label: "Yes, I would keep working but with more freedom"
+      - id: "e"
+        label: "I am not sure yet"
+  - id: q34
+    prompt: "What is your biggest obstacle to reaching FIRE?"
+    type: single_choice
+    construct: biggest_obstacle_reaching_fire
+    required: true
+    options:
+      - id: "a"
+        label: "Not enough income"
+      - id: "b"
+        label: "High cost of living"
+      - id: "c"
+        label: "Debt"
+      - id: "d"
+        label: "Family or dependent expenses"
+      - id: "e"
+        label: "Difficulty cutting spending"
+      - id: "f"
+        label: "Market uncertainty"
+      - id: "g"
+        label: "I do not feel I have a major obstacle"
+  - id: q35
+    prompt: "How has pursuing FIRE affected your day-to-day happiness?"
+    type: single_choice
+    construct: has_pursuing_fire_affected_day
+    required: true
+    options:
+      - id: "a"
+        label: "Much less happy"
+      - id: "b"
+        label: "Somewhat less happy"
+      - id: "c"
+        label: "No real change"
+      - id: "d"
+        label: "Somewhat happier"
+      - id: "e"
+        label: "Much happier"
+  - id: q36
+    prompt: "How satisfied are you with your progress toward financial independence?"
+    type: single_choice
+    construct: satisfied_progress_toward_financial_inde
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "How satisfied are you with your current savings rate?"
+    type: single_choice
+    construct: satisfied_current_savings_rate
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "Overall, how confident are you in your financial future?"
+    type: single_choice
+    construct: overall_confident_financial_future
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q39
+    prompt: "How likely are you to recommend pursuing FIRE to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_pursuing_fire_friend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q40
+    prompt: "How likely are you to increase your savings rate over the next year?"
+    type: single_choice
+    construct: likely_increase_savings_rate_over
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q41
+    prompt: "How likely are you to reach financial independence before age 55?"
+    type: single_choice
+    construct: likely_reach_financial_independence_befo
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What does financial independence mean to you personally? (Optional short answer)"
+    type: free_text
+    construct: does_financial_independence_mean_persona
+    required: false
+  - id: q43
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q44
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q48
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Business owner or entrepreneur"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Already retired"
+  - id: q49
+    prompt: "How many people, including yourself, live in your household?"
+    type: single_choice
+    construct: many_people_including_yourself_live
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q50
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "In a domestic partnership"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "Do you have children or other dependents you support?"
+    type: single_choice
+    construct: have_children_other_dependents_support
+    required: true
+    options:
+      - id: "a"
+        label: "No dependents"
+      - id: "b"
+        label: "1 dependent"
+      - id: "c"
+        label: "2 dependents"
+      - id: "d"
+        label: "3 or more dependents"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q52
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

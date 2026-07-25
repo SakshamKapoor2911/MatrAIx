@@ -1,0 +1,7 @@
+# Meal-Kit Usage
+
+How people use meal-kit subscription services and how they judge their value.
+
+## About this survey
+
+This survey profiles meal-kit subscription usage, opening with a screener on current status, tenure, primary service (HelloFresh, Blue Apron, Home Chef, EveryPlate, Factor), boxes per month, meals per box, and household size cooked for. It records behaviors such as motivations, plan types, per-serving and monthly spend, cost comparison to groceries, and preparation time. Attitudes are captured through an agreement Likert battery on time savings, value, healthiness, cooking skills, and packaging, plus a per-item importance matrix over service-selection criteria and a top-three ranking of those factors. Additional sections cover problems experienced, skipping and pausing, other food options used, substitution for takeout, and how respondents first heard about the service, followed by satisfaction across variety, quality, and delivery, recommendation likelihood, and retention intent, with numeric free-text on per-serving and monthly cost. Question types include single-choice, multi-select, varied Likert scales, an importance matrix, a ranking item, a 0–10 recommendation scale, and numeric and open free-text. The survey closes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, children in the household, marital status, U.S. region, and urbanicity.

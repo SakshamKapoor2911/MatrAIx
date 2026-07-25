@@ -1,0 +1,796 @@
+schemaVersion: "1.0"
+id: step_counting_v1
+title: "Step Counting Survey"
+description: "Consumer use of daily step counting, including devices, goals, motivation, and satisfaction."
+questions:
+  - id: q0
+    prompt: "Do you currently track your daily step count?"
+    type: single_choice
+    construct: currently_track_daily_step_count
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, every day"
+      - id: "b"
+        label: "Yes, most days"
+      - id: "c"
+        label: "Yes, occasionally"
+      - id: "d"
+        label: "No, but I have in the past"
+      - id: "e"
+        label: "No, I have never tracked my steps"
+  - id: q1
+    prompt: "How long have you been counting your daily steps?"
+    type: single_choice
+    construct: long_have_been_counting_daily
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 3 months"
+      - id: "b"
+        label: "3 to 12 months"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "More than 3 years"
+      - id: "e"
+        label: "I do not currently count my steps"
+  - id: q2
+    prompt: "What do you mainly use to count your steps?"
+    type: single_choice
+    construct: mainly_use_count_steps
+    required: true
+    options:
+      - id: "a"
+        label: "Smartwatch (for example, Apple Watch, Samsung Galaxy Watch)"
+      - id: "b"
+        label: "Fitness band (for example, Fitbit, Garmin, Xiaomi)"
+      - id: "c"
+        label: "Smartphone app using the phone's sensors"
+      - id: "d"
+        label: "A separate clip-on pedometer"
+      - id: "e"
+        label: "I do not currently count my steps"
+  - id: q3
+    prompt: "Which apps or platforms do you use to view your step data? (Select all that apply)"
+    type: multi_choice
+    construct: apps_platforms_use_view_step
+    required: true
+    options:
+      - id: "a"
+        label: "Apple Health or Apple Fitness"
+      - id: "b"
+        label: "Fitbit app"
+      - id: "c"
+        label: "Google Fit"
+      - id: "d"
+        label: "Samsung Health"
+      - id: "e"
+        label: "Garmin Connect"
+      - id: "f"
+        label: "A phone's built-in health widget"
+      - id: "g"
+        label: "I do not use any app"
+  - id: q4
+    prompt: "On a typical day, do you carry or wear your step-tracking device...?"
+    type: single_choice
+    construct: typical_day_carry_wear_step
+    required: true
+    options:
+      - id: "a"
+        label: "All day, including sleep"
+      - id: "b"
+        label: "All waking hours"
+      - id: "c"
+        label: "Only during exercise or walks"
+      - id: "d"
+        label: "Only sometimes"
+      - id: "e"
+        label: "I do not use a device"
+  - id: q5
+    prompt: "Do you have a daily step goal?"
+    type: single_choice
+    construct: have_daily_step_goal
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, 10,000 steps"
+      - id: "b"
+        label: "Yes, more than 10,000 steps"
+      - id: "c"
+        label: "Yes, fewer than 10,000 steps"
+      - id: "d"
+        label: "Yes, but the number varies"
+      - id: "e"
+        label: "No, I do not set a step goal"
+  - id: q6
+    prompt: "On a typical day, about how many steps do you take?"
+    type: single_choice
+    construct: typical_day_many_steps_take
+    required: true
+    options:
+      - id: "a"
+        label: "Fewer than 3,000"
+      - id: "b"
+        label: "3,000 to 4,999"
+      - id: "c"
+        label: "5,000 to 7,499"
+      - id: "d"
+        label: "7,500 to 9,999"
+      - id: "e"
+        label: "10,000 to 12,499"
+      - id: "f"
+        label: "12,500 or more"
+  - id: q7
+    prompt: "How often do you check your step count during the day?"
+    type: single_choice
+    construct: often_check_step_count_during
+    required: true
+    options:
+      - id: "a"
+        label: "Many times a day"
+      - id: "b"
+        label: "A few times a day"
+      - id: "c"
+        label: "Once a day"
+      - id: "d"
+        label: "A few times a week"
+      - id: "e"
+        label: "Rarely"
+  - id: q8
+    prompt: "How did you decide on your step goal?"
+    type: single_choice
+    construct: did_decide_step_goal
+    required: true
+    options:
+      - id: "a"
+        label: "I use the common 10,000-step target"
+      - id: "b"
+        label: "My device or app suggested it"
+      - id: "c"
+        label: "A doctor or health professional advised me"
+      - id: "d"
+        label: "I set it based on my own fitness level"
+      - id: "e"
+        label: "I have not set a specific goal"
+  - id: q9
+    prompt: "Which of these features do you use in your step-tracking app? (Select all that apply)"
+    type: multi_choice
+    construct: these_features_use_step_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Daily goal progress"
+      - id: "b"
+        label: "Reminders to move"
+      - id: "c"
+        label: "Streaks or badges"
+      - id: "d"
+        label: "Challenges with friends"
+      - id: "e"
+        label: "Weekly or monthly reports"
+      - id: "f"
+        label: "Distance or calorie estimates"
+      - id: "g"
+        label: "I do not use any of these features"
+  - id: q10
+    prompt: "Do you take part in step challenges or competitions with others?"
+    type: single_choice
+    construct: take_part_step_challenges_competitions
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I would like to"
+      - id: "d"
+        label: "No, and I am not interested"
+  - id: q11
+    prompt: "What most motivates you to reach your step goal? (Select all that apply)"
+    type: multi_choice
+    construct: most_motivates_reach_step_goal
+    required: true
+    options:
+      - id: "a"
+        label: "Improving my overall health"
+      - id: "b"
+        label: "Losing or managing weight"
+      - id: "c"
+        label: "Reaching a daily streak or badge"
+      - id: "d"
+        label: "Competing with friends or family"
+      - id: "e"
+        label: "Reducing stress or clearing my mind"
+      - id: "f"
+        label: "A doctor's recommendation"
+      - id: "g"
+        label: "Just seeing the number go up"
+  - id: q12
+    prompt: "When you fall short of your step goal, what do you usually do?"
+    type: single_choice
+    construct: when_fall_short_step_goal
+    required: true
+    options:
+      - id: "a"
+        label: "Take a walk later to catch up"
+      - id: "b"
+        label: "Feel disappointed but move on"
+      - id: "c"
+        label: "Not think much about it"
+      - id: "d"
+        label: "Adjust my goal down"
+      - id: "e"
+        label: "This does not apply to me"
+  - id: q13
+    prompt: "How much do you agree with the following statement: Counting my steps motivates me to move more."
+    type: single_choice
+    construct: much_agree_following_statement_counting
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: Reaching my daily step goal gives me a sense of accomplishment."
+    type: single_choice
+    construct: much_agree_following_statement_reaching
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: I trust my device's step count to be accurate."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I sometimes feel pressured or stressed by my step goal."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: Step counting has become a regular habit for me."
+    type: single_choice
+    construct: much_agree_following_statement_step
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement: Counting steps has improved my overall activity level."
+    type: single_choice
+    construct: much_agree_following_statement_counting
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "Since you started counting steps, how has your daily walking changed?"
+    type: single_choice
+    construct: since_started_counting_steps_has
+    required: true
+    options:
+      - id: "a"
+        label: "Increased a lot"
+      - id: "b"
+        label: "Increased somewhat"
+      - id: "c"
+        label: "Stayed about the same"
+      - id: "d"
+        label: "Decreased somewhat"
+      - id: "e"
+        label: "Decreased a lot"
+  - id: q20
+    prompt: "Which behaviors have you changed to get more steps? (Select all that apply)"
+    type: multi_choice
+    construct: behaviors_have_changed_get_more
+    required: true
+    options:
+      - id: "a"
+        label: "Taking the stairs instead of the elevator"
+      - id: "b"
+        label: "Parking farther away"
+      - id: "c"
+        label: "Taking walking breaks at work"
+      - id: "d"
+        label: "Walking or pacing while on the phone"
+      - id: "e"
+        label: "Taking an evening or after-dinner walk"
+      - id: "f"
+        label: "Getting off transit a stop early"
+      - id: "g"
+        label: "I have not changed any behaviors"
+  - id: q21
+    prompt: "How useful do you find the reminders to move that your device sends?"
+    type: single_choice
+    construct: useful_find_reminders_move_that
+    required: true
+    options:
+      - id: "a"
+        label: "Very useful"
+      - id: "b"
+        label: "Somewhat useful"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Not very useful"
+      - id: "e"
+        label: "I do not get reminders"
+  - id: q22
+    prompt: "How often do you compare your step count with previous days or weeks?"
+    type: single_choice
+    construct: often_compare_step_count_previous
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q23
+    prompt: "How accurate do you think your step count is on a normal day?"
+    type: single_choice
+    construct: accurate_think_step_count_normal
+    required: true
+    options:
+      - id: "a"
+        label: "Very accurate"
+      - id: "b"
+        label: "Somewhat accurate"
+      - id: "c"
+        label: "Neither accurate nor inaccurate"
+      - id: "d"
+        label: "Somewhat inaccurate"
+      - id: "e"
+        label: "Very inaccurate"
+  - id: q24
+    prompt: "Have you ever discussed your step counts with a doctor or health professional?"
+    type: single_choice
+    construct: have_ever_discussed_step_counts
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it was helpful"
+      - id: "b"
+        label: "Yes, but it was not very helpful"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No, and I would not"
+  - id: q25
+    prompt: "How important is each of the following in a step-tracking device or app: Accuracy of the step count."
+    type: single_choice
+    construct: important_each_following_step_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important is each of the following in a step-tracking device or app: Long battery life."
+    type: single_choice
+    construct: important_each_following_step_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important is each of the following in a step-tracking device or app: Motivational features like badges and streaks."
+    type: single_choice
+    construct: important_each_following_step_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "How important is each of the following in a step-tracking device or app: Easy-to-read charts and summaries."
+    type: single_choice
+    construct: important_each_following_step_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "How important is each of the following in a step-tracking device or app: Protecting my personal data."
+    type: single_choice
+    construct: important_each_following_step_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "How concerned are you about how your step and activity data are used?"
+    type: single_choice
+    construct: concerned_step_activity_data_used
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q31
+    prompt: "Select your top 3 reasons you count your steps. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_count
+    required: true
+    options:
+      - id: "a"
+        label: "General health"
+      - id: "b"
+        label: "Weight management"
+      - id: "c"
+        label: "Motivation and accountability"
+      - id: "d"
+        label: "Doctor's advice"
+      - id: "e"
+        label: "Competition with others"
+      - id: "f"
+        label: "Stress relief"
+      - id: "g"
+        label: "Curiosity about my activity"
+      - id: "h"
+        label: "Managing a health condition"
+  - id: q32
+    prompt: "Overall, how satisfied are you with counting your steps?"
+    type: single_choice
+    construct: overall_satisfied_counting_steps
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "On a scale of 0 to 10, how likely are you to recommend step counting to a friend or family member? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q34
+    prompt: "Over the next 12 months, do you plan to keep counting your steps?"
+    type: single_choice
+    construct: over_next_12_months_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Definitely yes"
+      - id: "b"
+        label: "Probably yes"
+      - id: "c"
+        label: "Not sure"
+      - id: "d"
+        label: "Probably not"
+      - id: "e"
+        label: "Definitely not"
+  - id: q35
+    prompt: "About how many steps did you take yesterday? Please enter a number."
+    type: free_text
+    construct: many_steps_did_take_yesterday
+    required: true
+  - id: q36
+    prompt: "What is your current daily step goal? Please enter a number (enter 0 if you do not have one)."
+    type: free_text
+    construct: current_daily_step_goal_please
+    required: true
+  - id: q37
+    prompt: "On how many of the past 7 days did you reach your step goal? Please enter a number from 0 to 7."
+    type: free_text
+    construct: many_past_7_days_did
+    required: true
+  - id: q38
+    prompt: "What would make step counting more useful or motivating for you? (Optional)"
+    type: free_text
+    construct: would_make_step_counting_more
+    required: false
+  - id: q39
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q40
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe or not to say"
+  - id: q41
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q44
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q45
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q47
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q48
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q49
+    prompt: "Which best describes the main device you own for tracking activity?"
+    type: single_choice
+    construct: best_describes_main_device_own
+    required: true
+    options:
+      - id: "a"
+        label: "Apple Watch"
+      - id: "b"
+        label: "Fitbit"
+      - id: "c"
+        label: "Garmin"
+      - id: "d"
+        label: "Samsung or other Android smartwatch"
+      - id: "e"
+        label: "Only my smartphone"
+      - id: "f"
+        label: "A basic pedometer"
+      - id: "g"
+        label: "I do not own any tracking device"

@@ -1,0 +1,885 @@
+schemaVersion: "1.0"
+id: markdown_editor_usage_v1
+title: "Markdown Editor Usage Survey"
+description: "How people choose and use Markdown editors and note-taking tools for writing and knowledge management."
+questions:
+  - id: q0
+    prompt: "How often do you write in Markdown?"
+    type: single_choice
+    construct: often_write_markdown
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "I don't write in Markdown"
+  - id: q1
+    prompt: "How long have you been using Markdown?"
+    type: single_choice
+    construct: long_have_been_using_markdown
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "Which application do you use most often to write Markdown?"
+    type: single_choice
+    construct: application_use_most_often_write
+    required: true
+    options:
+      - id: "a"
+        label: "Obsidian"
+      - id: "b"
+        label: "Typora"
+      - id: "c"
+        label: "iA Writer"
+      - id: "d"
+        label: "Notion"
+      - id: "e"
+        label: "VS Code"
+      - id: "f"
+        label: "Bear"
+      - id: "g"
+        label: "A plain text editor"
+      - id: "h"
+        label: "Other"
+  - id: q3
+    prompt: "Which Markdown or note-taking tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: markdown_note_taking_tools_have
+    required: true
+    options:
+      - id: "a"
+        label: "Obsidian"
+      - id: "b"
+        label: "Typora"
+      - id: "c"
+        label: "iA Writer"
+      - id: "d"
+        label: "Notion"
+      - id: "e"
+        label: "VS Code"
+      - id: "f"
+        label: "Bear"
+      - id: "g"
+        label: "Logseq"
+      - id: "h"
+        label: "Joplin"
+      - id: "i"
+        label: "Zettlr or Marktext"
+      - id: "j"
+        label: "GitHub or GitLab web editor"
+      - id: "k"
+        label: "None of these"
+  - id: q4
+    prompt: "Which tools are you interested in trying next? (Select all that apply)"
+    type: multi_choice
+    construct: tools_interested_trying_next_select
+    required: true
+    options:
+      - id: "a"
+        label: "Obsidian"
+      - id: "b"
+        label: "Notion"
+      - id: "c"
+        label: "Logseq"
+      - id: "d"
+        label: "iA Writer"
+      - id: "e"
+        label: "Typora"
+      - id: "f"
+        label: "Bear"
+      - id: "g"
+        label: "I'm happy with what I use"
+  - id: q5
+    prompt: "What do you primarily use Markdown for? (Select all that apply)"
+    type: multi_choice
+    construct: primarily_use_markdown_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Personal notes"
+      - id: "b"
+        label: "Documentation (README, wikis)"
+      - id: "c"
+        label: "Blogging or publishing"
+      - id: "d"
+        label: "Task and project management"
+      - id: "e"
+        label: "Academic or research writing"
+      - id: "f"
+        label: "Journaling"
+      - id: "g"
+        label: "Meeting notes"
+      - id: "h"
+        label: "Knowledge base or second brain"
+  - id: q6
+    prompt: "Which best describes how you prefer to edit Markdown?"
+    type: single_choice
+    construct: best_describes_prefer_edit_markdown
+    required: true
+    options:
+      - id: "a"
+        label: "Live preview alongside raw Markdown"
+      - id: "b"
+        label: "WYSIWYG that hides the syntax"
+      - id: "c"
+        label: "Raw Markdown only"
+      - id: "d"
+        label: "Raw Markdown with a separate preview pane"
+  - id: q7
+    prompt: "About how many notes or Markdown documents do you currently have? Please enter a number."
+    type: free_text
+    construct: many_notes_markdown_documents_currently
+    required: true
+  - id: q8
+    prompt: "About how many days per week do you open a Markdown editor? Please enter a number."
+    type: free_text
+    construct: many_days_per_week_open
+    required: true
+  - id: q9
+    prompt: "Which Markdown features do you regularly use? (Select all that apply)"
+    type: multi_choice
+    construct: markdown_features_regularly_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Tables"
+      - id: "b"
+        label: "Code blocks with syntax highlighting"
+      - id: "c"
+        label: "Task lists / checkboxes"
+      - id: "d"
+        label: "Footnotes"
+      - id: "e"
+        label: "Math (LaTeX) equations"
+      - id: "f"
+        label: "Diagrams (Mermaid, etc.)"
+      - id: "g"
+        label: "Internal links between notes"
+      - id: "h"
+        label: "Front matter / metadata"
+      - id: "i"
+        label: "Callouts or admonitions"
+  - id: q10
+    prompt: "Where are your Markdown files stored?"
+    type: single_choice
+    construct: where_markdown_files_stored
+    required: true
+    options:
+      - id: "a"
+        label: "Local files on my device"
+      - id: "b"
+        label: "Synced via a cloud drive (iCloud, Dropbox, etc.)"
+      - id: "c"
+        label: "In a Git repository"
+      - id: "d"
+        label: "In a proprietary app database or cloud"
+      - id: "e"
+        label: "A mix of these"
+  - id: q11
+    prompt: "How do you sync your notes across devices?"
+    type: single_choice
+    construct: sync_notes_across_devices
+    required: true
+    options:
+      - id: "a"
+        label: "A cloud file service"
+      - id: "b"
+        label: "The app's built-in sync"
+      - id: "c"
+        label: "Git"
+      - id: "d"
+        label: "I don't sync — one device only"
+      - id: "e"
+        label: "I manually copy files"
+  - id: q12
+    prompt: "Do you use plugins or extensions in your Markdown editor?"
+    type: single_choice
+    construct: use_plugins_extensions_markdown_editor
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, many"
+      - id: "b"
+        label: "Yes, a few"
+      - id: "c"
+        label: "No, but the app supports them"
+      - id: "d"
+        label: "My app doesn't support plugins"
+  - id: q13
+    prompt: "About how many plugins or extensions do you have installed? Please enter a number."
+    type: free_text
+    construct: many_plugins_extensions_have_installed
+    required: true
+  - id: q14
+    prompt: "How do you organize your notes? (Select all that apply)"
+    type: multi_choice
+    construct: organize_notes_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Folders and subfolders"
+      - id: "b"
+        label: "Tags"
+      - id: "c"
+        label: "Links between notes"
+      - id: "d"
+        label: "A daily notes or journal system"
+      - id: "e"
+        label: "A naming convention"
+      - id: "f"
+        label: "Search only — little organization"
+  - id: q15
+    prompt: "Do you publish any of your Markdown content?"
+    type: single_choice
+    construct: publish_any_markdown_content
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, to a blog or website"
+      - id: "b"
+        label: "Yes, to a wiki or documentation site"
+      - id: "c"
+        label: "Yes, shared with a team"
+      - id: "d"
+        label: "No, it's all private"
+  - id: q16
+    prompt: "How much do you agree: Writing in Markdown helps me focus on content over formatting."
+    type: single_choice
+    construct: much_agree_writing_markdown_helps
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: I prefer plain-text files I fully control over proprietary formats."
+    type: single_choice
+    construct: much_agree_i_prefer_plain
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: A distraction-free writing experience matters to me."
+    type: single_choice
+    construct: much_agree_distraction_free_writing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: Linking notes together has changed how I think and work."
+    type: single_choice
+    construct: much_agree_linking_notes_together
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: I worry about being locked into a single note-taking app."
+    type: single_choice
+    construct: much_agree_i_worry_being
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: My note collection has become hard to keep organized."
+    type: single_choice
+    construct: much_agree_my_note_collection
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "When choosing a Markdown editor, how important is writing and editing experience?"
+    type: single_choice
+    construct: when_choosing_markdown_editor_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing a Markdown editor, how important is cross-device sync?"
+    type: single_choice
+    construct: when_choosing_markdown_editor_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a Markdown editor, how important is data portability (owning your files)?"
+    type: single_choice
+    construct: when_choosing_markdown_editor_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a Markdown editor, how important is an extension or plugin ecosystem?"
+    type: single_choice
+    construct: when_choosing_markdown_editor_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a Markdown editor, how important is price or cost?"
+    type: single_choice
+    construct: when_choosing_markdown_editor_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a Markdown editor, how important is a clean, minimal interface?"
+    type: single_choice
+    construct: when_choosing_markdown_editor_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Which are your top 3 factors when choosing a Markdown editor? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Writing experience"
+      - id: "b"
+        label: "Cross-device sync"
+      - id: "c"
+        label: "Data portability"
+      - id: "d"
+        label: "Plugin ecosystem"
+      - id: "e"
+        label: "Price"
+      - id: "f"
+        label: "Minimal interface"
+      - id: "g"
+        label: "Linking and organization features"
+      - id: "h"
+        label: "Collaboration features"
+  - id: q29
+    prompt: "How often do you revisit or edit older notes?"
+    type: single_choice
+    construct: often_revisit_edit_older_notes
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q30
+    prompt: "How often do you feel overwhelmed by the number of notes you have?"
+    type: single_choice
+    construct: often_feel_overwhelmed_by_number
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q31
+    prompt: "How often do you use search to find something in your notes?"
+    type: single_choice
+    construct: often_use_search_find_something
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q32
+    prompt: "Do you pay for your primary Markdown or note-taking tool?"
+    type: single_choice
+    construct: pay_primary_markdown_note_taking
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a subscription"
+      - id: "b"
+        label: "Yes, a one-time purchase"
+      - id: "c"
+        label: "No, I use the free version"
+      - id: "d"
+        label: "No, it's free and open source"
+  - id: q33
+    prompt: "Do you use an AI writing assistant within your note-taking workflow?"
+    type: single_choice
+    construct: use_ai_writing_assistant_within
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I'm interested"
+      - id: "d"
+        label: "No"
+  - id: q34
+    prompt: "Which best describes your note-taking style?"
+    type: single_choice
+    construct: best_describes_note_taking_style
+    required: true
+    options:
+      - id: "a"
+        label: "A structured system I maintain deliberately"
+      - id: "b"
+        label: "Loosely organized but useful"
+      - id: "c"
+        label: "Mostly a scratchpad"
+      - id: "d"
+        label: "Whatever works in the moment"
+  - id: q35
+    prompt: "How did you discover your primary Markdown tool? (Select all that apply)"
+    type: multi_choice
+    construct: did_discover_primary_markdown_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Word of mouth"
+      - id: "b"
+        label: "Social media or online communities"
+      - id: "c"
+        label: "YouTube or productivity influencers"
+      - id: "d"
+        label: "Blog posts or newsletters"
+      - id: "e"
+        label: "It was recommended at work or school"
+      - id: "f"
+        label: "I searched for it deliberately"
+  - id: q36
+    prompt: "How satisfied are you with your editor's writing experience?"
+    type: single_choice
+    construct: satisfied_editor_s_writing_experience
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "How satisfied are you with how your notes sync across devices?"
+    type: single_choice
+    construct: satisfied_notes_sync_across_devices
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "Overall, how satisfied are you with your primary Markdown tool?"
+    type: single_choice
+    construct: overall_satisfied_primary_markdown_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q39
+    prompt: "How likely are you to recommend your primary Markdown tool to a friend or colleague? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_markdown_tool
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q40
+    prompt: "How likely are you to switch your primary note-taking tool within the next year?"
+    type: single_choice
+    construct: likely_switch_primary_note_taking
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q41
+    prompt: "What is one thing you would improve about your Markdown tool? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_markdown
+    required: false
+  - id: q42
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Software developer or engineer"
+      - id: "b"
+        label: "Writer or content creator"
+      - id: "c"
+        label: "Researcher or academic"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Product or project manager"
+      - id: "f"
+        label: "Designer"
+      - id: "g"
+        label: "Knowledge worker in another field"
+      - id: "h"
+        label: "Other"
+  - id: q43
+    prompt: "How many years have you worked professionally in your current field (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I'm not working professionally yet"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q44
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q45
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q46
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Media or entertainment"
+      - id: "h"
+        label: "Other"
+  - id: q47
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q48
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q51
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q52
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

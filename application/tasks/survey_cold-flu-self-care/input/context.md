@@ -1,0 +1,7 @@
+# Cold and Flu Self-Care
+
+How consumers manage everyday colds, flu, and seasonal respiratory bugs at home.
+
+## About this survey
+
+This survey covers how often respondents get colds or flu-like illnesses, when they were last sick, and whether they treat it themselves, ask a pharmacist, or contact a doctor. It measures the symptoms they get, the over-the-counter products and home remedies they use (pain relievers, multi-symptom medicine, decongestants, cough drops, humidifiers, tea and honey, vitamins), brands purchased (Vicks, Tylenol, Advil, Mucinex, Robitussin, Halls, Theraflu), when they start treating, where they buy, yearly spend, stocking habits, flu-shot behavior, work-or-school choices, and where they turn for advice. It runs Likert batteries on attitudes (home care, OTC effectiveness, mixing medicines, natural remedies, avoiding spread, label-reading) and on the importance of product-selection factors, plus a top-3 ranking of what matters most in a remedy, prevention habits, thresholds for seeing a doctor, telehealth use, confidence, symptom relief, satisfaction, purchase intent, a 0–10 recommendation score, and an open comment. Question types include single-choice, multi-select, Likert scales, a matrix battery split per item, a top-3 ranking, and numeric free-text. Demographics captured: age, gender, race/ethnicity, household income, education, employment, household size, marital status, region, urban/rural, insurance status, and children in the household.

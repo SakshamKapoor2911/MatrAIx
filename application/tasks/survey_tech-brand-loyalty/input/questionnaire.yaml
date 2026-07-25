@@ -1,0 +1,706 @@
+schemaVersion: "1.0"
+id: tech_brand_loyalty_v1
+title: "Tech Brand Loyalty Survey"
+description: "How loyal consumers are to their technology brands and ecosystems, and what keeps them committed or open to switching."
+questions:
+  - id: q0
+    prompt: "In general, how loyal are you to the tech brands you use?"
+    type: single_choice
+    construct: general_loyal_tech_brands_use
+    required: true
+    options:
+      - id: "a"
+        label: "Extremely loyal — I stick with my brands"
+      - id: "b"
+        label: "Fairly loyal"
+      - id: "c"
+        label: "Somewhat loyal"
+      - id: "d"
+        label: "Not very loyal — I switch easily"
+      - id: "e"
+        label: "I have no brand loyalty at all"
+  - id: q1
+    prompt: "Which best describes your main smartphone platform?"
+    type: single_choice
+    construct: best_describes_main_smartphone_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Apple iPhone"
+      - id: "b"
+        label: "Samsung Galaxy (Android)"
+      - id: "c"
+        label: "Google Pixel (Android)"
+      - id: "d"
+        label: "Another Android brand"
+      - id: "e"
+        label: "I do not use a smartphone"
+  - id: q2
+    prompt: "Which best describes your main computer platform?"
+    type: single_choice
+    construct: best_describes_main_computer_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Apple Mac (macOS)"
+      - id: "b"
+        label: "Windows PC"
+      - id: "c"
+        label: "Chromebook (ChromeOS)"
+      - id: "d"
+        label: "Linux"
+      - id: "e"
+        label: "I do not use a computer regularly"
+  - id: q3
+    prompt: "Which tech ecosystems are you invested in? (Select all that apply)"
+    type: multi_choice
+    construct: tech_ecosystems_invested_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Apple"
+      - id: "b"
+        label: "Google"
+      - id: "c"
+        label: "Samsung"
+      - id: "d"
+        label: "Microsoft"
+      - id: "e"
+        label: "Amazon"
+      - id: "f"
+        label: "Sony"
+      - id: "g"
+        label: "None in particular"
+  - id: q4
+    prompt: "For which brands do you own more than one product? (Select all that apply)"
+    type: multi_choice
+    construct: brands_own_more_than_one
+    required: true
+    options:
+      - id: "a"
+        label: "Apple"
+      - id: "b"
+        label: "Samsung"
+      - id: "c"
+        label: "Google"
+      - id: "d"
+        label: "Microsoft"
+      - id: "e"
+        label: "Amazon"
+      - id: "f"
+        label: "Sony"
+      - id: "g"
+        label: "Dell / HP / Lenovo"
+      - id: "h"
+        label: "Bose / Sonos / other audio brand"
+      - id: "i"
+        label: "None"
+  - id: q5
+    prompt: "How long have you primarily stuck with your current smartphone brand?"
+    type: single_choice
+    construct: long_have_primarily_stuck_current
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 2 years"
+      - id: "b"
+        label: "2–4 years"
+      - id: "c"
+        label: "5–7 years"
+      - id: "d"
+        label: "8–10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q6
+    prompt: "What keeps you loyal to your main tech brand? (Select all that apply)"
+    type: multi_choice
+    construct: keeps_loyal_main_tech_brand
+    required: true
+    options:
+      - id: "a"
+        label: "Products just work well for me"
+      - id: "b"
+        label: "Everything integrates in one ecosystem"
+      - id: "c"
+        label: "Familiarity — I know how it works"
+      - id: "d"
+        label: "Quality and reliability"
+      - id: "e"
+        label: "Design and aesthetics"
+      - id: "f"
+        label: "Customer support and service"
+      - id: "g"
+        label: "Cost of switching is too high"
+      - id: "h"
+        label: "Status or brand image"
+      - id: "i"
+        label: "Privacy or security reputation"
+  - id: q7
+    prompt: "Select your top 3 reasons for staying with your main tech brand. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_staying
+    required: true
+    options:
+      - id: "a"
+        label: "Products work well"
+      - id: "b"
+        label: "Ecosystem integration"
+      - id: "c"
+        label: "Familiarity"
+      - id: "d"
+        label: "Quality and reliability"
+      - id: "e"
+        label: "Design"
+      - id: "f"
+        label: "Support and service"
+      - id: "g"
+        label: "Switching cost"
+      - id: "h"
+        label: "Privacy or security"
+  - id: q8
+    prompt: "How much do you agree: I would need a very good reason to switch away from my main brand."
+    type: single_choice
+    construct: much_agree_i_would_need
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q9
+    prompt: "How much do you agree: Being in one ecosystem makes my devices work together better."
+    type: single_choice
+    construct: much_agree_being_one_ecosystem
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree: I feel locked in and it is hard to switch even if I wanted to."
+    type: single_choice
+    construct: much_agree_i_feel_locked
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree: I trust my main brand to protect my privacy."
+    type: single_choice
+    construct: much_agree_i_trust_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree: I identify with my main tech brand."
+    type: single_choice
+    construct: much_agree_i_identify_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree: I recommend my main brand to friends and family."
+    type: single_choice
+    construct: much_agree_i_recommend_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How satisfied are you with your main brand on: Product quality and reliability."
+    type: single_choice
+    construct: satisfied_main_brand_product_quality
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q15
+    prompt: "How satisfied are you with your main brand on: Value for money."
+    type: single_choice
+    construct: satisfied_main_brand_value_money
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q16
+    prompt: "How satisfied are you with your main brand on: Customer support."
+    type: single_choice
+    construct: satisfied_main_brand_customer_support
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q17
+    prompt: "How satisfied are you with your main brand on: Software updates and longevity."
+    type: single_choice
+    construct: satisfied_main_brand_software_updates
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q18
+    prompt: "How satisfied are you with your main brand on: Ecosystem and cross-device integration."
+    type: single_choice
+    construct: satisfied_main_brand_ecosystem_cross
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q19
+    prompt: "Have you switched your main smartphone platform in the past five years?"
+    type: single_choice
+    construct: have_switched_main_smartphone_platform
+    required: true
+    options:
+      - id: "a"
+        label: "No, I have stayed with the same platform"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "Yes, more than once"
+      - id: "d"
+        label: "I go back and forth"
+  - id: q20
+    prompt: "What would make you switch away from your main brand? (Select all that apply)"
+    type: multi_choice
+    construct: would_make_switch_away_from
+    required: true
+    options:
+      - id: "a"
+        label: "A much better product elsewhere"
+      - id: "b"
+        label: "A significantly lower price"
+      - id: "c"
+        label: "A privacy or trust scandal"
+      - id: "d"
+        label: "Poor customer support experience"
+      - id: "e"
+        label: "A product failure or defect"
+      - id: "f"
+        label: "Friends or family switching"
+      - id: "g"
+        label: "Nothing — I am committed"
+      - id: "h"
+        label: "Losing a feature I rely on"
+  - id: q21
+    prompt: "How much does brand influence your tech purchases compared with specs or price?"
+    type: single_choice
+    construct: much_does_brand_influence_tech
+    required: true
+    options:
+      - id: "a"
+        label: "Brand matters far more than specs or price"
+      - id: "b"
+        label: "Brand matters somewhat more"
+      - id: "c"
+        label: "About equal"
+      - id: "d"
+        label: "Specs and price matter somewhat more"
+      - id: "e"
+        label: "Specs and price matter far more"
+  - id: q22
+    prompt: "How important is it that all your devices are from the same brand or ecosystem?"
+    type: single_choice
+    construct: important_it_that_all_devices
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "Have you ever avoided a product you liked because it was outside your ecosystem?"
+    type: single_choice
+    construct: have_ever_avoided_product_liked
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, often"
+      - id: "b"
+        label: "Yes, sometimes"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "Never"
+  - id: q24
+    prompt: "How do you feel about brands you do NOT use?"
+    type: single_choice
+    construct: feel_brands_not_use
+    required: true
+    options:
+      - id: "a"
+        label: "I actively dislike some of them"
+      - id: "b"
+        label: "I am indifferent"
+      - id: "c"
+        label: "I respect them but prefer mine"
+      - id: "d"
+        label: "I am curious and might try them"
+  - id: q25
+    prompt: "Roughly how many years have you used your primary tech brand? Enter a number."
+    type: free_text
+    construct: roughly_many_years_have_used
+    required: true
+  - id: q26
+    prompt: "About how many devices do you currently own from your main brand? Enter a number."
+    type: free_text
+    construct: many_devices_currently_own_from
+    required: true
+  - id: q27
+    prompt: "Overall, how satisfied are you with your main tech brand?"
+    type: single_choice
+    construct: overall_satisfied_main_tech_brand
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q28
+    prompt: "How likely are you to recommend your main brand to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: likely_recommend_main_brand_friend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q29
+    prompt: "How likely are you to still be using your main brand in three years?"
+    type: single_choice
+    construct: likely_still_be_using_main
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Unsure"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q30
+    prompt: "In a sentence, what best explains your loyalty (or lack of loyalty) to your main tech brand? Please describe."
+    type: free_text
+    construct: sentence_best_explains_loyalty_lack
+    required: true
+  - id: q31
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your current employment status?"
+    type: single_choice
+    construct: best_describes_current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "How would you describe yourself as a tech consumer?"
+    type: single_choice
+    construct: would_describe_yourself_as_tech
+    required: true
+    options:
+      - id: "a"
+        label: "Early adopter — I get new things first"
+      - id: "b"
+        label: "Enthusiast — I follow tech closely"
+      - id: "c"
+        label: "Mainstream — I upgrade when it makes sense"
+      - id: "d"
+        label: "Budget-focused — value matters most"
+      - id: "e"
+        label: "Minimalist — I use as little tech as I can"
+  - id: q37
+    prompt: "What is your approximate annual household income (USD)?"
+    type: single_choice
+    construct: approximate_annual_household_income_usd
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000–$199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "How many people live in your household, including yourself?"
+    type: single_choice
+    construct: many_people_live_household_including
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q39
+    prompt: "What is your relationship status?"
+    type: single_choice
+    construct: relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "In a domestic partnership or living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

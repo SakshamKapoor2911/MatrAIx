@@ -1,0 +1,774 @@
+schemaVersion: "1.0"
+id: screen_time_tracking_v1
+title: "Screen Time Tracking Survey"
+description: "How people track, monitor, and manage their screen time and digital habits."
+questions:
+  - id: q0
+    prompt: "Do you track or monitor your screen time?"
+    type: single_choice
+    construct: track_monitor_screen_time
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I track it actively"
+      - id: "b"
+        label: "Yes, I check the stats occasionally"
+      - id: "c"
+        label: "I'm aware of the feature but don't really use it"
+      - id: "d"
+        label: "No, but I'd like to"
+      - id: "e"
+        label: "No, and I'm not interested"
+  - id: q1
+    prompt: "Which tools do you use to track screen time? (Select all that apply)"
+    type: multi_choice
+    construct: tools_use_track_screen_time
+    required: true
+    options:
+      - id: "a"
+        label: "Apple Screen Time (iOS/Mac)"
+      - id: "b"
+        label: "Android Digital Wellbeing"
+      - id: "c"
+        label: "Samsung Digital Wellbeing"
+      - id: "d"
+        label: "A third-party app (e.g., RescueTime, Opal, one sec, Jomo)"
+      - id: "e"
+        label: "Router or network-level controls"
+      - id: "f"
+        label: "Browser extensions"
+      - id: "g"
+        label: "Manual tracking / journaling"
+      - id: "h"
+        label: "I don't track screen time"
+  - id: q2
+    prompt: "How often do you check your screen time statistics?"
+    type: single_choice
+    construct: often_check_screen_time_statistics
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Weekly (e.g., the weekly report)"
+      - id: "d"
+        label: "Occasionally"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q3
+    prompt: "Do you set screen time limits or goals for yourself?"
+    type: single_choice
+    construct: set_screen_time_limits_goals
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I generally stick to them"
+      - id: "b"
+        label: "Yes, but I often ignore them"
+      - id: "c"
+        label: "I've tried but gave up"
+      - id: "d"
+        label: "No, but I'm considering it"
+      - id: "e"
+        label: "No"
+  - id: q4
+    prompt: "Which screen-time management features do you use? (Select all that apply)"
+    type: multi_choice
+    construct: screen_time_management_features_use
+    required: true
+    options:
+      - id: "a"
+        label: "App time limits / timers"
+      - id: "b"
+        label: "Downtime / bedtime schedules"
+      - id: "c"
+        label: "Focus or Do Not Disturb modes"
+      - id: "d"
+        label: "Grayscale / dimming the screen"
+      - id: "e"
+        label: "App blockers"
+      - id: "f"
+        label: "Notification limits or summaries"
+      - id: "g"
+        label: "Content / website filters"
+      - id: "h"
+        label: "None of these"
+  - id: q5
+    prompt: "On which devices do you monitor screen time? (Select all that apply)"
+    type: multi_choice
+    construct: devices_monitor_screen_time_select
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "Tablet"
+      - id: "c"
+        label: "Laptop"
+      - id: "d"
+        label: "Desktop computer"
+      - id: "e"
+        label: "Smart TV"
+      - id: "f"
+        label: "I don't monitor any device"
+  - id: q6
+    prompt: "What motivates you to track or manage screen time? (Select all that apply)"
+    type: multi_choice
+    construct: motivates_track_manage_screen_time
+    required: true
+    options:
+      - id: "a"
+        label: "Reduce overall usage"
+      - id: "b"
+        label: "Improve productivity / focus"
+      - id: "c"
+        label: "Sleep better"
+      - id: "d"
+        label: "Reduce social media use"
+      - id: "e"
+        label: "Spend more time with family or friends"
+      - id: "f"
+        label: "Mental health and wellbeing"
+      - id: "g"
+        label: "Reduce eye strain or headaches"
+      - id: "h"
+        label: "Simple curiosity"
+      - id: "i"
+        label: "Managing my children's usage"
+      - id: "j"
+        label: "I'm not particularly motivated to"
+  - id: q7
+    prompt: "On average, how many hours per day do you spend on screens for personal (non-work) use? Enter a whole number."
+    type: free_text
+    construct: average_many_hours_per_day
+    required: true
+  - id: q8
+    prompt: "Which category of app or activity uses the most of your screen time?"
+    type: single_choice
+    construct: category_app_activity_uses_most
+    required: true
+    options:
+      - id: "a"
+        label: "Social media"
+      - id: "b"
+        label: "Video streaming"
+      - id: "c"
+        label: "Games"
+      - id: "d"
+        label: "Messaging"
+      - id: "e"
+        label: "Web browsing"
+      - id: "f"
+        label: "Productivity / work"
+      - id: "g"
+        label: "News"
+      - id: "h"
+        label: "Other"
+  - id: q9
+    prompt: "How accurate do you think your own guess of your screen time is compared with the actual number?"
+    type: single_choice
+    construct: accurate_think_own_guess_screen
+    required: true
+    options:
+      - id: "a"
+        label: "Very accurate"
+      - id: "b"
+        label: "Somewhat accurate"
+      - id: "c"
+        label: "I usually underestimate it"
+      - id: "d"
+        label: "I usually overestimate it"
+      - id: "e"
+        label: "I have no idea"
+  - id: q10
+    prompt: "On how many days in a typical week do you meet your screen-time goal or limit? Enter a whole number from 0 to 7."
+    type: free_text
+    construct: many_days_typical_week_meet
+    required: true
+  - id: q11
+    prompt: "Roughly how many times per day do you pick up or unlock your phone? Enter a whole number."
+    type: free_text
+    construct: roughly_many_times_per_day
+    required: true
+  - id: q12
+    prompt: "How much do you agree with the following statement about your screen use? I spend too much time on screens."
+    type: single_choice
+    construct: much_agree_following_statement_screen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement about your screen use? Tracking my screen time has helped me reduce it."
+    type: single_choice
+    construct: much_agree_following_statement_screen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement about your screen use? Screen time limits are too easy to bypass to be effective."
+    type: single_choice
+    construct: much_agree_following_statement_screen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement about your screen use? I feel anxious or restless when I'm away from my phone."
+    type: single_choice
+    construct: much_agree_following_statement_screen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about your screen use? Screen time reports make me feel guilty."
+    type: single_choice
+    construct: much_agree_following_statement_screen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about your screen use? I'm satisfied with my current balance between screen time and other activities."
+    type: single_choice
+    construct: much_agree_following_statement_screen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about your screen use? Social media is my biggest time sink."
+    type: single_choice
+    construct: much_agree_following_statement_screen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How often do you feel you use your devices more than you'd like?"
+    type: single_choice
+    construct: often_feel_use_devices_more
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q20
+    prompt: "How important is each reason for managing your screen time? Improving productivity and focus."
+    type: single_choice
+    construct: important_each_reason_managing_screen
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each reason for managing your screen time? Getting better sleep."
+    type: single_choice
+    construct: important_each_reason_managing_screen
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each reason for managing your screen time? Mental health and wellbeing."
+    type: single_choice
+    construct: important_each_reason_managing_screen
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each reason for managing your screen time? Spending more time with family and friends."
+    type: single_choice
+    construct: important_each_reason_managing_screen
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each reason for managing your screen time? Reducing eye strain and physical discomfort."
+    type: single_choice
+    construct: important_each_reason_managing_screen
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "Select the top 3 strategies that work best for you to control screen time. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_strategies_that
+    required: true
+    options:
+      - id: "a"
+        label: "App time limits"
+      - id: "b"
+        label: "Turning off notifications"
+      - id: "c"
+        label: "Grayscale or dimming the screen"
+      - id: "d"
+        label: "Keeping the phone in another room"
+      - id: "e"
+        label: "Scheduled downtime / bedtime"
+      - id: "f"
+        label: "Deleting or hiding tempting apps"
+      - id: "g"
+        label: "Focus modes"
+      - id: "h"
+        label: "Accountability with others"
+      - id: "i"
+        label: "Nothing really works for me"
+  - id: q26
+    prompt: "Which activities would you most like to cut down on? (Select all that apply)"
+    type: multi_choice
+    construct: activities_would_most_like_cut
+    required: true
+    options:
+      - id: "a"
+        label: "Social media scrolling"
+      - id: "b"
+        label: "Video streaming / binge-watching"
+      - id: "c"
+        label: "Gaming"
+      - id: "d"
+        label: "News reading"
+      - id: "e"
+        label: "Messaging"
+      - id: "f"
+        label: "Web browsing"
+      - id: "g"
+        label: "None — I'm happy with my usage"
+  - id: q27
+    prompt: "Do you use a \"bedtime\" or \"wind-down\" mode to reduce screen use before sleep?"
+    type: single_choice
+    construct: use_bedtime_wind_down_mode
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, every night"
+      - id: "b"
+        label: "Yes, most nights"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "No, but I'd like to"
+      - id: "e"
+        label: "No"
+  - id: q28
+    prompt: "Have your screen-time habits changed over the past year?"
+    type: single_choice
+    construct: have_screen_time_habits_changed
+    required: true
+    options:
+      - id: "a"
+        label: "Decreased a lot"
+      - id: "b"
+        label: "Decreased somewhat"
+      - id: "c"
+        label: "Stayed about the same"
+      - id: "d"
+        label: "Increased somewhat"
+      - id: "e"
+        label: "Increased a lot"
+  - id: q29
+    prompt: "How would you rate your overall satisfaction with your digital balance?"
+    type: single_choice
+    construct: would_rate_overall_satisfaction_digital
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How confident are you in your ability to control your own screen time?"
+    type: single_choice
+    construct: confident_ability_control_own_screen
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q31
+    prompt: "How likely are you to actively try to reduce your screen time in the next 12 months?"
+    type: single_choice
+    construct: likely_actively_try_reduce_screen
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q32
+    prompt: "On a scale of 0 to 10, how likely are you to recommend screen-time tracking to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q33
+    prompt: "If you could change one thing about your screen habits, what would it be? (Optional short answer)"
+    type: free_text
+    construct: if_could_change_one_thing
+    required: false
+  - id: q34
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18-24"
+      - id: "c"
+        label: "25-34"
+      - id: "d"
+        label: "35-44"
+      - id: "e"
+        label: "45-54"
+      - id: "f"
+        label: "55-64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000-$49,999"
+      - id: "c"
+        label: "$50,000-$74,999"
+      - id: "d"
+        label: "$75,000-$99,999"
+      - id: "e"
+        label: "$100,000-$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Homemaker"
+      - id: "f"
+        label: "Unemployed"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "How many people live in your household, including yourself? Enter a whole number."
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q41
+    prompt: "What is your relationship status?"
+    type: single_choice
+    construct: relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or domestic partnership"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Do you have children under 18 living in your household?"
+    type: single_choice
+    construct: have_children_under_18_living
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q44
+    prompt: "How would you describe where you live?"
+    type: single_choice
+    construct: would_describe_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q45
+    prompt: "Which mobile platform do you primarily use?"
+    type: single_choice
+    construct: mobile_platform_primarily_use
+    required: true
+    options:
+      - id: "a"
+        label: "iPhone (iOS)"
+      - id: "b"
+        label: "Android"
+      - id: "c"
+        label: "Both about equally"
+      - id: "d"
+        label: "I don't use a smartphone"
+  - id: q46
+    prompt: "How would you describe your comfort with technology in general?"
+    type: single_choice
+    construct: would_describe_comfort_technology_genera
+    required: true
+    options:
+      - id: "a"
+        label: "I'm an early adopter who loves new tech"
+      - id: "b"
+        label: "Comfortable and fairly up to date"
+      - id: "c"
+        label: "Average — I use what I need"
+      - id: "d"
+        label: "A bit behind the curve"
+      - id: "e"
+        label: "I find new technology difficult"

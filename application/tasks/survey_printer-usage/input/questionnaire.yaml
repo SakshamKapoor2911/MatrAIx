@@ -1,0 +1,744 @@
+schemaVersion: "1.0"
+id: printer_usage_v1
+title: "Printer Usage Survey"
+description: "Home and personal printer ownership and use — printer types and brands, what people print, ink and toner costs, reliability, and satisfaction."
+questions:
+  - id: q0
+    prompt: "Do you own or have regular access to a printer at home?"
+    type: single_choice
+    construct: own_have_regular_access_printer
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I own one"
+      - id: "b"
+        label: "Yes, I share one in my household"
+      - id: "c"
+        label: "No, I use printers at work, school, or a print shop"
+      - id: "d"
+        label: "No, I rarely need to print"
+  - id: q1
+    prompt: "How long have you owned your current printer?"
+    type: single_choice
+    construct: long_have_owned_current_printer
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "I don't own one"
+  - id: q2
+    prompt: "What type of printer do you primarily use?"
+    type: single_choice
+    construct: type_printer_primarily_use
+    required: true
+    options:
+      - id: "a"
+        label: "Inkjet"
+      - id: "b"
+        label: "Laser (black and white)"
+      - id: "c"
+        label: "Color laser"
+      - id: "d"
+        label: "All-in-one (print/scan/copy)"
+      - id: "e"
+        label: "Photo printer"
+      - id: "f"
+        label: "Ink tank / supertank (e.g., EcoTank)"
+      - id: "g"
+        label: "Not sure"
+  - id: q3
+    prompt: "Which printer brand do you own?"
+    type: single_choice
+    construct: printer_brand_own
+    required: true
+    options:
+      - id: "a"
+        label: "HP"
+      - id: "b"
+        label: "Canon"
+      - id: "c"
+        label: "Epson"
+      - id: "d"
+        label: "Brother"
+      - id: "e"
+        label: "Lexmark"
+      - id: "f"
+        label: "Samsung / Xerox"
+      - id: "g"
+        label: "Other"
+      - id: "h"
+        label: "Not sure"
+  - id: q4
+    prompt: "What do you primarily use your printer for? (Select all that apply)"
+    type: multi_choice
+    construct: primarily_use_printer_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Documents for work"
+      - id: "b"
+        label: "Documents for personal/home use"
+      - id: "c"
+        label: "School or homework"
+      - id: "d"
+        label: "Photos"
+      - id: "e"
+        label: "Shipping labels"
+      - id: "f"
+        label: "Forms and paperwork"
+      - id: "g"
+        label: "Tickets, coupons, boarding passes"
+      - id: "h"
+        label: "Crafts / creative projects"
+      - id: "i"
+        label: "Scanning documents"
+      - id: "j"
+        label: "Making copies"
+  - id: q5
+    prompt: "Roughly how many pages do you print in a typical month? Enter a whole number."
+    type: free_text
+    construct: roughly_many_pages_print_typical
+    required: true
+  - id: q6
+    prompt: "How often do you print something?"
+    type: single_choice
+    construct: often_print_something
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "About once a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Once a month or less"
+      - id: "f"
+        label: "Rarely / almost never"
+  - id: q7
+    prompt: "How do you usually print? (Select all that apply)"
+    type: multi_choice
+    construct: usually_print_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "USB cable from a computer"
+      - id: "b"
+        label: "Home Wi-Fi network"
+      - id: "c"
+        label: "Mobile app or wireless from phone/tablet"
+      - id: "d"
+        label: "Cloud printing (e.g., Google Cloud Print, AirPrint)"
+      - id: "e"
+        label: "Email-to-print"
+      - id: "f"
+        label: "Not sure"
+  - id: q8
+    prompt: "Do you print mostly in color or black and white?"
+    type: single_choice
+    construct: print_mostly_color_black_white
+    required: true
+    options:
+      - id: "a"
+        label: "Almost always black and white"
+      - id: "b"
+        label: "Mostly black and white"
+      - id: "c"
+        label: "About half and half"
+      - id: "d"
+        label: "Mostly color"
+      - id: "e"
+        label: "Almost always color"
+  - id: q9
+    prompt: "What type of ink or toner do you buy?"
+    type: single_choice
+    construct: type_ink_toner_buy
+    required: true
+    options:
+      - id: "a"
+        label: "Manufacturer-brand (OEM) cartridges"
+      - id: "b"
+        label: "Third-party / compatible cartridges"
+      - id: "c"
+        label: "Refilled cartridges"
+      - id: "d"
+        label: "Ink tank refills (bottles)"
+      - id: "e"
+        label: "A subscription service (e.g., HP Instant Ink)"
+      - id: "f"
+        label: "Not sure"
+  - id: q10
+    prompt: "Roughly how much do you spend on ink or toner per year? Enter a whole-dollar amount (US$)."
+    type: free_text
+    construct: roughly_much_spend_ink_toner
+    required: true
+  - id: q11
+    prompt: "When buying a printer, how important is the purchase price?"
+    type: single_choice
+    construct: when_buying_printer_important_purchase
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q12
+    prompt: "When buying a printer, how important is the cost of ink/toner over time?"
+    type: single_choice
+    construct: when_buying_printer_important_cost
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q13
+    prompt: "When buying a printer, how important is print quality?"
+    type: single_choice
+    construct: when_buying_printer_important_print
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q14
+    prompt: "When buying a printer, how important is wireless / mobile printing?"
+    type: single_choice
+    construct: when_buying_printer_important_wireless
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q15
+    prompt: "When buying a printer, how important are scanning and copying features?"
+    type: single_choice
+    construct: when_buying_printer_important_scanning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "When buying a printer, how important is print speed?"
+    type: single_choice
+    construct: when_buying_printer_important_print
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "Which THREE factors matter most when choosing a printer? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: three_factors_matter_most_when
+    required: true
+    options:
+      - id: "a"
+        label: "Purchase price"
+      - id: "b"
+        label: "Ink/toner cost"
+      - id: "c"
+        label: "Print quality"
+      - id: "d"
+        label: "Wireless printing"
+      - id: "e"
+        label: "Scan/copy features"
+      - id: "f"
+        label: "Print speed"
+      - id: "g"
+        label: "Reliability"
+      - id: "h"
+        label: "Size / footprint"
+      - id: "i"
+        label: "Brand reputation"
+  - id: q18
+    prompt: "How much do you agree: The cost of ink or toner is too high."
+    type: single_choice
+    construct: much_agree_cost_ink_toner
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: My printer is reliable and rarely gives me trouble."
+    type: single_choice
+    construct: much_agree_my_printer_reliable
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: I print less than I used to."
+    type: single_choice
+    construct: much_agree_i_print_less
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: Setting up wireless printing was easy for me."
+    type: single_choice
+    construct: much_agree_setting_up_wireless
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: I feel locked into buying my printer brand's ink or toner."
+    type: single_choice
+    construct: much_agree_i_feel_locked
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How often do you experience printer problems (jams, connectivity, errors)?"
+    type: single_choice
+    construct: often_experience_printer_problems_jams
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q24
+    prompt: "What printer problems have you experienced? (Select all that apply)"
+    type: multi_choice
+    construct: printer_problems_have_experienced_select
+    required: true
+    options:
+      - id: "a"
+        label: "Paper jams"
+      - id: "b"
+        label: "Wireless/connectivity issues"
+      - id: "c"
+        label: "Ink drying out or clogging"
+      - id: "d"
+        label: "Poor print quality / streaks"
+      - id: "e"
+        label: "Cartridge not recognized"
+      - id: "f"
+        label: "Slow printing"
+      - id: "g"
+        label: "Driver or software problems"
+      - id: "h"
+        label: "Running out of ink unexpectedly"
+      - id: "i"
+        label: "No significant problems"
+  - id: q25
+    prompt: "Do you subscribe to an ink or toner replenishment service?"
+    type: single_choice
+    construct: subscribe_ink_toner_replenishment_servic
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I've considered it"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not sure"
+  - id: q26
+    prompt: "Where do you buy ink or toner? (Select all that apply)"
+    type: multi_choice
+    construct: where_buy_ink_toner_select
+    required: true
+    options:
+      - id: "a"
+        label: "Amazon"
+      - id: "b"
+        label: "Best Buy / Staples / Office Depot"
+      - id: "c"
+        label: "Walmart or Target"
+      - id: "d"
+        label: "Manufacturer's website"
+      - id: "e"
+        label: "Third-party / generic seller"
+      - id: "f"
+        label: "Warehouse club (Costco, Sam's)"
+      - id: "g"
+        label: "Subscription auto-delivery"
+  - id: q27
+    prompt: "What do you do when you don't have access to your own printer?"
+    type: single_choice
+    construct: when_don_t_have_access
+    required: true
+    options:
+      - id: "a"
+        label: "Use a printer at work or school"
+      - id: "b"
+        label: "Go to a print/copy shop (e.g., FedEx, UPS Store)"
+      - id: "c"
+        label: "Ask a friend or family member"
+      - id: "d"
+        label: "Use a library"
+      - id: "e"
+        label: "Avoid printing / go digital"
+      - id: "f"
+        label: "This never happens"
+  - id: q28
+    prompt: "Have you considered getting rid of your printer to go paperless?"
+    type: single_choice
+    construct: have_considered_getting_rid_printer
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, seriously"
+      - id: "b"
+        label: "I've thought about it"
+      - id: "c"
+        label: "No, I still need it"
+      - id: "d"
+        label: "I don't own one anyway"
+  - id: q29
+    prompt: "Overall, how satisfied are you with your current printer?"
+    type: single_choice
+    construct: overall_satisfied_current_printer
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How likely are you to buy a new printer in the next 12 months?"
+    type: single_choice
+    construct: likely_buy_new_printer_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "How likely are you to recommend your current printer to others? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_current_printer_others
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "What one thing would most improve your printing experience?"
+    type: free_text
+    construct: one_thing_would_most_improve
+    required: true
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18-24"
+      - id: "b"
+        label: "25-34"
+      - id: "c"
+        label: "35-44"
+      - id: "d"
+        label: "45-54"
+      - id: "e"
+        label: "55-64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000-$49,999"
+      - id: "c"
+        label: "$50,000-$74,999"
+      - id: "d"
+        label: "$75,000-$99,999"
+      - id: "e"
+        label: "$100,000-$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Not currently employed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "How many people live in your household, including you?"
+    type: single_choice
+    construct: many_people_live_household_including
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q40
+    prompt: "Do any children under 18 live in your household?"
+    type: single_choice
+    construct: any_children_under_18_live
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "Do you work from home at least part of the time?"
+    type: single_choice
+    construct: work_from_home_least_part
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, full-time remote"
+      - id: "b"
+        label: "Yes, hybrid or part-time"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not currently working"
+  - id: q42
+    prompt: "Which best describes where you live?"
+    type: single_choice
+    construct: best_describes_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q43
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"

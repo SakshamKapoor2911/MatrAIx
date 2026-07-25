@@ -1,0 +1,656 @@
+schemaVersion: "1.0"
+id: wire_transfer_usage_v1
+title: "Wire Transfer Usage Survey"
+description: "How people send and receive wire transfers and other large money transfers, and how they handle fees and fraud risk."
+questions:
+  - id: q0
+    prompt: "Have you ever sent or received a wire transfer or large electronic money transfer?"
+    type: single_choice
+    construct: have_ever_sent_received_wire
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I've done both"
+      - id: "b"
+        label: "Yes, I've sent one"
+      - id: "c"
+        label: "Yes, I've received one"
+      - id: "d"
+        label: "No, never"
+  - id: q1
+    prompt: "In the past 12 months, how often did you send a wire transfer or large money transfer?"
+    type: single_choice
+    construct: past_12_months_often_did
+    required: true
+    options:
+      - id: "a"
+        label: "Several times a month"
+      - id: "b"
+        label: "About once a month"
+      - id: "c"
+        label: "A few times"
+      - id: "d"
+        label: "Once"
+      - id: "e"
+        label: "Not at all"
+  - id: q2
+    prompt: "What types of transfers have you used? (Select all that apply)"
+    type: multi_choice
+    construct: types_transfers_have_used_select
+    required: true
+    options:
+      - id: "a"
+        label: "Domestic bank wire"
+      - id: "b"
+        label: "International bank wire"
+      - id: "c"
+        label: "A money transfer service (e.g., Western Union, MoneyGram)"
+      - id: "d"
+        label: "An online transfer service (e.g., Wise, Remitly, Xoom)"
+      - id: "e"
+        label: "A peer-to-peer app for a large transfer (e.g., Zelle, PayPal)"
+      - id: "f"
+        label: "A wire through a title or escrow company"
+      - id: "g"
+        label: "None of these"
+  - id: q3
+    prompt: "What have you most often used wire transfers or large transfers for? (Select all that apply)"
+    type: multi_choice
+    construct: have_most_often_used_wire
+    required: true
+    options:
+      - id: "a"
+        label: "A home purchase or real estate closing"
+      - id: "b"
+        label: "Paying a business or contractor"
+      - id: "c"
+        label: "Sending money to family"
+      - id: "d"
+        label: "Sending money abroad"
+      - id: "e"
+        label: "Moving money between my own accounts"
+      - id: "f"
+        label: "A large purchase (car, tuition, etc.)"
+      - id: "g"
+        label: "Receiving a payment owed to me"
+      - id: "h"
+        label: "None of these"
+  - id: q4
+    prompt: "How did you send your most recent wire or large transfer?"
+    type: single_choice
+    construct: did_send_most_recent_wire
+    required: true
+    options:
+      - id: "a"
+        label: "In person at a bank branch"
+      - id: "b"
+        label: "Through my bank's website or app"
+      - id: "c"
+        label: "Through a money transfer service in person"
+      - id: "d"
+        label: "Through an online transfer app"
+      - id: "e"
+        label: "Not applicable"
+  - id: q5
+    prompt: "Thinking of your most recent wire or large transfer, about how much did you send? Please enter a dollar amount (enter 0 if not applicable)."
+    type: free_text
+    construct: thinking_most_recent_wire_large
+    required: true
+  - id: q6
+    prompt: "About how much did you pay in fees for that transfer? Please enter a dollar amount (enter 0 if none or not applicable)."
+    type: free_text
+    construct: much_did_pay_fees_that
+    required: true
+  - id: q7
+    prompt: "About how many wire or large transfers did you send in the past 12 months? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: many_wire_large_transfers_did
+    required: true
+  - id: q8
+    prompt: "Was your most recent transfer domestic or international?"
+    type: single_choice
+    construct: was_most_recent_transfer_domestic
+    required: true
+    options:
+      - id: "a"
+        label: "Domestic (within the same country)"
+      - id: "b"
+        label: "International (to another country)"
+      - id: "c"
+        label: "Not applicable"
+  - id: q9
+    prompt: "How would you rate the fee you paid on your most recent transfer?"
+    type: single_choice
+    construct: would_rate_fee_paid_most
+    required: true
+    options:
+      - id: "a"
+        label: "Very reasonable"
+      - id: "b"
+        label: "Somewhat reasonable"
+      - id: "c"
+        label: "Somewhat high"
+      - id: "d"
+        label: "Very high"
+      - id: "e"
+        label: "Not applicable"
+  - id: q10
+    prompt: "When choosing how to send a large transfer, what matters most to you? (Select up to 3)"
+    type: single_choice
+    construct: when_choosing_send_large_transfer
+    required: true
+    options:
+      - id: "a"
+        label: "Low fees"
+      - id: "b"
+        label: "Speed of delivery"
+      - id: "c"
+        label: "Security and fraud protection"
+      - id: "d"
+        label: "A good exchange rate (for international)"
+      - id: "e"
+        label: "Ease of use"
+      - id: "f"
+        label: "Trust in the provider"
+      - id: "g"
+        label: "Recipient's convenience in receiving it"
+      - id: "h"
+        label: "Transfer limits that fit my needs"
+  - id: q11
+    prompt: "How much do you agree with the following statement about wire and large transfers? The fees are too high."
+    type: single_choice
+    construct: much_agree_following_statement_wire
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement about wire and large transfers? The process is confusing or hard to complete."
+    type: single_choice
+    construct: much_agree_following_statement_wire
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement about wire and large transfers? I worry about scams or sending money to the wrong place."
+    type: single_choice
+    construct: much_agree_following_statement_wire
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement about wire and large transfers? The money arrives quickly."
+    type: single_choice
+    construct: much_agree_following_statement_wire
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement about wire and large transfers? I trust my bank to handle them securely."
+    type: single_choice
+    construct: much_agree_following_statement_wire
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How important is each of the following to you when sending a transfer? Low fees."
+    type: single_choice
+    construct: important_each_following_when_sending
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "How important is each of the following to you when sending a transfer? Speed of delivery."
+    type: single_choice
+    construct: important_each_following_when_sending
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each of the following to you when sending a transfer? Security and fraud protection."
+    type: single_choice
+    construct: important_each_following_when_sending
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is each of the following to you when sending a transfer? A good exchange rate."
+    type: single_choice
+    construct: important_each_following_when_sending
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is each of the following to you when sending a transfer? Ease of use."
+    type: single_choice
+    construct: important_each_following_when_sending
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "Before sending a large transfer, how often do you compare fees or rates across providers?"
+    type: single_choice
+    construct: before_sending_large_transfer_often
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "How concerned are you about wire transfer fraud or scams?"
+    type: single_choice
+    construct: concerned_wire_transfer_fraud_scams
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q23
+    prompt: "Have you or someone you know ever been targeted by a wire transfer scam?"
+    type: single_choice
+    construct: have_someone_know_ever_been
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I have been targeted"
+      - id: "b"
+        label: "Yes, someone I know has"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not sure"
+  - id: q24
+    prompt: "What steps do you take to make sure a transfer is safe? (Select all that apply)"
+    type: multi_choice
+    construct: steps_take_make_sure_transfer
+    required: true
+    options:
+      - id: "a"
+        label: "Verify the recipient's details by phone or in person"
+      - id: "b"
+        label: "Double-check account and routing numbers"
+      - id: "c"
+        label: "Only use providers I trust"
+      - id: "d"
+        label: "Confirm before releasing large amounts"
+      - id: "e"
+        label: "Ask my bank to review the transfer"
+      - id: "f"
+        label: "I don't take special steps"
+  - id: q25
+    prompt: "How long did your most recent transfer take to arrive?"
+    type: single_choice
+    construct: long_did_most_recent_transfer
+    required: true
+    options:
+      - id: "a"
+        label: "Within a few hours"
+      - id: "b"
+        label: "Same day"
+      - id: "c"
+        label: "1–2 business days"
+      - id: "d"
+        label: "3 or more business days"
+      - id: "e"
+        label: "Not applicable"
+  - id: q26
+    prompt: "Did your most recent transfer go through without any problems?"
+    type: single_choice
+    construct: did_most_recent_transfer_go
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, no problems"
+      - id: "b"
+        label: "There was a minor delay"
+      - id: "c"
+        label: "There was a significant problem"
+      - id: "d"
+        label: "Not applicable"
+  - id: q27
+    prompt: "How likely are you to send another wire or large transfer in the next 12 months?"
+    type: single_choice
+    construct: likely_send_another_wire_large
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q28
+    prompt: "Overall, how satisfied are you with your most recent transfer experience?"
+    type: single_choice
+    construct: overall_satisfied_most_recent_transfer
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q29
+    prompt: "How likely are you to recommend your main transfer provider to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: likely_recommend_main_transfer_provider
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q30
+    prompt: "Is there anything you'd like to share about your experience with wire or large transfers? (Optional; write a short answer or enter \"none\".)"
+    type: free_text
+    construct: there_anything_d_like_share
+    required: false
+  - id: q31
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q32
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q36
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed, looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed and not looking"
+  - id: q37
+    prompt: "Were you born outside the United States or do you regularly send money to another country?"
+    type: single_choice
+    construct: were_born_outside_united_states
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, born outside the U.S."
+      - id: "b"
+        label: "Yes, I regularly send money abroad"
+      - id: "c"
+        label: "Both of the above"
+      - id: "d"
+        label: "Neither"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q41
+    prompt: "What type of area do you live in?"
+    type: single_choice
+    construct: type_area_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

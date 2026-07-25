@@ -1,0 +1,856 @@
+schemaVersion: "1.0"
+id: skincare_routine_habits_v1
+title: "Skincare Routine Habits Survey"
+description: "People's daily skincare routines, the products and ingredients they use, and their attitudes toward skincare."
+questions:
+  - id: q0
+    prompt: "How would you describe your current skincare routine?"
+    type: single_choice
+    construct: would_describe_current_skincare_routine
+    required: true
+    options:
+      - id: "a"
+        label: "Extensive, multiple steps daily"
+      - id: "b"
+        label: "A moderate routine"
+      - id: "c"
+        label: "A simple routine"
+      - id: "d"
+        label: "Only the basics when I remember"
+      - id: "e"
+        label: "I don't really have a routine"
+  - id: q1
+    prompt: "How long have you had a regular skincare routine?"
+    type: single_choice
+    construct: long_have_had_regular_skincare
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "4 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "I don't have a regular routine"
+  - id: q2
+    prompt: "How many steps are in your typical morning routine?"
+    type: single_choice
+    construct: many_steps_typical_morning_routine
+    required: true
+    options:
+      - id: "a"
+        label: "0 steps"
+      - id: "b"
+        label: "1 to 2 steps"
+      - id: "c"
+        label: "3 to 4 steps"
+      - id: "d"
+        label: "5 to 6 steps"
+      - id: "e"
+        label: "7 or more steps"
+  - id: q3
+    prompt: "How many steps are in your typical evening routine?"
+    type: single_choice
+    construct: many_steps_typical_evening_routine
+    required: true
+    options:
+      - id: "a"
+        label: "0 steps"
+      - id: "b"
+        label: "1 to 2 steps"
+      - id: "c"
+        label: "3 to 4 steps"
+      - id: "d"
+        label: "5 to 6 steps"
+      - id: "e"
+        label: "7 or more steps"
+  - id: q4
+    prompt: "How would you describe your skin type?"
+    type: single_choice
+    construct: would_describe_skin_type
+    required: true
+    options:
+      - id: "a"
+        label: "Dry"
+      - id: "b"
+        label: "Oily"
+      - id: "c"
+        label: "Combination"
+      - id: "d"
+        label: "Normal"
+      - id: "e"
+        label: "Sensitive"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q5
+    prompt: "Which products do you use regularly? (Select all that apply)"
+    type: multi_choice
+    construct: products_use_regularly_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Cleanser"
+      - id: "b"
+        label: "Moisturizer"
+      - id: "c"
+        label: "Sunscreen"
+      - id: "d"
+        label: "Serum"
+      - id: "e"
+        label: "Toner"
+      - id: "f"
+        label: "Exfoliant"
+      - id: "g"
+        label: "Eye cream"
+      - id: "h"
+        label: "Face mask"
+      - id: "i"
+        label: "Retinol or retinoid"
+      - id: "j"
+        label: "Facial oil"
+  - id: q6
+    prompt: "Which active ingredients do you look for? (Select all that apply)"
+    type: multi_choice
+    construct: active_ingredients_look_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Hyaluronic acid"
+      - id: "b"
+        label: "Vitamin C"
+      - id: "c"
+        label: "Niacinamide"
+      - id: "d"
+        label: "Retinol"
+      - id: "e"
+        label: "Salicylic acid"
+      - id: "f"
+        label: "Glycolic or lactic acid"
+      - id: "g"
+        label: "Ceramides"
+      - id: "h"
+        label: "Peptides"
+      - id: "i"
+        label: "I don't pay attention to ingredients"
+  - id: q7
+    prompt: "Which skincare brands do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: skincare_brands_currently_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "CeraVe"
+      - id: "b"
+        label: "The Ordinary"
+      - id: "c"
+        label: "Cetaphil"
+      - id: "d"
+        label: "Neutrogena"
+      - id: "e"
+        label: "La Roche-Posay"
+      - id: "f"
+        label: "Paula's Choice"
+      - id: "g"
+        label: "Drunk Elephant"
+      - id: "h"
+        label: "Olay"
+      - id: "i"
+        label: "A department-store or luxury brand"
+      - id: "j"
+        label: "Other"
+  - id: q8
+    prompt: "Where do you usually buy your skincare products? (Select all that apply)"
+    type: multi_choice
+    construct: where_usually_buy_skincare_products
+    required: true
+    options:
+      - id: "a"
+        label: "Drugstore or pharmacy"
+      - id: "b"
+        label: "Sephora or Ulta"
+      - id: "c"
+        label: "Online marketplaces"
+      - id: "d"
+        label: "Brand websites"
+      - id: "e"
+        label: "Department stores"
+      - id: "f"
+        label: "A dermatologist or clinic"
+      - id: "g"
+        label: "Grocery or big-box stores"
+  - id: q9
+    prompt: "About how much do you spend on skincare products in a typical month, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_spend_skincare_products_typical
+    required: true
+  - id: q10
+    prompt: "About how many skincare products do you currently use in your routine? Please enter a number."
+    type: free_text
+    construct: many_skincare_products_currently_use
+    required: true
+  - id: q11
+    prompt: "What are your main goals for your skincare routine? (Select all that apply)"
+    type: multi_choice
+    construct: main_goals_skincare_routine_select
+    required: true
+    options:
+      - id: "a"
+        label: "Keep skin hydrated"
+      - id: "b"
+        label: "Prevent signs of aging"
+      - id: "c"
+        label: "Even out skin tone"
+      - id: "d"
+        label: "Control oil or breakouts"
+      - id: "e"
+        label: "Soothe sensitivity"
+      - id: "f"
+        label: "Sun protection"
+      - id: "g"
+        label: "Maintain a healthy glow"
+      - id: "h"
+        label: "Relaxation and self-care"
+  - id: q12
+    prompt: "How much do you agree: A skincare routine is an important part of my day."
+    type: single_choice
+    construct: much_agree_skincare_routine_important
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree: I enjoy my skincare routine as a form of self-care."
+    type: single_choice
+    construct: much_agree_i_enjoy_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: I see real results from my skincare products."
+    type: single_choice
+    construct: much_agree_i_see_real
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: I research ingredients before buying skincare."
+    type: single_choice
+    construct: much_agree_i_research_ingredients
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: Skincare products are worth the money I spend on them."
+    type: single_choice
+    construct: much_agree_skincare_products_worth
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: I feel confident choosing the right products for my skin."
+    type: single_choice
+    construct: much_agree_i_feel_confident
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "When choosing a skincare product, how important is price?"
+    type: single_choice
+    construct: when_choosing_skincare_product_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "When choosing a skincare product, how important is the ingredient list?"
+    type: single_choice
+    construct: when_choosing_skincare_product_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "When choosing a skincare product, how important is brand reputation?"
+    type: single_choice
+    construct: when_choosing_skincare_product_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "When choosing a skincare product, how important are online reviews?"
+    type: single_choice
+    construct: when_choosing_skincare_product_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When choosing a skincare product, how important is being fragrance-free or gentle?"
+    type: single_choice
+    construct: when_choosing_skincare_product_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing a skincare product, how important is cruelty-free or clean labeling?"
+    type: single_choice
+    construct: when_choosing_skincare_product_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "Which are your top 3 goals for your skincare routine? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_goals_skincare_routine
+    required: true
+    options:
+      - id: "a"
+        label: "Hydration"
+      - id: "b"
+        label: "Anti-aging"
+      - id: "c"
+        label: "Even skin tone"
+      - id: "d"
+        label: "Clear skin"
+      - id: "e"
+        label: "Sun protection"
+      - id: "f"
+        label: "Soothing sensitivity"
+      - id: "g"
+        label: "A healthy glow"
+      - id: "h"
+        label: "Self-care and relaxation"
+  - id: q25
+    prompt: "Which of these keep you from having a more consistent routine? (Select all that apply)"
+    type: multi_choice
+    construct: these_keep_from_having_more
+    required: true
+    options:
+      - id: "a"
+        label: "Lack of time"
+      - id: "b"
+        label: "Cost of products"
+      - id: "c"
+        label: "Too many options to choose from"
+      - id: "d"
+        label: "Not sure what works"
+      - id: "e"
+        label: "Forgetting steps"
+      - id: "f"
+        label: "Products causing irritation"
+      - id: "g"
+        label: "Nothing holds me back"
+  - id: q26
+    prompt: "How do you decide which products to buy? (Select all that apply)"
+    type: multi_choice
+    construct: decide_products_buy_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Online reviews"
+      - id: "b"
+        label: "Social media or influencers"
+      - id: "c"
+        label: "Recommendations from friends or family"
+      - id: "d"
+        label: "A dermatologist's advice"
+      - id: "e"
+        label: "In-store testers or staff"
+      - id: "f"
+        label: "Personal trial and error"
+      - id: "g"
+        label: "Ingredient research"
+  - id: q27
+    prompt: "How often do you use sunscreen as part of your routine?"
+    type: single_choice
+    construct: often_use_sunscreen_as_part
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Most days"
+      - id: "e"
+        label: "Every day"
+  - id: q28
+    prompt: "How often do you try new skincare products?"
+    type: single_choice
+    construct: often_try_new_skincare_products
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "A few times a year"
+      - id: "c"
+        label: "Every couple of months"
+      - id: "d"
+        label: "Monthly"
+      - id: "e"
+        label: "Very frequently"
+  - id: q29
+    prompt: "How often do you follow your full routine as intended?"
+    type: single_choice
+    construct: often_follow_full_routine_as
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q30
+    prompt: "Have you ever consulted a dermatologist about your skincare?"
+    type: single_choice
+    construct: have_ever_consulted_dermatologist_skinca
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, once or a few times"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No, and I don't plan to"
+  - id: q31
+    prompt: "How much do you rely on social media for skincare advice?"
+    type: single_choice
+    construct: much_rely_social_media_skincare
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "It's my main source"
+  - id: q32
+    prompt: "How confident are you in the current products you use?"
+    type: single_choice
+    construct: confident_current_products_use
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q33
+    prompt: "How satisfied are you with the results of your skincare routine?"
+    type: single_choice
+    construct: satisfied_results_skincare_routine
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How satisfied are you with the value for money of your skincare products?"
+    type: single_choice
+    construct: satisfied_value_money_skincare_products
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "Overall, how satisfied are you with your skincare routine?"
+    type: single_choice
+    construct: overall_satisfied_skincare_routine
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "How likely are you to recommend your favorite skincare product to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_favorite_skincare_produ
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q37
+    prompt: "How likely are you to add a new step to your routine in the next year?"
+    type: single_choice
+    construct: likely_add_new_step_routine
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "How likely are you to switch to a different main skincare brand in the next year?"
+    type: single_choice
+    construct: likely_switch_different_main_skincare
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q39
+    prompt: "What would improve your skincare routine? (Optional short answer)"
+    type: free_text
+    construct: would_improve_skincare_routine_optional
+    required: false
+  - id: q40
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q41
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q46
+    prompt: "How many people live in your household, including yourself?"
+    type: single_choice
+    construct: many_people_live_household_including
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q47
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "In a domestic partnership"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q49
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

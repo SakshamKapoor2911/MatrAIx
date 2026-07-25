@@ -1,0 +1,636 @@
+schemaVersion: "1.0"
+id: foreign_exchange_v1
+title: "Foreign Exchange and Currency Survey"
+description: "How people exchange and spend foreign currency, mainly for travel and cross-border needs."
+questions:
+  - id: q0
+    prompt: "In the past 3 years, have you needed foreign currency or spent money in another currency?"
+    type: single_choice
+    construct: past_3_years_have_needed
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several times"
+      - id: "b"
+        label: "Yes, once or twice"
+      - id: "c"
+        label: "No, but I expect to"
+      - id: "d"
+        label: "No, and I don't expect to"
+  - id: q1
+    prompt: "What were your main reasons for needing foreign currency? (Select all that apply)"
+    type: multi_choice
+    construct: were_main_reasons_needing_foreign
+    required: true
+    options:
+      - id: "a"
+        label: "International travel or vacation"
+      - id: "b"
+        label: "Business travel"
+      - id: "c"
+        label: "Sending money to family abroad"
+      - id: "d"
+        label: "Buying goods from overseas"
+      - id: "e"
+        label: "Studying or living abroad"
+      - id: "f"
+        label: "Investing in foreign assets"
+      - id: "g"
+        label: "None of these"
+  - id: q2
+    prompt: "How often do you travel internationally?"
+    type: single_choice
+    construct: often_travel_internationally
+    required: true
+    options:
+      - id: "a"
+        label: "Several times a year"
+      - id: "b"
+        label: "About once a year"
+      - id: "c"
+        label: "Every few years"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q3
+    prompt: "When you need foreign currency for travel, how do you usually get it? (Select all that apply)"
+    type: multi_choice
+    construct: when_need_foreign_currency_travel
+    required: true
+    options:
+      - id: "a"
+        label: "Withdraw local cash from an ATM abroad"
+      - id: "b"
+        label: "Exchange cash at a bank before leaving"
+      - id: "c"
+        label: "Exchange at an airport currency counter"
+      - id: "d"
+        label: "Order currency online in advance"
+      - id: "e"
+        label: "Use a currency exchange kiosk abroad"
+      - id: "f"
+        label: "Just use my cards and rarely carry cash"
+      - id: "g"
+        label: "Use a travel or multi-currency card (e.g., Wise, Revolut)"
+  - id: q4
+    prompt: "When traveling abroad, how do you mostly pay for things?"
+    type: single_choice
+    construct: when_traveling_abroad_mostly_pay
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly local cash"
+      - id: "b"
+        label: "Mostly credit or debit cards"
+      - id: "c"
+        label: "A mix of cash and cards"
+      - id: "d"
+        label: "Mostly a travel/multi-currency card"
+      - id: "e"
+        label: "Mostly a mobile wallet"
+  - id: q5
+    prompt: "Thinking of your most recent trip abroad, about how much foreign currency did you exchange or spend? Please enter an amount in U.S. dollars (enter 0 if not applicable)."
+    type: free_text
+    construct: thinking_most_recent_trip_abroad
+    required: true
+  - id: q6
+    prompt: "About how much do you estimate you paid in currency exchange fees or markups on that trip? Please enter a dollar amount (enter 0 if none or not applicable)."
+    type: free_text
+    construct: much_estimate_paid_currency_exchange
+    required: true
+  - id: q7
+    prompt: "About how many countries have you visited that use a currency other than your own? Please enter a number."
+    type: free_text
+    construct: many_countries_have_visited_that
+    required: true
+  - id: q8
+    prompt: "How aware are you of the exchange rate when you convert money?"
+    type: single_choice
+    construct: aware_exchange_rate_when_convert
+    required: true
+    options:
+      - id: "a"
+        label: "I always check the current rate"
+      - id: "b"
+        label: "I usually check it"
+      - id: "c"
+        label: "I check it occasionally"
+      - id: "d"
+        label: "I rarely check it"
+      - id: "e"
+        label: "I never pay attention to it"
+  - id: q9
+    prompt: "When paying by card abroad, do you know whether your card charges foreign transaction fees?"
+    type: single_choice
+    construct: when_paying_by_card_abroad
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I use a card with no foreign fees"
+      - id: "b"
+        label: "Yes, and my card does charge them"
+      - id: "c"
+        label: "I'm not sure"
+      - id: "d"
+        label: "I don't use cards abroad"
+  - id: q10
+    prompt: "When a foreign card terminal asks whether to charge in your home currency or the local currency, what do you usually choose?"
+    type: single_choice
+    construct: when_foreign_card_terminal_asks
+    required: true
+    options:
+      - id: "a"
+        label: "Local currency"
+      - id: "b"
+        label: "My home currency"
+      - id: "c"
+        label: "It depends"
+      - id: "d"
+        label: "I don't know what this means"
+      - id: "e"
+        label: "Not applicable"
+  - id: q11
+    prompt: "How much do you agree with the following statement? Currency exchange fees and markups are hard to understand."
+    type: single_choice
+    construct: much_agree_following_statement_currency
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement? I shop around to get the best exchange rate."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement? Airport and hotel currency exchanges give poor rates."
+    type: single_choice
+    construct: much_agree_following_statement_airport
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement? Using cards abroad is safer than carrying cash."
+    type: single_choice
+    construct: much_agree_following_statement_using
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement? Exchange rate changes affect my travel budget."
+    type: single_choice
+    construct: much_agree_following_statement_exchange
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How important is each of the following when you exchange currency? Getting the best exchange rate."
+    type: single_choice
+    construct: important_each_following_when_exchange
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "How important is each of the following when you exchange currency? Low or no fees."
+    type: single_choice
+    construct: important_each_following_when_exchange
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each of the following when you exchange currency? Convenience and speed."
+    type: single_choice
+    construct: important_each_following_when_exchange
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is each of the following when you exchange currency? Safety and security."
+    type: single_choice
+    construct: important_each_following_when_exchange
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "Which methods do you trust most for getting a good deal on currency? (Select up to 3)"
+    type: single_choice
+    construct: methods_trust_most_getting_good
+    required: true
+    options:
+      - id: "a"
+        label: "ATMs abroad"
+      - id: "b"
+        label: "My home bank"
+      - id: "c"
+        label: "A travel/multi-currency card (e.g., Wise, Revolut)"
+      - id: "d"
+        label: "Credit cards with no foreign fees"
+      - id: "e"
+        label: "Online currency ordering"
+      - id: "f"
+        label: "Airport or in-person exchange counters"
+      - id: "g"
+        label: "Mobile wallets"
+  - id: q21
+    prompt: "Have you ever used a multi-currency or travel-focused account (e.g., Wise, Revolut)?"
+    type: single_choice
+    construct: have_ever_used_multi_currency
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I use one regularly"
+      - id: "b"
+        label: "Yes, I've tried one"
+      - id: "c"
+        label: "No, but I'm aware of them"
+      - id: "d"
+        label: "No, I've never heard of them"
+  - id: q22
+    prompt: "Do you ever follow or track exchange rates outside of travel (e.g., for investing or curiosity)?"
+    type: single_choice
+    construct: ever_follow_track_exchange_rates
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Occasionally"
+      - id: "c"
+        label: "Only around a trip"
+      - id: "d"
+        label: "Never"
+  - id: q23
+    prompt: "Have you ever traded currencies as an investment (retail forex trading)?"
+    type: single_choice
+    construct: have_ever_traded_currencies_as
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, currently"
+      - id: "b"
+        label: "Yes, in the past"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No, never"
+  - id: q24
+    prompt: "How often do you have leftover foreign cash after a trip?"
+    type: single_choice
+    construct: often_have_leftover_foreign_cash
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+      - id: "f"
+        label: "Not applicable"
+  - id: q25
+    prompt: "What do you usually do with leftover foreign currency? (Select all that apply)"
+    type: multi_choice
+    construct: usually_leftover_foreign_currency_select
+    required: true
+    options:
+      - id: "a"
+        label: "Keep it for a future trip"
+      - id: "b"
+        label: "Exchange it back to my home currency"
+      - id: "c"
+        label: "Spend it before leaving"
+      - id: "d"
+        label: "Give it away or donate it"
+      - id: "e"
+        label: "It just sits unused"
+      - id: "f"
+        label: "Not applicable"
+  - id: q26
+    prompt: "How confident are you that you get a fair deal when exchanging currency?"
+    type: single_choice
+    construct: confident_that_get_fair_deal
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q27
+    prompt: "How concerned are you about hidden fees or poor rates when exchanging money?"
+    type: single_choice
+    construct: concerned_hidden_fees_poor_rates
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q28
+    prompt: "Overall, how satisfied are you with the options available to you for exchanging currency?"
+    type: single_choice
+    construct: overall_satisfied_options_available_exch
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "How likely are you to use a travel or multi-currency card on your next trip abroad?"
+    type: single_choice
+    construct: likely_use_travel_multi_currency
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q30
+    prompt: "Is there anything you'd like to share about exchanging or spending foreign currency? (Optional; write a short answer or enter \"none\".)"
+    type: free_text
+    construct: there_anything_d_like_share
+    required: false
+  - id: q31
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q32
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q36
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed, looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed and not looking"
+  - id: q37
+    prompt: "Do you hold citizenship or close family ties in more than one country?"
+    type: single_choice
+    construct: hold_citizenship_close_family_ties
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q41
+    prompt: "What type of area do you live in?"
+    type: single_choice
+    construct: type_area_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

@@ -1,0 +1,620 @@
+schemaVersion: "1.0"
+id: patient_portal_usage_v1
+title: "Patient Portal Usage Survey"
+description: "Consumer use of, experience with, and satisfaction with online patient portals for managing care."
+questions:
+  - id: q0
+    prompt: "Has a health care provider ever offered you online access to a patient portal?"
+    type: single_choice
+    construct: has_health_care_provider_ever
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"
+  - id: q1
+    prompt: "Do you currently have an account on at least one patient portal?"
+    type: single_choice
+    construct: currently_have_account_least_one
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I had one before"
+      - id: "c"
+        label: "No, never"
+  - id: q2
+    prompt: "Which patient portal systems do you use? (Select all that apply)"
+    type: multi_choice
+    construct: patient_portal_systems_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "MyChart (Epic)"
+      - id: "b"
+        label: "FollowMyHealth"
+      - id: "c"
+        label: "A portal from athenahealth"
+      - id: "d"
+        label: "A portal from Cerner or Oracle Health"
+      - id: "e"
+        label: "My insurer's member portal"
+      - id: "f"
+        label: "My pharmacy's portal or app"
+      - id: "g"
+        label: "Another portal"
+      - id: "h"
+        label: "I do not use any patient portal"
+  - id: q3
+    prompt: "About how many separate patient portals do you have accounts on? Please enter a number."
+    type: free_text
+    construct: many_separate_patient_portals_have
+    required: true
+  - id: q4
+    prompt: "How often do you log in to a patient portal?"
+    type: single_choice
+    construct: often_log_patient_portal
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "A few times a year"
+      - id: "c"
+        label: "About once a month"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Weekly or more"
+  - id: q5
+    prompt: "How do you usually access your patient portal?"
+    type: single_choice
+    construct: usually_access_patient_portal
+    required: true
+    options:
+      - id: "a"
+        label: "A mobile app"
+      - id: "b"
+        label: "A website on my phone browser"
+      - id: "c"
+        label: "A website on a computer"
+      - id: "d"
+        label: "Both app and website"
+      - id: "e"
+        label: "Not sure"
+  - id: q6
+    prompt: "In the past 12 months, how many times did you log in to your main patient portal? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: past_12_months_many_times
+    required: true
+  - id: q7
+    prompt: "Which tasks have you used a patient portal for in the past 12 months? (Select all that apply)"
+    type: multi_choice
+    construct: tasks_have_used_patient_portal
+    required: true
+    options:
+      - id: "a"
+        label: "View lab or test results"
+      - id: "b"
+        label: "Message a doctor or care team"
+      - id: "c"
+        label: "Schedule or change an appointment"
+      - id: "d"
+        label: "Request a prescription refill"
+      - id: "e"
+        label: "View or download my medical records"
+      - id: "f"
+        label: "Pay a bill or view charges"
+      - id: "g"
+        label: "Check or update my insurance information"
+      - id: "h"
+        label: "Complete forms before a visit"
+      - id: "i"
+        label: "View after-visit summaries or clinical notes"
+      - id: "j"
+        label: "None of these"
+  - id: q8
+    prompt: "Which task do you use the portal for MOST often?"
+    type: single_choice
+    construct: task_use_portal_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Viewing test results"
+      - id: "b"
+        label: "Messaging providers"
+      - id: "c"
+        label: "Scheduling appointments"
+      - id: "d"
+        label: "Prescription refills"
+      - id: "e"
+        label: "Viewing records or notes"
+      - id: "f"
+        label: "Paying bills"
+      - id: "g"
+        label: "Something else"
+  - id: q9
+    prompt: "How easy or difficult is your patient portal to use overall?"
+    type: single_choice
+    construct: easy_difficult_patient_portal_use
+    required: true
+    options:
+      - id: "a"
+        label: "Very difficult"
+      - id: "b"
+        label: "Somewhat difficult"
+      - id: "c"
+        label: "Neither easy nor difficult"
+      - id: "d"
+        label: "Somewhat easy"
+      - id: "e"
+        label: "Very easy"
+  - id: q10
+    prompt: "When you send a message to your care team through the portal, how satisfied are you with the response?"
+    type: single_choice
+    construct: when_send_message_care_team
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I have never messaged my care team"
+  - id: q11
+    prompt: "How much do you agree or disagree: The portal makes it easier to manage my health care."
+    type: single_choice
+    construct: much_agree_disagree_portal_makes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: I can find what I need in the portal without much trouble."
+    type: single_choice
+    construct: much_agree_disagree_i_can
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: The health information in my portal is easy to understand."
+    type: single_choice
+    construct: much_agree_disagree_health_information
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I trust that my information in the portal is kept private and secure."
+    type: single_choice
+    construct: much_agree_disagree_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: Having multiple separate portals is frustrating."
+    type: single_choice
+    construct: much_agree_disagree_having_multiple
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+      - id: "f"
+        label: "Not applicable, I only have one"
+  - id: q16
+    prompt: "How satisfied are you with each portal feature — Viewing test results"
+    type: single_choice
+    construct: satisfied_each_portal_feature_viewing
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I do not use this feature"
+  - id: q17
+    prompt: "How satisfied are you with each portal feature — Messaging your care team"
+    type: single_choice
+    construct: satisfied_each_portal_feature_messaging
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I do not use this feature"
+  - id: q18
+    prompt: "How satisfied are you with each portal feature — Scheduling appointments"
+    type: single_choice
+    construct: satisfied_each_portal_feature_scheduling
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I do not use this feature"
+  - id: q19
+    prompt: "How satisfied are you with each portal feature — Prescription refills"
+    type: single_choice
+    construct: satisfied_each_portal_feature_prescripti
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I do not use this feature"
+  - id: q20
+    prompt: "How satisfied are you with each portal feature — Paying bills"
+    type: single_choice
+    construct: satisfied_each_portal_feature_paying
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I do not use this feature"
+  - id: q21
+    prompt: "In the past 12 months, have you viewed a test result in the portal before your provider discussed it with you?"
+    type: single_choice
+    construct: past_12_months_have_viewed
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I was comfortable doing so"
+      - id: "b"
+        label: "Yes, but I would have preferred to hear from my provider first"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I did not have any tests"
+  - id: q22
+    prompt: "Do you manage a patient portal on behalf of someone else (e.g., a child or older parent)?"
+    type: single_choice
+    construct: manage_patient_portal_behalf_someone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q23
+    prompt: "What most keeps you from using a patient portal more often? (Select all that apply)"
+    type: multi_choice
+    construct: most_keeps_from_using_patient
+    required: true
+    options:
+      - id: "a"
+        label: "I prefer to call the office"
+      - id: "b"
+        label: "The portal is hard to navigate"
+      - id: "c"
+        label: "Slow or unhelpful responses"
+      - id: "d"
+        label: "I forget my login"
+      - id: "e"
+        label: "Privacy or security concerns"
+      - id: "f"
+        label: "I do not have much need to"
+      - id: "g"
+        label: "My providers use different portals"
+      - id: "h"
+        label: "Nothing keeps me from using it"
+  - id: q24
+    prompt: "Have you ever used an app to combine records from more than one portal into one place (e.g., Apple Health)?"
+    type: single_choice
+    construct: have_ever_used_app_combine
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I would like to"
+      - id: "c"
+        label: "No, and I am not interested"
+  - id: q25
+    prompt: "Which improvements would most increase your use of patient portals? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: improvements_would_most_increase_use
+    required: true
+    options:
+      - id: "a"
+        label: "Faster message responses"
+      - id: "b"
+        label: "One login across all my providers"
+      - id: "c"
+        label: "Easier-to-understand results"
+      - id: "d"
+        label: "A better mobile app"
+      - id: "e"
+        label: "More appointment types available online"
+      - id: "f"
+        label: "Clearer billing information"
+      - id: "g"
+        label: "Better appointment reminders"
+      - id: "h"
+        label: "Stronger privacy protections"
+      - id: "i"
+        label: "Video visit access in the portal"
+      - id: "j"
+        label: "Family or caregiver access options"
+  - id: q26
+    prompt: "Overall, how satisfied are you with your patient portal experience?"
+    type: single_choice
+    construct: overall_satisfied_patient_portal_experie
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q27
+    prompt: "How likely are you to use a patient portal for your care over the next year?"
+    type: single_choice
+    construct: likely_use_patient_portal_care
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q28
+    prompt: "Overall, how likely are you to recommend using a patient portal to a friend or family member? Please use a 0 to 10 scale, where 0 is not at all likely and 10 is extremely likely. Please enter a number."
+    type: free_text
+    construct: overall_likely_recommend_using_patient
+    required: true
+  - id: q29
+    prompt: "What is your age? Please enter a number (years old)."
+    type: free_text
+    construct: age_please_enter_number_years
+    required: true
+  - id: q30
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q34
+    prompt: "How comfortable are you using computers, apps, and the internet in general?"
+    type: single_choice
+    construct: comfortable_using_computers_apps_interne
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Extremely comfortable"
+  - id: q35
+    prompt: "Do you currently have health insurance coverage?"
+    type: single_choice
+    construct: currently_have_health_insurance_coverage
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, through an employer"
+      - id: "b"
+        label: "Yes, through a government program (Medicare, Medicaid, etc.)"
+      - id: "c"
+        label: "Yes, purchased on my own"
+      - id: "d"
+        label: "No, I am uninsured"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q37
+    prompt: "In which region of the United States do you live?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q38
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q39
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"

@@ -1,0 +1,7 @@
+# Vector Database Usage
+
+How developers choose and use vector databases for retrieval-augmented generation, semantic search, and other AI applications.
+
+## About this survey
+
+This survey profiles vector database usage, opening with a screener on frequency, tenure, and primary use case. It records the main vector database along with the databases, embedding providers, frameworks, and applications respondents use, their deployment model, distance metric, indexing method, hybrid-search and metadata-filtering practices, and how they chose their database, plus numeric questions on index size and embedding dimension. Attitudes are captured with an agreement Likert battery on how essential vector databases are, complexity trade-offs, sufficiency of extensions like pgvector, and lock-in concerns, and a per-item importance matrix over database-selection criteria, along with frequency scales on re-indexing and relevance problems and a top-three ranking of decision factors. Later sections cover challenges faced, satisfaction with performance, relevance, and the database overall, followed by recommendation likelihood on a 0–10 scale and adoption and expansion intent. Question types include single-choice, multi-select, Likert agreement, importance, frequency and satisfaction scales, two matrix batteries, a ranking item, and numeric and open free-text. The survey closes with a demographic block covering role, professional experience, employment, company size, industry, team AI maturity, age, gender, race and ethnicity, education, U.S. region, and urbanicity.

@@ -1,0 +1,881 @@
+schemaVersion: "1.0"
+id: angel_startup_investing_v1
+title: "Angel and Startup Investing Survey"
+description: "How individuals invest in early-stage startups as angels or through equity crowdfunding, and their risk tolerance."
+questions:
+  - id: q0
+    prompt: "Have you ever invested in an early-stage startup?"
+    type: single_choice
+    construct: have_ever_invested_early_stage
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several times"
+      - id: "b"
+        label: "Yes, a few times"
+      - id: "c"
+        label: "Yes, once"
+      - id: "d"
+        label: "No, but I am interested"
+      - id: "e"
+        label: "No, and I am not interested"
+  - id: q1
+    prompt: "How long have you been investing in startups?"
+    type: single_choice
+    construct: long_have_been_investing_startups
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "I have never invested in startups"
+  - id: q2
+    prompt: "Which best describes how you invest in startups?"
+    type: single_choice
+    construct: best_describes_invest_startups
+    required: true
+    options:
+      - id: "a"
+        label: "Direct angel investments in companies"
+      - id: "b"
+        label: "Through equity crowdfunding platforms"
+      - id: "c"
+        label: "Through an angel syndicate or group"
+      - id: "d"
+        label: "As a limited partner in a venture fund"
+      - id: "e"
+        label: "A mix of these approaches"
+  - id: q3
+    prompt: "Which platforms or channels have you used to invest? (Select all that apply)"
+    type: multi_choice
+    construct: platforms_channels_have_used_invest
+    required: true
+    options:
+      - id: "a"
+        label: "AngelList / Republic"
+      - id: "b"
+        label: "Wefunder"
+      - id: "c"
+        label: "StartEngine"
+      - id: "d"
+        label: "SeedInvest"
+      - id: "e"
+        label: "An angel group or syndicate"
+      - id: "f"
+        label: "Direct deals I sourced myself"
+      - id: "g"
+        label: "A venture capital fund"
+      - id: "h"
+        label: "None of these"
+  - id: q4
+    prompt: "Which sectors have you invested in? (Select all that apply)"
+    type: multi_choice
+    construct: sectors_have_invested_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Software or SaaS"
+      - id: "b"
+        label: "Consumer products or apps"
+      - id: "c"
+        label: "Fintech"
+      - id: "d"
+        label: "Health or biotech"
+      - id: "e"
+        label: "Clean energy or climate"
+      - id: "f"
+        label: "Artificial intelligence"
+      - id: "g"
+        label: "Hardware or robotics"
+      - id: "h"
+        label: "Food and beverage"
+  - id: q5
+    prompt: "What is your primary motivation for startup investing?"
+    type: single_choice
+    construct: primary_motivation_startup_investing
+    required: true
+    options:
+      - id: "a"
+        label: "Potential for outsized financial returns"
+      - id: "b"
+        label: "Supporting founders and innovation"
+      - id: "c"
+        label: "Portfolio diversification"
+      - id: "d"
+        label: "Learning and staying connected to new ideas"
+      - id: "e"
+        label: "Access to deals through my network"
+      - id: "f"
+        label: "Personal passion for a cause or industry"
+  - id: q6
+    prompt: "How do you source deals? (Select all that apply)"
+    type: multi_choice
+    construct: source_deals_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Personal or professional network"
+      - id: "b"
+        label: "Equity crowdfunding platforms"
+      - id: "c"
+        label: "Angel groups or syndicates"
+      - id: "d"
+        label: "Demo days or pitch events"
+      - id: "e"
+        label: "Referrals from other investors"
+      - id: "f"
+        label: "Accelerators or incubators"
+      - id: "g"
+        label: "Cold inbound from founders"
+  - id: q7
+    prompt: "About how much have you invested in startups in total, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_have_invested_startups_total
+    required: true
+  - id: q8
+    prompt: "How many startups are currently in your portfolio? Please enter a number."
+    type: free_text
+    construct: many_startups_currently_portfolio_please
+    required: true
+  - id: q9
+    prompt: "What is your typical check size for a single startup investment, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: typical_check_size_single_startup
+    required: true
+  - id: q10
+    prompt: "What share of your total net worth is invested in startups?"
+    type: single_choice
+    construct: share_total_net_worth_invested
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 percent"
+      - id: "b"
+        label: "1 to 5 percent"
+      - id: "c"
+        label: "6 to 10 percent"
+      - id: "d"
+        label: "11 to 25 percent"
+      - id: "e"
+        label: "26 to 50 percent"
+      - id: "f"
+        label: "More than 50 percent"
+  - id: q11
+    prompt: "Are you an accredited investor?"
+    type: single_choice
+    construct: accredited_investor
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "I am not sure"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q12
+    prompt: "Have any of your startup investments had an exit (acquisition or IPO)?"
+    type: single_choice
+    construct: have_any_startup_investments_had
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, with a profit"
+      - id: "b"
+        label: "Yes, but at a loss"
+      - id: "c"
+        label: "Yes, roughly breaking even"
+      - id: "d"
+        label: "No exits yet"
+      - id: "e"
+        label: "Not applicable"
+  - id: q13
+    prompt: "How much do you agree: Most of my startup investments will fail, but a few winners will make up for it."
+    type: single_choice
+    construct: much_agree_most_my_startup
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: I invest only money I can afford to lose entirely."
+    type: single_choice
+    construct: much_agree_i_invest_only
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: Equity crowdfunding has opened startup investing to people like me."
+    type: single_choice
+    construct: much_agree_equity_crowdfunding_has
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: I do thorough due diligence before I invest."
+    type: single_choice
+    construct: much_agree_i_thorough_due
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: The founding team matters more than the idea."
+    type: single_choice
+    construct: much_agree_founding_team_matters
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: I worry my startup investments are too illiquid."
+    type: single_choice
+    construct: much_agree_i_worry_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How concerned are you about total loss of capital on a given investment?"
+    type: single_choice
+    construct: concerned_total_loss_capital_given
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q20
+    prompt: "How concerned are you about the long time horizon before any return?"
+    type: single_choice
+    construct: concerned_long_time_horizon_before
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q21
+    prompt: "How concerned are you about dilution in later funding rounds?"
+    type: single_choice
+    construct: concerned_dilution_later_funding_rounds
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q22
+    prompt: "How concerned are you about a lack of information after you invest?"
+    type: single_choice
+    construct: concerned_lack_information_after_invest
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q23
+    prompt: "How concerned are you about fraud or misrepresentation by founders?"
+    type: single_choice
+    construct: concerned_fraud_misrepresentation_by_fou
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q24
+    prompt: "When evaluating a startup, how important is the founding team?"
+    type: single_choice
+    construct: when_evaluating_startup_important_foundi
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When evaluating a startup, how important is the size of the market opportunity?"
+    type: single_choice
+    construct: when_evaluating_startup_important_size
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When evaluating a startup, how important is early traction or revenue?"
+    type: single_choice
+    construct: when_evaluating_startup_important_early
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When evaluating a startup, how important is the valuation and deal terms?"
+    type: single_choice
+    construct: when_evaluating_startup_important_valuat
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When evaluating a startup, how important is the product or technology?"
+    type: single_choice
+    construct: when_evaluating_startup_important_produc
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "When evaluating a startup, how important is who else is investing?"
+    type: single_choice
+    construct: when_evaluating_startup_important_who
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "Which are your top 3 factors when deciding to invest in a startup? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_deciding
+    required: true
+    options:
+      - id: "a"
+        label: "The founding team"
+      - id: "b"
+        label: "Market size"
+      - id: "c"
+        label: "Traction or revenue"
+      - id: "d"
+        label: "Valuation and terms"
+      - id: "e"
+        label: "Product or technology"
+      - id: "f"
+        label: "Other investors involved"
+      - id: "g"
+        label: "The business model"
+      - id: "h"
+        label: "Personal interest in the space"
+  - id: q31
+    prompt: "How involved are you with the startups you invest in?"
+    type: single_choice
+    construct: involved_startups_invest
+    required: true
+    options:
+      - id: "a"
+        label: "Very involved — I advise or mentor"
+      - id: "b"
+        label: "Somewhat involved — occasional help"
+      - id: "c"
+        label: "I offer help only if asked"
+      - id: "d"
+        label: "Passive — I just provide capital"
+      - id: "e"
+        label: "Not applicable"
+  - id: q32
+    prompt: "How often do you make a new startup investment?"
+    type: single_choice
+    construct: often_make_new_startup_investment
+    required: true
+    options:
+      - id: "a"
+        label: "Monthly or more"
+      - id: "b"
+        label: "Every few months"
+      - id: "c"
+        label: "A few times a year"
+      - id: "d"
+        label: "About once a year"
+      - id: "e"
+        label: "Less than once a year"
+  - id: q33
+    prompt: "What is your expected time horizon for a return on a startup investment?"
+    type: single_choice
+    construct: expected_time_horizon_return_startup
+    required: true
+    options:
+      - id: "a"
+        label: "1 to 3 years"
+      - id: "b"
+        label: "4 to 6 years"
+      - id: "c"
+        label: "7 to 10 years"
+      - id: "d"
+        label: "More than 10 years"
+      - id: "e"
+        label: "I have no fixed expectation"
+  - id: q34
+    prompt: "How do you handle taxes on your startup investments?"
+    type: single_choice
+    construct: handle_taxes_startup_investments
+    required: true
+    options:
+      - id: "a"
+        label: "An accountant or tax professional"
+      - id: "b"
+        label: "Tax software"
+      - id: "c"
+        label: "I handle it myself"
+      - id: "d"
+        label: "I have not had a taxable event yet"
+      - id: "e"
+        label: "Not applicable"
+  - id: q35
+    prompt: "How would you rate your knowledge of startup investing?"
+    type: single_choice
+    construct: would_rate_knowledge_startup_investing
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert"
+  - id: q36
+    prompt: "How satisfied are you with the returns from your startup investments so far?"
+    type: single_choice
+    construct: satisfied_returns_from_startup_investmen
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "How satisfied are you with the quality of deals you have access to?"
+    type: single_choice
+    construct: satisfied_quality_deals_have_access
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "Overall, how satisfied are you with your startup investing experience?"
+    type: single_choice
+    construct: overall_satisfied_startup_investing_expe
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q39
+    prompt: "How likely are you to recommend startup investing to a peer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_startup_investing_peer
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q40
+    prompt: "How likely are you to make a new startup investment in the next year?"
+    type: single_choice
+    construct: likely_make_new_startup_investment
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q41
+    prompt: "How likely are you to increase your startup allocation over the next year?"
+    type: single_choice
+    construct: likely_increase_startup_allocation_over
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What would help you invest in more startups, or what holds you back? (Optional short answer)"
+    type: free_text
+    construct: would_help_invest_more_startups
+    required: false
+  - id: q43
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q44
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $50,000"
+      - id: "b"
+        label: "$50,000 to $99,999"
+      - id: "c"
+        label: "$100,000 to $149,999"
+      - id: "d"
+        label: "$150,000 to $249,999"
+      - id: "e"
+        label: "$250,000 to $499,999"
+      - id: "f"
+        label: "$500,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "What is your approximate investable net worth?"
+    type: single_choice
+    construct: approximate_investable_net_worth
+    required: true
+    options:
+      - id: "a"
+        label: "Under $100,000"
+      - id: "b"
+        label: "$100,000 to $499,999"
+      - id: "c"
+        label: "$500,000 to $999,999"
+      - id: "d"
+        label: "$1 million to $4.9 million"
+      - id: "e"
+        label: "$5 million or more"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q49
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Business owner or entrepreneur"
+      - id: "d"
+        label: "Independent contractor or freelancer"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q50
+    prompt: "How many people, including yourself, live in your household?"
+    type: single_choice
+    construct: many_people_including_yourself_live
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q51
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "In a domestic partnership"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q52
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

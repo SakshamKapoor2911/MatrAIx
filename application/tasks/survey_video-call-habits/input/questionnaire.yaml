@@ -1,0 +1,913 @@
+schemaVersion: "1.0"
+id: video_call_habits_v1
+title: "Video Call Habits Survey"
+description: "How people use video calling and video conferencing across work and personal life, including the apps, devices, and features they rely on."
+questions:
+  - id: q0
+    prompt: "Do you make or join video calls (calls where you can see the other person on a screen)?"
+    type: single_choice
+    construct: make_join_video_calls_calls
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "No, never"
+  - id: q1
+    prompt: "About how long have you been using video calling apps?"
+    type: single_choice
+    construct: long_have_been_using_video
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "More than 5 years"
+  - id: q2
+    prompt: "On a typical week, how many video calls do you take part in?"
+    type: single_choice
+    construct: typical_week_many_video_calls
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1 to 2"
+      - id: "c"
+        label: "3 to 5"
+      - id: "d"
+        label: "6 to 10"
+      - id: "e"
+        label: "11 to 20"
+      - id: "f"
+        label: "More than 20"
+  - id: q3
+    prompt: "Which of the following do you use video calls for? (Select all that apply)"
+    type: multi_choice
+    construct: following_use_video_calls_select
+    required: true
+    options:
+      - id: "a"
+        label: "Work meetings"
+      - id: "b"
+        label: "One-on-one calls with coworkers or clients"
+      - id: "c"
+        label: "Job interviews"
+      - id: "d"
+        label: "Keeping in touch with family"
+      - id: "e"
+        label: "Keeping in touch with friends"
+      - id: "f"
+        label: "Online classes or training"
+      - id: "g"
+        label: "Telehealth or doctor visits"
+      - id: "h"
+        label: "Online events, webinars, or conferences"
+      - id: "i"
+        label: "Dating"
+      - id: "j"
+        label: "Customer or technical support"
+      - id: "k"
+        label: "Other"
+  - id: q4
+    prompt: "Which video calling apps or services have you used in the past 3 months? (Select all that apply)"
+    type: multi_choice
+    construct: video_calling_apps_services_have
+    required: true
+    options:
+      - id: "a"
+        label: "Zoom"
+      - id: "b"
+        label: "Microsoft Teams"
+      - id: "c"
+        label: "Google Meet"
+      - id: "d"
+        label: "FaceTime"
+      - id: "e"
+        label: "WhatsApp video"
+      - id: "f"
+        label: "Facebook Messenger / Messenger Rooms"
+      - id: "g"
+        label: "Discord"
+      - id: "h"
+        label: "Slack huddles or calls"
+      - id: "i"
+        label: "Skype"
+      - id: "j"
+        label: "Cisco Webex"
+      - id: "k"
+        label: "Signal"
+      - id: "l"
+        label: "Telegram"
+      - id: "m"
+        label: "Snapchat"
+      - id: "n"
+        label: "Other"
+  - id: q5
+    prompt: "Which video calling app do you use most often overall?"
+    type: single_choice
+    construct: video_calling_app_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Zoom"
+      - id: "b"
+        label: "Microsoft Teams"
+      - id: "c"
+        label: "Google Meet"
+      - id: "d"
+        label: "FaceTime"
+      - id: "e"
+        label: "WhatsApp video"
+      - id: "f"
+        label: "Facebook Messenger"
+      - id: "g"
+        label: "Discord"
+      - id: "h"
+        label: "Skype"
+      - id: "i"
+        label: "Cisco Webex"
+      - id: "j"
+        label: "Other"
+  - id: q6
+    prompt: "Which device do you use most often for video calls?"
+    type: single_choice
+    construct: device_use_most_often_video
+    required: true
+    options:
+      - id: "a"
+        label: "Laptop"
+      - id: "b"
+        label: "Desktop computer"
+      - id: "c"
+        label: "Smartphone"
+      - id: "d"
+        label: "Tablet"
+      - id: "e"
+        label: "Smart display or TV device (e.g., Echo Show, Portal, Nest Hub)"
+  - id: q7
+    prompt: "For work-related video calls specifically, which app does your organization use most? (Select all that apply)"
+    type: multi_choice
+    construct: work_related_video_calls_specifically
+    required: true
+    options:
+      - id: "a"
+        label: "Zoom"
+      - id: "b"
+        label: "Microsoft Teams"
+      - id: "c"
+        label: "Google Meet"
+      - id: "d"
+        label: "Cisco Webex"
+      - id: "e"
+        label: "Slack"
+      - id: "f"
+        label: "Other"
+      - id: "g"
+        label: "I don't take work video calls"
+  - id: q8
+    prompt: "On an average day, roughly how many minutes do you spend on video calls?"
+    type: free_text
+    construct: average_day_roughly_many_minutes
+    required: true
+  - id: q9
+    prompt: "How often do you turn your camera on during video calls?"
+    type: single_choice
+    construct: often_turn_camera_during_video
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q10
+    prompt: "Which of the following do you use during video calls? (Select all that apply)"
+    type: multi_choice
+    construct: following_use_during_video_calls
+    required: true
+    options:
+      - id: "a"
+        label: "Virtual or blurred background"
+      - id: "b"
+        label: "Screen sharing"
+      - id: "c"
+        label: "Chat / text messages"
+      - id: "d"
+        label: "Reactions or emojis"
+      - id: "e"
+        label: "Raise-hand feature"
+      - id: "f"
+        label: "Recording the call"
+      - id: "g"
+        label: "Live captions or subtitles"
+      - id: "h"
+        label: "Breakout rooms"
+      - id: "i"
+        label: "Whiteboard"
+      - id: "j"
+        label: "Filters or beauty effects"
+      - id: "k"
+        label: "None of these"
+  - id: q11
+    prompt: "How often do you use a virtual or blurred background?"
+    type: single_choice
+    construct: often_use_virtual_blurred_background
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q12
+    prompt: "Which external hardware do you use for video calls? (Select all that apply)"
+    type: multi_choice
+    construct: external_hardware_use_video_calls
+    required: true
+    options:
+      - id: "a"
+        label: "Built-in laptop or phone camera only"
+      - id: "b"
+        label: "External webcam"
+      - id: "c"
+        label: "Wired headset or earbuds"
+      - id: "d"
+        label: "Wireless headset or earbuds"
+      - id: "e"
+        label: "External microphone"
+      - id: "f"
+        label: "Ring light or external lighting"
+      - id: "g"
+        label: "Second monitor"
+      - id: "h"
+        label: "None of these"
+  - id: q13
+    prompt: "How would you rate the audio and video quality you typically experience on calls?"
+    type: single_choice
+    construct: would_rate_audio_video_quality
+    required: true
+    options:
+      - id: "a"
+        label: "Very poor"
+      - id: "b"
+        label: "Poor"
+      - id: "c"
+        label: "Acceptable"
+      - id: "d"
+        label: "Good"
+      - id: "e"
+        label: "Excellent"
+  - id: q14
+    prompt: "How often do you experience the following on video calls — Frozen or laggy video"
+    type: single_choice
+    construct: often_experience_following_video_calls
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q15
+    prompt: "How often do you experience the following on video calls — Audio dropping out or echo"
+    type: single_choice
+    construct: often_experience_following_video_calls
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q16
+    prompt: "How often do you experience the following on video calls — Getting disconnected"
+    type: single_choice
+    construct: often_experience_following_video_calls
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q17
+    prompt: "How often do you experience the following on video calls — Trouble joining or finding the meeting link"
+    type: single_choice
+    construct: often_experience_following_video_calls
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q18
+    prompt: "How often do you experience the following on video calls — People talking over each other"
+    type: single_choice
+    construct: often_experience_following_video_calls
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q19
+    prompt: "Please rate your agreement — Video calls help me feel more connected to people"
+    type: single_choice
+    construct: please_rate_agreement_video_calls
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Please rate your agreement — I often feel tired or drained after a day of video calls"
+    type: single_choice
+    construct: please_rate_agreement_i_often
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "Please rate your agreement — I am self-conscious about how I look on camera"
+    type: single_choice
+    construct: please_rate_agreement_i_am
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "Please rate your agreement — Video calls are as effective as meeting in person for most purposes"
+    type: single_choice
+    construct: please_rate_agreement_video_calls
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "Please rate your agreement — I would prefer a phone call or message over a video call in most situations"
+    type: single_choice
+    construct: please_rate_agreement_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "How often do you multitask (e.g., check email, browse) during video calls?"
+    type: single_choice
+    construct: often_multitask_e_g_check
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q25
+    prompt: "When you have a choice, how do you prefer to attend meetings?"
+    type: single_choice
+    construct: when_have_choice_prefer_attend
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly prefer in person"
+      - id: "b"
+        label: "Slightly prefer in person"
+      - id: "c"
+        label: "No preference"
+      - id: "d"
+        label: "Slightly prefer video call"
+      - id: "e"
+        label: "Strongly prefer video call"
+  - id: q26
+    prompt: "Which of these bother you most about video calls? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: these_bother_most_video_calls
+    required: true
+    options:
+      - id: "a"
+        label: "Feeling watched or on display"
+      - id: "b"
+        label: "Technical glitches"
+      - id: "c"
+        label: "Awkward silences or talking over people"
+      - id: "d"
+        label: "Meetings that could have been an email"
+      - id: "e"
+        label: "Background noise or distractions"
+      - id: "f"
+        label: "Having to look presentable"
+      - id: "g"
+        label: "Back-to-back calls with no breaks"
+      - id: "h"
+        label: "Poor lighting or camera quality"
+      - id: "i"
+        label: "Not being able to read body language"
+      - id: "j"
+        label: "Privacy concerns about what's visible behind me"
+  - id: q27
+    prompt: "Have you ever used a video call for a telehealth or virtual doctor appointment?"
+    type: single_choice
+    construct: have_ever_used_video_call
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several times"
+      - id: "b"
+        label: "Yes, once or twice"
+      - id: "c"
+        label: "No, but I would"
+      - id: "d"
+        label: "No, and I would not"
+  - id: q28
+    prompt: "How comfortable are you with the video calling technology you use?"
+    type: single_choice
+    construct: comfortable_video_calling_technology_use
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Extremely comfortable"
+  - id: q29
+    prompt: "Which of the following privacy or security steps do you take on video calls? (Select all that apply)"
+    type: multi_choice
+    construct: following_privacy_security_steps_take
+    required: true
+    options:
+      - id: "a"
+        label: "Use a virtual or blurred background to hide my surroundings"
+      - id: "b"
+        label: "Mute myself when not speaking"
+      - id: "c"
+        label: "Keep my camera off unless needed"
+      - id: "d"
+        label: "Check who else is on the call before speaking"
+      - id: "e"
+        label: "Use a waiting room or password for meetings I host"
+      - id: "f"
+        label: "Avoid using video calls for sensitive conversations"
+      - id: "g"
+        label: "Cover or disable my webcam when not in use"
+      - id: "h"
+        label: "None of these"
+  - id: q30
+    prompt: "How often do you host or schedule video calls (rather than just joining)?"
+    type: single_choice
+    construct: often_host_schedule_video_calls
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q31
+    prompt: "Do you pay for any video calling service, either personally or does your employer?"
+    type: single_choice
+    construct: pay_any_video_calling_service
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I pay personally"
+      - id: "b"
+        label: "Yes, my employer or school pays"
+      - id: "c"
+        label: "No, I only use free versions"
+      - id: "d"
+        label: "Not sure"
+  - id: q32
+    prompt: "Roughly how much do you personally spend per month on paid video calling services?"
+    type: free_text
+    construct: roughly_much_personally_spend_per
+    required: true
+  - id: q33
+    prompt: "How important are the following when choosing a video calling app — Reliability and call quality"
+    type: single_choice
+    construct: important_following_when_choosing_video
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q34
+    prompt: "How important are the following when choosing a video calling app — Ease of use"
+    type: single_choice
+    construct: important_following_when_choosing_video
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q35
+    prompt: "How important are the following when choosing a video calling app — Privacy and security"
+    type: single_choice
+    construct: important_following_when_choosing_video
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q36
+    prompt: "How important are the following when choosing a video calling app — Free to use"
+    type: single_choice
+    construct: important_following_when_choosing_video
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q37
+    prompt: "How important are the following when choosing a video calling app — The people I need to reach already use it"
+    type: single_choice
+    construct: important_following_when_choosing_video
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q38
+    prompt: "Compared with two years ago, how has your video call usage changed?"
+    type: single_choice
+    construct: compared_two_years_ago_has
+    required: true
+    options:
+      - id: "a"
+        label: "Much less than before"
+      - id: "b"
+        label: "Somewhat less"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat more"
+      - id: "e"
+        label: "Much more than before"
+  - id: q39
+    prompt: "Over the next year, how do you expect your video call usage to change?"
+    type: single_choice
+    construct: over_next_year_expect_video
+    required: true
+    options:
+      - id: "a"
+        label: "Decrease a lot"
+      - id: "b"
+        label: "Decrease somewhat"
+      - id: "c"
+        label: "Stay about the same"
+      - id: "d"
+        label: "Increase somewhat"
+      - id: "e"
+        label: "Increase a lot"
+  - id: q40
+    prompt: "Overall, how satisfied are you with your current video calling experience?"
+    type: single_choice
+    construct: overall_satisfied_current_video_calling
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q41
+    prompt: "How likely are you to recommend your main video calling app to a friend or colleague? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_main_video_calling
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q42
+    prompt: "What one thing would most improve your video calling experience?"
+    type: free_text
+    construct: one_thing_would_most_improve
+    required: true
+  - id: q43
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+  - id: q48
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelance"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed, looking for work"
+      - id: "f"
+        label: "Not employed, not looking"
+      - id: "g"
+        label: "Retired"
+  - id: q49
+    prompt: "Which best describes your current work arrangement?"
+    type: single_choice
+    construct: best_describes_current_work_arrangement
+    required: true
+    options:
+      - id: "a"
+        label: "Fully remote"
+      - id: "b"
+        label: "Hybrid (some remote, some in person)"
+      - id: "c"
+        label: "Fully in person"
+      - id: "d"
+        label: "Not currently working"
+  - id: q50
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q51
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q52
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

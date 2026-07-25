@@ -1,0 +1,756 @@
+schemaVersion: "1.0"
+id: credit_card_debt_v1
+title: "Credit Card Debt Survey"
+description: "How people carry, manage, and pay down revolving credit card debt."
+questions:
+  - id: q0
+    prompt: "Do you currently carry a balance on any credit card from month to month?"
+    type: single_choice
+    construct: currently_carry_balance_any_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, on one card"
+      - id: "b"
+        label: "Yes, on multiple cards"
+      - id: "c"
+        label: "No, I pay my balance in full each month"
+      - id: "d"
+        label: "I don't have a credit card"
+  - id: q1
+    prompt: "About how long have you been carrying credit card debt?"
+    type: single_choice
+    construct: long_have_been_carrying_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "4 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "I don't carry credit card debt"
+  - id: q2
+    prompt: "On how many credit cards do you currently carry a balance?"
+    type: single_choice
+    construct: many_credit_cards_currently_carry
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3 to 4"
+      - id: "e"
+        label: "5 or more"
+  - id: q3
+    prompt: "What primarily caused your current credit card debt? (Select all that apply)"
+    type: multi_choice
+    construct: primarily_caused_current_credit_card
+    required: true
+    options:
+      - id: "a"
+        label: "Everyday living expenses"
+      - id: "b"
+        label: "A medical bill or emergency"
+      - id: "c"
+        label: "Car or home repairs"
+      - id: "d"
+        label: "A job loss or income drop"
+      - id: "e"
+        label: "Large one-time purchases"
+      - id: "f"
+        label: "Travel or vacation"
+      - id: "g"
+        label: "Helping family members"
+      - id: "h"
+        label: "Overspending / lifestyle"
+      - id: "i"
+        label: "Not applicable — I have no credit card debt"
+  - id: q4
+    prompt: "How do you usually pay your credit card bill?"
+    type: single_choice
+    construct: usually_pay_credit_card_bill
+    required: true
+    options:
+      - id: "a"
+        label: "I pay the full statement balance"
+      - id: "b"
+        label: "I pay more than the minimum but not in full"
+      - id: "c"
+        label: "I pay only the minimum"
+      - id: "d"
+        label: "I sometimes miss or make partial payments"
+  - id: q5
+    prompt: "Roughly what interest rate (APR) are you paying on your credit card debt?"
+    type: single_choice
+    construct: roughly_interest_rate_apr_paying
+    required: true
+    options:
+      - id: "a"
+        label: "Under 15%"
+      - id: "b"
+        label: "15% to 19.9%"
+      - id: "c"
+        label: "20% to 24.9%"
+      - id: "d"
+        label: "25% or higher"
+      - id: "e"
+        label: "0% promotional rate"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q6
+    prompt: "How well do you know your total credit card balance at any given time?"
+    type: single_choice
+    construct: well_know_total_credit_card
+    required: true
+    options:
+      - id: "a"
+        label: "I know it exactly"
+      - id: "b"
+        label: "I know it approximately"
+      - id: "c"
+        label: "I have a rough idea"
+      - id: "d"
+        label: "I try not to think about it"
+  - id: q7
+    prompt: "Which strategies are you using to pay down your credit card debt? (Select all that apply)"
+    type: multi_choice
+    construct: strategies_using_pay_down_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Debt avalanche (highest interest first)"
+      - id: "b"
+        label: "Debt snowball (smallest balance first)"
+      - id: "c"
+        label: "Balance transfer to a 0% APR card"
+      - id: "d"
+        label: "A personal / debt consolidation loan"
+      - id: "e"
+        label: "Paying more than the minimum when I can"
+      - id: "f"
+        label: "Working with a credit counseling agency"
+      - id: "g"
+        label: "Cutting expenses to free up money"
+      - id: "h"
+        label: "Taking on extra income / side work"
+      - id: "i"
+        label: "I'm not actively paying it down"
+  - id: q8
+    prompt: "Have you used a balance transfer to move debt to a lower-rate card?"
+    type: single_choice
+    construct: have_used_balance_transfer_move
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, currently have one active"
+      - id: "b"
+        label: "Yes, in the past"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No"
+  - id: q9
+    prompt: "How confident are you in your plan to pay off your credit card debt?"
+    type: single_choice
+    construct: confident_plan_pay_off_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident — or I have no debt"
+  - id: q10
+    prompt: "How long do you expect it to take to pay off your current credit card debt?"
+    type: single_choice
+    construct: long_expect_it_take_pay
+    required: true
+    options:
+      - id: "a"
+        label: "Within 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "More than 3 years"
+      - id: "e"
+        label: "I don't have a timeline"
+      - id: "f"
+        label: "Not applicable — no debt"
+  - id: q11
+    prompt: "In the past 12 months, have you missed or been late on a credit card payment?"
+    type: single_choice
+    construct: past_12_months_have_missed
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable"
+  - id: q12
+    prompt: "How much do you agree with the following statement: My credit card debt causes me significant stress."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: I have a clear plan to pay off my credit card debt."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: Credit card interest makes it hard to get ahead."
+    type: single_choice
+    construct: much_agree_following_statement_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: I feel comfortable talking to others about my debt."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I sometimes use credit cards to cover essentials I couldn't otherwise afford."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How often do you worry about your credit card debt?"
+    type: single_choice
+    construct: often_worry_credit_card_debt
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Constantly"
+  - id: q18
+    prompt: "How often do you make more than the minimum payment?"
+    type: single_choice
+    construct: often_make_more_than_minimum
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q19
+    prompt: "How has your credit card debt changed over the past 12 months?"
+    type: single_choice
+    construct: has_credit_card_debt_changed
+    required: true
+    options:
+      - id: "a"
+        label: "Increased significantly"
+      - id: "b"
+        label: "Increased somewhat"
+      - id: "c"
+        label: "Stayed about the same"
+      - id: "d"
+        label: "Decreased somewhat"
+      - id: "e"
+        label: "Decreased significantly / paid off"
+  - id: q20
+    prompt: "How important is paying off credit card debt among your financial priorities right now?"
+    type: single_choice
+    construct: important_paying_off_credit_card
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How has carrying this debt affected other areas of your finances? (Select all that apply)"
+    type: multi_choice
+    construct: has_carrying_this_debt_affected
+    required: true
+    options:
+      - id: "a"
+        label: "Less money for savings"
+      - id: "b"
+        label: "Delayed a major purchase (home, car)"
+      - id: "c"
+        label: "Harder to cover monthly bills"
+      - id: "d"
+        label: "Lowered my credit score"
+      - id: "e"
+        label: "Caused stress in my relationships"
+      - id: "f"
+        label: "Limited my ability to invest"
+      - id: "g"
+        label: "No significant effect"
+  - id: q22
+    prompt: "Have you ever done any of the following to manage debt? (Select all that apply)"
+    type: multi_choice
+    construct: have_ever_done_any_following
+    required: true
+    options:
+      - id: "a"
+        label: "Contacted a card issuer to lower my rate"
+      - id: "b"
+        label: "Enrolled in a debt management plan"
+      - id: "c"
+        label: "Consolidated debt with a loan"
+      - id: "d"
+        label: "Used a nonprofit credit counselor"
+      - id: "e"
+        label: "Settled a debt for less than owed"
+      - id: "f"
+        label: "Considered or filed for bankruptcy"
+      - id: "g"
+        label: "None of these"
+  - id: q23
+    prompt: "What has been your biggest obstacle to paying off the debt?"
+    type: single_choice
+    construct: has_been_biggest_obstacle_paying
+    required: true
+    options:
+      - id: "a"
+        label: "High interest rates"
+      - id: "b"
+        label: "Income doesn't leave room to pay extra"
+      - id: "c"
+        label: "Ongoing unexpected expenses"
+      - id: "d"
+        label: "Continuing to add new charges"
+      - id: "e"
+        label: "Lack of a clear plan"
+      - id: "f"
+        label: "Not applicable — no debt"
+  - id: q24
+    prompt: "How would you rate your overall financial health right now?"
+    type: single_choice
+    construct: would_rate_overall_financial_health
+    required: true
+    options:
+      - id: "a"
+        label: "Very poor"
+      - id: "b"
+        label: "Poor"
+      - id: "c"
+        label: "Fair"
+      - id: "d"
+        label: "Good"
+      - id: "e"
+        label: "Very good"
+  - id: q25
+    prompt: "Select your top 3 goals for the next year. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_goals_next
+    required: true
+    options:
+      - id: "a"
+        label: "Pay off credit card debt"
+      - id: "b"
+        label: "Avoid taking on new debt"
+      - id: "c"
+        label: "Build an emergency fund"
+      - id: "d"
+        label: "Improve my credit score"
+      - id: "e"
+        label: "Lower my interest rate"
+      - id: "f"
+        label: "Increase my income"
+      - id: "g"
+        label: "Cut monthly expenses"
+      - id: "h"
+        label: "Start saving or investing"
+  - id: q26
+    prompt: "Where do you turn for help or advice about debt? (Select all that apply)"
+    type: multi_choice
+    construct: where_turn_help_advice_debt
+    required: true
+    options:
+      - id: "a"
+        label: "Friends or family"
+      - id: "b"
+        label: "Financial blogs or websites"
+      - id: "c"
+        label: "YouTube, podcasts, or social media"
+      - id: "d"
+        label: "A financial advisor or counselor"
+      - id: "e"
+        label: "My card issuer or bank"
+      - id: "f"
+        label: "A nonprofit credit counseling agency"
+      - id: "g"
+        label: "I don't seek out advice"
+  - id: q27
+    prompt: "How confident are you in your understanding of how credit card interest works?"
+    type: single_choice
+    construct: confident_understanding_credit_card_inte
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q28
+    prompt: "Overall, how satisfied are you with how you're managing your debt?"
+    type: single_choice
+    construct: overall_satisfied_re_managing_debt
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "How likely are you to be free of credit card debt within the next 2 years?"
+    type: single_choice
+    construct: likely_be_free_credit_card
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q30
+    prompt: "On a scale from 0 to 10, how much control do you feel you have over your credit card debt, where 0 is no control at all and 10 is complete control?"
+    type: single_choice
+    construct: scale_from_0_10_much
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "Approximately how much total credit card debt do you currently carry? Please enter a dollar amount."
+    type: free_text
+    construct: approximately_much_total_credit_card
+    required: true
+  - id: q32
+    prompt: "About how much do you pay toward credit card balances in a typical month? Please enter a dollar amount."
+    type: free_text
+    construct: much_pay_toward_credit_card
+    required: true
+  - id: q33
+    prompt: "What is your approximate total monthly take-home (after-tax) income? Please enter a dollar amount."
+    type: free_text
+    construct: approximate_total_monthly_take_home
+    required: true
+  - id: q34
+    prompt: "If there is anything else you'd like to share about your experience with credit card debt, please describe it briefly."
+    type: free_text
+    construct: if_there_anything_else_d
+    required: false
+  - id: q35
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Another race or ethnicity"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your annual household income before taxes?"
+    type: single_choice
+    construct: annual_household_income_before_taxes
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school graduate or equivalent"
+      - id: "c"
+        label: "Some college or associate's degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q40
+    prompt: "Which best describes your current employment status?"
+    type: single_choice
+    construct: best_describes_current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelance"
+      - id: "d"
+        label: "Not employed, looking for work"
+      - id: "e"
+        label: "Not employed, not looking for work"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q41
+    prompt: "How would you describe your credit score range?"
+    type: single_choice
+    construct: would_describe_credit_score_range
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent (740+)"
+      - id: "b"
+        label: "Good (670–739)"
+      - id: "c"
+        label: "Fair (580–669)"
+      - id: "d"
+        label: "Poor (below 580)"
+      - id: "e"
+        label: "I don't know"
+  - id: q42
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q43
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q45
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q46
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"

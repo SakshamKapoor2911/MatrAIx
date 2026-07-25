@@ -1,0 +1,823 @@
+schemaVersion: "1.0"
+id: note_taking_app_usage_v1
+title: "Note-Taking App Usage Survey"
+description: "Which note-taking apps people use, how they capture and organize notes across devices, and what they value in a note system."
+questions:
+  - id: q0
+    prompt: "Do you use a digital note-taking app?"
+    type: single_choice
+    construct: use_digital_note_taking_app
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, it's central to how I work"
+      - id: "b"
+        label: "Yes, regularly"
+      - id: "c"
+        label: "Yes, occasionally"
+      - id: "d"
+        label: "No, but I use paper notes"
+      - id: "e"
+        label: "No, I don't take notes"
+  - id: q1
+    prompt: "Which note-taking app do you use most often?"
+    type: single_choice
+    construct: note_taking_app_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Apple Notes"
+      - id: "b"
+        label: "Google Keep"
+      - id: "c"
+        label: "Microsoft OneNote"
+      - id: "d"
+        label: "Notion"
+      - id: "e"
+        label: "Evernote"
+      - id: "f"
+        label: "Obsidian"
+      - id: "g"
+        label: "A plain text or Markdown file"
+      - id: "h"
+        label: "Another app"
+  - id: q2
+    prompt: "Which note-taking apps have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: note_taking_apps_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Apple Notes"
+      - id: "b"
+        label: "Google Keep"
+      - id: "c"
+        label: "Microsoft OneNote"
+      - id: "d"
+        label: "Notion"
+      - id: "e"
+        label: "Evernote"
+      - id: "f"
+        label: "Obsidian"
+      - id: "g"
+        label: "Logseq"
+      - id: "h"
+        label: "Bear"
+      - id: "i"
+        label: "Roam Research"
+      - id: "j"
+        label: "Standard Notes"
+      - id: "k"
+        label: "Plain text / Markdown files"
+      - id: "l"
+        label: "Paper notebook"
+  - id: q3
+    prompt: "How many years have you used your main note-taking app?"
+    type: free_text
+    construct: many_years_have_used_main
+    required: true
+  - id: q4
+    prompt: "About how many notes do you currently have stored in your main app?"
+    type: free_text
+    construct: many_notes_currently_have_stored
+    required: true
+  - id: q5
+    prompt: "What do you use notes for? (Select all that apply)"
+    type: multi_choice
+    construct: use_notes_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "To-do lists and reminders"
+      - id: "b"
+        label: "Meeting or lecture notes"
+      - id: "c"
+        label: "Ideas and brainstorming"
+      - id: "d"
+        label: "Personal journaling"
+      - id: "e"
+        label: "Reference information and how-tos"
+      - id: "f"
+        label: "Project planning"
+      - id: "g"
+        label: "Saving links and web clippings"
+      - id: "h"
+        label: "Shopping or errand lists"
+      - id: "i"
+        label: "Recipes"
+      - id: "j"
+        label: "Writing drafts"
+  - id: q6
+    prompt: "In what context do you take notes most?"
+    type: single_choice
+    construct: context_take_notes_most
+    required: true
+    options:
+      - id: "a"
+        label: "Work / professional"
+      - id: "b"
+        label: "School / study"
+      - id: "c"
+        label: "Personal life"
+      - id: "d"
+        label: "A mix of these"
+  - id: q7
+    prompt: "On which devices do you take or read notes? (Select all that apply)"
+    type: multi_choice
+    construct: devices_take_read_notes_select
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "Laptop"
+      - id: "c"
+        label: "Desktop computer"
+      - id: "d"
+        label: "Tablet"
+      - id: "e"
+        label: "Smartwatch"
+      - id: "f"
+        label: "Voice assistant / smart speaker"
+  - id: q8
+    prompt: "How do you most often capture a new note?"
+    type: single_choice
+    construct: most_often_capture_new_note
+    required: true
+    options:
+      - id: "a"
+        label: "Typing on a computer"
+      - id: "b"
+        label: "Typing on a phone"
+      - id: "c"
+        label: "Handwriting with a stylus"
+      - id: "d"
+        label: "Voice / dictation"
+      - id: "e"
+        label: "Clipping from the web"
+      - id: "f"
+        label: "Photos or scans"
+  - id: q9
+    prompt: "How do you organize your notes? (Select all that apply)"
+    type: multi_choice
+    construct: organize_notes_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Folders or notebooks"
+      - id: "b"
+        label: "Tags or labels"
+      - id: "c"
+        label: "Links between notes"
+      - id: "d"
+        label: "Search instead of organizing"
+      - id: "e"
+        label: "Pinning or favorites"
+      - id: "f"
+        label: "Dates or a daily-notes system"
+      - id: "g"
+        label: "I don't really organize them"
+  - id: q10
+    prompt: "How often do you go back and read or reuse notes you've taken?"
+    type: single_choice
+    construct: often_go_back_read_reuse
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Constantly"
+  - id: q11
+    prompt: "How often do you take notes?"
+    type: single_choice
+    construct: often_take_notes
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "Daily"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Weekly"
+      - id: "e"
+        label: "Rarely"
+  - id: q12
+    prompt: "Do you sync your notes across multiple devices?"
+    type: single_choice
+    construct: sync_notes_across_multiple_devices
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, across all my devices"
+      - id: "b"
+        label: "Yes, across some devices"
+      - id: "c"
+        label: "No, they stay on one device"
+      - id: "d"
+        label: "Not sure"
+  - id: q13
+    prompt: "Which advanced features do you use in your note app? (Select all that apply)"
+    type: multi_choice
+    construct: advanced_features_use_note_app
+    required: true
+    options:
+      - id: "a"
+        label: "Checklists / to-dos"
+      - id: "b"
+        label: "Reminders"
+      - id: "c"
+        label: "Handwriting or drawing"
+      - id: "d"
+        label: "Audio recording"
+      - id: "e"
+        label: "Web clipping"
+      - id: "f"
+        label: "Templates"
+      - id: "g"
+        label: "Linking or backlinks between notes"
+      - id: "h"
+        label: "Databases or tables"
+      - id: "i"
+        label: "Sharing or collaboration"
+      - id: "j"
+        label: "AI writing or summarizing"
+      - id: "k"
+        label: "None of these"
+  - id: q14
+    prompt: "Have you switched your main note-taking app in the past few years?"
+    type: single_choice
+    construct: have_switched_main_note_taking
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I'm happy I did"
+      - id: "b"
+        label: "Yes, but it was painful to move my notes"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No, I've stayed with the same one"
+  - id: q15
+    prompt: "How much do you agree with the following statement about note-taking? — My note app helps me stay organized"
+    type: single_choice
+    construct: much_agree_following_statement_note
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about note-taking? — I can quickly find any note when I need it"
+    type: single_choice
+    construct: much_agree_following_statement_note
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about note-taking? — I capture more ideas than I ever revisit"
+    type: single_choice
+    construct: much_agree_following_statement_note
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about note-taking? — I worry about my notes being lost or locked into one app"
+    type: single_choice
+    construct: much_agree_following_statement_note
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about note-taking? — I've spent too much time tweaking my note system instead of using it"
+    type: single_choice
+    construct: much_agree_following_statement_note
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How important is each of the following in a note-taking app? — Fast, simple capture"
+    type: single_choice
+    construct: important_each_following_note_taking
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each of the following in a note-taking app? — Powerful search"
+    type: single_choice
+    construct: important_each_following_note_taking
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each of the following in a note-taking app? — Syncing across devices"
+    type: single_choice
+    construct: important_each_following_note_taking
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each of the following in a note-taking app? — Organization features (folders, tags, links)"
+    type: single_choice
+    construct: important_each_following_note_taking
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each of the following in a note-taking app? — Privacy and data ownership"
+    type: single_choice
+    construct: important_each_following_note_taking
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is each of the following in a note-taking app? — Being free or low cost"
+    type: single_choice
+    construct: important_each_following_note_taking
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "Which features matter most to you in a note-taking app? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: features_matter_most_note_taking
+    required: true
+    options:
+      - id: "a"
+        label: "Fast capture"
+      - id: "b"
+        label: "Search"
+      - id: "c"
+        label: "Cross-device sync"
+      - id: "d"
+        label: "Organization (folders, tags, links)"
+      - id: "e"
+        label: "Handwriting support"
+      - id: "f"
+        label: "Web clipping"
+      - id: "g"
+        label: "Collaboration and sharing"
+      - id: "h"
+        label: "AI assistance"
+      - id: "i"
+        label: "Privacy and encryption"
+      - id: "j"
+        label: "Offline access"
+  - id: q27
+    prompt: "Have you used AI features in your note app (summaries, writing help, Q&A over your notes)?"
+    type: single_choice
+    construct: have_used_ai_features_note
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, a few times"
+      - id: "c"
+        label: "No, but I'm interested"
+      - id: "d"
+        label: "No, and I'm not interested"
+      - id: "e"
+        label: "My app doesn't offer them"
+  - id: q28
+    prompt: "Do you pay for your note-taking app?"
+    type: single_choice
+    construct: pay_note_taking_app
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, an ongoing subscription"
+      - id: "b"
+        label: "Yes, a one-time purchase"
+      - id: "c"
+        label: "No, I use the free version"
+      - id: "d"
+        label: "No, my app is completely free"
+  - id: q29
+    prompt: "How concerned are you about the privacy of what you store in your notes?"
+    type: single_choice
+    construct: concerned_privacy_store_notes
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q30
+    prompt: "Do you still use paper notes alongside digital ones?"
+    type: single_choice
+    construct: still_use_paper_notes_alongside
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, paper is my main method"
+      - id: "b"
+        label: "Yes, about equally"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "No, I've gone fully digital"
+      - id: "e"
+        label: "I never used paper"
+  - id: q31
+    prompt: "How satisfied are you overall with your main note-taking app?"
+    type: single_choice
+    construct: satisfied_overall_main_note_taking
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How satisfied are you with how well you keep your notes organized?"
+    type: single_choice
+    construct: satisfied_well_keep_notes_organized
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How likely are you to still be using the same note app a year from now?"
+    type: single_choice
+    construct: likely_still_be_using_same
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "How likely are you to recommend your main note app to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_main_note_app
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "What one thing would most improve your note-taking setup?"
+    type: free_text
+    construct: one_thing_would_most_improve
+    required: true
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Full-time student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q43
+    prompt: "What is your current relationship status?"
+    type: single_choice
+    construct: current_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship or partnered"
+      - id: "c"
+        label: "Married"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q45
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q46
+    prompt: "Which best describes your current occupation?"
+    type: single_choice
+    construct: best_describes_current_occupation
+    required: true
+    options:
+      - id: "a"
+        label: "Student"
+      - id: "b"
+        label: "Office / knowledge worker"
+      - id: "c"
+        label: "Technology or engineering"
+      - id: "d"
+        label: "Creative or media"
+      - id: "e"
+        label: "Education"
+      - id: "f"
+        label: "Healthcare"
+      - id: "g"
+        label: "Other profession"
+      - id: "h"
+        label: "Not currently employed"
+      - id: "i"
+        label: "Retired"
+  - id: q47
+    prompt: "How would you rate your overall technical skill with computers?"
+    type: single_choice
+    construct: would_rate_overall_technical_skill
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert / power user"

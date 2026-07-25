@@ -1,0 +1,708 @@
+schemaVersion: "1.0"
+id: mobile_gaming_v1
+title: "Mobile Gaming Survey"
+description: "How people play games on smartphones and tablets, including their genres, spending, monetization attitudes, and playing habits."
+questions:
+  - id: q0
+    prompt: "Do you play games on your smartphone or tablet?"
+    type: single_choice
+    construct: play_games_smartphone_tablet
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, every day"
+      - id: "b"
+        label: "Yes, a few times a week"
+      - id: "c"
+        label: "Yes, occasionally"
+      - id: "d"
+        label: "No, I don't play mobile games"
+  - id: q1
+    prompt: "How long have you been playing mobile games?"
+    type: single_choice
+    construct: long_have_been_playing_mobile
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 7 years"
+      - id: "d"
+        label: "8 or more years"
+  - id: q2
+    prompt: "Which device do you mainly play mobile games on?"
+    type: single_choice
+    construct: device_mainly_play_mobile_games
+    required: true
+    options:
+      - id: "a"
+        label: "Android phone"
+      - id: "b"
+        label: "iPhone"
+      - id: "c"
+        label: "Android tablet"
+      - id: "d"
+        label: "iPad"
+      - id: "e"
+        label: "A mix of phone and tablet"
+  - id: q3
+    prompt: "On a typical day, about how much total time do you spend playing mobile games?"
+    type: single_choice
+    construct: typical_day_much_total_time
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 15 minutes"
+      - id: "b"
+        label: "15 to 30 minutes"
+      - id: "c"
+        label: "31 to 60 minutes"
+      - id: "d"
+        label: "1 to 2 hours"
+      - id: "e"
+        label: "More than 2 hours"
+  - id: q4
+    prompt: "Roughly how many games do you currently have installed on your device?"
+    type: free_text
+    construct: roughly_many_games_currently_have
+    required: true
+  - id: q5
+    prompt: "Which genres of mobile games do you play most? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: genres_mobile_games_play_most
+    required: true
+    options:
+      - id: "a"
+        label: "Puzzle (e.g., match-3, word games)"
+      - id: "b"
+        label: "Casual and hyper-casual"
+      - id: "c"
+        label: "Strategy"
+      - id: "d"
+        label: "Role-playing games (RPGs)"
+      - id: "e"
+        label: "Action and shooters"
+      - id: "f"
+        label: "Battle royale"
+      - id: "g"
+        label: "Simulation and management"
+      - id: "h"
+        label: "Card and board games"
+      - id: "i"
+        label: "Sports and racing"
+      - id: "j"
+        label: "Idle and clicker games"
+      - id: "k"
+        label: "Trivia and quiz"
+      - id: "l"
+        label: "Casino-style (slots, poker)"
+  - id: q6
+    prompt: "When do you usually play mobile games? (Select all that apply)"
+    type: multi_choice
+    construct: when_usually_play_mobile_games
+    required: true
+    options:
+      - id: "a"
+        label: "Commuting or traveling"
+      - id: "b"
+        label: "Waiting (lines, appointments)"
+      - id: "c"
+        label: "On breaks at work or school"
+      - id: "d"
+        label: "Relaxing at home"
+      - id: "e"
+        label: "In bed before sleep"
+      - id: "f"
+        label: "While watching TV"
+      - id: "g"
+        label: "During downtime throughout the day"
+  - id: q7
+    prompt: "How do you usually find new mobile games? (Select all that apply)"
+    type: multi_choice
+    construct: usually_find_new_mobile_games
+    required: true
+    options:
+      - id: "a"
+        label: "Browsing the app store"
+      - id: "b"
+        label: "App store charts or featured lists"
+      - id: "c"
+        label: "Ads in other games or apps"
+      - id: "d"
+        label: "Recommendations from friends or family"
+      - id: "e"
+        label: "Social media"
+      - id: "f"
+        label: "YouTube or streaming videos"
+      - id: "g"
+        label: "Reviews or gaming sites"
+  - id: q8
+    prompt: "Which best describes how you pay for mobile games?"
+    type: single_choice
+    construct: best_describes_pay_mobile_games
+    required: true
+    options:
+      - id: "a"
+        label: "I only play free games and never pay"
+      - id: "b"
+        label: "I play free games but make in-app purchases"
+      - id: "c"
+        label: "I pay upfront for some games"
+      - id: "d"
+        label: "I use a subscription (e.g., Apple Arcade, Google Play Pass)"
+      - id: "e"
+        label: "A mix of these"
+  - id: q9
+    prompt: "About how much did you spend on mobile games and in-app purchases in the past year?"
+    type: free_text
+    construct: much_did_spend_mobile_games
+    required: true
+  - id: q10
+    prompt: "How often do you make in-app purchases in mobile games?"
+    type: single_choice
+    construct: often_make_app_purchases_mobile
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q11
+    prompt: "What do you spend money on in mobile games? (Select all that apply)"
+    type: multi_choice
+    construct: spend_money_mobile_games_select
+    required: true
+    options:
+      - id: "a"
+        label: "Removing ads"
+      - id: "b"
+        label: "In-game currency"
+      - id: "c"
+        label: "Cosmetic items (skins, outfits)"
+      - id: "d"
+        label: "Extra lives or continues"
+      - id: "e"
+        label: "Loot boxes or gacha pulls"
+      - id: "f"
+        label: "Battle passes or season passes"
+      - id: "g"
+        label: "Unlocking full versions"
+      - id: "h"
+        label: "I don't spend money on mobile games"
+  - id: q12
+    prompt: "How often do you do the following — Play games that require an internet connection"
+    type: single_choice
+    construct: often_following_play_games_that
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q13
+    prompt: "How often do you do the following — Play with or against other people online"
+    type: single_choice
+    construct: often_following_play_against_other
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q14
+    prompt: "How often do you do the following — Watch ads to earn in-game rewards"
+    type: single_choice
+    construct: often_following_watch_ads_earn
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q15
+    prompt: "How often do you do the following — Play the same game daily to keep a streak or claim rewards"
+    type: single_choice
+    construct: often_following_play_same_game
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q16
+    prompt: "How often do you do the following — Uninstall a game shortly after installing it"
+    type: single_choice
+    construct: often_following_uninstall_game_shortly
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q17
+    prompt: "Please rate your agreement — Mobile games are a good way to relax and pass the time"
+    type: single_choice
+    construct: please_rate_agreement_mobile_games
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "Please rate your agreement — Ads in mobile games are too frequent or intrusive"
+    type: single_choice
+    construct: please_rate_agreement_ads_mobile
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "Please rate your agreement — Many mobile games pressure you to spend money to keep playing"
+    type: single_choice
+    construct: please_rate_agreement_many_mobile
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Please rate your agreement — I sometimes play mobile games more than I intend to"
+    type: single_choice
+    construct: please_rate_agreement_i_sometimes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "Please rate your agreement — Mobile games are as fun as console or PC games"
+    type: single_choice
+    construct: please_rate_agreement_mobile_games
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How important are the following in a mobile game — Being free to play"
+    type: single_choice
+    construct: important_following_mobile_game_being
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important are the following in a mobile game — Few or no ads"
+    type: single_choice
+    construct: important_following_mobile_game_few
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important are the following in a mobile game — Being able to play offline"
+    type: single_choice
+    construct: important_following_mobile_game_being
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important are the following in a mobile game — Fair pricing without pay-to-win mechanics"
+    type: single_choice
+    construct: important_following_mobile_game_fair
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important are the following in a mobile game — Quick sessions I can pick up and put down"
+    type: single_choice
+    construct: important_following_mobile_game_quick
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Do you subscribe to a mobile gaming service?"
+    type: single_choice
+    construct: subscribe_mobile_gaming_service
+    required: true
+    options:
+      - id: "a"
+        label: "Apple Arcade"
+      - id: "b"
+        label: "Google Play Pass"
+      - id: "c"
+        label: "Netflix Games"
+      - id: "d"
+        label: "Another service"
+      - id: "e"
+        label: "No"
+  - id: q28
+    prompt: "Do you play mobile games mostly alone or with others?"
+    type: single_choice
+    construct: play_mobile_games_mostly_alone
+    required: true
+    options:
+      - id: "a"
+        label: "Almost always alone"
+      - id: "b"
+        label: "Mostly alone"
+      - id: "c"
+        label: "An even mix"
+      - id: "d"
+        label: "Mostly with others (online or friends)"
+  - id: q29
+    prompt: "Roughly how many mobile games would you say you play regularly right now?"
+    type: free_text
+    construct: roughly_many_mobile_games_would
+    required: true
+  - id: q30
+    prompt: "Have you ever stopped playing a game specifically because of aggressive monetization?"
+    type: single_choice
+    construct: have_ever_stopped_playing_game
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, many times"
+      - id: "b"
+        label: "Yes, a few times"
+      - id: "c"
+        label: "Yes, once"
+      - id: "d"
+        label: "No"
+  - id: q31
+    prompt: "Over the next year, how do you expect your mobile gaming time to change?"
+    type: single_choice
+    construct: over_next_year_expect_mobile
+    required: true
+    options:
+      - id: "a"
+        label: "Decrease a lot"
+      - id: "b"
+        label: "Decrease somewhat"
+      - id: "c"
+        label: "Stay about the same"
+      - id: "d"
+        label: "Increase somewhat"
+      - id: "e"
+        label: "Increase a lot"
+  - id: q32
+    prompt: "Overall, how satisfied are you with your mobile gaming experience?"
+    type: single_choice
+    construct: overall_satisfied_mobile_gaming_experien
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How likely are you to recommend your favorite mobile game to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_favorite_mobile_game
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q34
+    prompt: "What do you like most, or dislike most, about mobile games today?"
+    type: free_text
+    construct: like_most_dislike_most_mobile
+    required: true
+  - id: q35
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+  - id: q40
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelance"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed, looking for work"
+      - id: "f"
+        label: "Not employed, not looking"
+      - id: "g"
+        label: "Retired"
+  - id: q41
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q42
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

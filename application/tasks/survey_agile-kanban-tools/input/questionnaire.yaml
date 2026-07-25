@@ -1,0 +1,741 @@
+schemaVersion: "1.0"
+id: agile_kanban_tools_v1
+title: "Agile & Kanban Tools Survey"
+description: "How software and product teams practice Agile and Kanban and the tools they use to run sprints, boards, and ceremonies."
+questions:
+  - id: q0
+    prompt: "Does your team use an Agile or Kanban approach to manage work?"
+    type: single_choice
+    construct: does_team_use_agile_kanban
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, we follow it closely"
+      - id: "b"
+        label: "Yes, but loosely"
+      - id: "c"
+        label: "No, but we're moving toward it"
+      - id: "d"
+        label: "No, we use a different approach"
+  - id: q1
+    prompt: "How long have you personally worked with Agile or Kanban methods?"
+    type: single_choice
+    construct: long_have_personally_worked_agile
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 7 years"
+      - id: "d"
+        label: "More than 7 years"
+      - id: "e"
+        label: "I don't use these methods"
+  - id: q2
+    prompt: "Which framework best describes how your team works?"
+    type: single_choice
+    construct: framework_best_describes_team_works
+    required: true
+    options:
+      - id: "a"
+        label: "Scrum"
+      - id: "b"
+        label: "Kanban"
+      - id: "c"
+        label: "Scrumban (a mix)"
+      - id: "d"
+        label: "SAFe or another scaled framework"
+      - id: "e"
+        label: "Custom / homegrown process"
+      - id: "f"
+        label: "No formal framework"
+  - id: q3
+    prompt: "How long is a typical sprint or iteration on your team?"
+    type: single_choice
+    construct: long_typical_sprint_iteration_team
+    required: true
+    options:
+      - id: "a"
+        label: "One week"
+      - id: "b"
+        label: "Two weeks"
+      - id: "c"
+        label: "Three weeks"
+      - id: "d"
+        label: "Four weeks or longer"
+      - id: "e"
+        label: "We use continuous flow (no sprints)"
+      - id: "f"
+        label: "Not applicable"
+  - id: q4
+    prompt: "Which Agile/Kanban tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: agile_kanban_tools_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Jira"
+      - id: "b"
+        label: "Azure DevOps (Boards)"
+      - id: "c"
+        label: "Linear"
+      - id: "d"
+        label: "GitHub Projects"
+      - id: "e"
+        label: "Trello"
+      - id: "f"
+        label: "ClickUp"
+      - id: "g"
+        label: "Shortcut"
+      - id: "h"
+        label: "YouTrack"
+      - id: "i"
+        label: "Monday.com"
+      - id: "j"
+        label: "Asana"
+      - id: "k"
+        label: "A physical board or whiteboard"
+      - id: "l"
+        label: "Other (please specify)"
+  - id: q5
+    prompt: "Which tool does your team use most often for Agile/Kanban work?"
+    type: single_choice
+    construct: tool_does_team_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Jira"
+      - id: "b"
+        label: "Azure DevOps"
+      - id: "c"
+        label: "Linear"
+      - id: "d"
+        label: "GitHub Projects"
+      - id: "e"
+        label: "Trello"
+      - id: "f"
+        label: "ClickUp"
+      - id: "g"
+        label: "Another tool"
+      - id: "h"
+        label: "A physical board"
+  - id: q6
+    prompt: "Which Agile ceremonies or practices does your team hold? (Select all that apply)"
+    type: multi_choice
+    construct: agile_ceremonies_practices_does_team
+    required: true
+    options:
+      - id: "a"
+        label: "Daily standup"
+      - id: "b"
+        label: "Sprint planning"
+      - id: "c"
+        label: "Backlog refinement / grooming"
+      - id: "d"
+        label: "Sprint review / demo"
+      - id: "e"
+        label: "Retrospective"
+      - id: "f"
+        label: "Release planning"
+      - id: "g"
+        label: "None of these"
+  - id: q7
+    prompt: "Which board or workflow features does your team use? (Select all that apply)"
+    type: multi_choice
+    construct: board_workflow_features_does_team
+    required: true
+    options:
+      - id: "a"
+        label: "Kanban columns / swimlanes"
+      - id: "b"
+        label: "Work-in-progress (WIP) limits"
+      - id: "c"
+        label: "Story points or estimates"
+      - id: "d"
+        label: "Burndown or burnup charts"
+      - id: "e"
+        label: "Velocity tracking"
+      - id: "f"
+        label: "Cumulative flow diagrams"
+      - id: "g"
+        label: "Epics and roadmaps"
+      - id: "h"
+        label: "Labels and filters"
+      - id: "i"
+        label: "Automations / workflow rules"
+  - id: q8
+    prompt: "How does your team estimate work?"
+    type: single_choice
+    construct: does_team_estimate_work
+    required: true
+    options:
+      - id: "a"
+        label: "Story points"
+      - id: "b"
+        label: "T-shirt sizes"
+      - id: "c"
+        label: "Hours or days"
+      - id: "d"
+        label: "Number of tasks"
+      - id: "e"
+        label: "We don't estimate"
+      - id: "f"
+        label: "Other"
+  - id: q9
+    prompt: "What is your primary role on the team?"
+    type: single_choice
+    construct: primary_role_team
+    required: true
+    options:
+      - id: "a"
+        label: "Developer or engineer"
+      - id: "b"
+        label: "Scrum Master or Agile coach"
+      - id: "c"
+        label: "Product owner or product manager"
+      - id: "d"
+        label: "Engineering manager or team lead"
+      - id: "e"
+        label: "Designer"
+      - id: "f"
+        label: "QA or tester"
+      - id: "g"
+        label: "Other"
+  - id: q10
+    prompt: "Approximately how many people are on your immediate Agile team? Enter a whole number."
+    type: free_text
+    construct: approximately_many_people_immediate_agil
+    required: true
+  - id: q11
+    prompt: "How often do you personally update the board or move cards?"
+    type: single_choice
+    construct: often_personally_update_board_move
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "About once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Once a week or less"
+      - id: "e"
+        label: "Rarely"
+  - id: q12
+    prompt: "Does your team use AI features within your Agile tool (e.g., auto-summaries, sprint insights)?"
+    type: single_choice
+    construct: does_team_use_ai_features
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but we're interested"
+      - id: "d"
+        label: "No, and we're not interested"
+  - id: q13
+    prompt: "How much do you agree with the following statement? — Our Agile process helps the team deliver work predictably."
+    type: single_choice
+    construct: much_agree_following_statement_our
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement? — Our tool accurately reflects the real state of our work."
+    type: single_choice
+    construct: much_agree_following_statement_our
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement? — Our ceremonies (standups, retros, etc.) are a good use of time."
+    type: single_choice
+    construct: much_agree_following_statement_our
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement? — Our estimates are usually reliable."
+    type: single_choice
+    construct: much_agree_following_statement_our
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement? — Updating the tool takes more effort than the value it provides."
+    type: single_choice
+    construct: much_agree_following_statement_updating
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How useful is each Agile practice to your team? — Daily standup"
+    type: single_choice
+    construct: useful_each_agile_practice_team
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all useful"
+      - id: "b"
+        label: "Slightly useful"
+      - id: "c"
+        label: "Moderately useful"
+      - id: "d"
+        label: "Very useful"
+      - id: "e"
+        label: "Extremely useful"
+  - id: q19
+    prompt: "How useful is each Agile practice to your team? — Sprint planning"
+    type: single_choice
+    construct: useful_each_agile_practice_team
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all useful"
+      - id: "b"
+        label: "Slightly useful"
+      - id: "c"
+        label: "Moderately useful"
+      - id: "d"
+        label: "Very useful"
+      - id: "e"
+        label: "Extremely useful"
+  - id: q20
+    prompt: "How useful is each Agile practice to your team? — Backlog refinement"
+    type: single_choice
+    construct: useful_each_agile_practice_team
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all useful"
+      - id: "b"
+        label: "Slightly useful"
+      - id: "c"
+        label: "Moderately useful"
+      - id: "d"
+        label: "Very useful"
+      - id: "e"
+        label: "Extremely useful"
+  - id: q21
+    prompt: "How useful is each Agile practice to your team? — Retrospectives"
+    type: single_choice
+    construct: useful_each_agile_practice_team
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all useful"
+      - id: "b"
+        label: "Slightly useful"
+      - id: "c"
+        label: "Moderately useful"
+      - id: "d"
+        label: "Very useful"
+      - id: "e"
+        label: "Extremely useful"
+  - id: q22
+    prompt: "How useful is each Agile practice to your team? — Velocity / metrics tracking"
+    type: single_choice
+    construct: useful_each_agile_practice_team
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all useful"
+      - id: "b"
+        label: "Slightly useful"
+      - id: "c"
+        label: "Moderately useful"
+      - id: "d"
+        label: "Very useful"
+      - id: "e"
+        label: "Extremely useful"
+  - id: q23
+    prompt: "Select your top 3 factors that matter most when choosing an Agile/Kanban tool. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_that
+    required: true
+    options:
+      - id: "a"
+        label: "Ease of use"
+      - id: "b"
+        label: "Board and workflow flexibility"
+      - id: "c"
+        label: "Reporting and metrics"
+      - id: "d"
+        label: "Integrations with dev tools (Git, CI/CD)"
+      - id: "e"
+        label: "Price"
+      - id: "f"
+        label: "Speed and performance"
+      - id: "g"
+        label: "Scalability across teams"
+      - id: "h"
+        label: "Automation capabilities"
+  - id: q24
+    prompt: "What frustrates you most about your Agile/Kanban tooling or process? (Select all that apply)"
+    type: multi_choice
+    construct: frustrates_most_agile_kanban_tooling
+    required: true
+    options:
+      - id: "a"
+        label: "Too much process overhead"
+      - id: "b"
+        label: "Board doesn't match reality"
+      - id: "c"
+        label: "Estimates are unreliable"
+      - id: "d"
+        label: "Tool is slow or clunky"
+      - id: "e"
+        label: "Too many meetings"
+      - id: "f"
+        label: "Poor reporting or metrics"
+      - id: "g"
+        label: "Hard to configure"
+      - id: "h"
+        label: "Nothing frustrates me"
+  - id: q25
+    prompt: "How mature do you consider your team's Agile practice?"
+    type: single_choice
+    construct: mature_consider_team_s_agile
+    required: true
+    options:
+      - id: "a"
+        label: "Just getting started"
+      - id: "b"
+        label: "Developing"
+      - id: "c"
+        label: "Established"
+      - id: "d"
+        label: "Highly mature and optimizing"
+  - id: q26
+    prompt: "How satisfied are you overall with your team's Agile/Kanban tool?"
+    type: single_choice
+    construct: satisfied_overall_team_s_agile
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q27
+    prompt: "How satisfied are you with your team's overall Agile process (regardless of tool)?"
+    type: single_choice
+    construct: satisfied_team_s_overall_agile
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q28
+    prompt: "How likely are you to recommend your Agile/Kanban tool to another team? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_agile_kanban_tool
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q29
+    prompt: "How likely is your team to change its primary Agile/Kanban tool in the next year?"
+    type: single_choice
+    construct: likely_team_change_its_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q30
+    prompt: "Approximately how many hours per week do you spend in Agile ceremonies and board upkeep? Enter a whole number."
+    type: free_text
+    construct: approximately_many_hours_per_week
+    required: true
+  - id: q31
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "How many years of professional experience do you have? Enter a whole number."
+    type: free_text
+    construct: many_years_professional_experience_have
+    required: true
+  - id: q38
+    prompt: "In which industry does your organization operate?"
+    type: single_choice
+    construct: industry_does_organization_operate
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Financial services"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Retail or e-commerce"
+      - id: "e"
+        label: "Manufacturing"
+      - id: "f"
+        label: "Government or education"
+      - id: "g"
+        label: "Media or marketing"
+      - id: "h"
+        label: "Other"
+  - id: q39
+    prompt: "How many people work at your organization?"
+    type: single_choice
+    construct: many_people_work_organization
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2–9"
+      - id: "c"
+        label: "10–49"
+      - id: "d"
+        label: "50–249"
+      - id: "e"
+        label: "250–999"
+      - id: "f"
+        label: "1,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q40
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q42
+    prompt: "Is there anything else you would like to share about your team's Agile or Kanban practice?"
+    type: free_text
+    construct: there_anything_else_would_like
+    required: false

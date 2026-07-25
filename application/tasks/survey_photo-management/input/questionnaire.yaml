@@ -1,0 +1,848 @@
+schemaVersion: "1.0"
+id: photo_management_v1
+title: "Photo Management Survey"
+description: "How people store, organize, edit, back up, and share their personal photo collections."
+questions:
+  - id: q0
+    prompt: "How would you describe the size of your personal photo collection?"
+    type: single_choice
+    construct: would_describe_size_personal_photo
+    required: true
+    options:
+      - id: "a"
+        label: "Small (under 1,000 photos)"
+      - id: "b"
+        label: "Moderate (1,000-5,000)"
+      - id: "c"
+        label: "Large (5,000-20,000)"
+      - id: "d"
+        label: "Very large (20,000-50,000)"
+      - id: "e"
+        label: "Huge (50,000 or more)"
+      - id: "f"
+        label: "I have no idea"
+  - id: q1
+    prompt: "What do you mostly use to take photos?"
+    type: single_choice
+    construct: mostly_use_take_photos
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "Dedicated digital camera (point-and-shoot)"
+      - id: "c"
+        label: "DSLR or mirrorless camera"
+      - id: "d"
+        label: "Tablet"
+      - id: "e"
+        label: "A mix of devices"
+      - id: "f"
+        label: "I rarely take photos"
+  - id: q2
+    prompt: "How often do you take photos?"
+    type: single_choice
+    construct: often_take_photos
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "Daily"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Rarely"
+  - id: q3
+    prompt: "How actively do you organize your photo collection?"
+    type: single_choice
+    construct: actively_organize_photo_collection
+    required: true
+    options:
+      - id: "a"
+        label: "Very actively — I keep it well curated"
+      - id: "b"
+        label: "Somewhat — I organize occasionally"
+      - id: "c"
+        label: "Rarely — photos just pile up"
+      - id: "d"
+        label: "Never — it's a big unsorted mess"
+      - id: "e"
+        label: "Not applicable"
+  - id: q4
+    prompt: "Where do you store your photos? (Select all that apply)"
+    type: multi_choice
+    construct: where_store_photos_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "On my phone"
+      - id: "b"
+        label: "In a cloud photo service"
+      - id: "c"
+        label: "On my computer's hard drive"
+      - id: "d"
+        label: "On an external drive"
+      - id: "e"
+        label: "On a NAS or home server"
+      - id: "f"
+        label: "Printed / physical albums"
+      - id: "g"
+        label: "On social media only"
+      - id: "h"
+        label: "On memory cards I keep"
+  - id: q5
+    prompt: "Which photo apps or services do you use? (Select all that apply)"
+    type: multi_choice
+    construct: photo_apps_services_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Apple Photos / iCloud Photos"
+      - id: "b"
+        label: "Google Photos"
+      - id: "c"
+        label: "Amazon Photos"
+      - id: "d"
+        label: "Microsoft OneDrive"
+      - id: "e"
+        label: "Dropbox"
+      - id: "f"
+        label: "Adobe Lightroom"
+      - id: "g"
+        label: "Flickr"
+      - id: "h"
+        label: "SmugMug"
+      - id: "i"
+        label: "A NAS app (e.g., Synology Photos, Immich)"
+      - id: "j"
+        label: "None / just the built-in gallery"
+  - id: q6
+    prompt: "Which service is your primary photo library?"
+    type: single_choice
+    construct: service_primary_photo_library
+    required: true
+    options:
+      - id: "a"
+        label: "Apple Photos / iCloud"
+      - id: "b"
+        label: "Google Photos"
+      - id: "c"
+        label: "Amazon Photos"
+      - id: "d"
+        label: "OneDrive / Dropbox"
+      - id: "e"
+        label: "Adobe Lightroom"
+      - id: "f"
+        label: "A local folder on my computer"
+      - id: "g"
+        label: "A NAS / self-hosted library"
+      - id: "h"
+        label: "My phone's default gallery"
+      - id: "i"
+        label: "Other"
+  - id: q7
+    prompt: "How do you organize your photos? (Select all that apply)"
+    type: multi_choice
+    construct: organize_photos_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Albums"
+      - id: "b"
+        label: "Folders by date"
+      - id: "c"
+        label: "Folders by event or trip"
+      - id: "d"
+        label: "Tags or keywords"
+      - id: "e"
+        label: "Favorites / starred"
+      - id: "f"
+        label: "People / face grouping"
+      - id: "g"
+        label: "Location / map"
+      - id: "h"
+        label: "I don't organize them"
+  - id: q8
+    prompt: "Which tools do you use to edit photos? (Select all that apply)"
+    type: multi_choice
+    construct: tools_use_edit_photos_select
+    required: true
+    options:
+      - id: "a"
+        label: "Built-in phone editor"
+      - id: "b"
+        label: "Google Photos editor"
+      - id: "c"
+        label: "Adobe Lightroom"
+      - id: "d"
+        label: "Adobe Photoshop"
+      - id: "e"
+        label: "Snapseed"
+      - id: "f"
+        label: "VSCO"
+      - id: "g"
+        label: "Apple Photos editing"
+      - id: "h"
+        label: "Third-party filter apps"
+      - id: "i"
+        label: "I don't edit photos"
+  - id: q9
+    prompt: "How do you share photos with others? (Select all that apply)"
+    type: multi_choice
+    construct: share_photos_others_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Text / messaging apps"
+      - id: "b"
+        label: "Social media posts"
+      - id: "c"
+        label: "Shared cloud albums"
+      - id: "d"
+        label: "Email"
+      - id: "e"
+        label: "Cloud links"
+      - id: "f"
+        label: "Printed photos or photo books"
+      - id: "g"
+        label: "AirDrop / nearby share"
+      - id: "h"
+        label: "I rarely share photos"
+  - id: q10
+    prompt: "Do you back up your photos separately from where you normally keep them?"
+    type: single_choice
+    construct: back_up_photos_separately_from
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, automatically to the cloud"
+      - id: "b"
+        label: "Yes, manually to a drive"
+      - id: "c"
+        label: "Yes, to multiple places"
+      - id: "d"
+        label: "No, I have only one copy"
+      - id: "e"
+        label: "Not sure"
+  - id: q11
+    prompt: "Do you pay for photo or cloud storage?"
+    type: single_choice
+    construct: pay_photo_cloud_storage
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a dedicated photo storage plan"
+      - id: "b"
+        label: "Yes, as part of a broader cloud plan (iCloud+, Google One, etc.)"
+      - id: "c"
+        label: "No, I use only free storage"
+      - id: "d"
+        label: "Not sure"
+  - id: q12
+    prompt: "Approximately how much do you pay per month for photo/cloud storage, in US dollars? Enter a whole number (0 if free)."
+    type: free_text
+    construct: approximately_much_pay_per_month
+    required: true
+  - id: q13
+    prompt: "Approximately how many photos are in your entire collection? Enter a whole number."
+    type: free_text
+    construct: approximately_many_photos_entire_collect
+    required: true
+  - id: q14
+    prompt: "Roughly how many photos do you take in a typical week? Enter a whole number."
+    type: free_text
+    construct: roughly_many_photos_take_typical
+    required: true
+  - id: q15
+    prompt: "How much do you agree with the following statement about your photos? My photo collection is well organized."
+    type: single_choice
+    construct: much_agree_following_statement_photos
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about your photos? I worry about losing my photos."
+    type: single_choice
+    construct: much_agree_following_statement_photos
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about your photos? I have too many duplicate or low-quality photos."
+    type: single_choice
+    construct: much_agree_following_statement_photos
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about your photos? I can easily find a specific old photo when I need it."
+    type: single_choice
+    construct: much_agree_following_statement_photos
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about your photos? I feel overwhelmed by how many photos I have."
+    type: single_choice
+    construct: much_agree_following_statement_photos
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement about your photos? AI features like search and automatic albums are genuinely useful to me."
+    type: single_choice
+    construct: much_agree_following_statement_photos
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree with the following statement about your photos? I wish I printed or displayed more of my photos."
+    type: single_choice
+    construct: much_agree_following_statement_photos
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How often do you delete or cull unwanted photos?"
+    type: single_choice
+    construct: often_delete_cull_unwanted_photos
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Regularly / after every shoot"
+  - id: q23
+    prompt: "How often do you use AI-powered search (e.g., searching \"beach\" or \"dog\") to find photos?"
+    type: single_choice
+    construct: often_use_ai_powered_search
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "All the time"
+  - id: q24
+    prompt: "When choosing a photo storage service, how important is each factor? Amount of storage included."
+    type: single_choice
+    construct: when_choosing_photo_storage_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a photo storage service, how important is each factor? Price."
+    type: single_choice
+    construct: when_choosing_photo_storage_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a photo storage service, how important is each factor? Privacy and data security."
+    type: single_choice
+    construct: when_choosing_photo_storage_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a photo storage service, how important is each factor? Smart search and organization."
+    type: single_choice
+    construct: when_choosing_photo_storage_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing a photo storage service, how important is each factor? Syncing across all my devices."
+    type: single_choice
+    construct: when_choosing_photo_storage_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "When choosing a photo storage service, how important is each factor? Original (uncompressed) photo quality."
+    type: single_choice
+    construct: when_choosing_photo_storage_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "Select your top 3 most valued photo management features. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_most_valued
+    required: true
+    options:
+      - id: "a"
+        label: "Automatic backup"
+      - id: "b"
+        label: "Face and people grouping"
+      - id: "c"
+        label: "Search by content or location"
+      - id: "d"
+        label: "Shared albums"
+      - id: "e"
+        label: "Editing tools"
+      - id: "f"
+        label: "Automatic memories / highlight reels"
+      - id: "g"
+        label: "Duplicate detection and cleanup"
+      - id: "h"
+        label: "Cross-device sync"
+      - id: "i"
+        label: "Printing and photo books"
+  - id: q31
+    prompt: "What concerns you most about your photo collection? (Select all that apply)"
+    type: multi_choice
+    construct: concerns_most_photo_collection_select
+    required: true
+    options:
+      - id: "a"
+        label: "Losing photos permanently"
+      - id: "b"
+        label: "Privacy of my photos in the cloud"
+      - id: "c"
+        label: "The cost of storage"
+      - id: "d"
+        label: "Being locked into one service"
+      - id: "e"
+        label: "Compression reducing quality"
+      - id: "f"
+        label: "Disorganization / clutter"
+      - id: "g"
+        label: "Running out of storage space"
+      - id: "h"
+        label: "No major concerns"
+  - id: q32
+    prompt: "If you switched phones or platforms today, how easy would it be to move your photos?"
+    type: single_choice
+    construct: if_switched_phones_platforms_today
+    required: true
+    options:
+      - id: "a"
+        label: "Very easy"
+      - id: "b"
+        label: "Somewhat easy"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat difficult"
+      - id: "e"
+        label: "Very difficult"
+      - id: "f"
+        label: "I don't know"
+  - id: q33
+    prompt: "How would you rate your overall satisfaction with how you manage your photos?"
+    type: single_choice
+    construct: would_rate_overall_satisfaction_manage
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How confident are you that you could find any specific photo within a minute?"
+    type: single_choice
+    construct: confident_that_could_find_any
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q35
+    prompt: "How likely are you to switch your primary photo service in the next 12 months?"
+    type: single_choice
+    construct: likely_switch_primary_photo_service
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q36
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your primary photo service to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q37
+    prompt: "If you could improve one thing about managing your photos, what would it be? (Optional short answer)"
+    type: free_text
+    construct: if_could_improve_one_thing
+    required: false
+  - id: q38
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18-24"
+      - id: "c"
+        label: "25-34"
+      - id: "d"
+        label: "35-44"
+      - id: "e"
+        label: "45-54"
+      - id: "f"
+        label: "55-64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000-$49,999"
+      - id: "c"
+        label: "$50,000-$74,999"
+      - id: "d"
+        label: "$75,000-$99,999"
+      - id: "e"
+        label: "$100,000-$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Homemaker"
+      - id: "f"
+        label: "Unemployed"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "How many people live in your household, including yourself? Enter a whole number."
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q45
+    prompt: "What is your relationship status?"
+    type: single_choice
+    construct: relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or domestic partnership"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q47
+    prompt: "How would you describe where you live?"
+    type: single_choice
+    construct: would_describe_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q48
+    prompt: "Which best describes your relationship to photography?"
+    type: single_choice
+    construct: best_describes_relationship_photography
+    required: true
+    options:
+      - id: "a"
+        label: "Professional or semi-professional photographer"
+      - id: "b"
+        label: "Serious hobbyist"
+      - id: "c"
+        label: "Casual enthusiast"
+      - id: "d"
+        label: "I mostly take everyday snapshots"
+      - id: "e"
+        label: "I rarely take photos"
+  - id: q49
+    prompt: "How would you describe your comfort with technology in general?"
+    type: single_choice
+    construct: would_describe_comfort_technology_genera
+    required: true
+    options:
+      - id: "a"
+        label: "I'm an early adopter who loves new tech"
+      - id: "b"
+        label: "Comfortable and fairly up to date"
+      - id: "c"
+        label: "Average — I use what I need"
+      - id: "d"
+        label: "A bit behind the curve"
+      - id: "e"
+        label: "I find new technology difficult"

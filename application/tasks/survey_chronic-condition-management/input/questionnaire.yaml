@@ -1,0 +1,656 @@
+schemaVersion: "1.0"
+id: chronic_condition_management_v1
+title: "Managing an Ongoing Health Condition Survey"
+description: "The everyday logistics, tools, and support people use to manage an ongoing health condition."
+questions:
+  - id: q0
+    prompt: "Do you currently manage a long-term or ongoing health condition, either for yourself or for someone you care for?"
+    type: single_choice
+    construct: currently_manage_long_term_ongoing
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for myself"
+      - id: "b"
+        label: "Yes, for someone I care for"
+      - id: "c"
+        label: "Yes, both for myself and someone else"
+      - id: "d"
+        label: "No"
+  - id: q1
+    prompt: "About how long have you (or the person you care for) been managing this condition?"
+    type: single_choice
+    construct: long_have_person_care_been
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "In general, how manageable does day-to-day management of the condition feel?"
+    type: single_choice
+    construct: general_manageable_does_day_day
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all manageable"
+      - id: "b"
+        label: "Slightly manageable"
+      - id: "c"
+        label: "Moderately manageable"
+      - id: "d"
+        label: "Very manageable"
+      - id: "e"
+        label: "Completely manageable"
+  - id: q3
+    prompt: "Which tasks are part of managing the condition day to day? (Select all that apply)"
+    type: multi_choice
+    construct: tasks_part_managing_condition_day
+    required: true
+    options:
+      - id: "a"
+        label: "Taking medications on a schedule"
+      - id: "b"
+        label: "Attending regular appointments"
+      - id: "c"
+        label: "Tracking measurements or symptoms"
+      - id: "d"
+        label: "Following a specific diet or nutrition plan"
+      - id: "e"
+        label: "Regular exercise or physical activity"
+      - id: "f"
+        label: "Coordinating between different providers"
+      - id: "g"
+        label: "Managing supplies or equipment"
+      - id: "h"
+        label: "Handling insurance or billing paperwork"
+      - id: "i"
+        label: "None of these"
+  - id: q4
+    prompt: "How do you keep track of appointments, medications, and measurements? (Select all that apply)"
+    type: multi_choice
+    construct: keep_track_appointments_medications_meas
+    required: true
+    options:
+      - id: "a"
+        label: "A smartphone app"
+      - id: "b"
+        label: "A calendar or planner"
+      - id: "c"
+        label: "Written notes or a logbook"
+      - id: "d"
+        label: "Reminders or alarms on my phone"
+      - id: "e"
+        label: "A patient portal"
+      - id: "f"
+        label: "A family member helps me"
+      - id: "g"
+        label: "I keep track in my head"
+      - id: "h"
+        label: "I do not track these regularly"
+  - id: q5
+    prompt: "How often do you have a check-up or appointment related to the condition?"
+    type: single_choice
+    construct: often_have_check_up_appointment
+    required: true
+    options:
+      - id: "a"
+        label: "More than once a month"
+      - id: "b"
+        label: "Monthly"
+      - id: "c"
+        label: "Every few months"
+      - id: "d"
+        label: "About once or twice a year"
+      - id: "e"
+        label: "Less than once a year"
+  - id: q6
+    prompt: "About how many different health care providers are involved in managing the condition? Please enter a number."
+    type: free_text
+    construct: many_different_health_care_providers
+    required: true
+  - id: q7
+    prompt: "How confident are you in managing the condition between appointments?"
+    type: single_choice
+    construct: confident_managing_condition_between_app
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q8
+    prompt: "What are the biggest obstacles to managing the condition? (Select all that apply)"
+    type: multi_choice
+    construct: biggest_obstacles_managing_condition_sel
+    required: true
+    options:
+      - id: "a"
+        label: "Cost of care or medications"
+      - id: "b"
+        label: "Remembering to take medications"
+      - id: "c"
+        label: "Scheduling or getting to appointments"
+      - id: "d"
+        label: "Coordinating between providers"
+      - id: "e"
+        label: "Understanding instructions"
+      - id: "f"
+        label: "Staying motivated"
+      - id: "g"
+        label: "Insurance or paperwork hassles"
+      - id: "h"
+        label: "Lack of support at home"
+      - id: "i"
+        label: "Time it takes"
+      - id: "j"
+        label: "I do not face major obstacles"
+  - id: q9
+    prompt: "Do you use any apps or devices to help manage the condition?"
+    type: single_choice
+    construct: use_any_apps_devices_help
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, an app"
+      - id: "b"
+        label: "Yes, a device or monitor"
+      - id: "c"
+        label: "Yes, both an app and a device"
+      - id: "d"
+        label: "No, but I am interested"
+      - id: "e"
+        label: "No, and I am not interested"
+  - id: q10
+    prompt: "Which of the following tools do you use to help manage the condition? (Select all that apply)"
+    type: multi_choice
+    construct: following_tools_use_help_manage
+    required: true
+    options:
+      - id: "a"
+        label: "Medication reminder app"
+      - id: "b"
+        label: "Symptom or measurement tracking app"
+      - id: "c"
+        label: "A home monitoring device"
+      - id: "d"
+        label: "A wearable (e.g., smartwatch, fitness tracker)"
+      - id: "e"
+        label: "A patient portal"
+      - id: "f"
+        label: "Telehealth visits"
+      - id: "g"
+        label: "Health coaching or a support program"
+      - id: "h"
+        label: "None of these"
+  - id: q11
+    prompt: "How helpful have these tools been in managing the condition?"
+    type: single_choice
+    construct: helpful_have_these_tools_been
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all helpful"
+      - id: "b"
+        label: "Slightly helpful"
+      - id: "c"
+        label: "Moderately helpful"
+      - id: "d"
+        label: "Very helpful"
+      - id: "e"
+        label: "Extremely helpful"
+      - id: "f"
+        label: "I do not use any tools"
+  - id: q12
+    prompt: "How much do you agree or disagree: I have the information I need to manage the condition well."
+    type: single_choice
+    construct: much_agree_disagree_i_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: My providers work well together to coordinate my care."
+    type: single_choice
+    construct: much_agree_disagree_my_providers
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: Managing the condition takes a lot of time and effort."
+    type: single_choice
+    construct: much_agree_disagree_managing_condition
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: The cost of managing the condition is a burden."
+    type: single_choice
+    construct: much_agree_disagree_cost_managing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: I have enough support to manage the condition."
+    type: single_choice
+    construct: much_agree_disagree_i_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How challenging is each part of management for you — Keeping up with medications"
+    type: single_choice
+    construct: challenging_each_part_management_keeping
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all challenging"
+      - id: "b"
+        label: "Slightly challenging"
+      - id: "c"
+        label: "Moderately challenging"
+      - id: "d"
+        label: "Very challenging"
+      - id: "e"
+        label: "Extremely challenging"
+  - id: q18
+    prompt: "How challenging is each part of management for you — Attending appointments"
+    type: single_choice
+    construct: challenging_each_part_management_attendi
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all challenging"
+      - id: "b"
+        label: "Slightly challenging"
+      - id: "c"
+        label: "Moderately challenging"
+      - id: "d"
+        label: "Very challenging"
+      - id: "e"
+        label: "Extremely challenging"
+  - id: q19
+    prompt: "How challenging is each part of management for you — Following diet or lifestyle recommendations"
+    type: single_choice
+    construct: challenging_each_part_management_followi
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all challenging"
+      - id: "b"
+        label: "Slightly challenging"
+      - id: "c"
+        label: "Moderately challenging"
+      - id: "d"
+        label: "Very challenging"
+      - id: "e"
+        label: "Extremely challenging"
+  - id: q20
+    prompt: "How challenging is each part of management for you — Managing costs and insurance"
+    type: single_choice
+    construct: challenging_each_part_management_managin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all challenging"
+      - id: "b"
+        label: "Slightly challenging"
+      - id: "c"
+        label: "Moderately challenging"
+      - id: "d"
+        label: "Very challenging"
+      - id: "e"
+        label: "Extremely challenging"
+  - id: q21
+    prompt: "How challenging is each part of management for you — Coordinating between providers"
+    type: single_choice
+    construct: challenging_each_part_management_coordin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all challenging"
+      - id: "b"
+        label: "Slightly challenging"
+      - id: "c"
+        label: "Moderately challenging"
+      - id: "d"
+        label: "Very challenging"
+      - id: "e"
+        label: "Extremely challenging"
+  - id: q22
+    prompt: "Who provides you with support in managing the condition? (Select all that apply)"
+    type: multi_choice
+    construct: who_provides_support_managing_condition
+    required: true
+    options:
+      - id: "a"
+        label: "Spouse or partner"
+      - id: "b"
+        label: "Other family members"
+      - id: "c"
+        label: "Friends"
+      - id: "d"
+        label: "My primary care provider"
+      - id: "e"
+        label: "A specialist"
+      - id: "f"
+        label: "A nurse or care coordinator"
+      - id: "g"
+        label: "A support group or community"
+      - id: "h"
+        label: "A health coach"
+      - id: "i"
+        label: "I mostly manage on my own"
+  - id: q23
+    prompt: "In the past month, how often did you feel overwhelmed by managing the condition?"
+    type: single_choice
+    construct: past_month_often_did_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q24
+    prompt: "In the past 12 months, did cost ever cause you to delay or skip part of your care plan (such as an appointment or refill)?"
+    type: single_choice
+    construct: past_12_months_did_cost
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, often"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q25
+    prompt: "About how many minutes per day do you spend on tasks related to managing the condition? Please enter a number."
+    type: free_text
+    construct: many_minutes_per_day_spend
+    required: true
+  - id: q26
+    prompt: "Which types of support would help you most in managing the condition? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: types_support_would_help_most
+    required: true
+    options:
+      - id: "a"
+        label: "Lower medication or care costs"
+      - id: "b"
+        label: "Better coordination between providers"
+      - id: "c"
+        label: "Easier appointment scheduling"
+      - id: "d"
+        label: "Clearer instructions and education"
+      - id: "e"
+        label: "Reminder tools for medications and tasks"
+      - id: "f"
+        label: "More help from family or caregivers"
+      - id: "g"
+        label: "A dedicated care coordinator or nurse"
+      - id: "h"
+        label: "Home monitoring devices"
+      - id: "i"
+        label: "Peer or community support"
+      - id: "j"
+        label: "More convenient telehealth options"
+  - id: q27
+    prompt: "Overall, how satisfied are you with how you are able to manage the condition day to day?"
+    type: single_choice
+    construct: overall_satisfied_able_manage_condition
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q28
+    prompt: "How confident are you that you will be able to manage the condition well over the next year?"
+    type: single_choice
+    construct: confident_that_will_be_able
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q29
+    prompt: "What would most help you manage the condition better? (Optional short answer)"
+    type: free_text
+    construct: would_most_help_manage_condition
+    required: false
+  - id: q30
+    prompt: "What is your age? Please enter a number (years old)."
+    type: free_text
+    construct: age_please_enter_number_years
+    required: true
+  - id: q31
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q35
+    prompt: "Do you currently have health insurance coverage?"
+    type: single_choice
+    construct: currently_have_health_insurance_coverage
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, through an employer"
+      - id: "b"
+        label: "Yes, through a government program (Medicare, Medicaid, etc.)"
+      - id: "c"
+        label: "Yes, purchased on my own"
+      - id: "d"
+        label: "No, I am uninsured"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Homemaker or caregiver"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not currently employed"
+  - id: q37
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q38
+    prompt: "In which region of the United States do you live?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q39
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q40
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"

@@ -1,0 +1,679 @@
+schemaVersion: "1.0"
+id: medication_adherence_v1
+title: "Medication Routine & Adherence Survey"
+description: "How consumers organize their daily medication routines and stay on track with taking them as directed."
+questions:
+  - id: q0
+    prompt: "Do you take any medications on a regular schedule (prescription or over-the-counter)?"
+    type: single_choice
+    construct: take_any_medications_regular_schedule
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, once a day"
+      - id: "b"
+        label: "Yes, more than once a day"
+      - id: "c"
+        label: "Yes, but not every day"
+      - id: "d"
+        label: "No, only occasionally"
+      - id: "e"
+        label: "No, none at all"
+  - id: q1
+    prompt: "How many medications or supplements do you take on a typical day? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: many_medications_supplements_take_typica
+    required: true
+  - id: q2
+    prompt: "How long have you been taking your longest-running regular medication?"
+    type: single_choice
+    construct: long_have_been_taking_longest
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+      - id: "f"
+        label: "Not applicable"
+  - id: q3
+    prompt: "What times of day do you usually take medication? (Select all that apply)"
+    type: multi_choice
+    construct: times_day_usually_take_medication
+    required: true
+    options:
+      - id: "a"
+        label: "Morning"
+      - id: "b"
+        label: "Midday"
+      - id: "c"
+        label: "Evening"
+      - id: "d"
+        label: "Bedtime"
+      - id: "e"
+        label: "With meals"
+      - id: "f"
+        label: "As needed only"
+  - id: q4
+    prompt: "How do you remember to take your medication? (Select all that apply)"
+    type: multi_choice
+    construct: remember_take_medication_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "I tie it to a daily routine (for example, breakfast)"
+      - id: "b"
+        label: "A phone alarm or reminder"
+      - id: "c"
+        label: "A medication reminder app"
+      - id: "d"
+        label: "A pill organizer or weekly box"
+      - id: "e"
+        label: "A family member reminds me"
+      - id: "f"
+        label: "I keep it somewhere I'll see it"
+      - id: "g"
+        label: "I just remember on my own"
+  - id: q5
+    prompt: "Do you use a pill organizer or weekly pill box?"
+    type: single_choice
+    construct: use_pill_organizer_weekly_pill
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, every week"
+      - id: "b"
+        label: "Yes, sometimes"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No"
+  - id: q6
+    prompt: "Do you use any app or device to help you take your medications?"
+    type: single_choice
+    construct: use_any_app_device_help
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a dedicated medication reminder app"
+      - id: "b"
+        label: "Yes, my phone's alarm or calendar"
+      - id: "c"
+        label: "Yes, a smart pill dispenser or device"
+      - id: "d"
+        label: "No, but I'm interested"
+      - id: "e"
+        label: "No, and I'm not interested"
+  - id: q7
+    prompt: "How often do you take your medications exactly as prescribed or directed?"
+    type: single_choice
+    construct: often_take_medications_exactly_as
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Almost always"
+      - id: "c"
+        label: "Most of the time"
+      - id: "d"
+        label: "Sometimes"
+      - id: "e"
+        label: "Rarely"
+  - id: q8
+    prompt: "In a typical week, how often do you miss or forget a dose?"
+    type: single_choice
+    construct: typical_week_often_miss_forget
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Once or twice a week"
+      - id: "d"
+        label: "Several times a week"
+      - id: "e"
+        label: "Most days"
+  - id: q9
+    prompt: "What are the main reasons you sometimes miss a dose? (Select all that apply)"
+    type: multi_choice
+    construct: main_reasons_sometimes_miss_dose
+    required: true
+    options:
+      - id: "a"
+        label: "I simply forget"
+      - id: "b"
+        label: "My schedule changed or I was away from home"
+      - id: "c"
+        label: "I ran out and hadn't refilled"
+      - id: "d"
+        label: "I didn't feel I needed it that day"
+      - id: "e"
+        label: "Unpleasant effects"
+      - id: "f"
+        label: "It's hard to keep track of multiple medications"
+      - id: "g"
+        label: "I rarely miss a dose"
+  - id: q10
+    prompt: "When you miss a dose, what do you usually do?"
+    type: single_choice
+    construct: when_miss_dose_usually
+    required: true
+    options:
+      - id: "a"
+        label: "Take it as soon as I remember"
+      - id: "b"
+        label: "Wait until the next scheduled dose"
+      - id: "c"
+        label: "It depends on the medication"
+      - id: "d"
+        label: "I look up what to do"
+      - id: "e"
+        label: "I rarely miss a dose"
+  - id: q11
+    prompt: "How do you keep track of when to refill your medications?"
+    type: single_choice
+    construct: keep_track_when_refill_medications
+    required: true
+    options:
+      - id: "a"
+        label: "Automatic refills from the pharmacy"
+      - id: "b"
+        label: "Pharmacy reminders (text, call, or app)"
+      - id: "c"
+        label: "I track it myself"
+      - id: "d"
+        label: "My doctor's office manages it"
+      - id: "e"
+        label: "I refill when I run low"
+  - id: q12
+    prompt: "Have you ever run out of a medication before you could refill it?"
+    type: single_choice
+    construct: have_ever_run_out_medication
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, never"
+  - id: q13
+    prompt: "How much do you agree or disagree: I have a reliable routine for taking my medications."
+    type: single_choice
+    construct: much_agree_disagree_i_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: Remembering to take my medications is easy for me."
+    type: single_choice
+    construct: much_agree_disagree_remembering_take
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: Taking multiple medications is complicated to manage."
+    type: single_choice
+    construct: much_agree_disagree_taking_multiple
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: I understand why I take each of my medications."
+    type: single_choice
+    construct: much_agree_disagree_i_understand
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree or disagree: Reminders and tools help me stay on track."
+    type: single_choice
+    construct: much_agree_disagree_reminders_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree or disagree: I feel confident managing my medications on my own."
+    type: single_choice
+    construct: much_agree_disagree_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How confident are you that you take your medications correctly and on time?"
+    type: single_choice
+    construct: confident_that_take_medications_correctl
+    required: true
+    options:
+      - id: "a"
+        label: "Very confident"
+      - id: "b"
+        label: "Somewhat confident"
+      - id: "c"
+        label: "Not very confident"
+      - id: "d"
+        label: "Not at all confident"
+  - id: q20
+    prompt: "How often do you talk with your doctor or pharmacist about how you're taking your medications?"
+    type: single_choice
+    construct: often_talk_doctor_pharmacist_re
+    required: true
+    options:
+      - id: "a"
+        label: "At every visit"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q21
+    prompt: "Have you ever stopped a medication without telling your doctor?"
+    type: single_choice
+    construct: have_ever_stopped_medication_without
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, I always check first"
+      - id: "d"
+        label: "Not applicable"
+  - id: q22
+    prompt: "What makes sticking to your medication routine harder? (Select all that apply)"
+    type: multi_choice
+    construct: makes_sticking_medication_routine_harder
+    required: true
+    options:
+      - id: "a"
+        label: "A busy or changing schedule"
+      - id: "b"
+        label: "Taking many medications"
+      - id: "c"
+        label: "Traveling or being away from home"
+      - id: "d"
+        label: "Forgetfulness"
+      - id: "e"
+        label: "Cost or refill hassles"
+      - id: "f"
+        label: "Unpleasant effects"
+      - id: "g"
+        label: "Nothing, it's easy for me"
+  - id: q23
+    prompt: "When staying on track with medications, how important is a simple daily routine?"
+    type: single_choice
+    construct: when_staying_track_medications_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When staying on track with medications, how important are reminders or alerts?"
+    type: single_choice
+    construct: when_staying_track_medications_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When staying on track with medications, how important is an easy refill process?"
+    type: single_choice
+    construct: when_staying_track_medications_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When staying on track with medications, how important is understanding what each medication does?"
+    type: single_choice
+    construct: when_staying_track_medications_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Would you be interested in any of these tools to help you stay on track? (Select all that apply)"
+    type: multi_choice
+    construct: would_be_interested_any_these
+    required: true
+    options:
+      - id: "a"
+        label: "A medication reminder app"
+      - id: "b"
+        label: "A smart pill dispenser"
+      - id: "c"
+        label: "Pharmacy prescription synchronization"
+      - id: "d"
+        label: "Pre-sorted packaging by dose"
+      - id: "e"
+        label: "Automatic refills"
+      - id: "f"
+        label: "Reminders from a family member"
+      - id: "g"
+        label: "I don't need any tools"
+  - id: q28
+    prompt: "On a scale of 0 to 10, how well do you feel you keep up with your medication routine? Please enter a number from 0 (not at all) to 10 (perfectly)."
+    type: free_text
+    construct: scale_0_10_well_feel
+    required: true
+  - id: q29
+    prompt: "Select your top 3 things that would most help you stick to your medications. (Select up to 3)"
+    type: single_choice
+    construct: select_top_3_things_that
+    required: true
+    options:
+      - id: "a"
+        label: "Simpler dosing schedules"
+      - id: "b"
+        label: "Better reminders"
+      - id: "c"
+        label: "Easier refills"
+      - id: "d"
+        label: "Lower cost"
+      - id: "e"
+        label: "Pre-sorted packaging"
+      - id: "f"
+        label: "Clearer instructions"
+      - id: "g"
+        label: "Support from family or caregivers"
+      - id: "h"
+        label: "Fewer medications overall"
+  - id: q30
+    prompt: "Overall, how satisfied are you with how well you manage your medication routine?"
+    type: single_choice
+    construct: overall_satisfied_well_manage_medication
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q31
+    prompt: "Is there one thing that would most help you stay on track with your medications? Please describe briefly (or enter \"none\")."
+    type: free_text
+    construct: there_one_thing_that_would
+    required: true
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Which best describes your race or ethnicity?"
+    type: single_choice
+    construct: best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian or Asian American"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Two or more races or another background"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+  - id: q40
+    prompt: "Which region of the country do you live in?"
+    type: single_choice
+    construct: region_country_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q42
+    prompt: "What is your primary source of health insurance?"
+    type: single_choice
+    construct: primary_source_health_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored plan"
+      - id: "b"
+        label: "Plan purchased on the marketplace or directly"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or veterans coverage (TRICARE / VA)"
+      - id: "f"
+        label: "I don't have health insurance"
+      - id: "g"
+        label: "Prefer not to say"

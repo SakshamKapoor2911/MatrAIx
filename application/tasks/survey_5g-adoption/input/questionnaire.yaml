@@ -1,0 +1,871 @@
+schemaVersion: "1.0"
+id: 5g_adoption_v1
+title: "5G Adoption Survey"
+description: "How consumers adopt, use, and feel about 5G mobile networks and 5G-based home internet."
+questions:
+  - id: q0
+    prompt: "Do you currently use a smartphone that supports 5G?"
+    type: single_choice
+    construct: currently_use_smartphone_that_supports
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I actively use 5G"
+      - id: "b"
+        label: "Yes, but I'm not sure if I use 5G"
+      - id: "c"
+        label: "Yes, but I keep 5G turned off"
+      - id: "d"
+        label: "No, my phone is 4G/LTE only"
+      - id: "e"
+        label: "No, I don't own a smartphone"
+      - id: "f"
+        label: "Not sure"
+  - id: q1
+    prompt: "Does your current mobile plan include 5G access?"
+    type: single_choice
+    construct: does_current_mobile_plan_include
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, unlimited 5G"
+      - id: "b"
+        label: "Yes, but with a data cap or throttling"
+      - id: "c"
+        label: "Yes, but only slower nationwide 5G (not ultra-fast)"
+      - id: "d"
+        label: "No, 5G is not included"
+      - id: "e"
+        label: "I don't know"
+  - id: q2
+    prompt: "How long have you been using 5G?"
+    type: single_choice
+    construct: long_have_been_using_5g
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 2 years"
+      - id: "d"
+        label: "2 to 4 years"
+      - id: "e"
+        label: "More than 4 years"
+      - id: "f"
+        label: "I don't use 5G"
+  - id: q3
+    prompt: "How did you first start using 5G?"
+    type: single_choice
+    construct: did_first_start_using_5g
+    required: true
+    options:
+      - id: "a"
+        label: "It came automatically with a new phone"
+      - id: "b"
+        label: "It came automatically with a plan upgrade"
+      - id: "c"
+        label: "I specifically upgraded my phone to get 5G"
+      - id: "d"
+        label: "I specifically changed carriers/plans to get 5G"
+      - id: "e"
+        label: "I'm not sure how it started"
+      - id: "f"
+        label: "I don't use 5G"
+  - id: q4
+    prompt: "Which mobile carrier do you primarily use?"
+    type: single_choice
+    construct: mobile_carrier_primarily_use
+    required: true
+    options:
+      - id: "a"
+        label: "Verizon"
+      - id: "b"
+        label: "AT&T"
+      - id: "c"
+        label: "T-Mobile"
+      - id: "d"
+        label: "Metro by T-Mobile"
+      - id: "e"
+        label: "Cricket Wireless"
+      - id: "f"
+        label: "Boost Mobile"
+      - id: "g"
+        label: "Mint Mobile"
+      - id: "h"
+        label: "Visible"
+      - id: "i"
+        label: "US Cellular"
+      - id: "j"
+        label: "Other prepaid / MVNO"
+      - id: "k"
+        label: "Other"
+  - id: q5
+    prompt: "Which brand of smartphone do you currently use?"
+    type: single_choice
+    construct: brand_smartphone_currently_use
+    required: true
+    options:
+      - id: "a"
+        label: "Apple iPhone"
+      - id: "b"
+        label: "Samsung Galaxy"
+      - id: "c"
+        label: "Google Pixel"
+      - id: "d"
+        label: "Motorola"
+      - id: "e"
+        label: "OnePlus"
+      - id: "f"
+        label: "Xiaomi"
+      - id: "g"
+        label: "Other Android brand"
+      - id: "h"
+        label: "Not a smartphone / other"
+  - id: q6
+    prompt: "Which type of 5G do you most often connect to?"
+    type: single_choice
+    construct: type_5g_most_often_connect
+    required: true
+    options:
+      - id: "a"
+        label: "Low-band (nationwide, wider coverage)"
+      - id: "b"
+        label: "Mid-band (e.g., T-Mobile Ultra Capacity, Verizon 5G Ultra Wideband)"
+      - id: "c"
+        label: "mmWave (ultra-fast, very short range)"
+      - id: "d"
+        label: "A mix depending on location"
+      - id: "e"
+        label: "I don't know which type"
+  - id: q7
+    prompt: "On a typical day, how often does your phone display a 5G indicator?"
+    type: single_choice
+    construct: typical_day_often_does_phone
+    required: true
+    options:
+      - id: "a"
+        label: "Almost always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+      - id: "f"
+        label: "I don't pay attention"
+  - id: q8
+    prompt: "Which devices do you connect to 5G networks? (Select all that apply)"
+    type: multi_choice
+    construct: devices_connect_5g_networks_select
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "Tablet with cellular"
+      - id: "c"
+        label: "Mobile hotspot / MiFi device"
+      - id: "d"
+        label: "Laptop with 5G modem"
+      - id: "e"
+        label: "5G home internet router (fixed wireless)"
+      - id: "f"
+        label: "Smartwatch with cellular"
+      - id: "g"
+        label: "Car / connected vehicle"
+      - id: "h"
+        label: "None of these"
+  - id: q9
+    prompt: "Which activities do you regularly do while on a 5G connection? (Select all that apply)"
+    type: multi_choice
+    construct: activities_regularly_while_5g_connection
+    required: true
+    options:
+      - id: "a"
+        label: "Streaming video (YouTube, Netflix, etc.)"
+      - id: "b"
+        label: "Streaming music or podcasts"
+      - id: "c"
+        label: "Video calls"
+      - id: "d"
+        label: "Online / cloud gaming"
+      - id: "e"
+        label: "Downloading large files or app updates"
+      - id: "f"
+        label: "Uploading photos or videos to the cloud"
+      - id: "g"
+        label: "Using it as a hotspot for other devices"
+      - id: "h"
+        label: "Social media browsing"
+      - id: "i"
+        label: "Video conferencing for work"
+      - id: "j"
+        label: "Navigation / maps"
+  - id: q10
+    prompt: "Do you use or subscribe to 5G home internet (fixed wireless access)?"
+    type: single_choice
+    construct: use_subscribe_5g_home_internet
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, it's my primary home internet"
+      - id: "b"
+        label: "Yes, as a backup connection"
+      - id: "c"
+        label: "No, but I'm considering it"
+      - id: "d"
+        label: "No, and I'm not interested"
+      - id: "e"
+        label: "Not available in my area"
+  - id: q11
+    prompt: "Which 5G home internet providers have you used or seriously considered? (Select all that apply)"
+    type: multi_choice
+    construct: 5g_home_internet_providers_have
+    required: true
+    options:
+      - id: "a"
+        label: "T-Mobile Home Internet"
+      - id: "b"
+        label: "Verizon 5G Home Internet"
+      - id: "c"
+        label: "AT&T Internet Air"
+      - id: "d"
+        label: "Starlink (satellite, for comparison)"
+      - id: "e"
+        label: "Another provider"
+      - id: "f"
+        label: "None"
+  - id: q12
+    prompt: "What is your approximate total monthly bill for your mobile plan, in US dollars? Enter a whole number."
+    type: free_text
+    construct: approximate_total_monthly_bill_mobile
+    required: true
+  - id: q13
+    prompt: "Roughly what download speed do you typically see on 5G, in Mbps? Enter a whole number (enter 0 if you don't know)."
+    type: free_text
+    construct: roughly_download_speed_typically_see
+    required: true
+  - id: q14
+    prompt: "How many 5G-capable devices are in your household? Enter a whole number."
+    type: free_text
+    construct: many_5g_capable_devices_household
+    required: true
+  - id: q15
+    prompt: "How much do you agree with the following statement about 5G? 5G is noticeably faster than 4G/LTE in my everyday use."
+    type: single_choice
+    construct: much_agree_following_statement_5g
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about 5G? 5G coverage is reliable where I live and work."
+    type: single_choice
+    construct: much_agree_following_statement_5g
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about 5G? 5G noticeably drains my phone's battery faster than 4G."
+    type: single_choice
+    construct: much_agree_following_statement_5g
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about 5G? 5G has improved my video streaming and download experience."
+    type: single_choice
+    construct: much_agree_following_statement_5g
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about 5G? 5G is worth paying extra for compared with 4G."
+    type: single_choice
+    construct: much_agree_following_statement_5g
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement about 5G? The improvement from 5G was mostly marketing hype."
+    type: single_choice
+    construct: much_agree_following_statement_5g
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree with the following statement about 5G? 5G has changed the way I use my phone (e.g., more streaming, hotspot, cloud)."
+    type: single_choice
+    construct: much_agree_following_statement_5g
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "When choosing a mobile carrier or plan, how important is each factor? Overall network coverage."
+    type: single_choice
+    construct: when_choosing_mobile_carrier_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing a mobile carrier or plan, how important is each factor? Monthly price."
+    type: single_choice
+    construct: when_choosing_mobile_carrier_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a mobile carrier or plan, how important is each factor? Fast 5G data speeds."
+    type: single_choice
+    construct: when_choosing_mobile_carrier_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a mobile carrier or plan, how important is each factor? Data allowance / no throttling."
+    type: single_choice
+    construct: when_choosing_mobile_carrier_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a mobile carrier or plan, how important is each factor? Customer service and support."
+    type: single_choice
+    construct: when_choosing_mobile_carrier_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a mobile carrier or plan, how important is each factor? Included perks (streaming subscriptions, hotspot data, etc.)."
+    type: single_choice
+    construct: when_choosing_mobile_carrier_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Select your top 3 reasons for valuing (or wanting) 5G. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_valuing
+    required: true
+    options:
+      - id: "a"
+        label: "Faster downloads"
+      - id: "b"
+        label: "Better video streaming quality"
+      - id: "c"
+        label: "Lower latency for gaming or calls"
+      - id: "d"
+        label: "Reliable connection in crowded places"
+      - id: "e"
+        label: "Replacing home broadband with 5G home internet"
+      - id: "f"
+        label: "Better hotspot / tethering"
+      - id: "g"
+        label: "Future-proofing my device"
+      - id: "h"
+        label: "Faster cloud backups and uploads"
+      - id: "i"
+        label: "I don't particularly value 5G"
+  - id: q29
+    prompt: "Which problems have you experienced with 5G? (Select all that apply)"
+    type: multi_choice
+    construct: problems_have_experienced_5g_select
+    required: true
+    options:
+      - id: "a"
+        label: "Spotty or inconsistent coverage"
+      - id: "b"
+        label: "Faster battery drain"
+      - id: "c"
+        label: "Phone gets warm"
+      - id: "d"
+        label: "Speeds no better than 4G"
+      - id: "e"
+        label: "Frequent switching between 5G and 4G"
+      - id: "f"
+        label: "Dropped connections"
+      - id: "g"
+        label: "Higher plan cost"
+      - id: "h"
+        label: "I haven't experienced problems"
+  - id: q30
+    prompt: "How often do you manually turn off 5G to save battery or data?"
+    type: single_choice
+    construct: often_manually_turn_off_5g
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always keep it off"
+  - id: q31
+    prompt: "How concerned are you about the health or safety of 5G radio signals?"
+    type: single_choice
+    construct: concerned_health_safety_5g_radio
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q32
+    prompt: "Where do you most often notice a meaningful speed benefit from 5G?"
+    type: single_choice
+    construct: where_most_often_notice_meaningful
+    required: true
+    options:
+      - id: "a"
+        label: "At home"
+      - id: "b"
+        label: "Downtown / dense urban areas"
+      - id: "c"
+        label: "At events, stadiums, or airports"
+      - id: "d"
+        label: "While commuting or traveling"
+      - id: "e"
+        label: "I rarely notice a benefit anywhere"
+      - id: "f"
+        label: "Not applicable"
+  - id: q33
+    prompt: "How would you rate your overall satisfaction with your 5G performance?"
+    type: single_choice
+    construct: would_rate_overall_satisfaction_5g
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q34
+    prompt: "How satisfied are you with 5G coverage specifically in your area?"
+    type: single_choice
+    construct: satisfied_5g_coverage_specifically_area
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q35
+    prompt: "How satisfied are you with the value (performance for the price) of your 5G plan?"
+    type: single_choice
+    construct: satisfied_value_performance_price_5g
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "On a scale of 0 to 10, how likely are you to recommend switching to a 5G phone or plan to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q37
+    prompt: "When you next upgrade your phone, how important will improved 5G be in your decision?"
+    type: single_choice
+    construct: when_next_upgrade_phone_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q38
+    prompt: "How likely are you to consider replacing your home internet with 5G fixed wireless in the next 2 years?"
+    type: single_choice
+    construct: likely_consider_replacing_home_internet
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q39
+    prompt: "If you could change one thing about your 5G experience, what would it be? (Optional short answer)"
+    type: free_text
+    construct: if_could_change_one_thing
+    required: false
+  - id: q40
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18-24"
+      - id: "c"
+        label: "25-34"
+      - id: "d"
+        label: "35-44"
+      - id: "e"
+        label: "45-54"
+      - id: "f"
+        label: "55-64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000-$49,999"
+      - id: "c"
+        label: "$50,000-$74,999"
+      - id: "d"
+        label: "$75,000-$99,999"
+      - id: "e"
+        label: "$100,000-$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Homemaker"
+      - id: "f"
+        label: "Unemployed"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "How many people live in your household, including yourself? Enter a whole number."
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q47
+    prompt: "What is your relationship status?"
+    type: single_choice
+    construct: relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or domestic partnership"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q49
+    prompt: "How would you describe where you live?"
+    type: single_choice
+    construct: would_describe_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q50
+    prompt: "How would you describe your comfort with technology in general?"
+    type: single_choice
+    construct: would_describe_comfort_technology_genera
+    required: true
+    options:
+      - id: "a"
+        label: "I'm an early adopter who loves new tech"
+      - id: "b"
+        label: "Comfortable and fairly up to date"
+      - id: "c"
+        label: "Average — I use what I need"
+      - id: "d"
+        label: "A bit behind the curve"
+      - id: "e"
+        label: "I find new technology difficult"
+  - id: q51
+    prompt: "On average, how many hours per day do you spend actively using your smartphone? Enter a whole number."
+    type: free_text
+    construct: average_many_hours_per_day
+    required: true

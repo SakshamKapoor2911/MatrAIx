@@ -1,0 +1,887 @@
+schemaVersion: "1.0"
+id: real_estate_crowdfunding_v1
+title: "Real Estate Crowdfunding Survey"
+description: "How people invest in real estate through crowdfunding platforms and how they judge the deals and returns."
+questions:
+  - id: q0
+    prompt: "Have you ever invested through a real estate crowdfunding platform?"
+    type: single_choice
+    construct: have_ever_invested_through_real
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I invest regularly"
+      - id: "b"
+        label: "Yes, I have invested a few times"
+      - id: "c"
+        label: "Yes, I invested once"
+      - id: "d"
+        label: "No, but I am interested"
+      - id: "e"
+        label: "No, and I am not interested"
+  - id: q1
+    prompt: "How long have you been investing in real estate crowdfunding?"
+    type: single_choice
+    construct: long_have_been_investing_real
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "I have never invested this way"
+  - id: q2
+    prompt: "Which best describes your real estate investing background?"
+    type: single_choice
+    construct: best_describes_real_estate_investing
+    required: true
+    options:
+      - id: "a"
+        label: "Crowdfunding is my only real estate investment"
+      - id: "b"
+        label: "I also own rental property directly"
+      - id: "c"
+        label: "I also own my primary residence only"
+      - id: "d"
+        label: "I invest in real estate through REITs or funds too"
+      - id: "e"
+        label: "I am new to real estate investing"
+  - id: q3
+    prompt: "Which real estate crowdfunding platforms have you used? (Select all that apply)"
+    type: multi_choice
+    construct: real_estate_crowdfunding_platforms_have
+    required: true
+    options:
+      - id: "a"
+        label: "Fundrise"
+      - id: "b"
+        label: "RealtyMogul"
+      - id: "c"
+        label: "Arrived"
+      - id: "d"
+        label: "CrowdStreet"
+      - id: "e"
+        label: "Yieldstreet"
+      - id: "f"
+        label: "EquityMultiple"
+      - id: "g"
+        label: "Groundfloor"
+      - id: "h"
+        label: "None of these"
+  - id: q4
+    prompt: "Which types of real estate deals have you invested in? (Select all that apply)"
+    type: multi_choice
+    construct: types_real_estate_deals_have
+    required: true
+    options:
+      - id: "a"
+        label: "Residential single-family rentals"
+      - id: "b"
+        label: "Multifamily apartments"
+      - id: "c"
+        label: "Commercial or office property"
+      - id: "d"
+        label: "Industrial or warehouse"
+      - id: "e"
+        label: "Retail property"
+      - id: "f"
+        label: "Real estate debt or lending"
+      - id: "g"
+        label: "Diversified REIT-style funds"
+      - id: "h"
+        label: "Development or new construction"
+  - id: q5
+    prompt: "What is your primary goal for these investments?"
+    type: single_choice
+    construct: primary_goal_these_investments
+    required: true
+    options:
+      - id: "a"
+        label: "Passive income from distributions"
+      - id: "b"
+        label: "Long-term appreciation"
+      - id: "c"
+        label: "Portfolio diversification"
+      - id: "d"
+        label: "Exposure to real estate without managing property"
+      - id: "e"
+        label: "Tax advantages"
+      - id: "f"
+        label: "Higher returns than the stock market"
+  - id: q6
+    prompt: "How did you first learn about real estate crowdfunding? (Select all that apply)"
+    type: multi_choice
+    construct: did_first_learn_real_estate
+    required: true
+    options:
+      - id: "a"
+        label: "Online search"
+      - id: "b"
+        label: "A financial news article or blog"
+      - id: "c"
+        label: "A podcast"
+      - id: "d"
+        label: "Social media or an influencer"
+      - id: "e"
+        label: "A friend or family member"
+      - id: "f"
+        label: "An advertisement"
+      - id: "g"
+        label: "A financial advisor"
+  - id: q7
+    prompt: "About how much have you invested in real estate crowdfunding in total, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_have_invested_real_estate
+    required: true
+  - id: q8
+    prompt: "About how many separate deals or funds do you currently hold? Please enter a number."
+    type: free_text
+    construct: many_separate_deals_funds_currently
+    required: true
+  - id: q9
+    prompt: "What is the largest amount you have put into a single deal, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: largest_amount_have_put_into
+    required: true
+  - id: q10
+    prompt: "What annual return have you experienced on these investments so far?"
+    type: single_choice
+    construct: annual_return_have_experienced_these
+    required: true
+    options:
+      - id: "a"
+        label: "I have lost money overall"
+      - id: "b"
+        label: "0 to 3 percent"
+      - id: "c"
+        label: "4 to 6 percent"
+      - id: "d"
+        label: "7 to 9 percent"
+      - id: "e"
+        label: "10 to 14 percent"
+      - id: "f"
+        label: "15 percent or more"
+      - id: "g"
+        label: "I do not track this"
+  - id: q11
+    prompt: "What share of your total investment portfolio is in real estate crowdfunding?"
+    type: single_choice
+    construct: share_total_investment_portfolio_real
+    required: true
+    options:
+      - id: "a"
+        label: "0 percent"
+      - id: "b"
+        label: "1 to 5 percent"
+      - id: "c"
+        label: "6 to 10 percent"
+      - id: "d"
+        label: "11 to 25 percent"
+      - id: "e"
+        label: "26 to 50 percent"
+      - id: "f"
+        label: "More than 50 percent"
+  - id: q12
+    prompt: "Are you an accredited investor?"
+    type: single_choice
+    construct: accredited_investor
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "I am not sure"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q13
+    prompt: "How much do you agree: Real estate crowdfunding is a good way to diversify my portfolio."
+    type: single_choice
+    construct: much_agree_real_estate_crowdfunding
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: The returns have met my expectations."
+    type: single_choice
+    construct: much_agree_returns_have_met
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: I understand the risks of the deals I invest in."
+    type: single_choice
+    construct: much_agree_i_understand_risks
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: I prefer this over being a hands-on landlord."
+    type: single_choice
+    construct: much_agree_i_prefer_this
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: The fees on these platforms are reasonable."
+    type: single_choice
+    construct: much_agree_fees_these_platforms
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: I worry about not being able to sell my investment quickly."
+    type: single_choice
+    construct: much_agree_i_worry_not
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How concerned are you about the illiquidity of these investments?"
+    type: single_choice
+    construct: concerned_illiquidity_these_investments
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q20
+    prompt: "How concerned are you about a real estate market downturn?"
+    type: single_choice
+    construct: concerned_real_estate_market_downturn
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q21
+    prompt: "How concerned are you about the platform going out of business?"
+    type: single_choice
+    construct: concerned_platform_going_out_business
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q22
+    prompt: "How concerned are you about platform fees eating into returns?"
+    type: single_choice
+    construct: concerned_platform_fees_eating_into
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q23
+    prompt: "How concerned are you about rising interest rates hurting property values?"
+    type: single_choice
+    construct: concerned_rising_interest_rates_hurting
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q24
+    prompt: "When choosing a real estate crowdfunding investment, how important is the projected return?"
+    type: single_choice
+    construct: when_choosing_real_estate_crowdfunding
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing an investment, how important is the property type or location?"
+    type: single_choice
+    construct: when_choosing_investment_important_prope
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing an investment, how important is the platform's track record?"
+    type: single_choice
+    construct: when_choosing_investment_important_platf
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing an investment, how important are the fees?"
+    type: single_choice
+    construct: when_choosing_investment_important_fees
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing an investment, how important is the minimum investment amount?"
+    type: single_choice
+    construct: when_choosing_investment_important_minim
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "When choosing an investment, how important is the hold period or liquidity?"
+    type: single_choice
+    construct: when_choosing_investment_important_hold
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "Which are your top 3 factors when choosing a real estate crowdfunding deal? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Projected return"
+      - id: "b"
+        label: "Property type and location"
+      - id: "c"
+        label: "Platform track record"
+      - id: "d"
+        label: "Fees"
+      - id: "e"
+        label: "Minimum investment"
+      - id: "f"
+        label: "Hold period and liquidity"
+      - id: "g"
+        label: "Risk level of the deal"
+      - id: "h"
+        label: "Tax treatment"
+  - id: q31
+    prompt: "How often do you check on your real estate crowdfunding investments?"
+    type: single_choice
+    construct: often_check_real_estate_crowdfunding
+    required: true
+    options:
+      - id: "a"
+        label: "Weekly"
+      - id: "b"
+        label: "Monthly"
+      - id: "c"
+        label: "Quarterly"
+      - id: "d"
+        label: "A few times a year"
+      - id: "e"
+        label: "Rarely"
+  - id: q32
+    prompt: "Do you reinvest the distributions you receive?"
+    type: single_choice
+    construct: reinvest_distributions_receive
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, automatically"
+      - id: "b"
+        label: "Yes, manually"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "No, I take the cash"
+      - id: "e"
+        label: "Not applicable"
+  - id: q33
+    prompt: "Have you experienced any of the following? (Select all that apply)"
+    type: multi_choice
+    construct: have_experienced_any_following_select
+    required: true
+    options:
+      - id: "a"
+        label: "A deal that lost money"
+      - id: "b"
+        label: "A distribution that was paused or reduced"
+      - id: "c"
+        label: "A hold period that ran longer than expected"
+      - id: "d"
+        label: "Difficulty redeeming or selling my shares"
+      - id: "e"
+        label: "A deal that returned more than expected"
+      - id: "f"
+        label: "None of these"
+  - id: q34
+    prompt: "How do you handle taxes on these investments?"
+    type: single_choice
+    construct: handle_taxes_these_investments
+    required: true
+    options:
+      - id: "a"
+        label: "Tax software"
+      - id: "b"
+        label: "An accountant or tax professional"
+      - id: "c"
+        label: "I handle it manually"
+      - id: "d"
+        label: "I have not dealt with this yet"
+      - id: "e"
+        label: "Not applicable"
+  - id: q35
+    prompt: "How would you rate your knowledge of real estate investing?"
+    type: single_choice
+    construct: would_rate_knowledge_real_estate
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert"
+  - id: q36
+    prompt: "How satisfied are you with the returns from these investments?"
+    type: single_choice
+    construct: satisfied_returns_from_these_investments
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "How satisfied are you with the platform's transparency and reporting?"
+    type: single_choice
+    construct: satisfied_platform_s_transparency_report
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "Overall, how satisfied are you with your real estate crowdfunding experience?"
+    type: single_choice
+    construct: overall_satisfied_real_estate_crowdfundi
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q39
+    prompt: "How likely are you to recommend real estate crowdfunding to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_real_estate_crowdfundin
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q40
+    prompt: "How likely are you to invest more through these platforms over the next year?"
+    type: single_choice
+    construct: likely_invest_more_through_these
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q41
+    prompt: "How likely are you to try a new real estate crowdfunding platform in the next year?"
+    type: single_choice
+    construct: likely_try_new_real_estate
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What would make you invest more, or what has held you back? (Optional short answer)"
+    type: free_text
+    construct: would_make_invest_more_has
+    required: false
+  - id: q43
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q44
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q48
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q49
+    prompt: "How many people, including yourself, live in your household?"
+    type: single_choice
+    construct: many_people_including_yourself_live
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q50
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "In a domestic partnership"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q52
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q53
+    prompt: "Do you own or rent your primary residence?"
+    type: single_choice
+    construct: own_rent_primary_residence
+    required: true
+    options:
+      - id: "a"
+        label: "Own with a mortgage"
+      - id: "b"
+        label: "Own outright"
+      - id: "c"
+        label: "Rent"
+      - id: "d"
+        label: "Other arrangement"
+      - id: "e"
+        label: "Prefer not to say"

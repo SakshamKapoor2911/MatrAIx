@@ -1,0 +1,717 @@
+schemaVersion: "1.0"
+id: will_preparation_v1
+title: "Will Preparation Survey"
+description: "How adults approach preparing a last will and testament."
+questions:
+  - id: q0
+    prompt: "Do you currently have a last will and testament?"
+    type: single_choice
+    construct: currently_have_last_will_testament
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I am in the process of making one"
+      - id: "c"
+        label: "No, but I plan to make one"
+      - id: "d"
+        label: "No, and I have no plans to make one"
+  - id: q1
+    prompt: "How long ago did you create your current will?"
+    type: single_choice
+    construct: long_ago_did_create_current
+    required: true
+    options:
+      - id: "a"
+        label: "Within the past year"
+      - id: "b"
+        label: "1 to 3 years ago"
+      - id: "c"
+        label: "4 to 10 years ago"
+      - id: "d"
+        label: "More than 10 years ago"
+      - id: "e"
+        label: "I do not have a will"
+  - id: q2
+    prompt: "How did you prepare your will?"
+    type: single_choice
+    construct: did_prepare_will
+    required: true
+    options:
+      - id: "a"
+        label: "With an estate planning attorney"
+      - id: "b"
+        label: "Using an online will service (for example, LegalZoom, Trust & Will, FreeWill, or Rocket Lawyer)"
+      - id: "c"
+        label: "Using a downloadable template or form"
+      - id: "d"
+        label: "I wrote it myself without a template"
+      - id: "e"
+        label: "Through my employer or a legal benefit"
+      - id: "f"
+        label: "I do not have a will"
+  - id: q3
+    prompt: "About how much did you pay to prepare your will? Please enter a dollar amount (enter 0 if free or not applicable)."
+    type: free_text
+    construct: much_did_pay_prepare_will
+    required: true
+  - id: q4
+    prompt: "Was your will properly signed, witnessed, or notarized to make it legally valid?"
+    type: single_choice
+    construct: was_will_properly_signed_witnessed
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, witnessed and notarized"
+      - id: "b"
+        label: "Yes, witnessed only"
+      - id: "c"
+        label: "Not sure"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "I do not have a will"
+  - id: q5
+    prompt: "Where do you keep your will? (Select all that apply)"
+    type: multi_choice
+    construct: where_keep_will_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "In a home safe or filing cabinet"
+      - id: "b"
+        label: "In a safe deposit box"
+      - id: "c"
+        label: "With my attorney"
+      - id: "d"
+        label: "Stored digitally or online"
+      - id: "e"
+        label: "With a trusted family member"
+      - id: "f"
+        label: "I do not have a will"
+  - id: q6
+    prompt: "What does your will currently address? (Select all that apply)"
+    type: multi_choice
+    construct: does_will_currently_address_select
+    required: true
+    options:
+      - id: "a"
+        label: "Who inherits my money and property"
+      - id: "b"
+        label: "An executor to carry out my wishes"
+      - id: "c"
+        label: "Guardians for minor children"
+      - id: "d"
+        label: "Specific gifts to individuals"
+      - id: "e"
+        label: "Gifts to charity"
+      - id: "f"
+        label: "Care for pets"
+      - id: "g"
+        label: "Funeral or burial wishes"
+      - id: "h"
+        label: "Digital assets or online accounts"
+      - id: "i"
+        label: "I do not have a will"
+  - id: q7
+    prompt: "Have you named an executor for your will?"
+    type: single_choice
+    construct: have_named_executor_will
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"
+      - id: "d"
+        label: "Not applicable"
+  - id: q8
+    prompt: "Have you told your named executor that they hold that role?"
+    type: single_choice
+    construct: have_told_named_executor_that
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not applicable"
+  - id: q9
+    prompt: "Do you have minor children who would need a named guardian?"
+    type: single_choice
+    construct: have_minor_children_who_would
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q10
+    prompt: "If you have minor children, does your will name a guardian for them?"
+    type: single_choice
+    construct: if_have_minor_children_does
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not applicable"
+  - id: q11
+    prompt: "Which life events, if any, have prompted you to create or update a will? (Select all that apply)"
+    type: multi_choice
+    construct: life_events_if_any_have
+    required: true
+    options:
+      - id: "a"
+        label: "Getting married"
+      - id: "b"
+        label: "Having a child"
+      - id: "c"
+        label: "Buying a home"
+      - id: "d"
+        label: "Divorce or separation"
+      - id: "e"
+        label: "Death of a family member"
+      - id: "f"
+        label: "A health scare or diagnosis"
+      - id: "g"
+        label: "Retirement"
+      - id: "h"
+        label: "None of these"
+  - id: q12
+    prompt: "If you do not have a will, what are the main reasons? (Select all that apply)"
+    type: multi_choice
+    construct: if_not_have_will_main
+    required: true
+    options:
+      - id: "a"
+        label: "I have not gotten around to it"
+      - id: "b"
+        label: "I do not think I have enough assets"
+      - id: "c"
+        label: "It seems too expensive"
+      - id: "d"
+        label: "It feels complicated"
+      - id: "e"
+        label: "I do not like thinking about death"
+      - id: "f"
+        label: "I am not sure how to start"
+      - id: "g"
+        label: "Not applicable, I have a will"
+  - id: q13
+    prompt: "How much do you agree or disagree: Having a will is important even for people without much wealth."
+    type: single_choice
+    construct: much_agree_disagree_having_will
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I understand what makes a will legally valid."
+    type: single_choice
+    construct: much_agree_disagree_i_understand
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: Online will services are a trustworthy way to make a will."
+    type: single_choice
+    construct: much_agree_disagree_online_will
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: I worry my wishes would not be followed without a will."
+    type: single_choice
+    construct: much_agree_disagree_i_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree or disagree: Making a will feels overwhelming to me."
+    type: single_choice
+    construct: much_agree_disagree_making_will
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How important is each reason for having a will — Making sure the right people inherit my assets?"
+    type: single_choice
+    construct: important_each_reason_having_will
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is each reason for having a will — Naming a guardian for my children?"
+    type: single_choice
+    construct: important_each_reason_having_will
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+      - id: "f"
+        label: "Not applicable"
+  - id: q20
+    prompt: "How important is each reason for having a will — Preventing disputes among family members?"
+    type: single_choice
+    construct: important_each_reason_having_will
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each reason for having a will — Sparing my family a difficult legal process?"
+    type: single_choice
+    construct: important_each_reason_having_will
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each reason for having a will — Recording my funeral or final wishes?"
+    type: single_choice
+    construct: important_each_reason_having_will
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "Please select your top 3 things you most want a will to accomplish. (Select all that apply)"
+    type: multi_choice
+    construct: please_select_top_3_things
+    required: true
+    options:
+      - id: "a"
+        label: "Direct who inherits my property"
+      - id: "b"
+        label: "Name a guardian for children"
+      - id: "c"
+        label: "Name an executor I trust"
+      - id: "d"
+        label: "Avoid family conflict"
+      - id: "e"
+        label: "Leave a gift to charity"
+      - id: "f"
+        label: "Provide for a pet"
+      - id: "g"
+        label: "State funeral wishes"
+      - id: "h"
+        label: "Make things simple for my family"
+  - id: q24
+    prompt: "When was the last time you reviewed the contents of your will?"
+    type: single_choice
+    construct: when_was_last_time_reviewed
+    required: true
+    options:
+      - id: "a"
+        label: "Within the past year"
+      - id: "b"
+        label: "1 to 3 years ago"
+      - id: "c"
+        label: "More than 3 years ago"
+      - id: "d"
+        label: "I have never reviewed it"
+      - id: "e"
+        label: "I do not have a will"
+  - id: q25
+    prompt: "Have you talked with your family about what is in your will or your wishes?"
+    type: single_choice
+    construct: have_talked_family_will_wishes
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, in detail"
+      - id: "b"
+        label: "Yes, briefly"
+      - id: "c"
+        label: "No, but I plan to"
+      - id: "d"
+        label: "No, and I do not plan to"
+  - id: q26
+    prompt: "How knowledgeable do you feel about the process of making a will?"
+    type: single_choice
+    construct: knowledgeable_feel_process_making_will
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all knowledgeable"
+      - id: "b"
+        label: "Slightly knowledgeable"
+      - id: "c"
+        label: "Moderately knowledgeable"
+      - id: "d"
+        label: "Very knowledgeable"
+      - id: "e"
+        label: "Extremely knowledgeable"
+  - id: q27
+    prompt: "How confident are you that your will (or plan for one) reflects your true wishes?"
+    type: single_choice
+    construct: confident_that_will_plan_one
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q28
+    prompt: "How likely are you to create or update your will in the next 12 months?"
+    type: single_choice
+    construct: likely_create_update_will_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q29
+    prompt: "Overall, how satisfied are you with your current situation regarding a will?"
+    type: single_choice
+    construct: overall_satisfied_current_situation_rega
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "On a scale of 0 to 10, how likely are you to encourage a friend or family member to make a will? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_encourage
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $30,000"
+      - id: "b"
+        label: "$30,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Homemaker or full-time caregiver"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+  - id: q38
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Do you have any children?"
+    type: single_choice
+    construct: have_any_children
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, all are adults"
+      - id: "b"
+        label: "Yes, at least one is a minor"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q41
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

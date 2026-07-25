@@ -1,0 +1,685 @@
+schemaVersion: "1.0"
+id: financial_advisor_usage_v1
+title: "Financial Advisor Usage Survey"
+description: "How consumers choose, use, pay for, and evaluate professional financial advisors."
+questions:
+  - id: q0
+    prompt: "Do you currently work with a professional financial advisor?"
+    type: single_choice
+    construct: currently_work_professional_financial_ad
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, on an ongoing basis"
+      - id: "b"
+        label: "Yes, occasionally or for one-time advice"
+      - id: "c"
+        label: "No, but I have in the past"
+      - id: "d"
+        label: "No, I have never worked with one"
+  - id: q1
+    prompt: "What is the approximate total value of your investable assets (retirement and non-retirement, excluding your home)?"
+    type: single_choice
+    construct: approximate_total_value_investable_asset
+    required: true
+    options:
+      - id: "a"
+        label: "Under $10,000"
+      - id: "b"
+        label: "$10,000–$49,999"
+      - id: "c"
+        label: "$50,000–$99,999"
+      - id: "d"
+        label: "$100,000–$249,999"
+      - id: "e"
+        label: "$250,000–$499,999"
+      - id: "f"
+        label: "$500,000–$999,999"
+      - id: "g"
+        label: "$1 million or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q2
+    prompt: "What type of financial advisor do you primarily use (or most recently used)?"
+    type: single_choice
+    construct: type_financial_advisor_primarily_use
+    required: true
+    options:
+      - id: "a"
+        label: "An independent financial planner or RIA"
+      - id: "b"
+        label: "An advisor at a bank or brokerage"
+      - id: "c"
+        label: "A robo-advisor or automated service"
+      - id: "d"
+        label: "An insurance agent"
+      - id: "e"
+        label: "An accountant or CPA"
+      - id: "f"
+        label: "I don't use any advisor"
+  - id: q3
+    prompt: "How did you find your current or most recent advisor?"
+    type: single_choice
+    construct: did_find_current_most_recent
+    required: true
+    options:
+      - id: "a"
+        label: "Referral from friends or family"
+      - id: "b"
+        label: "Through my employer's retirement plan"
+      - id: "c"
+        label: "Online search or comparison site"
+      - id: "d"
+        label: "Through my bank"
+      - id: "e"
+        label: "Through a robo-advisor platform"
+      - id: "f"
+        label: "Not applicable"
+  - id: q4
+    prompt: "How long have you worked with your current advisor?"
+    type: single_choice
+    construct: long_have_worked_current_advisor
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "Not applicable"
+  - id: q5
+    prompt: "For which services do you use (or would use) a financial advisor? (Select all that apply)"
+    type: multi_choice
+    construct: services_use_would_use_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Retirement planning"
+      - id: "b"
+        label: "Investment management"
+      - id: "c"
+        label: "Tax planning"
+      - id: "d"
+        label: "Estate planning"
+      - id: "e"
+        label: "Insurance guidance"
+      - id: "f"
+        label: "Budgeting and cash flow"
+      - id: "g"
+        label: "College or education savings"
+      - id: "h"
+        label: "Debt management"
+      - id: "i"
+        label: "None of these"
+  - id: q6
+    prompt: "How is (or was) your advisor compensated?"
+    type: single_choice
+    construct: was_advisor_compensated
+    required: true
+    options:
+      - id: "a"
+        label: "A percentage of assets managed (AUM fee)"
+      - id: "b"
+        label: "A flat annual or project fee"
+      - id: "c"
+        label: "An hourly rate"
+      - id: "d"
+        label: "Commissions on products sold"
+      - id: "e"
+        label: "Free through my employer or bank"
+      - id: "f"
+        label: "I don't know"
+  - id: q7
+    prompt: "Approximately how much do you pay your advisor per year in fees? Enter a dollar amount (enter 0 if none or unsure)."
+    type: free_text
+    construct: approximately_much_pay_advisor_per
+    required: true
+  - id: q8
+    prompt: "How often do you meet or communicate with your advisor?"
+    type: single_choice
+    construct: often_meet_communicate_advisor
+    required: true
+    options:
+      - id: "a"
+        label: "Monthly or more"
+      - id: "b"
+        label: "Quarterly"
+      - id: "c"
+        label: "Twice a year"
+      - id: "d"
+        label: "Once a year"
+      - id: "e"
+        label: "Rarely"
+      - id: "f"
+        label: "Not applicable"
+  - id: q9
+    prompt: "How do you usually meet with your advisor?"
+    type: single_choice
+    construct: usually_meet_advisor
+    required: true
+    options:
+      - id: "a"
+        label: "In person"
+      - id: "b"
+        label: "By video call"
+      - id: "c"
+        label: "By phone"
+      - id: "d"
+        label: "By email or messaging"
+      - id: "e"
+        label: "Through an app or portal"
+      - id: "f"
+        label: "Not applicable"
+  - id: q10
+    prompt: "How much do you agree with the following statement about your advisor: They act in my best interest."
+    type: single_choice
+    construct: much_agree_following_statement_advisor
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement about your advisor: They explain financial concepts clearly."
+    type: single_choice
+    construct: much_agree_following_statement_advisor
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement about your advisor: Their fees are worth the value I receive."
+    type: single_choice
+    construct: much_agree_following_statement_advisor
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement about your advisor: I trust them with my personal financial information."
+    type: single_choice
+    construct: much_agree_following_statement_advisor
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I could manage my finances well without any advisor."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How important is it to you that an advisor is a fiduciary (legally required to act in your interest)?"
+    type: single_choice
+    construct: important_it_that_advisor_fiduciary
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "How important is it to you that an advisor holds a professional certification such as CFP or CFA?"
+    type: single_choice
+    construct: important_it_that_advisor_holds
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "Which are the top 3 qualities you value most in a financial advisor? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_qualities_value_most
+    required: true
+    options:
+      - id: "a"
+        label: "Trustworthiness"
+      - id: "b"
+        label: "Low fees"
+      - id: "c"
+        label: "Strong investment returns"
+      - id: "d"
+        label: "Clear communication"
+      - id: "e"
+        label: "Professional credentials"
+      - id: "f"
+        label: "Availability and responsiveness"
+      - id: "g"
+        label: "Personalized advice"
+      - id: "h"
+        label: "Good technology and tools"
+      - id: "i"
+        label: "Understands my values and goals"
+  - id: q18
+    prompt: "How often do you follow your advisor's recommendations?"
+    type: single_choice
+    construct: often_follow_advisor_s_recommendations
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q19
+    prompt: "Have you ever switched or stopped using a financial advisor?"
+    type: single_choice
+    construct: have_ever_switched_stopped_using
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "I have never had one"
+  - id: q20
+    prompt: "What has made you consider switching or leaving an advisor? (Select all that apply)"
+    type: multi_choice
+    construct: has_made_consider_switching_leaving
+    required: true
+    options:
+      - id: "a"
+        label: "High fees"
+      - id: "b"
+        label: "Poor investment returns"
+      - id: "c"
+        label: "Poor communication"
+      - id: "d"
+        label: "Lost trust"
+      - id: "e"
+        label: "A major life change"
+      - id: "f"
+        label: "Found a cheaper robo-advisor option"
+      - id: "g"
+        label: "I have never considered switching"
+  - id: q21
+    prompt: "Do you also use a robo-advisor or automated investing tool alongside (or instead of) a human advisor?"
+    type: single_choice
+    construct: also_use_robo_advisor_automated
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q22
+    prompt: "How confident are you in managing your own finances without professional help?"
+    type: single_choice
+    construct: confident_managing_own_finances_without
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q23
+    prompt: "How much do you agree: Financial advice should be more affordable and accessible to people like me."
+    type: single_choice
+    construct: much_agree_financial_advice_should
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "Overall, has working with an advisor improved your financial situation?"
+    type: single_choice
+    construct: overall_has_working_advisor_improved
+    required: true
+    options:
+      - id: "a"
+        label: "Improved it significantly"
+      - id: "b"
+        label: "Improved it somewhat"
+      - id: "c"
+        label: "No noticeable change"
+      - id: "d"
+        label: "Made it worse"
+      - id: "e"
+        label: "Not applicable"
+  - id: q25
+    prompt: "How satisfied are you with your financial advisor overall?"
+    type: single_choice
+    construct: satisfied_financial_advisor_overall
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q26
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your advisor to a friend (0 = not at all likely, 10 = extremely likely)?"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q27
+    prompt: "How likely are you to continue using a financial advisor over the next two years?"
+    type: single_choice
+    construct: likely_continue_using_financial_advisor
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q28
+    prompt: "If you have any final thoughts about using a financial advisor, please share them here (optional)."
+    type: free_text
+    construct: if_have_any_final_thoughts
+    required: false
+  - id: q29
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q30
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "Which of the following best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000–$199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q34
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force (student, homemaker)"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Unable to work"
+  - id: q35
+    prompt: "Including yourself, how many people live in your household? Enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q36
+    prompt: "How many children under 18 live in your household? Enter a number."
+    type: free_text
+    construct: many_children_under_18_live
+    required: true
+  - id: q37
+    prompt: "What is your marital status?"
+    type: single_choice
+    construct: marital_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q38
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q39
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q40
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"
+  - id: q41
+    prompt: "Which best describes your primary financial goal right now?"
+    type: single_choice
+    construct: best_describes_primary_financial_goal
+    required: true
+    options:
+      - id: "a"
+        label: "Saving for retirement"
+      - id: "b"
+        label: "Buying a home"
+      - id: "c"
+        label: "Paying down debt"
+      - id: "d"
+        label: "Growing overall wealth"
+      - id: "e"
+        label: "Saving for education"
+      - id: "f"
+        label: "Preserving wealth I already have"

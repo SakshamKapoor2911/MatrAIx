@@ -1,0 +1,898 @@
+schemaVersion: "1.0"
+id: coding_challenge_platforms_v1
+title: "Coding-Challenge Platform Survey"
+description: "How developers use coding-challenge and practice-problem platforms to build skills, prepare for interviews, and compete."
+questions:
+  - id: q0
+    prompt: "How often do you practice on coding-challenge or practice-problem platforms?"
+    type: single_choice
+    construct: often_practice_coding_challenge_practice
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "Occasionally"
+      - id: "e"
+        label: "I have an account but rarely use it"
+      - id: "f"
+        label: "I don't use coding-challenge platforms"
+  - id: q1
+    prompt: "How long have you been using coding-challenge platforms?"
+    type: single_choice
+    construct: long_have_been_using_coding
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 2 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+  - id: q2
+    prompt: "What is your main reason for using coding-challenge platforms?"
+    type: single_choice
+    construct: main_reason_using_coding_challenge
+    required: true
+    options:
+      - id: "a"
+        label: "Preparing for technical interviews"
+      - id: "b"
+        label: "Sharpening general problem-solving skills"
+      - id: "c"
+        label: "Learning a new programming language"
+      - id: "d"
+        label: "Competitive programming and contests"
+      - id: "e"
+        label: "Fun and recreation"
+      - id: "f"
+        label: "Coursework or a bootcamp assignment"
+  - id: q3
+    prompt: "Which coding-challenge platform do you use most often?"
+    type: single_choice
+    construct: coding_challenge_platform_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "LeetCode"
+      - id: "b"
+        label: "HackerRank"
+      - id: "c"
+        label: "Codewars"
+      - id: "d"
+        label: "Codeforces"
+      - id: "e"
+        label: "CodeSignal"
+      - id: "f"
+        label: "Exercism"
+      - id: "g"
+        label: "AtCoder"
+      - id: "h"
+        label: "Advent of Code"
+      - id: "i"
+        label: "Project Euler"
+      - id: "j"
+        label: "Other"
+  - id: q4
+    prompt: "Which coding-challenge platforms have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: coding_challenge_platforms_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "LeetCode"
+      - id: "b"
+        label: "HackerRank"
+      - id: "c"
+        label: "Codewars"
+      - id: "d"
+        label: "Codeforces"
+      - id: "e"
+        label: "CodeSignal"
+      - id: "f"
+        label: "Exercism"
+      - id: "g"
+        label: "AtCoder"
+      - id: "h"
+        label: "Advent of Code"
+      - id: "i"
+        label: "Project Euler"
+      - id: "j"
+        label: "TopCoder"
+      - id: "k"
+        label: "None of these"
+  - id: q5
+    prompt: "Which programming languages do you use for coding challenges? (Select all that apply)"
+    type: multi_choice
+    construct: programming_languages_use_coding_challen
+    required: true
+    options:
+      - id: "a"
+        label: "Python"
+      - id: "b"
+        label: "JavaScript or TypeScript"
+      - id: "c"
+        label: "Java"
+      - id: "d"
+        label: "C++"
+      - id: "e"
+        label: "C#"
+      - id: "f"
+        label: "Go"
+      - id: "g"
+        label: "Rust"
+      - id: "h"
+        label: "C"
+      - id: "i"
+        label: "Ruby"
+      - id: "j"
+        label: "SQL"
+  - id: q6
+    prompt: "Which platform features do you regularly use? (Select all that apply)"
+    type: multi_choice
+    construct: platform_features_regularly_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Curated problem sets or study plans"
+      - id: "b"
+        label: "Timed contests"
+      - id: "c"
+        label: "Discussion forums and comments"
+      - id: "d"
+        label: "Editorial or official solutions"
+      - id: "e"
+        label: "Mock interview mode"
+      - id: "f"
+        label: "Company-specific question collections"
+      - id: "g"
+        label: "Leaderboards and rankings"
+      - id: "h"
+        label: "Streaks and daily challenges"
+      - id: "i"
+        label: "Premium-only content"
+  - id: q7
+    prompt: "Which problem topics do you focus on most when practicing? (Select all that apply)"
+    type: multi_choice
+    construct: problem_topics_focus_most_when
+    required: true
+    options:
+      - id: "a"
+        label: "Arrays and strings"
+      - id: "b"
+        label: "Dynamic programming"
+      - id: "c"
+        label: "Graphs and trees"
+      - id: "d"
+        label: "Greedy algorithms"
+      - id: "e"
+        label: "Sorting and searching"
+      - id: "f"
+        label: "Math and number theory"
+      - id: "g"
+        label: "Databases and SQL"
+      - id: "h"
+        label: "System design"
+      - id: "i"
+        label: "Bit manipulation"
+      - id: "j"
+        label: "Recursion and backtracking"
+  - id: q8
+    prompt: "Which contests or seasonal coding events have you participated in? (Select all that apply)"
+    type: multi_choice
+    construct: contests_seasonal_coding_events_have
+    required: true
+    options:
+      - id: "a"
+        label: "LeetCode weekly or biweekly contests"
+      - id: "b"
+        label: "Codeforces rounds"
+      - id: "c"
+        label: "AtCoder contests"
+      - id: "d"
+        label: "Advent of Code"
+      - id: "e"
+        label: "HackerRank contests"
+      - id: "f"
+        label: "Kaggle competitions"
+      - id: "g"
+        label: "ICPC or collegiate contests"
+      - id: "h"
+        label: "I have not participated in any contests"
+  - id: q9
+    prompt: "In a typical practice session, about how many problems do you attempt?"
+    type: single_choice
+    construct: typical_practice_session_many_problems
+    required: true
+    options:
+      - id: "a"
+        label: "Just one"
+      - id: "b"
+        label: "2 to 3"
+      - id: "c"
+        label: "4 to 6"
+      - id: "d"
+        label: "7 or more"
+      - id: "e"
+        label: "It varies widely"
+  - id: q10
+    prompt: "About how many hours per week do you spend on coding challenges? Please enter a number."
+    type: free_text
+    construct: many_hours_per_week_spend
+    required: true
+  - id: q11
+    prompt: "About how many coding problems have you solved in total across all platforms? Please enter a number."
+    type: free_text
+    construct: many_coding_problems_have_solved
+    required: true
+  - id: q12
+    prompt: "Do you pay for a premium subscription on any coding-challenge platform?"
+    type: single_choice
+    construct: pay_premium_subscription_any_coding
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, on one platform"
+      - id: "b"
+        label: "Yes, on more than one platform"
+      - id: "c"
+        label: "No, I use only free features"
+      - id: "d"
+        label: "I have subscribed in the past but not currently"
+  - id: q13
+    prompt: "Which difficulty level do you usually target?"
+    type: single_choice
+    construct: difficulty_level_usually_target
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly easy problems"
+      - id: "b"
+        label: "Mostly medium problems"
+      - id: "c"
+        label: "Mostly hard problems"
+      - id: "d"
+        label: "A mix across all levels"
+  - id: q14
+    prompt: "When you get stuck on a problem, what do you usually do first?"
+    type: single_choice
+    construct: when_get_stuck_problem_usually
+    required: true
+    options:
+      - id: "a"
+        label: "Keep trying on my own"
+      - id: "b"
+        label: "Look at hints provided by the platform"
+      - id: "c"
+        label: "Read the discussion or editorial solution"
+      - id: "d"
+        label: "Search the web for the approach"
+      - id: "e"
+        label: "Ask an AI coding assistant"
+      - id: "f"
+        label: "Move on to another problem"
+  - id: q15
+    prompt: "How do you typically discover new problems to solve? (Select all that apply)"
+    type: multi_choice
+    construct: typically_discover_new_problems_solve
+    required: true
+    options:
+      - id: "a"
+        label: "The platform's recommended or daily problem"
+      - id: "b"
+        label: "Curated study plans or lists"
+      - id: "c"
+        label: "Company-tagged question sets"
+      - id: "d"
+        label: "Recommendations from friends or colleagues"
+      - id: "e"
+        label: "Social media or online communities"
+      - id: "f"
+        label: "YouTube or blog walkthroughs"
+  - id: q16
+    prompt: "How much do you agree: Practicing on these platforms has improved my problem-solving skills."
+    type: single_choice
+    construct: much_agree_practicing_these_platforms
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: These platforms are essential preparation for technical interviews."
+    type: single_choice
+    construct: much_agree_these_platforms_essential
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: The problems are representative of real-world software work."
+    type: single_choice
+    construct: much_agree_problems_representative_real
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: Leaderboards and streaks keep me motivated to practice."
+    type: single_choice
+    construct: much_agree_leaderboards_streaks_keep
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: I often feel frustrated when I cannot solve a problem."
+    type: single_choice
+    construct: much_agree_i_often_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: Reading editorial solutions helps me learn effectively."
+    type: single_choice
+    construct: much_agree_reading_editorial_solutions
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "When choosing a coding-challenge platform, how important is the quality and variety of problems?"
+    type: single_choice
+    construct: when_choosing_coding_challenge_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing a coding-challenge platform, how important are clear difficulty ratings and progression?"
+    type: single_choice
+    construct: when_choosing_coding_challenge_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a coding-challenge platform, how important is an active community with discussions and solutions?"
+    type: single_choice
+    construct: when_choosing_coding_challenge_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a coding-challenge platform, how important are contest and competition features?"
+    type: single_choice
+    construct: when_choosing_coding_challenge_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a coding-challenge platform, how important is relevance to job interviews?"
+    type: single_choice
+    construct: when_choosing_coding_challenge_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a coding-challenge platform, how important is support for your preferred programming language?"
+    type: single_choice
+    construct: when_choosing_coding_challenge_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "How often do you participate in timed contests?"
+    type: single_choice
+    construct: often_participate_timed_contests
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q29
+    prompt: "How often do you read other users' solutions after solving a problem?"
+    type: single_choice
+    construct: often_read_other_users_solutions
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q30
+    prompt: "Which are your top 3 reasons for practicing on coding-challenge platforms? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_reasons_practicing_coding
+    required: true
+    options:
+      - id: "a"
+        label: "Interview preparation"
+      - id: "b"
+        label: "Building problem-solving skills"
+      - id: "c"
+        label: "Learning new languages or tools"
+      - id: "d"
+        label: "Competitive programming"
+      - id: "e"
+        label: "Fun and challenge"
+      - id: "f"
+        label: "Keeping skills sharp"
+      - id: "g"
+        label: "Coursework or certification"
+      - id: "h"
+        label: "Community and social motivation"
+  - id: q31
+    prompt: "How satisfied are you with the problem quality on your primary platform?"
+    type: single_choice
+    construct: satisfied_problem_quality_primary_platfo
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How satisfied are you with your primary platform's code editor and interface?"
+    type: single_choice
+    construct: satisfied_primary_platform_s_code
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "Overall, how satisfied are you with your primary coding-challenge platform?"
+    type: single_choice
+    construct: overall_satisfied_primary_coding_challen
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How likely are you to recommend your primary platform to another developer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_platform_anothe
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "How likely are you to continue using coding-challenge platforms over the next year?"
+    type: single_choice
+    construct: likely_continue_using_coding_challenge
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q36
+    prompt: "How likely are you to try a new coding-challenge platform in the next year?"
+    type: single_choice
+    construct: likely_try_new_coding_challenge
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q37
+    prompt: "Has practicing on coding-challenge platforms helped you in an actual job interview?"
+    type: single_choice
+    construct: has_practicing_coding_challenge_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, significantly"
+      - id: "b"
+        label: "Yes, somewhat"
+      - id: "c"
+        label: "No noticeable effect"
+      - id: "d"
+        label: "I have not interviewed since starting"
+      - id: "e"
+        label: "Not applicable"
+  - id: q38
+    prompt: "What is one thing you would improve about the coding-challenge platforms you use? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_coding
+    required: false
+  - id: q39
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "Mobile developer"
+      - id: "e"
+        label: "Data scientist or analyst"
+      - id: "f"
+        label: "Engineering manager"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Other"
+  - id: q40
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q42
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q43
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q44
+    prompt: "Are you currently preparing for or actively seeking a new job?"
+    type: single_choice
+    construct: currently_preparing_actively_seeking_new
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, actively interviewing"
+      - id: "b"
+        label: "Yes, preparing but not yet interviewing"
+      - id: "c"
+        label: "Open but not actively looking"
+      - id: "d"
+        label: "No, not looking"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q46
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q49
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q50
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

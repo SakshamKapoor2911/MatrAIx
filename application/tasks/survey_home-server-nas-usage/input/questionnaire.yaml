@@ -1,0 +1,924 @@
+schemaVersion: "1.0"
+id: home_server_nas_usage_v1
+title: "Home Server and NAS Usage Survey"
+description: "How enthusiasts run home servers and network-attached storage using platforms like Synology, Unraid, Proxmox, and TrueNAS."
+questions:
+  - id: q0
+    prompt: "How often do you actively use or manage your home server or NAS?"
+    type: single_choice
+    construct: often_actively_use_manage_home
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "Rarely — it just runs on its own"
+      - id: "e"
+        label: "I don't have a home server or NAS yet"
+  - id: q1
+    prompt: "How long have you run a home server or NAS?"
+    type: single_choice
+    construct: long_have_run_home_server
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "Which best describes you?"
+    type: single_choice
+    construct: best_describes
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner building my first home server"
+      - id: "b"
+        label: "Hobbyist homelabber"
+      - id: "c"
+        label: "Prosumer with a serious setup"
+      - id: "d"
+        label: "IT professional who also runs a homelab"
+      - id: "e"
+        label: "I mainly want reliable storage, not a hobby"
+  - id: q3
+    prompt: "What is the primary platform running your home server or NAS?"
+    type: single_choice
+    construct: primary_platform_running_home_server
+    required: true
+    options:
+      - id: "a"
+        label: "Synology DSM"
+      - id: "b"
+        label: "Unraid"
+      - id: "c"
+        label: "Proxmox VE"
+      - id: "d"
+        label: "TrueNAS"
+      - id: "e"
+        label: "QNAP"
+      - id: "f"
+        label: "Plain Linux server"
+      - id: "g"
+        label: "Windows"
+      - id: "h"
+        label: "Other"
+  - id: q4
+    prompt: "Which home server or NAS platforms have you used? (Select all that apply)"
+    type: multi_choice
+    construct: home_server_nas_platforms_have
+    required: true
+    options:
+      - id: "a"
+        label: "Synology DSM"
+      - id: "b"
+        label: "Unraid"
+      - id: "c"
+        label: "Proxmox VE"
+      - id: "d"
+        label: "TrueNAS (CORE or SCALE)"
+      - id: "e"
+        label: "QNAP"
+      - id: "f"
+        label: "OpenMediaVault"
+      - id: "g"
+        label: "Plain Linux (Debian, Ubuntu, etc.)"
+      - id: "h"
+        label: "Windows Server"
+      - id: "i"
+        label: "ESXi"
+      - id: "j"
+        label: "None"
+  - id: q5
+    prompt: "Which platform would you like to try or move to over the next year? (Select all that apply)"
+    type: multi_choice
+    construct: platform_would_like_try_move
+    required: true
+    options:
+      - id: "a"
+        label: "Synology DSM"
+      - id: "b"
+        label: "Unraid"
+      - id: "c"
+        label: "Proxmox VE"
+      - id: "d"
+        label: "TrueNAS SCALE"
+      - id: "e"
+        label: "OpenMediaVault"
+      - id: "f"
+        label: "A Kubernetes-based setup"
+      - id: "g"
+        label: "I'm happy with what I have"
+  - id: q6
+    prompt: "What do you use your home server or NAS for? (Select all that apply)"
+    type: multi_choice
+    construct: use_home_server_nas_select
+    required: true
+    options:
+      - id: "a"
+        label: "File storage and sharing"
+      - id: "b"
+        label: "Media server (Plex, Jellyfin, Emby)"
+      - id: "c"
+        label: "Backups of other devices"
+      - id: "d"
+        label: "Photo storage and management"
+      - id: "e"
+        label: "Running virtual machines"
+      - id: "f"
+        label: "Running Docker containers"
+      - id: "g"
+        label: "Surveillance / camera recording"
+      - id: "h"
+        label: "Home automation"
+      - id: "i"
+        label: "Game servers"
+  - id: q7
+    prompt: "What type of hardware runs your setup? (Select all that apply)"
+    type: multi_choice
+    construct: type_hardware_runs_setup_select
+    required: true
+    options:
+      - id: "a"
+        label: "Purpose-built NAS appliance (Synology, QNAP)"
+      - id: "b"
+        label: "Custom-built server (self-assembled)"
+      - id: "c"
+        label: "Repurposed old PC or laptop"
+      - id: "d"
+        label: "Mini PC (Intel NUC, etc.)"
+      - id: "e"
+        label: "Rack-mounted server"
+      - id: "f"
+        label: "Raspberry Pi or single-board computer"
+  - id: q8
+    prompt: "Which storage or filesystem features do you use? (Select all that apply)"
+    type: multi_choice
+    construct: storage_filesystem_features_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "ZFS"
+      - id: "b"
+        label: "Btrfs"
+      - id: "c"
+        label: "Unraid array with parity"
+      - id: "d"
+        label: "Hardware or software RAID"
+      - id: "e"
+        label: "Snapshots"
+      - id: "f"
+        label: "SSD caching or tiering"
+      - id: "g"
+        label: "Encryption at rest"
+      - id: "h"
+        label: "None of these"
+  - id: q9
+    prompt: "How do you back up the data on your home server or NAS? (Select all that apply)"
+    type: multi_choice
+    construct: back_up_data_home_server
+    required: true
+    options:
+      - id: "a"
+        label: "A second local device or drive"
+      - id: "b"
+        label: "Off-site to a friend's or family member's location"
+      - id: "c"
+        label: "Cloud backup (Backblaze B2, etc.)"
+      - id: "d"
+        label: "Cold storage / external drives"
+      - id: "e"
+        label: "Snapshots only"
+      - id: "f"
+        label: "I don't back it up"
+  - id: q10
+    prompt: "How do you access your server remotely? (Select all that apply)"
+    type: multi_choice
+    construct: access_server_remotely_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Tailscale or another mesh VPN"
+      - id: "b"
+        label: "WireGuard or OpenVPN"
+      - id: "c"
+        label: "Vendor cloud relay (QuickConnect, etc.)"
+      - id: "d"
+        label: "A reverse proxy with a domain"
+      - id: "e"
+        label: "Port forwarding"
+      - id: "f"
+        label: "I only use it on my local network"
+  - id: q11
+    prompt: "What operating environments run on your server? (Select all that apply)"
+    type: multi_choice
+    construct: operating_environments_run_server_select
+    required: true
+    options:
+      - id: "a"
+        label: "Docker containers"
+      - id: "b"
+        label: "Virtual machines"
+      - id: "c"
+        label: "LXC containers"
+      - id: "d"
+        label: "Native apps from a vendor app store"
+      - id: "e"
+        label: "Bare-metal services"
+      - id: "f"
+        label: "None of these"
+  - id: q12
+    prompt: "About how many terabytes of total raw storage does your setup have? Please enter a number."
+    type: free_text
+    construct: many_terabytes_total_raw_storage
+    required: true
+  - id: q13
+    prompt: "About how many drives (HDDs and SSDs) are in your setup? Please enter a number."
+    type: free_text
+    construct: many_drives_hdds_ssds_setup
+    required: true
+  - id: q14
+    prompt: "How would you rate your technical skill with home servers?"
+    type: single_choice
+    construct: would_rate_technical_skill_home
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert"
+  - id: q15
+    prompt: "How did you learn to run a home server or NAS? (Select all that apply)"
+    type: multi_choice
+    construct: did_learn_run_home_server
+    required: true
+    options:
+      - id: "a"
+        label: "YouTube tutorials"
+      - id: "b"
+        label: "Reddit (r/homelab, r/DataHoarder)"
+      - id: "c"
+        label: "Official documentation"
+      - id: "d"
+        label: "Blogs and written guides"
+      - id: "e"
+        label: "Discord or forum communities"
+      - id: "f"
+        label: "Trial and error"
+  - id: q16
+    prompt: "How much do you agree: My home server has become essential to my daily life."
+    type: single_choice
+    construct: much_agree_my_home_server
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: Maintaining my setup takes more effort than I expected."
+    type: single_choice
+    construct: much_agree_maintaining_my_setup
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: I am confident my data is safe from loss."
+    type: single_choice
+    construct: much_agree_i_am_confident
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: Building my homelab is genuinely fun."
+    type: single_choice
+    construct: much_agree_building_my_homelab
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: Power and electricity costs influence how I run my server."
+    type: single_choice
+    construct: much_agree_power_electricity_costs
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: A prebuilt NAS is worth the premium over a DIY build."
+    type: single_choice
+    construct: much_agree_prebuilt_nas_worth
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: My home network is a bottleneck for my server."
+    type: single_choice
+    construct: much_agree_my_home_network
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "When choosing a home server platform, how important is ease of use?"
+    type: single_choice
+    construct: when_choosing_home_server_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a home server platform, how important is data integrity and safety?"
+    type: single_choice
+    construct: when_choosing_home_server_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a home server platform, how important is power efficiency?"
+    type: single_choice
+    construct: when_choosing_home_server_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a home server platform, how important is app and container flexibility?"
+    type: single_choice
+    construct: when_choosing_home_server_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a home server platform, how important is upfront cost?"
+    type: single_choice
+    construct: when_choosing_home_server_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing a home server platform, how important is community support?"
+    type: single_choice
+    construct: when_choosing_home_server_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "Which are your top 3 factors when choosing a home server platform? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Ease of use"
+      - id: "b"
+        label: "Data integrity and safety"
+      - id: "c"
+        label: "Power efficiency"
+      - id: "d"
+        label: "App and container flexibility"
+      - id: "e"
+        label: "Upfront cost"
+      - id: "f"
+        label: "Community support"
+      - id: "g"
+        label: "Expandability"
+      - id: "h"
+        label: "Noise level"
+  - id: q30
+    prompt: "What services do you run in containers or VMs on your server? (Select all that apply)"
+    type: multi_choice
+    construct: services_run_containers_vms_server
+    required: true
+    options:
+      - id: "a"
+        label: "Media server (Plex, Jellyfin)"
+      - id: "b"
+        label: "Photo management (Immich, PhotoPrism)"
+      - id: "c"
+        label: "Home Assistant"
+      - id: "d"
+        label: "Pi-hole or AdGuard Home"
+      - id: "e"
+        label: "Nextcloud or file sync"
+      - id: "f"
+        label: "Download and *arr stack"
+      - id: "g"
+        label: "Game servers"
+      - id: "h"
+        label: "None"
+  - id: q31
+    prompt: "How often do you experience hardware or drive issues?"
+    type: single_choice
+    construct: often_experience_hardware_drive_issues
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q32
+    prompt: "How is your network wired for the server?"
+    type: single_choice
+    construct: network_wired_server
+    required: true
+    options:
+      - id: "a"
+        label: "Gigabit Ethernet"
+      - id: "b"
+        label: "2.5 Gigabit Ethernet"
+      - id: "c"
+        label: "10 Gigabit Ethernet"
+      - id: "d"
+        label: "Wi-Fi only"
+      - id: "e"
+        label: "Not sure"
+  - id: q33
+    prompt: "How much did you spend building your current setup?"
+    type: single_choice
+    construct: much_did_spend_building_current
+    required: true
+    options:
+      - id: "a"
+        label: "Under $250"
+      - id: "b"
+        label: "$250 to $500"
+      - id: "c"
+        label: "$500 to $1,000"
+      - id: "d"
+        label: "$1,000 to $3,000"
+      - id: "e"
+        label: "More than $3,000"
+  - id: q34
+    prompt: "Do you use an uninterruptible power supply (UPS)?"
+    type: single_choice
+    construct: use_uninterruptible_power_supply_ups
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, with automatic safe shutdown"
+      - id: "b"
+        label: "Yes, but not configured for shutdown"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not sure"
+  - id: q35
+    prompt: "How often do you worry about losing data on your server?"
+    type: single_choice
+    construct: often_worry_losing_data_server
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q36
+    prompt: "How satisfied are you with the reliability of your home server or NAS?"
+    type: single_choice
+    construct: satisfied_reliability_home_server_nas
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "How satisfied are you with your storage capacity and expandability?"
+    type: single_choice
+    construct: satisfied_storage_capacity_expandability
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "Overall, how satisfied are you with your home server or NAS?"
+    type: single_choice
+    construct: overall_satisfied_home_server_nas
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q39
+    prompt: "How likely are you to recommend running a home server or NAS to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_running_home_server
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q40
+    prompt: "How likely are you to expand your storage within the next year?"
+    type: single_choice
+    construct: likely_expand_storage_within_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q41
+    prompt: "How likely are you to switch to a different platform within the next year?"
+    type: single_choice
+    construct: likely_switch_different_platform_within
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What is one thing you would improve about your home server setup? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_home
+    required: false
+  - id: q43
+    prompt: "Which best describes your day-to-day occupation?"
+    type: single_choice
+    construct: best_describes_day_day_occupation
+    required: true
+    options:
+      - id: "a"
+        label: "Software developer or engineer"
+      - id: "b"
+        label: "IT or systems administrator"
+      - id: "c"
+        label: "Other technology role"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "A non-technology profession"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Other"
+  - id: q44
+    prompt: "How would you describe your professional technology experience?"
+    type: single_choice
+    construct: would_describe_professional_technology_e
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in technology"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q46
+    prompt: "Approximately how many people live in your household?"
+    type: single_choice
+    construct: approximately_many_people_live_household
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3 to 4"
+      - id: "d"
+        label: "5 or more"
+  - id: q47
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Not currently working"
+      - id: "i"
+        label: "Other"
+  - id: q48
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q49
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q52
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

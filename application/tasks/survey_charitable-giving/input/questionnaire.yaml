@@ -1,0 +1,698 @@
+schemaVersion: "1.0"
+id: charitable_giving_v1
+title: "Charitable Giving Survey"
+description: "How people donate money and time to charitable causes and choose organizations."
+questions:
+  - id: q0
+    prompt: "In the past 12 months, have you donated money to any charitable organization or cause?"
+    type: single_choice
+    construct: past_12_months_have_donated
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I have in the past"
+      - id: "c"
+        label: "No, I have never donated to charity"
+  - id: q1
+    prompt: "How long have you been a regular charitable donor?"
+    type: single_choice
+    construct: long_have_been_regular_charitable
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 10 years"
+      - id: "d"
+        label: "More than 10 years"
+      - id: "e"
+        label: "I do not consider myself a regular donor"
+  - id: q2
+    prompt: "About how much did you donate to charity in total over the past 12 months? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_did_donate_charity_total
+    required: true
+  - id: q3
+    prompt: "Which range best describes your total charitable giving over the past 12 months?"
+    type: single_choice
+    construct: range_best_describes_total_charitable
+    required: true
+    options:
+      - id: "a"
+        label: "I did not donate"
+      - id: "b"
+        label: "Under $100"
+      - id: "c"
+        label: "$100 to $499"
+      - id: "d"
+        label: "$500 to $999"
+      - id: "e"
+        label: "$1,000 to $2,499"
+      - id: "f"
+        label: "$2,500 to $4,999"
+      - id: "g"
+        label: "$5,000 or more"
+  - id: q4
+    prompt: "Roughly what share of your annual income do you give to charity?"
+    type: single_choice
+    construct: roughly_share_annual_income_give
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "Less than 1%"
+      - id: "c"
+        label: "1% to 2%"
+      - id: "d"
+        label: "3% to 5%"
+      - id: "e"
+        label: "6% to 10%"
+      - id: "f"
+        label: "More than 10%"
+  - id: q5
+    prompt: "How often do you typically make charitable donations?"
+    type: single_choice
+    construct: often_typically_make_charitable_donation
+    required: true
+    options:
+      - id: "a"
+        label: "Weekly"
+      - id: "b"
+        label: "Monthly"
+      - id: "c"
+        label: "A few times a year"
+      - id: "d"
+        label: "Once a year"
+      - id: "e"
+        label: "Only occasionally when asked"
+      - id: "f"
+        label: "I do not donate"
+  - id: q6
+    prompt: "Which causes have you donated to in the past 12 months? (Select all that apply)"
+    type: multi_choice
+    construct: causes_have_donated_past_12
+    required: true
+    options:
+      - id: "a"
+        label: "Religious organizations or congregations"
+      - id: "b"
+        label: "Food banks or hunger relief"
+      - id: "c"
+        label: "Health and medical research"
+      - id: "d"
+        label: "Education and scholarships"
+      - id: "e"
+        label: "Animal welfare"
+      - id: "f"
+        label: "Environment and conservation"
+      - id: "g"
+        label: "Disaster relief"
+      - id: "h"
+        label: "Human rights or social justice"
+      - id: "i"
+        label: "Arts and culture"
+      - id: "j"
+        label: "Veterans or first responders"
+      - id: "k"
+        label: "I did not donate"
+  - id: q7
+    prompt: "How do you usually make your donations? (Select all that apply)"
+    type: multi_choice
+    construct: usually_make_donations_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Online through a charity's website"
+      - id: "b"
+        label: "Through a crowdfunding platform (for example, GoFundMe)"
+      - id: "c"
+        label: "Automatic recurring gift or subscription"
+      - id: "d"
+        label: "Cash or check"
+      - id: "e"
+        label: "Workplace giving or payroll deduction"
+      - id: "f"
+        label: "Text-to-donate"
+      - id: "g"
+        label: "At a place of worship"
+      - id: "h"
+        label: "In-store round-up at checkout"
+      - id: "i"
+        label: "Donor-advised fund"
+  - id: q8
+    prompt: "Do you have any recurring or monthly charitable donations set up?"
+    type: single_choice
+    construct: have_any_recurring_monthly_charitable
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, to one organization"
+      - id: "b"
+        label: "Yes, to more than one organization"
+      - id: "c"
+        label: "No, but I have in the past"
+      - id: "d"
+        label: "No"
+  - id: q9
+    prompt: "In the past 12 months, have you volunteered your time to a charitable organization?"
+    type: single_choice
+    construct: past_12_months_have_volunteered
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I have in the past"
+      - id: "d"
+        label: "No, never"
+  - id: q10
+    prompt: "About how many hours did you volunteer in the past 12 months? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: many_hours_did_volunteer_past
+    required: true
+  - id: q11
+    prompt: "Besides money, how else have you supported causes in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: besides_money_else_have_supported
+    required: true
+    options:
+      - id: "a"
+        label: "Volunteered time"
+      - id: "b"
+        label: "Donated goods, food, or clothing"
+      - id: "c"
+        label: "Attended a fundraising event"
+      - id: "d"
+        label: "Shared or promoted a cause online"
+      - id: "e"
+        label: "Signed a petition"
+      - id: "f"
+        label: "Served on a board or committee"
+      - id: "g"
+        label: "None of these"
+  - id: q12
+    prompt: "When deciding whether to give to a charity, how do you research it? (Select all that apply)"
+    type: multi_choice
+    construct: when_deciding_whether_give_charity
+    required: true
+    options:
+      - id: "a"
+        label: "Charity rating sites (for example, Charity Navigator or GuideStar)"
+      - id: "b"
+        label: "The charity's own website or annual report"
+      - id: "c"
+        label: "Recommendations from friends or family"
+      - id: "d"
+        label: "News or social media coverage"
+      - id: "e"
+        label: "My place of worship or community group"
+      - id: "f"
+        label: "I do not usually research before giving"
+  - id: q13
+    prompt: "How much do you agree or disagree: Giving to charity is an important part of who I am."
+    type: single_choice
+    construct: much_agree_disagree_giving_charity
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I trust that most charities use donations responsibly."
+    type: single_choice
+    construct: much_agree_disagree_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: The tax deduction is an important reason I give."
+    type: single_choice
+    construct: much_agree_disagree_tax_deduction
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: I wish I could afford to give more than I do."
+    type: single_choice
+    construct: much_agree_disagree_i_wish
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree or disagree: I feel pressured by frequent donation requests."
+    type: single_choice
+    construct: much_agree_disagree_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How important is each factor when you choose a charity — Low overhead and administrative costs?"
+    type: single_choice
+    construct: important_each_factor_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is each factor when you choose a charity — A personal connection to the cause?"
+    type: single_choice
+    construct: important_each_factor_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is each factor when you choose a charity — Evidence that it makes a real impact?"
+    type: single_choice
+    construct: important_each_factor_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each factor when you choose a charity — Whether the organization is local?"
+    type: single_choice
+    construct: important_each_factor_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each factor when you choose a charity — Transparency about how funds are used?"
+    type: single_choice
+    construct: important_each_factor_when_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "What most often motivates you to give? Please select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: most_often_motivates_give_please
+    required: true
+    options:
+      - id: "a"
+        label: "Personal or family connection to the cause"
+      - id: "b"
+        label: "Religious or moral beliefs"
+      - id: "c"
+        label: "Wanting to help my community"
+      - id: "d"
+        label: "Response to a disaster or emergency"
+      - id: "e"
+        label: "A friend or family member asked"
+      - id: "f"
+        label: "Tax benefits"
+      - id: "g"
+        label: "Belief in the organization's effectiveness"
+      - id: "h"
+        label: "A matching gift opportunity"
+  - id: q24
+    prompt: "Do you itemize charitable donations on your tax return?"
+    type: single_choice
+    construct: itemize_charitable_donations_tax_return
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, every year"
+      - id: "b"
+        label: "Yes, some years"
+      - id: "c"
+        label: "No, I take the standard deduction"
+      - id: "d"
+        label: "Not sure"
+  - id: q25
+    prompt: "Compared with last year, do you expect to give more, less, or about the same this year?"
+    type: single_choice
+    construct: compared_last_year_expect_give
+    required: true
+    options:
+      - id: "a"
+        label: "More"
+      - id: "b"
+        label: "About the same"
+      - id: "c"
+        label: "Less"
+      - id: "d"
+        label: "Not sure"
+  - id: q26
+    prompt: "How has the economy or your finances affected your giving in the past year?"
+    type: single_choice
+    construct: has_economy_finances_affected_giving
+    required: true
+    options:
+      - id: "a"
+        label: "I gave more because of it"
+      - id: "b"
+        label: "No change"
+      - id: "c"
+        label: "I gave somewhat less"
+      - id: "d"
+        label: "I gave much less"
+      - id: "e"
+        label: "I stopped giving"
+  - id: q27
+    prompt: "How satisfied are you with the impact your donations have?"
+    type: single_choice
+    construct: satisfied_impact_donations_have
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q28
+    prompt: "How likely are you to set up a recurring donation in the next year?"
+    type: single_choice
+    construct: likely_set_up_recurring_donation
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q29
+    prompt: "On a scale of 0 to 10, how likely are you to encourage a friend to donate to a cause you support? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_encourage
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q30
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $30,000"
+      - id: "b"
+        label: "$30,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Homemaker or full-time caregiver"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+  - id: q37
+    prompt: "How important is religion or spirituality in your life?"
+    type: single_choice
+    construct: important_religion_spirituality_life
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q40
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

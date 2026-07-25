@@ -1,0 +1,743 @@
+schemaVersion: "1.0"
+id: video_conferencing_v1
+title: "Video Conferencing Survey"
+description: "How people use video conferencing tools for meetings and calls — which tools they choose, how they run meetings, and how video calls affect their workday."
+questions:
+  - id: q0
+    prompt: "Do you use video conferencing tools?"
+    type: single_choice
+    construct: use_video_conferencing_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for work and personal use"
+      - id: "b"
+        label: "Yes, mostly for work"
+      - id: "c"
+        label: "Yes, mostly for personal use"
+      - id: "d"
+        label: "No, I rarely or never use them"
+  - id: q1
+    prompt: "How long have you regularly used video conferencing tools?"
+    type: single_choice
+    construct: long_have_regularly_used_video
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 6 years"
+      - id: "d"
+        label: "More than 6 years"
+      - id: "e"
+        label: "I don't use them"
+  - id: q2
+    prompt: "On a typical workday, about how many video meetings do you attend? Enter a whole number."
+    type: free_text
+    construct: typical_workday_many_video_meetings
+    required: true
+  - id: q3
+    prompt: "Which video conferencing tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: video_conferencing_tools_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Zoom"
+      - id: "b"
+        label: "Microsoft Teams"
+      - id: "c"
+        label: "Google Meet"
+      - id: "d"
+        label: "Cisco Webex"
+      - id: "e"
+        label: "GoTo Meeting"
+      - id: "f"
+        label: "Whereby"
+      - id: "g"
+        label: "Discord"
+      - id: "h"
+        label: "FaceTime"
+      - id: "i"
+        label: "Slack huddles / calls"
+      - id: "j"
+        label: "Other (please specify)"
+  - id: q4
+    prompt: "Which video conferencing tool do you use most often?"
+    type: single_choice
+    construct: video_conferencing_tool_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Zoom"
+      - id: "b"
+        label: "Microsoft Teams"
+      - id: "c"
+        label: "Google Meet"
+      - id: "d"
+        label: "Cisco Webex"
+      - id: "e"
+        label: "FaceTime"
+      - id: "f"
+        label: "Another tool"
+  - id: q5
+    prompt: "For what do you use video conferencing? (Select all that apply)"
+    type: multi_choice
+    construct: use_video_conferencing_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Internal team meetings"
+      - id: "b"
+        label: "One-on-one meetings"
+      - id: "c"
+        label: "Client or customer calls"
+      - id: "d"
+        label: "Webinars or large presentations"
+      - id: "e"
+        label: "Interviews"
+      - id: "f"
+        label: "Training or education"
+      - id: "g"
+        label: "Personal / social calls"
+      - id: "h"
+        label: "Telehealth or appointments"
+      - id: "i"
+        label: "Other (please specify)"
+  - id: q6
+    prompt: "How do you usually join video meetings?"
+    type: single_choice
+    construct: usually_join_video_meetings
+    required: true
+    options:
+      - id: "a"
+        label: "Desktop app"
+      - id: "b"
+        label: "Web browser"
+      - id: "c"
+        label: "Mobile app"
+      - id: "d"
+        label: "Dedicated conference room system"
+      - id: "e"
+        label: "Phone dial-in (audio only)"
+  - id: q7
+    prompt: "Which features do you regularly use? (Select all that apply)"
+    type: multi_choice
+    construct: features_regularly_use_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Screen sharing"
+      - id: "b"
+        label: "Chat during meetings"
+      - id: "c"
+        label: "Virtual backgrounds or blur"
+      - id: "d"
+        label: "Recording"
+      - id: "e"
+        label: "Breakout rooms"
+      - id: "f"
+        label: "Reactions or hand-raise"
+      - id: "g"
+        label: "Live captions or transcription"
+      - id: "h"
+        label: "Whiteboard"
+      - id: "i"
+        label: "Polls or Q&A"
+      - id: "j"
+        label: "AI meeting summaries or notes"
+  - id: q8
+    prompt: "How often do you turn your camera on during work meetings?"
+    type: single_choice
+    construct: often_turn_camera_during_work
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Usually"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q9
+    prompt: "Do you use AI features for meetings (e.g., automatic notes, summaries, or transcription)?"
+    type: single_choice
+    construct: use_ai_features_meetings_e
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I'm interested"
+      - id: "d"
+        label: "No, and I'm not interested"
+  - id: q10
+    prompt: "What equipment do you typically use for video calls? (Select all that apply)"
+    type: multi_choice
+    construct: equipment_typically_use_video_calls
+    required: true
+    options:
+      - id: "a"
+        label: "Built-in laptop webcam and mic"
+      - id: "b"
+        label: "External webcam"
+      - id: "c"
+        label: "Headset or earbuds"
+      - id: "d"
+        label: "External microphone"
+      - id: "e"
+        label: "External speakers"
+      - id: "f"
+        label: "Ring light or dedicated lighting"
+      - id: "g"
+        label: "Second monitor"
+  - id: q11
+    prompt: "How much do you agree with the following statement? — Video meetings are an effective way to get work done."
+    type: single_choice
+    construct: much_agree_following_statement_video
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement? — I often feel tired or drained after back-to-back video meetings."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement? — Many of the video meetings I attend could have been an email or message."
+    type: single_choice
+    construct: much_agree_following_statement_many
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement? — The audio and video quality of my calls is usually good."
+    type: single_choice
+    construct: much_agree_following_statement_audio
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement? — I feel comfortable being on camera during meetings."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How often do you experience each of the following on video calls? — Audio or connection problems"
+    type: single_choice
+    construct: often_experience_each_following_video
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q17
+    prompt: "How often do you experience each of the following on video calls? — People talking over each other"
+    type: single_choice
+    construct: often_experience_each_following_video
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q18
+    prompt: "How often do you experience each of the following on video calls? — Multitasking or getting distracted"
+    type: single_choice
+    construct: often_experience_each_following_video
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q19
+    prompt: "How often do you experience each of the following on video calls? — Meetings starting or running late"
+    type: single_choice
+    construct: often_experience_each_following_video
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q20
+    prompt: "How important is each factor when choosing a video conferencing tool? — Audio and video quality"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each factor when choosing a video conferencing tool? — Ease of joining meetings"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each factor when choosing a video conferencing tool? — Reliability"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each factor when choosing a video conferencing tool? — Security and privacy"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each factor when choosing a video conferencing tool? — Feature set (recording, breakouts, etc.)"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "Select your top 3 factors that matter most when choosing a video conferencing tool. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_that
+    required: true
+    options:
+      - id: "a"
+        label: "Audio and video quality"
+      - id: "b"
+        label: "Ease of joining"
+      - id: "c"
+        label: "Reliability"
+      - id: "d"
+        label: "Security and privacy"
+      - id: "e"
+        label: "Feature set"
+      - id: "f"
+        label: "Price"
+      - id: "g"
+        label: "Meeting size limits"
+      - id: "h"
+        label: "Integration with calendar and other tools"
+  - id: q26
+    prompt: "What frustrates you most about video conferencing? (Select all that apply)"
+    type: multi_choice
+    construct: frustrates_most_video_conferencing_selec
+    required: true
+    options:
+      - id: "a"
+        label: "Too many meetings"
+      - id: "b"
+        label: "Technical or connection issues"
+      - id: "c"
+        label: "Meeting fatigue"
+      - id: "d"
+        label: "Awkward turn-taking"
+      - id: "e"
+        label: "Distracting home or office environments"
+      - id: "f"
+        label: "Difficulty reading the room"
+      - id: "g"
+        label: "Privacy concerns"
+      - id: "h"
+        label: "Nothing frustrates me"
+  - id: q27
+    prompt: "Do you pay for a video conferencing tool?"
+    type: single_choice
+    construct: pay_video_conferencing_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, personally"
+      - id: "b"
+        label: "Yes, my employer pays"
+      - id: "c"
+        label: "No, I use a free tier"
+      - id: "d"
+        label: "I don't know"
+  - id: q28
+    prompt: "How satisfied are you overall with your primary video conferencing tool?"
+    type: single_choice
+    construct: satisfied_overall_primary_video_conferen
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "How satisfied are you with the amount of time you spend in video meetings?"
+    type: single_choice
+    construct: satisfied_amount_time_spend_video
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How likely are you to recommend your video conferencing tool to others? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_video_conferencing_tool
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "Compared with today, how do you expect your video meeting time to change over the next year?"
+    type: single_choice
+    construct: compared_today_expect_video_meeting
+    required: true
+    options:
+      - id: "a"
+        label: "Decrease a lot"
+      - id: "b"
+        label: "Decrease a little"
+      - id: "c"
+        label: "Stay about the same"
+      - id: "d"
+        label: "Increase a little"
+      - id: "e"
+        label: "Increase a lot"
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which best describes your current work arrangement?"
+    type: single_choice
+    construct: best_describes_current_work_arrangement
+    required: true
+    options:
+      - id: "a"
+        label: "Fully remote"
+      - id: "b"
+        label: "Hybrid"
+      - id: "c"
+        label: "Fully in-person"
+      - id: "d"
+        label: "Not applicable"
+  - id: q39
+    prompt: "Which best describes your role?"
+    type: single_choice
+    construct: best_describes_role
+    required: true
+    options:
+      - id: "a"
+        label: "Individual contributor"
+      - id: "b"
+        label: "Team lead or supervisor"
+      - id: "c"
+        label: "Manager"
+      - id: "d"
+        label: "Executive or business owner"
+      - id: "e"
+        label: "Not applicable"
+  - id: q40
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q42
+    prompt: "Is there anything else you would like to share about how you use video conferencing?"
+    type: free_text
+    construct: there_anything_else_would_like
+    required: false

@@ -1,0 +1,710 @@
+schemaVersion: "1.0"
+id: stock_investing_attitudes_v1
+title: "Stock Investing Attitudes Survey"
+description: "People's beliefs, emotions, and behaviors around investing in the stock market."
+questions:
+  - id: q0
+    prompt: "Do you currently own any stocks or stock-based investments (directly or through funds)?"
+    type: single_choice
+    construct: currently_own_any_stocks_stock
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, individual stocks"
+      - id: "b"
+        label: "Yes, only through funds (mutual funds, ETFs, or a retirement plan)"
+      - id: "c"
+        label: "Yes, both individual stocks and funds"
+      - id: "d"
+        label: "No, but I have invested in the past"
+      - id: "e"
+        label: "No, I have never invested in stocks"
+  - id: q1
+    prompt: "How long have you been investing in the stock market?"
+    type: single_choice
+    construct: long_have_been_investing_stock
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 10 years"
+      - id: "d"
+        label: "More than 10 years"
+      - id: "e"
+        label: "I have never invested"
+  - id: q2
+    prompt: "About how much do you currently have invested in stocks and stock funds (excluding your home)?"
+    type: single_choice
+    construct: much_currently_have_invested_stocks
+    required: true
+    options:
+      - id: "a"
+        label: "Nothing"
+      - id: "b"
+        label: "Less than $5,000"
+      - id: "c"
+        label: "$5,000 to $24,999"
+      - id: "d"
+        label: "$25,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $499,999"
+      - id: "f"
+        label: "$500,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q3
+    prompt: "Roughly what share of your total savings is invested in stocks or stock funds?"
+    type: single_choice
+    construct: roughly_share_total_savings_invested
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "Less than 25%"
+      - id: "c"
+        label: "25% to 49%"
+      - id: "d"
+        label: "50% to 74%"
+      - id: "e"
+        label: "75% or more"
+      - id: "f"
+        label: "Don't know"
+  - id: q4
+    prompt: "Which sources do you use to make stock investing decisions? (Select all that apply)"
+    type: multi_choice
+    construct: sources_use_make_stock_investing
+    required: true
+    options:
+      - id: "a"
+        label: "Financial news sites or TV (e.g., CNBC, Bloomberg, WSJ)"
+      - id: "b"
+        label: "A financial advisor or professional"
+      - id: "c"
+        label: "Friends, family, or coworkers"
+      - id: "d"
+        label: "Social media or online forums (e.g., Reddit, YouTube, TikTok)"
+      - id: "e"
+        label: "Company research and financial reports"
+      - id: "f"
+        label: "Brokerage tools and analyst ratings"
+      - id: "g"
+        label: "I don't actively research; I invest passively"
+      - id: "h"
+        label: "Not applicable"
+  - id: q5
+    prompt: "How would you describe your overall risk tolerance as an investor?"
+    type: single_choice
+    construct: would_describe_overall_risk_tolerance
+    required: true
+    options:
+      - id: "a"
+        label: "Very conservative — I avoid risk"
+      - id: "b"
+        label: "Somewhat conservative"
+      - id: "c"
+        label: "Moderate"
+      - id: "d"
+        label: "Somewhat aggressive"
+      - id: "e"
+        label: "Very aggressive — I seek high returns and accept big swings"
+  - id: q6
+    prompt: "How often do you buy or sell individual stocks?"
+    type: single_choice
+    construct: often_buy_sell_individual_stocks
+    required: true
+    options:
+      - id: "a"
+        label: "Never — I only hold funds"
+      - id: "b"
+        label: "A few times a year"
+      - id: "c"
+        label: "Monthly"
+      - id: "d"
+        label: "Weekly"
+      - id: "e"
+        label: "Daily"
+  - id: q7
+    prompt: "How much do you agree: Investing in the stock market is a smart way to build wealth over time."
+    type: single_choice
+    construct: much_agree_investing_stock_market
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q8
+    prompt: "How much do you agree: Investing in individual stocks is basically a form of gambling."
+    type: single_choice
+    construct: much_agree_investing_individual_stocks
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q9
+    prompt: "How much do you agree: The stock market is rigged in favor of insiders and the wealthy."
+    type: single_choice
+    construct: much_agree_stock_market_rigged
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree: I have the knowledge I need to invest in stocks successfully."
+    type: single_choice
+    construct: much_agree_i_have_knowledge
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree: I get anxious when the value of my investments drops."
+    type: single_choice
+    construct: much_agree_i_get_anxious
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree: It is possible to reliably time the market to buy low and sell high."
+    type: single_choice
+    construct: much_agree_it_possible_reliably
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree: Long-term investing is better than trying to trade frequently."
+    type: single_choice
+    construct: much_agree_long_term_investing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: I fear losing money more than I hope to gain from investing."
+    type: single_choice
+    construct: much_agree_i_fear_losing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "When evaluating whether to invest in a stock, how important is each factor: the company's growth potential."
+    type: single_choice
+    construct: when_evaluating_whether_invest_stock
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "When evaluating whether to invest in a stock, how important is each factor: dividends or income it pays."
+    type: single_choice
+    construct: when_evaluating_whether_invest_stock
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "When evaluating whether to invest in a stock, how important is each factor: how well I know the company or its products."
+    type: single_choice
+    construct: when_evaluating_whether_invest_stock
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "When evaluating whether to invest in a stock, how important is each factor: recent price momentum and trends."
+    type: single_choice
+    construct: when_evaluating_whether_invest_stock
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "When evaluating whether to invest in a stock, how important is each factor: the company's social or environmental record."
+    type: single_choice
+    construct: when_evaluating_whether_invest_stock
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "When the market drops sharply, how do you usually react?"
+    type: single_choice
+    construct: when_market_drops_sharply_usually
+    required: true
+    options:
+      - id: "a"
+        label: "Buy more while prices are low"
+      - id: "b"
+        label: "Do nothing and wait it out"
+      - id: "c"
+        label: "Feel worried but hold on"
+      - id: "d"
+        label: "Sell some investments to reduce risk"
+      - id: "e"
+        label: "Sell most or all to avoid further losses"
+  - id: q21
+    prompt: "How often do you check the value of your stock investments?"
+    type: single_choice
+    construct: often_check_value_stock_investments
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "A few times a year"
+      - id: "c"
+        label: "Monthly"
+      - id: "d"
+        label: "Weekly"
+      - id: "e"
+        label: "Daily or more often"
+  - id: q22
+    prompt: "How much has the fear of losing money kept you from investing more in stocks?"
+    type: single_choice
+    construct: much_has_fear_losing_money
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "It has kept me out of the market entirely"
+  - id: q23
+    prompt: "What are your top 3 goals for investing in stocks? (Select all that apply — choose up to 3)"
+    type: single_choice
+    construct: top_3_goals_investing_stocks
+    required: true
+    options:
+      - id: "a"
+        label: "Saving for retirement"
+      - id: "b"
+        label: "Growing wealth over the long term"
+      - id: "c"
+        label: "Generating income (dividends)"
+      - id: "d"
+        label: "Saving for a specific goal (home, education, etc.)"
+      - id: "e"
+        label: "Beating inflation"
+      - id: "f"
+        label: "Making short-term profits"
+      - id: "g"
+        label: "Learning and enjoying investing"
+  - id: q24
+    prompt: "Which of the following have you invested in or traded? (Select all that apply)"
+    type: multi_choice
+    construct: following_have_invested_traded_select
+    required: true
+    options:
+      - id: "a"
+        label: "Individual U.S. stocks"
+      - id: "b"
+        label: "International stocks"
+      - id: "c"
+        label: "ETFs or index funds"
+      - id: "d"
+        label: "Options"
+      - id: "e"
+        label: "Cryptocurrency"
+      - id: "f"
+        label: "Meme or highly speculative stocks"
+      - id: "g"
+        label: "None of these"
+  - id: q25
+    prompt: "How confident are you in the stock market as a place to grow your money over the next 10 years?"
+    type: single_choice
+    construct: confident_stock_market_as_place
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q26
+    prompt: "How satisfied are you with the returns on your stock investments so far?"
+    type: single_choice
+    construct: satisfied_returns_stock_investments_so
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q27
+    prompt: "How likely are you to increase the amount you invest in stocks over the next year?"
+    type: single_choice
+    construct: likely_increase_amount_invest_stocks
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q28
+    prompt: "On a scale of 0 to 10, how likely are you to recommend stock market investing to a friend or family member? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q29
+    prompt: "About how much do you invest in stocks or stock funds in a typical month? Please enter a dollar amount."
+    type: free_text
+    construct: much_invest_stocks_stock_funds
+    required: true
+  - id: q30
+    prompt: "What is the biggest barrier that keeps you from investing (more) in stocks?"
+    type: single_choice
+    construct: biggest_barrier_that_keeps_from
+    required: true
+    options:
+      - id: "a"
+        label: "Not enough money to invest"
+      - id: "b"
+        label: "Fear of losing money"
+      - id: "c"
+        label: "Not knowing enough about it"
+      - id: "d"
+        label: "Prioritizing debt or other goals"
+      - id: "e"
+        label: "Distrust of the market or financial firms"
+      - id: "f"
+        label: "No barrier — I invest as much as I want"
+  - id: q31
+    prompt: "Is there anything else you would like to share about your views on stock investing? (Optional — you may leave a short comment.)"
+    type: free_text
+    construct: there_anything_else_would_like
+    required: false
+  - id: q32
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "Which best describes your race or ethnicity?"
+    type: single_choice
+    construct: best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Two or more races"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree or trade certificate"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Not employed for other reasons"
+  - id: q38
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q41
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q42
+    prompt: "How would you describe your level of investing experience?"
+    type: single_choice
+    construct: would_describe_level_investing_experienc
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Some experience"
+      - id: "c"
+        label: "Experienced"
+      - id: "d"
+        label: "Very experienced"

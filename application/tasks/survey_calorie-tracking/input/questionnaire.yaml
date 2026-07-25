@@ -1,0 +1,798 @@
+schemaVersion: "1.0"
+id: calorie_tracking_v1
+title: "Calorie Tracking Survey"
+description: "Consumer habits, tools, motivations, and satisfaction around tracking calories and food intake."
+questions:
+  - id: q0
+    prompt: "Do you currently track the calories or food you eat?"
+    type: single_choice
+    construct: currently_track_calories_food_eat
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, every day"
+      - id: "b"
+        label: "Yes, most days"
+      - id: "c"
+        label: "Yes, occasionally"
+      - id: "d"
+        label: "No, but I have in the past"
+      - id: "e"
+        label: "No, I have never tracked calories"
+  - id: q1
+    prompt: "How long have you been tracking your calories or food intake?"
+    type: single_choice
+    construct: long_have_been_tracking_calories
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 month"
+      - id: "b"
+        label: "1 to 3 months"
+      - id: "c"
+        label: "3 to 12 months"
+      - id: "d"
+        label: "1 to 3 years"
+      - id: "e"
+        label: "More than 3 years"
+      - id: "f"
+        label: "I do not currently track"
+  - id: q2
+    prompt: "What is the main method you use to track calories?"
+    type: single_choice
+    construct: main_method_use_track_calories
+    required: true
+    options:
+      - id: "a"
+        label: "A dedicated calorie-tracking app"
+      - id: "b"
+        label: "A notebook or paper journal"
+      - id: "c"
+        label: "A spreadsheet"
+      - id: "d"
+        label: "I estimate in my head"
+      - id: "e"
+        label: "I do not currently track"
+  - id: q3
+    prompt: "Which calorie-tracking apps do you use or have you used? (Select all that apply)"
+    type: multi_choice
+    construct: calorie_tracking_apps_use_have
+    required: true
+    options:
+      - id: "a"
+        label: "MyFitnessPal"
+      - id: "b"
+        label: "Lose It!"
+      - id: "c"
+        label: "Cronometer"
+      - id: "d"
+        label: "Noom"
+      - id: "e"
+        label: "Apple Health or Fitness"
+      - id: "f"
+        label: "Samsung Health or Google Fit"
+      - id: "g"
+        label: "A different app"
+      - id: "h"
+        label: "I do not use an app"
+  - id: q4
+    prompt: "How do you usually log the foods you eat?"
+    type: single_choice
+    construct: usually_log_foods_eat
+    required: true
+    options:
+      - id: "a"
+        label: "Scanning barcodes"
+      - id: "b"
+        label: "Searching a food database"
+      - id: "c"
+        label: "Taking a photo of my meal"
+      - id: "d"
+        label: "Entering foods manually"
+      - id: "e"
+        label: "Using saved meals or recipes"
+      - id: "f"
+        label: "I do not log foods"
+  - id: q5
+    prompt: "On a typical day, how many of your meals and snacks do you log?"
+    type: single_choice
+    construct: typical_day_many_meals_snacks
+    required: true
+    options:
+      - id: "a"
+        label: "All of them"
+      - id: "b"
+        label: "Most of them"
+      - id: "c"
+        label: "About half"
+      - id: "d"
+        label: "Only some"
+      - id: "e"
+        label: "None"
+  - id: q6
+    prompt: "What is your main goal for tracking calories?"
+    type: single_choice
+    construct: main_goal_tracking_calories
+    required: true
+    options:
+      - id: "a"
+        label: "Lose weight"
+      - id: "b"
+        label: "Maintain my current weight"
+      - id: "c"
+        label: "Gain weight or build muscle"
+      - id: "d"
+        label: "Eat more healthily overall"
+      - id: "e"
+        label: "Manage a health condition"
+      - id: "f"
+        label: "Curiosity about my diet"
+  - id: q7
+    prompt: "Do you have a daily calorie target?"
+    type: single_choice
+    construct: have_daily_calorie_target
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, set by an app"
+      - id: "b"
+        label: "Yes, set by a doctor or dietitian"
+      - id: "c"
+        label: "Yes, set by myself"
+      - id: "d"
+        label: "No, I do not use a specific target"
+  - id: q8
+    prompt: "Besides calories, which nutrients or metrics do you track? (Select all that apply)"
+    type: multi_choice
+    construct: besides_calories_nutrients_metrics_track
+    required: true
+    options:
+      - id: "a"
+        label: "Protein"
+      - id: "b"
+        label: "Carbohydrates"
+      - id: "c"
+        label: "Fat"
+      - id: "d"
+        label: "Sugar"
+      - id: "e"
+        label: "Fiber"
+      - id: "f"
+        label: "Sodium"
+      - id: "g"
+        label: "Water intake"
+      - id: "h"
+        label: "I only track calories"
+  - id: q9
+    prompt: "How often do you check your calorie total during the day?"
+    type: single_choice
+    construct: often_check_calorie_total_during
+    required: true
+    options:
+      - id: "a"
+        label: "Before every meal or snack"
+      - id: "b"
+        label: "A few times a day"
+      - id: "c"
+        label: "Once a day"
+      - id: "d"
+        label: "A few times a week"
+      - id: "e"
+        label: "Rarely"
+  - id: q10
+    prompt: "Do you also track the calories you burn through exercise?"
+    type: single_choice
+    construct: also_track_calories_burn_through
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I eat back those calories"
+      - id: "b"
+        label: "Yes, but I do not eat them back"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "No"
+  - id: q11
+    prompt: "Which features of your tracking app do you find most useful? (Select all that apply)"
+    type: multi_choice
+    construct: features_tracking_app_find_most
+    required: true
+    options:
+      - id: "a"
+        label: "Barcode scanning"
+      - id: "b"
+        label: "A large food database"
+      - id: "c"
+        label: "Daily goal and progress bar"
+      - id: "d"
+        label: "Nutrient breakdowns"
+      - id: "e"
+        label: "Recipe or meal builder"
+      - id: "f"
+        label: "Reminders to log"
+      - id: "g"
+        label: "Community or social features"
+      - id: "h"
+        label: "I do not use these features"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Tracking calories helps me make better food choices."
+    type: single_choice
+    construct: much_agree_following_statement_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: Logging my food takes too much time and effort."
+    type: single_choice
+    construct: much_agree_following_statement_logging
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I trust the calorie numbers my app gives me."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: Tracking calories sometimes makes me feel stressed about eating."
+    type: single_choice
+    construct: much_agree_following_statement_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: Calorie tracking has helped me reach my goals."
+    type: single_choice
+    construct: much_agree_following_statement_calorie
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: I have become more aware of portion sizes since I started tracking."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "Since you started tracking calories, how have your eating habits changed?"
+    type: single_choice
+    construct: since_started_tracking_calories_have
+    required: true
+    options:
+      - id: "a"
+        label: "Much healthier"
+      - id: "b"
+        label: "Somewhat healthier"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat less healthy"
+      - id: "e"
+        label: "Much less healthy"
+  - id: q19
+    prompt: "How accurate do you think your calorie logging is on a typical day?"
+    type: single_choice
+    construct: accurate_think_calorie_logging_typical
+    required: true
+    options:
+      - id: "a"
+        label: "Very accurate"
+      - id: "b"
+        label: "Somewhat accurate"
+      - id: "c"
+        label: "Neither accurate nor inaccurate"
+      - id: "d"
+        label: "Somewhat inaccurate"
+      - id: "e"
+        label: "Very inaccurate"
+  - id: q20
+    prompt: "What is the biggest challenge you face with calorie tracking?"
+    type: single_choice
+    construct: biggest_challenge_face_calorie_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Remembering to log everything"
+      - id: "b"
+        label: "Estimating portion sizes"
+      - id: "c"
+        label: "Finding accurate entries for foods"
+      - id: "d"
+        label: "Logging home-cooked or restaurant meals"
+      - id: "e"
+        label: "Staying motivated over time"
+      - id: "f"
+        label: "I do not face major challenges"
+  - id: q21
+    prompt: "How often do you log meals eaten at restaurants or takeout?"
+    type: single_choice
+    construct: often_log_meals_eaten_restaurants
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q22
+    prompt: "Which situations make it hardest for you to keep tracking? (Select all that apply)"
+    type: multi_choice
+    construct: situations_make_it_hardest_keep
+    required: true
+    options:
+      - id: "a"
+        label: "Eating out or traveling"
+      - id: "b"
+        label: "Social events and holidays"
+      - id: "c"
+        label: "Busy or stressful days"
+      - id: "d"
+        label: "Weekends"
+      - id: "e"
+        label: "Home-cooked meals with many ingredients"
+      - id: "f"
+        label: "None of these"
+  - id: q23
+    prompt: "How important is each of the following in a calorie-tracking tool: Accuracy of the food database."
+    type: single_choice
+    construct: important_each_following_calorie_trackin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each of the following in a calorie-tracking tool: How quick and easy it is to log food."
+    type: single_choice
+    construct: important_each_following_calorie_trackin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is each of the following in a calorie-tracking tool: Detailed nutrient breakdowns."
+    type: single_choice
+    construct: important_each_following_calorie_trackin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important is each of the following in a calorie-tracking tool: Low cost or a free version."
+    type: single_choice
+    construct: important_each_following_calorie_trackin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important is each of the following in a calorie-tracking tool: Protecting my personal data."
+    type: single_choice
+    construct: important_each_following_calorie_trackin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Do you pay for a premium version of a calorie-tracking app?"
+    type: single_choice
+    construct: pay_premium_version_calorie_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a monthly subscription"
+      - id: "b"
+        label: "Yes, an annual subscription"
+      - id: "c"
+        label: "No, I use the free version"
+      - id: "d"
+        label: "I do not use an app"
+  - id: q29
+    prompt: "How concerned are you about how your food and health data are used?"
+    type: single_choice
+    construct: concerned_food_health_data_used
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q30
+    prompt: "Have you ever discussed calorie or food tracking with a doctor or dietitian?"
+    type: single_choice
+    construct: have_ever_discussed_calorie_food
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it was helpful"
+      - id: "b"
+        label: "Yes, but it was not very helpful"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No, and I would not"
+  - id: q31
+    prompt: "Select your top 3 reasons you track calories. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_track
+    required: true
+    options:
+      - id: "a"
+        label: "Weight loss"
+      - id: "b"
+        label: "Weight maintenance"
+      - id: "c"
+        label: "Building muscle"
+      - id: "d"
+        label: "Eating more healthily"
+      - id: "e"
+        label: "Managing a health condition"
+      - id: "f"
+        label: "Accountability"
+      - id: "g"
+        label: "Learning about nutrition"
+      - id: "h"
+        label: "Curiosity"
+  - id: q32
+    prompt: "Overall, how satisfied are you with tracking your calories?"
+    type: single_choice
+    construct: overall_satisfied_tracking_calories
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "On a scale of 0 to 10, how likely are you to recommend calorie tracking to a friend or family member? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q34
+    prompt: "Over the next 12 months, do you plan to keep tracking your calories?"
+    type: single_choice
+    construct: over_next_12_months_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Definitely yes"
+      - id: "b"
+        label: "Probably yes"
+      - id: "c"
+        label: "Not sure"
+      - id: "d"
+        label: "Probably not"
+      - id: "e"
+        label: "Definitely not"
+  - id: q35
+    prompt: "What is your daily calorie target? Please enter a number (enter 0 if you do not have one)."
+    type: free_text
+    construct: daily_calorie_target_please_enter
+    required: true
+  - id: q36
+    prompt: "About how many minutes per day do you spend logging your food? Please enter a number of minutes."
+    type: free_text
+    construct: many_minutes_per_day_spend
+    required: true
+  - id: q37
+    prompt: "On how many of the past 7 days did you log your food? Please enter a number from 0 to 7."
+    type: free_text
+    construct: many_past_7_days_did
+    required: true
+  - id: q38
+    prompt: "What would make calorie tracking easier or more useful for you? (Optional)"
+    type: free_text
+    construct: would_make_calorie_tracking_easier
+    required: false
+  - id: q39
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q40
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe or not to say"
+  - id: q41
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q44
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q45
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q47
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q48
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q49
+    prompt: "Do you prepare most of your own meals at home?"
+    type: single_choice
+    construct: prepare_most_own_meals_home
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, almost always"
+      - id: "b"
+        label: "Yes, most of the time"
+      - id: "c"
+        label: "About half the time"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Almost never"

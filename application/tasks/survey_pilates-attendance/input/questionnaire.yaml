@@ -1,0 +1,918 @@
+schemaVersion: "1.0"
+id: pilates_attendance_v1
+title: "Pilates Practice Survey"
+description: "How people practice Pilates and attend classes, including mat versus reformer, studios, and attitudes."
+questions:
+  - id: q0
+    prompt: "Do you practice Pilates?"
+    type: single_choice
+    construct: practice_pilates
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I used to"
+      - id: "d"
+        label: "No, I never have"
+  - id: q1
+    prompt: "How long have you been practicing Pilates?"
+    type: single_choice
+    construct: long_have_been_practicing_pilates
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "4 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "I don't practice Pilates"
+  - id: q2
+    prompt: "How often do you practice Pilates?"
+    type: single_choice
+    construct: often_practice_pilates
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "About once a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Rarely"
+  - id: q3
+    prompt: "About how many minutes does a typical Pilates session last for you? Please enter a number."
+    type: free_text
+    construct: many_minutes_does_typical_pilates
+    required: true
+  - id: q4
+    prompt: "Which type of Pilates do you do most often?"
+    type: single_choice
+    construct: type_pilates_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Reformer Pilates"
+      - id: "b"
+        label: "Mat Pilates"
+      - id: "c"
+        label: "A mix of reformer and mat"
+      - id: "d"
+        label: "Tower or Cadillac"
+      - id: "e"
+        label: "Chair or other apparatus"
+      - id: "f"
+        label: "Contemporary or fusion Pilates"
+  - id: q5
+    prompt: "Where do you usually practice Pilates?"
+    type: single_choice
+    construct: where_usually_practice_pilates
+    required: true
+    options:
+      - id: "a"
+        label: "At a dedicated Pilates studio"
+      - id: "b"
+        label: "At a gym or fitness center"
+      - id: "c"
+        label: "At home with videos or apps"
+      - id: "d"
+        label: "At home on my own"
+      - id: "e"
+        label: "A mix of settings"
+  - id: q6
+    prompt: "What is your main reason for practicing Pilates?"
+    type: single_choice
+    construct: main_reason_practicing_pilates
+    required: true
+    options:
+      - id: "a"
+        label: "Core strength"
+      - id: "b"
+        label: "Flexibility and mobility"
+      - id: "c"
+        label: "Posture and alignment"
+      - id: "d"
+        label: "Injury recovery or prevention"
+      - id: "e"
+        label: "Toning and body conditioning"
+      - id: "f"
+        label: "Stress relief and mind-body connection"
+  - id: q7
+    prompt: "Which Pilates formats have you practiced in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: pilates_formats_have_practiced_past
+    required: true
+    options:
+      - id: "a"
+        label: "In-person reformer class"
+      - id: "b"
+        label: "In-person mat class"
+      - id: "c"
+        label: "Private or semi-private session"
+      - id: "d"
+        label: "Live online class"
+      - id: "e"
+        label: "On-demand video or app"
+      - id: "f"
+        label: "Self-guided at home"
+      - id: "g"
+        label: "Gym group class"
+  - id: q8
+    prompt: "Which Pilates or fitness studios or brands are you familiar with or have attended? (Select all that apply)"
+    type: multi_choice
+    construct: pilates_fitness_studios_brands_familiar
+    required: true
+    options:
+      - id: "a"
+        label: "Club Pilates"
+      - id: "b"
+        label: "Pilates Anytime"
+      - id: "c"
+        label: "[solidcore]"
+      - id: "d"
+        label: "Basi or a Balanced Body studio"
+      - id: "e"
+        label: "A local independent studio"
+      - id: "f"
+        label: "Peloton or a gym program"
+      - id: "g"
+        label: "Other"
+      - id: "h"
+        label: "None"
+  - id: q9
+    prompt: "Which Pilates or workout apps do you use? (Select all that apply)"
+    type: multi_choice
+    construct: pilates_workout_apps_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Pilates Anytime"
+      - id: "b"
+        label: "Down Dog Pilates"
+      - id: "c"
+        label: "Alo Moves"
+      - id: "d"
+        label: "Peloton app"
+      - id: "e"
+        label: "YouTube channels"
+      - id: "f"
+        label: "Apple Fitness+"
+      - id: "g"
+        label: "I don't use a Pilates app"
+  - id: q10
+    prompt: "Which Pilates equipment do you own or use at home? (Select all that apply)"
+    type: multi_choice
+    construct: pilates_equipment_own_use_home
+    required: true
+    options:
+      - id: "a"
+        label: "Mat"
+      - id: "b"
+        label: "Resistance bands"
+      - id: "c"
+        label: "Pilates ring (magic circle)"
+      - id: "d"
+        label: "Small weights or toning balls"
+      - id: "e"
+        label: "Foam roller"
+      - id: "f"
+        label: "Home reformer"
+      - id: "g"
+        label: "None of these"
+  - id: q11
+    prompt: "About how much do you spend on Pilates in a typical month (classes, apps, gear), in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_spend_pilates_typical_month
+    required: true
+  - id: q12
+    prompt: "How do you usually pay for Pilates classes?"
+    type: single_choice
+    construct: usually_pay_pilates_classes
+    required: true
+    options:
+      - id: "a"
+        label: "Monthly studio membership"
+      - id: "b"
+        label: "Class pack or credits"
+      - id: "c"
+        label: "Drop-in per class"
+      - id: "d"
+        label: "Included in a gym membership"
+      - id: "e"
+        label: "I use free or online resources"
+      - id: "f"
+        label: "I don't pay for classes"
+  - id: q13
+    prompt: "About how many classes or sessions do you attend in a typical month? Please enter a number."
+    type: free_text
+    construct: many_classes_sessions_attend_typical
+    required: true
+  - id: q14
+    prompt: "Did you start Pilates on the recommendation of any of the following? (Select all that apply)"
+    type: multi_choice
+    construct: did_start_pilates_recommendation_any
+    required: true
+    options:
+      - id: "a"
+        label: "A friend or family member"
+      - id: "b"
+        label: "A doctor or physical therapist"
+      - id: "c"
+        label: "A personal trainer or instructor"
+      - id: "d"
+        label: "Social media or an influencer"
+      - id: "e"
+        label: "My own research"
+      - id: "f"
+        label: "No particular recommendation"
+  - id: q15
+    prompt: "Thinking about your Pilates practice, how much do you agree: It is an important part of my routine."
+    type: single_choice
+    construct: thinking_pilates_practice_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "Thinking about your Pilates practice, how much do you agree: It has improved my core strength."
+    type: single_choice
+    construct: thinking_pilates_practice_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "Thinking about your Pilates practice, how much do you agree: It has helped my posture."
+    type: single_choice
+    construct: thinking_pilates_practice_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "Thinking about your Pilates practice, how much do you agree: Reformer classes are worth the extra cost over mat classes."
+    type: single_choice
+    construct: thinking_pilates_practice_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "Thinking about your Pilates practice, how much do you agree: A skilled instructor makes a big difference."
+    type: single_choice
+    construct: thinking_pilates_practice_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Thinking about your Pilates practice, how much do you agree: The cost of classes is a concern for me."
+    type: single_choice
+    construct: thinking_pilates_practice_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "When choosing a Pilates studio or class, how important is instructor quality?"
+    type: single_choice
+    construct: when_choosing_pilates_studio_class
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When choosing a Pilates studio or class, how important is cost?"
+    type: single_choice
+    construct: when_choosing_pilates_studio_class
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing a Pilates studio or class, how important is class size?"
+    type: single_choice
+    construct: when_choosing_pilates_studio_class
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a Pilates studio or class, how important is location and convenience?"
+    type: single_choice
+    construct: when_choosing_pilates_studio_class
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a Pilates studio or class, how important is the equipment and facilities?"
+    type: single_choice
+    construct: when_choosing_pilates_studio_class
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a Pilates studio or class, how important is the schedule and class availability?"
+    type: single_choice
+    construct: when_choosing_pilates_studio_class
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Which are your top 3 reasons for practicing Pilates? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_reasons_practicing_pilates
+    required: true
+    options:
+      - id: "a"
+        label: "Core strength"
+      - id: "b"
+        label: "Flexibility and mobility"
+      - id: "c"
+        label: "Posture and alignment"
+      - id: "d"
+        label: "Injury recovery or prevention"
+      - id: "e"
+        label: "Toning and conditioning"
+      - id: "f"
+        label: "Stress relief"
+      - id: "g"
+        label: "Low-impact exercise"
+      - id: "h"
+        label: "Community and atmosphere"
+  - id: q28
+    prompt: "What are the biggest barriers to practicing Pilates more? (Select all that apply)"
+    type: multi_choice
+    construct: biggest_barriers_practicing_pilates_more
+    required: true
+    options:
+      - id: "a"
+        label: "Cost of classes"
+      - id: "b"
+        label: "Lack of time"
+      - id: "c"
+        label: "Studio location or distance"
+      - id: "d"
+        label: "Limited class availability"
+      - id: "e"
+        label: "Feeling intimidated as a beginner"
+      - id: "f"
+        label: "Physical limitations"
+      - id: "g"
+        label: "Preferring other forms of exercise"
+      - id: "h"
+        label: "No barriers"
+  - id: q29
+    prompt: "How much of a barrier is cost to practicing Pilates more?"
+    type: single_choice
+    construct: much_barrier_cost_practicing_pilates
+    required: true
+    options:
+      - id: "a"
+        label: "Not a barrier at all"
+      - id: "b"
+        label: "A slight barrier"
+      - id: "c"
+        label: "A moderate barrier"
+      - id: "d"
+        label: "A significant barrier"
+      - id: "e"
+        label: "A major barrier"
+  - id: q30
+    prompt: "How much of a barrier is class scheduling or availability?"
+    type: single_choice
+    construct: much_barrier_class_scheduling_availabili
+    required: true
+    options:
+      - id: "a"
+        label: "Not a barrier at all"
+      - id: "b"
+        label: "A slight barrier"
+      - id: "c"
+        label: "A moderate barrier"
+      - id: "d"
+        label: "A significant barrier"
+      - id: "e"
+        label: "A major barrier"
+  - id: q31
+    prompt: "How much of a barrier is studio location or distance?"
+    type: single_choice
+    construct: much_barrier_studio_location_distance
+    required: true
+    options:
+      - id: "a"
+        label: "Not a barrier at all"
+      - id: "b"
+        label: "A slight barrier"
+      - id: "c"
+        label: "A moderate barrier"
+      - id: "d"
+        label: "A significant barrier"
+      - id: "e"
+        label: "A major barrier"
+  - id: q32
+    prompt: "How much of a barrier is feeling intimidated or new to Pilates?"
+    type: single_choice
+    construct: much_barrier_feeling_intimidated_new
+    required: true
+    options:
+      - id: "a"
+        label: "Not a barrier at all"
+      - id: "b"
+        label: "A slight barrier"
+      - id: "c"
+        label: "A moderate barrier"
+      - id: "d"
+        label: "A significant barrier"
+      - id: "e"
+        label: "A major barrier"
+  - id: q33
+    prompt: "How often do you attend an in-person studio class?"
+    type: single_choice
+    construct: often_attend_person_studio_class
+    required: true
+    options:
+      - id: "a"
+        label: "Weekly or more"
+      - id: "b"
+        label: "A few times a month"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q34
+    prompt: "How often do you practice Pilates at home?"
+    type: single_choice
+    construct: often_practice_pilates_home
+    required: true
+    options:
+      - id: "a"
+        label: "Weekly or more"
+      - id: "b"
+        label: "A few times a month"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q35
+    prompt: "Which other activities do you pair with Pilates? (Select all that apply)"
+    type: multi_choice
+    construct: other_activities_pair_pilates_select
+    required: true
+    options:
+      - id: "a"
+        label: "Yoga"
+      - id: "b"
+        label: "Strength training"
+      - id: "c"
+        label: "Walking or running"
+      - id: "d"
+        label: "Cycling"
+      - id: "e"
+        label: "Stretching or mobility work"
+      - id: "f"
+        label: "Physical therapy exercises"
+      - id: "g"
+        label: "None"
+  - id: q36
+    prompt: "How satisfied are you with your current Pilates practice?"
+    type: single_choice
+    construct: satisfied_current_pilates_practice
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "How satisfied are you with the instruction you receive?"
+    type: single_choice
+    construct: satisfied_instruction_receive
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "How satisfied are you with the value for money of your Pilates practice?"
+    type: single_choice
+    construct: satisfied_value_money_pilates_practice
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q39
+    prompt: "Overall, how satisfied are you with Pilates as part of your fitness routine?"
+    type: single_choice
+    construct: overall_satisfied_pilates_as_part
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q40
+    prompt: "How likely are you to recommend Pilates to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_pilates_friend_0
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q41
+    prompt: "How likely are you to practice Pilates more often over the next year?"
+    type: single_choice
+    construct: likely_practice_pilates_more_often
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "How likely are you to try reformer Pilates (or a new format) next year?"
+    type: single_choice
+    construct: likely_try_reformer_pilates_new
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q43
+    prompt: "How likely are you to still be practicing Pilates a year from now?"
+    type: single_choice
+    construct: likely_still_be_practicing_pilates
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q44
+    prompt: "What is one thing that would improve your Pilates experience? (Optional short answer)"
+    type: free_text
+    construct: one_thing_that_would_improve
+    required: false
+  - id: q45
+    prompt: "How would you describe your Pilates experience level?"
+    type: single_choice
+    construct: would_describe_pilates_experience_level
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Novice"
+      - id: "c"
+        label: "Intermediate"
+      - id: "d"
+        label: "Advanced"
+      - id: "e"
+        label: "Instructor or very experienced"
+  - id: q46
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q47
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q51
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q52
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q53
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship or partnered"
+      - id: "c"
+        label: "Married"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q54
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q55
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

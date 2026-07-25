@@ -1,0 +1,750 @@
+schemaVersion: "1.0"
+id: wearable_heart_monitor_v1
+title: "Wearable Heart Monitor Survey"
+description: "How consumers use wearable devices to track heart rate and heart health."
+questions:
+  - id: q0
+    prompt: "Do you use a wearable device that tracks your heart rate?"
+    type: single_choice
+    construct: use_wearable_device_that_tracks
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, daily"
+      - id: "b"
+        label: "Yes, several times a week"
+      - id: "c"
+        label: "Yes, occasionally"
+      - id: "d"
+        label: "I own one but rarely use it"
+      - id: "e"
+        label: "No, I don't use one"
+  - id: q1
+    prompt: "Which type of device do you primarily use?"
+    type: single_choice
+    construct: type_device_primarily_use
+    required: true
+    options:
+      - id: "a"
+        label: "A smartwatch"
+      - id: "b"
+        label: "A fitness band or tracker"
+      - id: "c"
+        label: "A chest-strap heart-rate monitor"
+      - id: "d"
+        label: "A smart ring"
+      - id: "e"
+        label: "More than one type"
+      - id: "f"
+        label: "I don't use one"
+  - id: q2
+    prompt: "Which brand do you use most? (Select all that apply)"
+    type: multi_choice
+    construct: brand_use_most_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Apple Watch"
+      - id: "b"
+        label: "Fitbit"
+      - id: "c"
+        label: "Garmin"
+      - id: "d"
+        label: "Samsung Galaxy Watch"
+      - id: "e"
+        label: "Whoop"
+      - id: "f"
+        label: "Oura Ring"
+      - id: "g"
+        label: "Polar"
+      - id: "h"
+        label: "Another brand"
+      - id: "i"
+        label: "I don't use one"
+  - id: q3
+    prompt: "How long have you been using a heart-rate tracking device?"
+    type: single_choice
+    construct: long_have_been_using_heart
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+      - id: "f"
+        label: "I don't use one"
+  - id: q4
+    prompt: "How often do you wear the device?"
+    type: single_choice
+    construct: often_wear_device
+    required: true
+    options:
+      - id: "a"
+        label: "All day and night"
+      - id: "b"
+        label: "All day, but not while sleeping"
+      - id: "c"
+        label: "Mainly during workouts"
+      - id: "d"
+        label: "Occasionally"
+      - id: "e"
+        label: "Rarely"
+  - id: q5
+    prompt: "Which heart-related metrics do you track or pay attention to? (Select all that apply)"
+    type: multi_choice
+    construct: heart_related_metrics_track_pay
+    required: true
+    options:
+      - id: "a"
+        label: "Resting heart rate"
+      - id: "b"
+        label: "Heart rate during exercise"
+      - id: "c"
+        label: "Heart rate variability"
+      - id: "d"
+        label: "Recovery or readiness scores"
+      - id: "e"
+        label: "Irregular rhythm notifications"
+      - id: "f"
+        label: "Cardio fitness or VO2 estimates"
+      - id: "g"
+        label: "I don't pay attention to specific metrics"
+  - id: q6
+    prompt: "What were your main reasons for using a heart-rate tracker? (Select all that apply)"
+    type: multi_choice
+    construct: were_main_reasons_using_heart
+    required: true
+    options:
+      - id: "a"
+        label: "General fitness and exercise"
+      - id: "b"
+        label: "Curiosity about my heart health"
+      - id: "c"
+        label: "Tracking recovery and stress"
+      - id: "d"
+        label: "Weight management goals"
+      - id: "e"
+        label: "On a doctor's or trainer's suggestion"
+      - id: "f"
+        label: "Peace of mind"
+      - id: "g"
+        label: "It came with a device I already wanted"
+  - id: q7
+    prompt: "How often do you check your heart-rate data?"
+    type: single_choice
+    construct: often_check_heart_rate_data
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "About once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Occasionally"
+      - id: "e"
+        label: "Almost never"
+  - id: q8
+    prompt: "Where do you review your heart-rate data? (Select all that apply)"
+    type: multi_choice
+    construct: where_review_heart_rate_data
+    required: true
+    options:
+      - id: "a"
+        label: "On the device itself"
+      - id: "b"
+        label: "In the companion phone app"
+      - id: "c"
+        label: "On a computer dashboard"
+      - id: "d"
+        label: "Through a connected health app (Apple Health, Google Fit)"
+      - id: "e"
+        label: "I don't review the data"
+  - id: q9
+    prompt: "On average, what is your resting heart rate in beats per minute? Please enter a number."
+    type: free_text
+    construct: average_resting_heart_rate_beats
+    required: true
+  - id: q10
+    prompt: "About how many hours per day do you wear your device? Please enter a number."
+    type: free_text
+    construct: many_hours_per_day_wear
+    required: true
+  - id: q11
+    prompt: "How much do you agree or disagree: Tracking my heart rate helps me understand my fitness."
+    type: single_choice
+    construct: much_agree_disagree_tracking_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: My device's heart-rate readings are accurate."
+    type: single_choice
+    construct: much_agree_disagree_my_device
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: Heart-rate tracking motivates me to be more active."
+    type: single_choice
+    construct: much_agree_disagree_heart_rate
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I sometimes worry about the numbers my device shows."
+    type: single_choice
+    construct: much_agree_disagree_i_sometimes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: The heart-rate data is easy to understand."
+    type: single_choice
+    construct: much_agree_disagree_heart_rate
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: Wearing the device has become a normal part of my routine."
+    type: single_choice
+    construct: much_agree_disagree_wearing_device
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How often do you adjust your workouts based on heart-rate data?"
+    type: single_choice
+    construct: often_adjust_workouts_based_heart
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q18
+    prompt: "Has your device ever alerted you to an unusually high or low heart rate?"
+    type: single_choice
+    construct: has_device_ever_alerted_unusually
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "My device doesn't have that feature"
+  - id: q19
+    prompt: "If your device gave you an unusual reading, what would you most likely do?"
+    type: single_choice
+    construct: if_device_gave_unusual_reading
+    required: true
+    options:
+      - id: "a"
+        label: "Check again later"
+      - id: "b"
+        label: "Search online for information"
+      - id: "c"
+        label: "Contact a doctor"
+      - id: "d"
+        label: "Ignore it"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q20
+    prompt: "Have you ever shared your heart-rate or device data with a doctor?"
+    type: single_choice
+    construct: have_ever_shared_heart_rate
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I would consider it"
+      - id: "c"
+        label: "No, and I would not"
+  - id: q21
+    prompt: "How important is each feature to you: Accuracy of heart-rate readings."
+    type: single_choice
+    construct: important_each_feature_accuracy_heart
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each feature to you: Battery life."
+    type: single_choice
+    construct: important_each_feature_battery_life
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each feature to you: Comfort and design."
+    type: single_choice
+    construct: important_each_feature_comfort_design
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each feature to you: Easy-to-understand app and insights."
+    type: single_choice
+    construct: important_each_feature_easy_understand
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is each feature to you: Irregular rhythm or health notifications."
+    type: single_choice
+    construct: important_each_feature_irregular_rhythm
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "Select your top 3 reasons you value heart-rate tracking. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_value
+    required: true
+    options:
+      - id: "a"
+        label: "Improving fitness and exercise"
+      - id: "b"
+        label: "Understanding my heart health"
+      - id: "c"
+        label: "Tracking recovery and stress"
+      - id: "d"
+        label: "Staying motivated"
+      - id: "e"
+        label: "Peace of mind"
+      - id: "f"
+        label: "Managing a wellness or weight goal"
+      - id: "g"
+        label: "Sharing data with a doctor or coach"
+      - id: "h"
+        label: "Getting health notifications"
+  - id: q27
+    prompt: "How concerned are you about the privacy of the health data your device collects?"
+    type: single_choice
+    construct: concerned_privacy_health_data_device
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q28
+    prompt: "Would you be willing to share your device's heart data with your health provider if asked?"
+    type: single_choice
+    construct: would_be_willing_share_device
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, definitely"
+      - id: "b"
+        label: "Probably"
+      - id: "c"
+        label: "Probably not"
+      - id: "d"
+        label: "Definitely not"
+  - id: q29
+    prompt: "How much do you trust the heart-health insights your device provides?"
+    type: single_choice
+    construct: much_trust_heart_health_insights
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+  - id: q30
+    prompt: "Compared with when you started, how has heart-rate tracking affected your activity level?"
+    type: single_choice
+    construct: compared_when_started_has_heart
+    required: true
+    options:
+      - id: "a"
+        label: "Much less active"
+      - id: "b"
+        label: "Somewhat less active"
+      - id: "c"
+        label: "No change"
+      - id: "d"
+        label: "Somewhat more active"
+      - id: "e"
+        label: "Much more active"
+  - id: q31
+    prompt: "About how much did you spend on your current device, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_did_spend_current_device
+    required: true
+  - id: q32
+    prompt: "Overall, how satisfied are you with your heart-rate tracking device?"
+    type: single_choice
+    construct: overall_satisfied_heart_rate_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your device to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q34
+    prompt: "How likely are you to keep using a heart-rate tracking device over the next year?"
+    type: single_choice
+    construct: likely_keep_using_heart_rate
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q35
+    prompt: "What would make heart-rate tracking more useful for you? (Optional)"
+    type: free_text
+    construct: would_make_heart_rate_tracking
+    required: false
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 to 74"
+      - id: "g"
+        label: "75 or older"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q42
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q43
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q44
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+  - id: q45
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q46
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q47
+    prompt: "How would you describe your overall activity level?"
+    type: single_choice
+    construct: would_describe_overall_activity_level
+    required: true
+    options:
+      - id: "a"
+        label: "Sedentary"
+      - id: "b"
+        label: "Lightly active"
+      - id: "c"
+        label: "Moderately active"
+      - id: "d"
+        label: "Very active"
+      - id: "e"
+        label: "Extremely active"

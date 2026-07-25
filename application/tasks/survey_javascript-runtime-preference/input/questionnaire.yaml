@@ -1,0 +1,940 @@
+schemaVersion: "1.0"
+id: javascript_runtime_preference_v1
+title: "JavaScript Runtime Preference Survey"
+description: "How developers choose, use, and evaluate JavaScript runtimes such as Node.js, Deno, and Bun."
+questions:
+  - id: q0
+    prompt: "How often do you write or run server-side JavaScript or TypeScript?"
+    type: single_choice
+    construct: often_write_run_server_side
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "I am just learning"
+      - id: "e"
+        label: "I rarely do"
+  - id: q1
+    prompt: "How long have you worked with JavaScript runtimes?"
+    type: single_choice
+    construct: long_have_worked_javascript_runtimes
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "What best describes your primary role?"
+    type: single_choice
+    construct: best_describes_primary_role
+    required: true
+    options:
+      - id: "a"
+        label: "Back-end developer"
+      - id: "b"
+        label: "Full-stack developer"
+      - id: "c"
+        label: "Front-end developer who also runs tooling"
+      - id: "d"
+        label: "DevOps or platform engineer"
+      - id: "e"
+        label: "I write JavaScript occasionally"
+  - id: q3
+    prompt: "Which JavaScript runtime do you use most often?"
+    type: single_choice
+    construct: javascript_runtime_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Node.js"
+      - id: "b"
+        label: "Deno"
+      - id: "c"
+        label: "Bun"
+      - id: "d"
+        label: "A cloud edge runtime (Workers, etc.)"
+      - id: "e"
+        label: "Other"
+  - id: q4
+    prompt: "Which JavaScript runtimes have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: javascript_runtimes_have_used_past
+    required: true
+    options:
+      - id: "a"
+        label: "Node.js"
+      - id: "b"
+        label: "Deno"
+      - id: "c"
+        label: "Bun"
+      - id: "d"
+        label: "Cloudflare Workers"
+      - id: "e"
+        label: "AWS Lambda (Node)"
+      - id: "f"
+        label: "Deno Deploy"
+      - id: "g"
+        label: "None"
+  - id: q5
+    prompt: "Which Node version managers do you use? (Select all that apply)"
+    type: multi_choice
+    construct: node_version_managers_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "nvm"
+      - id: "b"
+        label: "fnm"
+      - id: "c"
+        label: "Volta"
+      - id: "d"
+        label: "asdf"
+      - id: "e"
+        label: "The system package manager"
+      - id: "f"
+        label: "None"
+  - id: q6
+    prompt: "Which package managers do you use with your runtime? (Select all that apply)"
+    type: multi_choice
+    construct: package_managers_use_runtime_select
+    required: true
+    options:
+      - id: "a"
+        label: "npm"
+      - id: "b"
+        label: "pnpm"
+      - id: "c"
+        label: "Yarn"
+      - id: "d"
+        label: "Bun"
+      - id: "e"
+        label: "Deno's built-in tooling"
+      - id: "f"
+        label: "None"
+  - id: q7
+    prompt: "Which frameworks do you use with your runtime? (Select all that apply)"
+    type: multi_choice
+    construct: frameworks_use_runtime_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Express"
+      - id: "b"
+        label: "Fastify"
+      - id: "c"
+        label: "NestJS"
+      - id: "d"
+        label: "Hono"
+      - id: "e"
+        label: "Next.js"
+      - id: "f"
+        label: "Nuxt"
+      - id: "g"
+        label: "SvelteKit"
+      - id: "h"
+        label: "None"
+  - id: q8
+    prompt: "Which deployment or serverless platforms do you use? (Select all that apply)"
+    type: multi_choice
+    construct: deployment_serverless_platforms_use_sele
+    required: true
+    options:
+      - id: "a"
+        label: "Vercel"
+      - id: "b"
+        label: "Cloudflare Workers"
+      - id: "c"
+        label: "Deno Deploy"
+      - id: "d"
+        label: "AWS Lambda"
+      - id: "e"
+        label: "Netlify"
+      - id: "f"
+        label: "A self-managed server or container"
+      - id: "g"
+        label: "None"
+  - id: q9
+    prompt: "For what workloads do you use your primary runtime? (Select all that apply)"
+    type: multi_choice
+    construct: workloads_use_primary_runtime_select
+    required: true
+    options:
+      - id: "a"
+        label: "Web servers and APIs"
+      - id: "b"
+        label: "Command-line tools"
+      - id: "c"
+        label: "Build tooling and scripts"
+      - id: "d"
+        label: "Serverless or edge functions"
+      - id: "e"
+        label: "Real-time services (WebSockets)"
+      - id: "f"
+        label: "Desktop apps (Electron, Tauri)"
+  - id: q10
+    prompt: "Do you use TypeScript with your runtime?"
+    type: single_choice
+    construct: use_typescript_runtime
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for almost everything"
+      - id: "b"
+        label: "Yes, for some projects"
+      - id: "c"
+        label: "No, I use plain JavaScript"
+      - id: "d"
+        label: "I'm learning TypeScript"
+  - id: q11
+    prompt: "How do you primarily run TypeScript?"
+    type: single_choice
+    construct: primarily_run_typescript
+    required: true
+    options:
+      - id: "a"
+        label: "Compile with tsc first"
+      - id: "b"
+        label: "ts-node or tsx"
+      - id: "c"
+        label: "Native runtime TypeScript support (Deno, Bun)"
+      - id: "d"
+        label: "A bundler handles it"
+      - id: "e"
+        label: "I don't use TypeScript"
+  - id: q12
+    prompt: "Which workload do you run most often on your primary runtime?"
+    type: single_choice
+    construct: workload_run_most_often_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Web servers and APIs"
+      - id: "b"
+        label: "Command-line tools"
+      - id: "c"
+        label: "Build tooling"
+      - id: "d"
+        label: "Serverless functions"
+      - id: "e"
+        label: "Something else"
+  - id: q13
+    prompt: "What best describes your adoption of Bun?"
+    type: single_choice
+    construct: best_describes_adoption_bun
+    required: true
+    options:
+      - id: "a"
+        label: "I use it in production"
+      - id: "b"
+        label: "I use it for scripts or side projects"
+      - id: "c"
+        label: "I have tried it but don't use it"
+      - id: "d"
+        label: "I'm interested but haven't tried it"
+      - id: "e"
+        label: "I have no interest in Bun"
+  - id: q14
+    prompt: "What best describes your adoption of Deno?"
+    type: single_choice
+    construct: best_describes_adoption_deno
+    required: true
+    options:
+      - id: "a"
+        label: "I use it in production"
+      - id: "b"
+        label: "I use it for scripts or side projects"
+      - id: "c"
+        label: "I have tried it but don't use it"
+      - id: "d"
+        label: "I'm interested but haven't tried it"
+      - id: "e"
+        label: "I have no interest in Deno"
+  - id: q15
+    prompt: "About how many production services do you run on your primary runtime? Please enter a number."
+    type: free_text
+    construct: many_production_services_run_primary
+    required: true
+  - id: q16
+    prompt: "How many years of JavaScript experience do you have? Please enter a number."
+    type: free_text
+    construct: many_years_javascript_experience_have
+    required: true
+  - id: q17
+    prompt: "How did you learn to work with JavaScript runtimes? (Select all that apply)"
+    type: multi_choice
+    construct: did_learn_work_javascript_runtimes
+    required: true
+    options:
+      - id: "a"
+        label: "On the job"
+      - id: "b"
+        label: "Online courses or documentation"
+      - id: "c"
+        label: "A course or bootcamp"
+      - id: "d"
+        label: "School or university"
+      - id: "e"
+        label: "A colleague or mentor"
+      - id: "f"
+        label: "Trial and error"
+  - id: q18
+    prompt: "How would you rate your proficiency with server-side JavaScript?"
+    type: single_choice
+    construct: would_rate_proficiency_server_side
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert"
+  - id: q19
+    prompt: "Thinking about your primary JavaScript runtime, how much do you agree: it is fast enough for my needs."
+    type: single_choice
+    construct: thinking_primary_javascript_runtime_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Thinking about your primary JavaScript runtime, how much do you agree: it is stable and reliable."
+    type: single_choice
+    construct: thinking_primary_javascript_runtime_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "Thinking about your primary JavaScript runtime, how much do you agree: it has a strong package ecosystem."
+    type: single_choice
+    construct: thinking_primary_javascript_runtime_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "Thinking about your primary JavaScript runtime, how much do you agree: it offers a good developer experience."
+    type: single_choice
+    construct: thinking_primary_javascript_runtime_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "Thinking about your primary JavaScript runtime, how much do you agree: it has good TypeScript support."
+    type: single_choice
+    construct: thinking_primary_javascript_runtime_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "Thinking about your primary JavaScript runtime, how much do you agree: it is easy to deploy."
+    type: single_choice
+    construct: thinking_primary_javascript_runtime_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "Thinking about your primary JavaScript runtime, how much do you agree: its documentation is good."
+    type: single_choice
+    construct: thinking_primary_javascript_runtime_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q26
+    prompt: "When choosing a JavaScript runtime, how important is raw performance?"
+    type: single_choice
+    construct: when_choosing_javascript_runtime_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a JavaScript runtime, how important is npm ecosystem compatibility?"
+    type: single_choice
+    construct: when_choosing_javascript_runtime_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing a JavaScript runtime, how important is stability and maturity?"
+    type: single_choice
+    construct: when_choosing_javascript_runtime_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "When choosing a JavaScript runtime, how important is built-in TypeScript support?"
+    type: single_choice
+    construct: when_choosing_javascript_runtime_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "When choosing a JavaScript runtime, how important is fast startup time?"
+    type: single_choice
+    construct: when_choosing_javascript_runtime_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q31
+    prompt: "When choosing a JavaScript runtime, how important is the security model?"
+    type: single_choice
+    construct: when_choosing_javascript_runtime_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q32
+    prompt: "When choosing a JavaScript runtime, how important is community and support?"
+    type: single_choice
+    construct: when_choosing_javascript_runtime_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q33
+    prompt: "How often do you adopt new runtime features soon after release?"
+    type: single_choice
+    construct: often_adopt_new_runtime_features
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q34
+    prompt: "How much do you agree: Node.js will remain the dominant JavaScript runtime for years to come."
+    type: single_choice
+    construct: much_agree_node_js_will
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q35
+    prompt: "How much do you agree: Bun is ready for production use."
+    type: single_choice
+    construct: much_agree_bun_ready_production
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q36
+    prompt: "How much do you agree: Deno's permissions-based security model is valuable to me."
+    type: single_choice
+    construct: much_agree_deno_s_permissions
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q37
+    prompt: "Which are your top 3 reasons for preferring your primary runtime? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_reasons_preferring_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Performance"
+      - id: "b"
+        label: "Ecosystem and package compatibility"
+      - id: "c"
+        label: "Stability and maturity"
+      - id: "d"
+        label: "TypeScript and tooling"
+      - id: "e"
+        label: "Fast startup"
+      - id: "f"
+        label: "Security model"
+      - id: "g"
+        label: "Deployment options"
+      - id: "h"
+        label: "Team or company standard"
+  - id: q38
+    prompt: "Which pain points have you experienced with JavaScript runtimes? (Select all that apply)"
+    type: multi_choice
+    construct: pain_points_have_experienced_javascript
+    required: true
+    options:
+      - id: "a"
+        label: "Dependency or version conflicts"
+      - id: "b"
+        label: "Slow cold starts"
+      - id: "c"
+        label: "Memory usage"
+      - id: "d"
+        label: "Tooling or build complexity"
+      - id: "e"
+        label: "Compatibility between runtimes"
+      - id: "f"
+        label: "Security vulnerabilities in packages"
+      - id: "g"
+        label: "No major pain points"
+  - id: q39
+    prompt: "How satisfied are you with your primary JavaScript runtime?"
+    type: single_choice
+    construct: satisfied_primary_javascript_runtime
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q40
+    prompt: "How satisfied are you with your runtime's performance?"
+    type: single_choice
+    construct: satisfied_runtime_s_performance
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q41
+    prompt: "How likely are you to recommend your primary runtime to another developer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_runtime_another
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q42
+    prompt: "How likely are you to try a different JavaScript runtime within the next year?"
+    type: single_choice
+    construct: likely_try_different_javascript_runtime
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q43
+    prompt: "How likely are you to switch your primary runtime within the next year?"
+    type: single_choice
+    construct: likely_switch_primary_runtime_within
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q44
+    prompt: "What is one thing you would improve about the JavaScript runtime you use? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_javascript
+    required: false
+  - id: q45
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "DevOps or platform engineer"
+      - id: "e"
+        label: "Mobile developer"
+      - id: "f"
+        label: "Engineering manager"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Other"
+  - id: q46
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q47
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q48
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q49
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q50
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q51
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q52
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q53
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q54
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q55
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

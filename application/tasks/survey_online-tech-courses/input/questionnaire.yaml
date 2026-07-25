@@ -1,0 +1,819 @@
+schemaVersion: "1.0"
+id: online_tech_courses_v1
+title: "Online Tech Courses & E-Learning Survey"
+description: "How people take online technology courses, which platforms they use, and how they value e-learning for tech skills."
+questions:
+  - id: q0
+    prompt: "Have you taken an online technology or software course in the past two years?"
+    type: single_choice
+    construct: have_taken_online_technology_software
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several"
+      - id: "b"
+        label: "Yes, a few"
+      - id: "c"
+        label: "Yes, one"
+      - id: "d"
+        label: "No, but I've taken non-tech online courses"
+      - id: "e"
+        label: "No, none at all"
+  - id: q1
+    prompt: "Which online learning platforms have you used for tech courses? (Select all that apply)"
+    type: multi_choice
+    construct: online_learning_platforms_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Coursera"
+      - id: "b"
+        label: "Udemy"
+      - id: "c"
+        label: "edX"
+      - id: "d"
+        label: "LinkedIn Learning"
+      - id: "e"
+        label: "Pluralsight"
+      - id: "f"
+        label: "Codecademy"
+      - id: "g"
+        label: "freeCodeCamp"
+      - id: "h"
+        label: "Khan Academy"
+      - id: "i"
+        label: "DataCamp"
+      - id: "j"
+        label: "YouTube (courses/tutorials)"
+      - id: "k"
+        label: "A university online program"
+      - id: "l"
+        label: "Company-provided training platform"
+      - id: "m"
+        label: "None of these"
+  - id: q2
+    prompt: "What topics have you studied in online tech courses? (Select all that apply)"
+    type: multi_choice
+    construct: topics_have_studied_online_tech
+    required: true
+    options:
+      - id: "a"
+        label: "Programming / software development"
+      - id: "b"
+        label: "Data science / analytics"
+      - id: "c"
+        label: "Web development"
+      - id: "d"
+        label: "Cybersecurity"
+      - id: "e"
+        label: "Cloud computing"
+      - id: "f"
+        label: "AI / machine learning"
+      - id: "g"
+        label: "IT support / networking"
+      - id: "h"
+        label: "Design / UX"
+      - id: "i"
+        label: "Digital marketing / tools"
+      - id: "j"
+        label: "Productivity software (Excel, etc.)"
+      - id: "k"
+        label: "Project management"
+      - id: "l"
+        label: "None of these"
+  - id: q3
+    prompt: "What are your main reasons for taking online tech courses? (Select all that apply)"
+    type: multi_choice
+    construct: main_reasons_taking_online_tech
+    required: true
+    options:
+      - id: "a"
+        label: "Career advancement / promotion"
+      - id: "b"
+        label: "Switching careers"
+      - id: "c"
+        label: "Keeping skills current"
+      - id: "d"
+        label: "Required by my job"
+      - id: "e"
+        label: "Personal interest"
+      - id: "f"
+        label: "Earning a certificate or credential"
+      - id: "g"
+        label: "Preparing for a specific project"
+      - id: "h"
+        label: "Higher pay"
+      - id: "i"
+        label: "I don't take these courses"
+  - id: q4
+    prompt: "Which formats do you prefer for online learning? (Select all that apply)"
+    type: multi_choice
+    construct: formats_prefer_online_learning_select
+    required: true
+    options:
+      - id: "a"
+        label: "Video lectures"
+      - id: "b"
+        label: "Hands-on projects / labs"
+      - id: "c"
+        label: "Interactive coding exercises"
+      - id: "d"
+        label: "Reading / text-based lessons"
+      - id: "e"
+        label: "Quizzes and assessments"
+      - id: "f"
+        label: "Live / instructor-led sessions"
+      - id: "g"
+        label: "Discussion forums / peer learning"
+      - id: "h"
+        label: "Downloadable resources"
+  - id: q5
+    prompt: "Do you usually pay for courses or use free ones?"
+    type: single_choice
+    construct: usually_pay_courses_use_free
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly free courses"
+      - id: "b"
+        label: "A mix of free and paid"
+      - id: "c"
+        label: "Mostly paid courses"
+      - id: "d"
+        label: "My employer or school pays"
+      - id: "e"
+        label: "I don't take courses"
+  - id: q6
+    prompt: "Which pricing models have you used? (Select all that apply)"
+    type: multi_choice
+    construct: pricing_models_have_used_select
+    required: true
+    options:
+      - id: "a"
+        label: "One-time course purchase"
+      - id: "b"
+        label: "Monthly or annual subscription"
+      - id: "c"
+        label: "Free courses"
+      - id: "d"
+        label: "Free trial"
+      - id: "e"
+        label: "Employer-sponsored"
+      - id: "f"
+        label: "Scholarship or financial aid"
+      - id: "g"
+        label: "University tuition"
+      - id: "h"
+        label: "None of these"
+  - id: q7
+    prompt: "About how many online tech courses have you completed in total?"
+    type: free_text
+    construct: many_online_tech_courses_have
+    required: true
+  - id: q8
+    prompt: "About how much money have you personally spent on online tech courses in the past year (in US dollars)?"
+    type: free_text
+    construct: much_money_have_personally_spent
+    required: true
+  - id: q9
+    prompt: "How often do you finish the online courses you start?"
+    type: single_choice
+    construct: often_finish_online_courses_start
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Usually"
+      - id: "c"
+        label: "About half the time"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Almost never"
+  - id: q10
+    prompt: "What most often prevents you from finishing a course? (Select all that apply)"
+    type: multi_choice
+    construct: most_often_prevents_from_finishing
+    required: true
+    options:
+      - id: "a"
+        label: "Lack of time"
+      - id: "b"
+        label: "Losing motivation"
+      - id: "c"
+        label: "Course was too hard"
+      - id: "d"
+        label: "Course was too easy or boring"
+      - id: "e"
+        label: "Got what I needed and stopped"
+      - id: "f"
+        label: "Poor course quality"
+      - id: "g"
+        label: "Distractions"
+      - id: "h"
+        label: "I usually finish my courses"
+  - id: q11
+    prompt: "How many hours per week do you typically spend on online tech courses?"
+    type: single_choice
+    construct: many_hours_per_week_typically
+    required: true
+    options:
+      - id: "a"
+        label: "None currently"
+      - id: "b"
+        label: "Less than 2 hours"
+      - id: "c"
+        label: "2-5 hours"
+      - id: "d"
+        label: "6-10 hours"
+      - id: "e"
+        label: "More than 10 hours"
+  - id: q12
+    prompt: "Have you earned any certificates or credentials from online tech courses?"
+    type: single_choice
+    construct: have_earned_any_certificates_credentials
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several"
+      - id: "b"
+        label: "Yes, one or two"
+      - id: "c"
+        label: "No, but I plan to"
+      - id: "d"
+        label: "No, and I don't intend to"
+  - id: q13
+    prompt: "How much do you agree with the following statement: Online courses are an effective way to learn tech skills."
+    type: single_choice
+    construct: much_agree_following_statement_online
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: Online certificates are valued by employers."
+    type: single_choice
+    construct: much_agree_following_statement_online
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: I struggle to stay motivated in self-paced courses."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: Free courses can be just as good as paid ones."
+    type: single_choice
+    construct: much_agree_following_statement_free
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: Online learning has helped my career."
+    type: single_choice
+    construct: much_agree_following_statement_online
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement: AI tutors and chatbots are changing how I learn tech skills."
+    type: single_choice
+    construct: much_agree_following_statement_ai
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How important is the following when choosing an online tech course: price?"
+    type: single_choice
+    construct: important_following_when_choosing_online
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is the following when choosing an online tech course: instructor quality or reputation?"
+    type: single_choice
+    construct: important_following_when_choosing_online
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is the following when choosing an online tech course: hands-on projects or practice?"
+    type: single_choice
+    construct: important_following_when_choosing_online
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is the following when choosing an online tech course: a recognized certificate?"
+    type: single_choice
+    construct: important_following_when_choosing_online
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is the following when choosing an online tech course: student reviews and ratings?"
+    type: single_choice
+    construct: important_following_when_choosing_online
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is the following when choosing an online tech course: up-to-date content?"
+    type: single_choice
+    construct: important_following_when_choosing_online
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How do you usually discover new courses? (Select all that apply)"
+    type: multi_choice
+    construct: usually_discover_new_courses_select
+    required: true
+    options:
+      - id: "a"
+        label: "Platform recommendations"
+      - id: "b"
+        label: "Search engines"
+      - id: "c"
+        label: "YouTube"
+      - id: "d"
+        label: "Friends or colleagues"
+      - id: "e"
+        label: "Social media"
+      - id: "f"
+        label: "Employer or school"
+      - id: "g"
+        label: "Reviews and comparison articles"
+      - id: "h"
+        label: "Newsletters"
+      - id: "i"
+        label: "I don't actively look"
+  - id: q26
+    prompt: "On which devices do you typically take online courses? (Select all that apply)"
+    type: multi_choice
+    construct: devices_typically_take_online_courses
+    required: true
+    options:
+      - id: "a"
+        label: "Laptop"
+      - id: "b"
+        label: "Desktop computer"
+      - id: "c"
+        label: "Tablet"
+      - id: "d"
+        label: "Smartphone"
+      - id: "e"
+        label: "Smart TV"
+      - id: "f"
+        label: "I don't take online courses"
+  - id: q27
+    prompt: "Do you supplement courses with other learning resources? (Select all that apply)"
+    type: multi_choice
+    construct: supplement_courses_other_learning_resour
+    required: true
+    options:
+      - id: "a"
+        label: "Documentation"
+      - id: "b"
+        label: "YouTube tutorials"
+      - id: "c"
+        label: "Books"
+      - id: "d"
+        label: "AI chatbots"
+      - id: "e"
+        label: "Practice on real projects"
+      - id: "f"
+        label: "Community forums or Discord"
+      - id: "g"
+        label: "Coding challenge sites"
+      - id: "h"
+        label: "I rely only on the course"
+  - id: q28
+    prompt: "Has an online tech course ever directly helped you get a job, raise, or promotion?"
+    type: single_choice
+    construct: has_online_tech_course_ever
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but it helped indirectly"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Too soon to tell"
+  - id: q29
+    prompt: "Select your top 3 factors that make an online course worthwhile for you. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_that
+    required: true
+    options:
+      - id: "a"
+        label: "Clear, well-organized content"
+      - id: "b"
+        label: "Hands-on practice"
+      - id: "c"
+        label: "Low or reasonable cost"
+      - id: "d"
+        label: "A credential I can show"
+      - id: "e"
+        label: "A knowledgeable instructor"
+      - id: "f"
+        label: "Flexibility / self-paced"
+      - id: "g"
+        label: "Up-to-date material"
+      - id: "h"
+        label: "Community and support"
+      - id: "i"
+        label: "Direct career relevance"
+  - id: q30
+    prompt: "Overall, how satisfied are you with the online tech courses you've taken?"
+    type: single_choice
+    construct: overall_satisfied_online_tech_courses
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q31
+    prompt: "How likely are you to take another online tech course in the next year?"
+    type: single_choice
+    construct: likely_take_another_online_tech
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q32
+    prompt: "On a scale of 0 to 10, how likely are you to recommend online tech courses to a friend or colleague? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q33
+    prompt: "What would make online tech courses more valuable to you?"
+    type: free_text
+    construct: would_make_online_tech_courses
+    required: true
+  - id: q34
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18 years old"
+      - id: "b"
+        label: "18-24 years old"
+      - id: "c"
+        label: "25-34 years old"
+      - id: "d"
+        label: "35-44 years old"
+      - id: "e"
+        label: "45-54 years old"
+      - id: "f"
+        label: "55-64 years old"
+      - id: "g"
+        label: "65 years or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Unemployed, looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Homemaker or caregiver"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q41
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship, not married"
+      - id: "c"
+        label: "Married or domestic partnership"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Working in a technology field"
+      - id: "b"
+        label: "Working in a non-technology field"
+      - id: "c"
+        label: "Student"
+      - id: "d"
+        label: "Career changer / job seeker"
+      - id: "e"
+        label: "Not currently working"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "How would you rate your overall level of technology skill?"
+    type: single_choice
+    construct: would_rate_overall_level_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert / I work in technology"

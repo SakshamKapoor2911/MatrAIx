@@ -1,0 +1,759 @@
+schemaVersion: "1.0"
+id: console_gaming_v1
+title: "Console Gaming Survey"
+description: "How people play video games on game consoles such as PlayStation, Xbox, and Nintendo Switch, including ownership, spending, and what drives their console choice."
+questions:
+  - id: q0
+    prompt: "Do you play video games on a game console?"
+    type: single_choice
+    construct: play_video_games_game_console
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "No, I don't play console games"
+  - id: q1
+    prompt: "How long have you been playing console games?"
+    type: single_choice
+    construct: long_have_been_playing_console
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 9 years"
+      - id: "d"
+        label: "10 or more years"
+  - id: q2
+    prompt: "Which game consoles do you currently own or use? (Select all that apply)"
+    type: multi_choice
+    construct: game_consoles_currently_own_use
+    required: true
+    options:
+      - id: "a"
+        label: "PlayStation 5"
+      - id: "b"
+        label: "PlayStation 4"
+      - id: "c"
+        label: "Xbox Series X or S"
+      - id: "d"
+        label: "Xbox One"
+      - id: "e"
+        label: "Nintendo Switch"
+      - id: "f"
+        label: "Nintendo Switch 2"
+      - id: "g"
+        label: "Steam Deck or other handheld"
+      - id: "h"
+        label: "An older or retro console"
+      - id: "i"
+        label: "None of these"
+  - id: q3
+    prompt: "Which console do you play the most?"
+    type: single_choice
+    construct: console_play_most
+    required: true
+    options:
+      - id: "a"
+        label: "PlayStation 5"
+      - id: "b"
+        label: "PlayStation 4"
+      - id: "c"
+        label: "Xbox Series X or S"
+      - id: "d"
+        label: "Xbox One"
+      - id: "e"
+        label: "Nintendo Switch or Switch 2"
+      - id: "f"
+        label: "A handheld console"
+      - id: "g"
+        label: "Other"
+  - id: q4
+    prompt: "On a typical week, about how many hours do you spend playing on a console?"
+    type: single_choice
+    construct: typical_week_many_hours_spend
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 2 hours"
+      - id: "b"
+        label: "2 to 5 hours"
+      - id: "c"
+        label: "6 to 10 hours"
+      - id: "d"
+        label: "11 to 20 hours"
+      - id: "e"
+        label: "More than 20 hours"
+  - id: q5
+    prompt: "Roughly how many console games do you own (physical and digital combined)?"
+    type: free_text
+    construct: roughly_many_console_games_own
+    required: true
+  - id: q6
+    prompt: "Which genres do you play most? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: genres_play_most_select_top
+    required: true
+    options:
+      - id: "a"
+        label: "Action-adventure"
+      - id: "b"
+        label: "First-person shooters"
+      - id: "c"
+        label: "Role-playing games (RPGs)"
+      - id: "d"
+        label: "Sports"
+      - id: "e"
+        label: "Racing"
+      - id: "f"
+        label: "Fighting"
+      - id: "g"
+        label: "Platformers"
+      - id: "h"
+        label: "Party and family games"
+      - id: "i"
+        label: "Battle royale"
+      - id: "j"
+        label: "Simulation"
+      - id: "k"
+        label: "Puzzle and casual"
+      - id: "l"
+        label: "Horror"
+  - id: q7
+    prompt: "When you buy games, do you prefer physical discs or digital downloads?"
+    type: single_choice
+    construct: when_buy_games_prefer_physical
+    required: true
+    options:
+      - id: "a"
+        label: "Almost always physical"
+      - id: "b"
+        label: "Mostly physical"
+      - id: "c"
+        label: "About an even mix"
+      - id: "d"
+        label: "Mostly digital"
+      - id: "e"
+        label: "Almost always digital"
+  - id: q8
+    prompt: "How do you usually get new console games? (Select all that apply)"
+    type: multi_choice
+    construct: usually_get_new_console_games
+    required: true
+    options:
+      - id: "a"
+        label: "Buy new at full price"
+      - id: "b"
+        label: "Wait for sales or discounts"
+      - id: "c"
+        label: "Buy used games"
+      - id: "d"
+        label: "Subscription service catalog (e.g., Game Pass, PS Plus)"
+      - id: "e"
+        label: "Free-to-play games"
+      - id: "f"
+        label: "Gifts"
+      - id: "g"
+        label: "Rent or borrow"
+  - id: q9
+    prompt: "About how much did you spend on console games and add-ons in the past year?"
+    type: free_text
+    construct: much_did_spend_console_games
+    required: true
+  - id: q10
+    prompt: "Which gaming subscription services do you currently pay for? (Select all that apply)"
+    type: multi_choice
+    construct: gaming_subscription_services_currently_p
+    required: true
+    options:
+      - id: "a"
+        label: "PlayStation Plus (any tier)"
+      - id: "b"
+        label: "Xbox Game Pass (any tier)"
+      - id: "c"
+        label: "Nintendo Switch Online"
+      - id: "d"
+        label: "EA Play"
+      - id: "e"
+        label: "Ubisoft+"
+      - id: "f"
+        label: "None"
+  - id: q11
+    prompt: "How often do you play online multiplayer?"
+    type: single_choice
+    construct: often_play_online_multiplayer
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q12
+    prompt: "How often do you do the following — Play local co-op or couch multiplayer with people in the room"
+    type: single_choice
+    construct: often_following_play_local_co
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q13
+    prompt: "How often do you do the following — Use voice or party chat while playing"
+    type: single_choice
+    construct: often_following_use_voice_party
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q14
+    prompt: "How often do you do the following — Buy downloadable content (DLC) or expansions"
+    type: single_choice
+    construct: often_following_buy_downloadable_content
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q15
+    prompt: "How often do you do the following — Use your console to stream video (Netflix, YouTube, etc.)"
+    type: single_choice
+    construct: often_following_use_console_stream
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q16
+    prompt: "How often do you buy in-game items or microtransactions?"
+    type: single_choice
+    construct: often_buy_game_items_microtransactions
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q17
+    prompt: "Which accessories do you own for your console? (Select all that apply)"
+    type: multi_choice
+    construct: accessories_own_console_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Extra controllers"
+      - id: "b"
+        label: "A premium or pro controller"
+      - id: "c"
+        label: "A gaming headset"
+      - id: "d"
+        label: "A charging dock or station"
+      - id: "e"
+        label: "External storage"
+      - id: "f"
+        label: "A racing wheel or specialty controller"
+      - id: "g"
+        label: "A VR headset (e.g., PSVR)"
+      - id: "h"
+        label: "None of these"
+  - id: q18
+    prompt: "Please rate your agreement — Console gaming is one of my main hobbies"
+    type: single_choice
+    construct: please_rate_agreement_console_gaming
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "Please rate your agreement — Consoles are simpler and more convenient than gaming PCs"
+    type: single_choice
+    construct: please_rate_agreement_consoles_simpler
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Please rate your agreement — Exclusive games are a major reason I choose a console"
+    type: single_choice
+    construct: please_rate_agreement_exclusive_games
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "Please rate your agreement — I prefer owning physical games over digital downloads"
+    type: single_choice
+    construct: please_rate_agreement_i_prefer
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "Please rate your agreement — Gaming subscription services offer good value"
+    type: single_choice
+    construct: please_rate_agreement_gaming_subscriptio
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How important are the following when choosing a console — Exclusive games"
+    type: single_choice
+    construct: important_following_when_choosing_consol
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important are the following when choosing a console — Price of the console"
+    type: single_choice
+    construct: important_following_when_choosing_consol
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important are the following when choosing a console — Graphics and performance"
+    type: single_choice
+    construct: important_following_when_choosing_consol
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important are the following when choosing a console — Friends and family use the same one"
+    type: single_choice
+    construct: important_following_when_choosing_consol
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important are the following when choosing a console — Portability"
+    type: single_choice
+    construct: important_following_when_choosing_consol
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "How often do you trade in or resell games you've finished?"
+    type: single_choice
+    construct: often_trade_resell_games_ve
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q29
+    prompt: "Do you plan to buy a new console in the next 12 months?"
+    type: single_choice
+    construct: plan_buy_new_console_next
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, definitely"
+      - id: "b"
+        label: "Probably"
+      - id: "c"
+        label: "Probably not"
+      - id: "d"
+        label: "Definitely not"
+      - id: "e"
+        label: "Not sure"
+  - id: q30
+    prompt: "Who do you mostly play console games with?"
+    type: single_choice
+    construct: who_mostly_play_console_games
+    required: true
+    options:
+      - id: "a"
+        label: "Alone"
+      - id: "b"
+        label: "With family members"
+      - id: "c"
+        label: "With friends in person"
+      - id: "d"
+        label: "With friends or strangers online"
+      - id: "e"
+        label: "A mix of these"
+  - id: q31
+    prompt: "Do you watch console gaming content (streams, reviews, walkthroughs)?"
+    type: single_choice
+    construct: watch_console_gaming_content_streams
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "No"
+  - id: q32
+    prompt: "Over the next year, how do you expect your console gaming time to change?"
+    type: single_choice
+    construct: over_next_year_expect_console
+    required: true
+    options:
+      - id: "a"
+        label: "Decrease a lot"
+      - id: "b"
+        label: "Decrease somewhat"
+      - id: "c"
+        label: "Stay about the same"
+      - id: "d"
+        label: "Increase somewhat"
+      - id: "e"
+        label: "Increase a lot"
+  - id: q33
+    prompt: "Overall, how satisfied are you with your console gaming experience?"
+    type: single_choice
+    construct: overall_satisfied_console_gaming_experie
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How likely are you to recommend your main console to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_main_console_friend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "What do you enjoy most, or wish were better, about console gaming?"
+    type: free_text
+    construct: enjoy_most_wish_were_better
+    required: true
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelance"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed, looking for work"
+      - id: "f"
+        label: "Not employed, not looking"
+      - id: "g"
+        label: "Retired"
+  - id: q42
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q43
+    prompt: "Are there children under 18 living in your household?"
+    type: single_choice
+    construct: there_children_under_18_living
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q45
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

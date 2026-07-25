@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0",
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response"
+      },
+      "distributions": [
+        {
+          "id": "question_response.response_by_segment",
+          "facetKey": "response",
+          "title": "Answer distribution by persona segment",
+          "groupByPersonaDimensions": [
+            "age_bracket",
+            "health_insurance_status"
+          ]
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "trial_summary"
+      },
+      "distributions": [
+        {
+          "id": "trial_summary.mean_numeric_by_segment",
+          "facetKey": "mean_numeric_answer",
+          "title": "Mean numeric answer by persona segment",
+          "groupByPersonaDimensions": [
+            "age_bracket",
+            "health_insurance_status"
+          ]
+        }
+      ]
+    }
+  ]
+}

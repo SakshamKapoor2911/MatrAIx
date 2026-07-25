@@ -1,0 +1,830 @@
+schemaVersion: "1.0"
+id: financial_literacy_self_assessment_v1
+title: "Financial Literacy Self-Assessment Survey"
+description: "How people rate their own financial knowledge, where they learned it, and how they try to improve it."
+questions:
+  - id: q0
+    prompt: "Overall, how would you rate your knowledge of personal finance?"
+    type: single_choice
+    construct: overall_would_rate_knowledge_personal
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent"
+      - id: "b"
+        label: "Very good"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Fair"
+      - id: "e"
+        label: "Poor"
+  - id: q1
+    prompt: "Compared to other people your age, how would you rate your financial knowledge?"
+    type: single_choice
+    construct: compared_other_people_age_would
+    required: true
+    options:
+      - id: "a"
+        label: "Much more knowledgeable"
+      - id: "b"
+        label: "Somewhat more knowledgeable"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat less knowledgeable"
+      - id: "e"
+        label: "Much less knowledgeable"
+  - id: q2
+    prompt: "Who mainly manages the day-to-day finances in your household?"
+    type: single_choice
+    construct: who_mainly_manages_day_day
+    required: true
+    options:
+      - id: "a"
+        label: "I do it all"
+      - id: "b"
+        label: "I share it with a partner or family member"
+      - id: "c"
+        label: "Someone else handles most of it"
+      - id: "d"
+        label: "No one manages it consistently"
+  - id: q3
+    prompt: "Where did you learn the most about managing money?"
+    type: single_choice
+    construct: where_did_learn_most_managing
+    required: true
+    options:
+      - id: "a"
+        label: "From my family growing up"
+      - id: "b"
+        label: "On my own through trial and error"
+      - id: "c"
+        label: "School or a formal class"
+      - id: "d"
+        label: "Online content, videos, or social media"
+      - id: "e"
+        label: "A financial advisor or professional"
+      - id: "f"
+        label: "Friends or coworkers"
+  - id: q4
+    prompt: "Where do you get financial information today? (Select all that apply)"
+    type: multi_choice
+    construct: where_get_financial_information_today
+    required: true
+    options:
+      - id: "a"
+        label: "Family or friends"
+      - id: "b"
+        label: "Websites and news articles"
+      - id: "c"
+        label: "YouTube or podcasts"
+      - id: "d"
+        label: "Social media (e.g., TikTok, Instagram, Reddit)"
+      - id: "e"
+        label: "Books"
+      - id: "f"
+        label: "A financial advisor or banker"
+      - id: "g"
+        label: "My bank or brokerage's tools"
+      - id: "h"
+        label: "I don't actively seek financial information"
+  - id: q5
+    prompt: "Which of the following topics do you feel you understand well? (Select all that apply)"
+    type: multi_choice
+    construct: following_topics_feel_understand_well
+    required: true
+    options:
+      - id: "a"
+        label: "Budgeting and tracking spending"
+      - id: "b"
+        label: "Credit scores and credit cards"
+      - id: "c"
+        label: "Saving and emergency funds"
+      - id: "d"
+        label: "Investing in stocks or funds"
+      - id: "e"
+        label: "Retirement accounts (401(k), IRA)"
+      - id: "f"
+        label: "Taxes"
+      - id: "g"
+        label: "Insurance"
+      - id: "h"
+        label: "Mortgages and loans"
+      - id: "i"
+        label: "None of these"
+  - id: q6
+    prompt: "How confident are you in your understanding of the following topic? Budgeting and tracking spending."
+    type: single_choice
+    construct: confident_understanding_following_topic_
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q7
+    prompt: "How confident are you in your understanding of the following topic? Managing debt and credit."
+    type: single_choice
+    construct: confident_understanding_following_topic_
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q8
+    prompt: "How confident are you in your understanding of the following topic? Saving for emergencies."
+    type: single_choice
+    construct: confident_understanding_following_topic_
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q9
+    prompt: "How confident are you in your understanding of the following topic? Investing in stocks and funds."
+    type: single_choice
+    construct: confident_understanding_following_topic_
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q10
+    prompt: "How confident are you in your understanding of the following topic? Retirement planning."
+    type: single_choice
+    construct: confident_understanding_following_topic_
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q11
+    prompt: "How confident are you in your understanding of the following topic? Taxes."
+    type: single_choice
+    construct: confident_understanding_following_topic_
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q12
+    prompt: "How confident are you in your understanding of the following topic? Insurance."
+    type: single_choice
+    construct: confident_understanding_following_topic_
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q13
+    prompt: "How confident are you in your understanding of the following topic? Mortgages and loans."
+    type: single_choice
+    construct: confident_understanding_following_topic_
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q14
+    prompt: "Suppose you had $100 in a savings account earning 2% interest per year. After 5 years, if you take nothing out, how much would you have?"
+    type: single_choice
+    construct: suppose_had_100_savings_account
+    required: true
+    options:
+      - id: "a"
+        label: "More than $102"
+      - id: "b"
+        label: "Exactly $102"
+      - id: "c"
+        label: "Less than $102"
+      - id: "d"
+        label: "Don't know"
+  - id: q15
+    prompt: "Imagine the interest rate on your savings was 1% per year and inflation was 2% per year. After one year, how much would you be able to buy with the money in the account?"
+    type: single_choice
+    construct: imagine_interest_rate_savings_was
+    required: true
+    options:
+      - id: "a"
+        label: "More than today"
+      - id: "b"
+        label: "Exactly the same as today"
+      - id: "c"
+        label: "Less than today"
+      - id: "d"
+        label: "Don't know"
+  - id: q16
+    prompt: "True or false: Buying a single company's stock usually provides a safer return than a stock mutual fund."
+    type: single_choice
+    construct: true_false_buying_single_company
+    required: true
+    options:
+      - id: "a"
+        label: "True"
+      - id: "b"
+        label: "False"
+      - id: "c"
+        label: "Don't know"
+  - id: q17
+    prompt: "If interest rates in the economy rise, what typically happens to the price of existing bonds?"
+    type: single_choice
+    construct: if_interest_rates_economy_rise
+    required: true
+    options:
+      - id: "a"
+        label: "They rise"
+      - id: "b"
+        label: "They fall"
+      - id: "c"
+        label: "They stay the same"
+      - id: "d"
+        label: "Don't know"
+  - id: q18
+    prompt: "True or false: A 15-year mortgage usually has higher monthly payments than a 30-year mortgage, but you pay less total interest over the life of the loan."
+    type: single_choice
+    construct: true_false_15_year_mortgage
+    required: true
+    options:
+      - id: "a"
+        label: "True"
+      - id: "b"
+        label: "False"
+      - id: "c"
+        label: "Don't know"
+  - id: q19
+    prompt: "If you make only the minimum payment on a credit card balance each month, what usually happens to what you owe?"
+    type: single_choice
+    construct: if_make_only_minimum_payment
+    required: true
+    options:
+      - id: "a"
+        label: "The balance is paid off quickly"
+      - id: "b"
+        label: "The balance stays about the same"
+      - id: "c"
+        label: "The balance grows because of interest"
+      - id: "d"
+        label: "Don't know"
+  - id: q20
+    prompt: "Do you keep a household budget?"
+    type: single_choice
+    construct: keep_household_budget
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a detailed one"
+      - id: "b"
+        label: "Yes, a rough one"
+      - id: "c"
+        label: "No, but I keep it in my head"
+      - id: "d"
+        label: "No budget at all"
+  - id: q21
+    prompt: "How often do you track your spending?"
+    type: single_choice
+    construct: often_track_spending
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "In the past year, which of the following did you do? (Select all that apply)"
+    type: multi_choice
+    construct: past_year_following_did_select
+    required: true
+    options:
+      - id: "a"
+        label: "Created or updated a budget"
+      - id: "b"
+        label: "Built or added to an emergency fund"
+      - id: "c"
+        label: "Started or increased investing"
+      - id: "d"
+        label: "Paid down debt on purpose"
+      - id: "e"
+        label: "Met with a financial advisor"
+      - id: "f"
+        label: "Read a personal-finance book"
+      - id: "g"
+        label: "Took a financial education course"
+      - id: "h"
+        label: "None of these"
+  - id: q23
+    prompt: "Which tools do you use to manage your money? (Select all that apply)"
+    type: multi_choice
+    construct: tools_use_manage_money_select
+    required: true
+    options:
+      - id: "a"
+        label: "A spreadsheet"
+      - id: "b"
+        label: "A budgeting app (e.g., YNAB, Rocket Money)"
+      - id: "c"
+        label: "My bank or credit card app"
+      - id: "d"
+        label: "A financial advisor"
+      - id: "e"
+        label: "Pen and paper"
+      - id: "f"
+        label: "I don't use any tools"
+  - id: q24
+    prompt: "How much do you agree with the following statement? I feel confident making financial decisions."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "How much do you agree with the following statement? Financial topics are confusing to me."
+    type: single_choice
+    construct: much_agree_following_statement_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q26
+    prompt: "How much do you agree with the following statement? I wish I had learned more about money in school."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q27
+    prompt: "How much do you agree with the following statement? I actively try to improve my financial knowledge."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q28
+    prompt: "How much do you agree with the following statement? I worry that not knowing enough about money costs me."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q29
+    prompt: "How much do you agree with the following statement? Managing money comes naturally to me."
+    type: single_choice
+    construct: much_agree_following_statement_managing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q30
+    prompt: "In the past year, how often did you read or watch financial content to learn something?"
+    type: single_choice
+    construct: past_year_often_did_read
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q31
+    prompt: "In the past year, how often did you compare financial products before choosing one?"
+    type: single_choice
+    construct: past_year_often_did_compare
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q32
+    prompt: "In the past year, how often did you feel unsure about a financial decision you had to make?"
+    type: single_choice
+    construct: past_year_often_did_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q33
+    prompt: "Which topics do you most want to learn more about? (Select up to 3)"
+    type: single_choice
+    construct: topics_most_want_learn_more
+    required: true
+    options:
+      - id: "a"
+        label: "Budgeting"
+      - id: "b"
+        label: "Getting out of debt"
+      - id: "c"
+        label: "Building credit"
+      - id: "d"
+        label: "Investing"
+      - id: "e"
+        label: "Retirement planning"
+      - id: "f"
+        label: "Taxes"
+      - id: "g"
+        label: "Buying a home"
+      - id: "h"
+        label: "Insurance"
+      - id: "i"
+        label: "Estate planning"
+  - id: q34
+    prompt: "At what age did you start managing your own money? Please enter a number (years old)."
+    type: free_text
+    construct: age_did_start_managing_own
+    required: true
+  - id: q35
+    prompt: "About how many hours per month do you spend managing or learning about your personal finances? Please enter a number."
+    type: free_text
+    construct: many_hours_per_month_spend
+    required: true
+  - id: q36
+    prompt: "About how many personal-finance books, courses, or lengthy guides did you complete in the past year? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: many_personal_finance_books_courses
+    required: true
+  - id: q37
+    prompt: "How satisfied are you with your current level of financial knowledge?"
+    type: single_choice
+    construct: satisfied_current_level_financial_knowle
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "How important is improving your financial knowledge to you right now?"
+    type: single_choice
+    construct: important_improving_financial_knowledge_
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q39
+    prompt: "How likely are you to take a financial course or seriously study a money topic in the next year?"
+    type: single_choice
+    construct: likely_take_financial_course_seriously
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q40
+    prompt: "On a scale of 0 to 10, how confident are you in your ability to manage your own finances? (0 = not at all confident, 10 = completely confident)"
+    type: single_choice
+    construct: scale_0_10_confident_ability
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q41
+    prompt: "What is one money topic you most wish you understood better? (Optional; write a short answer or enter \"none\".)"
+    type: free_text
+    construct: one_money_topic_most_wish
+    required: false
+  - id: q42
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q43
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q47
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed, looking for work"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Not employed and not looking"
+  - id: q48
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q49
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q51
+    prompt: "What type of area do you live in?"
+    type: single_choice
+    construct: type_area_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q52
+    prompt: "Did you ever take a personal-finance or money-management class in high school or college?"
+    type: single_choice
+    construct: did_ever_take_personal_finance
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"

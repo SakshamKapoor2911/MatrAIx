@@ -1,0 +1,639 @@
+schemaVersion: "1.0"
+id: tax_software_usage_v1
+title: "Tax Software Usage Survey"
+description: "How consumers choose, use, pay for, and evaluate tax-preparation software."
+questions:
+  - id: q0
+    prompt: "Do you use tax-preparation software to file your own taxes?"
+    type: single_choice
+    construct: use_tax_preparation_software_file
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, every year"
+      - id: "b"
+        label: "Yes, most years"
+      - id: "c"
+        label: "I have used it in the past"
+      - id: "d"
+        label: "No, I use a preparer or another method"
+      - id: "e"
+        label: "No, I have never used it"
+  - id: q1
+    prompt: "Which tax software did you most recently use?"
+    type: single_choice
+    construct: tax_software_did_most_recently
+    required: true
+    options:
+      - id: "a"
+        label: "TurboTax"
+      - id: "b"
+        label: "H&R Block"
+      - id: "c"
+        label: "FreeTaxUSA"
+      - id: "d"
+        label: "TaxAct"
+      - id: "e"
+        label: "TaxSlayer"
+      - id: "f"
+        label: "Cash App Taxes"
+      - id: "g"
+        label: "IRS Direct File or Free File"
+      - id: "h"
+        label: "Other"
+  - id: q2
+    prompt: "How many years have you used tax software?"
+    type: single_choice
+    construct: many_years_have_used_tax
+    required: true
+    options:
+      - id: "a"
+        label: "This is my first year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 9 years"
+      - id: "d"
+        label: "10 years or more"
+  - id: q3
+    prompt: "Which product tier or version did you use most recently?"
+    type: single_choice
+    construct: product_tier_version_did_use
+    required: true
+    options:
+      - id: "a"
+        label: "Free edition"
+      - id: "b"
+        label: "Basic or Deluxe paid tier"
+      - id: "c"
+        label: "Premier or Self-Employed tier"
+      - id: "d"
+        label: "Full-service or expert-assisted option"
+      - id: "e"
+        label: "I don't know"
+  - id: q4
+    prompt: "Which features of your tax software do you regularly use? (Select all that apply)"
+    type: multi_choice
+    construct: features_tax_software_regularly_use
+    required: true
+    options:
+      - id: "a"
+        label: "Import of W-2 or 1099 forms"
+      - id: "b"
+        label: "Prior-year data carryover"
+      - id: "c"
+        label: "Deduction and credit finder"
+      - id: "d"
+        label: "Audit-risk checker"
+      - id: "e"
+        label: "Accuracy or maximum-refund guarantee"
+      - id: "f"
+        label: "Live expert help or chat"
+      - id: "g"
+        label: "Mobile app filing"
+      - id: "h"
+        label: "Refund tracking"
+      - id: "i"
+        label: "None of these"
+  - id: q5
+    prompt: "How much did you pay for your tax software this year (federal plus state and add-ons)? Enter a dollar amount (enter 0 if free)."
+    type: free_text
+    construct: much_did_pay_tax_software
+    required: true
+  - id: q6
+    prompt: "Did you also pay to file your state return through the software?"
+    type: single_choice
+    construct: did_also_pay_file_state
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, it was included"
+      - id: "c"
+        label: "No, my state has no income tax"
+      - id: "d"
+        label: "I didn't file state taxes"
+  - id: q7
+    prompt: "How long did it take you to complete your return with the software this year?"
+    type: single_choice
+    construct: long_did_it_take_complete
+    required: true
+    options:
+      - id: "a"
+        label: "Under 30 minutes"
+      - id: "b"
+        label: "30 minutes to 1 hour"
+      - id: "c"
+        label: "1 to 3 hours"
+      - id: "d"
+        label: "More than 3 hours"
+      - id: "e"
+        label: "Spread across multiple sessions"
+  - id: q8
+    prompt: "How did you first choose your tax software?"
+    type: single_choice
+    construct: did_first_choose_tax_software
+    required: true
+    options:
+      - id: "a"
+        label: "Used it in prior years"
+      - id: "b"
+        label: "Advertising or promotions"
+      - id: "c"
+        label: "Recommendation from friends or family"
+      - id: "d"
+        label: "Online reviews or comparisons"
+      - id: "e"
+        label: "It was the cheapest or free option"
+      - id: "f"
+        label: "Referred by my bank or payroll provider"
+  - id: q9
+    prompt: "How much do you agree with the following statement about your tax software: It is easy to use."
+    type: single_choice
+    construct: much_agree_following_statement_tax
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree with the following statement about your tax software: It clearly explains what to enter and why."
+    type: single_choice
+    construct: much_agree_following_statement_tax
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement about your tax software: It helped me find deductions or credits I would have missed."
+    type: single_choice
+    construct: much_agree_following_statement_tax
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement about your tax software: It tried to upsell me on features I didn't need."
+    type: single_choice
+    construct: much_agree_following_statement_tax
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement about your tax software: I trust it to keep my personal data secure."
+    type: single_choice
+    construct: much_agree_following_statement_tax
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How important is each of the following to you in tax software — price?"
+    type: single_choice
+    construct: important_each_following_tax_software
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q15
+    prompt: "How important is each of the following to you in tax software — ease of use?"
+    type: single_choice
+    construct: important_each_following_tax_software
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q16
+    prompt: "How important is each of the following to you in tax software — access to live expert help?"
+    type: single_choice
+    construct: important_each_following_tax_software
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "How important is each of the following to you in tax software — an accuracy or maximum-refund guarantee?"
+    type: single_choice
+    construct: important_each_following_tax_software
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "Which are the top 3 reasons you use tax software instead of a professional preparer? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_reasons_use_tax
+    required: true
+    options:
+      - id: "a"
+        label: "It costs less"
+      - id: "b"
+        label: "It's convenient and fast"
+      - id: "c"
+        label: "My taxes are simple enough"
+      - id: "d"
+        label: "I like doing it myself"
+      - id: "e"
+        label: "It's available anytime"
+      - id: "f"
+        label: "I trust the software's accuracy"
+      - id: "g"
+        label: "It imports my forms automatically"
+      - id: "h"
+        label: "It walks me through step by step"
+      - id: "i"
+        label: "I don't trust preparers"
+  - id: q19
+    prompt: "Did you use live expert help or 'assisted' filing offered by the software?"
+    type: single_choice
+    construct: did_use_live_expert_help
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it was helpful"
+      - id: "b"
+        label: "Yes, but it wasn't helpful"
+      - id: "c"
+        label: "No, but it was available"
+      - id: "d"
+        label: "No, it wasn't offered"
+  - id: q20
+    prompt: "Did you encounter any technical problems or errors while filing?"
+    type: single_choice
+    construct: did_encounter_any_technical_problems
+    required: true
+    options:
+      - id: "a"
+        label: "No problems"
+      - id: "b"
+        label: "Minor issues I resolved myself"
+      - id: "c"
+        label: "Significant problems"
+      - id: "d"
+        label: "Problems that made me give up on the software"
+  - id: q21
+    prompt: "How often do you compare tax-software options before filing each year?"
+    type: single_choice
+    construct: often_compare_tax_software_options
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "How much do you agree: The government should offer a free, easy tax-filing option so I don't need paid software."
+    type: single_choice
+    construct: much_agree_government_should_offer
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How satisfied are you with your tax software overall?"
+    type: single_choice
+    construct: satisfied_tax_software_overall
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q24
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your tax software to a friend (0 = not at all likely, 10 = extremely likely)?"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q25
+    prompt: "How likely are you to use the same tax software again next year?"
+    type: single_choice
+    construct: likely_use_same_tax_software
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q26
+    prompt: "If you have any final thoughts about tax software, please share them here (optional)."
+    type: free_text
+    construct: if_have_any_final_thoughts
+    required: false
+  - id: q27
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q28
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q29
+    prompt: "Which of the following best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q30
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000–$199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q32
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force (student, homemaker)"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Unable to work"
+  - id: q33
+    prompt: "Including yourself, how many people live in your household? Enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q34
+    prompt: "How many children under 18 live in your household? Enter a number."
+    type: free_text
+    construct: many_children_under_18_live
+    required: true
+  - id: q35
+    prompt: "What is your marital status?"
+    type: single_choice
+    construct: marital_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q36
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q37
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q38
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"
+  - id: q39
+    prompt: "Which device do you primarily use to prepare your taxes?"
+    type: single_choice
+    construct: device_primarily_use_prepare_taxes
+    required: true
+    options:
+      - id: "a"
+        label: "Desktop or laptop computer"
+      - id: "b"
+        label: "Smartphone"
+      - id: "c"
+        label: "Tablet"
+      - id: "d"
+        label: "I don't use software to prepare taxes"

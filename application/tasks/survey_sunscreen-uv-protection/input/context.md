@@ -1,0 +1,7 @@
+# Sunscreen and UV Protection
+
+People's sunscreen use and broader sun-protection habits.
+
+## About this survey
+
+This survey profiles consumer sun-protection behavior, opening with a screener on how often respondents wear sunscreen, how long they have used it regularly, and how reliably they apply it outdoors. It records the SPF level and sunscreen types used, chemical-versus-mineral preference, brands such as Neutrogena, La Roche-Posay, Supergoop, Blue Lizard, and EltaMD, body areas covered, other protection methods (hats, sunglasses, shade, and UPF clothing), yearly spending, reapplication counts, and where products are bought. Attitudes are captured with an agreement Likert battery on daily-habit importance, reapplication, value, and confidence and a per-item importance matrix over sunscreen-selection criteria such as SPF, feel, price, water resistance, reef-safe formulation, and makeup compatibility, plus a top-three ranking of reasons for sun protection and a barriers multi-select. Later sections cover situational use, sunburn frequency, UV-index checking, skin sun-sensitivity, off-season use, how habits were learned, application confidence, satisfaction, recommendation likelihood, and future consistency and product intent. The survey closes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, daily time outdoors, U.S. region, and urbanicity.

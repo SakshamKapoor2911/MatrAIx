@@ -1,0 +1,917 @@
+schemaVersion: "1.0"
+id: password_manager_usage_v1
+title: "Password Manager Usage Survey"
+description: "How people store, generate, and manage their online passwords, and their attitudes toward dedicated password manager tools."
+questions:
+  - id: q0
+    prompt: "How do you primarily keep track of the passwords for your online accounts?"
+    type: single_choice
+    construct: primarily_keep_track_passwords_online
+    required: true
+    options:
+      - id: "a"
+        label: "I use a dedicated password manager app"
+      - id: "b"
+        label: "I let my web browser save and fill them"
+      - id: "c"
+        label: "I rely on my phone or computer's built-in keychain"
+      - id: "d"
+        label: "I write them down on paper or in a notebook"
+      - id: "e"
+        label: "I save them in a notes app, spreadsheet, or document"
+      - id: "f"
+        label: "I memorize them or reuse a few passwords"
+      - id: "g"
+        label: "I reset them with \"forgot password\" each time"
+  - id: q1
+    prompt: "Do you currently use a dedicated password manager?"
+    type: single_choice
+    construct: currently_use_dedicated_password_manager
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I use one regularly"
+      - id: "b"
+        label: "Yes, but only occasionally"
+      - id: "c"
+        label: "No, but I have used one in the past"
+      - id: "d"
+        label: "No, and I never have"
+  - id: q2
+    prompt: "How long have you been using a password manager?"
+    type: single_choice
+    construct: long_have_been_using_password
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+      - id: "f"
+        label: "I do not use one"
+  - id: q3
+    prompt: "What first prompted you to start using a password manager? (Select all that apply)"
+    type: multi_choice
+    construct: first_prompted_start_using_password
+    required: true
+    options:
+      - id: "a"
+        label: "Too many accounts and passwords to remember"
+      - id: "b"
+        label: "A data breach or hacked account"
+      - id: "c"
+        label: "A recommendation from a friend or family member"
+      - id: "d"
+        label: "A recommendation from an article, video, or podcast"
+      - id: "e"
+        label: "A requirement or suggestion at work"
+      - id: "f"
+        label: "It came built into my browser or device"
+      - id: "g"
+        label: "I wanted to stop reusing the same password"
+      - id: "h"
+        label: "I have not started using one"
+  - id: q4
+    prompt: "Which password managers do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: password_managers_currently_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "1Password"
+      - id: "b"
+        label: "Bitwarden"
+      - id: "c"
+        label: "LastPass"
+      - id: "d"
+        label: "Dashlane"
+      - id: "e"
+        label: "Keeper"
+      - id: "f"
+        label: "NordPass"
+      - id: "g"
+        label: "Proton Pass"
+      - id: "h"
+        label: "Google Password Manager"
+      - id: "i"
+        label: "Apple iCloud Keychain"
+      - id: "j"
+        label: "Microsoft Authenticator / Edge password manager"
+      - id: "k"
+        label: "Firefox or other browser built-in manager"
+      - id: "l"
+        label: "Other"
+      - id: "m"
+        label: "I do not use any password manager"
+  - id: q5
+    prompt: "Which password manager do you consider your primary one?"
+    type: single_choice
+    construct: password_manager_consider_primary_one
+    required: true
+    options:
+      - id: "a"
+        label: "1Password"
+      - id: "b"
+        label: "Bitwarden"
+      - id: "c"
+        label: "LastPass"
+      - id: "d"
+        label: "Dashlane"
+      - id: "e"
+        label: "Keeper or NordPass"
+      - id: "f"
+        label: "Proton Pass"
+      - id: "g"
+        label: "Google Password Manager"
+      - id: "h"
+        label: "Apple iCloud Keychain"
+      - id: "i"
+        label: "Microsoft / Edge password manager"
+      - id: "j"
+        label: "A browser built-in manager"
+      - id: "k"
+        label: "Other"
+      - id: "l"
+        label: "Not applicable"
+  - id: q6
+    prompt: "What kind of plan do you have for your primary password manager?"
+    type: single_choice
+    construct: kind_plan_have_primary_password
+    required: true
+    options:
+      - id: "a"
+        label: "Free plan"
+      - id: "b"
+        label: "Paid individual/premium plan"
+      - id: "c"
+        label: "Family plan"
+      - id: "d"
+        label: "Provided by my employer"
+      - id: "e"
+        label: "It is built into my device or browser at no charge"
+      - id: "f"
+        label: "I don't know"
+      - id: "g"
+        label: "Not applicable"
+  - id: q7
+    prompt: "Approximately how much do you pay per year for password management software, in U.S. dollars? Enter 0 if you pay nothing."
+    type: free_text
+    construct: approximately_much_pay_per_year
+    required: true
+  - id: q8
+    prompt: "On which devices do you use your password manager? (Select all that apply)"
+    type: multi_choice
+    construct: devices_use_password_manager_select
+    required: true
+    options:
+      - id: "a"
+        label: "Windows PC"
+      - id: "b"
+        label: "Mac"
+      - id: "c"
+        label: "Linux computer"
+      - id: "d"
+        label: "iPhone"
+      - id: "e"
+        label: "Android phone"
+      - id: "f"
+        label: "iPad or Android tablet"
+      - id: "g"
+        label: "Web browser extension"
+      - id: "h"
+        label: "I do not use one on any device"
+  - id: q9
+    prompt: "Which password manager features do you actually use? (Select all that apply)"
+    type: multi_choice
+    construct: password_manager_features_actually_use
+    required: true
+    options:
+      - id: "a"
+        label: "Autofill of usernames and passwords"
+      - id: "b"
+        label: "Password generator"
+      - id: "c"
+        label: "Breach or dark-web monitoring alerts"
+      - id: "d"
+        label: "Secure notes storage"
+      - id: "e"
+        label: "Built-in two-factor / one-time code generator"
+      - id: "f"
+        label: "Passkey storage"
+      - id: "g"
+        label: "Password sharing with family or team"
+      - id: "h"
+        label: "Emergency access for a trusted contact"
+      - id: "i"
+        label: "Storing payment cards or addresses"
+      - id: "j"
+        label: "Password health / weak-password reports"
+      - id: "k"
+        label: "I don't use any of these"
+  - id: q10
+    prompt: "Roughly how many login credentials do you have stored in your password manager? Enter a whole number."
+    type: free_text
+    construct: roughly_many_login_credentials_have
+    required: true
+  - id: q11
+    prompt: "How often do you use your password manager's autofill when logging in?"
+    type: single_choice
+    construct: often_use_password_manager_s
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q12
+    prompt: "How do you generate passwords for new accounts?"
+    type: single_choice
+    construct: generate_passwords_new_accounts
+    required: true
+    options:
+      - id: "a"
+        label: "I always use the built-in password generator"
+      - id: "b"
+        label: "I usually use the generator but sometimes make my own"
+      - id: "c"
+        label: "I create my own strong passwords manually"
+      - id: "d"
+        label: "I reuse a variation of an existing password"
+      - id: "e"
+        label: "I reuse the same password across sites"
+  - id: q13
+    prompt: "Please rate your agreement: A password manager makes my online accounts more secure."
+    type: single_choice
+    construct: please_rate_agreement_password_manager
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "Please rate your agreement: I worry about what would happen if my password manager were hacked."
+    type: single_choice
+    construct: please_rate_agreement_i_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "Please rate your agreement: Setting up a password manager was easy for me."
+    type: single_choice
+    construct: please_rate_agreement_setting_up
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "Please rate your agreement: I trust the company behind my password manager to protect my data."
+    type: single_choice
+    construct: please_rate_agreement_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "Please rate your agreement: A password manager saves me time in my daily online life."
+    type: single_choice
+    construct: please_rate_agreement_password_manager
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "Please rate your agreement: I would feel lost if I could not access my password manager."
+    type: single_choice
+    construct: please_rate_agreement_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How important is this when choosing a password manager: Strong security and encryption"
+    type: single_choice
+    construct: important_this_when_choosing_password
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is this when choosing a password manager: Low or no cost"
+    type: single_choice
+    construct: important_this_when_choosing_password
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is this when choosing a password manager: Ease of use and clean interface"
+    type: single_choice
+    construct: important_this_when_choosing_password
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is this when choosing a password manager: Works across all my devices and browsers"
+    type: single_choice
+    construct: important_this_when_choosing_password
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is this when choosing a password manager: The company's reputation and track record"
+    type: single_choice
+    construct: important_this_when_choosing_password
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is this when choosing a password manager: Extra features like breach alerts and 2FA codes"
+    type: single_choice
+    construct: important_this_when_choosing_password
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How often do you reuse the same or a similar password across different accounts?"
+    type: single_choice
+    construct: often_reuse_same_similar_password
+    required: true
+    options:
+      - id: "a"
+        label: "Never — every account has a unique password"
+      - id: "b"
+        label: "Rarely — only for a few unimportant accounts"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Almost always"
+  - id: q26
+    prompt: "How strong would you rate the master password that protects your password manager?"
+    type: single_choice
+    construct: strong_would_rate_master_password
+    required: true
+    options:
+      - id: "a"
+        label: "Very strong (long and unique)"
+      - id: "b"
+        label: "Fairly strong"
+      - id: "c"
+        label: "Moderate"
+      - id: "d"
+        label: "Weak"
+      - id: "e"
+        label: "I don't use a master password / not applicable"
+  - id: q27
+    prompt: "How do you protect against losing access to your password manager? (Select all that apply)"
+    type: multi_choice
+    construct: protect_against_losing_access_password
+    required: true
+    options:
+      - id: "a"
+        label: "I saved a written recovery code in a safe place"
+      - id: "b"
+        label: "I set up account recovery contacts"
+      - id: "c"
+        label: "I exported an encrypted backup of my vault"
+      - id: "d"
+        label: "I rely on my email to reset access"
+      - id: "e"
+        label: "I memorized my master password"
+      - id: "f"
+        label: "I haven't set up any recovery method"
+      - id: "g"
+        label: "Not applicable"
+  - id: q28
+    prompt: "What concerns you most about using a password manager? (Select all that apply)"
+    type: multi_choice
+    construct: concerns_most_using_password_manager
+    required: true
+    options:
+      - id: "a"
+        label: "Putting all my passwords in one place"
+      - id: "b"
+        label: "Getting locked out if I forget the master password"
+      - id: "c"
+        label: "The service being hacked or breached"
+      - id: "d"
+        label: "Cost of a subscription"
+      - id: "e"
+        label: "It being too complicated to set up or use"
+      - id: "f"
+        label: "Trusting a company with my data"
+      - id: "g"
+        label: "Autofill entering data on the wrong site"
+      - id: "h"
+        label: "I have no real concerns"
+  - id: q29
+    prompt: "Have any of your online accounts ever been compromised or breached?"
+    type: single_choice
+    construct: have_any_online_accounts_ever
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, never"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q30
+    prompt: "Have you started using passkeys (passwordless sign-in) for any accounts?"
+    type: single_choice
+    construct: have_started_using_passkeys_passwordless
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for several accounts"
+      - id: "b"
+        label: "Yes, for one or two accounts"
+      - id: "c"
+        label: "No, but I plan to"
+      - id: "d"
+        label: "No, and I have no plans to"
+      - id: "e"
+        label: "I don't know what passkeys are"
+  - id: q31
+    prompt: "Do you use two-factor authentication to protect the password manager itself?"
+    type: single_choice
+    construct: use_two_factor_authentication_protect
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "I'm not sure"
+      - id: "d"
+        label: "Not applicable"
+  - id: q32
+    prompt: "Do you share any passwords with other people through your password manager?"
+    type: single_choice
+    construct: share_any_passwords_other_people
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, with family members"
+      - id: "b"
+        label: "Yes, with coworkers or a team"
+      - id: "c"
+        label: "Yes, with both"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "Not applicable"
+  - id: q33
+    prompt: "Besides passwords, what else do you store in your password manager? (Select all that apply)"
+    type: multi_choice
+    construct: besides_passwords_else_store_password
+    required: true
+    options:
+      - id: "a"
+        label: "Payment cards"
+      - id: "b"
+        label: "Secure notes or documents"
+      - id: "c"
+        label: "Wi-Fi passwords"
+      - id: "d"
+        label: "Software license keys"
+      - id: "e"
+        label: "Identity documents (passport, ID numbers)"
+      - id: "f"
+        label: "Recovery codes for other accounts"
+      - id: "g"
+        label: "Nothing besides passwords"
+      - id: "h"
+        label: "Not applicable"
+  - id: q34
+    prompt: "Select your top 3 reasons for using (or wanting to use) a password manager. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_using
+    required: true
+    options:
+      - id: "a"
+        label: "I don't have to remember many passwords"
+      - id: "b"
+        label: "It generates strong unique passwords for me"
+      - id: "c"
+        label: "It saves me time when logging in"
+      - id: "d"
+        label: "It warns me about breaches and weak passwords"
+      - id: "e"
+        label: "It syncs across all my devices"
+      - id: "f"
+        label: "It keeps my accounts more secure"
+      - id: "g"
+        label: "It lets me share access safely"
+      - id: "h"
+        label: "It stores more than just passwords"
+  - id: q35
+    prompt: "Overall, how satisfied are you with your current password management approach?"
+    type: single_choice
+    construct: overall_satisfied_current_password_manag
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "On a scale of 0 to 10, how likely are you to recommend using a password manager to a friend or colleague? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q37
+    prompt: "How likely are you to still be using a password manager one year from now?"
+    type: single_choice
+    construct: likely_still_be_using_password
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "Are you considering switching to a different password manager in the near future?"
+    type: single_choice
+    construct: considering_switching_different_password
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I'm actively looking"
+      - id: "b"
+        label: "Maybe, I'm somewhat interested"
+      - id: "c"
+        label: "No, I'm happy where I am"
+      - id: "d"
+        label: "Not applicable"
+  - id: q39
+    prompt: "If you could change one thing about how you manage your passwords, what would it be? (Optional)"
+    type: free_text
+    construct: if_could_change_one_thing
+    required: false
+  - id: q40
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18 years old"
+      - id: "b"
+        label: "18-24 years old"
+      - id: "c"
+        label: "25-34 years old"
+      - id: "d"
+        label: "35-44 years old"
+      - id: "e"
+        label: "45-54 years old"
+      - id: "f"
+        label: "55-64 years old"
+      - id: "g"
+        label: "65 years or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed, looking for work"
+      - id: "f"
+        label: "Not employed, not looking for work"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "How many people live in your household, including you? Enter a whole number."
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q47
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or domestic partnership"
+      - id: "c"
+        label: "In a relationship, not living together"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "In which U.S. region do you live?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "How would you rate your overall comfort with technology?"
+    type: single_choice
+    construct: would_rate_overall_comfort_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Extremely comfortable — I'm the person others ask for help"
+  - id: q51
+    prompt: "Which best describes your relationship to technology work?"
+    type: single_choice
+    construct: best_describes_relationship_technology_w
+    required: true
+    options:
+      - id: "a"
+        label: "I work in an IT, software, or cybersecurity role"
+      - id: "b"
+        label: "I work in tech but not in a technical role"
+      - id: "c"
+        label: "I work outside the tech industry"
+      - id: "d"
+        label: "I'm a student"
+      - id: "e"
+        label: "I'm not currently working"
+      - id: "f"
+        label: "Prefer not to say"

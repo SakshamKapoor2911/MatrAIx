@@ -1,0 +1,769 @@
+schemaVersion: "1.0"
+id: pc_gaming_habits_v1
+title: "PC Gaming Habits Survey"
+description: "How people play video games on a personal computer, including their hardware, storefronts, spending, and gaming behaviors."
+questions:
+  - id: q0
+    prompt: "Do you play video games on a PC (desktop or laptop computer)?"
+    type: single_choice
+    construct: play_video_games_pc_desktop
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "No, I don't play games on PC"
+  - id: q1
+    prompt: "How long have you been playing PC games?"
+    type: single_choice
+    construct: long_have_been_playing_pc
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 9 years"
+      - id: "d"
+        label: "10 or more years"
+  - id: q2
+    prompt: "On a typical week, about how many hours do you spend playing PC games?"
+    type: single_choice
+    construct: typical_week_many_hours_spend
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 2 hours"
+      - id: "b"
+        label: "2 to 5 hours"
+      - id: "c"
+        label: "6 to 10 hours"
+      - id: "d"
+        label: "11 to 20 hours"
+      - id: "e"
+        label: "More than 20 hours"
+  - id: q3
+    prompt: "What kind of PC do you mainly game on?"
+    type: single_choice
+    construct: kind_pc_mainly_game
+    required: true
+    options:
+      - id: "a"
+        label: "Custom-built desktop"
+      - id: "b"
+        label: "Pre-built gaming desktop"
+      - id: "c"
+        label: "Gaming laptop"
+      - id: "d"
+        label: "Standard laptop"
+      - id: "e"
+        label: "Standard desktop or all-in-one"
+      - id: "f"
+        label: "Handheld gaming PC (e.g., Steam Deck, ROG Ally)"
+  - id: q4
+    prompt: "Which storefronts or launchers do you use to buy or play PC games? (Select all that apply)"
+    type: multi_choice
+    construct: storefronts_launchers_use_buy_play
+    required: true
+    options:
+      - id: "a"
+        label: "Steam"
+      - id: "b"
+        label: "Epic Games Store"
+      - id: "c"
+        label: "GOG"
+      - id: "d"
+        label: "EA App"
+      - id: "e"
+        label: "Ubisoft Connect"
+      - id: "f"
+        label: "Battle.net"
+      - id: "g"
+        label: "Xbox app / Game Pass for PC"
+      - id: "h"
+        label: "Riot Client"
+      - id: "i"
+        label: "Itch.io"
+      - id: "j"
+        label: "Other"
+  - id: q5
+    prompt: "Which storefront or launcher do you use most?"
+    type: single_choice
+    construct: storefront_launcher_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Steam"
+      - id: "b"
+        label: "Epic Games Store"
+      - id: "c"
+        label: "GOG"
+      - id: "d"
+        label: "EA App"
+      - id: "e"
+        label: "Battle.net"
+      - id: "f"
+        label: "Xbox app / Game Pass for PC"
+      - id: "g"
+        label: "Other"
+  - id: q6
+    prompt: "Roughly how many games do you own in your PC libraries?"
+    type: free_text
+    construct: roughly_many_games_own_pc
+    required: true
+  - id: q7
+    prompt: "Which genres do you play most? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: genres_play_most_select_top
+    required: true
+    options:
+      - id: "a"
+        label: "First-person shooters"
+      - id: "b"
+        label: "Role-playing games (RPGs)"
+      - id: "c"
+        label: "Strategy (RTS, 4X, turn-based)"
+      - id: "d"
+        label: "MOBAs (e.g., League of Legends, Dota)"
+      - id: "e"
+        label: "Battle royale"
+      - id: "f"
+        label: "Simulation and management"
+      - id: "g"
+        label: "Survival and crafting"
+      - id: "h"
+        label: "Sports and racing"
+      - id: "i"
+        label: "Indie games"
+      - id: "j"
+        label: "MMORPGs"
+      - id: "k"
+        label: "Puzzle and casual"
+      - id: "l"
+        label: "Adventure and story-driven"
+  - id: q8
+    prompt: "How do you usually play?"
+    type: single_choice
+    construct: usually_play
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly single-player"
+      - id: "b"
+        label: "Mostly online multiplayer"
+      - id: "c"
+        label: "A roughly even mix of both"
+      - id: "d"
+        label: "Mostly local co-op with people in the same room"
+  - id: q9
+    prompt: "Which input devices do you use for PC gaming? (Select all that apply)"
+    type: multi_choice
+    construct: input_devices_use_pc_gaming
+    required: true
+    options:
+      - id: "a"
+        label: "Keyboard and mouse"
+      - id: "b"
+        label: "Wired game controller"
+      - id: "c"
+        label: "Wireless game controller"
+      - id: "d"
+        label: "Racing wheel"
+      - id: "e"
+        label: "Flight stick / HOTAS"
+      - id: "f"
+        label: "VR headset"
+      - id: "g"
+        label: "Touchscreen"
+  - id: q10
+    prompt: "Which of the following describe your gaming setup? (Select all that apply)"
+    type: multi_choice
+    construct: following_describe_gaming_setup_select
+    required: true
+    options:
+      - id: "a"
+        label: "Dedicated graphics card (GPU)"
+      - id: "b"
+        label: "High-refresh-rate monitor (120Hz or higher)"
+      - id: "c"
+        label: "Multiple monitors"
+      - id: "d"
+        label: "Mechanical keyboard"
+      - id: "e"
+        label: "Gaming mouse"
+      - id: "f"
+        label: "Gaming headset"
+      - id: "g"
+        label: "RGB lighting"
+      - id: "h"
+        label: "Streaming or capture equipment"
+      - id: "i"
+        label: "None of these"
+  - id: q11
+    prompt: "About how much did you spend on PC games and in-game purchases in the past year?"
+    type: free_text
+    construct: much_did_spend_pc_games
+    required: true
+  - id: q12
+    prompt: "How do you usually acquire new PC games? (Select all that apply)"
+    type: multi_choice
+    construct: usually_acquire_new_pc_games
+    required: true
+    options:
+      - id: "a"
+        label: "Buy at full price"
+      - id: "b"
+        label: "Wait for sales"
+      - id: "c"
+        label: "Subscription service (e.g., Game Pass)"
+      - id: "d"
+        label: "Free-to-play games"
+      - id: "e"
+        label: "Free giveaways (e.g., Epic weekly free games)"
+      - id: "f"
+        label: "Bundles (e.g., Humble Bundle)"
+      - id: "g"
+        label: "Gifts"
+  - id: q13
+    prompt: "How often do you buy in-game items or microtransactions?"
+    type: single_choice
+    construct: often_buy_game_items_microtransactions
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q14
+    prompt: "Do you subscribe to any PC gaming subscription services? (Select all that apply)"
+    type: multi_choice
+    construct: subscribe_any_pc_gaming_subscription
+    required: true
+    options:
+      - id: "a"
+        label: "Xbox Game Pass for PC / PC Game Pass"
+      - id: "b"
+        label: "EA Play"
+      - id: "c"
+        label: "Ubisoft+"
+      - id: "d"
+        label: "A cloud gaming service"
+      - id: "e"
+        label: "An MMO subscription"
+      - id: "f"
+        label: "None"
+  - id: q15
+    prompt: "How often do you do the following — Play with friends online"
+    type: single_choice
+    construct: often_following_play_friends_online
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q16
+    prompt: "How often do you do the following — Use voice chat while gaming"
+    type: single_choice
+    construct: often_following_use_voice_chat
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q17
+    prompt: "How often do you do the following — Watch gaming streams or videos (Twitch, YouTube)"
+    type: single_choice
+    construct: often_following_watch_gaming_streams
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q18
+    prompt: "How often do you do the following — Use mods or community content"
+    type: single_choice
+    construct: often_following_use_mods_community
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q19
+    prompt: "How often do you do the following — Play competitive or ranked matches"
+    type: single_choice
+    construct: often_following_play_competitive_ranked
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q20
+    prompt: "Please rate your agreement — Gaming is one of my main hobbies"
+    type: single_choice
+    construct: please_rate_agreement_gaming_one
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "Please rate your agreement — PC gaming offers better performance and quality than consoles"
+    type: single_choice
+    construct: please_rate_agreement_pc_gaming
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "Please rate your agreement — Keeping my gaming PC up to date is expensive"
+    type: single_choice
+    construct: please_rate_agreement_keeping_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "Please rate your agreement — I enjoy the social side of gaming with others"
+    type: single_choice
+    construct: please_rate_agreement_i_enjoy
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "Please rate your agreement — Microtransactions and paid extras have gotten out of hand"
+    type: single_choice
+    construct: please_rate_agreement_microtransactions_
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "How important are the following when you decide to buy a game — Graphics and performance"
+    type: single_choice
+    construct: important_following_when_decide_buy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important are the following when you decide to buy a game — Price or being on sale"
+    type: single_choice
+    construct: important_following_when_decide_buy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important are the following when you decide to buy a game — Reviews and ratings"
+    type: single_choice
+    construct: important_following_when_decide_buy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "How important are the following when you decide to buy a game — Multiplayer or friends playing it"
+    type: single_choice
+    construct: important_following_when_decide_buy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "How important are the following when you decide to buy a game — Story and single-player content"
+    type: single_choice
+    construct: important_following_when_decide_buy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "How often do you upgrade or replace your gaming PC hardware?"
+    type: single_choice
+    construct: often_upgrade_replace_gaming_pc
+    required: true
+    options:
+      - id: "a"
+        label: "Every year"
+      - id: "b"
+        label: "Every 2 to 3 years"
+      - id: "c"
+        label: "Every 4 to 5 years"
+      - id: "d"
+        label: "Less often than every 5 years"
+      - id: "e"
+        label: "I've never upgraded"
+  - id: q31
+    prompt: "Which best describes your view of PC hardware upgrades?"
+    type: single_choice
+    construct: best_describes_view_pc_hardware
+    required: true
+    options:
+      - id: "a"
+        label: "I chase the latest and best hardware"
+      - id: "b"
+        label: "I upgrade when games I want won't run well"
+      - id: "c"
+        label: "I upgrade only when something breaks"
+      - id: "d"
+        label: "I don't think about hardware much"
+  - id: q32
+    prompt: "Do you create gaming content (streaming, videos, guides)?"
+    type: single_choice
+    construct: create_gaming_content_streaming_videos
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I'd like to"
+      - id: "d"
+        label: "No"
+  - id: q33
+    prompt: "Over the next year, how do you expect your PC gaming time to change?"
+    type: single_choice
+    construct: over_next_year_expect_pc
+    required: true
+    options:
+      - id: "a"
+        label: "Decrease a lot"
+      - id: "b"
+        label: "Decrease somewhat"
+      - id: "c"
+        label: "Stay about the same"
+      - id: "d"
+        label: "Increase somewhat"
+      - id: "e"
+        label: "Increase a lot"
+  - id: q34
+    prompt: "Overall, how satisfied are you with your PC gaming experience?"
+    type: single_choice
+    construct: overall_satisfied_pc_gaming_experience
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "How likely are you to recommend PC gaming to a friend over console gaming? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_pc_gaming_friend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q36
+    prompt: "What do you enjoy most, or wish were better, about PC gaming?"
+    type: free_text
+    construct: enjoy_most_wish_were_better
+    required: true
+  - id: q37
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+  - id: q42
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelance"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not employed, looking for work"
+      - id: "f"
+        label: "Not employed, not looking"
+      - id: "g"
+        label: "Retired"
+  - id: q43
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q44
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q45
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

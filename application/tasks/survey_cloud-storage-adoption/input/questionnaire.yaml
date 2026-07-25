@@ -1,0 +1,787 @@
+schemaVersion: "1.0"
+id: cloud_storage_adoption_v1
+title: "Cloud Storage Adoption & Usage Survey"
+description: "Which cloud storage services people adopt, what they store and share, and how they weigh cost, privacy, and reliability."
+questions:
+  - id: q0
+    prompt: "Do you use any cloud storage service to store files, photos, or backups?"
+    type: single_choice
+    construct: use_any_cloud_storage_service
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, heavily"
+      - id: "b"
+        label: "Yes, regularly"
+      - id: "c"
+        label: "Yes, occasionally"
+      - id: "d"
+        label: "No, but I have in the past"
+      - id: "e"
+        label: "No, never"
+  - id: q1
+    prompt: "Which cloud storage service do you use most?"
+    type: single_choice
+    construct: cloud_storage_service_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Google Drive"
+      - id: "b"
+        label: "Apple iCloud"
+      - id: "c"
+        label: "Microsoft OneDrive"
+      - id: "d"
+        label: "Dropbox"
+      - id: "e"
+        label: "Amazon (Photos / Drive)"
+      - id: "f"
+        label: "Box"
+      - id: "g"
+        label: "Another service"
+      - id: "h"
+        label: "I don't use cloud storage"
+  - id: q2
+    prompt: "Which cloud storage services do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: cloud_storage_services_currently_use
+    required: true
+    options:
+      - id: "a"
+        label: "Google Drive"
+      - id: "b"
+        label: "Apple iCloud"
+      - id: "c"
+        label: "Microsoft OneDrive"
+      - id: "d"
+        label: "Dropbox"
+      - id: "e"
+        label: "Amazon Photos / Drive"
+      - id: "f"
+        label: "Box"
+      - id: "g"
+        label: "Proton Drive"
+      - id: "h"
+        label: "Mega"
+      - id: "i"
+        label: "pCloud"
+      - id: "j"
+        label: "A self-hosted option (Nextcloud, etc.)"
+      - id: "k"
+        label: "None"
+  - id: q3
+    prompt: "How many years have you been using cloud storage?"
+    type: free_text
+    construct: many_years_have_been_using
+    required: true
+  - id: q4
+    prompt: "Roughly how much total data do you keep in cloud storage?"
+    type: single_choice
+    construct: roughly_much_total_data_keep
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 5 GB"
+      - id: "b"
+        label: "5–50 GB"
+      - id: "c"
+        label: "50–200 GB"
+      - id: "d"
+        label: "200 GB–1 TB"
+      - id: "e"
+        label: "More than 1 TB"
+      - id: "f"
+        label: "Not sure"
+  - id: q5
+    prompt: "What do you store in the cloud? (Select all that apply)"
+    type: multi_choice
+    construct: store_cloud_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Photos and videos"
+      - id: "b"
+        label: "Documents and work files"
+      - id: "c"
+        label: "Music"
+      - id: "d"
+        label: "Device or computer backups"
+      - id: "e"
+        label: "Files shared with others"
+      - id: "f"
+        label: "School or coursework"
+      - id: "g"
+        label: "Financial or personal records"
+      - id: "h"
+        label: "App data and settings"
+  - id: q6
+    prompt: "Why do you use cloud storage? (Select all that apply)"
+    type: multi_choice
+    construct: why_use_cloud_storage_select
+    required: true
+    options:
+      - id: "a"
+        label: "Back up important files"
+      - id: "b"
+        label: "Access files from any device"
+      - id: "c"
+        label: "Free up space on my devices"
+      - id: "d"
+        label: "Share files with others"
+      - id: "e"
+        label: "Collaborate on documents"
+      - id: "f"
+        label: "It came with my device or account"
+      - id: "g"
+        label: "Sync photos automatically"
+  - id: q7
+    prompt: "How did you start using your main cloud service?"
+    type: single_choice
+    construct: did_start_using_main_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "It came bundled with my phone or computer"
+      - id: "b"
+        label: "I signed up for it deliberately"
+      - id: "c"
+        label: "It came with another subscription (Microsoft 365, etc.)"
+      - id: "d"
+        label: "A friend, family member, or work set it up"
+      - id: "e"
+        label: "Not sure"
+  - id: q8
+    prompt: "On which devices do you use cloud storage? (Select all that apply)"
+    type: multi_choice
+    construct: devices_use_cloud_storage_select
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "Laptop"
+      - id: "c"
+        label: "Desktop computer"
+      - id: "d"
+        label: "Tablet"
+      - id: "e"
+        label: "Smart TV or streaming device"
+      - id: "f"
+        label: "Work computer"
+  - id: q9
+    prompt: "Do you pay for cloud storage?"
+    type: single_choice
+    construct: pay_cloud_storage
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a monthly subscription"
+      - id: "b"
+        label: "Yes, an annual subscription"
+      - id: "c"
+        label: "It's included in another subscription I pay for"
+      - id: "d"
+        label: "No, I only use free storage"
+      - id: "e"
+        label: "Not sure"
+  - id: q10
+    prompt: "Roughly how much do you pay per month for cloud storage (across all services)?"
+    type: free_text
+    construct: roughly_much_pay_per_month
+    required: true
+  - id: q11
+    prompt: "How often do you access files stored in the cloud?"
+    type: single_choice
+    construct: often_access_files_stored_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "Daily"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Weekly"
+      - id: "e"
+        label: "Rarely"
+  - id: q12
+    prompt: "How often do you run out of, or get close to, your storage limit?"
+    type: single_choice
+    construct: often_run_out_get_close
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "I'm always near my limit"
+  - id: q13
+    prompt: "When you run low on cloud storage, what do you usually do?"
+    type: single_choice
+    construct: when_run_low_cloud_storage
+    required: true
+    options:
+      - id: "a"
+        label: "Upgrade to a larger plan"
+      - id: "b"
+        label: "Delete old files"
+      - id: "c"
+        label: "Move files to another service"
+      - id: "d"
+        label: "Move files to a local drive"
+      - id: "e"
+        label: "Ignore it"
+      - id: "f"
+        label: "This hasn't happened to me"
+  - id: q14
+    prompt: "Do your phone's photos back up to the cloud automatically?"
+    type: single_choice
+    construct: phone_s_photos_back_up
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, automatically"
+      - id: "b"
+        label: "Yes, but only on Wi-Fi"
+      - id: "c"
+        label: "I back them up manually"
+      - id: "d"
+        label: "No, I don't back up photos to the cloud"
+      - id: "e"
+        label: "Not sure"
+  - id: q15
+    prompt: "Which sharing or collaboration features do you use? (Select all that apply)"
+    type: multi_choice
+    construct: sharing_collaboration_features_use_selec
+    required: true
+    options:
+      - id: "a"
+        label: "Sharing links to files or folders"
+      - id: "b"
+        label: "Setting permissions (view / edit)"
+      - id: "c"
+        label: "Real-time document collaboration"
+      - id: "d"
+        label: "Shared folders with family or a team"
+      - id: "e"
+        label: "Password-protecting shared files"
+      - id: "f"
+        label: "None of these"
+  - id: q16
+    prompt: "Do you also keep local backups in addition to the cloud?"
+    type: single_choice
+    construct: also_keep_local_backups_addition
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, on an external drive"
+      - id: "b"
+        label: "Yes, on my computer's internal drive"
+      - id: "c"
+        label: "Yes, on a home network drive (NAS)"
+      - id: "d"
+        label: "No, the cloud is my only copy"
+      - id: "e"
+        label: "Not sure"
+  - id: q17
+    prompt: "How much do you agree with the following statement about cloud storage? — Cloud storage makes my files easier to access"
+    type: single_choice
+    construct: much_agree_following_statement_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about cloud storage? — I trust my provider to keep my files safe and available"
+    type: single_choice
+    construct: much_agree_following_statement_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about cloud storage? — I worry about the privacy of files I store in the cloud"
+    type: single_choice
+    construct: much_agree_following_statement_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement about cloud storage? — I feel locked into my provider's ecosystem"
+    type: single_choice
+    construct: much_agree_following_statement_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree with the following statement about cloud storage? — I'd be in trouble if my cloud account were lost or hacked"
+    type: single_choice
+    construct: much_agree_following_statement_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How important is each of the following in a cloud storage service? — Amount of storage included"
+    type: single_choice
+    construct: important_each_following_cloud_storage
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each of the following in a cloud storage service? — Privacy and encryption"
+    type: single_choice
+    construct: important_each_following_cloud_storage
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each of the following in a cloud storage service? — Price and value"
+    type: single_choice
+    construct: important_each_following_cloud_storage
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is each of the following in a cloud storage service? — Easy sharing and collaboration"
+    type: single_choice
+    construct: important_each_following_cloud_storage
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important is each of the following in a cloud storage service? — Automatic backup and syncing"
+    type: single_choice
+    construct: important_each_following_cloud_storage
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Which factors matter most when choosing a cloud storage service? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: factors_matter_most_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Amount of free storage"
+      - id: "b"
+        label: "Price of paid plans"
+      - id: "c"
+        label: "Privacy and security"
+      - id: "d"
+        label: "Integration with my devices"
+      - id: "e"
+        label: "Sharing and collaboration"
+      - id: "f"
+        label: "Automatic photo backup"
+      - id: "g"
+        label: "Reliability and uptime"
+      - id: "h"
+        label: "Speed of syncing"
+      - id: "i"
+        label: "Reputation of the company"
+  - id: q28
+    prompt: "How concerned are you that a provider could access, scan, or lose your files?"
+    type: single_choice
+    construct: concerned_that_provider_could_access
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q29
+    prompt: "Have you ever lost access to files stored in the cloud (account issue, deletion, outage)?"
+    type: single_choice
+    construct: have_ever_lost_access_files
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I lost important data"
+      - id: "b"
+        label: "Yes, but I recovered it"
+      - id: "c"
+        label: "No, never"
+      - id: "d"
+        label: "Not sure"
+  - id: q30
+    prompt: "Have you ever switched your main cloud storage provider?"
+    type: single_choice
+    construct: have_ever_switched_main_cloud
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I'm happy I did"
+      - id: "b"
+        label: "Yes, but moving files was a hassle"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No, I've stayed with the same one"
+  - id: q31
+    prompt: "How satisfied are you overall with your main cloud storage service?"
+    type: single_choice
+    construct: satisfied_overall_main_cloud_storage
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How satisfied are you with the value for money of your cloud storage?"
+    type: single_choice
+    construct: satisfied_value_money_cloud_storage
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How likely are you to still be using the same main cloud provider two years from now?"
+    type: single_choice
+    construct: likely_still_be_using_same
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "How likely are you to recommend your main cloud storage service to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_main_cloud_storage
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "What one thing would most improve your cloud storage experience?"
+    type: free_text
+    construct: one_thing_would_most_improve
+    required: true
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Full-time student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q43
+    prompt: "What is your current relationship status?"
+    type: single_choice
+    construct: current_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship or partnered"
+      - id: "c"
+        label: "Married"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q45
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q46
+    prompt: "How would you rate your overall technical skill with computers?"
+    type: single_choice
+    construct: would_rate_overall_technical_skill
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert / power user"

@@ -1,0 +1,683 @@
+schemaVersion: "1.0"
+id: inflation_attitudes_v1
+title: "Inflation Attitudes Survey"
+description: "How people perceive inflation and how rising prices affect their households."
+questions:
+  - id: q0
+    prompt: "How closely do you follow news about inflation and rising prices?"
+    type: single_choice
+    construct: closely_follow_news_inflation_rising
+    required: true
+    options:
+      - id: "a"
+        label: "Very closely"
+      - id: "b"
+        label: "Somewhat closely"
+      - id: "c"
+        label: "Not very closely"
+      - id: "d"
+        label: "Not at all"
+  - id: q1
+    prompt: "Over the past 12 months, how much do you feel prices have risen for the things you buy?"
+    type: single_choice
+    construct: over_past_12_months_much
+    required: true
+    options:
+      - id: "a"
+        label: "Risen a great deal"
+      - id: "b"
+        label: "Risen somewhat"
+      - id: "c"
+        label: "Stayed about the same"
+      - id: "d"
+        label: "Fallen somewhat"
+      - id: "e"
+        label: "Not sure"
+  - id: q2
+    prompt: "In your own words, by about what percent do you think prices have risen over the past year? Please enter a number (percent)."
+    type: free_text
+    construct: own_words_by_percent_think
+    required: true
+  - id: q3
+    prompt: "Where have you noticed the biggest price increases? (Select all that apply)"
+    type: multi_choice
+    construct: where_have_noticed_biggest_price
+    required: true
+    options:
+      - id: "a"
+        label: "Groceries and food"
+      - id: "b"
+        label: "Gas and fuel"
+      - id: "c"
+        label: "Rent or housing"
+      - id: "d"
+        label: "Utilities"
+      - id: "e"
+        label: "Dining out"
+      - id: "f"
+        label: "Healthcare"
+      - id: "g"
+        label: "Insurance"
+      - id: "h"
+        label: "Travel"
+      - id: "i"
+        label: "Childcare"
+      - id: "j"
+        label: "I have not noticed major increases"
+  - id: q4
+    prompt: "How much has inflation affected your household's finances over the past year?"
+    type: single_choice
+    construct: much_has_inflation_affected_household
+    required: true
+    options:
+      - id: "a"
+        label: "A great deal"
+      - id: "b"
+        label: "Quite a bit"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A little"
+      - id: "e"
+        label: "Not at all"
+  - id: q5
+    prompt: "How well is your household income keeping up with rising prices?"
+    type: single_choice
+    construct: well_household_income_keeping_up
+    required: true
+    options:
+      - id: "a"
+        label: "My income has risen faster than prices"
+      - id: "b"
+        label: "My income has kept pace with prices"
+      - id: "c"
+        label: "My income has fallen a little behind prices"
+      - id: "d"
+        label: "My income has fallen far behind prices"
+      - id: "e"
+        label: "Not sure"
+  - id: q6
+    prompt: "What changes have you made because of rising prices? (Select all that apply)"
+    type: multi_choice
+    construct: changes_have_made_because_rising
+    required: true
+    options:
+      - id: "a"
+        label: "Cut back on dining out"
+      - id: "b"
+        label: "Switched to cheaper store or generic brands"
+      - id: "c"
+        label: "Reduced driving or travel"
+      - id: "d"
+        label: "Cut back on entertainment or subscriptions"
+      - id: "e"
+        label: "Used more coupons or shopped sales"
+      - id: "f"
+        label: "Delayed a major purchase"
+      - id: "g"
+        label: "Reduced how much I save"
+      - id: "h"
+        label: "Took on extra work or a side job"
+      - id: "i"
+        label: "Dipped into savings"
+      - id: "j"
+        label: "I have not made changes"
+  - id: q7
+    prompt: "How often do you worry about being able to afford your regular expenses?"
+    type: single_choice
+    construct: often_worry_being_able_afford
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q8
+    prompt: "How often do you compare prices or look for deals before buying?"
+    type: single_choice
+    construct: often_compare_prices_look_deals
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q9
+    prompt: "How much do you agree or disagree: Inflation is one of the most important problems facing the country."
+    type: single_choice
+    construct: much_agree_disagree_inflation_one
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree or disagree: Rising prices have forced me to change how I live."
+    type: single_choice
+    construct: much_agree_disagree_rising_prices
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree: I feel in control of my household budget despite rising prices."
+    type: single_choice
+    construct: much_agree_disagree_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: I am optimistic that prices will stabilize in the next year."
+    type: single_choice
+    construct: much_agree_disagree_i_am
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: My savings are losing value because of inflation."
+    type: single_choice
+    construct: much_agree_disagree_my_savings
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How worried are you about inflation affecting each area — Your ability to afford groceries?"
+    type: single_choice
+    construct: worried_inflation_affecting_each_area
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+  - id: q15
+    prompt: "How worried are you about inflation affecting each area — Your housing or rent costs?"
+    type: single_choice
+    construct: worried_inflation_affecting_each_area
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+  - id: q16
+    prompt: "How worried are you about inflation affecting each area — Your ability to save for the future?"
+    type: single_choice
+    construct: worried_inflation_affecting_each_area
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+  - id: q17
+    prompt: "How worried are you about inflation affecting each area — Your retirement plans?"
+    type: single_choice
+    construct: worried_inflation_affecting_each_area
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+  - id: q18
+    prompt: "How worried are you about inflation affecting each area — Your ability to pay down debt?"
+    type: single_choice
+    construct: worried_inflation_affecting_each_area
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all worried"
+      - id: "b"
+        label: "Slightly worried"
+      - id: "c"
+        label: "Moderately worried"
+      - id: "d"
+        label: "Very worried"
+      - id: "e"
+        label: "Extremely worried"
+  - id: q19
+    prompt: "Over the next 12 months, do you expect prices overall to…"
+    type: single_choice
+    construct: over_next_12_months_expect
+    required: true
+    options:
+      - id: "a"
+        label: "Rise much faster than now"
+      - id: "b"
+        label: "Rise a little faster than now"
+      - id: "c"
+        label: "Rise at about the same pace"
+      - id: "d"
+        label: "Rise more slowly than now"
+      - id: "e"
+        label: "Fall"
+      - id: "f"
+        label: "Not sure"
+  - id: q20
+    prompt: "Over the next 12 months, do you expect your own financial situation to…"
+    type: single_choice
+    construct: over_next_12_months_expect
+    required: true
+    options:
+      - id: "a"
+        label: "Get much better"
+      - id: "b"
+        label: "Get a little better"
+      - id: "c"
+        label: "Stay about the same"
+      - id: "d"
+        label: "Get a little worse"
+      - id: "e"
+        label: "Get much worse"
+  - id: q21
+    prompt: "Have you taken any of these steps to protect your money from inflation? (Select all that apply)"
+    type: multi_choice
+    construct: have_taken_any_these_steps
+    required: true
+    options:
+      - id: "a"
+        label: "Moved money into a high-yield savings account"
+      - id: "b"
+        label: "Invested in stocks or index funds"
+      - id: "c"
+        label: "Bought I bonds or Treasury securities"
+      - id: "d"
+        label: "Bought gold or other commodities"
+      - id: "e"
+        label: "Paid down debt faster"
+      - id: "f"
+        label: "Bought big-ticket items sooner"
+      - id: "g"
+        label: "Asked for a raise or changed jobs"
+      - id: "h"
+        label: "None of these"
+  - id: q22
+    prompt: "Please select the top 3 spending categories where rising prices worry you most. (Select all that apply)"
+    type: multi_choice
+    construct: please_select_top_3_spending
+    required: true
+    options:
+      - id: "a"
+        label: "Groceries"
+      - id: "b"
+        label: "Housing or rent"
+      - id: "c"
+        label: "Gas and transportation"
+      - id: "d"
+        label: "Utilities"
+      - id: "e"
+        label: "Healthcare"
+      - id: "f"
+        label: "Insurance"
+      - id: "g"
+        label: "Childcare or education"
+      - id: "h"
+        label: "Dining and entertainment"
+  - id: q23
+    prompt: "How has inflation affected your overall financial stress?"
+    type: single_choice
+    construct: has_inflation_affected_overall_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Greatly increased my stress"
+      - id: "b"
+        label: "Somewhat increased my stress"
+      - id: "c"
+        label: "No effect"
+      - id: "d"
+        label: "Somewhat reduced my stress"
+      - id: "e"
+        label: "Not sure"
+  - id: q24
+    prompt: "How confident are you in your household's ability to handle rising prices over the next year?"
+    type: single_choice
+    construct: confident_household_s_ability_handle
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q25
+    prompt: "Who or what do you feel is most responsible for recent inflation?"
+    type: single_choice
+    construct: who_feel_most_responsible_recent
+    required: true
+    options:
+      - id: "a"
+        label: "Government spending or policy"
+      - id: "b"
+        label: "The Federal Reserve"
+      - id: "c"
+        label: "Businesses raising prices"
+      - id: "d"
+        label: "Global events and supply chains"
+      - id: "e"
+        label: "A combination of factors"
+      - id: "f"
+        label: "Not sure"
+  - id: q26
+    prompt: "How much do you trust official inflation statistics to reflect your own experience?"
+    type: single_choice
+    construct: much_trust_official_inflation_statistics
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Completely"
+  - id: q27
+    prompt: "Overall, how satisfied are you with your household's current financial situation?"
+    type: single_choice
+    construct: overall_satisfied_household_s_current
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q28
+    prompt: "How likely are you to make further spending cuts if prices keep rising?"
+    type: single_choice
+    construct: likely_make_further_spending_cuts
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q29
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q30
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $30,000"
+      - id: "b"
+        label: "$30,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Homemaker or full-time caregiver"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+  - id: q36
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q38
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own with a mortgage"
+      - id: "b"
+        label: "Own without a mortgage"
+      - id: "c"
+        label: "Rent"
+      - id: "d"
+        label: "Other arrangement"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q40
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

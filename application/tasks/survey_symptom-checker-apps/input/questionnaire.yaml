@@ -1,0 +1,797 @@
+schemaVersion: "1.0"
+id: symptom_checker_apps_v1
+title: "Symptom Checker Apps Survey"
+description: "How consumers use, trust, and evaluate online symptom checkers and health self-assessment tools."
+questions:
+  - id: q0
+    prompt: "Have you ever used an online symptom checker or health self-assessment tool?"
+    type: single_choice
+    construct: have_ever_used_online_symptom
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, many times"
+      - id: "b"
+        label: "Yes, a few times"
+      - id: "c"
+        label: "Yes, once"
+      - id: "d"
+        label: "No, but I've heard of them"
+      - id: "e"
+        label: "No, and I haven't heard of them"
+  - id: q1
+    prompt: "How did you first learn about symptom checkers?"
+    type: single_choice
+    construct: did_first_learn_symptom_checkers
+    required: true
+    options:
+      - id: "a"
+        label: "A web search"
+      - id: "b"
+        label: "An app store"
+      - id: "c"
+        label: "Social media or ads"
+      - id: "d"
+        label: "Friends or family"
+      - id: "e"
+        label: "A doctor or health provider"
+      - id: "f"
+        label: "A news article"
+      - id: "g"
+        label: "I don't remember"
+  - id: q2
+    prompt: "In the past 12 months, about how often have you used a symptom checker?"
+    type: single_choice
+    construct: past_12_months_often_have
+    required: true
+    options:
+      - id: "a"
+        label: "Weekly or more"
+      - id: "b"
+        label: "Monthly"
+      - id: "c"
+        label: "A few times"
+      - id: "d"
+        label: "Once"
+      - id: "e"
+        label: "Not at all"
+  - id: q3
+    prompt: "Which symptom checkers or tools have you used? (Select all that apply)"
+    type: multi_choice
+    construct: symptom_checkers_tools_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "WebMD Symptom Checker"
+      - id: "b"
+        label: "Mayo Clinic app or website"
+      - id: "c"
+        label: "Ada"
+      - id: "d"
+        label: "Buoy Health"
+      - id: "e"
+        label: "K Health"
+      - id: "f"
+        label: "A general web search (Google, etc.)"
+      - id: "g"
+        label: "An AI chatbot (ChatGPT, etc.)"
+      - id: "h"
+        label: "My health plan or provider's tool"
+      - id: "i"
+        label: "None of these"
+  - id: q4
+    prompt: "What device do you most often use for symptom checkers?"
+    type: single_choice
+    construct: device_most_often_use_symptom
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone app"
+      - id: "b"
+        label: "Smartphone web browser"
+      - id: "c"
+        label: "Computer or laptop"
+      - id: "d"
+        label: "Tablet"
+      - id: "e"
+        label: "Smart speaker or voice assistant"
+  - id: q5
+    prompt: "For whom do you usually use a symptom checker? (Select all that apply)"
+    type: multi_choice
+    construct: whom_usually_use_symptom_checker
+    required: true
+    options:
+      - id: "a"
+        label: "Myself"
+      - id: "b"
+        label: "My spouse or partner"
+      - id: "c"
+        label: "My child or dependent"
+      - id: "d"
+        label: "A parent or older relative"
+      - id: "e"
+        label: "A friend"
+      - id: "f"
+        label: "General curiosity, not a specific person"
+  - id: q6
+    prompt: "What usually prompts you to use a symptom checker? (Select all that apply)"
+    type: multi_choice
+    construct: usually_prompts_use_symptom_checker
+    required: true
+    options:
+      - id: "a"
+        label: "A new or unfamiliar symptom"
+      - id: "b"
+        label: "Deciding whether to see a doctor"
+      - id: "c"
+        label: "Wanting reassurance"
+      - id: "d"
+        label: "A minor illness like a cold"
+      - id: "e"
+        label: "Before or after a doctor's appointment"
+      - id: "f"
+        label: "Curiosity about a health topic"
+      - id: "g"
+        label: "Deciding on an over-the-counter remedy"
+  - id: q7
+    prompt: "After using a symptom checker, what do you usually do next? (Select all that apply)"
+    type: multi_choice
+    construct: after_using_symptom_checker_usually
+    required: true
+    options:
+      - id: "a"
+        label: "Wait and monitor how I feel"
+      - id: "b"
+        label: "Try a home or over-the-counter remedy"
+      - id: "c"
+        label: "Schedule a doctor's appointment"
+      - id: "d"
+        label: "Use telehealth"
+      - id: "e"
+        label: "Call a nurse line"
+      - id: "f"
+        label: "Search for more information"
+      - id: "g"
+        label: "Nothing in particular"
+  - id: q8
+    prompt: "How much do you agree or disagree: Symptom checkers give me useful information."
+    type: single_choice
+    construct: much_agree_disagree_symptom_checkers
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q9
+    prompt: "How much do you agree or disagree: Symptom checkers help me decide whether to seek care."
+    type: single_choice
+    construct: much_agree_disagree_symptom_checkers
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree or disagree: Symptom checkers sometimes make me more worried than before."
+    type: single_choice
+    construct: much_agree_disagree_symptom_checkers
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree or disagree: I trust the results a symptom checker gives me."
+    type: single_choice
+    construct: much_agree_disagree_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: Symptom checkers are easy to use."
+    type: single_choice
+    construct: much_agree_disagree_symptom_checkers
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I would rather ask a real health professional than use an app."
+    type: single_choice
+    construct: much_agree_disagree_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How accurate do you think symptom checkers generally are?"
+    type: single_choice
+    construct: accurate_think_symptom_checkers_generall
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all accurate"
+      - id: "b"
+        label: "Slightly accurate"
+      - id: "c"
+        label: "Moderately accurate"
+      - id: "d"
+        label: "Very accurate"
+      - id: "e"
+        label: "Extremely accurate"
+  - id: q15
+    prompt: "How satisfied were you the last time you used a symptom checker?"
+    type: single_choice
+    construct: satisfied_were_last_time_used
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q16
+    prompt: "How easy was it to understand the results the last time you used one?"
+    type: single_choice
+    construct: easy_was_it_understand_results
+    required: true
+    options:
+      - id: "a"
+        label: "Very difficult"
+      - id: "b"
+        label: "Somewhat difficult"
+      - id: "c"
+        label: "Neither easy nor difficult"
+      - id: "d"
+        label: "Somewhat easy"
+      - id: "e"
+        label: "Very easy"
+  - id: q17
+    prompt: "Has a symptom checker ever led you to see a doctor when you otherwise wouldn't have?"
+    type: single_choice
+    construct: has_symptom_checker_ever_led
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q18
+    prompt: "Has a symptom checker ever helped you avoid an unnecessary doctor visit?"
+    type: single_choice
+    construct: has_symptom_checker_ever_helped
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q19
+    prompt: "How often do you use a symptom checker before deciding to contact a doctor?"
+    type: single_choice
+    construct: often_use_symptom_checker_before
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q20
+    prompt: "How important is each feature in a symptom checker: Clear, easy-to-understand results."
+    type: single_choice
+    construct: important_each_feature_symptom_checker
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each feature in a symptom checker: Guidance on whether to seek care."
+    type: single_choice
+    construct: important_each_feature_symptom_checker
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each feature in a symptom checker: Being backed by doctors or medical sources."
+    type: single_choice
+    construct: important_each_feature_symptom_checker
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each feature in a symptom checker: Strong privacy protections for my data."
+    type: single_choice
+    construct: important_each_feature_symptom_checker
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each feature in a symptom checker: Being free to use."
+    type: single_choice
+    construct: important_each_feature_symptom_checker
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "Select your top 3 reasons you use or would use a symptom checker. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_use
+    required: true
+    options:
+      - id: "a"
+        label: "To decide whether to see a doctor"
+      - id: "b"
+        label: "For reassurance about a symptom"
+      - id: "c"
+        label: "To save time and money"
+      - id: "d"
+        label: "To learn about a health topic"
+      - id: "e"
+        label: "To use anytime, day or night"
+      - id: "f"
+        label: "To avoid an unnecessary visit"
+      - id: "g"
+        label: "To help a family member"
+      - id: "h"
+        label: "To prepare questions for a doctor"
+  - id: q26
+    prompt: "How concerned are you about the privacy of the health information you enter into these tools?"
+    type: single_choice
+    construct: concerned_privacy_health_information_ent
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q27
+    prompt: "Would you be willing to share symptom checker results with your doctor?"
+    type: single_choice
+    construct: would_be_willing_share_symptom
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, definitely"
+      - id: "b"
+        label: "Probably"
+      - id: "c"
+        label: "Probably not"
+      - id: "d"
+        label: "Definitely not"
+  - id: q28
+    prompt: "Have you ever used an AI chatbot to ask about symptoms or health questions?"
+    type: single_choice
+    construct: have_ever_used_ai_chatbot
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I would try it"
+      - id: "d"
+        label: "No, and I would not"
+  - id: q29
+    prompt: "Compared with a general web search, how helpful do you find dedicated symptom checker apps?"
+    type: single_choice
+    construct: compared_general_web_search_helpful
+    required: true
+    options:
+      - id: "a"
+        label: "Much less helpful"
+      - id: "b"
+        label: "Somewhat less helpful"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat more helpful"
+      - id: "e"
+        label: "Much more helpful"
+  - id: q30
+    prompt: "Would you pay for a premium symptom checker with more features?"
+    type: single_choice
+    construct: would_pay_premium_symptom_checker
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I'd use a free one"
+      - id: "c"
+        label: "No, I wouldn't use them at all"
+  - id: q31
+    prompt: "In the past 12 months, about how many times did you use a symptom checker? Please enter a number."
+    type: free_text
+    construct: past_12_months_many_times
+    required: true
+  - id: q32
+    prompt: "About how many minutes did you spend the last time you used one? Please enter a number."
+    type: free_text
+    construct: many_minutes_did_spend_last
+    required: true
+  - id: q33
+    prompt: "Overall, how satisfied are you with symptom checkers as a tool?"
+    type: single_choice
+    construct: overall_satisfied_symptom_checkers_as
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "On a scale of 0 to 10, how likely are you to recommend a symptom checker to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "How likely are you to use a symptom checker again in the future?"
+    type: single_choice
+    construct: likely_use_symptom_checker_again
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q36
+    prompt: "What would make you trust or use symptom checkers more? (Optional)"
+    type: free_text
+    construct: would_make_trust_use_symptom
+    required: false
+  - id: q37
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 to 74"
+      - id: "g"
+        label: "75 or older"
+  - id: q38
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q44
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q45
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+  - id: q46
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q47
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q48
+    prompt: "How comfortable are you overall using apps and technology?"
+    type: single_choice
+    construct: comfortable_overall_using_apps_technolog
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Somewhat uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat comfortable"
+      - id: "e"
+        label: "Very comfortable"
+  - id: q49
+    prompt: "What is your health insurance status?"
+    type: single_choice
+    construct: health_insurance_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored insurance"
+      - id: "b"
+        label: "Marketplace or individually purchased plan"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Other coverage"
+      - id: "f"
+        label: "No insurance"
+      - id: "g"
+        label: "Prefer not to say"

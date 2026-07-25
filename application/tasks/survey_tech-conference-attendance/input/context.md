@@ -1,0 +1,7 @@
+# Tech Conference Attendance
+
+How technology professionals attend conferences, meetups, and industry events, including format preferences, motivations, and spending.
+
+## About this survey
+
+This survey profiles technology event attendance, beginning with a screener on how many events respondents attend, how long they have attended, their main motivation, and their preferred format. It records the event types and specific conferences engaged with, how events are discovered, activities participated in, who pays, travel willingness, group versus solo attendance, and speaking experience, along with numeric spend and event-count questions. Attitudes are captured with an agreement Likert battery on career value, networking, virtual versus in-person value, and content quality, and a per-item importance matrix over event-selection criteria, plus a follow-up frequency scale and a top-three ranking of decision factors. Later sections cover in-person and virtual satisfaction, employer sponsorship dependence, format preference, barriers to attending, overall satisfaction, recommendation likelihood on a 0–10 scale, and future attendance and speaking intent. Question types include single-choice, multi-select, Likert agreement, importance, frequency, satisfaction and likelihood scales, two matrix batteries, a ranking item, and numeric and open free-text. The survey concludes with a demographic block covering role, professional experience, employment, company size, industry, conference budget, age, gender, race and ethnicity, education, U.S. region, and urbanicity.

@@ -1,0 +1,833 @@
+schemaVersion: "1.0"
+id: options_trading_v1
+title: "Options Trading Survey"
+description: "How individuals engage with stock and ETF options trading — their strategies, platforms, risk discipline, and outcomes."
+questions:
+  - id: q0
+    prompt: "Have you ever traded options contracts (calls or puts)?"
+    type: single_choice
+    construct: have_ever_traded_options_contracts
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I trade options regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Yes, but I have stopped"
+      - id: "d"
+        label: "No, but I am interested in starting"
+      - id: "e"
+        label: "No, and I am not interested"
+      - id: "f"
+        label: "I am not familiar with options"
+  - id: q1
+    prompt: "How long have you been trading options?"
+    type: single_choice
+    construct: long_have_been_trading_options
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1–3 years"
+      - id: "d"
+        label: "3–5 years"
+      - id: "e"
+        label: "More than 5 years"
+      - id: "f"
+        label: "Not applicable"
+  - id: q2
+    prompt: "How often do you trade options?"
+    type: single_choice
+    construct: often_trade_options
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "Several times a week"
+      - id: "c"
+        label: "About weekly"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "A few times a year"
+      - id: "f"
+        label: "Rarely or not applicable"
+  - id: q3
+    prompt: "What options trading approval level does your brokerage account have?"
+    type: single_choice
+    construct: options_trading_approval_level_does
+    required: true
+    options:
+      - id: "a"
+        label: "Level 1 (covered calls, cash-secured puts)"
+      - id: "b"
+        label: "Level 2 (buying calls and puts)"
+      - id: "c"
+        label: "Level 3 (spreads)"
+      - id: "d"
+        label: "Level 4 (naked / uncovered options)"
+      - id: "e"
+        label: "Not sure"
+      - id: "f"
+        label: "Not applicable"
+  - id: q4
+    prompt: "Approximately what percentage of your total investment portfolio is allocated to options?"
+    type: single_choice
+    construct: approximately_percentage_total_investmen
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 5%"
+      - id: "b"
+        label: "5–15%"
+      - id: "c"
+        label: "16–30%"
+      - id: "d"
+        label: "31–50%"
+      - id: "e"
+        label: "More than 50%"
+      - id: "f"
+        label: "None or not applicable"
+  - id: q5
+    prompt: "Which platforms do you use (or would you use) to trade options? (Select all that apply)"
+    type: multi_choice
+    construct: platforms_use_would_use_trade
+    required: true
+    options:
+      - id: "a"
+        label: "Robinhood"
+      - id: "b"
+        label: "Fidelity"
+      - id: "c"
+        label: "Charles Schwab / thinkorswim"
+      - id: "d"
+        label: "E*TRADE"
+      - id: "e"
+        label: "Webull"
+      - id: "f"
+        label: "Tastytrade"
+      - id: "g"
+        label: "Interactive Brokers"
+      - id: "h"
+        label: "Merrill Edge"
+      - id: "i"
+        label: "None of these"
+  - id: q6
+    prompt: "Which options strategies do you use? (Select all that apply)"
+    type: multi_choice
+    construct: options_strategies_use_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Buying calls"
+      - id: "b"
+        label: "Buying puts"
+      - id: "c"
+        label: "Covered calls"
+      - id: "d"
+        label: "Cash-secured puts"
+      - id: "e"
+        label: "Credit spreads"
+      - id: "f"
+        label: "Debit spreads"
+      - id: "g"
+        label: "Iron condors"
+      - id: "h"
+        label: "Straddles or strangles"
+      - id: "i"
+        label: "Selling naked options"
+      - id: "j"
+        label: "None or not applicable"
+  - id: q7
+    prompt: "Which underlying assets do you most often trade options on? (Select all that apply)"
+    type: multi_choice
+    construct: underlying_assets_most_often_trade
+    required: true
+    options:
+      - id: "a"
+        label: "Individual mega-cap stocks (e.g., Apple, Nvidia, Tesla)"
+      - id: "b"
+        label: "Broad-market ETFs (e.g., SPY, QQQ)"
+      - id: "c"
+        label: "Index options (e.g., SPX)"
+      - id: "d"
+        label: "Meme or high-volatility stocks"
+      - id: "e"
+        label: "Sector or thematic ETFs"
+      - id: "f"
+        label: "Not applicable"
+  - id: q8
+    prompt: "What is your primary goal with options trading?"
+    type: single_choice
+    construct: primary_goal_options_trading
+    required: true
+    options:
+      - id: "a"
+        label: "Speculation and outsized growth"
+      - id: "b"
+        label: "Generating income (e.g., premium selling)"
+      - id: "c"
+        label: "Hedging existing positions"
+      - id: "d"
+        label: "Leveraging a directional bet"
+      - id: "e"
+        label: "Learning or experimenting"
+      - id: "f"
+        label: "Not applicable"
+  - id: q9
+    prompt: "Do you trade short-dated weekly options or \"0DTE\" (zero-days-to-expiration) contracts?"
+    type: single_choice
+    construct: trade_short_dated_weekly_options
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, I prefer longer-dated contracts"
+      - id: "d"
+        label: "Not applicable"
+  - id: q10
+    prompt: "Do you use margin or leverage in your options trading?"
+    type: single_choice
+    construct: use_margin_leverage_options_trading
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable"
+  - id: q11
+    prompt: "What is the typical dollar size of an individual options position for you? Enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: typical_dollar_size_individual_options
+    required: true
+  - id: q12
+    prompt: "In a typical month, about how many options trades do you place? Enter a number (enter 0 if none)."
+    type: free_text
+    construct: typical_month_many_options_trades
+    required: true
+  - id: q13
+    prompt: "How do you primarily learn about options strategies? (Select all that apply)"
+    type: multi_choice
+    construct: primarily_learn_options_strategies_selec
+    required: true
+    options:
+      - id: "a"
+        label: "YouTube videos"
+      - id: "b"
+        label: "My brokerage's education content"
+      - id: "c"
+        label: "Books"
+      - id: "d"
+        label: "Online forums or Reddit (e.g., r/options, r/wallstreetbets)"
+      - id: "e"
+        label: "Paid courses or newsletters"
+      - id: "f"
+        label: "A financial advisor"
+      - id: "g"
+        label: "Friends or family"
+      - id: "h"
+        label: "Trial and error"
+  - id: q14
+    prompt: "Which tools do you use for options analysis? (Select all that apply)"
+    type: multi_choice
+    construct: tools_use_options_analysis_select
+    required: true
+    options:
+      - id: "a"
+        label: "Options chain and the Greeks (delta, theta, etc.)"
+      - id: "b"
+        label: "Implied volatility metrics"
+      - id: "c"
+        label: "Probability-of-profit calculators"
+      - id: "d"
+        label: "Charting and technical analysis"
+      - id: "e"
+        label: "Options screeners"
+      - id: "f"
+        label: "Unusual options activity or flow trackers"
+      - id: "g"
+        label: "None of these"
+  - id: q15
+    prompt: "How much do you agree with the following statement: Options are a core part of my overall investment strategy."
+    type: single_choice
+    construct: much_agree_following_statement_options
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I understand how the option Greeks (delta, gamma, theta, vega) affect my positions."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: Options trading often feels like gambling to me."
+    type: single_choice
+    construct: much_agree_following_statement_options
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement: I follow a written trading plan with defined entry and exit rules."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement: I consistently set and honor stop-losses or risk limits."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement: I only risk money I can afford to lose on options."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "When choosing an options trading platform, how important is: Low commissions and contract fees?"
+    type: single_choice
+    construct: when_choosing_options_trading_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When choosing an options trading platform, how important is: Fast, reliable trade execution?"
+    type: single_choice
+    construct: when_choosing_options_trading_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing an options trading platform, how important is: A clear options chain and analytics interface?"
+    type: single_choice
+    construct: when_choosing_options_trading_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing an options trading platform, how important is: Educational resources and research?"
+    type: single_choice
+    construct: when_choosing_options_trading_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing an options trading platform, how important is: Quality of the mobile app?"
+    type: single_choice
+    construct: when_choosing_options_trading_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "Select your top 3 factors when deciding to enter an options trade. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_when
+    required: true
+    options:
+      - id: "a"
+        label: "Implied volatility level"
+      - id: "b"
+        label: "My directional view on the underlying"
+      - id: "c"
+        label: "Upcoming catalysts (earnings, product events)"
+      - id: "d"
+        label: "Time to expiration"
+      - id: "e"
+        label: "Probability of profit"
+      - id: "f"
+        label: "Maximum potential loss"
+      - id: "g"
+        label: "Premium collected or paid"
+      - id: "h"
+        label: "Technical chart setup"
+  - id: q27
+    prompt: "Have you ever been assigned on a short option position?"
+    type: single_choice
+    construct: have_ever_been_assigned_short
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, multiple times"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable"
+  - id: q28
+    prompt: "Have you ever had an options position expire worthless (a total loss)?"
+    type: single_choice
+    construct: have_ever_had_options_position
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several times"
+      - id: "b"
+        label: "Yes, once or twice"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable"
+  - id: q29
+    prompt: "How closely do you monitor your open options positions?"
+    type: single_choice
+    construct: closely_monitor_open_options_positions
+    required: true
+    options:
+      - id: "a"
+        label: "Constantly throughout the trading day"
+      - id: "b"
+        label: "A few times a day"
+      - id: "c"
+        label: "Once a day"
+      - id: "d"
+        label: "A few times a week"
+      - id: "e"
+        label: "Rarely"
+  - id: q30
+    prompt: "How comfortable are you with the risk of options trading?"
+    type: single_choice
+    construct: comfortable_risk_options_trading
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Somewhat uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat comfortable"
+      - id: "e"
+        label: "Very comfortable"
+  - id: q31
+    prompt: "How often do your emotions (fear or greed) drive your options trading decisions?"
+    type: single_choice
+    construct: often_emotions_fear_greed_drive
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q32
+    prompt: "What is the largest single-day loss you have experienced on options as a share of the position?"
+    type: single_choice
+    construct: largest_single_day_loss_have
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 25%"
+      - id: "b"
+        label: "25–49%"
+      - id: "c"
+        label: "50–74%"
+      - id: "d"
+        label: "75–99%"
+      - id: "e"
+        label: "A total (100%) loss"
+      - id: "f"
+        label: "Not applicable"
+  - id: q33
+    prompt: "Overall, how profitable has your options trading been?"
+    type: single_choice
+    construct: overall_profitable_has_options_trading
+    required: true
+    options:
+      - id: "a"
+        label: "Consistently profitable"
+      - id: "b"
+        label: "Slightly profitable"
+      - id: "c"
+        label: "About break-even"
+      - id: "d"
+        label: "Slightly unprofitable"
+      - id: "e"
+        label: "Significant losses"
+      - id: "f"
+        label: "Too early to tell or not applicable"
+  - id: q34
+    prompt: "How satisfied are you with your primary options trading platform?"
+    type: single_choice
+    construct: satisfied_primary_options_trading_platfo
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "How likely are you to continue trading options over the next 12 months?"
+    type: single_choice
+    construct: likely_continue_trading_options_over
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q36
+    prompt: "On a scale of 0 to 10, how likely are you to recommend options trading to a friend who invests? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q37
+    prompt: "What has been your biggest lesson or challenge with options trading? Describe briefly. (Optional)"
+    type: free_text
+    construct: has_been_biggest_lesson_challenge
+    required: false
+  - id: q38
+    prompt: "How would you rate your overall investing knowledge?"
+    type: single_choice
+    construct: would_rate_overall_investing_knowledge
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert"
+  - id: q39
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q40
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Another race or ethnicity"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is your approximate annual household income before taxes?"
+    type: single_choice
+    construct: approximate_annual_household_income_befo
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $30,000"
+      - id: "b"
+        label: "$30,000 – $49,999"
+      - id: "c"
+        label: "$50,000 – $74,999"
+      - id: "d"
+        label: "$75,000 – $99,999"
+      - id: "e"
+        label: "$100,000 – $149,999"
+      - id: "f"
+        label: "$150,000 – $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school graduate or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q44
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+  - id: q45
+    prompt: "Including yourself, how many people live in your household? Enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q46
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q47
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q48
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q49
+    prompt: "Approximately what is the total value of your investable assets (excluding your primary home)?"
+    type: single_choice
+    construct: approximately_total_value_investable_ass
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $10,000"
+      - id: "b"
+        label: "$10,000 – $49,999"
+      - id: "c"
+        label: "$50,000 – $99,999"
+      - id: "d"
+        label: "$100,000 – $249,999"
+      - id: "e"
+        label: "$250,000 – $499,999"
+      - id: "f"
+        label: "$500,000 or more"
+      - id: "g"
+        label: "Prefer not to say"

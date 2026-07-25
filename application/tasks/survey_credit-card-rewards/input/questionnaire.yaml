@@ -1,0 +1,759 @@
+schemaVersion: "1.0"
+id: credit_card_rewards_v1
+title: "Credit Card Rewards Survey"
+description: "How people earn, choose, and redeem credit card rewards."
+questions:
+  - id: q0
+    prompt: "Do you currently have at least one rewards credit card?"
+    type: single_choice
+    construct: currently_have_least_one_rewards
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one rewards card"
+      - id: "b"
+        label: "Yes, multiple rewards cards"
+      - id: "c"
+        label: "No, only a card with no rewards"
+      - id: "d"
+        label: "No, I don't have a credit card"
+  - id: q1
+    prompt: "How many credit cards do you have in total?"
+    type: single_choice
+    construct: many_credit_cards_have_total
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3 to 4"
+      - id: "d"
+        label: "5 to 7"
+      - id: "e"
+        label: "8 or more"
+      - id: "f"
+        label: "None"
+  - id: q2
+    prompt: "What type of rewards does your primary card earn?"
+    type: single_choice
+    construct: type_rewards_does_primary_card
+    required: true
+    options:
+      - id: "a"
+        label: "Cash back"
+      - id: "b"
+        label: "Travel points or miles"
+      - id: "c"
+        label: "Store or brand-specific rewards"
+      - id: "d"
+        label: "A general points program (e.g., Chase Ultimate Rewards, Amex Membership Rewards)"
+      - id: "e"
+        label: "My main card doesn't earn rewards"
+  - id: q3
+    prompt: "Which rewards cards or issuers do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: rewards_cards_issuers_currently_use
+    required: true
+    options:
+      - id: "a"
+        label: "Chase (Sapphire, Freedom, etc.)"
+      - id: "b"
+        label: "American Express"
+      - id: "c"
+        label: "Capital One (Venture, Savor, etc.)"
+      - id: "d"
+        label: "Citi (Double Cash, Custom Cash, etc.)"
+      - id: "e"
+        label: "Discover"
+      - id: "f"
+        label: "A store or co-branded card (Amazon, Target, airline, hotel)"
+      - id: "g"
+        label: "Bank of America or Wells Fargo"
+      - id: "h"
+        label: "A credit union card"
+      - id: "i"
+        label: "None"
+  - id: q4
+    prompt: "How did you choose your primary rewards card? (Select all that apply)"
+    type: multi_choice
+    construct: did_choose_primary_rewards_card
+    required: true
+    options:
+      - id: "a"
+        label: "Sign-up / welcome bonus"
+      - id: "b"
+        label: "High rewards rate in categories I spend on"
+      - id: "c"
+        label: "No annual fee"
+      - id: "d"
+        label: "Travel perks (lounge access, credits, status)"
+      - id: "e"
+        label: "Recommendation from friends or family"
+      - id: "f"
+        label: "Points transfer partners"
+      - id: "g"
+        label: "A points/miles blog or YouTube channel"
+      - id: "h"
+        label: "It matched a brand I use often"
+  - id: q5
+    prompt: "Does your primary rewards card charge an annual fee?"
+    type: single_choice
+    construct: does_primary_rewards_card_charge
+    required: true
+    options:
+      - id: "a"
+        label: "No annual fee"
+      - id: "b"
+        label: "Yes, under $100"
+      - id: "c"
+        label: "Yes, $100 to $250"
+      - id: "d"
+        label: "Yes, $251 to $550"
+      - id: "e"
+        label: "Yes, more than $550"
+  - id: q6
+    prompt: "In a typical month, how much of your spending goes on rewards credit cards?"
+    type: single_choice
+    construct: typical_month_much_spending_goes
+    required: true
+    options:
+      - id: "a"
+        label: "Almost none"
+      - id: "b"
+        label: "Less than a quarter"
+      - id: "c"
+        label: "About half"
+      - id: "d"
+        label: "Most of it"
+      - id: "e"
+        label: "Nearly all of it"
+  - id: q7
+    prompt: "How do you pay your credit card balance each month?"
+    type: single_choice
+    construct: pay_credit_card_balance_each
+    required: true
+    options:
+      - id: "a"
+        label: "I pay the full balance every month"
+      - id: "b"
+        label: "I usually pay in full but occasionally carry a balance"
+      - id: "c"
+        label: "I carry a balance most months"
+      - id: "d"
+        label: "I pay only the minimum"
+  - id: q8
+    prompt: "Which spending categories do you specifically use rewards cards to maximize? (Select all that apply)"
+    type: multi_choice
+    construct: spending_categories_specifically_use_rew
+    required: true
+    options:
+      - id: "a"
+        label: "Groceries"
+      - id: "b"
+        label: "Dining and restaurants"
+      - id: "c"
+        label: "Gas and transportation"
+      - id: "d"
+        label: "Travel (flights, hotels)"
+      - id: "e"
+        label: "Online shopping"
+      - id: "f"
+        label: "Streaming and subscriptions"
+      - id: "g"
+        label: "Everyday / everything else"
+      - id: "h"
+        label: "I don't optimize by category"
+  - id: q9
+    prompt: "How do you typically redeem your rewards?"
+    type: single_choice
+    construct: typically_redeem_rewards
+    required: true
+    options:
+      - id: "a"
+        label: "Statement credit or cash back"
+      - id: "b"
+        label: "Travel through the card's portal"
+      - id: "c"
+        label: "Transfer points to airline/hotel partners"
+      - id: "d"
+        label: "Gift cards"
+      - id: "e"
+        label: "Merchandise or shopping"
+      - id: "f"
+        label: "I let them accumulate and rarely redeem"
+  - id: q10
+    prompt: "In the past 12 months, have you opened a new card mainly for its sign-up bonus?"
+    type: single_choice
+    construct: past_12_months_have_opened
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No"
+  - id: q11
+    prompt: "How often do you actively track or optimize your rewards earning?"
+    type: single_choice
+    construct: often_actively_track_optimize_rewards
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Constantly"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Maximizing credit card rewards is worth the effort."
+    type: single_choice
+    construct: much_agree_following_statement_maximizin
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: An annual fee is worth paying if the perks outweigh it."
+    type: single_choice
+    construct: much_agree_following_statement_annual
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: Having rewards cards tempts me to spend more than I otherwise would."
+    type: single_choice
+    construct: much_agree_following_statement_having
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: Keeping track of multiple cards and categories is more trouble than it's worth."
+    type: single_choice
+    construct: much_agree_following_statement_keeping
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I always pay my balance in full to avoid interest wiping out my rewards."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How important is each of the following in a rewards card: A large sign-up bonus."
+    type: single_choice
+    construct: important_each_following_rewards_card
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each of the following in a rewards card: No annual fee."
+    type: single_choice
+    construct: important_each_following_rewards_card
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is each of the following in a rewards card: A high everyday rewards rate."
+    type: single_choice
+    construct: important_each_following_rewards_card
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is each of the following in a rewards card: Travel perks (lounge access, credits, status)."
+    type: single_choice
+    construct: important_each_following_rewards_card
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each of the following in a rewards card: Flexible redemption options."
+    type: single_choice
+    construct: important_each_following_rewards_card
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "Roughly how much do you estimate you earn in rewards value per year across all cards?"
+    type: single_choice
+    construct: roughly_much_estimate_earn_rewards
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $100"
+      - id: "b"
+        label: "$100 to $299"
+      - id: "c"
+        label: "$300 to $599"
+      - id: "d"
+        label: "$600 to $999"
+      - id: "e"
+        label: "$1,000 or more"
+      - id: "f"
+        label: "I have no idea"
+  - id: q23
+    prompt: "Where do you get information about credit card rewards? (Select all that apply)"
+    type: multi_choice
+    construct: where_get_information_credit_card
+    required: true
+    options:
+      - id: "a"
+        label: "Points/miles blogs (e.g., The Points Guy, Doctor of Credit)"
+      - id: "b"
+        label: "YouTube or podcasts"
+      - id: "c"
+        label: "Reddit or online forums"
+      - id: "d"
+        label: "Friends or family"
+      - id: "e"
+        label: "Comparison sites (NerdWallet, Bankrate)"
+      - id: "f"
+        label: "The card issuer directly"
+      - id: "g"
+        label: "I don't follow rewards content"
+  - id: q24
+    prompt: "Have you ever downgraded or canceled a card to avoid its annual fee?"
+    type: single_choice
+    construct: have_ever_downgraded_canceled_card
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No"
+  - id: q25
+    prompt: "How do you feel about carrying multiple credit cards?"
+    type: single_choice
+    construct: feel_carrying_multiple_credit_cards
+    required: true
+    options:
+      - id: "a"
+        label: "I enjoy optimizing across several cards"
+      - id: "b"
+        label: "I keep a few for different categories"
+      - id: "c"
+        label: "I prefer to keep it simple with one or two"
+      - id: "d"
+        label: "I'd rather have just one card"
+  - id: q26
+    prompt: "Have rewards ever influenced you to make a purchase you wouldn't have otherwise?"
+    type: single_choice
+    construct: have_rewards_ever_influenced_make
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "Never"
+  - id: q27
+    prompt: "Select your top 3 reasons you use rewards credit cards. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_use
+    required: true
+    options:
+      - id: "a"
+        label: "Cash back / saving money"
+      - id: "b"
+        label: "Free or discounted travel"
+      - id: "c"
+        label: "Welcome bonuses"
+      - id: "d"
+        label: "Purchase protection and insurance"
+      - id: "e"
+        label: "Building credit history"
+      - id: "f"
+        label: "Convenience over cash/debit"
+      - id: "g"
+        label: "Premium perks and status"
+      - id: "h"
+        label: "Fraud protection"
+  - id: q28
+    prompt: "How confident are you that you're getting good value from your rewards cards?"
+    type: single_choice
+    construct: confident_that_re_getting_good
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q29
+    prompt: "Overall, how satisfied are you with your primary rewards card?"
+    type: single_choice
+    construct: overall_satisfied_primary_rewards_card
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How likely are you to apply for a new rewards card in the next 12 months?"
+    type: single_choice
+    construct: likely_apply_new_rewards_card
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "On a scale from 0 to 10, how likely are you to recommend your primary rewards card to a friend, where 0 is not at all likely and 10 is extremely likely?"
+    type: single_choice
+    construct: scale_from_0_10_likely
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "About how much do you charge to credit cards in a typical month? Please enter a dollar amount."
+    type: free_text
+    construct: much_charge_credit_cards_typical
+    required: true
+  - id: q33
+    prompt: "How much do you pay in credit card annual fees across all your cards per year? Please enter a dollar amount."
+    type: free_text
+    construct: much_pay_credit_card_annual
+    required: true
+  - id: q34
+    prompt: "If there is anything else you'd like to share about how you use credit card rewards, please describe it briefly."
+    type: free_text
+    construct: if_there_anything_else_d
+    required: false
+  - id: q35
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Another race or ethnicity"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your annual household income before taxes?"
+    type: single_choice
+    construct: annual_household_income_before_taxes
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school graduate or equivalent"
+      - id: "c"
+        label: "Some college or associate's degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q40
+    prompt: "Which best describes your current employment status?"
+    type: single_choice
+    construct: best_describes_current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelance"
+      - id: "d"
+        label: "Not employed, looking for work"
+      - id: "e"
+        label: "Not employed, not looking for work"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q41
+    prompt: "How would you describe your credit score range?"
+    type: single_choice
+    construct: would_describe_credit_score_range
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent (740+)"
+      - id: "b"
+        label: "Good (670–739)"
+      - id: "c"
+        label: "Fair (580–669)"
+      - id: "d"
+        label: "Poor (below 580)"
+      - id: "e"
+        label: "I don't know"
+  - id: q42
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q43
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q45
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q46
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"

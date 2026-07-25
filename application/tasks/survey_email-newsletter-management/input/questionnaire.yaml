@@ -1,0 +1,792 @@
+schemaVersion: "1.0"
+id: email_newsletter_management_v1
+title: "Email Newsletter Management Survey"
+description: "How people manage their email inboxes, newsletter subscriptions, and promotional mail."
+questions:
+  - id: q0
+    prompt: "How would you describe the state of your primary email inbox?"
+    type: single_choice
+    construct: would_describe_state_primary_email
+    required: true
+    options:
+      - id: "a"
+        label: "Inbox Zero — I keep it empty"
+      - id: "b"
+        label: "Well managed — few unread"
+      - id: "c"
+        label: "Somewhat cluttered"
+      - id: "d"
+        label: "Very cluttered"
+      - id: "e"
+        label: "Overwhelmed — thousands of unread messages"
+      - id: "f"
+        label: "Not sure"
+  - id: q1
+    prompt: "How many email newsletters are you currently subscribed to?"
+    type: single_choice
+    construct: many_email_newsletters_currently_subscri
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1-5"
+      - id: "c"
+        label: "6-15"
+      - id: "d"
+        label: "16-30"
+      - id: "e"
+        label: "31-50"
+      - id: "f"
+        label: "More than 50"
+  - id: q2
+    prompt: "How many active email accounts do you use?"
+    type: single_choice
+    construct: many_active_email_accounts_use
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4 or more"
+  - id: q3
+    prompt: "How often do you check your email?"
+    type: single_choice
+    construct: often_check_email
+    required: true
+    options:
+      - id: "a"
+        label: "Constantly throughout the day"
+      - id: "b"
+        label: "Several times a day"
+      - id: "c"
+        label: "Once or twice a day"
+      - id: "d"
+        label: "A few times a week"
+      - id: "e"
+        label: "Rarely"
+  - id: q4
+    prompt: "Which email providers or apps do you use? (Select all that apply)"
+    type: multi_choice
+    construct: email_providers_apps_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Gmail"
+      - id: "b"
+        label: "Microsoft Outlook / Outlook.com"
+      - id: "c"
+        label: "Apple Mail / iCloud Mail"
+      - id: "d"
+        label: "Yahoo Mail"
+      - id: "e"
+        label: "Proton Mail"
+      - id: "f"
+        label: "Thunderbird"
+      - id: "g"
+        label: "Spark"
+      - id: "h"
+        label: "Superhuman"
+      - id: "i"
+        label: "A work / company email system"
+      - id: "j"
+        label: "Other"
+  - id: q5
+    prompt: "How do you typically read newsletters? (Select all that apply)"
+    type: multi_choice
+    construct: typically_read_newsletters_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "In my main inbox alongside everything else"
+      - id: "b"
+        label: "In a dedicated folder or label"
+      - id: "c"
+        label: "Sent to a separate email address"
+      - id: "d"
+        label: "In a read-later app (e.g., Matter, Readwise)"
+      - id: "e"
+        label: "In a newsletter app (e.g., Meco, Substack app)"
+      - id: "f"
+        label: "Via RSS"
+      - id: "g"
+        label: "I subscribe but rarely read them"
+  - id: q6
+    prompt: "What topics do your newsletters cover? (Select all that apply)"
+    type: multi_choice
+    construct: topics_newsletters_cover_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "General news"
+      - id: "b"
+        label: "Technology"
+      - id: "c"
+        label: "Finance / investing"
+      - id: "d"
+        label: "Hobbies and interests"
+      - id: "e"
+        label: "Retail deals / promotions"
+      - id: "f"
+        label: "Work / industry updates"
+      - id: "g"
+        label: "Individual creators / writers"
+      - id: "h"
+        label: "Health and wellness"
+      - id: "i"
+        label: "I don't subscribe to newsletters"
+  - id: q7
+    prompt: "How do you manage the newsletters and promotional email you receive? (Select all that apply)"
+    type: multi_choice
+    construct: manage_newsletters_promotional_email_rec
+    required: true
+    options:
+      - id: "a"
+        label: "Filters or rules to sort them automatically"
+      - id: "b"
+        label: "Folders or labels"
+      - id: "c"
+        label: "Unsubscribe when I lose interest"
+      - id: "d"
+        label: "Mark as read and leave them"
+      - id: "e"
+        label: "Bulk delete periodically"
+      - id: "f"
+        label: "Use an unsubscribe tool (Unroll.me, Clean Email, etc.)"
+      - id: "g"
+        label: "Report as spam"
+      - id: "h"
+        label: "I don't actively manage them"
+  - id: q8
+    prompt: "How often do you unsubscribe from emails you no longer want?"
+    type: single_choice
+    construct: often_unsubscribe_from_emails_no
+    required: true
+    options:
+      - id: "a"
+        label: "As soon as I lose interest"
+      - id: "b"
+        label: "During periodic clean-ups"
+      - id: "c"
+        label: "Only when I'm really annoyed"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never — I just delete or ignore them"
+  - id: q9
+    prompt: "What do you usually do with promotional or marketing emails?"
+    type: single_choice
+    construct: usually_promotional_marketing_emails
+    required: true
+    options:
+      - id: "a"
+        label: "Read the ones that interest me"
+      - id: "b"
+        label: "Skim the subject lines and delete"
+      - id: "c"
+        label: "Let them pile up unread"
+      - id: "d"
+        label: "Auto-filter them out of my inbox"
+      - id: "e"
+        label: "Unsubscribe or mark as spam"
+  - id: q10
+    prompt: "Approximately how many unread emails are in your primary inbox right now? Enter a whole number."
+    type: free_text
+    construct: approximately_many_unread_emails_primary
+    required: true
+  - id: q11
+    prompt: "Approximately how many newsletters do you receive in a typical week? Enter a whole number."
+    type: free_text
+    construct: approximately_many_newsletters_receive_t
+    required: true
+  - id: q12
+    prompt: "On an average day, roughly how many minutes do you spend reading and managing email? Enter a whole number."
+    type: free_text
+    construct: average_day_roughly_many_minutes
+    required: true
+  - id: q13
+    prompt: "How much do you agree with the following statement about your email? My inbox feels under control."
+    type: single_choice
+    construct: much_agree_following_statement_email
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement about your email? I receive more newsletters than I can keep up with."
+    type: single_choice
+    construct: much_agree_following_statement_email
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement about your email? I read most of the newsletters I subscribe to."
+    type: single_choice
+    construct: much_agree_following_statement_email
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about your email? Unsubscribing is more hassle than just deleting emails."
+    type: single_choice
+    construct: much_agree_following_statement_email
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about your email? Newsletters are a valuable source of information for me."
+    type: single_choice
+    construct: much_agree_following_statement_email
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about your email? Email overload stresses me out."
+    type: single_choice
+    construct: much_agree_following_statement_email
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about your email? I feel guilty about unread messages piling up."
+    type: single_choice
+    construct: much_agree_following_statement_email
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Which best describes your inbox philosophy?"
+    type: single_choice
+    construct: best_describes_inbox_philosophy
+    required: true
+    options:
+      - id: "a"
+        label: "Inbox Zero — I clear everything"
+      - id: "b"
+        label: "Keep it tidy but not empty"
+      - id: "c"
+        label: "Only act on what matters, ignore the rest"
+      - id: "d"
+        label: "Let it pile up and search when needed"
+      - id: "e"
+        label: "I don't have a philosophy"
+  - id: q21
+    prompt: "How important is each email feature to you? Effective spam filtering."
+    type: single_choice
+    construct: important_each_email_feature_effective
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each email feature to you? Easy one-click unsubscribe."
+    type: single_choice
+    construct: important_each_email_feature_easy
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each email feature to you? Folders, labels, and filtering rules."
+    type: single_choice
+    construct: important_each_email_feature_folders
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each email feature to you? Powerful search."
+    type: single_choice
+    construct: important_each_email_feature_powerful
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is each email feature to you? Snooze and reminders."
+    type: single_choice
+    construct: important_each_email_feature_snooze
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important is each email feature to you? Syncing across all my devices."
+    type: single_choice
+    construct: important_each_email_feature_syncing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Select your top 3 reasons for subscribing to newsletters. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_subscribing
+    required: true
+    options:
+      - id: "a"
+        label: "Stay informed on news"
+      - id: "b"
+        label: "Learn about a hobby or interest"
+      - id: "c"
+        label: "Follow specific writers or creators"
+      - id: "d"
+        label: "Professional / industry knowledge"
+      - id: "e"
+        label: "Deals and discounts"
+      - id: "f"
+        label: "Curated recommendations"
+      - id: "g"
+        label: "Entertainment"
+      - id: "h"
+        label: "I don't subscribe to newsletters"
+  - id: q28
+    prompt: "What most often makes you unsubscribe from a newsletter? (Select all that apply)"
+    type: multi_choice
+    construct: most_often_makes_unsubscribe_from
+    required: true
+    options:
+      - id: "a"
+        label: "Too frequent"
+      - id: "b"
+        label: "No longer relevant"
+      - id: "c"
+        label: "Too much advertising / selling"
+      - id: "d"
+        label: "Content quality declined"
+      - id: "e"
+        label: "Inbox is too cluttered"
+      - id: "f"
+        label: "I never signed up on purpose"
+      - id: "g"
+        label: "I rarely unsubscribe"
+  - id: q29
+    prompt: "Do you use a separate email address for signups and newsletters?"
+    type: single_choice
+    construct: use_separate_email_address_signups
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a dedicated address"
+      - id: "b"
+        label: "Yes, an email alias or masked address"
+      - id: "c"
+        label: "No, I use my main address"
+      - id: "d"
+        label: "Not sure"
+  - id: q30
+    prompt: "When was the last time you did a serious inbox clean-up?"
+    type: single_choice
+    construct: when_was_last_time_did
+    required: true
+    options:
+      - id: "a"
+        label: "Within the last week"
+      - id: "b"
+        label: "Within the last month"
+      - id: "c"
+        label: "Within the last 6 months"
+      - id: "d"
+        label: "More than 6 months ago"
+      - id: "e"
+        label: "Never"
+  - id: q31
+    prompt: "How would you rate your overall satisfaction with how you manage email?"
+    type: single_choice
+    construct: would_rate_overall_satisfaction_manage
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How in control of your inbox do you feel overall?"
+    type: single_choice
+    construct: control_inbox_feel_overall
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all in control"
+      - id: "b"
+        label: "Slightly in control"
+      - id: "c"
+        label: "Moderately in control"
+      - id: "d"
+        label: "Very in control"
+      - id: "e"
+        label: "Completely in control"
+  - id: q33
+    prompt: "How likely are you to declutter or reorganize your email in the next 12 months?"
+    type: single_choice
+    construct: likely_declutter_reorganize_email_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your main email provider to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "If you could change one thing about how you handle email, what would it be? (Optional short answer)"
+    type: free_text
+    construct: if_could_change_one_thing
+    required: false
+  - id: q36
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18-24"
+      - id: "c"
+        label: "25-34"
+      - id: "d"
+        label: "35-44"
+      - id: "e"
+        label: "45-54"
+      - id: "f"
+        label: "55-64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000-$49,999"
+      - id: "c"
+        label: "$50,000-$74,999"
+      - id: "d"
+        label: "$75,000-$99,999"
+      - id: "e"
+        label: "$100,000-$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Homemaker"
+      - id: "f"
+        label: "Unemployed"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "How many people live in your household, including yourself? Enter a whole number."
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q43
+    prompt: "What is your relationship status?"
+    type: single_choice
+    construct: relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or domestic partnership"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q45
+    prompt: "How would you describe where you live?"
+    type: single_choice
+    construct: would_describe_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q46
+    prompt: "How much do you rely on email for your work or main daily activities?"
+    type: single_choice
+    construct: much_rely_email_work_main
+    required: true
+    options:
+      - id: "a"
+        label: "It's central to my day"
+      - id: "b"
+        label: "I use it a fair amount"
+      - id: "c"
+        label: "I use it occasionally"
+      - id: "d"
+        label: "I barely use it for work"
+      - id: "e"
+        label: "Not applicable"
+  - id: q47
+    prompt: "How would you describe your comfort with technology in general?"
+    type: single_choice
+    construct: would_describe_comfort_technology_genera
+    required: true
+    options:
+      - id: "a"
+        label: "I'm an early adopter who loves new tech"
+      - id: "b"
+        label: "Comfortable and fairly up to date"
+      - id: "c"
+        label: "Average — I use what I need"
+      - id: "d"
+        label: "A bit behind the curve"
+      - id: "e"
+        label: "I find new technology difficult"

@@ -1,0 +1,793 @@
+schemaVersion: "1.0"
+id: senior_health_services_v1
+title: "Senior Health Services Survey"
+description: "Attitudes toward and use of health and wellness services aimed at older adults."
+questions:
+  - id: q0
+    prompt: "Are you answering these questions mainly about yourself or about an older adult you help?"
+    type: single_choice
+    construct: answering_these_questions_mainly_yoursel
+    required: true
+    options:
+      - id: "a"
+        label: "About myself"
+      - id: "b"
+        label: "About a parent or older relative I help"
+      - id: "c"
+        label: "About another older adult I help"
+      - id: "d"
+        label: "About both myself and someone I help"
+  - id: q1
+    prompt: "Which age range applies to the older adult these questions are about?"
+    type: single_choice
+    construct: age_range_applies_older_adult
+    required: true
+    options:
+      - id: "a"
+        label: "Under 60"
+      - id: "b"
+        label: "60 to 69"
+      - id: "c"
+        label: "70 to 79"
+      - id: "d"
+        label: "80 to 89"
+      - id: "e"
+        label: "90 or older"
+  - id: q2
+    prompt: "What is the current living situation of that older adult?"
+    type: single_choice
+    construct: current_living_situation_that_older
+    required: true
+    options:
+      - id: "a"
+        label: "Lives independently at home, alone"
+      - id: "b"
+        label: "Lives independently at home, with family or a partner"
+      - id: "c"
+        label: "Lives in an independent living community"
+      - id: "d"
+        label: "Lives in an assisted living community"
+      - id: "e"
+        label: "Other arrangement"
+  - id: q3
+    prompt: "Which senior-focused health or wellness services have been used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: senior_focused_health_wellness_services
+    required: true
+    options:
+      - id: "a"
+        label: "Medicare annual wellness visit"
+      - id: "b"
+        label: "Senior center programs or classes"
+      - id: "c"
+        label: "Transportation to medical appointments"
+      - id: "d"
+        label: "Meal delivery (e.g., Meals on Wheels)"
+      - id: "e"
+        label: "In-home help with daily tasks"
+      - id: "f"
+        label: "Fall-prevention or balance program"
+      - id: "g"
+        label: "Pharmacy medication review"
+      - id: "h"
+        label: "None of these"
+  - id: q4
+    prompt: "Which health care providers are seen regularly? (Select all that apply)"
+    type: multi_choice
+    construct: health_care_providers_seen_regularly
+    required: true
+    options:
+      - id: "a"
+        label: "Primary care doctor"
+      - id: "b"
+        label: "Specialist (e.g., cardiologist, ophthalmologist)"
+      - id: "c"
+        label: "Dentist"
+      - id: "d"
+        label: "Audiologist or hearing specialist"
+      - id: "e"
+        label: "Physical or occupational therapist"
+      - id: "f"
+        label: "Pharmacist for medication guidance"
+      - id: "g"
+        label: "None regularly"
+  - id: q5
+    prompt: "How often are routine checkups or wellness visits scheduled?"
+    type: single_choice
+    construct: often_routine_checkups_wellness_visits
+    required: true
+    options:
+      - id: "a"
+        label: "More than twice a year"
+      - id: "b"
+        label: "About twice a year"
+      - id: "c"
+        label: "Once a year"
+      - id: "d"
+        label: "Less than once a year"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q6
+    prompt: "What type of insurance coverage is used?"
+    type: single_choice
+    construct: type_insurance_coverage_used
+    required: true
+    options:
+      - id: "a"
+        label: "Original Medicare"
+      - id: "b"
+        label: "Medicare Advantage plan"
+      - id: "c"
+        label: "Medicare plus a supplement (Medigap)"
+      - id: "d"
+        label: "Medicare and Medicaid together"
+      - id: "e"
+        label: "Other coverage"
+      - id: "f"
+        label: "Not sure"
+  - id: q7
+    prompt: "How are most medical appointments scheduled?"
+    type: single_choice
+    construct: most_medical_appointments_scheduled
+    required: true
+    options:
+      - id: "a"
+        label: "By phone"
+      - id: "b"
+        label: "Through an online portal or app"
+      - id: "c"
+        label: "In person at the office"
+      - id: "d"
+        label: "A family member or helper arranges them"
+      - id: "e"
+        label: "A mix of methods"
+  - id: q8
+    prompt: "What is the usual way to get to medical appointments?"
+    type: single_choice
+    construct: usual_way_get_medical_appointments
+    required: true
+    options:
+      - id: "a"
+        label: "Drive myself"
+      - id: "b"
+        label: "Ride from family or friends"
+      - id: "c"
+        label: "Senior or medical transportation service"
+      - id: "d"
+        label: "Public transit"
+      - id: "e"
+        label: "Rideshare or taxi"
+      - id: "f"
+        label: "Telehealth, so no travel needed"
+  - id: q9
+    prompt: "How many prescription medications are taken regularly? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: many_prescription_medications_taken_regu
+    required: true
+  - id: q10
+    prompt: "Which tools help with managing medications? (Select all that apply)"
+    type: multi_choice
+    construct: tools_help_managing_medications_select
+    required: true
+    options:
+      - id: "a"
+        label: "A weekly pill organizer"
+      - id: "b"
+        label: "Reminders on a phone or device"
+      - id: "c"
+        label: "A pharmacy that pre-sorts doses"
+      - id: "d"
+        label: "A family member's help"
+      - id: "e"
+        label: "A written list or chart"
+      - id: "f"
+        label: "No special tools"
+  - id: q11
+    prompt: "Which technology is used for health-related purposes? (Select all that apply)"
+    type: multi_choice
+    construct: technology_used_health_related_purposes
+    required: true
+    options:
+      - id: "a"
+        label: "Patient portal or health app"
+      - id: "b"
+        label: "Video visits (telehealth)"
+      - id: "c"
+        label: "A wearable or medical alert device"
+      - id: "d"
+        label: "Home blood pressure or glucose monitor"
+      - id: "e"
+        label: "Large-button phone or tablet"
+      - id: "f"
+        label: "None of these"
+  - id: q12
+    prompt: "How comfortable is the older adult using health technology like apps or portals?"
+    type: single_choice
+    construct: comfortable_older_adult_using_health
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Completely comfortable"
+  - id: q13
+    prompt: "How easy is it to get a timely appointment with a primary care provider?"
+    type: single_choice
+    construct: easy_it_get_timely_appointment
+    required: true
+    options:
+      - id: "a"
+        label: "Very difficult"
+      - id: "b"
+        label: "Difficult"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Easy"
+      - id: "e"
+        label: "Very easy"
+  - id: q14
+    prompt: "How much do you agree with the following statement: The available senior health services meet the needs well."
+    type: single_choice
+    construct: much_agree_following_statement_available
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: It is easy to find out what senior services are available locally."
+    type: single_choice
+    construct: much_agree_following_statement_it
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: Cost is a barrier to using more senior health services."
+    type: single_choice
+    construct: much_agree_following_statement_cost
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: Providers listen and take concerns seriously."
+    type: single_choice
+    construct: much_agree_following_statement_providers
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement: Staying independent at home for as long as possible is a top priority."
+    type: single_choice
+    construct: much_agree_following_statement_staying
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement: Coordinating care among different providers is difficult."
+    type: single_choice
+    construct: much_agree_following_statement_coordinat
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How important is the following in a senior health service: Convenient location or transportation."
+    type: single_choice
+    construct: important_following_senior_health_servic
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is the following in a senior health service: Staff who are patient and easy to talk to."
+    type: single_choice
+    construct: important_following_senior_health_servic
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is the following in a senior health service: Being covered by insurance."
+    type: single_choice
+    construct: important_following_senior_health_servic
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is the following in a senior health service: Short wait times."
+    type: single_choice
+    construct: important_following_senior_health_servic
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is the following in a senior health service: Help coordinating between providers."
+    type: single_choice
+    construct: important_following_senior_health_servic
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is the following in a senior health service: Clear, easy-to-understand information."
+    type: single_choice
+    construct: important_following_senior_health_servic
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "Which senior services would be most valuable to add or use more? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: senior_services_would_be_most
+    required: true
+    options:
+      - id: "a"
+        label: "Help with transportation to appointments"
+      - id: "b"
+        label: "In-home help with daily tasks"
+      - id: "c"
+        label: "Fall-prevention or exercise programs"
+      - id: "d"
+        label: "Medication management support"
+      - id: "e"
+        label: "Care coordination or a care navigator"
+      - id: "f"
+        label: "Social or wellness activities"
+      - id: "g"
+        label: "Meal delivery"
+      - id: "h"
+        label: "Help understanding insurance and benefits"
+  - id: q27
+    prompt: "Which wellness or social activities are part of a typical week? (Select all that apply)"
+    type: multi_choice
+    construct: wellness_social_activities_part_typical
+    required: true
+    options:
+      - id: "a"
+        label: "Walking or light exercise"
+      - id: "b"
+        label: "Group fitness or senior classes"
+      - id: "c"
+        label: "Social clubs or community groups"
+      - id: "d"
+        label: "Volunteering"
+      - id: "e"
+        label: "Religious or faith activities"
+      - id: "f"
+        label: "Hobbies or crafts"
+      - id: "g"
+        label: "None of these"
+  - id: q28
+    prompt: "How would you rate overall physical mobility and getting around day to day?"
+    type: single_choice
+    construct: would_rate_overall_physical_mobility
+    required: true
+    options:
+      - id: "a"
+        label: "Poor"
+      - id: "b"
+        label: "Fair"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Very good"
+      - id: "e"
+        label: "Excellent"
+  - id: q29
+    prompt: "How often is help needed with errands, chores, or daily tasks?"
+    type: single_choice
+    construct: often_help_needed_errands_chores
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q30
+    prompt: "Who provides most of that help when it is needed?"
+    type: single_choice
+    construct: who_provides_most_that_help
+    required: true
+    options:
+      - id: "a"
+        label: "Spouse or partner"
+      - id: "b"
+        label: "Adult children or other family"
+      - id: "c"
+        label: "Paid helper or aide"
+      - id: "d"
+        label: "Friends or neighbors"
+      - id: "e"
+        label: "No help is needed"
+  - id: q31
+    prompt: "How is information about senior health services usually found? (Select all that apply)"
+    type: multi_choice
+    construct: information_senior_health_services_usual
+    required: true
+    options:
+      - id: "a"
+        label: "Doctor or clinic referral"
+      - id: "b"
+        label: "Family or friends"
+      - id: "c"
+        label: "Local senior center or Area Agency on Aging"
+      - id: "d"
+        label: "Insurance plan materials"
+      - id: "e"
+        label: "Online search or websites"
+      - id: "f"
+        label: "I don't know where to look"
+  - id: q32
+    prompt: "About how far is the nearest primary care office? Please enter a number of miles."
+    type: free_text
+    construct: far_nearest_primary_care_office
+    required: true
+  - id: q33
+    prompt: "How confident are you in managing overall health and health care day to day?"
+    type: single_choice
+    construct: confident_managing_overall_health_health
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+  - id: q34
+    prompt: "Overall, how satisfied are you with the senior health services available?"
+    type: single_choice
+    construct: overall_satisfied_senior_health_services
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "How likely are you to try a new senior health or wellness service in the next year?"
+    type: single_choice
+    construct: likely_try_new_senior_health
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q36
+    prompt: "On a scale of 0 to 10, how likely are you to recommend the senior health services used to another older adult? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q37
+    prompt: "What would most improve access to senior health services? Please describe briefly."
+    type: free_text
+    construct: would_most_improve_access_senior
+    required: true
+  - id: q38
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–34"
+      - id: "b"
+        label: "35–44"
+      - id: "c"
+        label: "45–54"
+      - id: "d"
+        label: "55–64"
+      - id: "e"
+        label: "65–74"
+      - id: "f"
+        label: "75 or older"
+  - id: q39
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which of the following best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Other"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college"
+      - id: "c"
+        label: "Associate's degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Not employed for other reasons"
+  - id: q44
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q45
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "Which region of the country do you live in?"
+    type: single_choice
+    construct: region_country_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q47
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q48
+    prompt: "Do you or the older adult own or rent your home?"
+    type: single_choice
+    construct: older_adult_own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Live with family"
+      - id: "d"
+        label: "Senior living community"
+      - id: "e"
+        label: "Prefer not to say"

@@ -1,0 +1,615 @@
+schemaVersion: "1.0"
+id: side_hustle_earnings_v1
+title: "Side Hustle Earnings Survey"
+description: "How people run, earn from, and feel about a side hustle alongside their main income."
+questions:
+  - id: q0
+    prompt: "Do you currently earn money from a side hustle (any income outside your main job)?"
+    type: single_choice
+    construct: currently_earn_money_from_side
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "I did in the past but not now"
+      - id: "d"
+        label: "No, but I'd like to"
+      - id: "e"
+        label: "No"
+  - id: q1
+    prompt: "What type of side hustle do you have? (Select all that apply)"
+    type: multi_choice
+    construct: type_side_hustle_have_select
+    required: true
+    options:
+      - id: "a"
+        label: "Selling handmade or resale goods online"
+      - id: "b"
+        label: "Freelance services (writing, design, consulting)"
+      - id: "c"
+        label: "Content creation (YouTube, streaming, blogging)"
+      - id: "d"
+        label: "Tutoring or teaching"
+      - id: "e"
+        label: "Pet sitting, babysitting, or house sitting"
+      - id: "f"
+        label: "Renting out property or a room"
+      - id: "g"
+        label: "Reselling or flipping items"
+      - id: "h"
+        label: "Crafts, art, or a small product business"
+      - id: "i"
+        label: "None of these"
+  - id: q2
+    prompt: "How long have you had your side hustle?"
+    type: single_choice
+    construct: long_have_had_side_hustle
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+  - id: q3
+    prompt: "In a typical week, how many hours do you spend on your side hustle? Enter a number of hours."
+    type: free_text
+    construct: typical_week_many_hours_spend
+    required: true
+  - id: q4
+    prompt: "Approximately how much does your side hustle earn in a typical month? Enter a dollar amount."
+    type: free_text
+    construct: approximately_much_does_side_hustle
+    required: true
+  - id: q5
+    prompt: "Why did you start your side hustle? (Select all that apply)"
+    type: multi_choice
+    construct: why_did_start_side_hustle
+    required: true
+    options:
+      - id: "a"
+        label: "Extra income"
+      - id: "b"
+        label: "Pursue a passion or hobby"
+      - id: "c"
+        label: "Pay off debt"
+      - id: "d"
+        label: "Save for a specific goal"
+      - id: "e"
+        label: "Build toward a full-time business"
+      - id: "f"
+        label: "Job insecurity in my main job"
+      - id: "g"
+        label: "Learn new skills"
+  - id: q6
+    prompt: "What do you mainly do with your side-hustle income?"
+    type: single_choice
+    construct: mainly_side_hustle_income
+    required: true
+    options:
+      - id: "a"
+        label: "Cover everyday expenses"
+      - id: "b"
+        label: "Pay down debt"
+      - id: "c"
+        label: "Add to savings or investments"
+      - id: "d"
+        label: "Fund a specific goal or purchase"
+      - id: "e"
+        label: "Reinvest in the side hustle"
+      - id: "f"
+        label: "Discretionary spending or fun"
+  - id: q7
+    prompt: "How did you find customers or clients for your side hustle? (Select all that apply)"
+    type: multi_choice
+    construct: did_find_customers_clients_side
+    required: true
+    options:
+      - id: "a"
+        label: "Social media"
+      - id: "b"
+        label: "An online marketplace or platform"
+      - id: "c"
+        label: "Word of mouth"
+      - id: "d"
+        label: "A personal website or shop"
+      - id: "e"
+        label: "Local advertising or events"
+      - id: "f"
+        label: "Existing network from my job"
+      - id: "g"
+        label: "None of these"
+  - id: q8
+    prompt: "How much have you invested in starting or running your side hustle in the past year? Enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_have_invested_starting_running
+    required: true
+  - id: q9
+    prompt: "How much do you agree with the following statement: My side hustle is an important part of my income."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree with the following statement: My side hustle could grow into a full-time business."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree with the following statement: Balancing my side hustle with the rest of my life is difficult."
+    type: single_choice
+    construct: much_agree_following_statement_balancing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree with the following statement: My side hustle is profitable after expenses."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: I enjoy my side hustle regardless of the money."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How do you handle taxes on your side-hustle income?"
+    type: single_choice
+    construct: handle_taxes_side_hustle_income
+    required: true
+    options:
+      - id: "a"
+        label: "I report it and set money aside"
+      - id: "b"
+        label: "I report it but don't set money aside"
+      - id: "c"
+        label: "I handle it all at tax time"
+      - id: "d"
+        label: "I don't report small amounts"
+      - id: "e"
+        label: "I'm not sure how to handle it"
+  - id: q15
+    prompt: "Do you keep your side-hustle money separate from your personal finances?"
+    type: single_choice
+    construct: keep_side_hustle_money_separate
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a separate bank account"
+      - id: "b"
+        label: "Yes, a separate payment app"
+      - id: "c"
+        label: "No, it all goes into one account"
+      - id: "d"
+        label: "I mostly handle it in cash"
+  - id: q16
+    prompt: "Which are the top 3 reasons your side hustle matters most to you? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_reasons_side_hustle
+    required: true
+    options:
+      - id: "a"
+        label: "Extra income"
+      - id: "b"
+        label: "Financial security"
+      - id: "c"
+        label: "Creative fulfillment"
+      - id: "d"
+        label: "Independence and control"
+      - id: "e"
+        label: "Building new skills"
+      - id: "f"
+        label: "Potential future business"
+      - id: "g"
+        label: "Flexibility"
+      - id: "h"
+        label: "Helping others"
+      - id: "i"
+        label: "Enjoyment"
+  - id: q17
+    prompt: "How predictable is your side-hustle income month to month?"
+    type: single_choice
+    construct: predictable_side_hustle_income_month
+    required: true
+    options:
+      - id: "a"
+        label: "Very predictable"
+      - id: "b"
+        label: "Somewhat predictable"
+      - id: "c"
+        label: "Somewhat unpredictable"
+      - id: "d"
+        label: "Very unpredictable"
+  - id: q18
+    prompt: "Have you thought about turning your side hustle into your main job?"
+    type: single_choice
+    construct: have_thought_turning_side_hustle
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, actively planning to"
+      - id: "b"
+        label: "Yes, someday"
+      - id: "c"
+        label: "No, I prefer to keep it a side project"
+      - id: "d"
+        label: "No"
+  - id: q19
+    prompt: "How confident are you in growing your side-hustle income over the next year?"
+    type: single_choice
+    construct: confident_growing_side_hustle_income
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q20
+    prompt: "What is the biggest challenge for your side hustle?"
+    type: single_choice
+    construct: biggest_challenge_side_hustle
+    required: true
+    options:
+      - id: "a"
+        label: "Finding enough time"
+      - id: "b"
+        label: "Getting customers"
+      - id: "c"
+        label: "Pricing my work fairly"
+      - id: "d"
+        label: "Managing money and taxes"
+      - id: "e"
+        label: "Standing out from competition"
+      - id: "f"
+        label: "Staying motivated"
+      - id: "g"
+        label: "I don't face major challenges"
+  - id: q21
+    prompt: "How often does your side hustle interfere with your main job or personal life?"
+    type: single_choice
+    construct: often_does_side_hustle_interfere
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "How much do you agree: Having a side hustle makes me feel more financially secure."
+    type: single_choice
+    construct: much_agree_having_side_hustle
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How satisfied are you with your side hustle overall?"
+    type: single_choice
+    construct: satisfied_side_hustle_overall
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q24
+    prompt: "How likely are you to continue your side hustle over the next 12 months?"
+    type: single_choice
+    construct: likely_continue_side_hustle_over
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q25
+    prompt: "How likely are you to expand or scale up your side hustle in the next year?"
+    type: single_choice
+    construct: likely_expand_scale_up_side
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q26
+    prompt: "If you have any final thoughts about your side hustle, please share them here (optional)."
+    type: free_text
+    construct: if_have_any_final_thoughts
+    required: false
+  - id: q27
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q28
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q29
+    prompt: "Which of the following best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describes_race_ethnicity
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q30
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000–$199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q31
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q32
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force (student, homemaker)"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Unable to work"
+  - id: q33
+    prompt: "Including yourself, how many people live in your household? Enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q34
+    prompt: "How many children under 18 live in your household? Enter a number."
+    type: free_text
+    construct: many_children_under_18_live
+    required: true
+  - id: q35
+    prompt: "What is your marital status?"
+    type: single_choice
+    construct: marital_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never married"
+  - id: q36
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q37
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q38
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"
+  - id: q39
+    prompt: "Do you have a primary full-time job in addition to your side hustle?"
+    type: single_choice
+    construct: have_primary_full_time_job
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, full-time employment"
+      - id: "b"
+        label: "Yes, part-time employment"
+      - id: "c"
+        label: "No, the side hustle is my main activity"
+      - id: "d"
+        label: "I'm retired or a student"
+      - id: "e"
+        label: "Prefer not to say"

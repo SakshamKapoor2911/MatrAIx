@@ -1,0 +1,776 @@
+schemaVersion: "1.0"
+id: screen_recording_tools_v1
+title: "Screen Recording & Screen-Capture Tools Survey"
+description: "Which screen recording and screen-capture tools people use, for what purposes, and how satisfied they are."
+questions:
+  - id: q0
+    prompt: "How often do you record your screen or capture screenshots for anything beyond a casual snapshot?"
+    type: single_choice
+    construct: often_record_screen_capture_screenshots
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "Daily"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Rarely"
+      - id: "f"
+        label: "Never"
+  - id: q1
+    prompt: "For what purposes do you record your screen or capture your screen? (Select all that apply)"
+    type: multi_choice
+    construct: purposes_record_screen_capture_screen
+    required: true
+    options:
+      - id: "a"
+        label: "Making tutorials or how-to videos"
+      - id: "b"
+        label: "Async work updates / explaining something to a colleague"
+      - id: "c"
+        label: "Bug reports or tech support"
+      - id: "d"
+        label: "Recording meetings or webinars"
+      - id: "e"
+        label: "Creating course or training content"
+      - id: "f"
+        label: "Streaming or gaming clips"
+      - id: "g"
+        label: "Product demos or marketing"
+      - id: "h"
+        label: "Personal reference / saving info"
+      - id: "i"
+        label: "Presentations or slide narration"
+  - id: q2
+    prompt: "How many years have you been using screen recording tools?"
+    type: free_text
+    construct: many_years_have_been_using
+    required: true
+  - id: q3
+    prompt: "Which screen recording or capture tools do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: screen_recording_capture_tools_currently
+    required: true
+    options:
+      - id: "a"
+        label: "OBS Studio"
+      - id: "b"
+        label: "Loom"
+      - id: "c"
+        label: "Camtasia"
+      - id: "d"
+        label: "Snagit"
+      - id: "e"
+        label: "ScreenFlow"
+      - id: "f"
+        label: "QuickTime Player"
+      - id: "g"
+        label: "Windows Game Bar / Xbox"
+      - id: "h"
+        label: "macOS built-in screenshot / recording"
+      - id: "i"
+        label: "ShareX"
+      - id: "j"
+        label: "Bandicam"
+      - id: "k"
+        label: "CleanShot X"
+      - id: "l"
+        label: "Screencastify"
+      - id: "m"
+        label: "Zoom / Teams recording"
+      - id: "n"
+        label: "Other"
+  - id: q4
+    prompt: "Which tool do you use most often for screen recording?"
+    type: single_choice
+    construct: tool_use_most_often_screen
+    required: true
+    options:
+      - id: "a"
+        label: "OBS Studio"
+      - id: "b"
+        label: "Loom"
+      - id: "c"
+        label: "Camtasia"
+      - id: "d"
+        label: "Snagit"
+      - id: "e"
+        label: "QuickTime Player"
+      - id: "f"
+        label: "Built-in OS tools (Game Bar / macOS)"
+      - id: "g"
+        label: "ShareX"
+      - id: "h"
+        label: "Zoom / Teams recording"
+      - id: "i"
+        label: "Other"
+  - id: q5
+    prompt: "Which operating system do you record on most?"
+    type: single_choice
+    construct: operating_system_record_most
+    required: true
+    options:
+      - id: "a"
+        label: "Windows"
+      - id: "b"
+        label: "macOS"
+      - id: "c"
+        label: "Linux"
+      - id: "d"
+        label: "ChromeOS"
+      - id: "e"
+        label: "Mobile (iOS / Android)"
+  - id: q6
+    prompt: "How do you most often capture your screen?"
+    type: single_choice
+    construct: most_often_capture_screen
+    required: true
+    options:
+      - id: "a"
+        label: "Full-motion video recording"
+      - id: "b"
+        label: "Static screenshots"
+      - id: "c"
+        label: "GIFs or short clips"
+      - id: "d"
+        label: "About equally video and screenshots"
+  - id: q7
+    prompt: "When recording video, do you typically also capture: (Select all that apply)"
+    type: multi_choice
+    construct: when_recording_video_typically_also
+    required: true
+    options:
+      - id: "a"
+        label: "Your webcam / face"
+      - id: "b"
+        label: "Microphone / your voice"
+      - id: "c"
+        label: "System / computer audio"
+      - id: "d"
+        label: "A specific window only"
+      - id: "e"
+        label: "The full screen"
+      - id: "f"
+        label: "Just a selected region"
+  - id: q8
+    prompt: "How long are your typical screen recordings?"
+    type: single_choice
+    construct: long_typical_screen_recordings
+    required: true
+    options:
+      - id: "a"
+        label: "Under 1 minute"
+      - id: "b"
+        label: "1–5 minutes"
+      - id: "c"
+        label: "5–15 minutes"
+      - id: "d"
+        label: "15–60 minutes"
+      - id: "e"
+        label: "Over an hour"
+  - id: q9
+    prompt: "About how many screen recordings do you make in a typical month?"
+    type: free_text
+    construct: many_screen_recordings_make_typical
+    required: true
+  - id: q10
+    prompt: "After recording, what do you usually do? (Select all that apply)"
+    type: multi_choice
+    construct: after_recording_usually_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Share a link (cloud-hosted)"
+      - id: "b"
+        label: "Trim or lightly edit"
+      - id: "c"
+        label: "Full editing in a video editor"
+      - id: "d"
+        label: "Add captions or annotations"
+      - id: "e"
+        label: "Upload to YouTube or a platform"
+      - id: "f"
+        label: "Send the raw file directly"
+      - id: "g"
+        label: "Keep it as a personal reference"
+  - id: q11
+    prompt: "How do you usually share your recordings? (Select all that apply)"
+    type: multi_choice
+    construct: usually_share_recordings_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Instant shareable link"
+      - id: "b"
+        label: "Slack / Teams / chat"
+      - id: "c"
+        label: "Email attachment or link"
+      - id: "d"
+        label: "YouTube or a video platform"
+      - id: "e"
+        label: "Cloud storage folder"
+      - id: "f"
+        label: "I mostly keep them private"
+  - id: q12
+    prompt: "Which annotation or capture features do you use? (Select all that apply)"
+    type: multi_choice
+    construct: annotation_capture_features_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Arrows, boxes, and highlights"
+      - id: "b"
+        label: "Blurring or hiding sensitive info"
+      - id: "c"
+        label: "Cursor highlighting / click effects"
+      - id: "d"
+        label: "Zoom / pan effects"
+      - id: "e"
+        label: "Text callouts"
+      - id: "f"
+        label: "Automatic captions / transcripts"
+      - id: "g"
+        label: "I don't use annotation features"
+  - id: q13
+    prompt: "How do you pay for your primary screen recording tool?"
+    type: single_choice
+    construct: pay_primary_screen_recording_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Free version only"
+      - id: "b"
+        label: "Personal paid subscription"
+      - id: "c"
+        label: "One-time license purchase"
+      - id: "d"
+        label: "Employer pays"
+      - id: "e"
+        label: "It is built into my OS or another app I have"
+  - id: q14
+    prompt: "Approximately how much do you spend per month on screen recording software (US dollars)?"
+    type: free_text
+    construct: approximately_much_spend_per_month
+    required: true
+  - id: q15
+    prompt: "How much do you agree with the following statement about your primary tool? — It is quick and easy to start a recording."
+    type: single_choice
+    construct: much_agree_following_statement_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about your primary tool? — The recording quality is good."
+    type: single_choice
+    construct: much_agree_following_statement_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about your primary tool? — Sharing a recording is fast and painless."
+    type: single_choice
+    construct: much_agree_following_statement_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about your primary tool? — It does not noticeably slow down my computer."
+    type: single_choice
+    construct: much_agree_following_statement_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about your primary tool? — I trust it with sensitive on-screen information."
+    type: single_choice
+    construct: much_agree_following_statement_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How satisfied are you with each aspect of your primary tool? — Ease of starting a recording"
+    type: single_choice
+    construct: satisfied_each_aspect_primary_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q21
+    prompt: "How satisfied are you with each aspect of your primary tool? — Video and audio quality"
+    type: single_choice
+    construct: satisfied_each_aspect_primary_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q22
+    prompt: "How satisfied are you with each aspect of your primary tool? — Editing and annotation"
+    type: single_choice
+    construct: satisfied_each_aspect_primary_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q23
+    prompt: "How satisfied are you with each aspect of your primary tool? — Sharing and hosting"
+    type: single_choice
+    construct: satisfied_each_aspect_primary_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q24
+    prompt: "How important is each factor when choosing a screen recording tool? — Ease of use"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is each factor when choosing a screen recording tool? — Recording quality"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important is each factor when choosing a screen recording tool? — Easy sharing"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important is each factor when choosing a screen recording tool? — Price / being free"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Select the top 3 features you most want in a screen recording tool. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_features_most
+    required: true
+    options:
+      - id: "a"
+        label: "One-click recording"
+      - id: "b"
+        label: "Instant shareable links"
+      - id: "c"
+        label: "Built-in editing / trimming"
+      - id: "d"
+        label: "Automatic captions"
+      - id: "e"
+        label: "High-quality / high-resolution capture"
+      - id: "f"
+        label: "Webcam overlay"
+      - id: "g"
+        label: "Annotation tools"
+      - id: "h"
+        label: "Low performance impact"
+      - id: "i"
+        label: "Being free / no watermark"
+      - id: "j"
+        label: "Privacy controls"
+  - id: q29
+    prompt: "What frustrates you most about screen recording tools? (Select all that apply)"
+    type: multi_choice
+    construct: frustrates_most_screen_recording_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Watermarks on the free version"
+      - id: "b"
+        label: "Time limits on free recordings"
+      - id: "c"
+        label: "Large file sizes"
+      - id: "d"
+        label: "Audio sync or capture problems"
+      - id: "e"
+        label: "Performance slowdowns"
+      - id: "f"
+        label: "Complicated setup"
+      - id: "g"
+        label: "Privacy or account requirements"
+      - id: "h"
+        label: "Nothing frustrates me"
+  - id: q30
+    prompt: "Have you switched your main screen recording tool in the past two years?"
+    type: single_choice
+    construct: have_switched_main_screen_recording
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, once"
+      - id: "b"
+        label: "Yes, more than once"
+      - id: "c"
+        label: "No, but I have considered it"
+      - id: "d"
+        label: "No, and I have not considered it"
+  - id: q31
+    prompt: "How likely are you to recommend your primary screen recording tool to a peer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_screen_recordin
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "Overall, how satisfied are you with your current screen recording tool?"
+    type: single_choice
+    construct: overall_satisfied_current_screen_recordi
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How likely are you to change your main screen recording tool in the next 12 months?"
+    type: single_choice
+    construct: likely_change_main_screen_recording
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "What would make screen recording easier or better for you?"
+    type: free_text
+    construct: would_make_screen_recording_easier
+    required: true
+  - id: q35
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 25"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your annual household income (US dollars)?"
+    type: single_choice
+    construct: annual_household_income_us_dollars
+    required: true
+    options:
+      - id: "a"
+        label: "Under $35,000"
+      - id: "b"
+        label: "$35,000–$74,999"
+      - id: "c"
+        label: "$75,000–$124,999"
+      - id: "d"
+        label: "$125,000–$199,999"
+      - id: "e"
+        label: "$200,000 or more"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Professional or doctoral degree"
+  - id: q40
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed / freelancer"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+  - id: q41
+    prompt: "Which best describes your primary role?"
+    type: single_choice
+    construct: best_describes_primary_role
+    required: true
+    options:
+      - id: "a"
+        label: "Software / IT professional"
+      - id: "b"
+        label: "Educator or trainer"
+      - id: "c"
+        label: "Content creator / streamer"
+      - id: "d"
+        label: "Marketing or sales"
+      - id: "e"
+        label: "Customer support"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Other"
+  - id: q42
+    prompt: "What is your work arrangement?"
+    type: single_choice
+    construct: work_arrangement
+    required: true
+    options:
+      - id: "a"
+        label: "Fully remote"
+      - id: "b"
+        label: "Hybrid"
+      - id: "c"
+        label: "Fully in person"
+      - id: "d"
+        label: "Not currently working"
+  - id: q43
+    prompt: "How many people live in your household?"
+    type: free_text
+    construct: many_people_live_household
+    required: true
+  - id: q44
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q45
+    prompt: "How would you describe where you live?"
+    type: single_choice
+    construct: would_describe_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

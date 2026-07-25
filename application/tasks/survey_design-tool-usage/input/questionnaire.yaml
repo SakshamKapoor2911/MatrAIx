@@ -1,0 +1,852 @@
+schemaVersion: "1.0"
+id: design_tool_usage_v1
+title: "Design & Creative Tool Usage Survey"
+description: "Which graphic, UX, and creative design tools people use, how they use them, and how satisfied they are."
+questions:
+  - id: q0
+    prompt: "Which best describes how you use design or creative software?"
+    type: single_choice
+    construct: best_describes_use_design_creative
+    required: true
+    options:
+      - id: "a"
+        label: "Professional designer (it is my main job)"
+      - id: "b"
+        label: "Design is part of a broader role (marketing, product, dev, etc.)"
+      - id: "c"
+        label: "Freelancer or side-business designer"
+      - id: "d"
+        label: "Student learning design"
+      - id: "e"
+        label: "Hobbyist or personal projects only"
+      - id: "f"
+        label: "I rarely or never use design tools"
+  - id: q1
+    prompt: "How many years have you been using design or creative software?"
+    type: free_text
+    construct: many_years_have_been_using
+    required: true
+  - id: q2
+    prompt: "What kinds of design work do you do most? (Select all that apply)"
+    type: multi_choice
+    construct: kinds_design_work_most_select
+    required: true
+    options:
+      - id: "a"
+        label: "UI / UX design (apps, websites)"
+      - id: "b"
+        label: "Graphic design (logos, branding, print)"
+      - id: "c"
+        label: "Social media graphics"
+      - id: "d"
+        label: "Photo editing / retouching"
+      - id: "e"
+        label: "Illustration or digital art"
+      - id: "f"
+        label: "Presentations / slide decks"
+      - id: "g"
+        label: "Motion graphics or animation"
+      - id: "h"
+        label: "Video thumbnails / marketing assets"
+      - id: "i"
+        label: "Prototyping and wireframing"
+      - id: "j"
+        label: "3D or product design"
+  - id: q3
+    prompt: "Which design tools do you currently use? (Select all that apply)"
+    type: multi_choice
+    construct: design_tools_currently_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Figma"
+      - id: "b"
+        label: "Adobe Photoshop"
+      - id: "c"
+        label: "Adobe Illustrator"
+      - id: "d"
+        label: "Adobe XD"
+      - id: "e"
+        label: "Adobe InDesign"
+      - id: "f"
+        label: "Canva"
+      - id: "g"
+        label: "Sketch"
+      - id: "h"
+        label: "Affinity (Designer / Photo / Publisher)"
+      - id: "i"
+        label: "Procreate"
+      - id: "j"
+        label: "CorelDRAW"
+      - id: "k"
+        label: "GIMP"
+      - id: "l"
+        label: "Inkscape"
+      - id: "m"
+        label: "Framer"
+      - id: "n"
+        label: "Penpot"
+      - id: "o"
+        label: "Other"
+  - id: q4
+    prompt: "Which tool do you use most often for design work?"
+    type: single_choice
+    construct: tool_use_most_often_design
+    required: true
+    options:
+      - id: "a"
+        label: "Figma"
+      - id: "b"
+        label: "Adobe Photoshop"
+      - id: "c"
+        label: "Adobe Illustrator"
+      - id: "d"
+        label: "Canva"
+      - id: "e"
+        label: "Sketch"
+      - id: "f"
+        label: "Affinity"
+      - id: "g"
+        label: "Procreate"
+      - id: "h"
+        label: "Adobe XD"
+      - id: "i"
+        label: "Other"
+  - id: q5
+    prompt: "Which device do you primarily design on?"
+    type: single_choice
+    construct: device_primarily_design
+    required: true
+    options:
+      - id: "a"
+        label: "Windows desktop or laptop"
+      - id: "b"
+        label: "Mac desktop or laptop"
+      - id: "c"
+        label: "iPad or tablet with stylus"
+      - id: "d"
+        label: "Chromebook or web-only device"
+      - id: "e"
+        label: "Phone"
+  - id: q6
+    prompt: "Do you use a drawing tablet or stylus for design work?"
+    type: single_choice
+    construct: use_drawing_tablet_stylus_design
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a pen display (e.g., Wacom Cintiq, iPad + Apple Pencil)"
+      - id: "b"
+        label: "Yes, a pen tablet (no screen)"
+      - id: "c"
+        label: "No, mouse or trackpad only"
+      - id: "d"
+        label: "No, touch only"
+  - id: q7
+    prompt: "How often do you use design software?"
+    type: single_choice
+    construct: often_use_design_software
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times per day"
+      - id: "b"
+        label: "About once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "About once a week"
+      - id: "e"
+        label: "A few times a month or less"
+  - id: q8
+    prompt: "About how many hours per week do you spend using design tools?"
+    type: free_text
+    construct: many_hours_per_week_spend
+    required: true
+  - id: q9
+    prompt: "How did you first learn your main design tool? (Select all that apply)"
+    type: multi_choice
+    construct: did_first_learn_main_design
+    required: true
+    options:
+      - id: "a"
+        label: "Formal education / degree program"
+      - id: "b"
+        label: "YouTube tutorials"
+      - id: "c"
+        label: "Online courses (Udemy, Coursera, Skillshare, etc.)"
+      - id: "d"
+        label: "On the job"
+      - id: "e"
+        label: "Official documentation or help center"
+      - id: "f"
+        label: "Friends or colleagues"
+      - id: "g"
+        label: "Trial and error / self-taught"
+      - id: "h"
+        label: "Design community (Dribbble, Behance, forums)"
+  - id: q10
+    prompt: "How do you pay for your primary design tool?"
+    type: single_choice
+    construct: pay_primary_design_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Free version only"
+      - id: "b"
+        label: "Personal paid subscription"
+      - id: "c"
+        label: "Employer or client pays"
+      - id: "d"
+        label: "One-time license purchase"
+      - id: "e"
+        label: "Education / student license"
+      - id: "f"
+        label: "I pirate or use unlicensed copies"
+  - id: q11
+    prompt: "Approximately how much do you personally spend per month on design software (US dollars)?"
+    type: free_text
+    construct: approximately_much_personally_spend_per
+    required: true
+  - id: q12
+    prompt: "Which of these do you rely on to speed up your work? (Select all that apply)"
+    type: multi_choice
+    construct: these_rely_speed_up_work
+    required: true
+    options:
+      - id: "a"
+        label: "Design systems / component libraries"
+      - id: "b"
+        label: "Templates"
+      - id: "c"
+        label: "Plugins or extensions"
+      - id: "d"
+        label: "Reusable styles and tokens"
+      - id: "e"
+        label: "Stock assets (photos, icons, fonts)"
+      - id: "f"
+        label: "Keyboard shortcuts"
+      - id: "g"
+        label: "AI-generated assets"
+      - id: "h"
+        label: "None of these"
+  - id: q13
+    prompt: "Which AI-assisted design features have you used? (Select all that apply)"
+    type: multi_choice
+    construct: ai_assisted_design_features_have
+    required: true
+    options:
+      - id: "a"
+        label: "Generative fill / object removal"
+      - id: "b"
+        label: "Background removal"
+      - id: "c"
+        label: "Text-to-image generation"
+      - id: "d"
+        label: "AI layout or design suggestions"
+      - id: "e"
+        label: "Upscaling / enhancement"
+      - id: "f"
+        label: "Auto alt-text or content generation"
+      - id: "g"
+        label: "AI vector or icon generation"
+      - id: "h"
+        label: "I have not used any AI design features"
+  - id: q14
+    prompt: "When collaborating with others, how do you usually share design work? (Select all that apply)"
+    type: multi_choice
+    construct: when_collaborating_others_usually_share
+    required: true
+    options:
+      - id: "a"
+        label: "Real-time collaboration in the tool (multiplayer editing)"
+      - id: "b"
+        label: "Shareable link for viewing / commenting"
+      - id: "c"
+        label: "Exported images (PNG, JPG, PDF)"
+      - id: "d"
+        label: "Handoff tools with specs for developers"
+      - id: "e"
+        label: "Cloud folders (Drive, Dropbox)"
+      - id: "f"
+        label: "I mostly work solo"
+  - id: q15
+    prompt: "How much do you agree with the following statement about your primary design tool? — It is easy to learn and use."
+    type: single_choice
+    construct: much_agree_following_statement_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about your primary design tool? — It performs well even on large or complex files."
+    type: single_choice
+    construct: much_agree_following_statement_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about your primary design tool? — Its collaboration features fit how my team works."
+    type: single_choice
+    construct: much_agree_following_statement_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about your primary design tool? — The pricing is fair for what I get."
+    type: single_choice
+    construct: much_agree_following_statement_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about your primary design tool? — It has the AI features I want."
+    type: single_choice
+    construct: much_agree_following_statement_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How satisfied are you with each aspect of your primary design tool? — Performance and speed"
+    type: single_choice
+    construct: satisfied_each_aspect_primary_design
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q21
+    prompt: "How satisfied are you with each aspect of your primary design tool? — Collaboration and sharing"
+    type: single_choice
+    construct: satisfied_each_aspect_primary_design
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q22
+    prompt: "How satisfied are you with each aspect of your primary design tool? — Plugin and template ecosystem"
+    type: single_choice
+    construct: satisfied_each_aspect_primary_design
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q23
+    prompt: "How satisfied are you with each aspect of your primary design tool? — Export and developer handoff"
+    type: single_choice
+    construct: satisfied_each_aspect_primary_design
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q24
+    prompt: "How satisfied are you with each aspect of your primary design tool? — Value for money"
+    type: single_choice
+    construct: satisfied_each_aspect_primary_design
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q25
+    prompt: "How important is each factor when choosing a design tool? — Ease of use"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important is each factor when choosing a design tool? — Collaboration features"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important is each factor when choosing a design tool? — Price / subscription cost"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "How important is each factor when choosing a design tool? — Industry standard / what my team uses"
+    type: single_choice
+    construct: important_each_factor_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "Select the top 3 things you most want improved in your design tools. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_things_most
+    required: true
+    options:
+      - id: "a"
+        label: "Performance / speed"
+      - id: "b"
+        label: "Lower price"
+      - id: "c"
+        label: "Better collaboration"
+      - id: "d"
+        label: "More AI features"
+      - id: "e"
+        label: "Better plugin ecosystem"
+      - id: "f"
+        label: "Easier learning curve"
+      - id: "g"
+        label: "Better file compatibility"
+      - id: "h"
+        label: "Offline access"
+      - id: "i"
+        label: "Better mobile / tablet support"
+      - id: "j"
+        label: "More templates and assets"
+  - id: q30
+    prompt: "How do you feel about AI-generated art and design more broadly?"
+    type: single_choice
+    construct: feel_ai_generated_art_design
+    required: true
+    options:
+      - id: "a"
+        label: "Very enthusiastic — I use it heavily"
+      - id: "b"
+        label: "Positive — a useful assist"
+      - id: "c"
+        label: "Neutral / mixed"
+      - id: "d"
+        label: "Skeptical — concerns about quality or ethics"
+      - id: "e"
+        label: "Opposed — I avoid it"
+  - id: q31
+    prompt: "Have you switched your primary design tool in the past three years?"
+    type: single_choice
+    construct: have_switched_primary_design_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, once"
+      - id: "b"
+        label: "Yes, more than once"
+      - id: "c"
+        label: "No, but I have considered it"
+      - id: "d"
+        label: "No, and I have not considered it"
+  - id: q32
+    prompt: "If you switched or considered switching, what was the main driver?"
+    type: single_choice
+    construct: if_switched_considered_switching_was
+    required: true
+    options:
+      - id: "a"
+        label: "Better collaboration"
+      - id: "b"
+        label: "Price"
+      - id: "c"
+        label: "My team or clients moved"
+      - id: "d"
+        label: "Better features"
+      - id: "e"
+        label: "Performance issues"
+      - id: "f"
+        label: "Not applicable"
+  - id: q33
+    prompt: "How do you keep up with new design tools and trends? (Select all that apply)"
+    type: multi_choice
+    construct: keep_up_new_design_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Dribbble / Behance"
+      - id: "b"
+        label: "YouTube / TikTok"
+      - id: "c"
+        label: "Design newsletters or blogs"
+      - id: "d"
+        label: "Twitter/X or LinkedIn"
+      - id: "e"
+        label: "Design communities / Discord / Slack"
+      - id: "f"
+        label: "Conferences or meetups"
+      - id: "g"
+        label: "I don't actively follow trends"
+  - id: q34
+    prompt: "How likely are you to recommend your primary design tool to a peer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_design_tool
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "Overall, how satisfied are you with your current design tools?"
+    type: single_choice
+    construct: overall_satisfied_current_design_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "How likely are you to change your primary design tool in the next 12 months?"
+    type: single_choice
+    construct: likely_change_primary_design_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q37
+    prompt: "What would make your design workflow better? Describe in your own words."
+    type: free_text
+    construct: would_make_design_workflow_better
+    required: true
+  - id: q38
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 25"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your annual household income (US dollars)?"
+    type: single_choice
+    construct: annual_household_income_us_dollars
+    required: true
+    options:
+      - id: "a"
+        label: "Under $35,000"
+      - id: "b"
+        label: "$35,000–$74,999"
+      - id: "c"
+        label: "$75,000–$124,999"
+      - id: "d"
+        label: "$125,000–$199,999"
+      - id: "e"
+        label: "$200,000 or more"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Professional or doctoral degree"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed / freelancer"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+  - id: q44
+    prompt: "What is your primary role or field?"
+    type: single_choice
+    construct: primary_role_field
+    required: true
+    options:
+      - id: "a"
+        label: "Product / UX designer"
+      - id: "b"
+        label: "Graphic / visual designer"
+      - id: "c"
+        label: "Marketing or content creator"
+      - id: "d"
+        label: "Developer / engineer"
+      - id: "e"
+        label: "Illustrator or artist"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Other"
+  - id: q45
+    prompt: "How would you rate your own design skill level?"
+    type: single_choice
+    construct: would_rate_own_design_skill
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert / professional"
+  - id: q46
+    prompt: "How many people live in your household?"
+    type: free_text
+    construct: many_people_live_household
+    required: true
+  - id: q47
+    prompt: "What is your relationship status?"
+    type: single_choice
+    construct: relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q49
+    prompt: "How would you describe where you live?"
+    type: single_choice
+    construct: would_describe_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

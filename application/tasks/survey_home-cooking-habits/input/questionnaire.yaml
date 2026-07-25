@@ -1,0 +1,907 @@
+schemaVersion: "1.0"
+id: home_cooking_habits_v1
+title: "Home Cooking Habits Survey"
+description: "How people cook at home and pursue healthy eating, including their methods, tools, and barriers."
+questions:
+  - id: q0
+    prompt: "How often do you cook a meal at home?"
+    type: single_choice
+    construct: often_cook_meal_home
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "About once a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q1
+    prompt: "Who does most of the cooking in your household?"
+    type: single_choice
+    construct: who_does_most_cooking_household
+    required: true
+    options:
+      - id: "a"
+        label: "I do most of it"
+      - id: "b"
+        label: "I share it with someone else"
+      - id: "c"
+        label: "Someone else does most of it"
+      - id: "d"
+        label: "We rely mostly on takeout or ready-made food"
+  - id: q2
+    prompt: "How long have you been cooking regularly for yourself or your household?"
+    type: single_choice
+    construct: long_have_been_cooking_regularly
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 10 years"
+      - id: "d"
+        label: "More than 10 years"
+      - id: "e"
+        label: "I don't cook regularly"
+  - id: q3
+    prompt: "On a typical weekday, how do you usually get dinner?"
+    type: single_choice
+    construct: typical_weekday_usually_get_dinner
+    required: true
+    options:
+      - id: "a"
+        label: "Cook from scratch"
+      - id: "b"
+        label: "Assemble a quick meal from prepared components"
+      - id: "c"
+        label: "Heat a frozen or packaged meal"
+      - id: "d"
+        label: "Takeout or delivery"
+      - id: "e"
+        label: "Eat out"
+      - id: "f"
+        label: "Skip or graze"
+  - id: q4
+    prompt: "About how many home-cooked dinners do you make in a typical week? Please enter a number."
+    type: free_text
+    construct: many_home_cooked_dinners_make
+    required: true
+  - id: q5
+    prompt: "Which cooking methods do you use regularly? (Select all that apply)"
+    type: multi_choice
+    construct: cooking_methods_use_regularly_select
+    required: true
+    options:
+      - id: "a"
+        label: "Stovetop (sautéing, boiling, frying)"
+      - id: "b"
+        label: "Oven baking or roasting"
+      - id: "c"
+        label: "Slow cooker"
+      - id: "d"
+        label: "Instant Pot or pressure cooker"
+      - id: "e"
+        label: "Air fryer"
+      - id: "f"
+        label: "Grilling"
+      - id: "g"
+        label: "Microwave"
+      - id: "h"
+        label: "No-cook meals (salads, sandwiches)"
+  - id: q6
+    prompt: "Which kitchen appliances do you own and use? (Select all that apply)"
+    type: multi_choice
+    construct: kitchen_appliances_own_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Air fryer"
+      - id: "b"
+        label: "Instant Pot or pressure cooker"
+      - id: "c"
+        label: "Slow cooker"
+      - id: "d"
+        label: "Blender"
+      - id: "e"
+        label: "Food processor"
+      - id: "f"
+        label: "Stand mixer"
+      - id: "g"
+        label: "Rice cooker"
+      - id: "h"
+        label: "Cast iron or quality cookware"
+  - id: q7
+    prompt: "Where do you get recipes and cooking ideas? (Select all that apply)"
+    type: multi_choice
+    construct: where_get_recipes_cooking_ideas
+    required: true
+    options:
+      - id: "a"
+        label: "Recipe websites (Allrecipes, NYT Cooking, etc.)"
+      - id: "b"
+        label: "YouTube or cooking videos"
+      - id: "c"
+        label: "Social media (Instagram, TikTok, Pinterest)"
+      - id: "d"
+        label: "Cookbooks"
+      - id: "e"
+        label: "Friends and family"
+      - id: "f"
+        label: "A meal-kit or recipe app"
+      - id: "g"
+        label: "I improvise without recipes"
+  - id: q8
+    prompt: "Which meal-planning or recipe apps do you use? (Select all that apply)"
+    type: multi_choice
+    construct: meal_planning_recipe_apps_use
+    required: true
+    options:
+      - id: "a"
+        label: "Paprika"
+      - id: "b"
+        label: "Mealime"
+      - id: "c"
+        label: "Yummly"
+      - id: "d"
+        label: "NYT Cooking"
+      - id: "e"
+        label: "Whisk / Samsung Food"
+      - id: "f"
+        label: "A notes or spreadsheet app"
+      - id: "g"
+        label: "None"
+  - id: q9
+    prompt: "Have you used a meal-kit delivery service in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: have_used_meal_kit_delivery
+    required: true
+    options:
+      - id: "a"
+        label: "HelloFresh"
+      - id: "b"
+        label: "Blue Apron"
+      - id: "c"
+        label: "Home Chef"
+      - id: "d"
+        label: "Factor or another prepared-meal service"
+      - id: "e"
+        label: "A grocery-store meal kit"
+      - id: "f"
+        label: "None"
+  - id: q10
+    prompt: "How often do you plan your meals in advance for the week?"
+    type: single_choice
+    construct: often_plan_meals_advance_week
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q11
+    prompt: "How often do you cook meals in batches or meal-prep ahead of time?"
+    type: single_choice
+    construct: often_cook_meals_batches_meal
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q12
+    prompt: "How often do you try a new recipe?"
+    type: single_choice
+    construct: often_try_new_recipe
+    required: true
+    options:
+      - id: "a"
+        label: "Several times a week"
+      - id: "b"
+        label: "About once a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Almost never"
+  - id: q13
+    prompt: "Which of these describe your healthy-eating habits? (Select all that apply)"
+    type: multi_choice
+    construct: these_describe_healthy_eating_habits
+    required: true
+    options:
+      - id: "a"
+        label: "Cooking with plenty of vegetables"
+      - id: "b"
+        label: "Controlling portion sizes"
+      - id: "c"
+        label: "Limiting added sugar"
+      - id: "d"
+        label: "Choosing whole grains"
+      - id: "e"
+        label: "Reducing processed foods"
+      - id: "f"
+        label: "Cooking with less salt"
+      - id: "g"
+        label: "Choosing lean proteins or plant proteins"
+      - id: "h"
+        label: "None of these"
+  - id: q14
+    prompt: "Which of these do you consider when planning meals? (Select all that apply)"
+    type: multi_choice
+    construct: these_consider_when_planning_meals
+    required: true
+    options:
+      - id: "a"
+        label: "Nutrition and health"
+      - id: "b"
+        label: "Cost and budget"
+      - id: "c"
+        label: "Time to prepare"
+      - id: "d"
+        label: "Family or household preferences"
+      - id: "e"
+        label: "Using up what's in the fridge"
+      - id: "f"
+        label: "Variety and trying new things"
+      - id: "g"
+        label: "Dietary restrictions or allergies"
+  - id: q15
+    prompt: "About how much does your household spend on groceries in a typical week, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_does_household_spend_groceries
+    required: true
+  - id: q16
+    prompt: "How much do you agree: Cooking at home helps me eat more healthily."
+    type: single_choice
+    construct: much_agree_cooking_home_helps
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: I enjoy the process of cooking."
+    type: single_choice
+    construct: much_agree_i_enjoy_process
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Cooking at home saves me money compared with eating out."
+    type: single_choice
+    construct: much_agree_cooking_home_saves
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: I feel confident cooking a meal without a recipe."
+    type: single_choice
+    construct: much_agree_i_feel_confident
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: I often don't have time to cook the way I'd like."
+    type: single_choice
+    construct: much_agree_i_often_don
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: Eating healthy at home is more expensive than eating less healthy."
+    type: single_choice
+    construct: much_agree_eating_healthy_home
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much of a barrier is lack of time to cooking at home?"
+    type: single_choice
+    construct: much_barrier_lack_time_cooking
+    required: true
+    options:
+      - id: "a"
+        label: "Not a barrier at all"
+      - id: "b"
+        label: "A slight barrier"
+      - id: "c"
+        label: "A moderate barrier"
+      - id: "d"
+        label: "A significant barrier"
+      - id: "e"
+        label: "A major barrier"
+  - id: q23
+    prompt: "How much of a barrier is cost of ingredients to cooking healthy meals?"
+    type: single_choice
+    construct: much_barrier_cost_ingredients_cooking
+    required: true
+    options:
+      - id: "a"
+        label: "Not a barrier at all"
+      - id: "b"
+        label: "A slight barrier"
+      - id: "c"
+        label: "A moderate barrier"
+      - id: "d"
+        label: "A significant barrier"
+      - id: "e"
+        label: "A major barrier"
+  - id: q24
+    prompt: "How much of a barrier is lack of cooking skills or confidence?"
+    type: single_choice
+    construct: much_barrier_lack_cooking_skills
+    required: true
+    options:
+      - id: "a"
+        label: "Not a barrier at all"
+      - id: "b"
+        label: "A slight barrier"
+      - id: "c"
+        label: "A moderate barrier"
+      - id: "d"
+        label: "A significant barrier"
+      - id: "e"
+        label: "A major barrier"
+  - id: q25
+    prompt: "How much of a barrier is meal cleanup and dishes?"
+    type: single_choice
+    construct: much_barrier_meal_cleanup_dishes
+    required: true
+    options:
+      - id: "a"
+        label: "Not a barrier at all"
+      - id: "b"
+        label: "A slight barrier"
+      - id: "c"
+        label: "A moderate barrier"
+      - id: "d"
+        label: "A significant barrier"
+      - id: "e"
+        label: "A major barrier"
+  - id: q26
+    prompt: "How much of a barrier is picky eaters or differing tastes in the household?"
+    type: single_choice
+    construct: much_barrier_picky_eaters_differing
+    required: true
+    options:
+      - id: "a"
+        label: "Not a barrier at all"
+      - id: "b"
+        label: "A slight barrier"
+      - id: "c"
+        label: "A moderate barrier"
+      - id: "d"
+        label: "A significant barrier"
+      - id: "e"
+        label: "A major barrier"
+  - id: q27
+    prompt: "Which are your top 3 barriers to cooking healthy meals at home? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_barriers_cooking_healthy
+    required: true
+    options:
+      - id: "a"
+        label: "Lack of time"
+      - id: "b"
+        label: "Cost of ingredients"
+      - id: "c"
+        label: "Lack of skills or confidence"
+      - id: "d"
+        label: "Cleanup and dishes"
+      - id: "e"
+        label: "Household preferences"
+      - id: "f"
+        label: "Lack of meal-planning"
+      - id: "g"
+        label: "Tiredness or low motivation"
+      - id: "h"
+        label: "Limited kitchen space or equipment"
+  - id: q28
+    prompt: "When choosing what to cook, how important is nutrition?"
+    type: single_choice
+    construct: when_choosing_cook_important_nutrition
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "When choosing what to cook, how important is preparation time?"
+    type: single_choice
+    construct: when_choosing_cook_important_preparation
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "When choosing what to cook, how important is cost?"
+    type: single_choice
+    construct: when_choosing_cook_important_cost
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q31
+    prompt: "When choosing what to cook, how important is taste and enjoyment?"
+    type: single_choice
+    construct: when_choosing_cook_important_taste
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q32
+    prompt: "When choosing what to cook, how important is using fresh ingredients?"
+    type: single_choice
+    construct: when_choosing_cook_important_using
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q33
+    prompt: "How often do you eat takeout or delivery in a typical week?"
+    type: single_choice
+    construct: often_eat_takeout_delivery_typical
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Once"
+      - id: "c"
+        label: "2 to 3 times"
+      - id: "d"
+        label: "4 to 5 times"
+      - id: "e"
+        label: "6 or more times"
+  - id: q34
+    prompt: "How often do fresh vegetables feature in your home-cooked meals?"
+    type: single_choice
+    construct: often_fresh_vegetables_feature_home
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q35
+    prompt: "How would you rate your overall cooking skills?"
+    type: single_choice
+    construct: would_rate_overall_cooking_skills
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Basic"
+      - id: "c"
+        label: "Intermediate"
+      - id: "d"
+        label: "Advanced"
+      - id: "e"
+        label: "Very skilled"
+  - id: q36
+    prompt: "How satisfied are you with the variety of meals you cook?"
+    type: single_choice
+    construct: satisfied_variety_meals_cook
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "How satisfied are you with how healthy your home cooking is?"
+    type: single_choice
+    construct: satisfied_healthy_home_cooking
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "Overall, how satisfied are you with your home-cooking routine?"
+    type: single_choice
+    construct: overall_satisfied_home_cooking_routine
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q39
+    prompt: "How likely are you to recommend home cooking over eating out to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_home_cooking_over
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q40
+    prompt: "How likely are you to cook at home more often over the next year?"
+    type: single_choice
+    construct: likely_cook_home_more_often
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q41
+    prompt: "How likely are you to try eating healthier at home over the next year?"
+    type: single_choice
+    construct: likely_try_eating_healthier_home
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What is one thing that would help you cook more or eat healthier at home? (Optional short answer)"
+    type: free_text
+    construct: one_thing_that_would_help
+    required: false
+  - id: q43
+    prompt: "Do you follow any particular eating pattern? (Select all that apply)"
+    type: multi_choice
+    construct: follow_any_particular_eating_pattern
+    required: true
+    options:
+      - id: "a"
+        label: "Vegetarian"
+      - id: "b"
+        label: "Vegan"
+      - id: "c"
+        label: "Mediterranean"
+      - id: "d"
+        label: "Low-carb or keto"
+      - id: "e"
+        label: "Gluten-free"
+      - id: "f"
+        label: "Reduced sugar"
+      - id: "g"
+        label: "No specific pattern"
+  - id: q44
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q45
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q49
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q50
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q51
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship or partnered"
+      - id: "c"
+        label: "Married"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q52
+    prompt: "Do children under 18 live in your household?"
+    type: single_choice
+    construct: children_under_18_live_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q53
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q54
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

@@ -1,0 +1,620 @@
+schemaVersion: "1.0"
+id: urgent_vs_primary_care_choice_v1
+title: "Urgent Care vs. Primary Care Choice Survey"
+description: "How consumers decide between urgent care, primary care, and other options for non-emergency needs."
+questions:
+  - id: q0
+    prompt: "Do you have a regular primary care provider (a doctor or clinic you usually see)?"
+    type: single_choice
+    construct: have_regular_primary_care_provider
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I had one before"
+      - id: "c"
+        label: "No, I have never had one"
+  - id: q1
+    prompt: "When you have a minor but non-emergency health issue, where do you usually go first?"
+    type: single_choice
+    construct: when_have_minor_but_non
+    required: true
+    options:
+      - id: "a"
+        label: "My primary care provider"
+      - id: "b"
+        label: "An urgent care or walk-in clinic"
+      - id: "c"
+        label: "A retail or pharmacy clinic"
+      - id: "d"
+        label: "A telehealth or virtual visit"
+      - id: "e"
+        label: "I wait it out or treat it myself"
+      - id: "f"
+        label: "It depends on the issue"
+  - id: q2
+    prompt: "In the past year, about how many times did you use an urgent care or walk-in clinic? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: past_year_many_times_did
+    required: true
+  - id: q3
+    prompt: "In the past year, about how many times did you see your primary care provider? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: past_year_many_times_did
+    required: true
+  - id: q4
+    prompt: "Which of these care options have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: these_care_options_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Primary care provider"
+      - id: "b"
+        label: "Urgent care or walk-in clinic"
+      - id: "c"
+        label: "Retail or pharmacy clinic"
+      - id: "d"
+        label: "Telehealth or virtual visit"
+      - id: "e"
+        label: "Emergency room"
+      - id: "f"
+        label: "Nurse advice line"
+      - id: "g"
+        label: "None of these"
+  - id: q5
+    prompt: "What most influences whether you choose urgent care over your primary care provider? (Select all that apply)"
+    type: multi_choice
+    construct: most_influences_whether_choose_urgent
+    required: true
+    options:
+      - id: "a"
+        label: "How quickly I can be seen"
+      - id: "b"
+        label: "Office hours or weekend availability"
+      - id: "c"
+        label: "How serious the issue feels"
+      - id: "d"
+        label: "Cost or copay differences"
+      - id: "e"
+        label: "Distance or convenience"
+      - id: "f"
+        label: "Whether my primary doctor is available"
+      - id: "g"
+        label: "Insurance coverage"
+  - id: q6
+    prompt: "How easy is it to get a timely appointment with your primary care provider?"
+    type: single_choice
+    construct: easy_it_get_timely_appointment
+    required: true
+    options:
+      - id: "a"
+        label: "Very difficult"
+      - id: "b"
+        label: "Somewhat difficult"
+      - id: "c"
+        label: "Somewhat easy"
+      - id: "d"
+        label: "Very easy"
+      - id: "e"
+        label: "Not applicable"
+  - id: q7
+    prompt: "About how many days do you typically wait for a routine primary care appointment? Please enter a number of days."
+    type: free_text
+    construct: many_days_typically_wait_routine
+    required: true
+  - id: q8
+    prompt: "For which situations would you choose urgent care over primary care? (Select all that apply)"
+    type: multi_choice
+    construct: situations_would_choose_urgent_care
+    required: true
+    options:
+      - id: "a"
+        label: "A minor injury like a sprain or small cut"
+      - id: "b"
+        label: "A cold, cough, or sore throat"
+      - id: "c"
+        label: "A minor infection"
+      - id: "d"
+        label: "A problem that started after hours"
+      - id: "e"
+        label: "When I cannot get a timely primary care appointment"
+      - id: "f"
+        label: "A prescription refill or quick question"
+      - id: "g"
+        label: "I would not typically choose urgent care"
+  - id: q9
+    prompt: "How do you usually decide where to go when you are unsure? (Select all that apply)"
+    type: multi_choice
+    construct: usually_decide_where_go_when
+    required: true
+    options:
+      - id: "a"
+        label: "Call my primary care office for advice"
+      - id: "b"
+        label: "Use a nurse line or telehealth service"
+      - id: "c"
+        label: "Search online about my symptoms"
+      - id: "d"
+        label: "Ask family or friends"
+      - id: "e"
+        label: "Check what my insurance covers"
+      - id: "f"
+        label: "Just go to whichever is closest or open"
+  - id: q10
+    prompt: "How much does cost affect your choice between urgent care and primary care?"
+    type: single_choice
+    construct: much_does_cost_affect_choice
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A great deal"
+  - id: q11
+    prompt: "How much does wait time affect your choice?"
+    type: single_choice
+    construct: much_does_wait_time_affect
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A great deal"
+  - id: q12
+    prompt: "How much does convenience or location affect your choice?"
+    type: single_choice
+    construct: much_does_convenience_location_affect
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A great deal"
+  - id: q13
+    prompt: "Select your top 3 factors that matter most when choosing where to go. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_that
+    required: true
+    options:
+      - id: "a"
+        label: "How quickly I can be seen"
+      - id: "b"
+        label: "Cost"
+      - id: "c"
+        label: "Convenience or location"
+      - id: "d"
+        label: "Seeing a provider who knows me"
+      - id: "e"
+        label: "Hours or weekend availability"
+      - id: "f"
+        label: "Quality of care"
+      - id: "g"
+        label: "Insurance coverage"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I prefer to see my own primary care provider when I can."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: Urgent care is more convenient for my schedule."
+    type: single_choice
+    construct: much_agree_following_statement_urgent
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: I get good-quality care at urgent care clinics."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement: I worry urgent care costs more than I expect."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement: It is important that my care is coordinated across providers."
+    type: single_choice
+    construct: much_agree_following_statement_it
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How important is continuity (seeing a provider who knows your history) to you?"
+    type: single_choice
+    construct: important_continuity_seeing_provider_who
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How satisfied are you with your most recent urgent care visit?"
+    type: single_choice
+    construct: satisfied_most_recent_urgent_care
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q21
+    prompt: "How satisfied are you with your most recent primary care visit?"
+    type: single_choice
+    construct: satisfied_most_recent_primary_care
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q22
+    prompt: "How would you rate the value for money of urgent care visits?"
+    type: single_choice
+    construct: would_rate_value_money_urgent
+    required: true
+    options:
+      - id: "a"
+        label: "Very poor"
+      - id: "b"
+        label: "Poor"
+      - id: "c"
+        label: "Fair"
+      - id: "d"
+        label: "Good"
+      - id: "e"
+        label: "Excellent"
+      - id: "f"
+        label: "Not applicable"
+  - id: q23
+    prompt: "Has using urgent care changed how often you see your primary care provider?"
+    type: single_choice
+    construct: has_using_urgent_care_changed
+    required: true
+    options:
+      - id: "a"
+        label: "I see my primary provider less now"
+      - id: "b"
+        label: "No change"
+      - id: "c"
+        label: "I see my primary provider more now"
+      - id: "d"
+        label: "Not applicable"
+  - id: q24
+    prompt: "After an urgent care visit, how often do you follow up with your primary care provider?"
+    type: single_choice
+    construct: after_urgent_care_visit_often
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q25
+    prompt: "What would make you more likely to choose your primary care provider first? (Select all that apply)"
+    type: multi_choice
+    construct: would_make_more_likely_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Faster appointments"
+      - id: "b"
+        label: "Extended or weekend hours"
+      - id: "c"
+        label: "Lower cost"
+      - id: "d"
+        label: "Easier scheduling or telehealth options"
+      - id: "e"
+        label: "Nothing would change my choice"
+      - id: "f"
+        label: "I already choose them first"
+  - id: q26
+    prompt: "How likely are you to use urgent care again in the next year?"
+    type: single_choice
+    construct: likely_use_urgent_care_again
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Somewhat likely"
+      - id: "d"
+        label: "Very likely"
+  - id: q27
+    prompt: "How likely are you to try telehealth before going to urgent care in the future?"
+    type: single_choice
+    construct: likely_try_telehealth_before_going
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Somewhat unlikely"
+      - id: "c"
+        label: "Somewhat likely"
+      - id: "d"
+        label: "Very likely"
+  - id: q28
+    prompt: "In your own words, how do you decide between urgent care and primary care?"
+    type: free_text
+    construct: own_words_decide_between_urgent
+    required: true
+  - id: q29
+    prompt: "What is your age band?"
+    type: single_choice
+    construct: age_band
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q30
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe or not to say"
+  - id: q31
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q34
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+  - id: q35
+    prompt: "What type of health insurance do you primarily have?"
+    type: single_choice
+    construct: type_health_insurance_primarily_have
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored"
+      - id: "b"
+        label: "Marketplace or individually purchased"
+      - id: "c"
+        label: "Government program"
+      - id: "d"
+        label: "No insurance"
+      - id: "e"
+        label: "Not sure"
+  - id: q36
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married or living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q38
+    prompt: "What is your approximate annual household income?"
+    type: single_choice
+    construct: approximate_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q40
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

@@ -1,0 +1,707 @@
+schemaVersion: "1.0"
+id: credit_score_awareness_v1
+title: "Credit Score Awareness Survey"
+description: "How aware people are of their credit score and how they monitor and manage it."
+questions:
+  - id: q0
+    prompt: "Do you know your current credit score?"
+    type: single_choice
+    construct: know_current_credit_score
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I know it exactly"
+      - id: "b"
+        label: "I know it approximately"
+      - id: "c"
+        label: "I have a rough idea"
+      - id: "d"
+        label: "No, I don't know it"
+  - id: q1
+    prompt: "How would you describe your credit score range?"
+    type: single_choice
+    construct: would_describe_credit_score_range
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent (800–850)"
+      - id: "b"
+        label: "Very good (740–799)"
+      - id: "c"
+        label: "Good (670–739)"
+      - id: "d"
+        label: "Fair (580–669)"
+      - id: "e"
+        label: "Poor (300–579)"
+      - id: "f"
+        label: "I don't know"
+  - id: q2
+    prompt: "How often do you check your credit score?"
+    type: single_choice
+    construct: often_check_credit_score
+    required: true
+    options:
+      - id: "a"
+        label: "Weekly or more"
+      - id: "b"
+        label: "Monthly"
+      - id: "c"
+        label: "Every few months"
+      - id: "d"
+        label: "About once a year"
+      - id: "e"
+        label: "Rarely"
+      - id: "f"
+        label: "Never"
+  - id: q3
+    prompt: "How do you usually check your credit score? (Select all that apply)"
+    type: multi_choice
+    construct: usually_check_credit_score_select
+    required: true
+    options:
+      - id: "a"
+        label: "A free app or website (Credit Karma, Experian, NerdWallet)"
+      - id: "b"
+        label: "My bank or credit card's free score tool"
+      - id: "c"
+        label: "AnnualCreditReport.com (free credit reports)"
+      - id: "d"
+        label: "A paid credit-monitoring service"
+      - id: "e"
+        label: "When applying for a loan or credit"
+      - id: "f"
+        label: "I don't check my credit score"
+  - id: q4
+    prompt: "Which credit scoring model are you most familiar with?"
+    type: single_choice
+    construct: credit_scoring_model_most_familiar
+    required: true
+    options:
+      - id: "a"
+        label: "FICO Score"
+      - id: "b"
+        label: "VantageScore"
+      - id: "c"
+        label: "Both"
+      - id: "d"
+        label: "I'm not familiar with either"
+  - id: q5
+    prompt: "How well do you understand what factors affect your credit score?"
+    type: single_choice
+    construct: well_understand_factors_affect_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Slightly"
+      - id: "c"
+        label: "Moderately"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Extremely well"
+  - id: q6
+    prompt: "Which of these do you believe affect your credit score? (Select all that apply)"
+    type: multi_choice
+    construct: these_believe_affect_credit_score
+    required: true
+    options:
+      - id: "a"
+        label: "Payment history"
+      - id: "b"
+        label: "Amount of debt / credit utilization"
+      - id: "c"
+        label: "Length of credit history"
+      - id: "d"
+        label: "New credit applications / hard inquiries"
+      - id: "e"
+        label: "Mix of credit types"
+      - id: "f"
+        label: "Your income"
+      - id: "g"
+        label: "Checking your own score"
+      - id: "h"
+        label: "I'm not sure what affects it"
+  - id: q7
+    prompt: "Do you know your current credit utilization (how much of your available credit you use)?"
+    type: single_choice
+    construct: know_current_credit_utilization_much
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I keep it low on purpose"
+      - id: "b"
+        label: "Yes, approximately"
+      - id: "c"
+        label: "No, but I've heard of it"
+      - id: "d"
+        label: "No, I'm not familiar with it"
+  - id: q8
+    prompt: "Have you ever checked your full credit report (not just the score)?"
+    type: single_choice
+    construct: have_ever_checked_full_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, in the past year"
+      - id: "b"
+        label: "Yes, but more than a year ago"
+      - id: "c"
+        label: "No, but I know I can"
+      - id: "d"
+        label: "No, and I didn't know I could"
+  - id: q9
+    prompt: "Have you ever found an error on your credit report?"
+    type: single_choice
+    construct: have_ever_found_error_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I disputed it"
+      - id: "b"
+        label: "Yes, but I didn't dispute it"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I've never checked my report"
+  - id: q10
+    prompt: "In the past 2 years, have you taken any deliberate steps to improve your credit score? (Select all that apply)"
+    type: multi_choice
+    construct: past_2_years_have_taken
+    required: true
+    options:
+      - id: "a"
+        label: "Paid down credit card balances"
+      - id: "b"
+        label: "Made sure to pay all bills on time"
+      - id: "c"
+        label: "Kept old accounts open"
+      - id: "d"
+        label: "Avoided new credit applications"
+      - id: "e"
+        label: "Disputed errors on my report"
+      - id: "f"
+        label: "Became an authorized user on someone's card"
+      - id: "g"
+        label: "Used a credit-builder loan or secured card"
+      - id: "h"
+        label: "I haven't taken any steps"
+  - id: q11
+    prompt: "How confident are you in your ability to improve your credit score?"
+    type: single_choice
+    construct: confident_ability_improve_credit_score
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q12
+    prompt: "How much do you agree with the following statement: My credit score is important to my financial future."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: I understand how to build and maintain good credit."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: Checking my own credit score lowers it."
+    type: single_choice
+    construct: much_agree_following_statement_checking
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: I worry about my credit score."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: Credit scoring feels confusing or opaque to me."
+    type: single_choice
+    construct: much_agree_following_statement_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How important is your credit score for each of the following: Getting approved for a mortgage."
+    type: single_choice
+    construct: important_credit_score_each_following
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is your credit score for each of the following: Getting a good interest rate on loans."
+    type: single_choice
+    construct: important_credit_score_each_following
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is your credit score for each of the following: Renting an apartment."
+    type: single_choice
+    construct: important_credit_score_each_following
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is your credit score for each of the following: Getting approved for a credit card."
+    type: single_choice
+    construct: important_credit_score_each_following
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "Has your credit score ever affected a major financial decision or outcome? (Select all that apply)"
+    type: multi_choice
+    construct: has_credit_score_ever_affected
+    required: true
+    options:
+      - id: "a"
+        label: "Approved or denied for a loan"
+      - id: "b"
+        label: "The interest rate I was offered"
+      - id: "c"
+        label: "Renting a home or apartment"
+      - id: "d"
+        label: "A credit card application"
+      - id: "e"
+        label: "A security deposit on utilities"
+      - id: "f"
+        label: "An employment or background check"
+      - id: "g"
+        label: "No, it hasn't affected me"
+  - id: q22
+    prompt: "Do you use any credit-monitoring or alert service?"
+    type: single_choice
+    construct: use_any_credit_monitoring_alert
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a free service"
+      - id: "b"
+        label: "Yes, a paid service"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No"
+  - id: q23
+    prompt: "Have you ever placed a credit freeze or fraud alert on your credit?"
+    type: single_choice
+    construct: have_ever_placed_credit_freeze
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a credit freeze"
+      - id: "b"
+        label: "Yes, a fraud alert"
+      - id: "c"
+        label: "No, but I know how"
+      - id: "d"
+        label: "No, I'm not familiar with these"
+  - id: q24
+    prompt: "How has your credit score changed over the past year?"
+    type: single_choice
+    construct: has_credit_score_changed_over
+    required: true
+    options:
+      - id: "a"
+        label: "Improved significantly"
+      - id: "b"
+        label: "Improved somewhat"
+      - id: "c"
+        label: "Stayed about the same"
+      - id: "d"
+        label: "Declined somewhat"
+      - id: "e"
+        label: "Declined significantly"
+      - id: "f"
+        label: "I don't know"
+  - id: q25
+    prompt: "Where do you get information about credit scores? (Select all that apply)"
+    type: multi_choice
+    construct: where_get_information_credit_scores
+    required: true
+    options:
+      - id: "a"
+        label: "Credit apps or websites"
+      - id: "b"
+        label: "My bank or lender"
+      - id: "c"
+        label: "Friends or family"
+      - id: "d"
+        label: "Social media, YouTube, or podcasts"
+      - id: "e"
+        label: "Financial blogs or news"
+      - id: "f"
+        label: "A financial advisor or counselor"
+      - id: "g"
+        label: "I don't seek out this information"
+  - id: q26
+    prompt: "Select your top 3 reasons you care (or would care) about your credit score. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_care
+    required: true
+    options:
+      - id: "a"
+        label: "Buying a home"
+      - id: "b"
+        label: "Getting a car loan"
+      - id: "c"
+        label: "Qualifying for good credit cards"
+      - id: "d"
+        label: "Getting low interest rates"
+      - id: "e"
+        label: "Renting housing"
+      - id: "f"
+        label: "Financial peace of mind"
+      - id: "g"
+        label: "Emergencies / access to credit"
+      - id: "h"
+        label: "I don't especially care about it"
+  - id: q27
+    prompt: "How satisfied are you with your current credit score?"
+    type: single_choice
+    construct: satisfied_current_credit_score
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q28
+    prompt: "How likely are you to work on improving your credit score in the next 12 months?"
+    type: single_choice
+    construct: likely_work_improving_credit_score
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q29
+    prompt: "On a scale from 0 to 10, how knowledgeable do you feel about credit scores overall, where 0 is not at all knowledgeable and 10 is extremely knowledgeable?"
+    type: single_choice
+    construct: scale_from_0_10_knowledgeable
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q30
+    prompt: "What is your best estimate of your current credit score? Please enter a number."
+    type: free_text
+    construct: best_estimate_current_credit_score
+    required: true
+  - id: q31
+    prompt: "About how many credit cards or loans do you currently have open? Please enter a number."
+    type: free_text
+    construct: many_credit_cards_loans_currently
+    required: true
+  - id: q32
+    prompt: "If there is anything else you'd like to share about your experience with credit scores, please describe it briefly."
+    type: free_text
+    construct: if_there_anything_else_d
+    required: false
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Another race or ethnicity"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your annual household income before taxes?"
+    type: single_choice
+    construct: annual_household_income_before_taxes
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school graduate or equivalent"
+      - id: "c"
+        label: "Some college or associate's degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q38
+    prompt: "Which best describes your current employment status?"
+    type: single_choice
+    construct: best_describes_current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelance"
+      - id: "d"
+        label: "Not employed, looking for work"
+      - id: "e"
+        label: "Not employed, not looking for work"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q39
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q40
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q43
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"

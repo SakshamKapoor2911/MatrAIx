@@ -1,0 +1,804 @@
+schemaVersion: "1.0"
+id: productivity_suite_choice_v1
+title: "Office & Productivity Suite Choice Survey"
+description: "Which office and productivity suites people use, how they use their apps, and what they value in collaboration, cost, and features."
+questions:
+  - id: q0
+    prompt: "Which office/productivity suite do you use most often?"
+    type: single_choice
+    construct: office_productivity_suite_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Microsoft 365 / Office"
+      - id: "b"
+        label: "Google Workspace (Docs, Sheets, Slides)"
+      - id: "c"
+        label: "Apple iWork (Pages, Numbers, Keynote)"
+      - id: "d"
+        label: "LibreOffice or OpenOffice"
+      - id: "e"
+        label: "WPS Office"
+      - id: "f"
+        label: "I don't really use one"
+      - id: "g"
+        label: "Another suite"
+  - id: q1
+    prompt: "Which productivity suites have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: productivity_suites_have_used_past
+    required: true
+    options:
+      - id: "a"
+        label: "Microsoft 365 / Office"
+      - id: "b"
+        label: "Google Workspace"
+      - id: "c"
+        label: "Apple iWork"
+      - id: "d"
+        label: "LibreOffice / OpenOffice"
+      - id: "e"
+        label: "WPS Office"
+      - id: "f"
+        label: "Zoho Workplace"
+      - id: "g"
+        label: "Notion"
+      - id: "h"
+        label: "OnlyOffice"
+      - id: "i"
+        label: "None of these"
+  - id: q2
+    prompt: "How long have you used your main productivity suite?"
+    type: single_choice
+    construct: long_have_used_main_productivity
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+  - id: q3
+    prompt: "Which applications within your suite do you use? (Select all that apply)"
+    type: multi_choice
+    construct: applications_within_suite_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Word processor (documents)"
+      - id: "b"
+        label: "Spreadsheet"
+      - id: "c"
+        label: "Presentation software"
+      - id: "d"
+        label: "Email"
+      - id: "e"
+        label: "Calendar"
+      - id: "f"
+        label: "Cloud storage / file drive"
+      - id: "g"
+        label: "Note-taking (OneNote, Keep)"
+      - id: "h"
+        label: "Video meetings (Teams, Meet)"
+      - id: "i"
+        label: "Forms or surveys"
+      - id: "j"
+        label: "Chat / messaging"
+  - id: q4
+    prompt: "How many hours per week do you spend using office/productivity apps?"
+    type: free_text
+    construct: many_hours_per_week_spend
+    required: true
+  - id: q5
+    prompt: "In what context do you mainly use your productivity suite?"
+    type: single_choice
+    construct: context_mainly_use_productivity_suite
+    required: true
+    options:
+      - id: "a"
+        label: "Work / professional"
+      - id: "b"
+        label: "School / education"
+      - id: "c"
+        label: "Personal / home use"
+      - id: "d"
+        label: "A mix of work and personal"
+      - id: "e"
+        label: "Volunteer or community organization"
+  - id: q6
+    prompt: "How did you come to use your main suite? (Select all that apply)"
+    type: multi_choice
+    construct: did_come_use_main_suite
+    required: true
+    options:
+      - id: "a"
+        label: "Required by my employer"
+      - id: "b"
+        label: "Required by my school"
+      - id: "c"
+        label: "I chose it myself"
+      - id: "d"
+        label: "It came with my computer or device"
+      - id: "e"
+        label: "Friends or family use it"
+      - id: "f"
+        label: "It's free"
+      - id: "g"
+        label: "Habit from long-term use"
+  - id: q7
+    prompt: "Which best describes how you access your suite most often?"
+    type: single_choice
+    construct: best_describes_access_suite_most
+    required: true
+    options:
+      - id: "a"
+        label: "Desktop apps installed on my computer"
+      - id: "b"
+        label: "In a web browser"
+      - id: "c"
+        label: "Mobile apps"
+      - id: "d"
+        label: "A mix of desktop and web"
+      - id: "e"
+        label: "A mix across all my devices"
+  - id: q8
+    prompt: "Do you pay for your productivity suite?"
+    type: single_choice
+    construct: pay_productivity_suite
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a personal subscription"
+      - id: "b"
+        label: "Yes, a one-time purchase"
+      - id: "c"
+        label: "My employer or school pays"
+      - id: "d"
+        label: "No, I use a free version"
+      - id: "e"
+        label: "Not sure"
+  - id: q9
+    prompt: "Which document format do you most often save or share files in?"
+    type: single_choice
+    construct: document_format_most_often_save
+    required: true
+    options:
+      - id: "a"
+        label: "Microsoft formats (.docx, .xlsx, .pptx)"
+      - id: "b"
+        label: "Google Docs / Sheets / Slides links"
+      - id: "c"
+        label: "PDF"
+      - id: "d"
+        label: "Open formats (.odt, .ods)"
+      - id: "e"
+        label: "It depends on who I'm sharing with"
+  - id: q10
+    prompt: "How often do you collaborate on documents with other people in real time?"
+    type: single_choice
+    construct: often_collaborate_documents_other_people
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Constantly"
+  - id: q11
+    prompt: "Which collaboration features do you use? (Select all that apply)"
+    type: multi_choice
+    construct: collaboration_features_use_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Real-time co-editing"
+      - id: "b"
+        label: "Comments and suggestions"
+      - id: "c"
+        label: "Version history"
+      - id: "d"
+        label: "Sharing links with permissions"
+      - id: "e"
+        label: "Track changes"
+      - id: "f"
+        label: "Assigning tasks or action items"
+      - id: "g"
+        label: "None of these"
+  - id: q12
+    prompt: "How often do you run into compatibility problems opening files made in a different suite?"
+    type: single_choice
+    construct: often_run_into_compatibility_problems
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Constantly"
+  - id: q13
+    prompt: "Have you used AI writing or assistant features in your suite (Copilot, Gemini, etc.)?"
+    type: single_choice
+    construct: have_used_ai_writing_assistant
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, a few times"
+      - id: "c"
+        label: "No, but I'm interested"
+      - id: "d"
+        label: "No, and I'm not interested"
+      - id: "e"
+        label: "My suite doesn't offer them"
+  - id: q14
+    prompt: "How comfortable are you learning new features in your productivity apps?"
+    type: single_choice
+    construct: comfortable_learning_new_features_produc
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Extremely comfortable"
+  - id: q15
+    prompt: "How much do you agree with the following statement about your suite? — It has all the features I need"
+    type: single_choice
+    construct: much_agree_following_statement_suite
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about your suite? — It is easy to collaborate with others using it"
+    type: single_choice
+    construct: much_agree_following_statement_suite
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about your suite? — It is worth what I (or my employer) pay for it"
+    type: single_choice
+    construct: much_agree_following_statement_suite
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about your suite? — I feel locked into its ecosystem"
+    type: single_choice
+    construct: much_agree_following_statement_suite
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about your suite? — I only use a small fraction of its features"
+    type: single_choice
+    construct: much_agree_following_statement_suite
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How important is each of the following in a productivity suite? — Real-time collaboration"
+    type: single_choice
+    construct: important_each_following_productivity_su
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each of the following in a productivity suite? — Working offline"
+    type: single_choice
+    construct: important_each_following_productivity_su
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each of the following in a productivity suite? — Compatibility with Microsoft file formats"
+    type: single_choice
+    construct: important_each_following_productivity_su
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each of the following in a productivity suite? — Low or no cost"
+    type: single_choice
+    construct: important_each_following_productivity_su
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each of the following in a productivity suite? — Cloud storage and syncing"
+    type: single_choice
+    construct: important_each_following_productivity_su
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is each of the following in a productivity suite? — Built-in AI assistance"
+    type: single_choice
+    construct: important_each_following_productivity_su
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "Which applications matter most to you in a productivity suite? Select your top 3. (Select all that apply)"
+    type: multi_choice
+    construct: applications_matter_most_productivity_su
+    required: true
+    options:
+      - id: "a"
+        label: "Word processor"
+      - id: "b"
+        label: "Spreadsheet"
+      - id: "c"
+        label: "Presentations"
+      - id: "d"
+        label: "Email"
+      - id: "e"
+        label: "Calendar"
+      - id: "f"
+        label: "Cloud storage"
+      - id: "g"
+        label: "Note-taking"
+      - id: "h"
+        label: "Video meetings"
+      - id: "i"
+        label: "Chat / messaging"
+  - id: q27
+    prompt: "Which application do you use most within your suite?"
+    type: single_choice
+    construct: application_use_most_within_suite
+    required: true
+    options:
+      - id: "a"
+        label: "Word processor"
+      - id: "b"
+        label: "Spreadsheet"
+      - id: "c"
+        label: "Presentation software"
+      - id: "d"
+        label: "Email"
+      - id: "e"
+        label: "Calendar"
+      - id: "f"
+        label: "Something else"
+  - id: q28
+    prompt: "Have you switched your main productivity suite in the past few years?"
+    type: single_choice
+    construct: have_switched_main_productivity_suite
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I'm happy I did"
+      - id: "b"
+        label: "Yes, but I preferred the old one"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No, I've stayed with the same one"
+  - id: q29
+    prompt: "How concerned are you about the privacy of documents stored in your suite's cloud?"
+    type: single_choice
+    construct: concerned_privacy_documents_stored_suite
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q30
+    prompt: "How satisfied are you overall with your main productivity suite?"
+    type: single_choice
+    construct: satisfied_overall_main_productivity_suit
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q31
+    prompt: "How satisfied are you with the value for money of your suite?"
+    type: single_choice
+    construct: satisfied_value_money_suite
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How likely are you to still be using the same suite two years from now?"
+    type: single_choice
+    construct: likely_still_be_using_same
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q33
+    prompt: "How likely are you to recommend your main productivity suite to a friend or colleague? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_main_productivity_suite
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q34
+    prompt: "What one thing would most improve your productivity suite?"
+    type: free_text
+    construct: one_thing_would_most_improve
+    required: true
+  - id: q35
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your total annual household income?"
+    type: single_choice
+    construct: total_annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or equivalent"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Full-time student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "Which best describes your role or field of work/study?"
+    type: single_choice
+    construct: best_describes_role_field_work
+    required: true
+    options:
+      - id: "a"
+        label: "Business, finance, or administration"
+      - id: "b"
+        label: "Technology or engineering"
+      - id: "c"
+        label: "Education"
+      - id: "d"
+        label: "Healthcare"
+      - id: "e"
+        label: "Creative or media"
+      - id: "f"
+        label: "Sales, retail, or service"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Not applicable"
+  - id: q42
+    prompt: "How many people live in your household, including yourself?"
+    type: free_text
+    construct: many_people_live_household_including
+    required: true
+  - id: q43
+    prompt: "What is your current relationship status?"
+    type: single_choice
+    construct: current_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship or partnered"
+      - id: "c"
+        label: "Married"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q45
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q46
+    prompt: "How would you rate your overall technical skill with computers?"
+    type: single_choice
+    construct: would_rate_overall_technical_skill
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert / power user"

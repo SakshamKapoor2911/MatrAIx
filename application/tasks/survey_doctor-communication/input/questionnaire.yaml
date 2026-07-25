@@ -1,0 +1,793 @@
+schemaVersion: "1.0"
+id: doctor_communication_v1
+title: "Doctor Communication Survey"
+description: "How patients experience and evaluate communication with their doctors and health providers."
+questions:
+  - id: q0
+    prompt: "Do you currently have a regular doctor or primary care provider you see?"
+    type: single_choice
+    construct: currently_have_regular_doctor_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one regular provider"
+      - id: "b"
+        label: "Yes, but I see several different providers"
+      - id: "c"
+        label: "No, I see whoever is available"
+      - id: "d"
+        label: "No, I rarely see a doctor"
+  - id: q1
+    prompt: "In the past 12 months, how many times did you see or speak with a doctor or health provider?"
+    type: single_choice
+    construct: past_12_months_many_times
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1 time"
+      - id: "c"
+        label: "2 to 3 times"
+      - id: "d"
+        label: "4 to 6 times"
+      - id: "e"
+        label: "7 or more times"
+  - id: q2
+    prompt: "How long have you been seeing your current primary care provider?"
+    type: single_choice
+    construct: long_have_been_seeing_current
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 7 years"
+      - id: "d"
+        label: "More than 7 years"
+      - id: "e"
+        label: "I don't have a regular provider"
+  - id: q3
+    prompt: "How do you most often communicate with your doctor or their office?"
+    type: single_choice
+    construct: most_often_communicate_doctor_their
+    required: true
+    options:
+      - id: "a"
+        label: "In-person visits"
+      - id: "b"
+        label: "Phone calls"
+      - id: "c"
+        label: "Video or telehealth visits"
+      - id: "d"
+        label: "Patient portal messages"
+      - id: "e"
+        label: "Email or text"
+  - id: q4
+    prompt: "Which ways have you communicated with a doctor or their office in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: ways_have_communicated_doctor_their
+    required: true
+    options:
+      - id: "a"
+        label: "In-person visit"
+      - id: "b"
+        label: "Phone call"
+      - id: "c"
+        label: "Video or telehealth visit"
+      - id: "d"
+        label: "Patient portal secure message"
+      - id: "e"
+        label: "Email"
+      - id: "f"
+        label: "Text message"
+      - id: "g"
+        label: "Through a nurse or medical assistant"
+  - id: q5
+    prompt: "About how long does a typical appointment with your doctor last?"
+    type: single_choice
+    construct: long_does_typical_appointment_doctor
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 10 minutes"
+      - id: "b"
+        label: "10 to 15 minutes"
+      - id: "c"
+        label: "16 to 30 minutes"
+      - id: "d"
+        label: "More than 30 minutes"
+  - id: q6
+    prompt: "Before an appointment, how often do you prepare a list of questions or concerns?"
+    type: single_choice
+    construct: before_appointment_often_prepare_list
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q7
+    prompt: "How often do you feel rushed during your appointments?"
+    type: single_choice
+    construct: often_feel_rushed_during_appointments
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q8
+    prompt: "Thinking about your most recent visit, how often did your doctor: Explain things in a way you could understand."
+    type: single_choice
+    construct: thinking_most_recent_visit_often
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Usually"
+      - id: "e"
+        label: "Always"
+  - id: q9
+    prompt: "Thinking about your most recent visit, how often did your doctor: Listen carefully to you."
+    type: single_choice
+    construct: thinking_most_recent_visit_often
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Usually"
+      - id: "e"
+        label: "Always"
+  - id: q10
+    prompt: "Thinking about your most recent visit, how often did your doctor: Give you a chance to ask all your questions."
+    type: single_choice
+    construct: thinking_most_recent_visit_often
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Usually"
+      - id: "e"
+        label: "Always"
+  - id: q11
+    prompt: "Thinking about your most recent visit, how often did your doctor: Involve you in decisions about your care."
+    type: single_choice
+    construct: thinking_most_recent_visit_often
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Usually"
+      - id: "e"
+        label: "Always"
+  - id: q12
+    prompt: "Thinking about your most recent visit, how often did your doctor: Show respect for what you had to say."
+    type: single_choice
+    construct: thinking_most_recent_visit_often
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Usually"
+      - id: "e"
+        label: "Always"
+  - id: q13
+    prompt: "Thinking about your most recent visit, how often did your doctor: Spend enough time with you."
+    type: single_choice
+    construct: thinking_most_recent_visit_often
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Usually"
+      - id: "e"
+        label: "Always"
+  - id: q14
+    prompt: "Thinking about your most recent visit, how often did your doctor: Address your emotional concerns, not just physical ones."
+    type: single_choice
+    construct: thinking_most_recent_visit_often
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Usually"
+      - id: "e"
+        label: "Always"
+  - id: q15
+    prompt: "How much do you agree or disagree: I feel comfortable asking my doctor questions."
+    type: single_choice
+    construct: much_agree_disagree_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: I feel comfortable disagreeing with my doctor or asking for another option."
+    type: single_choice
+    construct: much_agree_disagree_i_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree or disagree: My doctor uses too much medical jargon."
+    type: single_choice
+    construct: much_agree_disagree_my_doctor
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree or disagree: I trust the medical advice my doctor gives me."
+    type: single_choice
+    construct: much_agree_disagree_i_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree or disagree: I usually leave appointments knowing what to do next."
+    type: single_choice
+    construct: much_agree_disagree_i_usually
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How often do you feel your doctor understands your concerns and priorities?"
+    type: single_choice
+    construct: often_feel_doctor_understands_concerns
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q21
+    prompt: "After a visit, how often do you feel confused about instructions or next steps?"
+    type: single_choice
+    construct: after_visit_often_feel_confused
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "When you don't understand something, what do you usually do? (Select all that apply)"
+    type: multi_choice
+    construct: when_don_t_understand_something
+    required: true
+    options:
+      - id: "a"
+        label: "Ask the doctor to explain again"
+      - id: "b"
+        label: "Ask a nurse or staff member"
+      - id: "c"
+        label: "Look it up online later"
+      - id: "d"
+        label: "Ask a family member or friend"
+      - id: "e"
+        label: "Message the office through the portal"
+      - id: "f"
+        label: "I usually don't follow up"
+  - id: q23
+    prompt: "Have you ever avoided asking a question because you felt rushed or uncomfortable?"
+    type: single_choice
+    construct: have_ever_avoided_asking_question
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, often"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "Never"
+  - id: q24
+    prompt: "Have you ever left a doctor or switched providers because of poor communication?"
+    type: single_choice
+    construct: have_ever_left_doctor_switched
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I've considered it"
+      - id: "c"
+        label: "No"
+  - id: q25
+    prompt: "Select your top 3 qualities you value most in a doctor's communication. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_qualities_value
+    required: true
+    options:
+      - id: "a"
+        label: "Listens carefully"
+      - id: "b"
+        label: "Explains things clearly"
+      - id: "c"
+        label: "Shows empathy and warmth"
+      - id: "d"
+        label: "Spends enough time"
+      - id: "e"
+        label: "Involves me in decisions"
+      - id: "f"
+        label: "Is honest and direct"
+      - id: "g"
+        label: "Responds quickly to messages"
+      - id: "h"
+        label: "Respects my preferences and values"
+      - id: "i"
+        label: "Follows up after visits"
+  - id: q26
+    prompt: "Do you feel your doctor communicates well through the patient portal or messaging?"
+    type: single_choice
+    construct: feel_doctor_communicates_well_through
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, very well"
+      - id: "b"
+        label: "Somewhat well"
+      - id: "c"
+        label: "Not very well"
+      - id: "d"
+        label: "I don't use portal messaging"
+  - id: q27
+    prompt: "How quickly does your doctor's office usually respond to your messages or calls?"
+    type: single_choice
+    construct: quickly_does_doctor_s_office
+    required: true
+    options:
+      - id: "a"
+        label: "Same day"
+      - id: "b"
+        label: "Within 1 to 2 days"
+      - id: "c"
+        label: "Within a week"
+      - id: "d"
+        label: "Longer than a week"
+      - id: "e"
+        label: "I rarely get a response"
+  - id: q28
+    prompt: "Do you bring anyone with you to appointments to help communicate?"
+    type: single_choice
+    construct: bring_anyone_appointments_help_communica
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, usually"
+      - id: "b"
+        label: "Sometimes"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "Never"
+  - id: q29
+    prompt: "Have you ever used information you found online in a discussion with your doctor?"
+    type: single_choice
+    construct: have_ever_used_information_found
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it went well"
+      - id: "b"
+        label: "Yes, and it was awkward"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No, and I would not"
+  - id: q30
+    prompt: "How comfortable are you being fully honest with your doctor about your habits and lifestyle?"
+    type: single_choice
+    construct: comfortable_being_fully_honest_doctor
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Somewhat uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat comfortable"
+      - id: "e"
+        label: "Very comfortable"
+  - id: q31
+    prompt: "How important is it to you that your doctor shares your cultural background or speaks your primary language?"
+    type: single_choice
+    construct: important_it_that_doctor_shares
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q32
+    prompt: "In your most recent visit, about how many minutes did the doctor spend actively talking with you? Please enter a number."
+    type: free_text
+    construct: most_recent_visit_many_minutes
+    required: true
+  - id: q33
+    prompt: "In a typical visit, about how many questions do you ask your doctor? Please enter a number."
+    type: free_text
+    construct: typical_visit_many_questions_ask
+    required: true
+  - id: q34
+    prompt: "Overall, how satisfied are you with how your doctor communicates with you?"
+    type: single_choice
+    construct: overall_satisfied_doctor_communicates
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "On a scale of 0 to 10, how likely are you to recommend your doctor to a friend or family member? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q36
+    prompt: "How likely are you to stay with your current doctor over the next year?"
+    type: single_choice
+    construct: likely_stay_current_doctor_over
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q37
+    prompt: "What is one thing that would most improve communication with your doctor? (Optional)"
+    type: free_text
+    construct: one_thing_that_would_most
+    required: false
+  - id: q38
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 to 74"
+      - id: "g"
+        label: "75 or older"
+  - id: q39
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q44
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q45
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q46
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+  - id: q47
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q48
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q49
+    prompt: "What is your primary language spoken at home?"
+    type: single_choice
+    construct: primary_language_spoken_home
+    required: true
+    options:
+      - id: "a"
+        label: "English"
+      - id: "b"
+        label: "Spanish"
+      - id: "c"
+        label: "Another language"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "What is your health insurance status?"
+    type: single_choice
+    construct: health_insurance_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored insurance"
+      - id: "b"
+        label: "Marketplace or individually purchased plan"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Other coverage"
+      - id: "f"
+        label: "No insurance"
+      - id: "g"
+        label: "Prefer not to say"

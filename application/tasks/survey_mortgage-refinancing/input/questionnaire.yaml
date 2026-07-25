@@ -1,0 +1,752 @@
+schemaVersion: "1.0"
+id: mortgage_refinancing_v1
+title: "Mortgage Refinancing Survey"
+description: "People's experiences with and attitudes toward refinancing a mortgage."
+questions:
+  - id: q0
+    prompt: "Do you currently have a mortgage on a home you own?"
+    type: single_choice
+    construct: currently_have_mortgage_home_own
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one mortgage"
+      - id: "b"
+        label: "Yes, more than one (e.g., a second property)"
+      - id: "c"
+        label: "No, I own my home outright"
+      - id: "d"
+        label: "No, I don't own a home"
+  - id: q1
+    prompt: "Which best describes your experience with refinancing?"
+    type: single_choice
+    construct: best_describes_experience_refinancing
+    required: true
+    options:
+      - id: "a"
+        label: "I've refinanced in the past 2 years"
+      - id: "b"
+        label: "I've refinanced, but more than 2 years ago"
+      - id: "c"
+        label: "I'm considering refinancing now"
+      - id: "d"
+        label: "I've thought about it but haven't refinanced"
+      - id: "e"
+        label: "I've never considered refinancing"
+  - id: q2
+    prompt: "How many times have you refinanced a mortgage?"
+    type: single_choice
+    construct: many_times_have_refinanced_mortgage
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Once"
+      - id: "c"
+        label: "Twice"
+      - id: "d"
+        label: "Three or more times"
+  - id: q3
+    prompt: "What is (or was) your main reason for considering a refinance?"
+    type: single_choice
+    construct: was_main_reason_considering_refinance
+    required: true
+    options:
+      - id: "a"
+        label: "Lower my interest rate"
+      - id: "b"
+        label: "Lower my monthly payment"
+      - id: "c"
+        label: "Shorten my loan term"
+      - id: "d"
+        label: "Cash out home equity"
+      - id: "e"
+        label: "Switch from an adjustable to a fixed rate"
+      - id: "f"
+        label: "Remove private mortgage insurance (PMI)"
+      - id: "g"
+        label: "Consolidate debt"
+  - id: q4
+    prompt: "Which reasons apply to your interest in refinancing? (Select all that apply)"
+    type: multi_choice
+    construct: reasons_apply_interest_refinancing_selec
+    required: true
+    options:
+      - id: "a"
+        label: "Get a lower interest rate"
+      - id: "b"
+        label: "Reduce the monthly payment"
+      - id: "c"
+        label: "Pay off the loan faster"
+      - id: "d"
+        label: "Take cash out for renovations"
+      - id: "e"
+        label: "Take cash out for other expenses"
+      - id: "f"
+        label: "Consolidate higher-interest debt"
+      - id: "g"
+        label: "Remove PMI"
+      - id: "h"
+        label: "Change loan type or term"
+      - id: "i"
+        label: "Not applicable"
+  - id: q5
+    prompt: "What type of refinance are you considering or did you do?"
+    type: single_choice
+    construct: type_refinance_considering_did
+    required: true
+    options:
+      - id: "a"
+        label: "Rate-and-term refinance"
+      - id: "b"
+        label: "Cash-out refinance"
+      - id: "c"
+        label: "Streamline refinance (FHA/VA)"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q6
+    prompt: "What is the interest rate on your current mortgage?"
+    type: single_choice
+    construct: interest_rate_current_mortgage
+    required: true
+    options:
+      - id: "a"
+        label: "Under 3%"
+      - id: "b"
+        label: "3% to 3.99%"
+      - id: "c"
+        label: "4% to 4.99%"
+      - id: "d"
+        label: "5% to 5.99%"
+      - id: "e"
+        label: "6% or higher"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q7
+    prompt: "What is stopping you (or gave you pause) about refinancing? (Select all that apply)"
+    type: multi_choice
+    construct: stopping_gave_pause_refinancing_select
+    required: true
+    options:
+      - id: "a"
+        label: "Current rates aren't low enough"
+      - id: "b"
+        label: "Closing costs are too high"
+      - id: "c"
+        label: "I don't plan to stay in the home long enough"
+      - id: "d"
+        label: "My existing rate is already low"
+      - id: "e"
+        label: "The paperwork and hassle"
+      - id: "f"
+        label: "Concerns about qualifying"
+      - id: "g"
+        label: "Nothing — I refinanced or plan to"
+      - id: "h"
+        label: "I'm not sure it's worth it"
+  - id: q8
+    prompt: "How many lenders did you (or would you) compare for a refinance?"
+    type: single_choice
+    construct: many_lenders_did_would_compare
+    required: true
+    options:
+      - id: "a"
+        label: "Just 1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3 to 4"
+      - id: "d"
+        label: "5 or more"
+      - id: "e"
+        label: "I haven't compared any"
+  - id: q9
+    prompt: "Which types of lenders did you consider for refinancing? (Select all that apply)"
+    type: multi_choice
+    construct: types_lenders_did_consider_refinancing
+    required: true
+    options:
+      - id: "a"
+        label: "My current mortgage servicer"
+      - id: "b"
+        label: "My bank or credit union"
+      - id: "c"
+        label: "An online lender (Rocket Mortgage, Better.com, etc.)"
+      - id: "d"
+        label: "A mortgage broker"
+      - id: "e"
+        label: "A local or regional lender"
+      - id: "f"
+        label: "I haven't looked into lenders"
+  - id: q10
+    prompt: "Did you calculate your break-even point (how long to recoup closing costs)?"
+    type: single_choice
+    construct: did_calculate_break_even_point
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it made sense to refinance"
+      - id: "b"
+        label: "Yes, and it didn't make sense"
+      - id: "c"
+        label: "No, but I know what that means"
+      - id: "d"
+        label: "No, I'm not familiar with it"
+  - id: q11
+    prompt: "How did you learn about your refinancing options? (Select all that apply)"
+    type: multi_choice
+    construct: did_learn_refinancing_options_select
+    required: true
+    options:
+      - id: "a"
+        label: "My current lender contacted me"
+      - id: "b"
+        label: "Online rate comparison sites"
+      - id: "c"
+        label: "A mortgage broker"
+      - id: "d"
+        label: "Friends or family"
+      - id: "e"
+        label: "Financial blogs, YouTube, or podcasts"
+      - id: "f"
+        label: "News about interest rates"
+      - id: "g"
+        label: "A financial advisor"
+  - id: q12
+    prompt: "How much do you agree with the following statement: Refinancing is a smart way to save money when rates drop."
+    type: single_choice
+    construct: much_agree_following_statement_refinanci
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree with the following statement: The refinancing process is complicated and time-consuming."
+    type: single_choice
+    construct: much_agree_following_statement_refinanci
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree with the following statement: I understand how closing costs affect whether a refinance is worth it."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree with the following statement: I keep an eye on interest rates in case a refinance makes sense."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement: Taking cash out of home equity is risky."
+    type: single_choice
+    construct: much_agree_following_statement_taking
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How important was each of the following in a refinance decision: Lowering the interest rate."
+    type: single_choice
+    construct: important_was_each_following_refinance
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important was each of the following in a refinance decision: Reducing the monthly payment."
+    type: single_choice
+    construct: important_was_each_following_refinance
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important was each of the following in a refinance decision: Closing costs."
+    type: single_choice
+    construct: important_was_each_following_refinance
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important was each of the following in a refinance decision: How long you plan to stay in the home."
+    type: single_choice
+    construct: important_was_each_following_refinance
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important was each of the following in a refinance decision: Accessing home equity (cash out)."
+    type: single_choice
+    construct: important_was_each_following_refinance
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How closely do you follow mortgage interest rate trends?"
+    type: single_choice
+    construct: closely_follow_mortgage_interest_rate
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Closely"
+      - id: "e"
+        label: "Very closely"
+  - id: q23
+    prompt: "How knowledgeable do you feel about the refinancing process?"
+    type: single_choice
+    construct: knowledgeable_feel_refinancing_process
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all knowledgeable"
+      - id: "b"
+        label: "Slightly knowledgeable"
+      - id: "c"
+        label: "Moderately knowledgeable"
+      - id: "d"
+        label: "Very knowledgeable"
+      - id: "e"
+        label: "Extremely knowledgeable"
+  - id: q24
+    prompt: "At what rate drop would you seriously consider refinancing?"
+    type: single_choice
+    construct: rate_drop_would_seriously_consider
+    required: true
+    options:
+      - id: "a"
+        label: "Any drop below my current rate"
+      - id: "b"
+        label: "About 0.5 percentage points"
+      - id: "c"
+        label: "About 1 percentage point"
+      - id: "d"
+        label: "More than 1.5 percentage points"
+      - id: "e"
+        label: "I wouldn't refinance regardless"
+  - id: q25
+    prompt: "If you refinanced, how did it change your loan term?"
+    type: single_choice
+    construct: if_refinanced_did_it_change
+    required: true
+    options:
+      - id: "a"
+        label: "Kept the same term"
+      - id: "b"
+        label: "Shortened the term"
+      - id: "c"
+        label: "Lengthened the term / reset the clock"
+      - id: "d"
+        label: "Not applicable — I haven't refinanced"
+  - id: q26
+    prompt: "How did refinancing (or would refinancing) affect your monthly payment?"
+    type: single_choice
+    construct: did_refinancing_would_refinancing_affect
+    required: true
+    options:
+      - id: "a"
+        label: "Lowered it significantly"
+      - id: "b"
+        label: "Lowered it somewhat"
+      - id: "c"
+        label: "Kept it about the same"
+      - id: "d"
+        label: "Raised it (to pay off faster or take cash out)"
+      - id: "e"
+        label: "Not applicable"
+  - id: q27
+    prompt: "Select your top 3 factors you'd weigh in a refinance decision. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_d
+    required: true
+    options:
+      - id: "a"
+        label: "The new interest rate"
+      - id: "b"
+        label: "Closing costs"
+      - id: "c"
+        label: "The break-even timeline"
+      - id: "d"
+        label: "Monthly payment change"
+      - id: "e"
+        label: "How long I'll stay in the home"
+      - id: "f"
+        label: "Total interest paid over the loan"
+      - id: "g"
+        label: "Accessing equity"
+      - id: "h"
+        label: "My credit score"
+  - id: q28
+    prompt: "Overall, how satisfied were you (or do you expect to be) with refinancing?"
+    type: single_choice
+    construct: overall_satisfied_were_expect_be
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "How likely are you to refinance (or refinance again) in the next 2 years?"
+    type: single_choice
+    construct: likely_refinance_refinance_again_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q30
+    prompt: "On a scale from 0 to 10, how confident are you in your ability to decide whether refinancing is worth it, where 0 is not at all confident and 10 is extremely confident?"
+    type: single_choice
+    construct: scale_from_0_10_confident
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "What is your current remaining mortgage balance? Please enter a dollar amount."
+    type: free_text
+    construct: current_remaining_mortgage_balance_pleas
+    required: true
+  - id: q32
+    prompt: "About how much do you pay (or would you pay) in refinance closing costs? Please enter a dollar amount."
+    type: free_text
+    construct: much_pay_would_pay_refinance
+    required: true
+  - id: q33
+    prompt: "What is your current monthly mortgage payment (principal and interest)? Please enter a dollar amount."
+    type: free_text
+    construct: current_monthly_mortgage_payment_princip
+    required: true
+  - id: q34
+    prompt: "If there is anything else you'd like to share about your views on refinancing, please describe it briefly."
+    type: free_text
+    construct: if_there_anything_else_d
+    required: false
+  - id: q35
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Another race or ethnicity"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your annual household income before taxes?"
+    type: single_choice
+    construct: annual_household_income_before_taxes
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school graduate or equivalent"
+      - id: "c"
+        label: "Some college or associate's degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q40
+    prompt: "Which best describes your current employment status?"
+    type: single_choice
+    construct: best_describes_current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelance"
+      - id: "d"
+        label: "Not employed, looking for work"
+      - id: "e"
+        label: "Not employed, not looking for work"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q41
+    prompt: "How would you describe your credit score range?"
+    type: single_choice
+    construct: would_describe_credit_score_range
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent (740+)"
+      - id: "b"
+        label: "Good (670–739)"
+      - id: "c"
+        label: "Fair (580–669)"
+      - id: "d"
+        label: "Poor (below 580)"
+      - id: "e"
+        label: "I don't know"
+  - id: q42
+    prompt: "About how many years have you owned your current home?"
+    type: single_choice
+    construct: many_years_have_owned_current
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 2 years"
+      - id: "b"
+        label: "2 to 5 years"
+      - id: "c"
+        label: "6 to 10 years"
+      - id: "d"
+        label: "11 to 20 years"
+      - id: "e"
+        label: "More than 20 years"
+      - id: "f"
+        label: "I don't own a home"
+  - id: q43
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q44
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q46
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

@@ -1,0 +1,783 @@
+schemaVersion: "1.0"
+id: mobile_app_development_v1
+title: "Mobile App Development Survey"
+description: "How people build mobile apps: the platforms, frameworks, tooling, distribution, and practices they use and their satisfaction with them."
+questions:
+  - id: q0
+    prompt: "Which best describes your involvement in mobile app development?"
+    type: single_choice
+    construct: best_describes_involvement_mobile_app
+    required: true
+    options:
+      - id: "a"
+        label: "Professional mobile developer (main job)"
+      - id: "b"
+        label: "Developer who sometimes builds mobile apps"
+      - id: "c"
+        label: "Freelancer / agency building apps for clients"
+      - id: "d"
+        label: "Indie developer publishing my own apps"
+      - id: "e"
+        label: "Student learning mobile development"
+      - id: "f"
+        label: "Hobbyist"
+      - id: "g"
+        label: "I don't build mobile apps"
+  - id: q1
+    prompt: "How many years have you been building mobile apps?"
+    type: free_text
+    construct: many_years_have_been_building
+    required: true
+  - id: q2
+    prompt: "Which platforms do you build for? (Select all that apply)"
+    type: multi_choice
+    construct: platforms_build_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "iOS / iPadOS"
+      - id: "b"
+        label: "Android"
+      - id: "c"
+        label: "Cross-platform (both from one codebase)"
+      - id: "d"
+        label: "Wear OS / watchOS"
+      - id: "e"
+        label: "Mobile web / PWA"
+      - id: "f"
+        label: "Other (TV, foldables, etc.)"
+  - id: q3
+    prompt: "What is your main development approach?"
+    type: single_choice
+    construct: main_development_approach
+    required: true
+    options:
+      - id: "a"
+        label: "Native (separate iOS and Android codebases)"
+      - id: "b"
+        label: "Cross-platform framework (one codebase)"
+      - id: "c"
+        label: "Progressive web app / hybrid web"
+      - id: "d"
+        label: "Low-code / no-code app builder"
+      - id: "e"
+        label: "Mix of approaches"
+  - id: q4
+    prompt: "Which frameworks or languages do you use for mobile development? (Select all that apply)"
+    type: multi_choice
+    construct: frameworks_languages_use_mobile_developm
+    required: true
+    options:
+      - id: "a"
+        label: "Swift / SwiftUI (iOS)"
+      - id: "b"
+        label: "UIKit / Objective-C (iOS)"
+      - id: "c"
+        label: "Kotlin (Android)"
+      - id: "d"
+        label: "Jetpack Compose (Android)"
+      - id: "e"
+        label: "Java (Android)"
+      - id: "f"
+        label: "Flutter (Dart)"
+      - id: "g"
+        label: "React Native"
+      - id: "h"
+        label: ".NET MAUI / Xamarin"
+      - id: "i"
+        label: "Ionic / Capacitor"
+      - id: "j"
+        label: "Unity (games)"
+      - id: "k"
+        label: "Kotlin Multiplatform"
+      - id: "l"
+        label: "Other"
+  - id: q5
+    prompt: "Which cross-platform framework would you choose for a new project today?"
+    type: single_choice
+    construct: cross_platform_framework_would_choose
+    required: true
+    options:
+      - id: "a"
+        label: "Flutter"
+      - id: "b"
+        label: "React Native"
+      - id: "c"
+        label: "Kotlin Multiplatform"
+      - id: "d"
+        label: ".NET MAUI"
+      - id: "e"
+        label: "I'd go native"
+      - id: "f"
+        label: "Not applicable"
+  - id: q6
+    prompt: "Which IDEs or editors do you use for mobile work? (Select all that apply)"
+    type: multi_choice
+    construct: ides_editors_use_mobile_work
+    required: true
+    options:
+      - id: "a"
+        label: "Xcode"
+      - id: "b"
+        label: "Android Studio"
+      - id: "c"
+        label: "Visual Studio Code"
+      - id: "d"
+        label: "Cursor"
+      - id: "e"
+        label: "JetBrains (IntelliJ, Fleet, etc.)"
+      - id: "f"
+        label: "Other"
+  - id: q7
+    prompt: "Which backend or services do you use for your apps? (Select all that apply)"
+    type: multi_choice
+    construct: backend_services_use_apps_select
+    required: true
+    options:
+      - id: "a"
+        label: "Firebase"
+      - id: "b"
+        label: "Supabase"
+      - id: "c"
+        label: "Your own custom API / server"
+      - id: "d"
+        label: "AWS (Amplify, AppSync, etc.)"
+      - id: "e"
+        label: "Azure / Google Cloud"
+      - id: "f"
+        label: "A backend-as-a-service (other)"
+      - id: "g"
+        label: "No backend / fully local"
+  - id: q8
+    prompt: "How do you handle app testing? (Select all that apply)"
+    type: multi_choice
+    construct: handle_app_testing_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Unit tests"
+      - id: "b"
+        label: "UI / integration tests"
+      - id: "c"
+        label: "Manual testing on real devices"
+      - id: "d"
+        label: "Emulators / simulators"
+      - id: "e"
+        label: "Beta testing (TestFlight, Play internal testing)"
+      - id: "f"
+        label: "Automated device farms"
+      - id: "g"
+        label: "Minimal or no testing"
+  - id: q9
+    prompt: "How do you distribute your apps? (Select all that apply)"
+    type: multi_choice
+    construct: distribute_apps_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Apple App Store"
+      - id: "b"
+        label: "Google Play Store"
+      - id: "c"
+        label: "Enterprise / internal distribution"
+      - id: "d"
+        label: "Direct APK / sideloading"
+      - id: "e"
+        label: "Alternative app stores"
+      - id: "f"
+        label: "Not yet published"
+  - id: q10
+    prompt: "How do you monetize your apps? (Select all that apply)"
+    type: multi_choice
+    construct: monetize_apps_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Paid downloads"
+      - id: "b"
+        label: "In-app purchases"
+      - id: "c"
+        label: "Subscriptions"
+      - id: "d"
+        label: "Ads"
+      - id: "e"
+        label: "Free (no monetization)"
+      - id: "f"
+        label: "Client / contract work (not app revenue)"
+      - id: "g"
+        label: "Freemium"
+  - id: q11
+    prompt: "How often do you release app updates?"
+    type: single_choice
+    construct: often_release_app_updates
+    required: true
+    options:
+      - id: "a"
+        label: "Weekly or more often"
+      - id: "b"
+        label: "Every few weeks"
+      - id: "c"
+        label: "Monthly"
+      - id: "d"
+        label: "A few times a year"
+      - id: "e"
+        label: "Rarely"
+      - id: "f"
+        label: "Not applicable"
+  - id: q12
+    prompt: "Do you use a CI/CD pipeline for mobile builds and releases?"
+    type: single_choice
+    construct: use_ci_cd_pipeline_mobile
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, fully automated builds and releases"
+      - id: "b"
+        label: "Yes, automated builds but manual release"
+      - id: "c"
+        label: "Partially"
+      - id: "d"
+        label: "No, everything is manual"
+      - id: "e"
+        label: "Not applicable"
+  - id: q13
+    prompt: "Which analytics or monitoring tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: analytics_monitoring_tools_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Firebase Analytics"
+      - id: "b"
+        label: "Firebase Crashlytics"
+      - id: "c"
+        label: "Sentry"
+      - id: "d"
+        label: "Amplitude / Mixpanel"
+      - id: "e"
+        label: "App Store / Play Console analytics"
+      - id: "f"
+        label: "RevenueCat or a subscription analytics tool"
+      - id: "g"
+        label: "None"
+  - id: q14
+    prompt: "About how many hours per week do you spend on mobile development?"
+    type: free_text
+    construct: many_hours_per_week_spend
+    required: true
+  - id: q15
+    prompt: "How much do you agree with the following statement? — App store review and approval is a smooth process."
+    type: single_choice
+    construct: much_agree_following_statement_app
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement? — Cross-platform frameworks have gotten good enough to replace native for most apps."
+    type: single_choice
+    construct: much_agree_following_statement_cross
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement? — App store fees and policies are fair."
+    type: single_choice
+    construct: much_agree_following_statement_app
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement? — AI tools meaningfully speed up my mobile development."
+    type: single_choice
+    construct: much_agree_following_statement_ai
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement? — Keeping up with OS and SDK changes is a burden."
+    type: single_choice
+    construct: much_agree_following_statement_keeping
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How challenging is each of the following in your mobile work? — Device and OS fragmentation"
+    type: single_choice
+    construct: challenging_each_following_mobile_work
+    required: true
+    options:
+      - id: "a"
+        label: "Not a challenge"
+      - id: "b"
+        label: "Minor challenge"
+      - id: "c"
+        label: "Moderate challenge"
+      - id: "d"
+        label: "Major challenge"
+      - id: "e"
+        label: "Severe challenge"
+  - id: q21
+    prompt: "How challenging is each of the following in your mobile work? — App store approval / policies"
+    type: single_choice
+    construct: challenging_each_following_mobile_work
+    required: true
+    options:
+      - id: "a"
+        label: "Not a challenge"
+      - id: "b"
+        label: "Minor challenge"
+      - id: "c"
+        label: "Moderate challenge"
+      - id: "d"
+        label: "Major challenge"
+      - id: "e"
+        label: "Severe challenge"
+  - id: q22
+    prompt: "How challenging is each of the following in your mobile work? — Performance and battery optimization"
+    type: single_choice
+    construct: challenging_each_following_mobile_work
+    required: true
+    options:
+      - id: "a"
+        label: "Not a challenge"
+      - id: "b"
+        label: "Minor challenge"
+      - id: "c"
+        label: "Moderate challenge"
+      - id: "d"
+        label: "Major challenge"
+      - id: "e"
+        label: "Severe challenge"
+  - id: q23
+    prompt: "How challenging is each of the following in your mobile work? — User acquisition / discoverability"
+    type: single_choice
+    construct: challenging_each_following_mobile_work
+    required: true
+    options:
+      - id: "a"
+        label: "Not a challenge"
+      - id: "b"
+        label: "Minor challenge"
+      - id: "c"
+        label: "Moderate challenge"
+      - id: "d"
+        label: "Major challenge"
+      - id: "e"
+        label: "Severe challenge"
+  - id: q24
+    prompt: "How challenging is each of the following in your mobile work? — Monetization"
+    type: single_choice
+    construct: challenging_each_following_mobile_work
+    required: true
+    options:
+      - id: "a"
+        label: "Not a challenge"
+      - id: "b"
+        label: "Minor challenge"
+      - id: "c"
+        label: "Moderate challenge"
+      - id: "d"
+        label: "Major challenge"
+      - id: "e"
+        label: "Severe challenge"
+  - id: q25
+    prompt: "How satisfied are you with each of the following? — Your primary framework / language"
+    type: single_choice
+    construct: satisfied_each_following_primary_framewo
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q26
+    prompt: "How satisfied are you with each of the following? — Your development tools / IDE"
+    type: single_choice
+    construct: satisfied_each_following_development_too
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q27
+    prompt: "How satisfied are you with each of the following? — The app store submission process"
+    type: single_choice
+    construct: satisfied_each_following_app_store
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q28
+    prompt: "How satisfied are you with each of the following? — Your backend / services"
+    type: single_choice
+    construct: satisfied_each_following_backend_service
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q29
+    prompt: "Which AI tools do you use in mobile development? (Select all that apply)"
+    type: multi_choice
+    construct: ai_tools_use_mobile_development
+    required: true
+    options:
+      - id: "a"
+        label: "GitHub Copilot"
+      - id: "b"
+        label: "ChatGPT"
+      - id: "c"
+        label: "Claude"
+      - id: "d"
+        label: "Cursor"
+      - id: "e"
+        label: "Android Studio / Xcode built-in AI"
+      - id: "f"
+        label: "Gemini"
+      - id: "g"
+        label: "I don't use AI tools"
+  - id: q30
+    prompt: "Select the top 3 factors when choosing a mobile development approach. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_factors_when
+    required: true
+    options:
+      - id: "a"
+        label: "Development speed"
+      - id: "b"
+        label: "App performance"
+      - id: "c"
+        label: "Access to native features"
+      - id: "d"
+        label: "Team's existing skills"
+      - id: "e"
+        label: "Code reuse across platforms"
+      - id: "f"
+        label: "Community and ecosystem"
+      - id: "g"
+        label: "Long-term maintainability"
+      - id: "h"
+        label: "Cost"
+      - id: "i"
+        label: "UI/UX quality"
+  - id: q31
+    prompt: "How likely are you to recommend your primary mobile framework to a peer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_mobile_framewor
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "Overall, how satisfied are you with your mobile development tools and workflow?"
+    type: single_choice
+    construct: overall_satisfied_mobile_development_too
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How likely are you to switch your primary mobile framework in the next 12 months?"
+    type: single_choice
+    construct: likely_switch_primary_mobile_framework
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "What is the biggest pain point in mobile app development for you today?"
+    type: free_text
+    construct: biggest_pain_point_mobile_app
+    required: true
+  - id: q35
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 25"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your annual household income (US dollars)?"
+    type: single_choice
+    construct: annual_household_income_us_dollars
+    required: true
+    options:
+      - id: "a"
+        label: "Under $50,000"
+      - id: "b"
+        label: "$50,000–$99,999"
+      - id: "c"
+        label: "$100,000–$149,999"
+      - id: "d"
+        label: "$150,000–$249,999"
+      - id: "e"
+        label: "$250,000 or more"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Professional or doctoral degree"
+  - id: q40
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed / freelancer"
+      - id: "d"
+        label: "Not currently employed"
+      - id: "e"
+        label: "Student"
+      - id: "f"
+        label: "Retired"
+  - id: q41
+    prompt: "How many years of professional software development experience do you have?"
+    type: free_text
+    construct: many_years_professional_software_develop
+    required: true
+  - id: q42
+    prompt: "How large is the company or organization you work for?"
+    type: single_choice
+    construct: large_company_organization_work
+    required: true
+    options:
+      - id: "a"
+        label: "Just me / freelance"
+      - id: "b"
+        label: "2–9"
+      - id: "c"
+        label: "10–49"
+      - id: "d"
+        label: "50–249"
+      - id: "e"
+        label: "250–999"
+      - id: "f"
+        label: "1,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q43
+    prompt: "What is your work arrangement?"
+    type: single_choice
+    construct: work_arrangement
+    required: true
+    options:
+      - id: "a"
+        label: "Fully remote"
+      - id: "b"
+        label: "Hybrid"
+      - id: "c"
+        label: "Fully in person"
+      - id: "d"
+        label: "Not currently working"
+  - id: q44
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q45
+    prompt: "How would you describe where you live?"
+    type: single_choice
+    construct: would_describe_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

@@ -1,0 +1,7 @@
+# Coding-Challenge Platform
+
+How developers use coding-challenge and practice-problem platforms to build skills, prepare for interviews, and compete.
+
+## About this survey
+
+This survey profiles how people practice on coding-challenge platforms, opening with a screener on frequency, tenure, and the respondent's main motivation. It records the primary platform along with the platforms, programming languages, features, problem topics, and contests they engage with, plus session habits, difficulty targets, discovery methods, and how they respond when stuck. Attitudes are captured with an agreement Likert battery on skill growth, interview relevance, real-world applicability, motivation, and frustration, and a per-item importance matrix over platform-selection criteria, along with frequency scales on contest participation and reading others' solutions and a top-three ranking of practice motivations. Later sections measure satisfaction with problem quality, editor, and the platform overall, followed by recommendation likelihood on a 0–10 scale, continued-use and switching intent, and interview impact. Question types include single-choice, multi-select, Likert agreement, importance, frequency, satisfaction and likelihood scales, two matrix batteries, a ranking item, and numeric and open free-text. The survey closes with a demographic block covering role, professional experience, employment, company size, industry, job-search status, age, gender, race and ethnicity, education, U.S. region, and urbanicity.

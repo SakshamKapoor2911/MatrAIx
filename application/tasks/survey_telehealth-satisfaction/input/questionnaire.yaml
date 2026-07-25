@@ -1,0 +1,732 @@
+schemaVersion: "1.0"
+id: telehealth_satisfaction_v1
+title: "Telehealth Satisfaction Survey"
+description: "How satisfied people are with the virtual (phone or video) medical visits they have experienced."
+questions:
+  - id: q0
+    prompt: "Have you had a telehealth (phone or video) visit in the past 12 months?"
+    type: single_choice
+    construct: have_had_telehealth_phone_video
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I have in the past"
+      - id: "c"
+        label: "No, never"
+  - id: q1
+    prompt: "About how many telehealth visits have you had in the past 12 months? Please enter a number."
+    type: free_text
+    construct: many_telehealth_visits_have_had
+    required: true
+  - id: q2
+    prompt: "Thinking of your most recent telehealth visit, what type was it?"
+    type: single_choice
+    construct: thinking_most_recent_telehealth_visit
+    required: true
+    options:
+      - id: "a"
+        label: "Video visit"
+      - id: "b"
+        label: "Phone call (voice only)"
+      - id: "c"
+        label: "Secure messaging or chat"
+      - id: "d"
+        label: "Not applicable"
+  - id: q3
+    prompt: "What was the main reason for your most recent telehealth visit?"
+    type: single_choice
+    construct: was_main_reason_most_recent
+    required: true
+    options:
+      - id: "a"
+        label: "A routine follow-up"
+      - id: "b"
+        label: "A minor illness"
+      - id: "c"
+        label: "A prescription refill"
+      - id: "d"
+        label: "Reviewing test results"
+      - id: "e"
+        label: "A wellness or general health question"
+      - id: "f"
+        label: "Other"
+  - id: q4
+    prompt: "How long did you wait past your scheduled time before your most recent telehealth visit started?"
+    type: single_choice
+    construct: long_did_wait_past_scheduled
+    required: true
+    options:
+      - id: "a"
+        label: "It started on time"
+      - id: "b"
+        label: "Less than 5 minutes"
+      - id: "c"
+        label: "5 to 15 minutes"
+      - id: "d"
+        label: "16 to 30 minutes"
+      - id: "e"
+        label: "More than 30 minutes"
+  - id: q5
+    prompt: "Did you experience any technical problems during your most recent telehealth visit?"
+    type: single_choice
+    construct: did_experience_any_technical_problems
+    required: true
+    options:
+      - id: "a"
+        label: "No problems"
+      - id: "b"
+        label: "Minor problems that did not disrupt the visit"
+      - id: "c"
+        label: "Problems that disrupted the visit"
+      - id: "d"
+        label: "Problems that ended the visit early"
+  - id: q6
+    prompt: "Which of the following went well during your telehealth visits? (Select all that apply)"
+    type: multi_choice
+    construct: following_went_well_during_telehealth
+    required: true
+    options:
+      - id: "a"
+        label: "Easy to schedule"
+      - id: "b"
+        label: "Easy to connect and log in"
+      - id: "c"
+        label: "The provider listened to me"
+      - id: "d"
+        label: "Clear explanations"
+      - id: "e"
+        label: "Short wait time"
+      - id: "f"
+        label: "My questions were answered"
+      - id: "g"
+        label: "Follow-up instructions were clear"
+  - id: q7
+    prompt: "Which of the following were frustrating during your telehealth visits? (Select all that apply)"
+    type: multi_choice
+    construct: following_were_frustrating_during_telehe
+    required: true
+    options:
+      - id: "a"
+        label: "Connection or audio problems"
+      - id: "b"
+        label: "Hard to describe my symptoms remotely"
+      - id: "c"
+        label: "Felt rushed"
+      - id: "d"
+        label: "Long wait past appointment time"
+      - id: "e"
+        label: "Trouble logging in"
+      - id: "f"
+        label: "Provider seemed distracted"
+      - id: "g"
+        label: "Nothing was frustrating"
+  - id: q8
+    prompt: "How satisfied were you with each of the following aspects of your telehealth care — The ease of scheduling"
+    type: single_choice
+    construct: satisfied_were_each_following_aspects
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q9
+    prompt: "How satisfied were you with each of the following aspects of your telehealth care — The wait time before the visit"
+    type: single_choice
+    construct: satisfied_were_each_following_aspects
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q10
+    prompt: "How satisfied were you with each of the following aspects of your telehealth care — The audio and video quality"
+    type: single_choice
+    construct: satisfied_were_each_following_aspects
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q11
+    prompt: "How satisfied were you with each of the following aspects of your telehealth care — How well the provider listened"
+    type: single_choice
+    construct: satisfied_were_each_following_aspects
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q12
+    prompt: "How satisfied were you with each of the following aspects of your telehealth care — The clarity of the provider's explanations"
+    type: single_choice
+    construct: satisfied_were_each_following_aspects
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q13
+    prompt: "How satisfied were you with each of the following aspects of your telehealth care — The follow-up instructions you received"
+    type: single_choice
+    construct: satisfied_were_each_following_aspects
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q14
+    prompt: "How much do you agree: The care I received by telehealth was as good as an in-person visit."
+    type: single_choice
+    construct: much_agree_care_i_received
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: The provider gave me enough time during the telehealth visit."
+    type: single_choice
+    construct: much_agree_provider_gave_me
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: I felt my privacy was protected during the visit."
+    type: single_choice
+    construct: much_agree_i_felt_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How often were your telehealth visits able to fully resolve your issue without a follow-up in-person visit?"
+    type: single_choice
+    construct: often_were_telehealth_visits_able
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q18
+    prompt: "Overall, how satisfied were you with your most recent telehealth visit?"
+    type: single_choice
+    construct: overall_satisfied_were_most_recent
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q19
+    prompt: "On a scale of 0 to 10, how likely are you to recommend telehealth to a friend or family member based on your experience? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q20
+    prompt: "How likely are you to choose telehealth again for a similar issue?"
+    type: single_choice
+    construct: likely_choose_telehealth_again_similar
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q21
+    prompt: "Compared with your expectations, how was your telehealth experience?"
+    type: single_choice
+    construct: compared_expectations_was_telehealth_exp
+    required: true
+    options:
+      - id: "a"
+        label: "Much better than expected"
+      - id: "b"
+        label: "Somewhat better"
+      - id: "c"
+        label: "About what I expected"
+      - id: "d"
+        label: "Somewhat worse"
+      - id: "e"
+        label: "Much worse than expected"
+  - id: q22
+    prompt: "How did your telehealth experience affect your trust in virtual care overall?"
+    type: single_choice
+    construct: did_telehealth_experience_affect_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Increased it a lot"
+      - id: "b"
+        label: "Increased it somewhat"
+      - id: "c"
+        label: "No change"
+      - id: "d"
+        label: "Decreased it somewhat"
+      - id: "e"
+        label: "Decreased it a lot"
+  - id: q23
+    prompt: "Which of the following did your most recent telehealth visit include? (Select all that apply)"
+    type: multi_choice
+    construct: following_did_most_recent_telehealth
+    required: true
+    options:
+      - id: "a"
+        label: "A prescription or refill"
+      - id: "b"
+        label: "A referral to another provider"
+      - id: "c"
+        label: "An order for lab tests or imaging"
+      - id: "d"
+        label: "Advice to schedule an in-person visit"
+      - id: "e"
+        label: "Follow-up instructions by message"
+      - id: "f"
+        label: "A scheduled follow-up appointment"
+      - id: "g"
+        label: "None of these"
+  - id: q24
+    prompt: "How did the wait time for your telehealth visit compare with a typical in-person visit?"
+    type: single_choice
+    construct: did_wait_time_telehealth_visit
+    required: true
+    options:
+      - id: "a"
+        label: "Much shorter"
+      - id: "b"
+        label: "Somewhat shorter"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat longer"
+      - id: "e"
+        label: "Much longer"
+  - id: q25
+    prompt: "How much do you agree: I would prefer telehealth over in-person care for routine follow-ups."
+    type: single_choice
+    construct: much_agree_i_would_prefer
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q26
+    prompt: "How much do you agree: My telehealth visit saved me time overall."
+    type: single_choice
+    construct: much_agree_my_telehealth_visit
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q27
+    prompt: "How often did you feel rushed during your telehealth visits?"
+    type: single_choice
+    construct: often_did_feel_rushed_during
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q28
+    prompt: "How satisfied were you with the value of the telehealth visit for the cost?"
+    type: single_choice
+    construct: satisfied_were_value_telehealth_visit
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "How important is being able to see the same provider for your telehealth visits?"
+    type: single_choice
+    construct: important_being_able_see_same
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "How likely are you to use telehealth from the same service or provider again?"
+    type: single_choice
+    construct: likely_use_telehealth_from_same
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q31
+    prompt: "What is the single biggest improvement that would make telehealth better for you? Please answer briefly."
+    type: free_text
+    construct: single_biggest_improvement_that_would
+    required: true
+  - id: q32
+    prompt: "Which aspects of a telehealth visit matter most to your satisfaction? (Select up to 3)"
+    type: single_choice
+    construct: aspects_telehealth_visit_matter_most
+    required: true
+    options:
+      - id: "a"
+        label: "Convenience and saving travel time"
+      - id: "b"
+        label: "Short wait to be seen"
+      - id: "c"
+        label: "Provider communication and attentiveness"
+      - id: "d"
+        label: "Reliable technology and video quality"
+      - id: "e"
+        label: "Low cost"
+      - id: "f"
+        label: "Privacy and data security"
+      - id: "g"
+        label: "Ability to get a prescription or referral"
+      - id: "h"
+        label: "Seeing the same provider each time"
+      - id: "i"
+        label: "Ease of scheduling"
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 to 74"
+      - id: "g"
+        label: "75 or older"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino/a"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Another race or ethnicity"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Graduate or professional degree"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Homemaker or caregiver"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q39
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q40
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Widowed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I do not live in the United States"
+  - id: q42
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q43
+    prompt: "What is your primary health insurance coverage?"
+    type: single_choice
+    construct: primary_health_insurance_coverage
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored insurance"
+      - id: "b"
+        label: "Insurance I bought myself (marketplace or private)"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Military or VA (TRICARE)"
+      - id: "f"
+        label: "I am uninsured"
+      - id: "g"
+        label: "Not sure"

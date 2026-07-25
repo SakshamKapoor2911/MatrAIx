@@ -1,0 +1,740 @@
+schemaVersion: "1.0"
+id: standing_desk_usage_v1
+title: "Standing Desk Usage Survey"
+description: "How people use standing desks and manage sitting time during their workday."
+questions:
+  - id: q0
+    prompt: "Do you use a standing desk or sit-stand desk?"
+    type: single_choice
+    construct: use_standing_desk_sit_stand
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "I have one but rarely use the standing feature"
+      - id: "d"
+        label: "No, but I'm interested"
+      - id: "e"
+        label: "No, and I'm not interested"
+  - id: q1
+    prompt: "Where do you primarily use or would use a standing desk?"
+    type: single_choice
+    construct: where_primarily_use_would_use
+    required: true
+    options:
+      - id: "a"
+        label: "At a workplace or office"
+      - id: "b"
+        label: "At a home office"
+      - id: "c"
+        label: "Both work and home"
+      - id: "d"
+        label: "Somewhere else"
+      - id: "e"
+        label: "I don't use one anywhere"
+  - id: q2
+    prompt: "How long have you been using a standing desk?"
+    type: single_choice
+    construct: long_have_been_using_standing
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 3 months"
+      - id: "b"
+        label: "3 to 12 months"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "More than 3 years"
+      - id: "e"
+        label: "I don't use one"
+  - id: q3
+    prompt: "What type of standing desk setup do you have?"
+    type: single_choice
+    construct: type_standing_desk_setup_have
+    required: true
+    options:
+      - id: "a"
+        label: "Electric height-adjustable desk"
+      - id: "b"
+        label: "Manual crank or lever desk"
+      - id: "c"
+        label: "A desktop riser or converter"
+      - id: "d"
+        label: "A fixed-height standing desk"
+      - id: "e"
+        label: "An improvised setup"
+      - id: "f"
+        label: "I don't have one"
+  - id: q4
+    prompt: "Which brand or type best describes your desk? (Select all that apply)"
+    type: multi_choice
+    construct: brand_type_best_describes_desk
+    required: true
+    options:
+      - id: "a"
+        label: "Uplift"
+      - id: "b"
+        label: "Fully or Jarvis"
+      - id: "c"
+        label: "Vari"
+      - id: "d"
+        label: "FlexiSpot"
+      - id: "e"
+        label: "IKEA"
+      - id: "f"
+        label: "A desktop converter (Varidesk, etc.)"
+      - id: "g"
+        label: "Another brand"
+      - id: "h"
+        label: "I don't have a standing desk"
+  - id: q5
+    prompt: "About how many hours per day do you spend at your desk (sitting and standing combined)? Please enter a number."
+    type: free_text
+    construct: many_hours_per_day_spend
+    required: true
+  - id: q6
+    prompt: "About how many of those hours do you spend standing? Please enter a number."
+    type: free_text
+    construct: many_those_hours_spend_standing
+    required: true
+  - id: q7
+    prompt: "How often do you switch between sitting and standing during a workday?"
+    type: single_choice
+    construct: often_switch_between_sitting_standing
+    required: true
+    options:
+      - id: "a"
+        label: "I don't switch"
+      - id: "b"
+        label: "Once or twice a day"
+      - id: "c"
+        label: "A few times a day"
+      - id: "d"
+        label: "Many times a day"
+      - id: "e"
+        label: "On a set schedule with reminders"
+  - id: q8
+    prompt: "What prompts you to change positions? (Select all that apply)"
+    type: multi_choice
+    construct: prompts_change_positions_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "A timer or app reminder"
+      - id: "b"
+        label: "Feeling stiff or uncomfortable"
+      - id: "c"
+        label: "Habit or routine"
+      - id: "d"
+        label: "A change in task"
+      - id: "e"
+        label: "Feeling tired or low energy"
+      - id: "f"
+        label: "Nothing in particular"
+  - id: q9
+    prompt: "Which accessories do you use with your desk? (Select all that apply)"
+    type: multi_choice
+    construct: accessories_use_desk_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "An anti-fatigue standing mat"
+      - id: "b"
+        label: "A monitor arm or riser"
+      - id: "c"
+        label: "An ergonomic chair"
+      - id: "d"
+        label: "A footrest"
+      - id: "e"
+        label: "A keyboard tray"
+      - id: "f"
+        label: "A balance board"
+      - id: "g"
+        label: "None of these"
+  - id: q10
+    prompt: "What were your main reasons for using a standing desk? (Select all that apply)"
+    type: multi_choice
+    construct: were_main_reasons_using_standing
+    required: true
+    options:
+      - id: "a"
+        label: "To reduce time spent sitting"
+      - id: "b"
+        label: "To ease back or neck discomfort"
+      - id: "c"
+        label: "To boost energy or focus"
+      - id: "d"
+        label: "On a doctor's or therapist's advice"
+      - id: "e"
+        label: "General health and wellness"
+      - id: "f"
+        label: "It was provided at work"
+      - id: "g"
+        label: "To feel more productive"
+  - id: q11
+    prompt: "How much do you agree or disagree: Using a standing desk has improved how my body feels during the day."
+    type: single_choice
+    construct: much_agree_disagree_using_standing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree or disagree: Using a standing desk helps me feel more focused or energetic."
+    type: single_choice
+    construct: much_agree_disagree_using_standing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: I remember to alternate between sitting and standing."
+    type: single_choice
+    construct: much_agree_disagree_i_remember
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: Standing for long periods causes me discomfort."
+    type: single_choice
+    construct: much_agree_disagree_standing_long
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: A standing desk was worth the cost."
+    type: single_choice
+    construct: much_agree_disagree_standing_desk
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: I would recommend a standing desk to others."
+    type: single_choice
+    construct: much_agree_disagree_i_would
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "Since using a standing desk, how has your back or neck comfort changed?"
+    type: single_choice
+    construct: since_using_standing_desk_has
+    required: true
+    options:
+      - id: "a"
+        label: "Much worse"
+      - id: "b"
+        label: "Somewhat worse"
+      - id: "c"
+        label: "No change"
+      - id: "d"
+        label: "Somewhat better"
+      - id: "e"
+        label: "Much better"
+  - id: q18
+    prompt: "Since using a standing desk, how has your energy level during work changed?"
+    type: single_choice
+    construct: since_using_standing_desk_has
+    required: true
+    options:
+      - id: "a"
+        label: "Much worse"
+      - id: "b"
+        label: "Somewhat worse"
+      - id: "c"
+        label: "No change"
+      - id: "d"
+        label: "Somewhat better"
+      - id: "e"
+        label: "Much better"
+  - id: q19
+    prompt: "Since using a standing desk, how has your focus or productivity changed?"
+    type: single_choice
+    construct: since_using_standing_desk_has
+    required: true
+    options:
+      - id: "a"
+        label: "Much worse"
+      - id: "b"
+        label: "Somewhat worse"
+      - id: "c"
+        label: "No change"
+      - id: "d"
+        label: "Somewhat better"
+      - id: "e"
+        label: "Much better"
+  - id: q20
+    prompt: "How often do you experience foot or leg fatigue from standing?"
+    type: single_choice
+    construct: often_experience_foot_leg_fatigue
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q21
+    prompt: "Do you use any reminders or apps to prompt you to stand or move?"
+    type: single_choice
+    construct: use_any_reminders_apps_prompt
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a desk or phone app"
+      - id: "b"
+        label: "Yes, a smartwatch or fitness tracker"
+      - id: "c"
+        label: "Yes, a manual timer"
+      - id: "d"
+        label: "No, I rely on habit"
+      - id: "e"
+        label: "No reminders at all"
+  - id: q22
+    prompt: "Besides standing, what else do you do to reduce sitting during the day? (Select all that apply)"
+    type: multi_choice
+    construct: besides_standing_else_reduce_sitting
+    required: true
+    options:
+      - id: "a"
+        label: "Take walking breaks"
+      - id: "b"
+        label: "Stretch at my desk"
+      - id: "c"
+        label: "Walk during phone calls"
+      - id: "d"
+        label: "Use stairs instead of elevators"
+      - id: "e"
+        label: "Take a walk at lunch"
+      - id: "f"
+        label: "Nothing in particular"
+  - id: q23
+    prompt: "How important is each factor in a standing desk to you: Ease of adjusting the height."
+    type: single_choice
+    construct: important_each_factor_standing_desk
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each factor in a standing desk to you: Stability at standing height."
+    type: single_choice
+    construct: important_each_factor_standing_desk
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important is each factor in a standing desk to you: Price and value."
+    type: single_choice
+    construct: important_each_factor_standing_desk
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important is each factor in a standing desk to you: Desk size and work surface."
+    type: single_choice
+    construct: important_each_factor_standing_desk
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important is each factor in a standing desk to you: Memory presets for saved heights."
+    type: single_choice
+    construct: important_each_factor_standing_desk
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Select your top 3 benefits you value most from a standing desk. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_benefits_value
+    required: true
+    options:
+      - id: "a"
+        label: "Less back or neck discomfort"
+      - id: "b"
+        label: "More energy during work"
+      - id: "c"
+        label: "Better focus and productivity"
+      - id: "d"
+        label: "Reduced sitting time"
+      - id: "e"
+        label: "More movement throughout the day"
+      - id: "f"
+        label: "Better posture"
+      - id: "g"
+        label: "General health improvement"
+      - id: "h"
+        label: "Comfort and adjustability"
+  - id: q29
+    prompt: "About how much did you spend on your standing desk setup, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_did_spend_standing_desk
+    required: true
+  - id: q30
+    prompt: "Overall, how satisfied are you with your standing desk?"
+    type: single_choice
+    construct: overall_satisfied_standing_desk
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q31
+    prompt: "On a scale of 0 to 10, how likely are you to recommend a standing desk to a friend or coworker? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q32
+    prompt: "How likely are you to keep using a standing desk over the next year?"
+    type: single_choice
+    construct: likely_keep_using_standing_desk
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q33
+    prompt: "What would improve your standing desk experience? (Optional)"
+    type: free_text
+    construct: would_improve_standing_desk_experience
+    required: false
+  - id: q34
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 to 74"
+      - id: "g"
+        label: "75 or older"
+  - id: q35
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or Other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q40
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Retired"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Homemaker or caregiver"
+  - id: q41
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q42
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+  - id: q43
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q44
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q45
+    prompt: "What best describes your typical work arrangement?"
+    type: single_choice
+    construct: best_describes_typical_work_arrangement
+    required: true
+    options:
+      - id: "a"
+        label: "Fully in-person"
+      - id: "b"
+        label: "Hybrid"
+      - id: "c"
+        label: "Fully remote"
+      - id: "d"
+        label: "Not currently working at a desk"
+  - id: q46
+    prompt: "How would you describe the nature of your work?"
+    type: single_choice
+    construct: would_describe_nature_work
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly desk or computer work"
+      - id: "b"
+        label: "A mix of desk and active work"
+      - id: "c"
+        label: "Mostly active or physical work"
+      - id: "d"
+        label: "Not currently working"

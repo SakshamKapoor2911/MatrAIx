@@ -1,0 +1,787 @@
+schemaVersion: "1.0"
+id: checking_account_usage_v1
+title: "Checking Account Usage Survey"
+description: "How people choose, use, and feel about their everyday checking accounts."
+questions:
+  - id: q0
+    prompt: "Do you currently have a checking account?"
+    type: single_choice
+    construct: currently_have_checking_account
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one checking account"
+      - id: "b"
+        label: "Yes, more than one checking account"
+      - id: "c"
+        label: "No, but I've had one before"
+      - id: "d"
+        label: "No, I've never had one"
+  - id: q1
+    prompt: "What type of institution holds your primary checking account?"
+    type: single_choice
+    construct: type_institution_holds_primary_checking
+    required: true
+    options:
+      - id: "a"
+        label: "A large national bank (e.g., Chase, Bank of America, Wells Fargo)"
+      - id: "b"
+        label: "A regional or community bank"
+      - id: "c"
+        label: "A credit union"
+      - id: "d"
+        label: "An online-only bank or neobank (e.g., Chime, Ally, SoFi)"
+      - id: "e"
+        label: "I don't have a checking account"
+  - id: q2
+    prompt: "Roughly how long have you had your primary checking account?"
+    type: single_choice
+    construct: roughly_long_have_had_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 10 years"
+      - id: "d"
+        label: "More than 10 years"
+      - id: "e"
+        label: "Not applicable"
+  - id: q3
+    prompt: "Which bank or credit union holds your primary checking account?"
+    type: single_choice
+    construct: bank_credit_union_holds_primary
+    required: true
+    options:
+      - id: "a"
+        label: "Chase"
+      - id: "b"
+        label: "Bank of America"
+      - id: "c"
+        label: "Wells Fargo"
+      - id: "d"
+        label: "Citibank"
+      - id: "e"
+        label: "Capital One"
+      - id: "f"
+        label: "A credit union"
+      - id: "g"
+        label: "An online bank (Ally, SoFi, Chime, etc.)"
+      - id: "h"
+        label: "Another bank"
+  - id: q4
+    prompt: "How do you most often access your checking account?"
+    type: single_choice
+    construct: most_often_access_checking_account
+    required: true
+    options:
+      - id: "a"
+        label: "Mobile banking app"
+      - id: "b"
+        label: "Online banking on a computer"
+      - id: "c"
+        label: "ATM"
+      - id: "d"
+        label: "In person at a branch"
+      - id: "e"
+        label: "By phone"
+  - id: q5
+    prompt: "How often do you check your checking account balance?"
+    type: single_choice
+    construct: often_check_checking_account_balance
+    required: true
+    options:
+      - id: "a"
+        label: "Multiple times a day"
+      - id: "b"
+        label: "About once a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "About once a week"
+      - id: "e"
+        label: "A few times a month or less"
+  - id: q6
+    prompt: "Which features do you use on your checking account? (Select all that apply)"
+    type: multi_choice
+    construct: features_use_checking_account_select
+    required: true
+    options:
+      - id: "a"
+        label: "Mobile check deposit"
+      - id: "b"
+        label: "Bill pay"
+      - id: "c"
+        label: "Person-to-person payments (Zelle, Venmo)"
+      - id: "d"
+        label: "Debit card"
+      - id: "e"
+        label: "Direct deposit of paychecks"
+      - id: "f"
+        label: "Automatic transfers to savings"
+      - id: "g"
+        label: "Low-balance or transaction alerts"
+      - id: "h"
+        label: "Overdraft protection"
+  - id: q7
+    prompt: "How do you primarily pay for everyday purchases from your checking account?"
+    type: single_choice
+    construct: primarily_pay_everyday_purchases_from
+    required: true
+    options:
+      - id: "a"
+        label: "Debit card"
+      - id: "b"
+        label: "Mobile wallet (Apple Pay, Google Pay)"
+      - id: "c"
+        label: "Physical checks"
+      - id: "d"
+        label: "Cash withdrawn from the account"
+      - id: "e"
+        label: "Online bill pay"
+  - id: q8
+    prompt: "About how many debit card transactions do you make in a typical month?"
+    type: single_choice
+    construct: many_debit_card_transactions_make
+    required: true
+    options:
+      - id: "a"
+        label: "0–5"
+      - id: "b"
+        label: "6–15"
+      - id: "c"
+        label: "16–30"
+      - id: "d"
+        label: "31–50"
+      - id: "e"
+        label: "More than 50"
+  - id: q9
+    prompt: "Do you have your paycheck or income directly deposited into this account?"
+    type: single_choice
+    construct: have_paycheck_income_directly_deposited
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, all of it"
+      - id: "b"
+        label: "Yes, part of it"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I don't have regular income deposits"
+  - id: q10
+    prompt: "Does your checking account charge a monthly maintenance fee?"
+    type: single_choice
+    construct: does_checking_account_charge_monthly
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I pay it"
+      - id: "b"
+        label: "Yes, but I waive it by meeting requirements"
+      - id: "c"
+        label: "No monthly fee"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q11
+    prompt: "In the past 12 months, which fees have you paid on your checking account? (Select all that apply)"
+    type: multi_choice
+    construct: past_12_months_fees_have
+    required: true
+    options:
+      - id: "a"
+        label: "Monthly maintenance fee"
+      - id: "b"
+        label: "Overdraft or insufficient funds fee"
+      - id: "c"
+        label: "Out-of-network ATM fee"
+      - id: "d"
+        label: "Wire transfer fee"
+      - id: "e"
+        label: "Foreign transaction fee"
+      - id: "f"
+        label: "Paper statement fee"
+      - id: "g"
+        label: "None of these"
+  - id: q12
+    prompt: "In the past 12 months, how many times have you overdrafted your checking account?"
+    type: single_choice
+    construct: past_12_months_many_times
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Once"
+      - id: "c"
+        label: "2 to 3 times"
+      - id: "d"
+        label: "4 to 6 times"
+      - id: "e"
+        label: "More than 6 times"
+  - id: q13
+    prompt: "Do you keep a minimum balance in your checking account to avoid fees?"
+    type: single_choice
+    construct: keep_minimum_balance_checking_account
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, intentionally"
+      - id: "b"
+        label: "My balance usually stays above the minimum anyway"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "There's no minimum on my account"
+  - id: q14
+    prompt: "About what is your typical checking account balance? Please enter a dollar amount."
+    type: free_text
+    construct: typical_checking_account_balance_please
+    required: true
+  - id: q15
+    prompt: "How did you choose your current checking account? (Select all that apply)"
+    type: multi_choice
+    construct: did_choose_current_checking_account
+    required: true
+    options:
+      - id: "a"
+        label: "No or low fees"
+      - id: "b"
+        label: "Sign-up bonus or promotion"
+      - id: "c"
+        label: "Branch or ATM convenience"
+      - id: "d"
+        label: "Recommendation from family or friends"
+      - id: "e"
+        label: "Bundled with other accounts I have there"
+      - id: "f"
+        label: "Good mobile app or online banking"
+      - id: "g"
+        label: "Interest paid on the balance"
+      - id: "h"
+        label: "It's the bank I've always used"
+  - id: q16
+    prompt: "How important is each of the following in a checking account: Low or no monthly fees."
+    type: single_choice
+    construct: important_each_following_checking_accoun
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "How important is each of the following in a checking account: A good mobile app."
+    type: single_choice
+    construct: important_each_following_checking_accoun
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each of the following in a checking account: A large ATM or branch network."
+    type: single_choice
+    construct: important_each_following_checking_accoun
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is each of the following in a checking account: Early access to direct-deposited paychecks."
+    type: single_choice
+    construct: important_each_following_checking_accoun
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is each of the following in a checking account: Overdraft protection or fee forgiveness."
+    type: single_choice
+    construct: important_each_following_checking_accoun
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How much do you agree with the following statement: My bank's mobile app meets all my everyday banking needs."
+    type: single_choice
+    construct: much_agree_following_statement_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree with the following statement: The fees on my checking account are reasonable."
+    type: single_choice
+    construct: much_agree_following_statement_fees
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How much do you agree with the following statement: I trust my bank to keep my money and information safe."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "How much do you agree with the following statement: I rarely need to visit a physical branch anymore."
+    type: single_choice
+    construct: much_agree_following_statement_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "How often do you visit a physical bank branch?"
+    type: single_choice
+    construct: often_visit_physical_bank_branch
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "A few times a year"
+      - id: "c"
+        label: "About monthly"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Weekly or more"
+  - id: q26
+    prompt: "How often do you write a paper check?"
+    type: single_choice
+    construct: often_write_paper_check
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "A few times a year"
+      - id: "c"
+        label: "About monthly"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Weekly or more"
+  - id: q27
+    prompt: "How often do you use an ATM?"
+    type: single_choice
+    construct: often_use_atm
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "A few times a year"
+      - id: "c"
+        label: "About monthly"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Weekly or more"
+  - id: q28
+    prompt: "Have you switched your primary checking account in the past 5 years?"
+    type: single_choice
+    construct: have_switched_primary_checking_account
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, once"
+      - id: "b"
+        label: "Yes, more than once"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No"
+  - id: q29
+    prompt: "What would most likely make you switch checking accounts? (Select all that apply)"
+    type: multi_choice
+    construct: would_most_likely_make_switch
+    required: true
+    options:
+      - id: "a"
+        label: "Lower or no fees"
+      - id: "b"
+        label: "A cash sign-up bonus"
+      - id: "c"
+        label: "Higher interest on the balance"
+      - id: "d"
+        label: "A better mobile app"
+      - id: "e"
+        label: "Poor customer service"
+      - id: "f"
+        label: "Better ATM or branch access"
+      - id: "g"
+        label: "Nothing — I'm happy where I am"
+  - id: q30
+    prompt: "Do you use overdraft protection on your checking account?"
+    type: single_choice
+    construct: use_overdraft_protection_checking_accoun
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, linked to a savings account"
+      - id: "b"
+        label: "Yes, linked to a credit line or card"
+      - id: "c"
+        label: "No, I've opted out of overdraft coverage"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q31
+    prompt: "Select your top 3 reasons you stay with your current bank. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_reasons_stay
+    required: true
+    options:
+      - id: "a"
+        label: "Convenience and habit"
+      - id: "b"
+        label: "Low fees"
+      - id: "c"
+        label: "Good mobile app or online banking"
+      - id: "d"
+        label: "Branch or ATM access"
+      - id: "e"
+        label: "Customer service"
+      - id: "f"
+        label: "Other accounts bundled there"
+      - id: "g"
+        label: "Rewards or interest"
+      - id: "h"
+        label: "Trust and security"
+  - id: q32
+    prompt: "How satisfied are you with your primary checking account overall?"
+    type: single_choice
+    construct: satisfied_primary_checking_account_overa
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How satisfied are you with your bank's customer service?"
+    type: single_choice
+    construct: satisfied_bank_s_customer_service
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How likely are you to keep your current checking account over the next year?"
+    type: single_choice
+    construct: likely_keep_current_checking_account
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q35
+    prompt: "On a scale from 0 to 10, how likely are you to recommend your bank to a friend, where 0 is not at all likely and 10 is extremely likely?"
+    type: single_choice
+    construct: scale_from_0_10_likely
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q36
+    prompt: "About how much do you pay in checking account fees in a typical year? Please enter a dollar amount."
+    type: free_text
+    construct: much_pay_checking_account_fees
+    required: true
+  - id: q37
+    prompt: "If there is anything else you would like to share about your checking account experience, please describe it briefly."
+    type: free_text
+    construct: if_there_anything_else_would
+    required: false
+  - id: q38
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18–24"
+      - id: "b"
+        label: "25–34"
+      - id: "c"
+        label: "35–44"
+      - id: "d"
+        label: "45–54"
+      - id: "e"
+        label: "55–64"
+      - id: "f"
+        label: "65 or older"
+  - id: q39
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Another race or ethnicity"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your annual household income before taxes?"
+    type: single_choice
+    construct: annual_household_income_before_taxes
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school graduate or equivalent"
+      - id: "c"
+        label: "Some college or associate's degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+  - id: q43
+    prompt: "Which best describes your current employment status?"
+    type: single_choice
+    construct: best_describes_current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelance"
+      - id: "d"
+        label: "Not employed, looking for work"
+      - id: "e"
+        label: "Not employed, not looking for work"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q44
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q45
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q47
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q48
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"

@@ -1,0 +1,705 @@
+schemaVersion: "1.0"
+id: estate_planning_v1
+title: "Estate Planning Survey"
+description: "Adults' attitudes toward and experiences with estate planning."
+questions:
+  - id: q0
+    prompt: "Do you currently have any estate planning documents in place?"
+    type: single_choice
+    construct: currently_have_any_estate_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a comprehensive plan"
+      - id: "b"
+        label: "Yes, but only some basic documents"
+      - id: "c"
+        label: "No, but I am working on it"
+      - id: "d"
+        label: "No, and I have not started"
+  - id: q1
+    prompt: "Which estate planning documents do you currently have? (Select all that apply)"
+    type: multi_choice
+    construct: estate_planning_documents_currently_have
+    required: true
+    options:
+      - id: "a"
+        label: "A will"
+      - id: "b"
+        label: "A living trust or revocable trust"
+      - id: "c"
+        label: "A durable power of attorney"
+      - id: "d"
+        label: "A healthcare proxy or medical power of attorney"
+      - id: "e"
+        label: "A living will or advance directive"
+      - id: "f"
+        label: "Beneficiary designations on accounts"
+      - id: "g"
+        label: "A letter of instruction"
+      - id: "h"
+        label: "None of these"
+  - id: q2
+    prompt: "How long ago did you first create an estate plan or will?"
+    type: single_choice
+    construct: long_ago_did_first_create
+    required: true
+    options:
+      - id: "a"
+        label: "Within the past year"
+      - id: "b"
+        label: "1 to 3 years ago"
+      - id: "c"
+        label: "4 to 10 years ago"
+      - id: "d"
+        label: "More than 10 years ago"
+      - id: "e"
+        label: "I do not have one"
+  - id: q3
+    prompt: "When was the last time you reviewed or updated your estate plan?"
+    type: single_choice
+    construct: when_was_last_time_reviewed
+    required: true
+    options:
+      - id: "a"
+        label: "Within the past year"
+      - id: "b"
+        label: "1 to 3 years ago"
+      - id: "c"
+        label: "More than 3 years ago"
+      - id: "d"
+        label: "Never updated it"
+      - id: "e"
+        label: "Not applicable"
+  - id: q4
+    prompt: "How did you create your estate planning documents? (Select all that apply)"
+    type: multi_choice
+    construct: did_create_estate_planning_documents
+    required: true
+    options:
+      - id: "a"
+        label: "With an estate planning attorney"
+      - id: "b"
+        label: "Using an online service (for example, LegalZoom, Trust & Will, or Rocket Lawyer)"
+      - id: "c"
+        label: "With a financial advisor"
+      - id: "d"
+        label: "Using free or DIY templates"
+      - id: "e"
+        label: "Through my employer or a legal benefit"
+      - id: "f"
+        label: "I have not created any"
+  - id: q5
+    prompt: "Have you named an executor or personal representative for your estate?"
+    type: single_choice
+    construct: have_named_executor_personal_representat
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"
+      - id: "d"
+        label: "Not applicable"
+  - id: q6
+    prompt: "Have you designated a power of attorney for financial decisions?"
+    type: single_choice
+    construct: have_designated_power_attorney_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"
+  - id: q7
+    prompt: "Have you designated someone to make healthcare decisions on your behalf?"
+    type: single_choice
+    construct: have_designated_someone_make_healthcare
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"
+  - id: q8
+    prompt: "Have you documented your wishes for medical care if you become unable to decide (an advance directive)?"
+    type: single_choice
+    construct: have_documented_wishes_medical_care
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"
+  - id: q9
+    prompt: "Which types of assets would your estate plan need to address? (Select all that apply)"
+    type: multi_choice
+    construct: types_assets_would_estate_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Home or real estate"
+      - id: "b"
+        label: "Retirement accounts (401(k), IRA)"
+      - id: "c"
+        label: "Bank and savings accounts"
+      - id: "d"
+        label: "Brokerage or investment accounts"
+      - id: "e"
+        label: "Life insurance policies"
+      - id: "f"
+        label: "A business or ownership stake"
+      - id: "g"
+        label: "Valuable personal property or collectibles"
+      - id: "h"
+        label: "Digital assets or online accounts"
+      - id: "i"
+        label: "None of these"
+  - id: q10
+    prompt: "Have you talked with your family about your estate plans or wishes?"
+    type: single_choice
+    construct: have_talked_family_estate_plans
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, in detail"
+      - id: "b"
+        label: "Yes, but only briefly"
+      - id: "c"
+        label: "No, but I plan to"
+      - id: "d"
+        label: "No, and I do not plan to"
+  - id: q11
+    prompt: "What has kept you from creating or completing an estate plan? (Select all that apply)"
+    type: multi_choice
+    construct: has_kept_from_creating_completing
+    required: true
+    options:
+      - id: "a"
+        label: "I have not gotten around to it"
+      - id: "b"
+        label: "It seems too expensive"
+      - id: "c"
+        label: "It feels complicated or confusing"
+      - id: "d"
+        label: "I do not think I have enough assets"
+      - id: "e"
+        label: "I do not like thinking about death"
+      - id: "f"
+        label: "I am not sure who to name"
+      - id: "g"
+        label: "Nothing, I already have a complete plan"
+  - id: q12
+    prompt: "How much do you agree or disagree: Having an estate plan gives me peace of mind."
+    type: single_choice
+    construct: much_agree_disagree_having_estate
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree or disagree: Estate planning is only necessary for wealthy people."
+    type: single_choice
+    construct: much_agree_disagree_estate_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree or disagree: I understand what documents I need for a complete estate plan."
+    type: single_choice
+    construct: much_agree_disagree_i_understand
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree or disagree: I worry my family would face problems if I did not have a plan."
+    type: single_choice
+    construct: much_agree_disagree_i_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: Talking about estate planning makes me uncomfortable."
+    type: single_choice
+    construct: much_agree_disagree_talking_estate
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How important is each goal in your estate planning — Making sure assets go to the people I choose?"
+    type: single_choice
+    construct: important_each_goal_estate_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "How important is each goal in your estate planning — Avoiding probate or legal delays for my family?"
+    type: single_choice
+    construct: important_each_goal_estate_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "How important is each goal in your estate planning — Minimizing taxes on my estate?"
+    type: single_choice
+    construct: important_each_goal_estate_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "How important is each goal in your estate planning — Providing for a spouse or partner?"
+    type: single_choice
+    construct: important_each_goal_estate_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+      - id: "f"
+        label: "Not applicable"
+  - id: q21
+    prompt: "How important is each goal in your estate planning — Providing for children or dependents?"
+    type: single_choice
+    construct: important_each_goal_estate_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+      - id: "f"
+        label: "Not applicable"
+  - id: q22
+    prompt: "How important is each goal in your estate planning — Leaving a charitable gift or legacy?"
+    type: single_choice
+    construct: important_each_goal_estate_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "Please select your top 3 priorities for your estate plan. (Select all that apply)"
+    type: multi_choice
+    construct: please_select_top_3_priorities
+    required: true
+    options:
+      - id: "a"
+        label: "Passing assets to family"
+      - id: "b"
+        label: "Avoiding probate"
+      - id: "c"
+        label: "Minimizing taxes"
+      - id: "d"
+        label: "Naming guardians for children"
+      - id: "e"
+        label: "Planning for medical decisions"
+      - id: "f"
+        label: "Supporting a charity"
+      - id: "g"
+        label: "Keeping my affairs private"
+      - id: "h"
+        label: "Avoiding family conflict"
+  - id: q24
+    prompt: "About how much would you expect to pay to have a professional prepare your estate plan? Please enter a dollar amount."
+    type: free_text
+    construct: much_would_expect_pay_have
+    required: true
+  - id: q25
+    prompt: "Do you have children under 18 for whom you would need to name a guardian?"
+    type: single_choice
+    construct: have_children_under_18_whom
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q26
+    prompt: "If you have minor children, have you named a guardian for them in a legal document?"
+    type: single_choice
+    construct: if_have_minor_children_have
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not applicable"
+  - id: q27
+    prompt: "How confident are you that your current plan (or lack of one) reflects your wishes?"
+    type: single_choice
+    construct: confident_that_current_plan_lack
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q28
+    prompt: "How knowledgeable do you feel about estate planning overall?"
+    type: single_choice
+    construct: knowledgeable_feel_estate_planning_overa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all knowledgeable"
+      - id: "b"
+        label: "Slightly knowledgeable"
+      - id: "c"
+        label: "Moderately knowledgeable"
+      - id: "d"
+        label: "Very knowledgeable"
+      - id: "e"
+        label: "Extremely knowledgeable"
+  - id: q29
+    prompt: "How likely are you to create or update your estate plan in the next 12 months?"
+    type: single_choice
+    construct: likely_create_update_estate_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q30
+    prompt: "Overall, how satisfied are you with the state of your estate planning?"
+    type: single_choice
+    construct: overall_satisfied_state_estate_planning
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q31
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q32
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q33
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $30,000"
+      - id: "b"
+        label: "$30,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Which range best describes your total household net worth (assets minus debts)?"
+    type: single_choice
+    construct: range_best_describes_total_household
+    required: true
+    options:
+      - id: "a"
+        label: "Negative or zero"
+      - id: "b"
+        label: "Under $50,000"
+      - id: "c"
+        label: "$50,000 to $199,999"
+      - id: "d"
+        label: "$200,000 to $499,999"
+      - id: "e"
+        label: "$500,000 to $999,999"
+      - id: "f"
+        label: "$1 million or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Homemaker or full-time caregiver"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+  - id: q39
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q41
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

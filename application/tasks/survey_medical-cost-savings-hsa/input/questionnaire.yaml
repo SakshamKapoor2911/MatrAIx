@@ -1,0 +1,750 @@
+schemaVersion: "1.0"
+id: medical_cost_savings_hsa_v1
+title: "Health Savings Account (HSA) Usage Survey"
+description: "How consumers use Health Savings Accounts and otherwise save for medical costs."
+questions:
+  - id: q0
+    prompt: "Are you currently enrolled in a high-deductible health plan (HDHP)?"
+    type: single_choice
+    construct: currently_enrolled_high_deductible_healt
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"
+  - id: q1
+    prompt: "Do you currently have a Health Savings Account (HSA)?"
+    type: single_choice
+    construct: currently_have_health_savings_account
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I contribute to it"
+      - id: "b"
+        label: "Yes, but I no longer contribute"
+      - id: "c"
+        label: "No, but I have had one in the past"
+      - id: "d"
+        label: "No, and I have never had one"
+  - id: q2
+    prompt: "How long have you had an HSA?"
+    type: single_choice
+    construct: long_have_had_hsa
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "I do not have an HSA"
+  - id: q3
+    prompt: "Where is your HSA held? (Select all that apply)"
+    type: multi_choice
+    construct: where_hsa_held_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Fidelity"
+      - id: "b"
+        label: "HealthEquity"
+      - id: "c"
+        label: "Optum Bank"
+      - id: "d"
+        label: "Lively"
+      - id: "e"
+        label: "HSA Bank"
+      - id: "f"
+        label: "My bank or credit union"
+      - id: "g"
+        label: "Through my employer's default provider"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "I do not have an HSA"
+  - id: q4
+    prompt: "How did you first open your HSA?"
+    type: single_choice
+    construct: did_first_open_hsa
+    required: true
+    options:
+      - id: "a"
+        label: "Automatically through my employer when I enrolled in the health plan"
+      - id: "b"
+        label: "I chose an employer-sponsored HSA option"
+      - id: "c"
+        label: "I opened one on my own outside my employer"
+      - id: "d"
+        label: "A financial advisor helped me open it"
+      - id: "e"
+        label: "I do not have an HSA"
+  - id: q5
+    prompt: "Do you also have or use any of the following tax-advantaged health accounts? (Select all that apply)"
+    type: multi_choice
+    construct: also_have_use_any_following
+    required: true
+    options:
+      - id: "a"
+        label: "Flexible Spending Account (FSA)"
+      - id: "b"
+        label: "Dependent Care FSA"
+      - id: "c"
+        label: "Health Reimbursement Arrangement (HRA)"
+      - id: "d"
+        label: "Limited-purpose FSA"
+      - id: "e"
+        label: "None of these"
+  - id: q6
+    prompt: "About how much do you personally contribute to your HSA each year? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_personally_contribute_hsa_each
+    required: true
+  - id: q7
+    prompt: "Does your employer contribute to your HSA?"
+    type: single_choice
+    construct: does_employer_contribute_hsa
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a fixed amount each year"
+      - id: "b"
+        label: "Yes, a match on my contributions"
+      - id: "c"
+        label: "Yes, but I am not sure how much"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "Not applicable"
+  - id: q8
+    prompt: "Are you contributing the maximum allowed to your HSA this year?"
+    type: single_choice
+    construct: contributing_maximum_allowed_hsa_this
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, the full IRS maximum"
+      - id: "b"
+        label: "Close to the maximum"
+      - id: "c"
+        label: "Somewhat below the maximum"
+      - id: "d"
+        label: "Well below the maximum"
+      - id: "e"
+        label: "I do not contribute"
+      - id: "f"
+        label: "Not sure"
+  - id: q9
+    prompt: "How do you primarily use the money in your HSA?"
+    type: single_choice
+    construct: primarily_use_money_hsa
+    required: true
+    options:
+      - id: "a"
+        label: "Spend it on current medical expenses as they come up"
+      - id: "b"
+        label: "A mix of spending and saving"
+      - id: "c"
+        label: "Save and invest it for future medical costs"
+      - id: "d"
+        label: "Save it as part of my retirement strategy"
+      - id: "e"
+        label: "I do not have an HSA"
+  - id: q10
+    prompt: "Do you invest any of your HSA balance (for example, in mutual funds or ETFs)?"
+    type: single_choice
+    construct: invest_any_hsa_balance_example
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, most of my balance is invested"
+      - id: "b"
+        label: "Yes, a portion is invested"
+      - id: "c"
+        label: "No, I keep it all in cash"
+      - id: "d"
+        label: "Not sure"
+      - id: "e"
+        label: "I do not have an HSA"
+  - id: q11
+    prompt: "About how much is your current total HSA balance? Please enter a dollar amount (enter 0 if none)."
+    type: free_text
+    construct: much_current_total_hsa_balance
+    required: true
+  - id: q12
+    prompt: "What do you use your HSA funds to pay for? (Select all that apply)"
+    type: multi_choice
+    construct: use_hsa_funds_pay_select
+    required: true
+    options:
+      - id: "a"
+        label: "Doctor visits and copays"
+      - id: "b"
+        label: "Prescription medications"
+      - id: "c"
+        label: "Dental care"
+      - id: "d"
+        label: "Vision care and glasses"
+      - id: "e"
+        label: "Deductibles and coinsurance"
+      - id: "f"
+        label: "Over-the-counter items"
+      - id: "g"
+        label: "Mental health or therapy visits"
+      - id: "h"
+        label: "I have not used my HSA funds"
+  - id: q13
+    prompt: "How do you typically pay for a qualified expense from your HSA? (Select all that apply)"
+    type: multi_choice
+    construct: typically_pay_qualified_expense_from
+    required: true
+    options:
+      - id: "a"
+        label: "HSA debit card at the point of care"
+      - id: "b"
+        label: "Reimburse myself later from the HSA"
+      - id: "c"
+        label: "Online bill pay from the HSA"
+      - id: "d"
+        label: "I pay out of pocket and save the receipts to reimburse later"
+      - id: "e"
+        label: "I have not used my HSA"
+  - id: q14
+    prompt: "How often do you check your HSA balance or activity?"
+    type: single_choice
+    construct: often_check_hsa_balance_activity
+    required: true
+    options:
+      - id: "a"
+        label: "At least weekly"
+      - id: "b"
+        label: "A few times a month"
+      - id: "c"
+        label: "About once a month"
+      - id: "d"
+        label: "A few times a year"
+      - id: "e"
+        label: "Rarely or never"
+  - id: q15
+    prompt: "How much do you agree or disagree: I understand the tax advantages of an HSA."
+    type: single_choice
+    construct: much_agree_disagree_i_understand
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree or disagree: My HSA gives me peace of mind about future medical costs."
+    type: single_choice
+    construct: much_agree_disagree_my_hsa
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree or disagree: I worry about affording a large unexpected medical bill."
+    type: single_choice
+    construct: much_agree_disagree_i_worry
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree or disagree: The rules about what an HSA can pay for are confusing."
+    type: single_choice
+    construct: much_agree_disagree_rules_hsa
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree or disagree: I think of my HSA as a long-term retirement or investment account."
+    type: single_choice
+    construct: much_agree_disagree_i_think
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How important is each of the following in how you use your HSA — Lowering my taxes?"
+    type: single_choice
+    construct: important_each_following_use_hsa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important is each of the following in how you use your HSA — Covering current medical bills?"
+    type: single_choice
+    construct: important_each_following_use_hsa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important is each of the following in how you use your HSA — Building savings for future health costs?"
+    type: single_choice
+    construct: important_each_following_use_hsa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important is each of the following in how you use your HSA — Growing the money through investing?"
+    type: single_choice
+    construct: important_each_following_use_hsa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important is each of the following in how you use your HSA — Saving for expenses in retirement?"
+    type: single_choice
+    construct: important_each_following_use_hsa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "Besides an HSA, how else do you set aside money for medical costs? (Select all that apply)"
+    type: multi_choice
+    construct: besides_hsa_else_set_aside
+    required: true
+    options:
+      - id: "a"
+        label: "A general emergency savings fund"
+      - id: "b"
+        label: "A dedicated medical savings account"
+      - id: "c"
+        label: "A Flexible Spending Account (FSA)"
+      - id: "d"
+        label: "A credit card kept for emergencies"
+      - id: "e"
+        label: "Money in a brokerage or retirement account"
+      - id: "f"
+        label: "I do not set aside money specifically for medical costs"
+  - id: q26
+    prompt: "In the past 12 months, have you delayed or skipped medical care because of cost?"
+    type: single_choice
+    construct: past_12_months_have_delayed
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q27
+    prompt: "In the past 12 months, have you had trouble paying a medical bill?"
+    type: single_choice
+    construct: past_12_months_have_had
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several bills"
+      - id: "b"
+        label: "Yes, one bill"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q28
+    prompt: "Please select your top 3 reasons for having or wanting an HSA. (Select all that apply)"
+    type: multi_choice
+    construct: please_select_top_3_reasons
+    required: true
+    options:
+      - id: "a"
+        label: "Tax savings"
+      - id: "b"
+        label: "Employer contributions"
+      - id: "c"
+        label: "Paying current medical bills"
+      - id: "d"
+        label: "Saving for future health costs"
+      - id: "e"
+        label: "Investment growth"
+      - id: "f"
+        label: "Money rolls over year to year"
+      - id: "g"
+        label: "Retirement planning"
+      - id: "h"
+        label: "Control over how I spend on care"
+  - id: q29
+    prompt: "How knowledgeable do you feel about how HSAs work?"
+    type: single_choice
+    construct: knowledgeable_feel_hsas_work
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all knowledgeable"
+      - id: "b"
+        label: "Slightly knowledgeable"
+      - id: "c"
+        label: "Moderately knowledgeable"
+      - id: "d"
+        label: "Very knowledgeable"
+      - id: "e"
+        label: "Extremely knowledgeable"
+  - id: q30
+    prompt: "How confident are you that you are using your HSA in the most beneficial way?"
+    type: single_choice
+    construct: confident_that_using_hsa_most
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q31
+    prompt: "Overall, how satisfied are you with your HSA?"
+    type: single_choice
+    construct: overall_satisfied_hsa
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How likely are you to increase your HSA contributions next year?"
+    type: single_choice
+    construct: likely_increase_hsa_contributions_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q33
+    prompt: "On a scale of 0 to 10, how likely are you to recommend using an HSA to a friend or coworker? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q34
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "18 to 24"
+      - id: "b"
+        label: "25 to 34"
+      - id: "c"
+        label: "35 to 44"
+      - id: "d"
+        label: "45 to 54"
+      - id: "e"
+        label: "55 to 64"
+      - id: "f"
+        label: "65 or older"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary or another gender"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "Are you of Hispanic, Latino, or Spanish origin?"
+    type: single_choice
+    construct: hispanic_latino_spanish_origin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "What is your race? (Select all that apply)"
+    type: multi_choice
+    construct: race_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Asian"
+      - id: "d"
+        label: "American Indian or Alaska Native"
+      - id: "e"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "f"
+        label: "Some other race"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $30,000"
+      - id: "b"
+        label: "$30,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate or professional degree"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed"
+      - id: "e"
+        label: "Homemaker or full-time caregiver"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+  - id: q41
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living with a partner"
+      - id: "c"
+        label: "Divorced or separated"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Single, never married"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q43
+    prompt: "What type of health insurance coverage do you have?"
+    type: single_choice
+    construct: type_health_insurance_coverage_have
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored plan"
+      - id: "b"
+        label: "Plan purchased on my own or through the marketplace"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Other"
+      - id: "f"
+        label: "No health insurance"
+  - id: q44
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Outside the United States"
+  - id: q45
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

@@ -1,0 +1,746 @@
+schemaVersion: "1.0"
+id: home_networking_v1
+title: "Home Networking Survey"
+description: "How households set up, manage, secure, and troubleshoot their home network and Wi-Fi, and how satisfied they are with the equipment."
+questions:
+  - id: q0
+    prompt: "Who is mainly responsible for the home network and Wi-Fi in your household?"
+    type: single_choice
+    construct: who_mainly_responsible_home_network
+    required: true
+    options:
+      - id: "a"
+        label: "I am the main person"
+      - id: "b"
+        label: "I share responsibility with someone else"
+      - id: "c"
+        label: "Someone else in my household handles it"
+      - id: "d"
+        label: "No one really manages it"
+      - id: "e"
+        label: "A professional or landlord manages it"
+  - id: q1
+    prompt: "What kind of router or Wi-Fi setup do you have at home?"
+    type: single_choice
+    construct: kind_router_wi_fi_setup
+    required: true
+    options:
+      - id: "a"
+        label: "The gateway / router provided by my internet provider"
+      - id: "b"
+        label: "My own single router"
+      - id: "c"
+        label: "A mesh Wi-Fi system"
+      - id: "d"
+        label: "A router plus separate access points"
+      - id: "e"
+        label: "I do not know"
+  - id: q2
+    prompt: "Which networking brands are in your home? (Select all that apply)"
+    type: multi_choice
+    construct: networking_brands_home_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Provider-supplied (no separate brand)"
+      - id: "b"
+        label: "Netgear"
+      - id: "c"
+        label: "TP-Link"
+      - id: "d"
+        label: "Asus"
+      - id: "e"
+        label: "Eero (Amazon)"
+      - id: "f"
+        label: "Google Nest Wifi"
+      - id: "g"
+        label: "Ubiquiti / UniFi"
+      - id: "h"
+        label: "Linksys"
+      - id: "i"
+        label: "Other"
+      - id: "j"
+        label: "I do not know"
+  - id: q3
+    prompt: "Which Wi-Fi standard does your network use?"
+    type: single_choice
+    construct: wi_fi_standard_does_network
+    required: true
+    options:
+      - id: "a"
+        label: "Wi-Fi 4 or older"
+      - id: "b"
+        label: "Wi-Fi 5 (802.11ac)"
+      - id: "c"
+        label: "Wi-Fi 6 (802.11ax)"
+      - id: "d"
+        label: "Wi-Fi 6E"
+      - id: "e"
+        label: "Wi-Fi 7"
+      - id: "f"
+        label: "I do not know"
+  - id: q4
+    prompt: "Do you use any wired Ethernet connections at home?"
+    type: single_choice
+    construct: use_any_wired_ethernet_connections
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for many devices"
+      - id: "b"
+        label: "Yes, for a few key devices"
+      - id: "c"
+        label: "Just one or two"
+      - id: "d"
+        label: "No, everything is Wi-Fi"
+  - id: q5
+    prompt: "Which types of devices are on your home network? (Select all that apply)"
+    type: multi_choice
+    construct: types_devices_home_network_select
+    required: true
+    options:
+      - id: "a"
+        label: "Computers and laptops"
+      - id: "b"
+        label: "Smartphones and tablets"
+      - id: "c"
+        label: "Smart TVs and streaming devices"
+      - id: "d"
+        label: "Gaming consoles"
+      - id: "e"
+        label: "Smart home devices (lights, plugs, thermostats)"
+      - id: "f"
+        label: "Security cameras or video doorbells"
+      - id: "g"
+        label: "Smart speakers / voice assistants"
+      - id: "h"
+        label: "Printers"
+      - id: "i"
+        label: "Network storage (NAS) or a home server"
+  - id: q6
+    prompt: "How do you usually manage your network settings?"
+    type: single_choice
+    construct: usually_manage_network_settings
+    required: true
+    options:
+      - id: "a"
+        label: "A mobile app from the router maker"
+      - id: "b"
+        label: "The router's web admin page"
+      - id: "c"
+        label: "I ask someone else to do it"
+      - id: "d"
+        label: "I never change the settings"
+      - id: "e"
+        label: "I do not know how"
+  - id: q7
+    prompt: "Which network security practices do you follow? (Select all that apply)"
+    type: multi_choice
+    construct: network_security_practices_follow_select
+    required: true
+    options:
+      - id: "a"
+        label: "Changed the default admin password"
+      - id: "b"
+        label: "Use a strong Wi-Fi password"
+      - id: "c"
+        label: "Use WPA3 or WPA2 encryption"
+      - id: "d"
+        label: "Set up a separate guest network"
+      - id: "e"
+        label: "Keep router firmware updated"
+      - id: "f"
+        label: "Isolate smart-home / IoT devices"
+      - id: "g"
+        label: "Use a VPN on my network"
+      - id: "h"
+        label: "Disabled remote administration"
+      - id: "i"
+        label: "None of these"
+  - id: q8
+    prompt: "How confident are you in the security of your home network?"
+    type: single_choice
+    construct: confident_security_home_network
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Extremely confident"
+  - id: q9
+    prompt: "How do you keep your router's firmware up to date?"
+    type: single_choice
+    construct: keep_router_s_firmware_up
+    required: true
+    options:
+      - id: "a"
+        label: "It updates automatically"
+      - id: "b"
+        label: "I update it manually when I remember"
+      - id: "c"
+        label: "I rarely or never update it"
+      - id: "d"
+        label: "I do not know how"
+  - id: q10
+    prompt: "Select your top 3 features you look for when buying networking gear. (Select all that apply)"
+    type: multi_choice
+    construct: select_top_3_features_look
+    required: true
+    options:
+      - id: "a"
+        label: "Whole-home coverage"
+      - id: "b"
+        label: "Fast speeds"
+      - id: "c"
+        label: "Easy setup"
+      - id: "d"
+        label: "Strong security features"
+      - id: "e"
+        label: "Parental controls"
+      - id: "f"
+        label: "Good app / management interface"
+      - id: "g"
+        label: "Number of Ethernet ports"
+      - id: "h"
+        label: "Price"
+  - id: q11
+    prompt: "How much do you agree: I understand how my home network works."
+    type: single_choice
+    construct: much_agree_i_understand_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree: My Wi-Fi reaches every part of my home reliably."
+    type: single_choice
+    construct: much_agree_my_wi_fi
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree: Setting up and managing my network is easy."
+    type: single_choice
+    construct: much_agree_setting_up_managing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: I worry about the security of the devices on my network."
+    type: single_choice
+    construct: much_agree_i_worry_security
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: My network handles all my connected devices without slowing down."
+    type: single_choice
+    construct: much_agree_my_network_handles
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How satisfied are you with your home network on: Wi-Fi coverage."
+    type: single_choice
+    construct: satisfied_home_network_wi_fi
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q17
+    prompt: "How satisfied are you with your home network on: Speed and performance."
+    type: single_choice
+    construct: satisfied_home_network_speed_performance
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q18
+    prompt: "How satisfied are you with your home network on: Ease of setup and management."
+    type: single_choice
+    construct: satisfied_home_network_ease_setup
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q19
+    prompt: "How satisfied are you with your home network on: Reliability / uptime."
+    type: single_choice
+    construct: satisfied_home_network_reliability_uptim
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q20
+    prompt: "How satisfied are you with your home network on: Security features."
+    type: single_choice
+    construct: satisfied_home_network_security_features
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q21
+    prompt: "What networking problems do you experience? (Select all that apply)"
+    type: multi_choice
+    construct: networking_problems_experience_select_al
+    required: true
+    options:
+      - id: "a"
+        label: "Dead zones or weak signal in some rooms"
+      - id: "b"
+        label: "Slow speeds"
+      - id: "c"
+        label: "Devices dropping off Wi-Fi"
+      - id: "d"
+        label: "Needing to restart the router often"
+      - id: "e"
+        label: "Trouble connecting new devices"
+      - id: "f"
+        label: "Interference or congestion"
+      - id: "g"
+        label: "Confusing settings"
+      - id: "h"
+        label: "None of these"
+  - id: q22
+    prompt: "How often do you have to restart or reset your router?"
+    type: single_choice
+    construct: often_have_restart_reset_router
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "A few times a year"
+      - id: "c"
+        label: "Monthly"
+      - id: "d"
+        label: "Weekly"
+      - id: "e"
+        label: "Several times a week or more"
+  - id: q23
+    prompt: "Have you added any equipment to improve coverage? (Select all that apply)"
+    type: multi_choice
+    construct: have_added_any_equipment_improve
+    required: true
+    options:
+      - id: "a"
+        label: "Wi-Fi extender / repeater"
+      - id: "b"
+        label: "Mesh nodes"
+      - id: "c"
+        label: "Additional wired access points"
+      - id: "d"
+        label: "Powerline / MoCA adapters"
+      - id: "e"
+        label: "A better single router"
+      - id: "f"
+        label: "No, I have not added anything"
+  - id: q24
+    prompt: "Do you use any parental controls or content filtering on your network?"
+    type: single_choice
+    construct: use_any_parental_controls_content
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, extensively"
+      - id: "b"
+        label: "Yes, some"
+      - id: "c"
+        label: "No, but I would like to"
+      - id: "d"
+        label: "No, not needed"
+  - id: q25
+    prompt: "When something goes wrong with your network, what do you usually do first?"
+    type: single_choice
+    construct: when_something_goes_wrong_network
+    required: true
+    options:
+      - id: "a"
+        label: "Restart the router"
+      - id: "b"
+        label: "Search online for a fix"
+      - id: "c"
+        label: "Use the router's app diagnostics"
+      - id: "d"
+        label: "Ask a knowledgeable friend or family member"
+      - id: "e"
+        label: "Call the provider or manufacturer"
+      - id: "f"
+        label: "Wait and hope it fixes itself"
+  - id: q26
+    prompt: "How long ago did you last upgrade or replace your main router or Wi-Fi system?"
+    type: single_choice
+    construct: long_ago_did_last_upgrade
+    required: true
+    options:
+      - id: "a"
+        label: "Within the past year"
+      - id: "b"
+        label: "1–2 years ago"
+      - id: "c"
+        label: "3–4 years ago"
+      - id: "d"
+        label: "5 or more years ago"
+      - id: "e"
+        label: "I have never replaced it"
+  - id: q27
+    prompt: "About how many devices are connected to your home network? Enter a number."
+    type: free_text
+    construct: many_devices_connected_home_network
+    required: true
+  - id: q28
+    prompt: "About how many years has it been since you last upgraded your router or Wi-Fi system? Enter a number."
+    type: free_text
+    construct: many_years_has_it_been
+    required: true
+  - id: q29
+    prompt: "Overall, how satisfied are you with your home network?"
+    type: single_choice
+    construct: overall_satisfied_home_network
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q30
+    prompt: "How likely are you to recommend your networking equipment to a friend? (0 = not at all likely, 10 = extremely likely)"
+    type: single_choice
+    construct: likely_recommend_networking_equipment_fr
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q31
+    prompt: "How likely are you to upgrade your networking equipment in the next 12 months?"
+    type: single_choice
+    construct: likely_upgrade_networking_equipment_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Unsure"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q32
+    prompt: "What would most improve your home network? Please describe."
+    type: free_text
+    construct: would_most_improve_home_network
+    required: true
+  - id: q33
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18–24"
+      - id: "c"
+        label: "25–34"
+      - id: "d"
+        label: "35–44"
+      - id: "e"
+        label: "45–54"
+      - id: "f"
+        label: "55–64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q34
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q35
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q36
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q37
+    prompt: "Which best describes your current employment status?"
+    type: single_choice
+    construct: best_describes_current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "How would you describe your comfort with technology?"
+    type: single_choice
+    construct: would_describe_comfort_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Very advanced — I set up complex systems"
+      - id: "b"
+        label: "Comfortable — I handle most things myself"
+      - id: "c"
+        label: "Average — I manage the basics"
+      - id: "d"
+        label: "Below average — I need help with tech"
+      - id: "e"
+        label: "I avoid technical tasks"
+  - id: q39
+    prompt: "What is your approximate annual household income (USD)?"
+    type: single_choice
+    construct: approximate_annual_household_income_usd
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000–$49,999"
+      - id: "c"
+        label: "$50,000–$74,999"
+      - id: "d"
+        label: "$75,000–$99,999"
+      - id: "e"
+        label: "$100,000–$149,999"
+      - id: "f"
+        label: "$150,000–$199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "How many people live in your household, including yourself?"
+    type: single_choice
+    construct: many_people_live_household_including
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q41
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own"
+      - id: "b"
+        label: "Rent"
+      - id: "c"
+        label: "Other arrangement"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q43
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
