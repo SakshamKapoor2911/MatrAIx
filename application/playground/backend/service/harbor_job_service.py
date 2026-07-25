@@ -1251,7 +1251,7 @@ class HarborJobService:
     ) -> dict[str, str]:
         env = {} if for_remote else dict(os.environ)
         existing = env.get("PYTHONPATH", "")
-        path_entries = [entry for entry in existing.split(":") if entry]
+        path_entries = [entry for entry in existing.split(os.pathsep) if entry]
         required_paths = [
             str(self.repo_root),
             str(self.repo_root / "environment" / "runtime"),
@@ -1269,7 +1269,7 @@ class HarborJobService:
         for path in reversed(required_paths):
             if path not in path_entries:
                 path_entries.insert(0, path)
-        env["PYTHONPATH"] = ":".join(path_entries)
+        env["PYTHONPATH"] = os.pathsep.join(path_entries)
         if survey_task_path:
             env["MATRIX_SURVEY_TASK_PATH"] = survey_task_path
         if trial_profile == "user_sim_chat":
@@ -1981,6 +1981,6 @@ def _launch_view(record: HarborLaunchRecord | None) -> dict[str, Any] | None:
 
 def _rel_path(path: Path, root: Path) -> str:
     try:
-        return str(path.relative_to(root))
+        return path.relative_to(root).as_posix()
     except ValueError:
-        return str(path)
+        return path.as_posix()

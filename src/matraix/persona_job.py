@@ -60,7 +60,7 @@ def load_manifest(pool_dir: Path, *, repo_root: Path) -> list[dict[str, Any]]:
                     entries.append(
                         {
                             "persona_id": raw.get("persona_id"),
-                            "path": str(path.relative_to(repo_root)),
+                            "path": path.relative_to(repo_root).as_posix(),
                             **raw,
                         }
                     )
@@ -74,7 +74,7 @@ def load_manifest(pool_dir: Path, *, repo_root: Path) -> list[dict[str, Any]]:
         entries.append(
             {
                 "persona_id": raw.get("persona_id"),
-                "path": str(path.relative_to(repo_root)),
+                "path": path.relative_to(repo_root).as_posix(),
                 **raw,
             }
         )

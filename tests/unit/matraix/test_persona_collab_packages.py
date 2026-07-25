@@ -1,4 +1,5 @@
 import json
+import os
 import tarfile
 from pathlib import Path
 
@@ -95,7 +96,8 @@ def test_wiki_collab_package_builds_extractable_archive(tmp_path: Path) -> None:
     )
 
     assert Path(summary["archive_path"]).is_file()
-    assert (out_dir / "run_assignment.sh").stat().st_mode & 0o111
+    if os.name != "nt":
+        assert (out_dir / "run_assignment.sh").stat().st_mode & 0o111
     assert _read_jsonl(out_dir / "tasks.jsonl")[0]["title"] == "Grace Example"
     assert json.loads((out_dir / "assignment.json").read_text())["task_count"] == 2
 

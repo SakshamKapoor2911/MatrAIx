@@ -115,7 +115,7 @@ def _persona_entry_from_path(path: Path, *, repo_root: Path) -> dict[str, Any]:
     persona_id = str(raw.get("persona_id") or raw.get("id") or path.stem)
     return {
         "persona_id": persona_id,
-        "path": str(path.relative_to(repo_root)),
+        "path": path.relative_to(repo_root).as_posix(),
         **raw,
     }
 

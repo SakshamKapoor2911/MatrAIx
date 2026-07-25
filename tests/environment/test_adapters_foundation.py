@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import pathlib
 import stat
 import tomllib
@@ -106,4 +107,5 @@ def test_simpleqa_task_template_keeps_scripts_executable() -> None:
 
     for script_path in script_paths:
         mode = script_path.stat().st_mode
-        assert mode & stat.S_IXUSR, script_path
+        if os.name != "nt":
+            assert mode & stat.S_IXUSR, script_path

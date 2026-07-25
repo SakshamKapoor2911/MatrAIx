@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import os
+
 from playground.remote_runner.dispatch import (
     filter_remote_harbor_payload_env,
     run_harbor_job,
@@ -44,7 +46,7 @@ def test_run_harbor_job_invokes_command_runner(tmp_path, monkeypatch) -> None:
     assert calls[0]["command"][:2] == ["echo", "harbor"]
     assert "--yes" in calls[0]["command"]
     assert calls[0]["env"]["MATRIX_SURVEY_TASK_PATH"] == "application/tasks/survey_product-attitudes"
-    pythonpath = calls[0]["env"]["PYTHONPATH"].split(":")
+    pythonpath = calls[0]["env"]["PYTHONPATH"].split(os.pathsep)
     assert str(tmp_path) in pythonpath
     assert str(tmp_path / "environment" / "runtime") in pythonpath
     assert str(tmp_path / "packages" / "playground" / "src") in pythonpath

@@ -39,7 +39,7 @@ def build_harbor_env(*, repo_root: Path, payload: dict[str, Any]) -> dict[str, s
         for key, value in filter_remote_harbor_payload_env(extra).items():
             env[key] = value
     existing = env.get("PYTHONPATH", "")
-    path_entries = [entry for entry in existing.split(":") if entry]
+    path_entries = [entry for entry in existing.split(os.pathsep) if entry]
     required_paths = [
         str(repo_root),
         str(repo_root / "environment" / "runtime"),
@@ -57,7 +57,7 @@ def build_harbor_env(*, repo_root: Path, payload: dict[str, Any]) -> dict[str, s
     for path in reversed(required_paths):
         if path not in path_entries:
             path_entries.insert(0, path)
-    env["PYTHONPATH"] = ":".join(path_entries)
+    env["PYTHONPATH"] = os.pathsep.join(path_entries)
     return env
 
 

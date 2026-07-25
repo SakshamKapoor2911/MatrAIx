@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 
 from backend.service.harbor_job_service import HarborJobService, HarborLaunchRecord
 
@@ -413,7 +414,7 @@ def test_launch_auto_chat_uses_local_distributed_executor(tmp_path, monkeypatch)
     env = calls[0]["env"]
     assert isinstance(env, dict)
     assert env["MATRIX_CHATBOT_TASK_PATH"] == "application/tasks/chat_recai"
-    pythonpath = env["PYTHONPATH"].split(":")
+    pythonpath = env["PYTHONPATH"].split(os.pathsep)
     assert str(repo) in pythonpath
     assert str(repo / "environment" / "runtime") in pythonpath
     assert str(repo / "packages" / "playground" / "src") in pythonpath

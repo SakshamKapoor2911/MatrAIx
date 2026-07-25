@@ -740,9 +740,9 @@ def test_harbor_runner_writes_run_inputs_invokes_harbor_and_maps_artifacts(
         assert config["environment"]["force_build"] is False
         assert config["environment"]["delete"] is False
         assert config["agents"][0]["kwargs"]["persona_path"].endswith("persona.yaml")
-        assert config["tasks"][0]["path"].endswith(
-            "application/tasks/chat_recai"
-        )
+        assert config["tasks"][0]["path"].replace(
+            "\\", "/"
+        ).endswith("application/tasks/chat_recai")
         prompt_path = config["extra_instruction_paths"][0]
         assert prompt_path.endswith("task_prompt.md")
         assert (

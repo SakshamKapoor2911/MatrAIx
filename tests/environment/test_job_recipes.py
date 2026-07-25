@@ -41,7 +41,7 @@ def _task_paths(recipe: dict[str, Any]) -> list[str]:
 def test_job_recipes_are_curated_and_resolvable() -> None:
     recipe_paths = _recipe_paths()
     relative_recipe_paths = {
-        str(recipe_path.relative_to(ROOT)) for recipe_path in recipe_paths
+        recipe_path.relative_to(ROOT).as_posix() for recipe_path in recipe_paths
     }
 
     assert recipe_paths

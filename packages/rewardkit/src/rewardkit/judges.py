@@ -196,7 +196,8 @@ def _read_file_blocks(p: Path, label: str) -> list[ContentBlock]:
 
     # Try reading as text: binary files raise UnicodeDecodeError and are skipped.
     try:
-        return [{"type": "text", "text": f"--- {label} ---\n{p.read_text()}"}]
+        text = p.read_bytes().decode("utf-8")
+        return [{"type": "text", "text": f"--- {label} ---\n{text}"}]
     except (UnicodeDecodeError, OSError):
         return []
 

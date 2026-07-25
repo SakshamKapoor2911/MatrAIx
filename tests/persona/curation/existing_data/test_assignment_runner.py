@@ -117,6 +117,8 @@ def test_status_reports_manifest_and_progress(tmp_path: Path):
 
 
 def test_run_assignment_prefers_existing_python_over_uv(tmp_path: Path):
+    if os.name == "nt":
+        return  # shell scripts not supported on Windows
     package = make_package(tmp_path)
     fake_bin = tmp_path / "fake-bin"
     fake_bin.mkdir()
