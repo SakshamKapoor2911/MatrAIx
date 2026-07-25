@@ -1,0 +1,103 @@
+{
+  "configPath": "configs\\jobs\\application-task-job-recipe\\pg-chat-openbb-ecfe324b.yaml",
+  "executionPlane": "harbor",
+  "executionMode": "auto",
+  "useLocalDistributed": true,
+  "trialProfile": "user_sim_chat",
+  "surveyTaskPath": null,
+  "chatTaskPath": "application/tasks/chat_openbb",
+  "osAppSubmissionProfile": null,
+  "chatDomain": null,
+  "chatApplicationId": null,
+  "chatApplicationContext": null,
+  "chatMaxTurns": null,
+  "jobConfig": {
+    "job_name": "pg-chat-openbb-ecfe324b",
+    "jobs_dir": "jobs",
+    "n_attempts": 1,
+    "timeout_multiplier": 1.0,
+    "n_concurrent_trials": 2,
+    "quiet": false,
+    "environment": {
+      "type": "host",
+      "delete": true
+    },
+    "agents": [
+      {
+        "name": "persona-user-sim",
+        "model_name": "dashscope/deepseek-v4-pro",
+        "kwargs": {
+          "persona_path": "persona/datasets/bench-dev-sample/persona_0164.yaml"
+        }
+      },
+      {
+        "name": "persona-user-sim",
+        "model_name": "dashscope/deepseek-v4-pro",
+        "kwargs": {
+          "persona_path": "persona/datasets/bench-dev-sample/persona_0029.yaml"
+        }
+      },
+      {
+        "name": "persona-user-sim",
+        "model_name": "dashscope/deepseek-v4-pro",
+        "kwargs": {
+          "persona_path": "persona/datasets/bench-dev-sample/persona_0007.yaml"
+        }
+      },
+      {
+        "name": "persona-user-sim",
+        "model_name": "dashscope/deepseek-v4-pro",
+        "kwargs": {
+          "persona_path": "persona/datasets/bench-dev-sample/persona_0190.yaml"
+        }
+      },
+      {
+        "name": "persona-user-sim",
+        "model_name": "dashscope/deepseek-v4-pro",
+        "kwargs": {
+          "persona_path": "persona/datasets/bench-dev-sample/persona_0071.yaml"
+        }
+      },
+      {
+        "name": "persona-user-sim",
+        "model_name": "dashscope/deepseek-v4-pro",
+        "kwargs": {
+          "persona_path": "persona/datasets/bench-dev-sample/persona_0063.yaml"
+        }
+      },
+      {
+        "name": "persona-user-sim",
+        "model_name": "dashscope/deepseek-v4-pro",
+        "kwargs": {
+          "persona_path": "persona/datasets/bench-dev-sample/persona_0058.yaml"
+        }
+      },
+      {
+        "name": "persona-user-sim",
+        "model_name": "dashscope/deepseek-v4-pro",
+        "kwargs": {
+          "persona_path": "persona/datasets/bench-dev-sample/persona_0036.yaml"
+        }
+      },
+      {
+        "name": "persona-user-sim",
+        "model_name": "dashscope/deepseek-v4-pro",
+        "kwargs": {
+          "persona_path": "persona/datasets/bench-dev-sample/persona_0189.yaml"
+        }
+      },
+      {
+        "name": "persona-user-sim",
+        "model_name": "dashscope/deepseek-v4-pro",
+        "kwargs": {
+          "persona_path": "persona/datasets/bench-dev-sample/persona_0027.yaml"
+        }
+      }
+    ],
+    "tasks": [
+      {
+        "path": "application/tasks/chat_openbb"
+      }
+    ]
+  }
+}

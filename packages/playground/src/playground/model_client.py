@@ -38,6 +38,44 @@ def dashscope_openai_client_kwargs(model: str) -> Dict[str, str]:
     }
 
 
+<<<<<<< Updated upstream
+=======
+_DEEPSEEK_MODEL_MAP = {
+    "deepseek-chat": "deepseek-chat",
+    "deepseek-reasoner": "deepseek-reasoner",
+    "deepseek-v4-flash": "deepseek-v4-flash",
+    "deepseek-v4-pro": "deepseek-chat",
+}
+
+
+def deepseek_model_id(model: str) -> str:
+    """Return the DeepSeek API model name from a Harbor persona model string."""
+    bare = (model or "").strip()
+    if bare.startswith("deepseek/"):
+        bare = bare.split("/", 1)[1]
+    return _DEEPSEEK_MODEL_MAP.get(bare, bare)
+
+
+def deepseek_openai_client_kwargs(model: str) -> Dict[str, str]:
+    """OpenAI SDK kwargs for DeepSeek chat."""
+    api_key = (os.environ.get("DEEPSEEK_API_KEY") or "").strip()
+    if not api_key:
+        raise RuntimeError(
+            "DEEPSEEK_API_KEY is required for persona model {!r}".format(model)
+        )
+    base_url = (
+        os.environ.get("DEEPSEEK_API_BASE")
+        or os.environ.get("LLM_BASE_URL")
+        or DEEPSEEK_DEFAULT_BASE_URL
+    ).strip()
+    return {
+        "model": deepseek_model_id(model),
+        "api_key": api_key,
+        "base_url": base_url,
+    }
+
+
+>>>>>>> Stashed changes
 class AnthropicJSONClient:
     """Minimal Anthropic Messages client that returns a JSON object."""
 

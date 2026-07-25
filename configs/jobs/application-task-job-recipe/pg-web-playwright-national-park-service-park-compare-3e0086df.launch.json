@@ -1,0 +1,68 @@
+{
+  "configPath": "configs\\jobs\\application-task-job-recipe\\pg-web-playwright-national-park-service-park-compare-3e0086df.yaml",
+  "executionPlane": "harbor",
+  "executionMode": "auto",
+  "useLocalDistributed": true,
+  "trialProfile": "json_survey",
+  "surveyTaskPath": "application/tasks/web-playwright-national-park-service-park-compare",
+  "chatTaskPath": null,
+  "osAppSubmissionProfile": null,
+  "chatDomain": null,
+  "chatApplicationId": null,
+  "chatApplicationContext": null,
+  "chatMaxTurns": null,
+  "jobConfig": {
+    "job_name": "pg-web-playwright-national-park-service-park-compare-3e0086df",
+    "jobs_dir": "jobs",
+    "n_attempts": 1,
+    "timeout_multiplier": 1.0,
+    "n_concurrent_trials": 2,
+    "quiet": false,
+    "environment": {
+      "type": "host",
+      "delete": true
+    },
+    "agents": [
+      {
+        "name": "persona-json-survey",
+        "model_name": "dashscope/deepseek-v4-pro",
+        "kwargs": {
+          "persona_path": "persona/datasets/bench-dev-sample/persona_0164.yaml"
+        }
+      },
+      {
+        "name": "persona-json-survey",
+        "model_name": "dashscope/deepseek-v4-pro",
+        "kwargs": {
+          "persona_path": "persona/datasets/bench-dev-sample/persona_0029.yaml"
+        }
+      },
+      {
+        "name": "persona-json-survey",
+        "model_name": "dashscope/deepseek-v4-pro",
+        "kwargs": {
+          "persona_path": "persona/datasets/bench-dev-sample/persona_0007.yaml"
+        }
+      },
+      {
+        "name": "persona-json-survey",
+        "model_name": "dashscope/deepseek-v4-pro",
+        "kwargs": {
+          "persona_path": "persona/datasets/bench-dev-sample/persona_0190.yaml"
+        }
+      },
+      {
+        "name": "persona-json-survey",
+        "model_name": "dashscope/deepseek-v4-pro",
+        "kwargs": {
+          "persona_path": "persona/datasets/bench-dev-sample/persona_0071.yaml"
+        }
+      }
+    ],
+    "tasks": [
+      {
+        "path": "application/tasks/web-playwright-national-park-service-park-compare"
+      }
+    ]
+  }
+}
