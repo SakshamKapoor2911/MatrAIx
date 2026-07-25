@@ -20,7 +20,6 @@ dependencies = [
     "pyyaml>=6.0.2",
     "requests>=2.32.4",
     "rich>=14.1.0",
-    "ruff>=0.13.0",
     "shortuuid>=1.0.13",
     "supabase>=2.28.2",
     "tenacity>=9.1.2",
@@ -35,6 +34,9 @@ hr = "harbor.cli.main:app"
 hb = "harbor.cli.main:app"
 
 [project.optional-dependencies]
+dev = [
+    "ruff>=0.13.0",
+]
 amazon-modal = [
     "datasets>=4.4.1",
     "huggingface-hub>=0.36.0",
@@ -167,3 +169,24 @@ markers = [
 
 [tool.ruff]
 target-version = "py312"
+line-length = 100
+
+[lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "SIM", "ARG", "PTH"]
+ignore = [
+  "E501",
+  "ARG001",
+  "ARG002",
+  "PTH123",
+]
+
+[lint.per-file-ignores]
+"__init__.py" = ["F401"]
+"tests/**/*.py" = ["S101"]
+"**/test_*.py" = ["S101"]
+"**/*_test.py" = ["S101"]
+
+[format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
