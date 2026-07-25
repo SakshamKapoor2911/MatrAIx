@@ -133,12 +133,16 @@ packages = [
     "matraix.agents",
     "matraix.agents.installed",
     "matraix.agents.persona",
+    "backend",
+    "backend.api",
+    "backend.service",
 ]
 
 [tool.setuptools.package-dir]
 harbor = "environment/runtime/harbor"
 matraix = "src/matraix"
 "matraix.agents" = "environment/agents/matraix/agents"
+backend = "application/playground/backend"
 
 [tool.setuptools.package-data]
 harbor = [

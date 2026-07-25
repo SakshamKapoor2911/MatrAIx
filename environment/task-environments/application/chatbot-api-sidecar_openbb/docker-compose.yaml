@@ -9,6 +9,7 @@ services:
       context: ./finance-chatbot
     environment:
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-}
       FINANCE_AGENT_MODEL: ${FINANCE_AGENT_MODEL:-gpt-4o-mini}
       OPENBB_MCP_URL: ${OPENBB_MCP_URL:-http://openbb-mcp:8001/mcp}
       OPENBB_MCP_CATEGORIES: ${OPENBB_MCP_CATEGORIES:-equity,etf,economy,news,crypto,fixedincome,index,technical}

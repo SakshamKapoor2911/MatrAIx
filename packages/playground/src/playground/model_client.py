@@ -40,10 +40,10 @@ def dashscope_openai_client_kwargs(model: str) -> Dict[str, str]:
 
 
 _DEEPSEEK_MODEL_MAP = {
-    "deepseek-chat": "deepseek-v4-pro",
-    "deepseek-reasoner": "deepseek-v4-pro",
+    "deepseek-chat": "deepseek-chat",
+    "deepseek-reasoner": "deepseek-reasoner",
     "deepseek-v4-flash": "deepseek-v4-flash",
-    "deepseek-v4-pro": "deepseek-v4-pro",
+    "deepseek-v4-pro": "deepseek-chat",
 }
 
 
