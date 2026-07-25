@@ -1,0 +1,14 @@
+services:
+  main:
+    image: busybox:latest
+    command: sleep infinity
+    depends_on:
+      finance-chatbot:
+        condition: service_healthy
+  finance-chatbot:
+    ports:
+      - "127.0.0.1:8901:8000"
+    environment:
+      OPENAI_API_KEY: sk-5519c214b45e475fada753cc1214f8ff
+      OPENAI_BASE_URL: https://api.deepseek.com
+      FINANCE_AGENT_MODEL: deepseek-v4-flash

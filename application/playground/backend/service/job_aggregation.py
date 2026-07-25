@@ -99,6 +99,11 @@ def build_job_aggregation(
         return None
 
     previous_payload = read_job_aggregation_artifact(job_dir)
+    if isinstance(previous_payload, dict):
+        coverage = previous_payload.get("coverage", {})
+        if isinstance(coverage, dict) and coverage.get("completedTrials") == coverage.get("trialCount") and coverage.get("trialCount", 0) > 0:
+            return previous_payload
+
     trial_dirs = sorted(
         [
             path
