@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create a rule-only Afrobarometer extraction with exactly 1,290 fields."""
+"""Create rule-only ConvAI2 extraction records with exactly 1,290 fields."""
 
 import argparse
 import gzip
@@ -26,60 +26,24 @@ def load_profiles(path):
     return profiles
 
 
-def evidence_for(dim, profile_text):
-    prefixes = {
-        "age_bracket": "Reported age bracket:",
-        "gender_identity": "Reported gender:",
-        "highest_education": "Highest reported education:",
-        "region": "Country:",
-        "primary_language": "Primary language:",
-        "demo_employment_status": "Reported occupation:",
-    }
-    prefix = prefixes.get(dim)
-    lines = profile_text.splitlines()
-    if prefix:
-        return next((line for line in lines if line.startswith(prefix)), "")
-    if dim == "demo_religion_affiliation":
-        return next(
-            (
-                line
-                for line in lines
-                if line.startswith("Stated survey-derived value: identifies as ")
-            ),
-            "",
-        )
-    return ""
-
-
 def build_record(uid, profile, order, allowed):
+    observed = profile.get("observed", {})
     fields = normalize(
-        [],
-        order,
-        allowed,
-        profile_text=profile["profile_text"],
-        observed=profile.get("observed", {}),
+        [], order, allowed, profile_text=profile["profile_text"], observed=observed
     )
+    evidence = profile.get("observed_evidence", {})
     for field in fields:
-        if field["field_id"] in profile.get("observed", {}):
-            field["evidence"] = evidence_for(field["field_id"], profile["profile_text"])
-            field["description"] = "Mapped exactly from an observed source field."
-            field["provenance"] = "observed"
-        else:
-            field["provenance"] = "unobserved"
+        if field["field_id"] in observed:
+            field["evidence"] = evidence.get(field["field_id"], "")
+            field["description"] = (
+                "Mapped deterministically from an explicit persona sentence."
+            )
     return {
         "user_id": uid,
-        "source": "afrobarometer_r9",
+        "source": "convai2_personas",
         "model": None,
-        "extraction_method": "rule_based_crosswalk",
         "fields": fields,
-        "observed": json.dumps(
-            profile.get("observed", {}), ensure_ascii=False, sort_keys=True
-        ),
-        "source_inference_flags": json.dumps(
-            profile.get("source_inference_flags", {}),
-            ensure_ascii=False,
-            sort_keys=True,
-        ),
+        "observed": observed,
     }
 
 
@@ -99,7 +63,6 @@ def write_parquet(path, profiles, order, allowed, batch_size=100):
             ("evidence", pa.string()),
             ("description", pa.string()),
             ("assignment_type", pa.string()),
-            ("provenance", pa.string()),
         ]
     )
     schema = pa.schema(
@@ -107,10 +70,8 @@ def write_parquet(path, profiles, order, allowed, batch_size=100):
             ("user_id", pa.string()),
             ("source", pa.string()),
             ("model", pa.string()),
-            ("extraction_method", pa.string()),
             ("fields", pa.list_(field_type)),
-            ("observed", pa.string()),
-            ("source_inference_flags", pa.string()),
+            ("observed", pa.map_(pa.string(), pa.string())),
         ]
     )
     writer = pq.ParquetWriter(path, schema, compression="zstd")
@@ -129,15 +90,12 @@ def write_parquet(path, profiles, order, allowed, batch_size=100):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument(
-        "--profiles", required=True, help="output from prepare_afrobarometer.py"
-    )
+    ap.add_argument("--profiles", required=True, help="output from prepare_convai2.py")
     ap.add_argument(
         "--schema", default=os.path.join(REPO, "persona/schema/dimensions.json")
     )
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
-
     order, allowed = load_schema(args.schema)
     profiles = load_profiles(args.profiles)
     os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
@@ -148,10 +106,6 @@ def main():
         with opener(args.out, "wt", encoding="utf-8") as dst:
             for uid, profile in profiles.items():
                 record = build_record(uid, profile, order, allowed)
-                record["observed"] = json.loads(record["observed"])
-                record["source_inference_flags"] = json.loads(
-                    record["source_inference_flags"]
-                )
                 dst.write(json.dumps(record, ensure_ascii=False) + "\n")
     print(f"wrote {len(profiles):,} personas ({len(order)} fields each) -> {args.out}")
 

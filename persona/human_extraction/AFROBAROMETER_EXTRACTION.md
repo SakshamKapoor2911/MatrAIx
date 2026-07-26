@@ -57,11 +57,14 @@ Remove `--limit 5`, prepare a new full profiles file, and run the same rule-only
 postprocessor and validator against it. Runtime is local CPU/file-processing time;
 there are no API calls or model costs.
 
-For the deliverable Parquet file, use:
+For the canonical compressed JSONL deliverable, use:
 
 ```bash
 python persona/human_extraction/scripts/postprocess_afrobarometer.py \
   --profiles out/afrobarometer_profiles_full.jsonl \
   --schema persona/schema/dimensions.json \
-  --out afrobarometer_extracted.parquet
+  --out afrobarometer/extraction_v1/shard_00.jsonl.gz
 ```
+
+Every field includes `provenance`: `observed` for exact crosswalk values and
+`unobserved` for null dimensions.
