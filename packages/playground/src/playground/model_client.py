@@ -170,4 +170,19 @@ def build_json_client(model: str, *, temperature: float = 0.7) -> Any:
         )
     if value.startswith("gpt-"):
         return OpenAIChatClient(model=value, temperature=temperature)
+    if value.startswith("deepseek/"):
+        api_key = (os.environ.get("DEEPSEEK_API_KEY") or "").strip()
+        if not api_key:
+            raise RuntimeError(
+                "DEEPSEEK_API_KEY is required for persona model {!r}".format(value)
+            )
+        base_url = (
+            os.environ.get("DEEPSEEK_API_BASE") or "https://api.deepseek.com/v1"
+        ).strip()
+        return OpenAIChatClient(
+            model=value.split("/", 1)[1],
+            api_key=api_key,
+            base_url=base_url,
+            temperature=temperature,
+        )
     return AnthropicJSONClient(value, temperature=temperature)
