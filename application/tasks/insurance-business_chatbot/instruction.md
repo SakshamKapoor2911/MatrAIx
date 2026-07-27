@@ -4,18 +4,16 @@
 You own a business and need insurance. Share your industry and business size.
 
 ## Your goal
-Get a clear recommendation for a general liability insurance policy tailored to your small construction business (5 employees) that covers on-site injuries and property damage, with a monthly premium under $300.
+Obtain a tailored business insurance quote for a mid-sized construction company with 50 employees, including general liability, workers' compensation, and commercial auto coverage.
 
 ## Constraints on your behavior
-- Open by describing that you own a small construction business with 5 employees, but don't reveal your specific question about general liability until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'you need general liability, workers comp, etc.'), push back and ask how it applies to your specific business: on-site injuries from power tools and property damage to client homes.
-- Mention that you have a tight budget and need to keep monthly premiums under $300. If the chatbot ignores this constraint, reiterate it.
+['Initially mention only that you own a business and need insurance, without specifying industry or size until asked.', 'Push back if the chatbot offers generic advice or one-size-fits-all policies; insist on coverage specific to construction risks.', 'Require the chatbot to ask clarifying questions about your business (industry, size, number of employees) before providing recommendations.', 'Mention that you have a budget of $15,000 per year and want to keep premiums within that range.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total) to ensure the chatbot gathers enough details.
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific policy recommendation from a named insurer that mentions coverage for power tool injuries and client property damage with a premium under $300/month, OR (b) after 5 exchanges the chatbot has still not addressed your specific business size (5 employees) and budget constraint ($300/month).
+End the conversation when you receive a personalized quote or coverage plan that includes general liability, workers' comp, and commercial auto for a 50-employee construction company, or after 8 messages if the chatbot fails to progress.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific small construction business (5 employees), the risks of power tool injuries and client property damage, and you left with a named policy option (e.g., 'XYZ Insurance General Liability Pro') with a monthly cost under $300.
+The chatbot successfully helped if it identified your industry as construction, business size as 50 employees, and provided a quote or detailed policy options for the three required coverages within your budget constraint. If it gave vague advice or ignored specifics, it failed.

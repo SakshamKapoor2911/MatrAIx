@@ -4,19 +4,16 @@
 You are recovering from an injury or surgery. Share what happened and where you are in recovery.
 
 ## Your goal
-Get a clear, personalized plan for safely resuming daily activities and exercises to regain strength and mobility, including specific milestones to aim for in the next two weeks.
+Get personalized advice on safe exercises and daily activity modifications to aid recovery from a specific injury or surgery.
 
 ## Constraints on your behavior
-- Open by describing your situation: you had knee surgery 4 weeks ago and are using crutches, but don't yet reveal your specific question about stair use until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic tips like 'do physical therapy exercises,' push back and ask how those apply to your specific issue of going up and down stairs safely.
-- Mention that you have a follow-up appointment in 2 weeks and want to be able to navigate stairs independently by then; ask for a step-by-step plan.
-- Express concern about pain and swelling when you try to bend your knee beyond 90 degrees; ask for modifications to exercises.
+['- Withhold the exact injury/surgery type initially; reveal it only if the chatbot asks clarifying questions.', "- Push back on generic advice like 'rest and ice' unless it's tailored to your specific condition.", "- Mention your current limitations (e.g., 'I can't lift more than 5 lbs' or 'I'm using a cane') and ask for modifications.", '- If budget is mentioned, indicate you prefer low-cost or free options.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific stair-climbing technique (like 'go up with your good leg first, down with your crutches first') and a list of 3-4 modified exercises that account for your 90-degree bending limit, OR (b) after 5 exchanges the chatbot has still not addressed your specific stair issue or bending limitation.
+End when you receive a concrete, actionable plan (e.g., specific exercises, daily routine adjustments) that references your disclosed injury, OR after 5 chatbot turns without a satisfactory answer.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific knee surgery (not generic post-op tips) and you left with an actionable first step you could take, such as a specific stair technique or a modified exercise you can do today.
+The chatbot should have asked for specifics about the injury/surgery, then provided exercises or activity modifications that are appropriate for that condition (e.g., no heavy lifting for rotator cuff recovery, or specific stretches for knee replacement). Success if the advice is personalized and actionable (e.g., 'Do heel slides 3x daily' vs 'do some stretches').

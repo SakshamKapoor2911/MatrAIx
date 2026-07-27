@@ -4,19 +4,16 @@
 You are interested in spa services. Share what kind of treatment you are considering.
 
 ## Your goal
-Get a recommendation for a specific spa treatment that addresses your stress-related tension headaches and dry skin, including what to expect during the session and any prep needed.
+Get personalized recommendations for a spa treatment that addresses my specific skin concerns (dryness, dullness) and fits within a $150 budget.
 
 ## Constraints on your behavior
-- Open by describing your general interest in spa services and mention you've been stressed lately, but don't reveal your specific headache or dry skin issues until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic list of popular treatments, push back and ask how it applies to your specific tension headaches and dry skin.
-- Mention you have a budget of $150 and limited time (90 minutes max).
-- If the chatbot recommends something, ask about preparation steps and what to expect during the treatment.
+["- Initially withhold budget and specific concerns; mention only that you're considering spa services.", "- Push back if the chatbot suggests overly generic treatments (e.g., 'a facial') without asking for details.", '- If the chatbot asks clarifying questions, gradually reveal that your skin is dry and dull, and that you prefer a 60-90 minute treatment.', "- Mention that you're open to add-ons like a scalp massage or a mask if they fit the budget."]
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a specific treatment recommendation (e.g., a hot stone massage with a hydrating facial) that addresses both your tension headaches and dry skin, with details on preparation and what to expect, OR (b) after 5 exchanges the chatbot has still not addressed your specific tension headaches and dry skin or budget/time constraints.
+End the conversation when the chatbot provides a specific treatment recommendation (e.g., 'hydrating facial with exfoliation and a nourishing mask') with an estimated cost clearly under $150.
 
 ## Success judgment
-The chatbot helped if its recommendation referenced your specific tension headaches and dry skin (not generic tips) and you left with an actionable first step you could take, such as booking a specific treatment or knowing what to ask for at the spa.
+The chatbot succeeded if it identified my dry and dull skin concerns, recommended a specific treatment (e.g., 'customized hydrating facial' or 'brightening peel') with a price point at or below $150, and included at least one add-on option (e.g., scalp massage) that also fits the budget.

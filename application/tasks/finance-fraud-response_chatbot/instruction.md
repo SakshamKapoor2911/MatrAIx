@@ -4,19 +4,19 @@
 You suspect fraud on your account. The chatbot guides you through verification freeze and reporting steps.
 
 ## Your goal
-Get step-by-step guidance to freeze your account and report the suspected fraud, including confirmation that the freeze is in effect and a case/reference number for the report.
+Report suspected fraud on your account and initiate a freeze to prevent further unauthorized transactions.
 
 ## Constraints on your behavior
-- Open by describing that you noticed several unauthorized transactions on your account, but don't reveal the specific amounts or dates until the chatbot asks for details.
-- If the chatbot gives generic advice like 'contact your bank,' push back and ask for specific steps to freeze the account and report fraud.
-- Mention that you're worried about your savings account being drained and ask if freezing one account affects others.
-- State that you need a case number or confirmation for your records.
+- Initially provide only vague details (e.g., 'I see some strange charges') to test if the chatbot asks clarifying questions.
+- Withhold your account number until the chatbot explicitly requests it for verification.
+- Push back if the chatbot gives generic advice (e.g., 'change your password') without first freezing the account.
+- Mention that you are in a hurry and want immediate action.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you have frozen your account and received a case number for the fraud report, OR (b) after 5 exchanges the chatbot has still not provided specific freeze instructions or a case number.
+End the conversation when the chatbot provides a clear step-by-step process to freeze your account and report the fraud, including a confirmation that the freeze is in effect and a reference number for the report.
 
 ## Success judgment
-The chatbot helped if it provided specific steps to freeze your account (e.g., 'log into online banking, go to settings, click freeze') and issued a case number or confirmation that the freeze was placed.
+The chatbot succeeds if it: (1) asks specific questions about the suspicious charges (e.g., amount, date, merchant), (2) requests account verification (e.g., account number, SSN last four), (3) initiates a freeze on the account, (4) provides a fraud report reference number, and (5) offers next steps (e.g., monitoring, new card).

@@ -4,18 +4,19 @@
 You're a marketing manager with 5 years of experience aiming for a senior role at a tech company. Your resume hasn't been updated in 3 years.
 
 ## Your goal
-Get a targeted resume update plan that highlights leadership and data-driven campaign results for a senior marketing role at a tech company.
+Get detailed, actionable advice on updating my resume to target senior marketing manager roles at tech companies, including specific keywords, format, and achievements to highlight.
 
 ## Constraints on your behavior
-- Open by describing your situation: a marketing manager with 5 years of experience, resume outdated by 3 years, wanting a senior role in tech. But don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'update your resume with keywords'), push back and ask how it applies to your specific campaigns like 'Q3 email automation project that increased conversions by 20%' or 'cross-functional team leadership for product launch'.
-- Mention you have limited time (only 2 hours this week) and want a focused plan, not a full overhaul.
+- Initially ask for general resume tips without revealing my specific background or target role.
+- If the chatbot gives generic advice, push back by asking for examples tailored to tech marketing.
+- Mention my 5 years of experience and that my resume is 3 years old, but only after the first response.
+- Express interest in highlighting metrics and leadership achievements.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you get a concrete 3-step action plan that includes how to rephrase your 'Q3 email automation' and 'product launch leadership' into bullet points, OR (b) after 5 exchanges the chatbot has still not addressed your specific campaign examples or time constraint.
+End the conversation when I receive at least three specific, actionable suggestions (e.g., keywords like 'GTM strategy', format changes, or achievement examples) that I can apply directly to my resume.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific 'Q3 email automation' and 'product launch leadership' achievements (not generic tips) and you left with an actionable first step you could take in your 2-hour window.
+The chatbot is successful if it provides concrete advice such as: (a) specific keywords for senior marketing manager roles (e.g., 'demand generation', 'cross-functional leadership'), (b) a recommended resume format (e.g., reverse-chronological with a summary), and (c) examples of achievements to include (e.g., 'increased pipeline by 50%'). If it only gives generic tips like 'update your resume' or 'use action verbs', it fails.

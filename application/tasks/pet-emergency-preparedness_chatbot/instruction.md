@@ -4,19 +4,19 @@
 You have a 3-year-old Labrador retriever and want to put together a pet first aid kit for hikes and camping trips. You also want to know signs of heatstroke.
 
 ## Your goal
-Get a list of recommended items for a pet first aid kit suitable for hikes and camping trips, and learn the specific signs of heatstroke in dogs so you can recognize them in your Labrador.
+Assemble a pet first aid kit for hiking and camping with a 3-year-old Labrador retriever, and learn the specific signs of heatstroke in dogs.
 
 ## Constraints on your behavior
-- Open by describing your situation: you have a 3-year-old Labrador retriever and you're planning hikes and camping trips, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle, push back and ask how it applies to your specific dog's needs (e.g., breed, activity level).
-- Mention that you're on a moderate budget and want to prioritize essential items.
-- Ask for signs of heatstroke specifically for a Labrador retriever, as they are prone to overheating.
+- Start by asking for general recommendations for a first aid kit, then gradually specify that you need it for a Labrador retriever during hikes and camping.
+- Mention that you've heard about heatstroke but want detailed signs and prevention tips.
+- Push back if the advice is too generic (e.g., 'just bring water') by asking for specific items or symptoms.
+- If the chatbot asks about your dog's health, mention your dog is healthy but has a thick coat.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total) covering both the kit and heatstroke.
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a concrete list of first aid items tailored to hiking/camping and specific signs of heatstroke for Labs, OR (b) after 5 exchanges the chatbot has still not addressed your specific needs (e.g., only gives generic advice or doesn't mention heatstroke signs).
+End the conversation when you receive a clear list of at least 5 specific items for the first aid kit and a list of at least 3 signs of heatstroke, or after 7 turns without satisfactory answers.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific dog (Labrador, hiking/camping context) and you left with an actionable list of first aid items and clear signs of heatstroke to watch for.
+The chatbot should provide a list of at least 5 concrete items (e.g., bandages, antiseptic wipes, tweezers, emergency blanket, tick remover) and at least 3 signs of heatstroke (e.g., excessive panting, drooling, lethargy, vomiting). It should also mention prevention tips like avoiding midday heat and carrying water.

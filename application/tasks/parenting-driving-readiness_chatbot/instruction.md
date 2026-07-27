@@ -4,19 +4,16 @@
 Your teen is approaching driving age. The chatbot explains graduated licensing and safety planning.
 
 ## Your goal
-Create a personalized safety plan and timeline for your teen's learning-to-drive process, including specific milestones for supervised practice, a list of required documents for the permit, and a strategy for managing insurance costs.
+Get a concrete checklist of steps to help my teen get a driver's license, including specific requirements for supervised driving hours and a sample parent-teen driving agreement.
 
 ## Constraints on your behavior
-- Open by describing your situation: you have a 15-year-old son named Alex who is excited to drive, but you're nervous about safety and the financial impact. Don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'just practice 50 hours'), push back and ask how it applies to your specific situation: you live in a rural area with long gravel roads and your son has a tendency to be distracted by his phone.
-- Mention budget constraints: you're concerned about the cost of adding a teen to your insurance and want to know if there are discounts for driver's ed or good grades.
-- Ask for concrete steps: you want a checklist of what to do first (e.g., enroll in driver's ed, get permit, practice on specific road types) with timelines.
+['- Ask for specific state-level requirements (e.g., minimum supervised hours, age restrictions).', '- Push back if the chatbot gives generic advice without citing state-specific resources.', '- Mention that my teen has ADHD and ask for safety tips tailored to that.', '- Express concern about insurance costs and ask for money-saving tips.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a specific step-by-step plan that includes when to apply for the permit, a suggested number of practice hours on gravel vs. paved roads, and a list of insurance discounts (e.g., good student, driver's ed), OR (b) after 5 exchanges the chatbot has still not addressed your rural roads and phone distraction concerns.
+End the conversation when I have received: (1) the exact number of supervised hours required in my state, (2) a link or reference to the state DMV page, (3) a sample parent-teen driving agreement, and (4) at least one ADHD-specific safety tip.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific location (rural area with gravel roads) and your teen's distraction issue (phone use), and you left with an actionable first step (e.g., 'enroll in driver's ed next month' or 'call insurance agent about good student discount').
+The chatbot succeeds if it provides: (a) the specific supervised driving hours for the state (e.g., 50 hours), (b) a direct link or clear instructions to the state DMV, (c) a downloadable or copyable parent-teen driving agreement, and (d) a safety tip addressing ADHD (e.g., limit distractions, use a checklist).

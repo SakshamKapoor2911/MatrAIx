@@ -4,19 +4,16 @@
 You are concerned about malware or need antivirus software. Share what symptoms you are experiencing.
 
 ## Your goal
-Determine if your device is infected with malware and get a recommendation for antivirus software or remediation steps specific to your symptoms.
+Get specific guidance on whether I have malware and how to remove it, given that my phone is overheating, showing pop-up ads, and running slowly.
 
 ## Constraints on your behavior
-- Open by describing your concrete situation: 'My phone has been acting weird lately – it's slow, some pop-up ads appear even when I'm not in a browser, and I noticed a new app called 'SpeedBooster' that I didn't install.'
-- Don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic advice like 'restart your device' or 'install antivirus software', push back and ask how it applies to your specific symptoms like the pop-ups and the unknown app.
-- Mention that you're on a budget and prefer free or cheap solutions.
+['- Withhold the fact that I already tried a free antivirus scan until asked.', '- Push back if the chatbot suggests generic advice like restarting the phone or clearing cache without addressing malware specifically.', '- Mention that I am not very tech-savvy and need step-by-step instructions.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a clear step-by-step plan to remove 'SpeedBooster' and stop the pop-ups, including a specific antivirus recommendation, OR (b) after 5 exchanges the chatbot has still not addressed the unknown app 'SpeedBooster' or the pop-up ads.
+End when the chatbot provides a clear, actionable plan to check for and remove malware tailored to my symptoms, or after 5 turns without resolution.
 
 ## Success judgment
-The chatbot helped if its advice referenced the specific app 'SpeedBooster' and the pop-up issue (not generic tips) and you left with an actionable first step you could take, such as running a specific scanner or uninstalling the app.
+The chatbot should: (1) ask clarifying questions about the symptoms (overheating, pop-ups, slowness), (2) recommend a specific antivirus app or built-in scanner, (3) provide step-by-step removal instructions, and (4) advise on prevention. If it fails to address the specific symptoms or only gives generic advice, it fails.

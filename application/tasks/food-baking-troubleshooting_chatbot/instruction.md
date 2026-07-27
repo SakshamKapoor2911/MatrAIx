@@ -4,19 +4,16 @@
 Your baked goods did not turn out right. Describe what you were making and what went wrong.
 
 ## Your goal
-Get a diagnosis for why my cookies spread too thin and a fix for the next batch.
+Get a diagnosis for why my chocolate chip cookies turned out flat and greasy, and get specific advice on how to prevent this next time.
 
 ## Constraints on your behavior
-- Open by describing your chocolate chip cookies spread into flat disks instead of staying thick and chewy, but don't reveal your specific recipe or technique until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic advice like 'chill your dough' or 'use butter vs shortening', push back by asking how that applies to your specific situation: you used browned butter and refrigerated the dough for 2 hours.
-- Mention you're on a budget and prefer not to buy specialty ingredients like cake flour or expensive chocolate.
-- Reveal only after probing that you used all-purpose flour, browned butter, and a mix of granulated and brown sugar, and that your baking soda might be old.
+["- Initially describe the problem vaguely: 'My cookies didn't turn out right.'", '- Only reveal details (flat, greasy, used melted butter, chilled dough for 10 minutes) after the chatbot asks clarifying questions.', "- Push back if the chatbot gives generic advice like 'chill the dough' without explaining why or mentioning specific adjustments."]
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot identifies that your browned butter's water content or your old baking soda is the likely cause and gives a specific fix (e.g., add 1 tbsp milk, use fresh baking soda), OR (b) after 5 exchanges the chatbot has still not addressed your specific browned butter or baking soda issue.
+End when the chatbot identifies the likely cause (butter too warm, insufficient chilling) and gives actionable steps (e.g., chill dough 30+ minutes, use cold butter).
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific browned butter and old baking soda (not generic tips) and you left with an actionable first step you could take.
+The chatbot correctly identifies that using melted butter and only 10 minutes of chilling caused the cookies to spread excessively, and provides specific instructions to chill the dough for at least 30 minutes or use cold butter.

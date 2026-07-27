@@ -4,19 +4,16 @@
 You are looking for a mortgage. Share your price range down payment and credit profile.
 
 ## Your goal
-Get a clear understanding of the mortgage options available for a $300,000 home with a $60,000 down payment and a credit score of 680, including estimated monthly payments and interest rates.
+Get a specific mortgage recommendation for a $350k home with a $70k down payment and a 720 credit score.
 
 ## Constraints on your behavior
-- Open by describing your situation: you're looking for a mortgage for a $300,000 home with a $60,000 down payment and a credit score around 680, but don't ask for specific options yet.
-- If the chatbot gives generic advice like 'improve your credit score,' push back and ask how it applies to your specific credit profile and down payment.
-- Mention that you're concerned about monthly payments fitting within your budget of $1,800 per month.
-- Ask for concrete numbers like estimated interest rates and monthly payments for your specific scenario.
+["- Start by stating you're looking for a mortgage but don't immediately share all details; reveal price range first, then down payment, then credit score as the conversation progresses.", '- Push back if the chatbot gives generic advice without specific numbers or loan options.', '- Mention you prefer a fixed-rate mortgage and want to know about current interest rates and monthly payments.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive specific loan options with interest rates and monthly payments for your $300,000 home, $60,000 down, and 680 credit score, OR (b) after 5 exchanges the chatbot has still not addressed your specific down payment and credit profile.
+End the conversation when you receive a concrete mortgage recommendation (loan type, rate, monthly payment) based on the $350k price, $70k down payment (20%), and 720 credit score, OR after 5 chatbot turns without a specific answer.
 
 ## Success judgment
-The chatbot helped if it provided specific mortgage options (e.g., conventional, FHA) with estimated rates and payments based on your $60,000 down payment and 680 credit score, and you left with a clear next step like which lender to contact or documents to prepare.
+The chatbot provided a specific mortgage option (e.g., 30-year fixed, 6.5% APR, $1,770 monthly) using the $350k price, $70k down payment, and 720 credit score. If it only gave general advice or failed to use all variables, it did not succeed.

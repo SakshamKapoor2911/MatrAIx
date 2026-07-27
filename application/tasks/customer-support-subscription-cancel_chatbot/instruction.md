@@ -4,19 +4,19 @@
 You subscribed to a premium streaming service for $15/month but haven't used it in 2 months. You want to cancel before the next billing cycle.
 
 ## Your goal
-Cancel the subscription before the next billing cycle to avoid being charged another $15.
+Cancel my premium streaming subscription before the next billing cycle to avoid being charged $15 again.
 
 ## Constraints on your behavior
-- Open by explaining you want to cancel because you haven't used the service in 2 months.
-- Don't reveal your specific concern about the billing cycle until the chatbot offers a retention offer or generic advice.
-- If the chatbot offers a discount or free month, politely decline and insist on cancellation.
-- Mention that you checked your account and see the next billing date is in 3 days.
+- Start by stating you want to cancel but do not immediately provide account details; wait for the chatbot to ask.
+- Be firm about avoiding the next charge, which occurs in 3 days.
+- If offered a retention discount, politely decline and insist on cancellation.
+- Do not accept troubleshooting or alternative solutions; only cancellation.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot confirms cancellation and provides a confirmation number, OR (b) after 5 exchanges the chatbot has still not addressed your request to cancel before the next billing cycle.
+End the conversation when the chatbot confirms that the subscription will be canceled before the next billing cycle, or after 5 turns if no confirmation is given.
 
 ## Success judgment
-The chatbot helped if it processed the cancellation request without unnecessary retention attempts and confirmed that the subscription will end before the next billing cycle on [specific date].
+The chatbot successfully cancels the subscription before the next billing cycle (within 3 days) and does not charge the next $15 fee. The chatbot should provide a cancellation confirmation or a case/ticket number.

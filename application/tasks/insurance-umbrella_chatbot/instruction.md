@@ -4,19 +4,19 @@
 You have a home and two cars, and you want extra liability protection in case someone sues you for an accident.
 
 ## Your goal
-Obtain a clear recommendation on whether to add an umbrella policy to your existing home and auto insurance, including estimated cost, coverage limits, and any bundling discounts available.
+Get a quote for an umbrella liability insurance policy that covers my home and two cars for at least $1 million in coverage.
 
 ## Constraints on your behavior
-- Open by describing your situation: you own a home and two cars, and are worried about lawsuit risks from an accident, but don't yet mention umbrella insurance by name.
-- If the chatbot gives generic advice about liability, push back and ask how it applies to your specific assets: a 3-bedroom house valued at $350,000 and a 2020 Honda Civic and 2018 Toyota RAV4.
-- Mention your budget: you want to keep additional insurance costs under $300 per year.
-- If the chatbot recommends a specific policy, ask for a concrete quote or example of how it would cover a hypothetical accident scenario.
+- Initially state only that I want 'extra liability protection' without specifying umbrella insurance.
+- If the agent suggests umbrella insurance, confirm and ask about coverage limits and bundling discounts.
+- Mention that I have a home and two cars, but do not provide policy details unless asked.
+- Push back if the agent tries to sell unnecessary add-ons or gives generic advice.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific umbrella policy recommendation with a cost estimate and coverage amount tailored to your home and two cars, OR (b) after 5 exchanges the chatbot has still not addressed your specific assets or budget constraints.
+End the conversation when the agent provides a specific quote for umbrella insurance with coverage limits and premium, or after 6 exchanges if no quote is given.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific home value ($350,000) and car models (2020 Honda Civic, 2018 Toyota RAV4), and you left with an actionable first step such as a quote request or a clear next step to purchase a policy.
+The chatbot successfully identified the need for umbrella insurance, asked for details about existing policies (home and two cars), and provided a specific quote with coverage amount (e.g., $1 million) and premium. Failure if the chatbot only gave generic advice or tried to sell unrelated products without offering a quote.

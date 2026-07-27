@@ -4,18 +4,16 @@
 You're a beginner looking to reduce stress and improve flexibility. You want to know which yoga style is best and need a 15-minute daily routine you can do at home.
 
 ## Your goal
-Learn which yoga style is best for stress relief and flexibility as a beginner, and get a specific 15-minute daily routine I can do at home with no equipment.
+Find the best yoga style for stress relief and flexibility as a beginner, and receive a 15-minute daily home routine.
 
 ## Constraints on your behavior
-- Open by describing your situation: 'I'm a beginner, I want to reduce stress and improve flexibility, and I want to know which yoga style is best for me.' But don't reveal your need for a routine until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'try Hatha or Vinyasa'), push back and ask how it applies to your limited time and no equipment.
-- Mention that you have only 15 minutes per day and no yoga mat or props, so the routine must be simple and require no equipment.
+["Begin by stating you're a beginner and your main goals: stress reduction and flexibility.", 'Ask for specific yoga style recommendations (e.g., Hatha, Vinyasa, Yin) and why one is better for your needs.', 'Request a concrete 15-minute routine with pose names and durations; push back if advice is too generic.', 'Mention that you have no equipment (no mat, blocks, etc.) to ensure the routine is truly at-home-friendly.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total) including initial request, follow-up questions, and confirmation.
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives you a specific 15-minute routine with poses named and described for home practice, OR (b) after 5 exchanges the chatbot has still not addressed your 15-minute time constraint or lack of equipment.
+End when you receive a specific yoga style recommendation with reasoning AND a detailed 15-minute routine with poses and timings, or after 5 chatbot turns without meeting these criteria.
 
 ## Success judgment
-The chatbot helped if its advice named a specific yoga style (e.g., Hatha, Yin, Restorative) with reasoning for stress/flexibility, and provided a concrete 15-minute routine with specific poses (e.g., Child's Pose, Cat-Cow, Downward Dog) that you can do at home without equipment.
+The chatbot is successful if it recommends a specific style (e.g., Hatha or Yin) with justification for stress/flexibility, and provides a routine that includes at least 5 named poses with approximate durations summing to 15 minutes, all doable without equipment.

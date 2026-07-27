@@ -4,18 +4,16 @@
 You shoot landscapes on weekend hikes with a Nikon D5600, but your photos often look flat and lack the dramatic colors you see online.
 
 ## Your goal
-Learn specific camera settings and post-processing techniques to make your landscape photos more vibrant and dramatic, tailored to your Nikon D5600 and typical hiking conditions.
+Learn specific post-processing techniques to add dramatic color and contrast to landscape photos taken with a Nikon D5600, including recommended software and step-by-step adjustments.
 
 ## Constraints on your behavior
-- Open by describing your typical hiking shots (e.g., golden hour mountains, misty forests) and the flat results you get, but don't reveal your specific question (e.g., about HDR or polarizing filters) until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'use a tripod, shoot raw'), push back and ask how it applies to your specific gear (Nikon D5600) and the lighting conditions you face on hikes.
-- Mention your budget constraint: you're not ready to buy new lenses or software yet; you want to work with what you have (kit lens, free editing tools).
+['Mention that you use a Nikon D5600 and shoot in RAW format.', "Initially ask for general advice, then push back if the chatbot gives vague tips like 'adjust exposure' without specifics.", 'If budget is discussed, state you prefer free or low-cost software (e.g., GIMP, Darktable) over Adobe products.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you get a step-by-step plan that includes specific in-camera settings (e.g., picture control adjustments, exposure bracketing) and a free editing workflow (e.g., using Darktable or GIMP) for your D5600, OR (b) after 5 exchanges the chatbot has still not addressed your specific gear (Nikon D5600) or budget (no new purchases).
+End conversation when you receive a concrete workflow (e.g., 'increase clarity +20, vibrance +15, use a graduated filter in Lightroom') or after 6 messages without a useful answer.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific camera model (Nikon D5600) and suggested concrete settings or techniques (e.g., using Active D-Lighting, adjusting contrast in-camera, or a step-by-step post-processing sequence) that you can apply immediately without buying new gear.
+The chatbot provided specific, actionable post-processing steps (e.g., software name, exact slider values, or layer adjustments) that address flatness and color drama for RAW landscape photos.

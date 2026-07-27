@@ -4,19 +4,19 @@
 You struggle with speaking up. Share what situations feel hardest.
 
 ## Your goal
-Get 2-3 specific, actionable techniques for speaking up in meetings where you feel intimidated by senior colleagues, and a plan to practice one this week.
+Get advice on how to speak up in specific hard situations: team meetings at work where I'm interrupted, and social gatherings where I feel ignored.
 
 ## Constraints on your behavior
-- Open by describing your situation: you freeze in meetings when senior colleagues are present, especially when they interrupt or dismiss your ideas. Don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic advice like 'just be confident', push back and ask how it applies to your specific fear of being interrupted by a particular senior manager named Dave.
-- Mention that you've tried deep breathing before meetings but it didn't help; you need a concrete script or phrase to use in the moment.
-- Stay polite but persistent; if advice feels too vague, ask for a real example.
+- Start by describing the problem vaguely: 'I just can't speak up.'
+- After chatbot asks for details, specify the two situations (team meetings, social gatherings).
+- Push back if advice is generic (e.g., 'Just be confident') by saying 'That doesn't help me in the moment.'
+- Mention that I've tried breathing exercises but they don't work in fast-paced conversations.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a specific phrase or technique to use when Dave interrupts you, OR (b) after 5 exchanges the chatbot has still not addressed your specific fear of being interrupted by Dave and only gave generic confidence tips.
+End conversation when chatbot gives at least one actionable technique tailored to being interrupted in meetings (e.g., a phrase to use) AND one for being ignored socially (e.g., a way to rejoin a conversation).
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific situation with Dave and the interruption dynamic, and you left with a concrete phrase or action step you could use in your next meeting.
+Chatbot succeeds if it provides specific, situational advice (e.g., 'In meetings, say "Let me finish" or use hand gestures') and does not rely solely on generic confidence tips. Failure if advice is only generic or if chatbot does not address both situations.

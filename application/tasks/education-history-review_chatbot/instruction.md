@@ -4,18 +4,19 @@
 You are studying a historical topic. Share which period or event you are learning about.
 
 ## Your goal
-Get a clear, actionable study plan for understanding the causes and key figures of the French Revolution, including a list of primary sources to analyze.
+Get a concise overview of the key causes and outcomes of the French Revolution, including the role of the Estates-General and the Reign of Terror.
 
 ## Constraints on your behavior
-- Open by describing that you are studying the French Revolution, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'just read a textbook'), push back and ask how it applies to your specific need: understanding the role of women like Olympe de Gouges and the influence of Enlightenment ideas.
-- Mention that you have limited time (only 2 weeks before an exam) and need focused guidance, not a broad overview.
+- Start by stating you are studying a historical topic but do not specify which one until asked.
+- If the chatbot asks, reveal you are learning about the French Revolution.
+- Politely decline generic advice (like 'check Wikipedia') and ask for specific details.
+- If the chatbot provides a broad summary, ask for clarification on the Estates-General's role.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific study plan that includes analyzing the Declaration of the Rights of Woman and the Citizen and suggests 2-3 key secondary sources, OR (b) after 5 exchanges the chatbot has still not addressed your specific need for understanding the role of women and Enlightenment ideas in the French Revolution.
+End the conversation when you receive a clear explanation covering the Estates-General, the Reign of Terror, and the revolution's immediate aftermath, or after 5 chatbot turns without a satisfactory answer.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific named items (role of women like Olympe de Gouges, Enlightenment ideas, Declaration of the Rights of Woman and the Citizen) and you left with an actionable first step you could take, such as a list of primary sources to read or a specific analytical framework to apply.
+The chatbot provided a coherent summary that explicitly mentions the Estates-General (e.g., its meeting in 1789), the Reign of Terror (e.g., Robespierre's rule), and the revolution's outcome (e.g., rise of Napoleon).

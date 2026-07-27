@@ -100,21 +100,56 @@ def _default_dimension_filters(domain: str) -> dict:
     }
 
 
+def _default_stratify_fields(domain: str) -> list[str]:
+    """Return domain-appropriate stratify fields for persona insights."""
+    domain = domain.lower()
+    domain_fields = {
+        "education": ["highest_education", "age_bracket"],
+        "healthcare": ["health_health_literacy", "age_bracket"],
+        "finance": ["risk_tolerance", "economic_motivation"],
+        "legal": ["legal_knowledge", "age_bracket"],
+        "career": ["work_experience", "education_level"],
+        "technology": ["tech_savviness", "age_bracket"],
+        "insurance": ["risk_tolerance", "age_bracket"],
+        "travel": ["travel_frequency", "age_bracket"],
+        "real-estate": ["economic_motivation", "age_bracket"],
+        "telecom": ["tech_savviness", "age_bracket"],
+        "customer-support": ["patience_level", "age_bracket"],
+        "automotive": ["economic_motivation", "age_bracket"],
+        "beauty": ["lstyle_beauty_routine", "age_bracket"],
+        "food": ["lstyle_diet_type", "age_bracket"],
+        "fitness": ["fitness_level", "age_bracket"],
+        "gaming": ["gaming_frequency", "age_bracket"],
+        "home-services": ["home_ownership", "age_bracket"],
+        "parenting": ["parenting_stage", "age_bracket"],
+        "pet": ["pet_ownership_experience", "age_bracket"],
+        "photography": ["photography_experience", "age_bracket"],
+        "sports": ["sports_participation", "age_bracket"],
+        "sustainability": ["environmental_engagement", "age_bracket"],
+        "writing": ["writing_experience", "age_bracket"],
+    }
+    return domain_fields.get(domain, ["age_bracket"])
+
+
 def _build_persona_strategy(row: dict) -> dict:
     """Build persona_strategy.json content from CSV row data."""
     filters = _parse_dimension_filters(row.get("ps_dimensionFilters", ""))
     sample_size_text = row.get("ps_sampleSize", "").strip()
     if not filters:
         filters = _default_dimension_filters(row.get("domain", ""))
+    mode = row.get("ps_defaultMode", "").strip() or "stratified"
     strategy = {
         "schemaVersion": "1.0",
         "sources": [],
-        "defaultMode": row.get("ps_defaultMode", "").strip() or "random",
+        "defaultMode": mode,
         "dimensionFilters": filters,
     }
+    strategy["sampleSizePerValueGroup"] = 1
     stratify_raw = _v(row, "ps_stratifyFields", "").strip()
     if stratify_raw:
         strategy["stratifyFields"] = [s.strip() for s in stratify_raw.split(",") if s.strip()]
+    else:
+        strategy["stratifyFields"] = _default_stratify_fields(row.get("domain", ""))
     if sample_size_text:
         try:
             strategy["sampleSize"] = int(sample_size_text)

@@ -4,18 +4,16 @@
 You need dental insurance. Share your dental health needs and budget.
 
 ## Your goal
-Find a dental insurance plan that covers at least two cleanings per year, basic fillings, and a root canal, with a monthly premium under $50 and an annual deductible under $500.
+Find a dental insurance plan that covers two cleanings per year, one set of X-rays, and basic restorative procedures (fillings, extractions) for a monthly budget of $30-50.
 
 ## Constraints on your behavior
-- Open by describing your dental health needs (e.g., need regular cleanings, have a cracked molar that may need root canal, and want coverage for fillings), but don't reveal your specific budget or deductible limit until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic list of plans without addressing your cracked molar or budget constraints, push back and ask how each plan applies to your specific situation, especially the root canal coverage.
-- Mention that you're on a tight budget and need to keep monthly costs low, but don't specify the exact premium or deductible limits until prompted.
+["- Start by stating you need dental insurance but don't immediately specify budget or coverage needs.", '- If asked about budget, provide the $30-50 range only after the assistant asks explicitly.', "- Push back if the assistant recommends plans that don't cover basic restorative procedures like fillings.", '- Mention you have no urgent dental issues but want preventive and basic care covered.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot recommends a specific plan that covers root canals with a premium under $50 and deductible under $500, OR (b) after 5 exchanges the chatbot has still not addressed your cracked molar and budget constraints.
+End the conversation when the assistant provides a specific plan recommendation that meets all stated criteria (2 cleanings, X-rays, fillings/extractions within budget) OR after 5 exchanges without a suitable plan.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific cracked molar and budget (premium under $50, deductible under $500) and you left with a concrete plan name or quote to apply for.
+The chatbot is successful if it recommends a specific dental insurance plan (with name or details) that includes: two annual cleanings, annual X-rays, coverage for fillings and extractions, and costs between $30-$50 per month.

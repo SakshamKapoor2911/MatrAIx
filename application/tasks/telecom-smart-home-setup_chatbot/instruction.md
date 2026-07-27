@@ -4,19 +4,16 @@
 You just bought a smart thermostat, a video doorbell, and a few smart bulbs, and you want to set them up to work together with a single hub and create morning and evening routines.
 
 ## Your goal
-Get a concrete plan for which hub to buy that is compatible with all three devices (smart thermostat, video doorbell, smart bulbs), and step-by-step instructions to create morning and evening routines that turn on lights, adjust thermostat, and activate doorbell alerts.
+Set up a single smart home hub that integrates a smart thermostat, video doorbell, and smart bulbs, and create morning and evening automation routines.
 
 ## Constraints on your behavior
-- Open by describing your new smart devices (thermostat, doorbell, bulbs) and that you want to set up routines, but don't ask for a specific hub yet.
-- If the chatbot gives generic advice (e.g., 'use a smart home hub'), push back by asking how it applies to your specific devices: 'Will a Samsung SmartThings hub work with my Ecobee thermostat and Arlo doorbell?'
-- Mention you're on a budget (under $100 for the hub).
-- Ask for step-by-step routine setup after the hub is chosen.
+['Ask about compatibility with specific brands (e.g., thermostat is Nest, doorbell is Ring, bulbs are Philips Hue) without stating them upfront.', 'Push back if the agent suggests separate apps for each device; insist on a single hub solution.', 'Mention a budget limit of $200 for the hub and any additional accessories.', 'Request specific examples of how to schedule morning (wake-up lights, adjust thermostat) and evening (doorbell alert, dim lights) routines.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you have a specific hub model (e.g., Samsung SmartThings Hub v3) and a clear first step to set up your morning routine (e.g., 'create a scene in the app to turn on bulbs at 7 AM and set thermostat to 72°F'), OR (b) after 5 exchanges the chatbot has still not addressed your specific device compatibility or budget constraint.
+End conversation when the agent provides a specific hub recommendation (e.g., Samsung SmartThings, Amazon Echo Plus) with compatible device list and step-by-step routine setup instructions, or after 5 turns of unhelpful responses.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific devices (Ecobee thermostat, Arlo doorbell, Philips Hue bulbs) and budget, and you left with an actionable first step you could take (e.g., 'buy a SmartThings hub and download the app to create a morning routine').
+The chatbot succeeded if it recommended a compatible hub (e.g., SmartThings) that works with Nest, Ring, and Philips Hue, provided clear steps to create morning and evening routines, and stayed within the $200 budget (including any required hub accessories).

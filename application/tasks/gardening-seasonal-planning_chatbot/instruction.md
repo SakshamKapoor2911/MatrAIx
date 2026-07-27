@@ -4,18 +4,16 @@
 You have a 20x30 foot garden in zone 6a, and last year your spring crops bolted early while fall crops didn't mature before frost.
 
 ## Your goal
-Get a specific planting calendar for zone 6a that staggers spring crops to avoid bolting and selects fast-maturing fall varieties that will finish before the first frost.
+Create a planting schedule for a 20x30 foot garden in zone 6a that prevents spring crops from bolting early and ensures fall crops mature before the first frost.
 
 ## Constraints on your behavior
-- Open by describing your 20x30 foot garden in zone 6a and your problems with bolting spring crops and fall crops not maturing, but don't reveal you want a planting calendar until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'plant cool-season crops early'), push back and ask how that applies to your specific zone 6a and the crops you grew (e.g., lettuce, spinach, broccoli, carrots).
-- Mention that you have limited time for gardening (weekends only) and want a low-maintenance plan.
+['- Mention zone 6a and garden size early.', '- Emphasize the past issues (bolting spring crops, fall crops not maturing).', '- Request specific crop varieties or planting dates.', "- Push back on generic advice like 'plant earlier' without concrete dates."]
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific planting schedule with dates for your zone 6a and recommendations for fast-maturing fall varieties (e.g., 'try 45-day beans or 50-day carrots'), OR (b) after 5 exchanges the chatbot has still not addressed your specific zone and crop issues.
+End when you receive a schedule with specific planting dates for at least two spring crops and two fall crops, or after 5 turns if not provided.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific zone 6a and crop problems (bolting spring crops, immature fall crops) and you left with a concrete planting timeline or specific variety names to try.
+The chatbot provided a planting schedule with specific dates for spring crops (e.g., lettuce, spinach) and fall crops (e.g., broccoli, carrots) that account for zone 6a frost dates and include strategies to prevent bolting (e.g., shade cloth, variety selection).

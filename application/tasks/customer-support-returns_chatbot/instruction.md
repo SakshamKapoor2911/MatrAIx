@@ -4,18 +4,19 @@
 You received a product that does not meet expectations. The chatbot walks you through the return process.
 
 ## Your goal
-Get step-by-step instructions to return a defective item and receive a full refund.
+Initiate a return for a defective product (e.g., a blender that doesn't spin) and get step-by-step instructions for the process.
 
 ## Constraints on your behavior
-- Open by describing your situation: you received a 'Model X blender' that stopped working after three uses, but don't explicitly ask how to return it until the chatbot asks a clarifying question or suggests standard troubleshooting.
-- If the chatbot suggests generic troubleshooting (e.g., 'try resetting it'), push back by stating that the motor emitted a burning smell and you already tried the manual's steps.
-- Mention that you need a prepaid return label because the item is heavy (15 lbs) and you shouldn't have to pay for shipping a defective product.
+- Initially describe the issue vaguely (e.g., 'it doesn't work').
+- Only provide order details (order number, product name) when asked.
+- Push back if the bot suggests troubleshooting before a return.
+- Mention you want a refund, not a replacement.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific return authorization number and a prepaid return label, OR (b) after 5 exchanges the chatbot has still not addressed your request for a prepaid label and instead keeps suggesting troubleshooting.
+End when you receive clear return instructions including a prepaid shipping label and return address, or after 5 bot responses without progress.
 
 ## Success judgment
-The chatbot helped if its instructions included a specific return authorization number and a prepaid return label for your defective blender, and you felt confident about the next step to ship it back.
+The chatbot should (1) ask for order details, (2) confirm the product is defective, (3) initiate a return, (4) provide a prepaid shipping label or instructions to get one, and (5) specify the return window and refund timeline.

@@ -4,18 +4,19 @@
 You have a small vegetable garden that's been hit by aphids and powdery mildew, and you want to avoid chemical pesticides.
 
 ## Your goal
-Get a step-by-step plan for controlling aphids and powdery mildew in your vegetable garden using only non-chemical methods, including specific products or homemade remedies and application schedules.
+Get specific, actionable advice on controlling aphids and powdery mildew in a small vegetable garden using only non-chemical methods.
 
 ## Constraints on your behavior
-- Open by describing your garden situation (size, vegetables affected, severity of infestation), but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'use neem oil'), push back and ask how it applies to your specific vegetables (e.g., tomatoes and zucchini) and the current stage of growth.
-- Mention that you have a limited budget and prefer homemade solutions if possible.
+- Initially state the problem vaguely (e.g., 'My plants have pests and a white stuff on leaves') and only provide details about vegetables (tomatoes, zucchini, cucumbers) when asked.
+- Reject any chemical pesticide suggestions firmly.
+- Mention limited space and budget constraints (e.g., 'I don't have much room or money for complicated setups').
+- Push back on generic advice like 'use neem oil' without dilution or application frequency.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a detailed weekly action plan that includes specific remedies for aphids and powdery mildew on your tomatoes and zucchini, OR (b) after 5 exchanges the chatbot has still not addressed your specific vegetables or the timing of treatments (e.g., before harvest).
+End the conversation when the chatbot provides a step-by-step non-chemical treatment plan specific to aphids and powdery mildew on the mentioned vegetables, including application method and frequency.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific vegetables (tomatoes and zucchini) and the current stage of growth (e.g., fruiting), and you left with an actionable first step (e.g., 'spray with homemade baking soda solution this evening').
+The chatbot is successful if it suggests at least two specific non-chemical treatments (e.g., insecticidal soap for aphids, milk spray or baking soda solution for powdery mildew) with clear instructions on concentration, application timing, and coverage for the vegetables (tomatoes, zucchini, cucumbers).

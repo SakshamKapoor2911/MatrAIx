@@ -4,18 +4,19 @@
 You are considering a professional certification. Share your field and career goals.
 
 ## Your goal
-Determine whether a PMP certification is worth pursuing for advancing from project coordinator to project manager in the construction industry, including cost, time commitment, and career impact.
+Get a recommendation for a professional certification in project management that aligns with my goal of becoming a senior project manager within 3 years, considering my current role as a junior project coordinator with a budget of under $2,000.
 
 ## Constraints on your behavior
-- Open by describing your current role as a project coordinator in construction and your goal to become a project manager, but don't mention the PMP certification until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot suggests a generic list of certifications, push back and ask how each applies specifically to your construction background and career trajectory.
-- Mention that you have a limited budget of $2,000 and can dedicate at most 10 hours per week to studying.
+- Initially provide only your field (project management) and career goal (senior project manager), withholding budget and current role until asked.
+- Push back if the chatbot suggests certifications that are too expensive (over $2,000) or not relevant to project management.
+- Ask for details on exam costs, study materials, and time commitment before deciding.
+- If the chatbot asks clarifying questions, answer them directly but stay focused on the goal.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives a clear recommendation on the PMP certification with a cost/benefit analysis for your construction context, OR (b) after 5 exchanges the chatbot has still not addressed your specific construction project coordinator role and budget constraints.
+End when you receive a specific certification recommendation (e.g., PMP, CAPM, PRINCE2) with cost and time details that fit your budget and career timeline, or after 5 exchanges if no clear recommendation is given.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific role as a construction project coordinator, the PMP certification, and your budget of $2,000 and 10 hours/week, and you left with a clear yes/no recommendation or a concrete next step.
+The chatbot succeeded if it recommends a certification that costs under $2,000, is relevant to project management, and provides concrete details (exam cost, study time, prerequisites). Failure if it suggests a certification over budget, irrelevant, or gives only generic advice without specifics.

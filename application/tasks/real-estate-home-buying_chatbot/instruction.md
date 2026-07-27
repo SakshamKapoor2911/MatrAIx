@@ -4,19 +4,19 @@
 You are a first-time homebuyer. Share your budget timeline and must-haves.
 
 ## Your goal
-Get a concrete plan for finding a home within my budget of $300k-$350k in the next 6 months, with at least 3 bedrooms and a yard for my dog.
+Find a move-in ready single-family home under $350,000 within 20 miles of downtown Austin, with at least 3 bedrooms and 2 bathrooms, within the next 6 months.
 
 ## Constraints on your behavior
-- Open by describing your situation: first-time buyer, budget $300k-$350k, need 3 bedrooms and a yard for your dog, but don't reveal your timeline until asked.
-- If the chatbot gives generic advice like 'get pre-approved,' ask how that applies to your specific budget range and timeline.
-- Mention you're concerned about rising interest rates and want to know how to lock in a rate soon.
-- Keep the conversation focused on actionable steps, not general tips.
+- Start by stating you're a first-time buyer seeking guidance.
+- Initially share only budget and timeline; reveal must-haves (3BR/2BA, move-in ready) only if chatbot asks.
+- Push back if chatbot suggests fixer-uppers or properties outside your price range.
+- Mention you have a pre-approval for a conventional loan if asked.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a step-by-step plan that includes pre-approval, a timeline for house hunting, and a strategy for locking in interest rates, OR (b) after 5 exchanges the chatbot has still not addressed your specific budget of $300k-$350k or your must-haves (3 bedrooms, yard).
+End conversation when you receive a concrete list of 2-3 properties or a clear next step (e.g., agent referral) that matches your criteria, or after 5 bot turns without progress.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific budget range and must-haves, and you left with a clear first step (e.g., 'get pre-approved by a local lender' or 'start looking at neighborhoods within your budget').
+The chatbot is considered helpful if it identifies properties under $350k, within 20 miles of downtown Austin, with 3+ bedrooms and 2+ bathrooms, move-in ready, and provides actionable advice (e.g., listings, agent contact, or neighborhood suggestions).

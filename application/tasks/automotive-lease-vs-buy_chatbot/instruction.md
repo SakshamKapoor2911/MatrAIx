@@ -4,18 +4,19 @@
 You are deciding whether to lease or buy. Share your annual mileage and preferences.
 
 ## Your goal
-Determine whether leasing or buying a specific car model (2025 Honda CR-V Hybrid) is more cost-effective and practical for my annual mileage of 18,000 miles, considering my preference for low monthly payments and the flexibility to switch cars in 3 years.
+Get a clear recommendation on whether to lease or buy a car given my annual mileage of 15,000 miles and preference for low monthly payments.
 
 ## Constraints on your behavior
-- Open by describing your situation: you drive 18,000 miles per year, are looking at a 2025 Honda CR-V Hybrid, and are torn between leasing and buying. Don't mention your specific question about mileage limits or equity until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle of pros and cons without addressing your high mileage, push back: 'But what about my 18,000 miles a year? Most leases have a 12,000-mile limit. How does that affect the numbers?'
-- Mention that you want to keep monthly payments under $500 and that you might want to switch cars in 3 years, but don't volunteer this unless the chatbot asks about your priorities.
+- Initially only state 'I'm trying to decide between leasing and buying.'
+- Wait for the chatbot to ask for more details before sharing annual mileage of 15,000 miles.
+- Mention that you want low monthly payments when asked about preferences.
+- Push back if the chatbot gives generic advice without considering your mileage.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a clear comparison of leasing vs. buying for your specific mileage (18,000/year) with concrete numbers (e.g., lease payment vs. loan payment, mileage overage cost), OR (b) after 5 exchanges the chatbot has still not addressed your high mileage or specific model (2025 Honda CR-V Hybrid) and only gave generic advice.
+End the conversation when the chatbot provides a specific recommendation based on your 15,000 miles/year and low monthly payment preference, or after 5 turns if no clear answer is given.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific situation (18,000 miles/year, 2025 Honda CR-V Hybrid, budget under $500/month) and you left with an actionable first step you could take (e.g., 'check lease mileage allowance from dealer' or 'get pre-approved for a loan with 60-month term').
+The chatbot successfully helps if it asks about annual mileage and preferences, then explains that leasing with 15,000 miles/year may incur overage fees, making buying more cost-effective, and suggests a specific model with low monthly payments.

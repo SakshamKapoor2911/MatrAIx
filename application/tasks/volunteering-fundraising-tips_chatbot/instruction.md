@@ -4,18 +4,16 @@
 You're organizing a bake sale for your local animal shelter and want to raise $2,000 in one weekend with a small team of volunteers.
 
 ## Your goal
-Get a concrete plan for a $2,000 bake sale with a small team, including specific recipes, pricing, and volunteer roles.
+Plan a successful bake sale to raise $2,000 for the local animal shelter over one weekend with a small team of volunteers.
 
 ## Constraints on your behavior
-- Open by describing your bake sale for the animal shelter, but don't reveal your specific $2,000 goal or small team size until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'sell cupcakes and cookies'), push back and ask how it applies to your specific small team and high target.
-- Mention you have only 4 volunteers and a limited budget of $100 for supplies, so ideas must be cost-effective and manageable.
+['Withhold team size and budget details until the chatbot asks for them.', "Push back on generic advice like 'sell more items' without specifics.", 'Mention that the team is small (3-5 people) and the shelter has limited kitchen space.', 'Expect actionable steps for pricing, volunteer shifts, and promotion.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you get a concrete plan with specific recipes (e.g., no-bake treats), pricing per item, and a volunteer schedule, OR (b) after 5 exchanges the chatbot has still not addressed your small team size or $100 budget.
+End when the chatbot provides a concrete plan including pricing strategy, shift schedule, and promotion ideas tailored to the $2,000 goal and small team.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific constraints (4 volunteers, $100 budget, $2,000 goal) and you left with an actionable first step, like a list of 3 high-margin recipes and a pricing strategy.
+The chatbot should offer specific pricing (e.g., $2-5 per item, target 400-1000 items sold), a shift schedule for 3-5 volunteers covering 2 days, and low-cost promotion ideas (social media, flyers). Generic advice without numbers or team coordination fails.

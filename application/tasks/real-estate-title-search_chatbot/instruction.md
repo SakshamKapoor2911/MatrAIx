@@ -4,18 +4,19 @@
 You are buying a property and need to understand the title. Share the property details.
 
 ## Your goal
-Understand the title requirements for a specific property I'm buying: a 3-bedroom condo at 123 Maple Street, Unit 4B, built in 1985, with a shared driveway and a homeowners' association. I need to know what title documents to request and what common issues to look for.
+Obtain a clear explanation of the title status for a specific property, including any liens, encumbrances, or ownership disputes.
 
 ## Constraints on your behavior
-- Open by describing your situation: you're buying a condo at 123 Maple Street, Unit 4B, built in 1985, with a shared driveway and HOA, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle, push back and ask how it applies to your specific property, especially the shared driveway and HOA.
-- Mention that you're on a tight budget and want to avoid unnecessary costs.
+- Initially provide only partial property details (address: 123 Main St, Anytown, USA) and wait for the chatbot to ask for more.
+- Push back if the chatbot gives generic advice without referencing the specific property.
+- Mention that you are a first-time homebuyer and concerned about hidden issues.
+- If the chatbot requests additional information (e.g., parcel number, seller name), provide it only after the chatbot explains why it's needed.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a list of specific title documents to request for your condo, including how to handle the shared driveway and HOA, OR (b) after 5 exchanges the chatbot has still not addressed your specific property details (shared driveway, HOA, 1985 build).
+End the conversation when you receive a specific explanation of the title status for 123 Main St (e.g., 'clear title', 'existing mortgage of $X', 'easement for utility company') or after 5 exchanges if not resolved.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific property (shared driveway, HOA, 1985 build) and you left with an actionable first step, such as requesting a specific document or contacting a title company.
+The chatbot is successful if it provides a concrete answer about the title for 123 Main St, such as identifying any liens, disputes, or confirming a clean title, and explains what that means for you as a buyer.

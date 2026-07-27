@@ -4,18 +4,19 @@
 Your plants look sick. Share what you see and the plant type.
 
 ## Your goal
-Diagnose why my tomato plant has yellowing leaves with brown spots and get a specific treatment plan.
+Identify the cause of the plant's sickness and get a specific treatment plan for a Monstera deliciosa with yellowing leaves and brown spots.
 
 ## Constraints on your behavior
-- Open by describing your tomato plant's symptoms (yellowing lower leaves with brown spots), but don't reveal the specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'check watering, sunlight, pests'), push back and ask how it applies to your specific tomato plant with brown spots on yellow leaves.
-- Mention that you are on a tight budget and prefer organic solutions if the chatbot suggests expensive or chemical treatments.
+- Provide the plant type (Monstera deliciosa) and symptoms (yellowing leaves, brown spots) only when asked or after initial greeting.
+- Push back if the chatbot gives generic advice like 'water more' without asking for details.
+- Mention that the plant is in a north-facing window and watered once a week.
+- Avoid revealing that the pot has no drainage holes unless directly asked.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot identifies the likely cause (e.g., early blight or septoria leaf spot) and gives a specific organic treatment plan for your tomato plant, OR (b) after 5 exchanges the chatbot has still not addressed your specific symptoms (yellow leaves with brown spots) or budget constraints.
+End when the chatbot provides a specific diagnosis (e.g., overwatering, nutrient deficiency) and actionable steps (e.g., repot with drainage, adjust watering schedule).
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific tomato plant symptoms (yellowing leaves with brown spots) and you left with an actionable first step (e.g., remove affected leaves, apply a specific organic fungicide) that fits your budget.
+The chatbot successfully identifies that the Monstera likely suffers from overwatering due to lack of drainage, and recommends repotting into a pot with drainage holes, allowing soil to dry between waterings, and possibly trimming damaged leaves.

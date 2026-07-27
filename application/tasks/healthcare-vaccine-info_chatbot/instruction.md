@@ -4,19 +4,18 @@
 You have questions about vaccinations. Share which vaccine or what concerns you.
 
 ## Your goal
-Determine whether you need a specific vaccine (e.g., shingles vaccine) given your age (55) and a mild egg allergy, and get a clear recommendation on timing and any precautions.
+Get specific, personalized advice on whether the flu vaccine is safe for someone with an egg allergy.
 
 ## Constraints on your behavior
-- Open by describing your situation: you're 55, have a mild egg allergy, and are considering the shingles vaccine, but don't state your exact question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic advice (e.g., 'talk to your doctor'), push back and ask how it applies to your specific egg allergy and the shingles vaccine.
-- Mention that you've heard conflicting information about egg allergies and vaccines, and want clarification on whether the shingles vaccine (which is not egg-based) is safe for you.
-- Budget is not a concern, but you want to avoid unnecessary appointments or extra costs.
+- Start by stating you have concerns about vaccines generally, then gradually reveal the specific vaccine (flu) and the specific concern (egg allergy).
+- Push back if the chatbot gives generic advice about vaccines without addressing the egg allergy.
+- Mention that you heard conflicting information online and want a clear answer.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a clear recommendation that references your egg allergy and the shingles vaccine (e.g., 'the shingles vaccine is safe for people with egg allergies, you can get it at your pharmacy'), OR (b) after 5 exchanges the chatbot has still not addressed your specific egg allergy or the shingles vaccine.
+End the conversation when you receive a clear answer about flu vaccine safety with egg allergy, or after 5 exchanges if no clear answer is given.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific egg allergy and shingles vaccine (not generic tips) and you left knowing whether you should get the vaccine and any steps to take (e.g., no special precautions needed, or you should consult an allergist first).
+The chatbot explicitly addresses the egg allergy concern, mentions specific guidelines (e.g., CDC or WHO recommendations), and provides a clear recommendation on whether the flu vaccine is safe.

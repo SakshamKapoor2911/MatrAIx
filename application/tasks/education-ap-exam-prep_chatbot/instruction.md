@@ -4,18 +4,19 @@
 You are preparing for an AP exam. Share which exam and your current comfort level.
 
 ## Your goal
-Get a targeted study plan for the AP Biology exam, focusing on specific weak areas like cellular respiration and genetics, with recommendations for practice resources.
+Get a customized study plan for the AP Biology exam, focusing on cellular respiration and photosynthesis, with specific resources and practice problems.
 
 ## Constraints on your behavior
-- Open by stating you're preparing for the AP Biology exam and your current comfort level is a 5/10, but don't specify your weak topics until asked.
-- If the chatbot gives generic advice like 'make flashcards,' push back by asking how that applies to your difficulty with cellular respiration pathways.
-- Mention you have only 3 weeks left and a limited budget for resources (under $50).
+- Withhold the specific AP exam initially; reveal it only after the chatbot asks or provides general advice.
+- Push back on generic study tips (e.g., 'make flashcards') by asking for specifics.
+- Mention that you have a budget of $50 for additional resources.
+- Express a comfort level of 3/10 initially.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a specific study schedule that covers cellular respiration and genetics with resource links under $50, OR (b) after 5 exchanges the chatbot has still not addressed your weak areas in cellular respiration and genetics.
+End when you receive a study plan that includes at least three specific resources (e.g., Khan Academy videos, practice tests, or textbook chapters) for cellular respiration and photosynthesis, and the total cost of recommended paid resources is within $50.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific weak areas (cellular respiration and genetics) and you left with an actionable first step (e.g., a list of 3 practice problems to do that night).
+The chatbot succeeded if it provided a study plan with at least three specific resources for cellular respiration and photosynthesis, did not exceed the $50 budget for paid items, and addressed your 3/10 comfort level by suggesting foundational materials.

@@ -4,18 +4,16 @@
 You are planning a wedding. Share budget and guest count.
 
 ## Your goal
-Get a concrete plan for allocating a $15,000 budget for a 100-guest wedding, including specific vendor recommendations and cost-saving strategies.
+Find a wedding venue that fits within a $15,000 budget for 100 guests, including catering and basic decorations.
 
 ## Constraints on your behavior
-- Open by describing your situation: 'I'm planning a wedding with a $15,000 budget for 100 guests. I need help figuring out how to allocate the budget.'
-- If the chatbot gives generic advice like 'prioritize what's important to you', push back and ask how to apply that to your specific budget and guest count.
-- Mention you're willing to DIY some decorations but need to keep costs low for catering and venue.
+['- Start by stating the need for a venue without revealing budget or guest count until asked.', '- When asked, provide budget ($15,000) and guest count (100).', '- Push back on suggestions that exceed the budget or cannot accommodate 100 guests.', '- Express preference for outdoor or rustic-style venues.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a detailed budget breakdown with specific dollar amounts for venue, catering, attire, etc., OR (b) after 5 exchanges the chatbot has still not provided a concrete allocation or vendor suggestions.
+End the conversation when you receive a specific venue recommendation that includes pricing and capacity details meeting your budget and guest count, or after 8 exchanges without a suitable option.
 
 ## Success judgment
-The chatbot helped if its advice included specific budget percentages or dollar amounts for your $15,000 budget and 100 guests, and you left with a clear first step (e.g., 'book a venue that costs no more than $4,500').
+The chatbot succeeded if it recommended at least one venue with a clear breakdown of costs (e.g., rental fee, catering per person) that totals ≤ $15,000 and can accommodate 100 guests, and addressed your preference for outdoor/rustic style.

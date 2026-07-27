@@ -4,19 +4,19 @@
 You are considering or starting homeschooling. Share your childs age and your reasons.
 
 ## Your goal
-Get advice on how to start homeschooling a 7-year-old with social anxiety, including curriculum options and socialization strategies.
+Get specific guidance on how to start homeschooling a 7-year-old child with a focus on personalized learning, including curriculum options and legal requirements.
 
 ## Constraints on your behavior
-- Open by describing your child (age 7, has social anxiety) and that you're considering homeschooling, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle, push back and ask how it applies to your child's social anxiety.
-- Mention that you have a limited budget and cannot afford expensive programs.
-- Ask specific questions about curriculum that is flexible and allows for a gentle approach.
+- Initially share only the child's age (7) and general reasons (desire for personalized learning).
+- Withhold specific location and any learning difficulties until asked.
+- Push back on generic advice like 'just follow a standard curriculum' by emphasizing the need for customization.
+- Mention a budget constraint (e.g., under $500 for the first year) when asked about resources.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a concrete first step that addresses your child's social anxiety and budget constraints, OR (b) after 5 exchanges the chatbot has still not addressed your child's social anxiety or budget.
+End the conversation when the chatbot provides actionable steps for legal registration in the user's state and at least two curriculum recommendations that fit the budget and personalization needs.
 
 ## Success judgment
-The chatbot helped if its advice referenced your child's social anxiety and your budget, and you left with an actionable first step (e.g., a specific curriculum to research, a local co-op to contact, or a schedule to try).
+The chatbot is successful if it asks for the user's location to provide state-specific legal requirements, recommends curricula that are customizable and under $500, and suggests a plan for assessing the child's current level without assuming deficits.

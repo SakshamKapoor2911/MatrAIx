@@ -4,19 +4,16 @@
 You are organizing a reunion. Share the group size and location preferences.
 
 ## Your goal
-Get a concrete plan for a reunion: venue options for a group of 30 in the Chicago area, with pricing and availability for a Saturday in June.
+Plan a reunion for 30 people in a mid-range budget hotel in Chicago with a private room for dinner.
 
 ## Constraints on your behavior
-- Open by describing your situation: 'I'm planning a reunion for about 30 people in Chicago, maybe a park or a hall, but I'm not sure what works.' Don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'consider parks, halls, or restaurants'), push back: 'We have a mix of ages, so a bar won't work. And I need somewhere with parking and wheelchair access. What about the Lincoln Park Zoo or a community center?'
-- Mention budget: 'We're trying to keep costs under $500 for the venue. Can you suggest something affordable?'
-- If the chatbot suggests a specific venue, ask about catering options or if we can bring our own food.
+['Provide group size (30 people) and location preference (Chicago) early in the conversation.', 'Mention budget constraints (mid-range) and need for a private dinner room.', 'Ask clarifying questions about menu options and room capacity.', 'Avoid accepting generic suggestions without specific details on pricing and availability.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives you a shortlist of 2-3 specific venues in Chicago with estimated costs and availability for June, OR (b) after 5 exchanges the chatbot has still not suggested any specific venue or addressed your constraints (parking, wheelchair access, budget).
+End when you receive a concrete proposal with estimated cost, menu options, and private room availability for 30 people in Chicago.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific needs (30 people, Chicago, budget under $500, parking/wheelchair access) and you left with a concrete next step (e.g., 'I'll call the Lincoln Park Zoo for June 15th pricing').
+The chatbot provided a specific hotel in Chicago with a private room for 30 people, mid-range pricing, and dinner menu options. If it only gave generic advice or failed to address all constraints, it failed.

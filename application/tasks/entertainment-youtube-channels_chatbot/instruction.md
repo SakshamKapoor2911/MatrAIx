@@ -4,19 +4,19 @@
 You enjoy DIY woodworking and home improvement projects and want to find YouTube channels that offer detailed tutorials with minimal fluff, around 10-15 minutes each.
 
 ## Your goal
-Get 2-3 YouTube channel recommendations for woodworking tutorials that are detailed, 10-15 minutes long, with minimal fluff. Also, get a suggestion for a first project to try.
+Find 3-5 YouTube channels that offer detailed, minimal-fluff woodworking and home improvement tutorials with video lengths of 10-15 minutes.
 
 ## Constraints on your behavior
-- Open by describing your interest in DIY woodworking and home improvement, but don't reveal your specific request for YouTube channels until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot recommends channels with long videos or too much fluff, push back and ask for channels that are concise and focused.
-- Mention that you're a beginner and want projects that use basic tools.
-- Budget constraint: You're on a tight budget, so recommend projects that don't require expensive equipment.
+- Withhold any specific woodworking interests or experience level initially; reveal only if asked.
+- Push back if the assistant suggests channels with long intros, excessive chatter, or videos over 20 minutes.
+- Mention that you prefer concise, step-by-step instructions without unnecessary talking.
+- If the assistant asks clarifying questions, answer them concisely.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides at least two specific channel names with a brief description of their style and a suggested first project, OR (b) after 5 exchanges the chatbot has still not addressed your need for concise, budget-friendly tutorials.
+End the conversation when you have received at least 3 channel recommendations that match the criteria (detailed, minimal fluff, 10-15 minute videos) or after 5 assistant turns without a satisfactory recommendation.
 
 ## Success judgment
-The chatbot helped if it recommended specific YouTube channels known for detailed, short tutorials (like Steve Ramsey or Woodworking for Mere Mortals) and suggested a beginner project like a simple shelf or birdhouse that requires minimal tools.
+The chatbot succeeded if it recommended at least 3 YouTube channels that: (a) focus on woodworking or home improvement, (b) have detailed tutorials with minimal fluff (i.e., no long intros, little to no unrelated chatter), and (c) typical video length is 10-15 minutes. If the chatbot suggests channels with longer videos or excessive fluff, and does not adjust after feedback, it failed.

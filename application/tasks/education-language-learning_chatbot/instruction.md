@@ -4,19 +4,19 @@
 You are learning a new language. Tell the chatbot which language and your level.
 
 ## Your goal
-Get a personalized study plan for learning Spanish at a beginner level, including specific resources and a weekly schedule.
+Get personalized language learning resources and a study plan for beginner-level French.
 
 ## Constraints on your behavior
-- Open by describing your situation: 'I'm learning Spanish, and I'm a complete beginner. I've just started using Duolingo and have a textbook.'
-- Don't reveal your specific question until the chatbot asks a follow-up or gives generic advice. Then say: 'I'm struggling with verb conjugations and need a structured plan.'
-- If the chatbot gives a generic listicle (e.g., 'use apps, watch movies'), push back and ask how it applies to your specific textbook and Duolingo progress.
-- Mention that you have limited time: only 30 minutes per day to study.
+- Start by stating you are learning French and are a beginner.
+- Ask for specific resources (apps, books, podcasts) and a weekly study schedule.
+- If the chatbot gives generic advice, ask for more tailored recommendations (e.g., for auditory learners).
+- Mention you have 30 minutes per day to study.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a weekly schedule that incorporates your 30-minute limit and uses your textbook and Duolingo, OR (b) after 5 exchanges the chatbot has still not addressed your specific textbook and Duolingo progress.
+End when you receive a concrete list of resources (at least 2 apps, 1 book, 1 podcast) and a sample weekly plan.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific textbook name (e.g., 'Practice Makes Perfect') and Duolingo, and you left with an actionable first step (e.g., 'Focus on present tense conjugations for 10 minutes each day').
+The chatbot provided at least 2 app recommendations (e.g., Duolingo, Babbel), 1 book (e.g., 'Easy French Step-by-Step'), and 1 podcast (e.g., 'Coffee Break French'), along with a 7-day schedule using the 30-min/day constraint.

@@ -4,18 +4,19 @@
 Your nails are brittle and peeling after years of gel polish use, and you're looking for ways to strengthen them naturally without acrylics.
 
 ## Your goal
-Get a step-by-step natural nail care routine to strengthen brittle, peeling nails without using acrylics or harsh chemicals.
+Get a step-by-step natural nail-strengthening routine (including specific products like cuticle oil, nail hardeners, and dietary supplements) that avoids acrylics and addresses brittleness caused by years of gel polish.
 
 ## Constraints on your behavior
-- Open by describing your brittle, peeling nails from years of gel polish, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (like 'use cuticle oil and biotin'), push back and ask how it applies to your specific nail damage from gel removal.
-- Mention that you have a budget of $30 for products and prefer natural, affordable options.
+- Withhold that you've tried biotin and it didn't work until the chatbot suggests it.
+- Push back on generic advice like 'keep them short' or 'use a base coat' by asking for science-backed ingredients.
+- Mention you have a budget of $30 for products.
+- Ask for product recommendations that are cruelty-free and vegan.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a specific 4-week plan that includes a nail strengthener with keratin or collagen, a non-acetone remover, and a ridge-filling base coat, OR (b) after 5 exchanges the chatbot has still not addressed your specific gel-damaged nails and budget constraint.
+End when the chatbot provides a specific routine with at least one product under $15, an ingredient to look for (e.g., keratin, jojoba oil), and a dietary tip (e.g., vitamin E or silica).
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific brittle nails from gel polish (not generic weak nails) and you left with an actionable first step, like a product name or a weekly routine you could start today.
+The chatbot successfully provided a routine that includes: (1) a specific cuticle oil or nail hardener under $15, (2) an ingredient like keratin or jojoba oil, (3) a dietary suggestion (e.g., vitamin E or silica), and (4) explicitly advised against acrylics or gel polish. If the chatbot fails to meet any of these, the interaction is considered unsuccessful.

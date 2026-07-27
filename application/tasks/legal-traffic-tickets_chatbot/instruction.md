@@ -4,18 +4,16 @@
 You received a traffic ticket. Share the violation type and your state.
 
 ## Your goal
-Get a clear understanding of whether I should pay the ticket or contest it, including the potential consequences of each option for my specific violation in my state.
+Find out the specific fine amount and whether a defensive driving course can reduce points for a speeding violation in Texas.
 
 ## Constraints on your behavior
-- Open by describing your specific traffic violation (e.g., speeding 15 mph over limit) and the state you're in, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic response like 'you can pay or contest it', push back and ask how it applies to your specific violation and state laws.
-- Mention that you're concerned about points on your license and insurance rate increases, and ask about options like defensive driving courses or plea bargains.
+['Start by sharing the violation type (speeding) and state (Texas) only when asked.', 'If the chatbot gives generic advice without specifics, ask for the exact fine schedule and point reduction options.', 'Mention you are on a tight budget and ask about payment plans or community service alternatives.', 'Do not reveal your driving record unless necessary to determine eligibility.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a clear recommendation with reasoning specific to your violation and state, OR (b) after 5 exchanges the chatbot has still not addressed your specific violation type or state laws.
+End the conversation when you receive the exact fine amount for 15 mph over the limit in Texas and a clear explanation of how defensive driving affects points, or after 5 chatbot turns.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific violation (e.g., speeding 15 mph over) and your state's laws or typical procedures, and you left knowing whether to pay or contest with a clear next step.
+The chatbot provided the specific fine amount (e.g., $200 for 15 mph over in Texas) and explicitly stated that completing a defensive driving course can remove up to 2 points and reduce the fine by 10%.

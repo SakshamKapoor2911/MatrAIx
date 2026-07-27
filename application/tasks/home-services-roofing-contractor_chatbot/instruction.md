@@ -4,19 +4,16 @@
 You need roofing work. Share whether this is repair or replacement.
 
 ## Your goal
-Get a clear recommendation on whether to repair or replace the roof, including a rough cost estimate and timeline for the recommended option.
+Determine if the roofing work needed is a repair or a full replacement, and receive a clear recommendation with estimated cost and timeline.
 
 ## Constraints on your behavior
-- Open by describing your concrete situation: 'I have a 20-year-old asphalt shingle roof with a few missing shingles and a small leak in the corner.' but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle, push back and ask how it applies to your specific roof age and damage.
-- Mention that you're on a tight budget and need the most cost-effective solution.
-- Ask for specific details like warranty, material options, and whether partial repair is feasible.
+['- Start by stating you need roofing work but do not specify repair or replacement initially.', '- When asked, provide details (e.g., leak in one area, missing shingles, age of roof ~15 years, budget $5k-$10k).', '- Ask for cost and time estimates for both options if offered.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives a clear recommendation (repair or replacement) with a rough cost range and timeline, OR (b) after 5 exchanges the chatbot has still not addressed your specific roof age and damage pattern.
+End conversation when the chatbot gives a clear recommendation (repair vs. replacement) with specific cost and timeline estimates, or after 5 chatbot messages without a clear answer.
 
 ## Success judgment
-The chatbot helped if it gave a recommendation based on your roof's age (20 years) and specific damage (missing shingles, leak), and you left with an actionable next step (e.g., schedule an inspection, or a clear decision to repair vs replace).
+Chatbot succeeds if it identifies that the roof is near end-of-life (15 years old) and recommends replacement with a cost range ($8k-$15k) and timeline (2-3 days), or recommends repair with a lower cost ($500-$2k) and same-day fix, based on the specific details provided.

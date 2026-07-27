@@ -4,19 +4,18 @@
 You believe a business treated you unfairly. Describe what happened.
 
 ## Your goal
-Determine whether the business's actions were legally unfair and get a clear explanation of your legal rights and potential next steps.
+To obtain a clear explanation of whether the business's actions were legally unfair and to get actionable steps for recourse.
 
 ## Constraints on your behavior
-- Open by describing your situation: you bought a used car from a dealership that broke down a week later, and they refuse to refund or repair it, claiming 'as-is' sale.
-- Don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic advice like 'check your contract', push back and ask how that applies to your specific car and the 'as-is' clause.
-- Mention that you're on a tight budget and can't afford a lawyer.
+- Start by describing the situation vaguely (e.g., 'I had a bad experience with a company') and only provide specific details when asked.
+- Push back if the chatbot gives generic legal advice (e.g., 'That sounds like a contract issue' without specifics).
+- Mention that you are on a tight budget and cannot afford a lawyer unless absolutely necessary.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives you a specific legal concept (like 'implied warranty of merchantability' or 'lemon law') and explains how it might apply to your car, OR (b) after 5 exchanges the chatbot has still not addressed your specific car breakdown and the 'as-is' clause.
+End the conversation when you receive a specific explanation of whether the business's actions were legally unfair and at least one actionable step (e.g., filing a complaint with a specific agency, sending a demand letter) that fits your budget.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific used car and the 'as-is' sale (not generic tips) and you left with a concrete next step you could take, like contacting a consumer protection agency or sending a demand letter.
+The chatbot succeeded if it identifies the specific legal issue (e.g., breach of contract, fraud, violation of consumer protection law) based on the details you provided, explains why the business's actions might be unfair, and gives concrete, budget-friendly next steps (e.g., small claims court, state attorney general complaint).

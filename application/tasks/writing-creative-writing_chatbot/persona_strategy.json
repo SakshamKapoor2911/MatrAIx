@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "sources": [],
-  "defaultMode": "random",
+  "defaultMode": "stratified",
   "dimensionFilters": {
     "age_bracket": [
       "18-24",
@@ -13,5 +13,10 @@
     "intent": [
       "Get task done"
     ]
-  }
+  },
+  "sampleSizePerValueGroup": 1,
+  "stratifyFields": [
+    "writing_experience",
+    "age_bracket"
+  ]
 }

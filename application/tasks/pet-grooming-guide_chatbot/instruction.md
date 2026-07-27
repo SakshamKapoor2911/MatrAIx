@@ -4,19 +4,16 @@
 You have a long-haired Persian cat that gets matted fur. You want to learn how to brush and groom at home.
 
 ## Your goal
-Learn a step-by-step grooming routine for my long-haired Persian cat, including which brush to use, how to detangle mats, and how often to brush.
+Learn a step-by-step grooming routine for my long-haired Persian cat to prevent matting, including specific brush type, technique, and frequency.
 
 ## Constraints on your behavior
-- Open by describing your Persian cat's matting problem, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic tips like 'brush regularly,' push back and ask how to handle existing mats near the skin without hurting the cat.
-- Mention your cat hates being brushed and ask for techniques to make it less stressful.
-- You're on a budget, so ask for affordable brush recommendations under $20.
+['- Mention that the cat is a long-haired Persian and gets matted fur easily.', '- Ask for specific brush recommendations (e.g., slicker brush, metal comb).', '- Request detailed technique instructions (e.g., brushing direction, how to handle mats).', '- Ask about grooming frequency and any tips to make the cat comfortable.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you get a specific grooming plan with brush type, detangling method, and frequency, OR (b) after 5 exchanges the chatbot has still not addressed your cat's matting or budget constraints.
+End when I have a clear, actionable grooming routine: specific brush to buy, step-by-step technique, and recommended frequency.
 
 ## Success judgment
-The chatbot helped if its advice referenced your Persian cat's matting (not generic cat grooming) and you left with an actionable step like a brush name under $20 or a detangling technique you can try.
+The chatbot provided a brush recommendation (e.g., slicker brush, wide-tooth comb), explained how to brush in sections, how to detangle mats without hurting the cat, and suggested a frequency (e.g., daily brushing).

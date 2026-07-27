@@ -4,19 +4,16 @@
 You love cooking stir-fries and soups in a small apartment kitchen with limited counter space. You're looking for a versatile multi-cooker that can sauté and slow cook.
 
 ## Your goal
-Get a recommendation for a specific multi-cooker model that fits a small apartment kitchen with limited counter space, can sauté and slow cook, and costs under $150.
+Find a versatile multi-cooker (e.g., Instant Pot) that can sauté and slow cook, fits in a small apartment kitchen with limited counter space (max 12 inches wide), and costs under $150.
 
 ## Constraints on your behavior
-- Open by describing your small apartment kitchen with limited counter space and love for stir-fries and soups, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle of popular multi-cookers, push back and ask how each applies to your limited counter space (e.g., dimensions, footprint) and your need to sauté and slow cook.
-- Mention your budget of under $150 early on, and if the chatbot recommends something over budget, express hesitation and ask for alternatives.
-- Ask about specific features like sauté function quality, slow cook temperature settings, and whether the lid seals well for soups.
+['- Initially mention only that you need a multi-cooker for stir-fries and soups, without specifying size or budget constraints.', '- When recommendations are given, push back if they are too large (over 12 inches wide) or too expensive (over $150).', '- Emphasize the need for both sauté and slow cook functions, and ask about specific features like non-stick inner pot or programmable settings.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot recommends a specific model (e.g., Instant Pot Duo Plus 6-quart) that fits your counter space (e.g., dimensions 13.4 x 12.2 x 12.5 inches) and budget, and explains how it handles sauté and slow cook, OR (b) after 5 exchanges the chatbot has still not addressed your specific counter space constraints or budget.
+End the conversation when you receive a recommendation that meets all constraints (multi-cooker, sauté and slow cook, under 12 inches wide, under $150) or after 5 turns of failing to get such a recommendation.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific kitchen constraints (e.g., compact size, counter dimensions) and budget ($150), and you left with an actionable recommendation (e.g., a specific model name) and a clear understanding of how it meets your sauté and slow cook needs.
+The chatbot is considered successful if it recommends a specific multi-cooker model that is under 12 inches wide, under $150, and has both sauté and slow cook functions. If it fails to meet any of these criteria after 5 turns, it is unsuccessful.

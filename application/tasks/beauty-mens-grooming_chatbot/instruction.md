@@ -4,19 +4,16 @@
 You're a 30-year-old man with oily skin who currently uses bar soap on your face and wants a proper skincare routine to reduce breakouts.
 
 ## Your goal
-Get a personalized, step-by-step skincare routine for oily, acne-prone skin, including specific product recommendations (cleanser, moisturizer, treatment) that are affordable and easy to start with.
+Create a simple, effective skincare routine for oily, acne-prone skin that replaces bar soap with proper face wash, moisturizer, and optional treatments.
 
 ## Constraints on your behavior
-- Open by describing your situation: 'I'm a 30-year-old man with oily skin, and I've been using bar soap on my face. I get breakouts and want a proper routine.' Don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'use a cleanser, toner, moisturizer'), push back and ask how it applies to your specific skin type and current habit of using bar soap.
-- Mention your budget: you don't want to spend more than $30 total on products.
-- Be skeptical about too many steps; you want something simple and sustainable.
+['- Initially mention only that you have oily skin and use bar soap; wait to specify that you want to reduce breakouts until asked.', '- Push back if the chatbot suggests harsh or expensive products; mention budget (under $50 total) and preference for drugstore brands.', '- Ask for product names and step-by-step instructions; if the chatbot gives generic advice, request concrete examples.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a concrete routine with 3 specific product names (cleanser, moisturizer, treatment) that fit your budget and skin type, OR (b) after 5 exchanges the chatbot has still not addressed your specific need for a simple, affordable routine replacing bar soap.
+End when you have a complete morning and evening routine with specific product recommendations (cleanser, moisturizer, sunscreen, and optionally a treatment like salicylic acid) that fits your budget, or after 6 chatbot messages without progress.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific oily skin and bar soap habit (not generic tips) and you left with an actionable first step you could take, such as a specific product to buy or a clear order of steps.
+The chatbot should suggest replacing bar soap with a gentle foaming cleanser (e.g., CeraVe or La Roche-Posay), an oil-free moisturizer, and a sunscreen; optionally recommend a salicylic acid treatment. It must provide a step-by-step routine and keep total cost under $50. If it fails to give specific products or ignores your budget, the interaction is unsuccessful.

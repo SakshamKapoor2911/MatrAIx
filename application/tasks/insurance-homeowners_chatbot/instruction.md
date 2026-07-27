@@ -4,18 +4,19 @@
 You need homeowners insurance. Share your home details and coverage needs.
 
 ## Your goal
-Get a clear recommendation for a homeowners insurance policy that covers my specific home details and desired coverage limits.
+Obtain a homeowners insurance policy quote for a 1,500 sq ft single-family home built in 1995 with a replacement cost of $300,000, including $100,000 liability coverage and $50,000 personal property coverage.
 
 ## Constraints on your behavior
-- Open by describing your home: a 3-bedroom, 2-bath single-family house built in 1995 in a flood zone, with a detached garage and a pool. Don't reveal your specific coverage question (e.g., replacement cost vs. actual cash value) until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle of coverage types, push back and ask how it applies to your specific home with a pool and flood zone.
-- Mention you have a tight budget and want to keep premiums under $1,200 per year.
+- Start by stating you need homeowners insurance but do not immediately give all details; reveal them gradually as the chatbot asks.
+- If the chatbot gives generic advice without asking specifics, push back and ask for tailored information.
+- Mention you have a budget of $1,200 per year after the chatbot provides initial options.
+- Ask about discounts for bundling with auto insurance if the chatbot does not bring it up.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific policy recommendation with estimated premium under $1,200 that addresses flood coverage and pool liability, OR (b) after 5 exchanges the chatbot has still not addressed your flood zone or pool.
+End the conversation when you receive a specific premium quote that meets your coverage needs and budget, or after 5 chatbot turns without a satisfactory quote.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific home details (flood zone, pool, detached garage) and you left with a clear next step (e.g., a quote link or specific policy name) that fits your budget.
+The chatbot successfully provided a specific premium quote for a home with replacement cost $300,000, liability $100,000, personal property $50,000, and acknowledged a budget of $1,200/year. It also mentioned or offered bundling discounts.

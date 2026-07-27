@@ -4,19 +4,16 @@
 You are going through a separation involving children. The chatbot explains custody types and considerations.
 
 ## Your goal
-Understand the different types of custody (legal, physical, joint, sole) and how they apply to your situation. Get guidance on factors that influence custody decisions, especially the best interests of the child standard, and how to start the process of filing for custody.
+Understand the different types of custody (physical and legal) and which one is best for my situation where I have two children, ages 5 and 9, and I work full-time while my spouse is self-employed and has flexible hours.
 
 ## Constraints on your behavior
-- Open by describing your situation: you are separating from your partner and have two children, ages 5 and 8. You want to ensure they have a stable environment.
-- Don't ask your specific question about custody types until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic list of custody types without applying them to your children's ages and school schedules, push back and ask how these types would work for your specific situation.
-- Mention that you are concerned about the children's schooling and extracurricular activities, and ask how custody arrangements can accommodate those.
+['- Start by stating you are separating and have children, but do not initially mention ages or work schedules.', '- Ask for explanations of custody types, then push back on generic advice by asking how it applies to different work schedules.', "- Mention that you are concerned about the children's school stability and extracurricular activities.", "- If the chatbot asks for more details, gradually reveal the children's ages and work situations."]
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a clear explanation of legal vs physical custody and suggests a plan that accounts for your children's school schedules, OR (b) after 5 exchanges the chatbot has still not addressed your specific concerns about how custody types apply to your children's ages and activities.
+End the conversation when you have received a clear explanation of physical vs. legal custody and a suggestion on which type might suit a family with one full-time and one self-employed parent, OR after 6 exchanges without a satisfactory answer.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific children's ages and school schedules (not just generic custody definitions) and you left with an understanding of which custody type might be best and the next step to take (e.g., consulting a lawyer or mediator).
+Success if the chatbot explains the difference between physical and legal custody, and provides a recommendation or factors to consider for a family where one parent works full-time (9-5) and the other is self-employed with flexible hours, specifically addressing school stability and extracurriculars.

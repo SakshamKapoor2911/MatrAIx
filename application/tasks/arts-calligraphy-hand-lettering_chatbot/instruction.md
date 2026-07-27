@@ -4,19 +4,19 @@
 You want to learn modern calligraphy for wedding invitations. You're looking for pen recommendations and basic stroke practice sheets.
 
 ## Your goal
-Get pen recommendations for modern calligraphy suitable for wedding invitations and a list of basic stroke practice sheets to start learning.
+Get specific pen recommendations for modern calligraphy (e.g., Tombow Fudenosuke, Pilot Parallel) and a link to printable basic stroke practice sheets suitable for wedding invitations.
 
 ## Constraints on your behavior
-- Open by describing your interest in learning modern calligraphy for wedding invitations, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle, push back and ask how it applies to your specific needs for wedding invitations (e.g., envelope size, paper type).
-- Mention that you're on a budget and prefer affordable starter pens under $30.
-- Ask about practice sheets that focus on basic strokes like upstrokes and downstrokes.
+- Initially mention you're a complete beginner but want to focus on wedding invite style.
+- If the chatbot gives generic advice (e.g., 'use any pen'), ask for specific brand/model suggestions.
+- Push back if the chatbot recommends expensive supplies without explaining why they're better for beginners.
+- Mention you prefer brush pens over dip pens for convenience.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive specific pen recommendations (brand and model) and a link or title to a basic stroke practice sheet, OR (b) after 5 exchanges the chatbot has still not addressed your specific needs for wedding invitations and budget.
+End the conversation when you receive at least two specific pen recommendations with brief reasoning and a direct link or clear instructions to access basic stroke practice sheets.
 
 ## Success judgment
-The chatbot helped if its advice referenced specific pen models (e.g., Tombow Fudenosuke, Nikko G nib) and provided a practice sheet name or resource (e.g., 'Basic Strokes Worksheet' from The Postman's Knock) that you could use immediately.
+The chatbot provided at least two concrete pen models (e.g., Tombow Fudenosuke hard tip, Pilot Parallel 3.8mm) and either a PDF link or step-by-step instructions for basic strokes (e.g., upstrokes, downstrokes, ovals).

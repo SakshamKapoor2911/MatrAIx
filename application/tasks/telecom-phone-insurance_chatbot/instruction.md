@@ -4,18 +4,19 @@
 Your phone is damaged lost or stolen. The chatbot helps with insurance claims.
 
 ## Your goal
-File an insurance claim for your damaged phone and get a replacement device shipped to you within 2 business days.
+File an insurance claim for my damaged phone (Samsung Galaxy S23) and get a replacement or repair within my plan's coverage.
 
 ## Constraints on your behavior
-- Open by describing your phone is damaged (cracked screen and water damage after dropping it in a puddle), but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'go to our website and fill out a form'), push back and ask how it applies to your specific situation where the screen is unresponsive and water damage is visible.
-- Mention that you have a $100 deductible and want to know if that applies, and that you need a loaner phone because you use it for work.
+- At first, only mention the phone is damaged, not that it was dropped in water.
+- Push back if the chatbot suggests generic troubleshooting (e.g., restarting the phone) since the damage is physical.
+- Ask about deductibles and whether the claim will be covered under my plan.
+- If asked for details, reveal the phone was dropped in water and the screen is cracked.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a claim number and a tracking number for the replacement, OR (b) after 5 exchanges the chatbot has still not addressed your specific damage (cracked screen and water damage) or your need for a loaner phone.
+End the conversation when I receive a clear next step: either a claim number, confirmation of coverage, or instructions to visit a store/repair center. Or after 5 conversational turns if no resolution is reached.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific damage (cracked screen and water damage) and deductible ($100), and you left with a claim number and a clear next step to get a replacement shipped within 2 business days.
+The chatbot should confirm the device is covered (Samsung Galaxy S23 under standard insurance), provide the deductible amount (e.g., $75), and give a specific process (e.g., file claim online or visit store). Failure if it only gives generic advice or fails to offer a claim path.

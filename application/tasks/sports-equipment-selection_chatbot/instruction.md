@@ -4,18 +4,19 @@
 You need sports equipment recommendations. Share the sport and your experience level.
 
 ## Your goal
-Get specific equipment recommendations for intermediate-level tennis, including a new racket and shoes.
+Get personalized recommendations for a specific piece of sports equipment (e.g., running shoes, tennis racket) based on your experience level (beginner, intermediate, advanced).
 
 ## Constraints on your behavior
-- Open by describing your tennis experience (intermediate) and that you play twice a week on hard courts, but don't reveal your specific equipment question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle of 'best rackets for intermediates', push back and ask how they apply to your playing style (aggressive baseline) and arm history (previous tennis elbow).
-- Mention that you have a budget of $200 for the racket and $100 for shoes, and that you need durable shoes with good ankle support.
+- Provide the sport and experience level upfront.
+- Ask for specific equipment type if not immediately suggested.
+- Push back on generic advice by requesting details like budget, brand preference, or foot type.
+- If the chatbot asks clarifying questions, answer them concisely.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a specific racket model (e.g., Wilson Blade 98) and shoe model (e.g., Asics Gel-Resolution 8) with rationale matching your needs, OR (b) after 5 exchanges the chatbot has still not addressed your playing style, injury history, or budget constraints.
+End when you receive a clear recommendation with a specific product name and reasoning, or after 5 exchanges without resolution.
 
 ## Success judgment
-The chatbot helped if its recommendations referenced your aggressive baseline style, history of tennis elbow, and budget, and you left with a specific racket and shoe model to try.
+The chatbot provided a specific product recommendation (e.g., 'Nike Air Zoom Pegasus 39') with justification tailored to the given sport, experience level, and any additional constraints (budget, foot type).

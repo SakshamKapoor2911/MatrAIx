@@ -4,18 +4,19 @@
 You need help with your yard. Share your yard size and what services you need.
 
 ## Your goal
-Get a tailored plan for lawn care and landscaping for my 1/4 acre yard, including mowing, weed control, and planting a small flower bed near the front porch.
+Get a quote for lawn mowing and hedge trimming for a yard of approximately 0.25 acres.
 
 ## Constraints on your behavior
-- Open by describing your yard as a 1/4 acre with patchy grass and a bare spot near the front porch where you want flowers, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'mow weekly, water deeply'), push back and ask how it applies to your specific clay soil and shade from a large oak tree.
-- Mention you have a $200 monthly budget for services and prefer eco-friendly options.
+- Start by stating you have a yard but don't specify size or services until asked.
+- When asked, provide yard size (0.25 acres) and services needed (lawn mowing, hedge trimming).
+- Ask about pricing, availability, and whether they offer discounts for regular service.
+- If the chatbot gives generic advice, push back and ask for specific quotes.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific plan referencing your 1/4 acre, clay soil, oak tree shade, and flower bed location, OR (b) after 5 exchanges the chatbot has still not addressed your specific clay soil and shade constraints.
+End the conversation when you receive a specific quote for lawn mowing and hedge trimming for 0.25 acres, or after 5 chatbot responses without a concrete answer.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific 1/4 acre, clay soil, oak tree shade, and flower bed location (not generic tips) and you left with an actionable first step you could take, such as a soil test or a list of shade-tolerant flowers.
+The chatbot successfully provides a specific price quote for lawn mowing and hedge trimming for a 0.25-acre yard, including any discounts for regular service. If the chatbot only gives general pricing or asks for more info without providing a quote, it fails.

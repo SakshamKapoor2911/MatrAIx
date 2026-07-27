@@ -4,19 +4,19 @@
 You have $10,000 to invest and want to avoid companies involved in fossil fuels and tobacco. You're looking for ESG funds that focus on renewable energy and social justice.
 
 ## Your goal
-Identify 2-3 ESG funds that exclude fossil fuels and tobacco, focus on renewable energy and social justice, and are suitable for a $10,000 investment.
+Find ESG funds that invest in renewable energy and social justice, avoiding fossil fuels and tobacco, within a $10,000 budget.
 
 ## Constraints on your behavior
-- Open by describing your $10,000 to invest and desire to avoid fossil fuels and tobacco, but don't reveal your specific request for ESG funds until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic list of ESG funds, push back and ask how each fund specifically excludes fossil fuels and tobacco and promotes social justice.
-- Mention that you want to prioritize renewable energy and social justice, and ask about the fund's screening criteria and impact reporting.
-- Keep budget constraints in mind: ask about minimum investment requirements and fees.
+- Initially ask for general ESG fund recommendations without specifying budget or exclusions.
+- Push back if the chatbot suggests funds with any fossil fuel or tobacco exposure.
+- Mention the $10,000 budget only after the chatbot provides initial suggestions.
+- Ask about social justice criteria specifically if the chatbot focuses only on environmental factors.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides specific fund names with details on fossil fuel and tobacco exclusions, renewable energy focus, social justice criteria, and minimum investment requirements, OR (b) after 5 exchanges the chatbot has still not addressed your specific constraints (exclusions, renewable energy, social justice) and only gives generic advice.
+End the conversation when the chatbot provides at least two specific fund names that explicitly exclude fossil fuels and tobacco, have a renewable energy and social justice focus, and mention minimum investment requirements below $10,000.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific $10,000 budget, excluded fossil fuels and tobacco, focused on renewable energy and social justice, and you left with at least one actionable fund name and next step (e.g., how to invest).
+The chatbot succeeded if it recommended at least two funds that: (1) have no fossil fuel or tobacco holdings, (2) explicitly target renewable energy and social justice, and (3) have a minimum investment of $10,000 or less.

@@ -4,18 +4,16 @@
 You want to start a neighborhood watch program in your suburban community after a series of car break-ins, but you're not sure how to get neighbors involved.
 
 ## Your goal
-Get a concrete step-by-step plan for launching a neighborhood watch program in my suburban community, including how to recruit at least 10 neighbors and organize an initial meeting.
+Get a step-by-step plan to launch a neighborhood watch program in my suburban community, including strategies to recruit at least 10 neighbors for the initial meeting.
 
 ## Constraints on your behavior
-- Open by describing my situation: recent car break-ins in my neighborhood and my desire to start a watch program, but don't reveal my specific question about getting neighbors involved until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic tips like 'talk to your neighbors,' push back by explaining that my neighbors are mostly unresponsive on social media and rarely attend community events, and ask how to reach them specifically.
-- Mention that I have limited time (I work full-time) and need efficient strategies that don't require door-knocking every house.
+['Withhold the specific number of neighbors I need until asked.', "Push back on generic advice like 'just talk to your neighbors' by asking for concrete examples of outreach methods.", 'Mention that I have a limited budget of $50 for materials like flyers or signs.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific recruitment plan that includes targeting the 3 streets most affected by break-ins and a sample flyer or email template, OR (b) after 5 exchanges the chatbot has still not addressed my specific constraints of unresponsive neighbors and limited time.
+End when I receive a specific, actionable plan with outreach steps and a sample flyer template, or after 6 turns without progress.
 
 ## Success judgment
-The chatbot helped if its advice referenced my specific neighborhood's break-in pattern (e.g., targeting the 3 affected streets) and my constraints (unresponsive neighbors, limited time), and I left with an actionable first step like a draft flyer or a list of 3 specific neighbors to contact.
+The chatbot provided a clear step-by-step plan including specific outreach methods (e.g., door-to-door with a script, social media group), a sample flyer template, and a realistic timeline to recruit 10 neighbors within a $50 budget.

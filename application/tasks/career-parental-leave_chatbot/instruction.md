@@ -4,19 +4,16 @@
 You are expecting or planning a family and want to understand leave options. Share your employment situation.
 
 ## Your goal
-Get a clear breakdown of the different types of family leave (maternity, paternity, parental, FMLA, short-term disability) that apply to your situation, including eligibility, duration, and pay, so you can plan your time off and finances.
+Identify all paid and unpaid leave options (maternity, paternity, parental, FMLA, disability) available to me as a full-time employee at a tech startup with less than 50 employees, and understand how to combine them.
 
 ## Constraints on your behavior
-- Open by describing your employment situation: you work full-time at a mid-sized tech company (about 500 employees) in the U.S., have been there for 2 years, and are the primary breadwinner. Mention that you're expecting a child in 5 months, but don't ask for specific leave options until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle of leave types without tying them to your specific company size, tenure, or state (e.g., California or Texas), push back and ask how those apply to your situation, especially regarding unpaid FMLA vs. paid leave and whether your company offers any additional benefits.
-- Mention that you're concerned about income loss during leave because you're the primary earner, and ask about options for supplementing unpaid leave (e.g., using PTO, short-term disability, or state programs). Also, note that your spouse works part-time and may not have leave benefits.
-- Keep the conversation focused on actionable steps: eligibility criteria, how to apply, and a timeline for requesting leave. Avoid vague advice like 'talk to HR' without specifics on what to ask.
+['- Start by sharing that you work at a small tech startup (<50 employees) and are expecting a child, but do not initially specify your state or exact tenure.', "- If the chatbot gives generic advice (e.g., 'check with HR'), push back by asking for specifics about FMLA applicability for small companies.", '- Mention that you have short-term disability insurance through work and ask if that can be used alongside parental leave.', '- If the chatbot asks for more details, provide that you are in Texas and have been employed for 10 months.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a concrete, step-by-step plan that includes: which leave types you qualify for (e.g., FMLA, company parental leave, state disability), an estimate of weeks and pay percentage, and a checklist of documents or forms to submit, OR (b) after 5 exchanges the chatbot has still not addressed your specific company size (500 employees), tenure (2 years), or income concerns as the primary breadwinner.
+End the conversation when you receive a clear, actionable plan that lists specific leave types, durations, pay percentages, and steps to apply, OR after 6 chatbot turns if no satisfactory answer is given.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific company size (500 employees), tenure (2 years), and role as primary breadwinner (not generic tips), and you left with an actionable first step you could take, such as 'Check your employee handbook for parental leave policy' or 'Ask HR about short-term disability enrollment window.'
+The chatbot must identify that FMLA may not apply due to company size (<50 employees), explain Texas state leave laws (no paid family leave), confirm short-term disability can be used for childbirth recovery (typically 6-8 weeks at partial pay), and suggest any company-specific parental leave policy or unpaid leave options. It should also advise checking employee handbook and discussing with HR.

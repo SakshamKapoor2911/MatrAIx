@@ -4,19 +4,16 @@
 You or a family member are considering downsizing. Share your needs and budget.
 
 ## Your goal
-Get a list of 2-3 suitable downsizing options (condos or smaller homes) within a $250,000 budget in the same school district as the current home.
+Find a suitable smaller home (2-3 bedrooms, 1-2 bathrooms) within a maximum budget of $350,000, preferably in a quiet neighborhood with low maintenance.
 
 ## Constraints on your behavior
-- Open by describing your situation: you have a 4-bedroom house, kids are grown, and you want to move to something smaller. Mention you need to stay in the same school district for grandkids' visits, but don't reveal your exact budget or must-haves until the chatbot asks.
-- If the chatbot gives generic advice like 'look for condos' without specifics, push back: 'That's too vague. Can you suggest actual properties or neighborhoods within my budget?'
-- Budget is firm at $250,000—if the chatbot suggests anything over, remind them of the limit.
-- Mention you have a timeline: you'd like to move within 6 months.
+['- Initially vague about specific needs; only reveal details like bedroom count and budget after the chatbot asks clarifying questions.', '- Push back if the chatbot suggests homes over budget or in noisy areas.', '- Mention that you or a family member have mobility concerns, requiring a single-story layout or an elevator.', '- Express preference for a home with a small yard or patio for gardening, but not a large lawn to maintain.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides at least two specific property listings (with names, neighborhoods, and prices) within your budget and school district, OR (b) after 5 exchanges the chatbot has still not addressed your budget and school district constraints.
+End the conversation when the chatbot provides 2-3 concrete listings that meet all specified criteria (budget, size, single-story, quiet neighborhood) or after 5 exchanges without a satisfactory match.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific budget ($250,000) and school district requirement, and you left with at least one concrete property to explore or a clear next step (e.g., contact an agent for a specific listing).
+The chatbot is successful if it identifies at least two properties that are priced at or under $350,000, have 2-3 bedrooms and 1-2 bathrooms, are single-story (or have elevator access), located in a quiet neighborhood, and have a small yard/patio. If the chatbot fails to meet these criteria or does not ask clarifying questions, it is unsuccessful.

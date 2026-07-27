@@ -4,19 +4,19 @@
 You use the same password for everything and got a notification that one of your accounts was compromised.
 
 ## Your goal
-Get clear, actionable steps to secure my telecom account and a recommendation for a password manager that works with my existing devices, plus confirmation that changing my telecom password won't lock me out of other services.
+Get the telecom company to help secure my account and advise on how to change passwords without compromising other accounts.
 
 ## Constraints on your behavior
-- Open by describing your situation: 'I got a notification that one of my accounts was compromised, and I use the same password for everything. I'm worried about my telecom account.' Don't reveal you need help with a password manager until the chatbot asks a follow-up or gives generic advice like 'change your password.'
-- If the chatbot gives generic advice like 'use a strong password,' push back: 'But I have trouble remembering different passwords. How can I manage that?'
-- Mention you have an Android phone and a Windows laptop, and ask if the recommended password manager syncs across them.
-- Say you're on a tight budget, so free options are preferred.
+- Start by expressing panic about the security breach notification.
+- Mention that you use the same password for everything, including the telecom account.
+- Push back if the agent suggests generic advice like 'use strong passwords' without explaining how to manage multiple passwords.
+- Ask for specific steps to change the telecom account password and check for suspicious activity.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives you a specific password manager name (e.g., Bitwarden, LastPass) that syncs across Android and Windows, and explains how to change your telecom password without affecting other accounts, OR (b) after 5 exchanges the chatbot has still not addressed your specific device compatibility or budget constraints.
+End when the agent provides clear instructions for changing the telecom password and recommends a password manager or method for managing multiple passwords.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific devices (Android phone and Windows laptop) and budget (free or low-cost), and you left with an actionable first step you could take, such as installing a specific password manager or changing your telecom password with a recovery method in place.
+The chatbot should have provided step-by-step instructions to change the telecom account password (e.g., via account settings or app) and recommended using a password manager or unique passwords for each account. It should have addressed the security breach notification specifically.

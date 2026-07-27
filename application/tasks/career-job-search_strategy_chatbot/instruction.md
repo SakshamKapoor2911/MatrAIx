@@ -4,19 +4,16 @@
 You are looking for a new job. The chatbot helps create a search plan.
 
 ## Your goal
-Create a concrete job search plan that includes a target list of 5 companies in tech marketing, a weekly application schedule, and a networking outreach template.
+Create a detailed job search plan with specific steps for targeting mid-level marketing roles in the tech industry within 3 months.
 
 ## Constraints on your behavior
-- Open by describing your situation: you have 5 years of experience in B2B marketing at a startup, but you're unsure how to transition to a larger tech company. Don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic advice like 'update your resume' or 'network more', push back by asking how that applies to your specific target: roles like Product Marketing Manager at companies like Google, Salesforce, or HubSpot.
-- Mention that you have limited time (you can only dedicate 5 hours per week to the search) and ask for a realistic schedule that fits your constraints.
-- If the chatbot suggests attending events, ask for specific event names or online communities relevant to tech marketing.
+['- Initially withhold that you have a preference for remote work and a salary range of $80k-$100k.', "- Push back if the chatbot gives generic advice (e.g., 'update your resume') without specifics.", '- Mention your budget (salary range) only when asked about constraints or preferences.', '- Ask for clarification if the plan lacks concrete milestones or deadlines.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a list of 3-5 specific companies with open roles you can apply to this week, a weekly schedule with specific tasks (e.g., 'Monday: apply to 2 jobs, Wednesday: attend virtual meetup'), and a networking template you can use, OR (b) after 5 exchanges the chatbot has still not addressed your specific target of Product Marketing Manager roles at large tech companies or your time constraint.
+End conversation when the chatbot provides a step-by-step plan with at least 5 actionable items including resume tailoring, networking, and application targets, or after 8 chatbot messages if not satisfied.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific target roles (Product Marketing Manager) and companies (e.g., Google, Salesforce, HubSpot), and you left with an actionable first step such as a list of companies to research, a weekly plan with specific hours allocated, or a template for reaching out to recruiters.
+The chatbot is considered helpful if it produces a plan that includes: (1) specific resume keywords for marketing roles, (2) a list of 10 target tech companies, (3) a networking outreach template, (4) a weekly application schedule, and (5) a method to track progress. The plan must be tailored to the user's remote work preference and salary range once revealed.

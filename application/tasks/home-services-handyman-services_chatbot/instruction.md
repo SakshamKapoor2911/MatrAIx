@@ -4,19 +4,16 @@
 You need small home repairs. Share what needs fixing.
 
 ## Your goal
-Get a prioritized list of which small home repairs to tackle first and a rough estimate of time and cost for each.
+Get specific, actionable advice on how to fix a leaking kitchen faucet and a squeaky bedroom door hinge, including recommended tools and step-by-step instructions.
 
 ## Constraints on your behavior
-- Open by describing your concrete situation: 'I have a leaky faucet in the kitchen, a squeaky door hinge, and a cracked tile in the bathroom.'
-- Don't reveal your specific question (which to do first) until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'fix leaks first'), push back and ask how it applies to your specific items (e.g., 'But the faucet leak is very slow and the tile crack is getting worse—should I still do the faucet first?').
-- Mention you have a limited budget (under $100) and want to do it yourself, so cost of supplies matters.
+['- Start by mentioning you need small home repairs without specifying details; wait for the chatbot to ask for more information.', "- If the chatbot gives generic advice (e.g., 'call a handyman'), push back by saying you prefer DIY and need specific steps.", '- Mention you have a limited budget (under $50 for both repairs) and prefer using tools you already own (screwdriver, adjustable wrench).', '- If the chatbot asks for specifics, provide the exact issues: the faucet drips from the spout when turned off, and the hinge squeaks when the door is opened slowly.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total) to ensure the chatbot provides detailed step-by-step instructions tailored to the specific issues.
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives you a specific prioritized list with time/cost estimates for your leaky faucet, squeaky door hinge, and cracked tile, OR (b) after 5 exchanges the chatbot has still not addressed your specific repairs (leaky faucet, squeaky door hinge, cracked tile) or your budget constraint.
+End the conversation when you receive clear, step-by-step instructions for both repairs, including required tools and materials, and you have confirmed you can proceed with your budget and tools.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific repairs (leaky faucet, squeaky door hinge, cracked tile) and your budget constraint, and you left with an actionable first step (e.g., 'fix the faucet first because it wastes water, costs $15, and takes 30 minutes').
+The chatbot is successful if it provides distinct, step-by-step instructions for fixing the leaking faucet (e.g., replacing the O-ring or cartridge) and the squeaky hinge (e.g., lubricating with oil or tightening screws), lists tools needed (e.g., screwdriver, wrench, replacement O-ring, lubricant), and confirms the total cost is under $50.

@@ -4,19 +4,18 @@
 You need HVAC work. Share whether this is installation maintenance or repair.
 
 ## Your goal
-Determine whether the HVAC technician can service my specific 15-year-old Trane heat pump model 2TWR1, which has a refrigerant leak, and get a ballpark cost estimate for the repair.
+You need a new central air conditioning unit installed to replace a 15-year-old broken system.
 
 ## Constraints on your behavior
-- Open by describing your 15-year-old Trane heat pump and that it's not cooling, but don't reveal the suspected refrigerant leak until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic advice like 'check the filter' or 'call for maintenance,' push back and ask how that applies to your specific model and the fact that you see ice on the copper lines.
-- Mention that you are on a tight budget and want to know if repair is worth it or if replacement would be more cost-effective.
-- Be skeptical of upsells and ask for a breakdown of costs.
+- Start by stating you need HVAC work, but don't specify the type until prompted.
+- Push back if the chatbot gives generic advice without asking for details.
+- Mention your budget is $5,000 and your home is 2,000 sq ft.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a specific diagnosis and a ballpark cost estimate for the repair of the refrigerant leak on your Trane 2TWR1, OR (b) after 5 exchanges the chatbot has still not addressed your specific model and the refrigerant leak issue.
+End the conversation when you receive a specific quote or recommendation for a 3-ton AC unit installation within your budget.
 
 ## Success judgment
-The chatbot helped if it acknowledged your Trane 2TWR1 model and the refrigerant leak (ice on lines), gave a ballpark repair estimate, and provided a clear next step (e.g., schedule a diagnostic visit or compare repair vs. replacement costs).
+The chatbot successfully helped if it identified the need for a 3-ton AC unit installation, provided a cost estimate near $5,000, and offered steps to proceed.

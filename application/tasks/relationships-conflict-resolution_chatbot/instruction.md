@@ -4,19 +4,19 @@
 You have a conflict you want to resolve. Share what happened and who is involved.
 
 ## Your goal
-Get a clear, actionable plan to resolve the conflict with your sister, including a specific conversation script and steps to address the underlying issue.
+Obtain specific advice on how to resolve a conflict with a close friend, Sarah, regarding her canceling plans last minute without explanation.
 
 ## Constraints on your behavior
-- Open by describing the conflict with your sister over her borrowing your car without asking and returning it with a dent, but don't reveal your desired resolution until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot suggests generic conflict resolution tips, push back and ask how to apply them to your specific situation with your sister, who tends to avoid confrontation.
-- Mention that you want to preserve the relationship but feel disrespected, and you're willing to compromise if she acknowledges the issue.
-- Avoid accepting vague advice like 'communicate openly' without concrete steps.
+- Start by describing the situation without naming the person initially.
+- Push back if the chatbot gives generic advice like 'communicate openly' without specifics.
+- Mention that you value the friendship but feel hurt.
+- Ask for concrete steps or scripts to use when talking to Sarah.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a step-by-step plan including a specific conversation opening line and a follow-up strategy, OR (b) after 5 exchanges the chatbot has still not addressed your sister's avoidance pattern or provided a concrete script.
+End the conversation when you receive actionable advice that includes specific phrases or steps to address the issue with Sarah, or after 5 exchanges without progress.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific conflict with your sister over the car and the dent, and you left with a concrete conversation starter and a plan for handling her potential defensiveness.
+The chatbot is successful if it provides concrete suggestions (e.g., 'Say: I felt hurt when you canceled last minute. Can we talk about what happened?') and addresses the specific dynamic of a close friendship, rather than generic conflict resolution tips.

@@ -4,18 +4,16 @@
 You have an iPhone 12 with a cracked screen but otherwise functional. You want to trade it in for a newer model.
 
 ## Your goal
-Get a trade-in offer for my cracked-screen iPhone 12 and understand the process for upgrading to a newer iPhone model.
+Trade in my iPhone 12 with a cracked screen for a newer model (iPhone 14 or 15) and get the best possible trade-in value or discount.
 
 ## Constraints on your behavior
-- Open by describing your iPhone 12 with a cracked screen but otherwise functional, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle about trade-in programs, push back and ask how the crack affects the trade-in value and whether it's still eligible.
-- Mention that you're on a budget and want to minimize out-of-pocket costs.
+['Initially mention only that the phone has a cracked screen, but reveal other details (storage, carrier) only when asked.', 'Push back if the agent offers a generic trade-in quote without considering the damage; ask if cracked screen affects value.', 'Mention that you want the new phone to be unlocked or compatible with your current carrier.', 'State that you are looking for the best deal, including any promotions or discounts.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a specific trade-in value estimate for your cracked iPhone 12 and clear next steps, OR (b) after 5 exchanges the chatbot has still not addressed your cracked screen condition or provided a concrete offer.
+End the conversation when the agent provides a specific trade-in value for the cracked iPhone 12 and a clear path to purchase a newer model (iPhone 14 or 15) with the trade-in applied, OR after 5 exchanges without resolution.
 
 ## Success judgment
-The chatbot helped if it acknowledged the cracked screen explicitly, gave a trade-in value or range considering the damage, and outlined an actionable process (e.g., where to go, what to bring, any fees).
+The chatbot succeeded if it asked for the phone's storage capacity and carrier, explained how the cracked screen affects trade-in value, provided a specific dollar amount or discount range for the trade-in, and offered a concrete next step (e.g., in-store or mail-in process) to upgrade to an iPhone 14 or 15.

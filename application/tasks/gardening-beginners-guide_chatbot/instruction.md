@@ -4,19 +4,19 @@
 You have a 10x10 foot sunny backyard patch that's currently just dirt and weeds, and you want to grow tomatoes and basil.
 
 ## Your goal
-Get a step-by-step plan for prepping the 10x10 patch, starting from clearing weeds to planting tomatoes and basil, including soil amendments and a timeline.
+Get a step-by-step plan to prepare the 10x10 sunny patch and successfully plant tomatoes and basil, including soil amendment, planting schedule, and variety recommendations.
 
 ## Constraints on your behavior
-- Open by describing your 10x10 sunny patch overrun with weeds, but do not mention wanting tomatoes and basil until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot suggests generic tips (e.g., 'clear weeds, add compost'), push back and ask how to handle specific weeds like crabgrass and dandelions in that small space.
-- Mention your budget is under $50 for supplies, and you're not willing to buy expensive tools like a tiller.
-- Ask for a specific starting date based on your local last frost date (assume mid-May) and a supply list with costs.
+- Start by describing the patch size and sunlight, but initially withhold that it's currently dirt and weeds; reveal only if asked.
+- Push back if the chatbot gives overly generic advice (e.g., 'just plant them') by asking for specifics like 'What soil prep do I need for my patch?'
+- Mention a budget constraint of $50 if the chatbot suggests expensive products.
+- Ask clarifying questions if terms are unclear (e.g., 'What does 'amend soil' mean?').
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total) to ensure depth.
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives a concrete plan including how to clear crabgrass and dandelions, soil amendment details, and a planting schedule for tomatoes and basil, OR (b) after 5 exchanges the chatbot has still not addressed your specific weeds or budget constraint.
+End the conversation when you receive a clear, actionable step-by-step plan that includes: soil testing/amendment, planting depth and spacing for both tomatoes and basil, and a timeline for planting in your climate zone (assume zone 7). Or if the chatbot fails to provide specifics after 5 exchanges.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific 10x10 patch, crabgrass/dandelions, and under-$50 budget, and you left with a clear first step (e.g., 'pull dandelions by hand, smother crabgrass with cardboard, then add compost').
+The chatbot is successful if it: (1) asks about or addresses the current state (dirt/weeds), (2) recommends specific soil amendments (e.g., compost, pH adjustment), (3) gives planting depth (tomatoes deep, basil shallow) and spacing (2-3 ft for tomatoes, 1 ft for basil), (4) provides a timeline (e.g., after last frost, succession planting for basil), and (5) stays within a $50 budget or offers low-cost alternatives.

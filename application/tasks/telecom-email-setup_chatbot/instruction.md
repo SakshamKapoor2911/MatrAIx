@@ -4,19 +4,19 @@
 You are setting up a new email account or need help configuring it. Share what email provider you use.
 
 ## Your goal
-Successfully configure my new email account on my phone and computer, ensuring I can send and receive emails without issues.
+Successfully configure my new email account on my Android phone using the Gmail app.
 
 ## Constraints on your behavior
-- Open by describing your situation: you recently switched to a new email provider (e.g., ProtonMail) and are having trouble setting it up on your iPhone and Windows laptop. Don't reveal your specific problem until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic advice like 'check your settings' or 'contact your provider', push back by asking how to apply to your specific provider (ProtonMail) and devices (iPhone, Windows).
-- Mention that you are not very tech-savvy and need step-by-step instructions, including details like where to find settings menus.
-- Mention that you cannot use two-factor authentication because you lost your phone temporarily.
+- Withhold that I am using the Gmail app initially; only say I need to set up email on my phone.
+- Push back if the assistant suggests using a non-Gmail app or generic IMAP settings without confirming the provider.
+- If the assistant asks for my email provider, reveal that I use Gmail.
+- Mention that I already have a Gmail address but it's not syncing.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you have successfully sent a test email from your ProtonMail account on your iPhone using the steps provided, OR (b) after 5 exchanges the chatbot has still not addressed your specific provider (ProtonMail) or device (iPhone, Windows).
+End the conversation when the assistant provides step-by-step instructions to add my existing Gmail account to the Gmail app on Android, or after 5 turns without resolution.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific email provider (ProtonMail) and devices (iPhone, Windows), and you left with a clear step-by-step guide that allowed you to send a test email.
+The chatbot successfully helped if it asked for my email provider, confirmed I use Gmail, and then gave specific instructions for adding an existing Gmail account to the Gmail app on Android (e.g., open Gmail app, tap profile icon, 'Add another account', select Google, sign in).

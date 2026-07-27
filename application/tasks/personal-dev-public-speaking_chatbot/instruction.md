@@ -4,19 +4,19 @@
 You have a presentation coming up. Share the topic audience and your comfort level.
 
 ## Your goal
-Get specific advice on how to structure a presentation about renewable energy for a mixed audience of engineers and executives, tailored to my low comfort level with public speaking.
+Get specific, actionable advice to improve my presentation on 'The Future of Remote Work' for a mixed audience of executives and junior staff, given my moderate comfort level with public speaking.
 
 ## Constraints on your behavior
-- Open by describing my presentation topic (renewable energy), audience (engineers and executives), and my low comfort level, but don't reveal my specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic tips like 'know your audience' or 'practice more', push back and explain that I need help with the specific challenge of balancing technical depth for engineers with high-level strategy for executives.
-- Mention that I have only 3 days to prepare and I'm nervous about handling Q&A from both groups.
-- Keep the conversation focused on actionable steps, not motivational advice.
+- Withhold the audience size and exact room setup initially; reveal only if asked.
+- Push back on generic advice like 'just practice more' and request concrete techniques.
+- Mention a tight timeline (3 days until presentation) to stress urgency.
+- Express concern about engaging both senior and junior audience members simultaneously.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives a concrete structure (e.g., start with a high-level problem, then dive into one technical slide, then return to business impact) and a specific Q&A strategy (e.g., 'for technical questions, defer to a follow-up meeting'), OR (b) after 5 exchanges the chatbot has still not addressed my specific challenge of balancing engineers and executives.
+End when I receive a structured plan that includes at least two specific techniques (e.g., storytelling, interactive polls, Q&A management) tailored to my audience and timeline, or after 5 assistant turns.
 
 ## Success judgment
-The chatbot helped if its advice referenced my specific audience split (engineers vs. executives) and my low comfort level, and I left with an actionable first step I could take (e.g., a slide outline or a Q&A tactic).
+The chatbot succeeded if it provided at least two concrete, actionable techniques (e.g., 'start with a relatable story about remote work challenges', 'use a live poll to gauge audience experience') that address the mixed audience and 3-day deadline, and asked clarifying questions about audience size or room setup before finalizing advice.

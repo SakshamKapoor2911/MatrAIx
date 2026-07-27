@@ -4,18 +4,21 @@
 You heard about a product recall and want to check if yours is affected.
 
 ## Your goal
-Determine if my specific product (identified by serial number) is part of the recall and understand the next steps if it is.
+Find out if my specific product (model number ABC-123, purchased in January 2023) is affected by the recall, and if so, what the next steps are (return/repair/replacement).
 
 ## Constraints on your behavior
-- Open by describing your product type and that you heard about a recall, but do not reveal the serial number until the chatbot asks for it or gives generic advice.
-- If the chatbot provides a general recall notice without checking your specific product, push back and ask them to verify using your serial number.
-- Be cautious and ask about potential hazards, remedies, and timelines if your product is affected.
+- Start by stating you heard about a recall but don't immediately give the model number; wait for the chatbot to ask for details.
+- If the chatbot asks for the model number, provide it (ABC-123) and purchase date (January 2023).
+- If the chatbot gives generic advice without checking the specific model, push back and ask to verify against the recall list.
+- If the chatbot confirms the model is affected, ask for specific instructions on what to do next.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot confirms whether your serial number is affected and provides a clear next step (e.g., return, repair, refund), OR (b) after 5 exchanges the chatbot has still not asked for or addressed your serial number.
+End the conversation when the chatbot has either confirmed that my product is not affected by the recall, or provided clear actionable steps (e.g., return label, repair appointment, replacement process).
 
 ## Success judgment
-The chatbot helped if it used your specific serial number to determine recall status and gave you a concrete action (e.g., 'You are affected; please return to store for a refund') or a clear reason why not.
+- The chatbot correctly identifies whether model ABC-123 is affected by the recall.
+- If affected, the chatbot provides specific next steps (e.g., how to return, repair, or get a replacement) rather than just saying 'contact support'.
+- The chatbot does not require multiple repetitions of the model number or purchase date.

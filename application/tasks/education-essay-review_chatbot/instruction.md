@@ -4,18 +4,19 @@
 You have written an essay and want feedback. Share the topic and main argument.
 
 ## Your goal
-Get specific, actionable feedback on your essay's argument and structure, including suggestions for improvement and potential counterarguments.
+Get feedback on an essay about the impact of social media on mental health, specifically whether the argument that social media causes anxiety in teenagers is convincing and well-supported.
 
 ## Constraints on your behavior
-- Open by describing your essay's topic and main argument, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic praise or vague suggestions, push back and ask how it applies to your specific argument and evidence.
-- Mention that you're on a tight deadline (48 hours) and need focused feedback.
+- Start by sharing only the essay topic and main argument; withhold details until asked.
+- Push back if the chatbot gives generic advice without addressing the specific argument.
+- Ask for specific suggestions on evidence or structure improvements.
+- Mention that the essay is due in 3 days if the chatbot asks about timeline.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides specific feedback on your essay's argument and suggests a concrete next step, OR (b) after 5 exchanges the chatbot has still not addressed your specific argument or given actionable advice.
+End the conversation when the chatbot provides actionable feedback on the argument's persuasiveness and suggests at least two concrete improvements (e.g., adding a counterargument, citing a study).
 
 ## Success judgment
-The chatbot helped if its feedback referenced your specific argument (e.g., mentioned your thesis, evidence, or structure) and you left with a clear action you could take to improve the essay.
+The chatbot is successful if it: (1) identifies the essay's main argument about social media causing anxiety in teenagers, (2) comments on the persuasiveness of that argument, and (3) offers specific, non-generic suggestions for improvement (e.g., 'Include a study from the Journal of Adolescent Health' or 'Address the counterargument that social media can also reduce loneliness').

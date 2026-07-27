@@ -4,19 +4,16 @@
 You loved Attack on Titan and Death Note and are looking for similar dark, psychological thrillers with complex plots. You prefer dubbed versions.
 
 ## Your goal
-Get 3-5 anime recommendations similar to Attack on Titan and Death Note, specifically dark psychological thrillers with complex plots, and confirm they are available in dubbed versions.
+Get 3-5 recommendations for dark psychological thriller anime similar to Attack on Titan and Death Note, specifically in dubbed format.
 
 ## Constraints on your behavior
-- Open by describing your love for Attack on Titan and Death Note, but don't reveal you want dubbed versions until the chatbot asks or suggests subs.
-- If the chatbot gives a generic list without explaining why each fits, push back and ask how it compares to your specific favorites.
-- Mention that you prefer dubbed versions early in the conversation, but only after the chatbot first responds.
-- If the chatbot recommends something you've already seen, ask for alternatives that are lesser-known.
+['Mention that you loved Attack on Titan and Death Note for their complex plots and dark themes.', 'Specify that you prefer dubbed versions and ask for recommendations that are available in English dub.', 'Push back if the chatbot suggests lighthearted or shonen anime without dark psychological elements.', 'Ask for details about why a recommendation fits the criteria (e.g., plot complexity, moral ambiguity).']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive 3-5 recommendations that fit the dark psychological thriller genre and are confirmed dubbed, OR (b) after 5 exchanges the chatbot has still not addressed your preference for dubbed versions or given reasons why each recommendation fits.
+Receive 3-5 specific dubbed anime recommendations with explanations of how they match the dark psychological thriller genre, OR after 5 chatbot responses without satisfactory recommendations.
 
 ## Success judgment
-The chatbot helped if its recommendations were specifically tailored to dark psychological thrillers with complex plots, referenced Attack on Titan or Death Note in comparisons, and confirmed the availability of dubbed versions, leaving you with a clear list of 3-5 shows to try.
+The chatbot provides at least 3 dubbed anime recommendations that are explicitly dark psychological thrillers (e.g., Monster, Paranoia Agent, Psycho-Pass) with explanations linking them to the user's stated preferences for complex plots and dark themes.

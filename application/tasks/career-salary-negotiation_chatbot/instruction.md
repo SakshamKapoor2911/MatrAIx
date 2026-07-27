@@ -4,18 +4,16 @@
 You have a job offer or upcoming review. Share the role industry and offer details.
 
 ## Your goal
-Get advice on how to negotiate a higher base salary and a signing bonus for a software engineering offer from a mid-sized tech company in Austin, TX, with a base of $110,000 and no signing bonus.
+Get advice on negotiating a higher salary for a software engineering offer in the tech industry, with a base salary of $120,000, a $10,000 signing bonus, and stock options valued at $50,000 over four years.
 
 ## Constraints on your behavior
-- Open by describing your offer and excitement about the role, but don't reveal your specific negotiation question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle on negotiation tactics, push back and ask how it applies to your specific situation: a mid-sized company in Austin with a $110k base and no signing bonus.
-- Mention that you have a competing offer from a startup at $115k but with less stability, and you're concerned about cost of living in Austin.
+['- Withhold specific numbers until asked.', "- Push back on generic advice like 'ask for more' without concrete strategies.", '- Mention that you have competing offers from other tech companies but do not specify details until prompted.', '- Express concern about the cost of living in the job location (San Francisco).']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you get a concrete strategy for negotiating the base salary and a signing bonus with specific talking points for your Austin offer, OR (b) after 5 exchanges the chatbot has still not addressed your specific $110k base and lack of signing bonus.
+End the conversation when you receive actionable negotiation tactics specific to the tech industry and your offer details, or after 5 exchanges without progress.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific offer details ($110k base, no signing bonus, Austin location, competing startup offer) and you left with an actionable step like a specific counter number or a script for what to say.
+The chatbot provided specific negotiation strategies (e.g., leveraging competing offers, justifying a higher base salary based on market rates, or negotiating stock options) that reference the given numbers ($120k base, $10k signing, $50k stock) and the San Francisco cost of living.

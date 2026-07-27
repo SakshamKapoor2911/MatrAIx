@@ -4,19 +4,16 @@
 Your game is not working correctly. Share the game platform and what is happening.
 
 ## Your goal
-Get a diagnosis for why my PC game is crashing and a step-by-step fix to resolve the issue.
+Resolve the issue with the game not working correctly on my platform.
 
 ## Constraints on your behavior
-- Open by describing your concrete situation: 'I'm playing Cyberpunk 2077 on Steam, and it crashes to desktop every 30 minutes with no error message.'
-- Don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'update drivers, verify files'), push back and ask how it applies to your specific named items: 'I already updated my NVIDIA drivers and verified files—what else could cause this specific crash pattern?'
-- Mention your budget constraint: 'I can't afford new hardware, so please suggest free or low-cost fixes.'
+["- State the game and platform (e.g., 'Overwatch 2 on PC') in the first message.", "- Describe the specific problem (e.g., 'crashes to desktop after 5 minutes of play').", "- Withhold details about what you've tried until asked.", "- If the chatbot suggests generic steps (e.g., 'restart your PC'), push back and ask for more specific solutions."]
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you have a concrete step-by-step fix that you can try immediately, OR (b) after 5 exchanges the chatbot has still not addressed your specific crash pattern (every 30 minutes, no error) and budget constraint.
+End when the chatbot provides a solution that addresses the specific problem (e.g., 'Try updating your graphics drivers' or 'Lower the graphics settings'), or after 5 turns without resolution.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific named items (Cyberpunk 2077, Steam, NVIDIA drivers, no error message, 30-minute crash interval) and you left with an actionable first step you could take.
+The chatbot correctly identifies the game and platform, asks clarifying questions about the problem, and provides a solution that directly targets the described issue (e.g., crash on Overwatch 2 on PC).

@@ -4,18 +4,16 @@
 You frequently use public Wi-Fi at coffee shops and want a VPN that protects your privacy without slowing down your streaming. You also need it to work on both your laptop and phone.
 
 ## Your goal
-Get a VPN recommendation that works on both laptop and phone, protects privacy on public Wi-Fi, and supports streaming without slowdown.
+Get a VPN recommendation that works on both laptop and phone, protects privacy on public Wi-Fi, and doesn't slow down streaming.
 
 ## Constraints on your behavior
-- Open by describing your frequent use of public Wi-Fi at coffee shops and need for privacy, but don't mention the streaming or multi-device requirements until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic list of VPNs, push back by asking how each specific option handles streaming speed on public Wi-Fi and whether it works on both devices.
-- Mention that you have a budget of around $10 per month and are not interested in free VPNs due to privacy concerns.
+['- Mention using public Wi-Fi at coffee shops and need for privacy.', '- State that you stream video (e.g., Netflix, YouTube) and need good speeds.', '- Ask about device compatibility (laptop and phone).', '- Push back if the recommendation is too expensive or has no free trial.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot recommends a specific VPN that explicitly addresses streaming speed on public Wi-Fi and multi-device support, OR (b) after 5 exchanges the chatbot has still not addressed your specific streaming speed or multi-device requirements.
+End when you receive a specific VPN recommendation with details on privacy, speed, device support, and pricing (or after 5 turns if not satisfied).
 
 ## Success judgment
-The chatbot helped if its recommendation referenced your specific need for streaming speed on public Wi-Fi and compatibility with both laptop and phone, and you left with a clear VPN option to try.
+The chatbot recommended a VPN that explicitly supports both laptop and phone, has strong encryption for public Wi-Fi, and offers fast speeds suitable for streaming (e.g., mentions no throttling, high bandwidth, or a free trial to test performance).

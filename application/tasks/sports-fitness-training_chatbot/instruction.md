@@ -4,19 +4,16 @@
 You're training for your first half-marathon in 12 weeks and want a running plan that builds mileage safely, along with strength training to prevent injuries.
 
 ## Your goal
-Get a specific 12-week half-marathon training plan that gradually increases mileage (starting at 15 miles/week and peaking at 30 miles/week) and includes 2 strength sessions per week, with exercises targeting the glutes and core to prevent IT band and knee issues.
+Get a 12-week half-marathon training plan with weekly mileage progression and two strength sessions per week to prevent injuries.
 
 ## Constraints on your behavior
-- Open by describing your situation: training for a first half-marathon in 12 weeks, currently running 3 times a week about 15 miles total, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'just run more'), push back and ask how it applies to your specific 12-week timeline and injury history (previous IT band tightness).
-- Mention a budget constraint: you're a student, so you can't afford a coach or expensive gym membership; you need a plan using only bodyweight or minimal equipment (like resistance bands).
-- After receiving a plan, ask for clarification on how to handle a week where you might miss a run due to exams.
+['- Start by stating your goal and timeline (12 weeks until race).', "- Mention you're a beginner to half-marathons but have been running 10-15 miles per week.", '- Ask for specific weekly mileage targets and strength exercises.', '- Push back if the plan increases mileage too fast (more than 10% per week).']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a weekly schedule with specific mileage per run and mentions glute bridges and planks as strength exercises, OR (b) after 5 exchanges the chatbot has still not addressed your 12-week timeline or IT band concerns.
+End when you receive a week-by-week plan with specific mileage and strength exercises, or after 5 exchanges if the chatbot is unhelpful.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific 12-week timeline, included a weekly mileage progression with rest weeks, and suggested specific strength exercises (glute bridges, planks) that you can do with a resistance band, and you left knowing what your next run and first strength session look like.
+The chatbot provides a 12-week plan with weekly mileage increasing by no more than 10% per week, includes two strength sessions per week with specific exercises (e.g., squats, lunges, planks), and addresses injury prevention.

@@ -4,19 +4,19 @@
 You need to install a child car seat. Share your childs age weight and vehicle type.
 
 ## Your goal
-Get step-by-step instructions for correctly installing a child car seat in your specific vehicle, including how to use the LATCH system or seat belt, and how to check for a secure fit.
+Get step-by-step instructions for correctly installing a child car seat for my 3-year-old, 30 lb child in a 2022 Honda CR-V.
 
 ## Constraints on your behavior
-- Open by describing your situation: 'I have a 2-year-old who weighs 28 lbs and I drive a 2018 Honda CR-V. I need to install a car seat.'
-- If the chatbot gives generic advice (e.g., 'read the manual'), push back and ask for specifics about your car model and child's weight.
-- Mention that you've tried installing it yourself but the seat moves more than an inch, and you're worried about safety.
-- Ask about whether to use the LATCH system or the seat belt, given your child's weight.
+- Provide only the child's age (3 years), weight (30 lb), and vehicle type (2022 Honda CR-V) initially.
+- Do not mention the type of car seat (forward-facing) unless asked.
+- If the chatbot gives generic advice, push back by specifying that I need instructions for my exact vehicle and child.
+- Mention that I have the manual but find it confusing.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total) to ensure the chatbot provides specific, actionable steps.
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a clear, step-by-step installation guide that references your 2018 Honda CR-V and 28 lb child, OR (b) after 5 exchanges the chatbot has still not addressed your specific vehicle model or child's weight.
+End the conversation once the chatbot provides a clear, step-by-step installation guide that references the specific vehicle (2022 Honda CR-V) and child details (3 years, 30 lb), or after 5 turns without a satisfactory answer.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific vehicle (2018 Honda CR-V) and child's weight (28 lbs), and you left with an actionable first step you could take (e.g., checking the lower anchors location, or how to lock the seat belt).
+The chatbot should give a step-by-step installation guide that includes: (1) using the LATCH system or seat belt, (2) correct recline angle for forward-facing, (3) tightness check (less than 1 inch movement), (4) chest clip at armpit level. It must reference the 2022 Honda CR-V and the child's age and weight.

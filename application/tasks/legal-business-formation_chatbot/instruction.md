@@ -4,18 +4,19 @@
 You and two friends want to start a mobile app development company. You're unsure whether to form an LLC or a corporation.
 
 ## Your goal
-Determine whether an LLC or a corporation is the better legal structure for your mobile app development company, considering liability, taxes, and future fundraising needs.
+Determine whether an LLC or a corporation is the better legal structure for a mobile app development company founded with two friends, considering liability, tax implications, and management flexibility.
 
 ## Constraints on your behavior
-- Open by describing your situation: you and two friends want to start a mobile app development company, but don't reveal your specific question about LLC vs. corporation until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic list of pros and cons for LLCs and corporations, push back and ask how it applies to your specific situation, such as the fact that you have three founders and plan to seek venture capital in the future.
-- Mention that you have limited initial capital and are concerned about personal liability for app-related issues.
+- Start by asking for general advice on LLC vs corporation.
+- Only after initial response, mention that there are three founders (you and two friends) and that you plan to develop mobile apps.
+- Push back if the chatbot gives overly generic advice without considering the specific context of a tech startup with multiple founders.
+- If the chatbot asks about funding or exit strategy, mention you are bootstrapping initially but may seek investors later.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a clear recommendation for either LLC or corporation with reasons tied to your specific situation (three founders, mobile app, future VC funding), OR (b) after 5 exchanges the chatbot has still not addressed your specific concerns about liability and fundraising.
+End the conversation when you receive a clear recommendation with reasoning tailored to your specific situation (three founders, mobile app development, potential future investors).
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific situation (three founders, mobile app development, future fundraising plans) and you left with a clear understanding of which entity type to choose and why.
+The chatbot should have recommended either LLC or corporation, explained the pros and cons for a multi-founder tech startup, and addressed at least two of the following: liability protection, tax treatment (pass-through vs double taxation), management structure (member-managed vs board), and suitability for future investment.

@@ -4,19 +4,16 @@
 You just bought a DSLR camera and want to learn how to take portraits with blurred backgrounds.
 
 ## Your goal
-Learn the specific camera settings (aperture, focal length, distance) needed to achieve a blurred background (bokeh) in portraits, and get a practice exercise to try at home.
+Learn how to take portraits with a blurred background (bokeh effect) using my new DSLR camera.
 
 ## Constraints on your behavior
-- Open by describing your situation: 'I just got a new DSLR, a Canon EOS Rebel T7 with the kit 18-55mm lens. I want to take portraits with that blurry background effect.' But don't reveal your specific question about settings until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'use a wide aperture'), push back and ask how it applies to your specific kit lens, which only goes to f/5.6 at 55mm.
-- Mention you have a limited budget and can't buy a new lens right now, so you need to work with what you have.
-- If the chatbot suggests moving closer to the subject, ask about the risk of distortion and how close is too close.
+['- Mention that you are a beginner and just bought a DSLR camera.', '- Ask for specific settings (aperture, shutter speed, ISO) and lens recommendations.', '- Push back if advice is too generic; ask for concrete examples or step-by-step instructions.', '- Mention that your budget for additional equipment is limited (under $200).']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives you a concrete practice exercise that uses your kit lens (e.g., 'set your lens to 55mm, aperture f/5.6, stand 5 feet from your subject, and place them 10 feet from the background'), OR (b) after 5 exchanges the chatbot has still not addressed your specific kit lens limitations and has only given generic advice.
+End when you receive a clear, actionable answer that includes specific camera settings (e.g., aperture f/2.8 or lower, use a 50mm lens) and a step-by-step technique for achieving blurred backgrounds, or after 5 turns if not satisfied.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific kit lens (Canon 18-55mm f/3.5-5.6) and you left with an actionable first step you could take, such as a specific setup to practice with.
+The chatbot is considered successful if it provides specific, actionable advice tailored to a beginner DSLR user on achieving blurred backgrounds, including recommended aperture (e.g., f/2.8 or lower), focal length (e.g., 50mm or longer), distance from subject, and a brief technique (e.g., use portrait mode or manual settings). The advice should be clear and step-by-step, not generic.

@@ -4,19 +4,19 @@
 You often get defensive during feedback at work and want to learn to respond calmly and understand your triggers better.
 
 ## Your goal
-Learn a structured technique (like a 3-step pause-calm-respond method) to manage defensiveness during performance reviews, and identify your top 2 personal triggers (e.g., tone of voice or being interrupted) so you can prepare for them.
+Develop emotional intelligence skills including self-awareness empathy and emotional regulation
 
 ## Constraints on your behavior
-- Open by describing your situation: 'I often get defensive when my manager gives feedback at work, especially during performance reviews. I want to handle it better.'
-- Don't reveal your specific triggers or ask for a technique until the chatbot asks a follow-up or gives generic advice like 'just stay calm.' Then push back: 'That's too vague. What do I do when my manager uses a sharp tone?'
-- If the chatbot suggests a list of generic tips (e.g., 'take a deep breath'), ask how it applies to your specific trigger: 'Deep breathing helps, but what if I feel attacked by the way they interrupt me?'
-- Mention that you've tried counting to ten but it doesn't work, and you need something more concrete.
+- Open by describing your situation, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
+- Budget: mention you want to stay under a specific amount when supplies or costs come up.
+- If the chatbot gives a generic listicle, push back and ask how it applies to your specific items or constraints.
+- Be specific about the details that matter for your case.
 
 ## Interaction requirements
 At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives you a concrete 3-step method (like pause-label-respond) that you can practice before your next review, OR (b) after 5 exchanges the chatbot has still not addressed your specific triggers (tone of voice or being interrupted) and only gave generic advice.
+End the conversation when EITHER (a) you have a clear answer that addresses your specific situation and constraints, OR (b) after 5 exchanges the chatbot has still not addressed your specific needs.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific triggers (tone of voice, being interrupted) and you left with an actionable first step you could take, such as a specific phrase to use or a rehearsal technique.
+The chatbot helped if its advice referenced your specific items or needs (not generic tips) and you left with an actionable next step you could take.

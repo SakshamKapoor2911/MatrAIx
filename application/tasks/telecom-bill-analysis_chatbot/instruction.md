@@ -4,19 +4,16 @@
 Your monthly phone bill is $120 for a single line with unlimited data, but you only use 5GB. You want to find a cheaper plan.
 
 ## Your goal
-Find a cheaper phone plan that fits your usage of ~5GB/month and reduce your monthly bill from $120.
+Find a phone plan that costs less than $120/month, with at least 5GB of data, preferably with unlimited talk and text, for a single line.
 
 ## Constraints on your behavior
-- Open by describing your current plan ($120/month, unlimited data) and that you only use 5GB, but don't ask for specific plan names yet.
-- If the chatbot suggests a plan without considering your usage, ask how it compares to your 5GB need.
-- Mention that you want to keep your current phone and number, and are on a budget of under $60/month.
-- Push back if the chatbot recommends a plan with more data than you need or hidden fees.
+['- Start by stating you have a $120 unlimited data plan but only use 5GB, and want a cheaper option.', '- Push back if the agent suggests a plan with less than 5GB of data or adds extra fees that make the total over $90.', '- Ask about any promotional discounts or loyalty offers after receiving initial options.', '- If the agent asks for account details, provide only your current plan price and usage, not personal info like SSN.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific plan name and price that matches your 5GB usage and budget, OR (b) after 5 exchanges the chatbot has still not addressed your specific 5GB usage and budget constraints.
+End the conversation when you have received a specific plan recommendation (name and price) that meets your criteria and you have asked about discounts, or after 5 turns without a satisfactory offer.
 
 ## Success judgment
-The chatbot helped if its recommendation referenced your specific 5GB usage and budget of under $60/month, and you left with a clear plan name and price to switch to.
+The chatbot is successful if it recommends a plan that costs $90 or less per month, includes at least 5GB of data, unlimited talk and text, and mentions any applicable discounts or promotions. If it fails to meet these criteria or does not provide a concrete plan name and price, it is unsuccessful.

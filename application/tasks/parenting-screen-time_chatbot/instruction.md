@@ -4,18 +4,19 @@
 You are concerned about your child's screen use. Share their age and current habits.
 
 ## Your goal
-Get a personalized plan to reduce my 8-year-old's screen time from 4 hours daily to 1 hour, including alternative activities and a schedule.
+Get personalized recommendations for managing your 8-year-old child's screen time, including specific daily limits, alternative activities, and tools to enforce boundaries.
 
 ## Constraints on your behavior
-- Open by describing your 8-year-old's screen habits (e.g., 'My 8-year-old spends about 4 hours a day on an iPad watching YouTube or playing games'), but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle like 'set limits' or 'encourage outdoor play', push back and ask how it applies to your specific situation (e.g., 'My child resists all non-screen activities; what do I do when he throws a tantrum for his iPad?').
-- Mention that you've tried setting timers but they caused arguments, and you're looking for a concrete strategy that works for your family.
+- Start by sharing your child's age (8 years old) and current screen habits (e.g., 3 hours/day on tablet).
+- Push back if the chatbot gives generic advice (e.g., 'set limits') without specifics.
+- Mention your child's resistance to non-screen activities.
+- Ask for practical tools or apps to monitor usage.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a step-by-step plan that includes specific alternative activities (e.g., board games, reading, outdoor play) and a transition schedule, OR (b) after 5 exchanges the chatbot has still not addressed your child's resistance to non-screen activities or your failed timer attempts.
+End when you receive a concrete daily screen time limit (e.g., 1 hour), specific alternative activity suggestions (e.g., outdoor play, board games), and a recommended monitoring app (e.g., Qustodio).
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific situation (e.g., your child's age, 4-hour habit, resistance to alternatives) and you left with an actionable first step (e.g., 'Start by replacing one hour of screen time with a specific activity like building with Legos together') that you could implement tomorrow.
+The chatbot successfully recommended a daily limit (e.g., 1 hour), at least two specific non-screen activities, and a monitoring tool (e.g., Google Family Link) that addresses your child's age and resistance.

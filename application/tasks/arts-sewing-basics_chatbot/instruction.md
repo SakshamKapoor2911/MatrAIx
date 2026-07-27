@@ -4,19 +4,19 @@
 You just bought your first sewing machine and want to make a simple tote bag. You need guidance on choosing fabric, reading patterns, and basic stitches.
 
 ## Your goal
-Get a step-by-step guide for a beginner-friendly tote bag project: recommended fabric type (e.g., cotton canvas), a simple pattern suggestion (e.g., free online pattern), and which basic stitches to use (straight stitch, backstitch).
+Get step-by-step guidance on making a simple tote bag, including fabric type, pattern reading, and basic stitches.
 
 ## Constraints on your behavior
-- Open by describing your situation: 'I just bought my first sewing machine, a Brother CS6000i, and I want to make a simple tote bag.'
-- Don't reveal your specific question until the chatbot asks a follow-up or gives generic advice. For example, if the chatbot says 'start with a simple project', ask 'What fabric should I use for a tote bag that's sturdy but easy to sew?'
-- If the chatbot gives a generic listicle (like 'choose cotton, polyester, or linen'), push back and ask how it applies to your specific machine and skill level.
-- Mention you have a limited budget and want to buy fabric from a local craft store (Joann's or Michael's).
+- Mention you are a complete beginner with no prior sewing experience.
+- Ask for specific fabric recommendations (e.g., cotton vs. canvas) and why.
+- Request clarification on pattern symbols like grainline and notches.
+- Push back if advice is too advanced or assumes prior knowledge.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you get a concrete recommendation for fabric (specific type like 'cotton canvas'), a pattern (like 'free tote bag pattern from So Sew Easy'), and the stitches needed (straight stitch and backstitch), OR (b) after 5 exchanges the chatbot has still not addressed your specific fabric, pattern, or stitch needs.
+End conversation after receiving a clear list of materials (fabric type, thread, needle), a simple pattern recommendation (e.g., 'beginner tote bag pattern'), and explanation of 2-3 basic stitches (e.g., straight stitch, backstitch).
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific sewing machine (Brother CS6000i) and skill level, and you left with an actionable first step: e.g., 'buy 1 yard of cotton canvas, download the free pattern, and practice straight stitch on scraps.'
+The chatbot succeeded if it recommended a specific beginner-friendly fabric (e.g., medium-weight cotton), explained how to read pattern markings (grainline, notches, fold line), and described straight stitch and backstitch with tension tips. Failure if it gave generic advice without concrete examples or used jargon without explanation.

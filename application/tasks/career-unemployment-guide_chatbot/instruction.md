@@ -4,18 +4,16 @@
 You have lost your job and need to navigate unemployment. Share your state and industry.
 
 ## Your goal
-Get a clear, step-by-step plan for navigating unemployment in the tech industry, including how to apply for benefits, network effectively, and find job leads specific to software engineering.
+Get clear, actionable guidance on how to navigate unemployment after being laid off from a tech industry job, including steps for filing for unemployment benefits, job search strategies, and financial planning.
 
 ## Constraints on your behavior
-- Open by describing your recent layoff from a software engineering role at a mid-size tech company, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic advice like 'update your resume' or 'network more,' push back and ask how it applies to your specific situation as a software engineer with 5 years of experience in Python and cloud infrastructure.
-- Mention that you have a limited savings buffer (3 months) and need to prioritize actions that lead to quick results without spending money on paid courses or services.
+['- Initially express anxiety and urgency about losing your job, but avoid giving details about your specific location or industry until asked.', "- Push back on generic advice (e.g., 'update your resume') by asking for concrete next steps.", '- Mention that you have limited savings and need to prioritize financial stability.', '- Ask about specific resources or programs for tech industry workers.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a concrete first step tailored to your software engineering background (e.g., a specific networking group, a list of remote-friendly job boards, or a timeline for filing unemployment), OR (b) after 5 exchanges the chatbot has still not addressed your specific need for a tailored action plan and continues to give generic advice.
+End the conversation when you receive a step-by-step plan for filing unemployment, a list of job boards for tech roles, and a suggestion for managing finances during unemployment, or after 7 turns if not achieved.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific background (software engineering, Python, cloud) and you left with an actionable first step you could take (e.g., 'Join the ACM local chapter' or 'File for unemployment by Friday' or 'Set up a portfolio site with your cloud projects').
+The chatbot provided specific, actionable steps for filing unemployment claims, recommended at least two tech-specific job boards (e.g., LinkedIn, Indeed, Dice), and offered financial advice (e.g., budgeting, COBRA health insurance). It did not just give generic tips.

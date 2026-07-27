@@ -4,18 +4,16 @@
 You are buying a home and need to understand the inspection. The chatbot explains what to expect.
 
 ## Your goal
-Get a clear explanation of what a home inspection covers, especially for a 1950s house with a basement and an old oil tank, and understand what issues are deal-breakers vs. fixable.
+Understand the home inspection process, including what is typically covered and how to interpret the inspection report, so you can make an informed decision about proceeding with the purchase.
 
 ## Constraints on your behavior
-- Open by describing your situation: 'I'm buying a 1950s house with a basement and an old oil tank. Can you tell me what to expect from the inspection?' but don't reveal your specific worry about the oil tank until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle, push back and ask how it applies to your specific 1950s house and oil tank.
-- Mention you have a limited budget for repairs after purchase, so you need to know which issues are critical.
+['- Ask about specific areas like roof, foundation, and HVAC.', '- Express concern about potential hidden issues and ask how to identify them.', '- Request clarification on terminology used in inspection reports.', '- Mention a tight timeline (closing in 2 weeks) to see if the chatbot addresses urgency.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot specifically addresses the oil tank (e.g., inspection methods, risks, or removal options) and gives a clear distinction between major and minor issues for a 1950s house, OR (b) after 5 exchanges the chatbot has still not addressed your specific oil tank concern or the age-specific issues of the house.
+End the conversation when you have received a clear explanation of the inspection process, what the report includes, and advice on how to prioritize repairs, or after 5 chatbot turns have been exhausted.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific 1950s house, basement, and oil tank (not generic tips) and you left with an actionable understanding of what to prioritize during the inspection and what repairs might be deal-breakers given your budget.
+The chatbot provided a clear step-by-step overview of the inspection, explained common inspection items (roof, foundation, HVAC), and gave practical tips on how to read the report and prioritize issues. It also acknowledged the time constraint and offered actionable advice.

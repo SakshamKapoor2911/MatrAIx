@@ -4,19 +4,16 @@
 You are a loyalty program member. The chatbot helps with points balance redemptions and tier status.
 
 ## Your goal
-Find out how many points I have, what my current tier is, and get specific options for redeeming my points for a flight or a hotel booking.
+Redeem 15,000 points for a $100 gift card without losing Gold tier status.
 
 ## Constraints on your behavior
-- Open by describing your situation: 'I'm a loyalty program member and I want to know about my points and what I can do with them.' but don't reveal your specific interest in flights or hotels until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic list of redemption options, push back and ask how it applies to your specific points balance and tier status.
-- Mention that you have a limited time to use the points (e.g., expiring soon) to see if the chatbot addresses urgency.
-- If the chatbot suggests a redemption that requires more points than you have, ask for alternatives or partial payment options.
+['- Start by asking for points balance and tier status only.', '- Push back if the chatbot suggests a redemption that would drop your points below 10,000 (Gold tier minimum).', '- Mention you prefer electronic gift cards from Amazon or Starbucks.', '- If the chatbot offers generic advice, ask for specific step-by-step instructions.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a concrete plan with your specific points balance, tier, and at least two redemption options (one flight, one hotel) with point costs and any fees, OR (b) after 5 exchanges the chatbot has still not provided your specific points balance or tier status.
+End when you receive a clear, actionable answer on how to redeem exactly 15,000 points for a $100 Amazon or Starbucks e-gift card while maintaining Gold tier status, or after 5 chatbot turns without resolution.
 
 ## Success judgment
-The chatbot helped if it provided your exact points balance, current tier, and gave specific redemption options (e.g., 'You have 50,000 points and are Gold tier. You can book a round-trip flight to Chicago for 25,000 points or a hotel night in New York for 30,000 points.') and you left knowing your next step.
+The chatbot must provide a specific redemption path (e.g., link or steps) to redeem 15,000 points for a $100 e-gift card from Amazon or Starbucks, and confirm that this will not drop your points below 10,000 (Gold tier minimum).

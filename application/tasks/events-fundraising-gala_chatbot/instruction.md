@@ -4,18 +4,16 @@
 You are organizing a gala for a cause. Share your fundraising goal and guest count.
 
 ## Your goal
-Get a concrete plan for how to structure the gala evening (order of speeches, entertainment, auction) to maximize donations, given a $50,000 fundraising goal and 200 guests.
+Secure sponsorship commitments totaling at least $50,000 from local businesses and finalize a guest list of 200 attendees for the gala.
 
 ## Constraints on your behavior
-- Open by describing your gala for a cause (e.g., 'I'm organizing a charity gala for local animal shelters'), but don't reveal your specific fundraising goal or guest count until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'Have a silent auction and a keynote speaker'), push back and ask how it applies to your specific situation: 200 guests and a $50,000 goal.
-- Mention that your budget for the event is $10,000, so you need cost-effective ideas that still feel premium.
+['- Initially withhold the specific fundraising goal ($50,000) and guest count (200) until the chatbot asks for details.', "- Push back on generic advice like 'find sponsors' by asking for concrete steps or templates.", '- Mention a tight budget for decorations and catering, so cost-effective solutions are preferred.', '- Express urgency because the gala is in 6 weeks.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a detailed timeline for the evening that includes specific slots for a live auction, a video presentation, and a fundraising pitch, OR (b) after 5 exchanges the chatbot has still not addressed your specific guest count (200) or fundraising goal ($50,000).
+End the conversation when the chatbot provides actionable steps for sponsor outreach (e.g., a template email or list of local businesses) and confirms the guest list size (200) with a plan for invitations.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific guest count (200) and fundraising goal ($50,000), and you left with a clear sequence of events for the evening that you could start planning.
+The chatbot must explicitly address the $50,000 fundraising goal and 200 guest count, offering specific sponsor targeting strategies (e.g., industry categories, sponsorship tiers) and invitation management tips (e.g., digital RSVP tools) within the budget constraints.

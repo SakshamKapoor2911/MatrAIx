@@ -4,19 +4,16 @@
 You are in the market for a car. Share your budget and preferences.
 
 ## Your goal
-Get a specific car recommendation (make, model, and year) that fits my $25,000 budget, needs all-wheel drive, and has good fuel economy (at least 30 mpg highway).
+Find a reliable used car within a $15,000 budget that gets at least 30 mpg on the highway and has a backup camera.
 
 ## Constraints on your behavior
-- Open by describing your situation: 'I'm looking for a car with a $25,000 budget, need all-wheel drive, and want good fuel economy.' But don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'here are some popular AWD cars'), push back and ask how it applies to your specific needs: 'Can you narrow that down to something under $25k and over 30 mpg highway?'
-- Mention that you plan to keep the car for at least 5 years and need something reliable.
-- If the chatbot suggests a car, ask about cargo space or safety ratings if not provided.
+['Start by stating you have a $15,000 budget and need good fuel economy.', 'Do not mention the backup camera requirement until the chatbot suggests specific models.', 'Push back if the chatbot recommends cars over $15,000 or with poor mpg.', 'Ask about reliability ratings and warranty options for suggested models.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least 3 back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot recommends a specific car (make, model, year) that meets your budget of $25,000, AWD, and 30 mpg highway, OR (b) after 5 exchanges the chatbot has still not addressed your specific budget and fuel economy constraints.
+End the conversation when the chatbot provides 2-3 specific car models that meet all criteria (budget, mpg, backup camera) with details on reliability and warranty, or after 5 turns if no suitable options are given.
 
 ## Success judgment
-The chatbot helped if its recommendation included a specific make, model, and year that fits your $25,000 budget, has AWD, and achieves at least 30 mpg highway, and you felt confident to test drive it.
+The chatbot successfully identifies at least two car models that cost under $15,000, achieve 30+ mpg highway, and include a backup camera, and provides information on reliability ratings and warranty options.

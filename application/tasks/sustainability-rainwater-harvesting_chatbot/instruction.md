@@ -4,18 +4,19 @@
 You live in a drought-prone area of California and want to install a rainwater harvesting system for your garden. You need to know the legal requirements and system costs.
 
 ## Your goal
-Get a clear understanding of the legal requirements for rainwater harvesting in your California county, including any permits or restrictions, and obtain a realistic cost estimate for a system that can support your garden.
+Get specific legal requirements for rainwater harvesting in a drought-prone California area and a cost estimate for a system that waters a 500 sq ft garden.
 
 ## Constraints on your behavior
-- Open by describing your general situation: you live in a drought-prone area of California and want to harvest rainwater for your garden, but don't reveal your specific county or garden size until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic advice about rainwater harvesting without addressing California-specific laws or your county, push back by asking how it applies to your specific county (e.g., 'But in my county, there might be different rules—can you check for Sonoma County?').
-- Mention that you have a limited budget of $500 and want to know if a simple barrel system is feasible or if you need a more expensive setup.
+- Start by asking about legal requirements without specifying the garden size immediately.
+- Push back on generic advice like 'check local ordinances' by asking for specific state laws or permits.
+- Mention budget constraint: under $1,500 total.
+- Ask for cost breakdown including tank, gutters, and installation.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a concrete answer about legal requirements for Sonoma County and a cost breakdown for a system under $500, OR (b) after 5 exchanges the chatbot has still not addressed your California-specific legal or cost constraints.
+Chatbot provides specific legal references (e.g., CA Rainwater Capture Act, local permit) and a cost estimate under $1,500 for the specified garden size, or after 5 exchanges without actionable answers.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific county (Sonoma) and budget ($500), and you left with an actionable first step (e.g., contact the county building department for a permit, or a list of affordable barrel suppliers).
+Chatbot should cite specific California laws (e.g., CA Water Code §10560), mention any required permits, and give a realistic cost range (e.g., $800-1,200) for a system with a 500-gallon tank, gutter diversion, and basic filtration.

@@ -4,19 +4,16 @@
 You want to build a minimalist wardrobe with ethically made basics under $50 per item. You're interested in brands that use organic cotton and recycled materials.
 
 ## Your goal
-Get a list of specific brands that sell ethically made basics (t-shirts, pants, underwear) under $50 per item, using organic cotton or recycled materials, and a recommended starting capsule wardrobe of 5-7 items.
+Find at least 3 brands that sell ethically made basic clothing items (e.g., t-shirts, plain tops, leggings) using organic cotton and recycled materials, with each item under $50.
 
 ## Constraints on your behavior
-- Open by describing your interest in building a minimalist wardrobe with ethical basics, but don't reveal your budget or material preferences until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot suggests brands like Patagonia or Everlane without checking prices, push back and ask if they have items under $50 and use organic cotton or recycled materials.
-- Mention that you're on a tight budget and can't spend more than $50 per item, and ask for budget-friendly options.
-- If the chatbot gives generic tips like 'shop secondhand' or 'buy less', acknowledge but ask for specific brand names and a concrete starter list.
+['Initially withhold budget and material preferences; reveal them only after the chatbot asks clarifying questions.', "Push back on generic advice like 'buy from sustainable brands' by asking for specific names and price points.", 'If the chatbot suggests a brand, ask for confirmation that items are under $50 and made from organic cotton or recycled materials.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides at least 3 specific brand names with price confirmation under $50 and material details (organic cotton or recycled), OR (b) after 5 exchanges the chatbot has still not addressed your specific budget and material constraints.
+End the conversation when you have received at least 3 specific brand names with confirmed under-$50 items using organic cotton/recycled materials, or after 5 turns of chatbot failing to provide concrete answers.
 
 ## Success judgment
-The chatbot helped if its advice referenced specific brands (e.g., Pact, Kotn, or alternative) with items under $50 and using organic cotton or recycled materials, and you left with a concrete starter list of 5-7 items or a clear next step to research those brands.
+Success if the chatbot provides at least 3 specific brand names and confirms that each offers basics under $50 using organic cotton and/or recycled materials. Failure if the chatbot gives only generic advice, recommends brands without price or material verification, or fails to address the budget constraint.

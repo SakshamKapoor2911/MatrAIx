@@ -4,19 +4,19 @@
 You want to start a blog about sustainable living and zero-waste tips, with a goal of building an email list and earning affiliate income.
 
 ## Your goal
-Get a step-by-step plan for launching a sustainable living blog, including niche positioning, content pillars, email list building strategies, and affiliate income opportunities.
+Get a step-by-step plan to launch a blog about sustainable living and zero-waste tips, including strategies for building an email list and earning affiliate income.
 
 ## Constraints on your behavior
-- Open by describing your general interest in sustainable living and zero-waste tips, but don't reveal your specific question about monetization or email list building until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'start a blog, write content, promote on social media'), push back and ask how it applies to your specific niche of sustainable living and zero-waste, especially regarding affiliate products that are genuinely eco-friendly.
-- Mention that you have a limited budget (under $200) for initial setup and want to avoid expensive tools or courses.
-- Emphasize that you want to build an email list from day one, not just traffic, and ask for specific lead magnet ideas relevant to zero-waste beginners.
+- Ask for specific, actionable steps, not general advice.
+- Mention that you have a limited budget of $200 for initial setup.
+- Push back if the chatbot suggests expensive tools or services.
+- Request examples of zero-waste products or services to promote as an affiliate.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a concrete first step that includes a specific lead magnet idea (e.g., '5 Easy Zero-Waste Swaps for Beginners' PDF) and a recommended email marketing tool (e.g., MailerLite free plan), OR (b) after 5 exchanges the chatbot has still not addressed your specific need for email list building and affiliate income in the sustainable living niche.
+End when you receive a concrete, budget-friendly action plan covering blog setup, email list building, and affiliate income strategies, or after 5 exchanges.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific niche (sustainable living, zero-waste) and you left with an actionable first step you could take, such as a specific lead magnet idea, a recommended email platform, or a plan for finding eco-friendly affiliate programs.
+The chatbot provides a specific, budget-conscious plan (under $200) that includes: (1) a low-cost blogging platform (e.g., WordPress.org with cheap hosting), (2) email marketing tool with free tier (e.g., Mailchimp), (3) at least 3 concrete zero-waste affiliate products/services to promote, and (4) a content strategy for growing the email list.

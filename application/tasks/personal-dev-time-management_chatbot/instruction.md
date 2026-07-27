@@ -4,18 +4,19 @@
 You feel overwhelmed and want to get organized. Share your daily responsibilities.
 
 ## Your goal
-Get a concrete, step-by-step plan to organize your daily responsibilities, including a prioritized task list and a simple scheduling method.
+Get a practical, step-by-step plan to organize daily responsibilities (work tasks, household chores, self-care, and social commitments) using a time-blocking method.
 
 ## Constraints on your behavior
-- Open by describing your situation: 'I feel overwhelmed by my daily responsibilities and want to get organized.' Don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'just make a to-do list'), push back and ask how it applies to your specific responsibilities: 'But I have work deadlines, meal prep, and kids' activities—how do I prioritize those?'
-- Mention that you have limited time and want a system that takes less than 15 minutes a day to maintain.
+- Initially describe feeling overwhelmed but withhold specific responsibilities until prompted.
+- Push back on generic advice like 'just make a to-do list' or 'prioritize' without concrete steps.
+- When sharing responsibilities, mention: 4 work projects, 2 household chores (cleaning, cooking), 30 min exercise, and 2 weekly social events.
+- If chatbot asks about time availability, specify 8am-10pm with 1-hour lunch break.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives you a specific plan that includes a prioritized task list and a scheduling method tailored to your responsibilities (work, meal prep, kids' activities), OR (b) after 5 exchanges the chatbot has still not addressed your specific responsibilities or constraints (limited time).
+End conversation when chatbot provides a specific time-blocked schedule template that allocates blocks for work projects, chores, exercise, and social time, OR after 5 turns without a concrete plan.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific responsibilities (work deadlines, meal prep, kids' activities) and you left with an actionable first step (e.g., 'block 10 minutes each morning to prioritize tasks using a simple A-B-C method') that you could take.
+Chatbot succeeded if it: (1) extracted the specific responsibilities (4 work projects, 2 chores, exercise, 2 social events), (2) provided a time-blocking schedule with named blocks (e.g., '9-11am Project A', '6-6:30pm Exercise'), and (3) offered a suggestion for adjusting the plan if overwhelmed (e.g., reducing social events to 1 per week).

@@ -4,19 +4,16 @@
 You have a Canon Rebel T7 with the kit lens and want to take better natural-light portraits of your kids playing outdoors.
 
 ## Your goal
-Get a concrete starting plan: how to use your Canon Rebel T7 and kit lens for better natural-light portraits of your kids playing outdoors, including specific settings, timing, and composition tips.
+Get specific, actionable advice on using the Canon Rebel T7 kit lens to capture sharp, well-lit outdoor portraits of children in motion, including recommended camera settings (aperture, shutter speed, ISO) and techniques for focusing and composition.
 
 ## Constraints on your behavior
-- Open by describing your situation: 'I have a Canon Rebel T7 with the kit lens and I struggle to get good portraits of my kids playing outside. They move a lot, and the light is often harsh.'
-- Don't reveal your specific question until the chatbot asks a follow-up or gives generic advice. If it immediately gives generic tips, ask how they apply to your T7 kit lens.
-- If the chatbot gives a generic listicle (e.g., 'use golden hour, aperture priority, and continuous shooting'), push back: 'But with the kit lens, the aperture is f/3.5-5.6. How do I get a blurry background in bright sunlight?'
-- Mention your budget: you can't afford a new lens right now, so you need to work with what you have.
+['Start by describing the challenge: kids moving fast, kit lens limitations, and natural light conditions (e.g., golden hour vs. harsh midday sun).', "Ask clarifying questions if the chatbot gives generic advice (e.g., 'What about when they're running?').", 'Mention that you have a budget of $100 if the chatbot suggests buying new gear, but you prefer to work with what you have.', "Push back on advice that is too vague (e.g., 'use a fast shutter speed' – ask for a specific number)."]
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives a specific plan for your T7 kit lens (e.g., shutter speed 1/500s, aperture f/5.6, ISO 400, and suggests using a tree for shade), OR (b) after 5 exchanges the chatbot has still not addressed your specific kit lens limitations (aperture range, no image stabilization).
+End the conversation when you receive a concrete, step-by-step plan that includes specific settings for the Rebel T7 kit lens (e.g., aperture f/5.6, shutter speed 1/500s, ISO 400, and a technique like AI Servo AF) OR after 5 exchanges without such advice.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific Canon Rebel T7 with kit lens (e.g., 'set aperture to f/5.6, use AI Servo AF') and you left with an actionable first step (e.g., 'try shooting in aperture priority mode at f/5.6, ISO 400, and use a tree for soft light').
+The chatbot succeeds if it provides a clear, actionable plan with settings (aperture, shutter speed, ISO, focus mode) tailored to the Rebel T7 kit lens and children in motion, and explains how to adjust for different lighting conditions (e.g., cloudy vs. sunny). It fails if it only gives generic tips, recommends expensive gear, or fails to address the specific challenge of moving subjects.
