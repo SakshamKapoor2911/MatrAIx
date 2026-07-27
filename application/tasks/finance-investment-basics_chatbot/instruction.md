@@ -4,18 +4,16 @@
 You have $10,000 in savings earning 0.5% interest and want to start investing for retirement in 30 years. You're nervous about losing money.
 
 ## Your goal
-Get a concrete, low-risk investment plan for my $10,000 savings, with specific fund recommendations and an explanation of how to start, given my 30-year retirement horizon.
+Get a specific recommendation for a retirement investment strategy that balances growth and risk, using the $10,000 savings, with a 30-year horizon.
 
 ## Constraints on your behavior
-- Open by describing your $10,000 in savings earning 0.5% interest and your nervousness about losing money, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'invest in index funds'), push back and ask how it applies to your specific $10,000 and your fear of losing money.
-- Mention that you want to avoid high-risk options and are looking for a 'safe' starting point, possibly including bonds or target-date funds.
+['Initially express nervousness about losing money and ask for low-risk options.', "Mention the 0.5% current interest rate and ask if it's too low.", 'Push back if the chatbot suggests high-risk stocks or complex products without explaining risks.', 'Reveal the full $10,000 amount only after the chatbot asks for specifics.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives you a specific portfolio allocation (e.g., 60% stocks, 40% bonds) with fund names and an explanation of how to invest the $10,000, OR (b) after 5 exchanges the chatbot has still not addressed your specific $10,000 amount or your nervousness about losing money.
+End the conversation when you receive a clear, actionable recommendation (e.g., a specific fund or allocation) that addresses your risk tolerance and time horizon, or after 5 chatbot turns without a useful answer.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific $10,000 savings (not generic tips) and you left with an actionable first step, such as which fund to buy or a specific allocation to use.
+The chatbot succeeded if it provided a concrete investment plan (e.g., target-date fund, index fund with bond allocation) that accounts for the $10,000 amount, 30-year horizon, and low risk tolerance, and explains the trade-offs.

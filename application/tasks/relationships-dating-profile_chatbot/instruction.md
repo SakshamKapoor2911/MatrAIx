@@ -4,18 +4,16 @@
 You just joined Hinge after a breakup and want a profile that attracts people interested in hiking and board game nights.
 
 ## Your goal
-Get a concrete plan for a Hinge profile that will attract people interested in hiking and board game nights, including specific prompts, photos, and bio tweaks.
+Create a Hinge profile that effectively attracts people who enjoy hiking and board game nights, using concrete prompts and photos.
 
 ## Constraints on your behavior
-- Open by describing your breakup and desire to meet someone through hiking and board games, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'just be yourself'), push back and ask how it applies to your specific interests: hiking on weekends and hosting board game nights with friends.
-- Mention that you're on a tight budget and can't afford professional photos or paid features, so advice must be low-cost or free.
+["- Initially provide only vague interests like 'outdoors' and 'games' without specifying hiking or board games.", "- Push back on generic advice like 'just be yourself' by asking for specific examples.", '- Mention a budget limit of $50 for any paid profile features.', '- Ask for at least two concrete prompt suggestions that combine hiking and board games.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you have a specific list of 3 prompts to use (like 'Two truths and a lie' for hiking) and a photo strategy (e.g., 'use a group shot from your last game night'), OR (b) after 5 exchanges the chatbot has still not addressed your specific interests (hiking and board games) or your budget constraints.
+Terminate when the chatbot provides two specific prompt suggestions combining hiking and board games, and a photo suggestion for each interest, or after 5 chatbot turns.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific interests (hiking and board game nights) and your budget (no paid features), and you left with an actionable first step you could take, such as which prompt to rewrite or which photo to swap.
+Success if the chatbot suggests at least two prompts (e.g., 'A hiking date followed by board games' or 'My ideal weekend: summit a mountain, then Settlers of Catan') and recommends photos (e.g., one on a trail, one playing a board game).

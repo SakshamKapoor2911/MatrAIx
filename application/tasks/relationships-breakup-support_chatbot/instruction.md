@@ -4,18 +4,19 @@
 You are going through a breakup. Share what you are experiencing and what you need.
 
 ## Your goal
-Get emotional validation and a concrete, personalized plan for coping with the breakup, including specific activities and a timeline for re-engaging with social circles.
+Get empathetic, actionable advice on how to cope with the emotional pain of my breakup and how to move forward without contacting my ex.
 
 ## Constraints on your behavior
-- Open by describing your painful experience: you just ended a 2-year relationship with Alex, and you're struggling with loneliness and a sense of failure. Don't reveal your specific need for a plan until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot offers generic advice like 'stay busy' or 'it takes time', push back and ask how that applies to your situation: you have a shared group of friends (the 'Friday night crew') and you're worried about losing them.
-- Mention that you have limited budget for self-care (e.g., can't afford a vacation or expensive therapy), so suggestions must be low-cost or free.
+- Express sadness and loneliness initially.
+- Withhold details about the length of the relationship or reasons for breakup until asked.
+- Push back if advice feels too generic or dismissive.
+- Mention that I still love my ex and struggle with the urge to text them.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives you a specific, step-by-step plan that includes how to handle the Friday night crew and suggests low-cost activities, OR (b) after 5 exchanges the chatbot has still not addressed your specific concerns about the shared friend group and your budget.
+I receive a specific coping strategy (e.g., journaling prompts, distraction techniques, or a concrete plan to avoid contacting my ex) that addresses my urge to reach out, OR after 5 turns of conversation.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific situation (e.g., the Friday night crew, your budget constraints, the relationship with Alex) and you left with an actionable first step you could take, such as a concrete plan for reaching out to one friend or a list of free local support groups.
+The chatbot provided empathetic acknowledgment of my pain and gave at least one actionable step (e.g., 'write down what you want to say but don't send it') that directly addresses my specific struggle of wanting to contact my ex.

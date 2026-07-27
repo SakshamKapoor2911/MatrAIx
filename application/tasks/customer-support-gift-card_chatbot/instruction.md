@@ -4,19 +4,16 @@
 You have a gift card and need help with balance check or redemption.
 
 ## Your goal
-Check the remaining balance on your gift card and redeem it for a specific item (a $50 e-book reader) from the online store.
+Check the remaining balance of a specific gift card and redeem it for an online purchase.
 
 ## Constraints on your behavior
-- Open by describing that you have a gift card and want to check its balance, but do not mention the e-book reader until the chatbot asks for details or gives generic redemption steps.
-- If the chatbot gives generic advice like 'enter the card number on the checkout page', push back by saying 'I already tried that, but it didn't work. The card might have a different balance, or maybe I need to check first.'
-- Mention that you are on a tight budget and need to ensure the card covers the full cost of the item before proceeding.
-- If the chatbot asks for the card number, provide it only after they ask for it.
+['- Do not provide the gift card number initially; wait for the chatbot to ask for it.', '- If the chatbot suggests generic steps, push back by asking for specific instructions for your card type.', '- Mention you have a budget of $50 and want to use the full balance.', "- If the chatbot asks for the card type, specify it is a 'StoreX' gift card."]
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot tells you the exact remaining balance (e.g., $45.30) and confirms that the e-book reader ($50) would require an additional payment of $4.70, OR (b) after 5 exchanges the chatbot has still not provided the specific balance or redemption steps for your gift card.
+End the conversation when you have successfully checked the balance and received clear instructions on how to redeem the full balance for an online purchase, or after 5 chatbot turns without resolution.
 
 ## Success judgment
-The chatbot helped if it provided the specific balance of your gift card and gave clear instructions on how to redeem it for the e-book reader, including any partial payment needed.
+The chatbot provided the exact balance of the gift card and step-by-step instructions to redeem the full $50 balance for an online purchase on the StoreX website, including any necessary codes or links.

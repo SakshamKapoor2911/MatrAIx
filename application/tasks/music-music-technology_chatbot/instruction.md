@@ -4,19 +4,16 @@
 You have a $500 budget and want to record acoustic guitar and vocals for YouTube covers, but you're not sure what audio interface or mic to buy.
 
 ## Your goal
-Get a concrete recommendation for an audio interface and microphone under $500 that will work well for recording acoustic guitar and vocals simultaneously for YouTube covers.
+Get a specific recommendation for an audio interface and microphone suitable for recording acoustic guitar and vocals, staying within a $500 budget.
 
 ## Constraints on your behavior
-- Open by describing your situation: you want to record acoustic guitar and vocals for YouTube covers, but you're not sure what to buy.
-- Don't reveal your budget or specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle, push back and ask how it applies to your specific need for simultaneous recording of guitar and vocals.
-- Mention your $500 budget if the chatbot suggests something too expensive.
+['- Initially state only the budget and vague need to record guitar and vocals.', "- If asked for more details, specify it's for YouTube covers, acoustic guitar and vocals.", "- Push back on generic advice like 'any interface works' by asking for model names.", '- Mention that you are a beginner and want something easy to set up.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives a specific recommendation for an audio interface and microphone under $500 that supports simultaneous recording, OR (b) after 5 exchanges the chatbot has still not addressed your specific need for simultaneous recording of acoustic guitar and vocals.
+['- Receive a concrete recommendation for a specific audio interface model and microphone model that together cost $500 or less.', '- Or after 5 user turns if no satisfactory answer is given.']
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific need for simultaneous recording of acoustic guitar and vocals within a $500 budget, and you left with a clear purchase recommendation (e.g., Focusrite Scarlett 2i2 + Shure SM57 or similar).
+The chatbot successfully recommends a specific audio interface (e.g., Focusrite Scarlett 2i2) and microphone (e.g., Shure SM57) with total cost under $500, and provides a brief explanation of why they suit the user's needs.

@@ -4,19 +4,16 @@
 You have curly, frizzy hair and want to define your curls without using heat. You're looking for sulfate-free shampoos and leave-in conditioners.
 
 ## Your goal
-Get a personalized recommendation for a sulfate-free shampoo and leave-in conditioner that work on curly, frizzy hair without heat, and understand the order of application.
+Find a sulfate-free shampoo and a leave-in conditioner that help define curly, frizzy hair without heat.
 
 ## Constraints on your behavior
-- Open by describing your curly, frizzy hair and desire to avoid heat, but don't reveal your specific question about product order until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle, push back and ask how it applies to your specific hair type (curly, frizzy).
-- Mention that you have a budget of under $30 per product and prefer drugstore brands.
-- Avoid mentioning that you already have a specific product in mind; let the chatbot suggest first.
+['Start by saying you have curly, frizzy hair and want to avoid heat styling.', "Mention you're looking for sulfate-free products specifically.", "If the chatbot suggests generic products, ask for specific product names or ingredients (e.g., 'Does this shampoo contain sulfates?').", 'If the chatbot provides a list, ask for the top recommendation and why it works for frizzy curls.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot recommends a specific sulfate-free shampoo and leave-in conditioner under $30 with application order, OR (b) after 5 exchanges the chatbot has still not addressed your curly, frizzy hair or budget constraints.
+End the conversation when you receive at least one specific sulfate-free shampoo and one specific leave-in conditioner recommendation with reasoning for frizzy curls, or after 5 turns of back-and-forth without getting a concrete answer.
 
 ## Success judgment
-The chatbot helped if it recommended specific products (name and brand) that are sulfate-free, suitable for curly and frizzy hair, under $30, and explained the order of application (e.g., shampoo first, then leave-in conditioner).
+The chatbot successfully recommended at least one sulfate-free shampoo and one leave-in conditioner, explained why they help define curls without heat, and the recommendations are appropriate for frizzy curly hair.

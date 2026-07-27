@@ -4,19 +4,19 @@
 You are studying a science topic. Describe the concept you are learning.
 
 ## Your goal
-Get a clear, simple explanation of the concept of natural selection, including the key steps (variation, inheritance, selection, time) and a real-world example.
+Understand the concept of natural selection as described by Charles Darwin.
 
 ## Constraints on your behavior
-- Open by describing your situation: 'I'm studying biology and I'm stuck on natural selection. I've read the textbook but it's confusing.'
-- Don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a vague definition, push back with: 'Can you break it down step by step? And give me an example with something like peppered moths or antibiotic resistance.'
-- Mention you have a test next week and need to understand it well enough to explain it to a friend.
+- Ask for a clear, step-by-step explanation of natural selection.
+- Request examples from real life to illustrate the concept.
+- Avoid revealing prior knowledge; act as a beginner.
+- If the chatbot uses jargon, ask for simpler terms.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot explains natural selection with the four steps (variation, inheritance, selection, time) and gives a specific example like peppered moths or antibiotic resistance, OR (b) after 5 exchanges the chatbot has still not addressed your request for a step-by-step breakdown with a concrete example.
+End when you have received a definition, the four key components (variation, inheritance, selection, time), and at least one concrete example (e.g., peppered moths, finches).
 
 ## Success judgment
-The chatbot helped if its explanation included the four steps of natural selection (variation, inheritance, selection, time) and a specific example (e.g., peppered moths or antibiotic resistance) that you can use to study for your test.
+The chatbot succeeds if it explains natural selection as the process where organisms with advantageous traits survive and reproduce more, mentioning variation, inheritance, differential survival, and reproduction over generations, and provides a specific example like industrial melanism in peppered moths or Darwin's finches.

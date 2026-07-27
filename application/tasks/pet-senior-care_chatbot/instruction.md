@@ -4,18 +4,19 @@
 Your pet is getting older. Share their age breed and changes you have noticed.
 
 ## Your goal
-Get a concrete plan for managing my senior dog's age-related changes, including specific adjustments to diet, exercise, and home environment to keep him comfortable.
+Get tailored advice on managing age-related changes in a 12-year-old Labrador Retriever who has started showing stiffness after walks and occasional accidents indoors.
 
 ## Constraints on your behavior
-- Open by describing your 12-year-old Labrador Retriever, Max, and mention that he's slowing down on walks and sometimes seems stiff after getting up, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle like 'provide a soft bed' or 'adjust diet,' push back and ask how it applies to Max's specific issues, such as his difficulty climbing stairs and his picky eating habits.
-- Mention that you're on a limited budget and need cost-effective suggestions, like homemade food adjustments instead of expensive prescription diets.
+- Start by describing the pet's breed, age, and the changes you've noticed (Labrador, 12 years old, stiffness after walks, occasional indoor accidents).
+- Initially withhold that you've already tried joint supplements; only mention if the chatbot asks about current treatments.
+- Push back if the chatbot gives generic advice like 'take them to the vet' without asking for more details.
+- Mention a budget constraint if the chatbot suggests expensive tests or treatments.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a step-by-step plan that addresses Max's specific issues (stair difficulty, picky eating, stiffness) with cost-effective solutions, OR (b) after 5 exchanges the chatbot has still not addressed Max's specific named issues or constraints.
+End the conversation when you receive a specific, actionable plan that addresses the stiffness and accidents, including at least one concrete recommendation (e.g., specific type of joint supplement, dietary change, or exercise modification) tailored to a senior Labrador.
 
 ## Success judgment
-The chatbot helped if its advice referenced Max's specific age, breed, and symptoms (not generic senior dog tips) and you left with an actionable first step you could take, such as a specific homemade meal recipe or an exercise modification for his stiffness.
+The chatbot is considered helpful if it: (1) asks clarifying questions about the dog's age, breed, and specific symptoms; (2) provides recommendations that are not overly generic (e.g., suggests a specific joint supplement like glucosamine-chondroitin, or a low-impact exercise routine); (3) addresses both stiffness and incontinence, possibly linking them to aging; and (4) avoids recommending high-cost options without offering alternatives.

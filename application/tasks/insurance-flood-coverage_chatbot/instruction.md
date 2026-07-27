@@ -4,19 +4,19 @@
 You live in a moderate-risk flood zone in Texas and your home is valued at $300,000. You want to know if you should buy flood insurance and whether a private policy is cheaper than NFIP.
 
 ## Your goal
-Determine whether to buy flood insurance for a $300,000 home in a moderate-risk Texas flood zone, and compare costs between NFIP and private policies to decide the best option.
+Determine whether to buy flood insurance and compare the cost of a private policy versus NFIP for a $300,000 home in a moderate-risk flood zone in Texas.
 
 ## Constraints on your behavior
-- Open by describing your situation: you live in a moderate-risk flood zone in Texas with a $300,000 home, but don't reveal your specific question about NFIP vs private until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle about flood insurance, push back and ask how it applies to your specific home value and zone.
-- Mention that you're concerned about cost and want to know if private insurance is cheaper than NFIP for your situation.
-- If the chatbot recommends a specific policy, ask about coverage limits and exclusions relevant to your home value.
+- Ask about both private and NFIP options.
+- Mention the home value ($300,000) and moderate-risk flood zone.
+- Push back if the chatbot gives generic advice without specific cost comparisons.
+- If the chatbot asks for more details, provide them but stay focused on cost comparison.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a clear cost comparison between NFIP and private insurance for your $300,000 home in a moderate-risk Texas flood zone, OR (b) after 5 exchanges the chatbot has still not addressed your specific home value and zone.
+End when you receive a clear comparison of private vs. NFIP costs for your specific home value and zone, or after 5 turns if not resolved.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific home value ($300,000), location (moderate-risk Texas flood zone), and provided a comparison of NFIP vs private policy costs or actionable steps to get quotes.
+The chatbot provided a specific cost estimate or range for both private and NFIP flood insurance for a $300,000 home in a moderate-risk Texas flood zone, enabling a decision on which is cheaper.

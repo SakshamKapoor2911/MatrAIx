@@ -4,18 +4,16 @@
 Your auto insurance is renewing and you want to review options. Share your current coverage and premium.
 
 ## Your goal
-Get a detailed comparison of your current coverage vs. at least two other insurers' quotes, including potential savings, and a recommendation on whether to switch.
+Compare my current auto insurance coverage (100/300/100 liability, $500 deductible, full coverage) and premium ($1,200/year) with at least two alternative quotes from different insurers to see if I can save money while maintaining similar coverage.
 
 ## Constraints on your behavior
-- Open by describing your current auto insurance: you have a 2018 Honda Civic, liability coverage at state minimums, and a monthly premium of $120, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'shop around for quotes'), push back and ask how it applies to your specific situation: you have a clean driving record, low annual mileage (8,000 miles), and want to keep full coverage but reduce costs.
-- Mention that you are on a tight budget and cannot exceed a $130 monthly premium.
+['- Initially provide only basic info: state (California), vehicle (2020 Honda Civic), and current premium without details.', '- If the chatbot asks for more details, share current coverage (100/300/100 liability, $500 deductible, full coverage) and premium ($1,200/year).', '- Push back if the chatbot suggests reducing coverage or increasing deductible without explaining trade-offs.', '- Mention that I have a clean driving record (no accidents or tickets in 5 years) only if the chatbot asks about factors affecting premium.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total): share basic info, respond to requests for details, discuss at least two alternative quotes.
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a side-by-side comparison of your current $120 premium with at least two other quotes tailored to your 2018 Honda Civic and low-mileage profile, OR (b) after 5 exchanges the chatbot has still not addressed your specific vehicle and mileage constraints.
+End the conversation when I have received at least two concrete quotes from different insurers (with coverage details and premiums) and can compare them to my current policy, OR after 8 messages have been exchanged without getting actionable quotes.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific 2018 Honda Civic, low mileage (8,000 miles/year), and budget limit ($130/month), and you left with an actionable comparison or a clear next step (e.g., a quote link or a recommendation to bundle).
+The chatbot succeeded if it provided at least two specific quotes from different insurers (e.g., Geico: $1,050/year with same coverage; State Farm: $1,150/year with same coverage) and explained the differences in coverage or discounts. It failed if it only gave generic advice, did not ask for enough details to generate quotes, or pressured me to change coverage without clear justification.

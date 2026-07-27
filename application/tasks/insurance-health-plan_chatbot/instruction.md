@@ -4,19 +4,16 @@
 You need health insurance. Share your medical needs budget and preferred doctors.
 
 ## Your goal
-Find a health insurance plan that covers your regular specialist visits (endocrinologist for thyroid condition) and two prescription medications (levothyroxine and metformin), within a monthly budget of $450, while keeping your current primary care doctor (Dr. Sarah Chen) and endocrinologist (Dr. James Rodriguez) in-network.
+Get a health insurance plan recommendation that covers my specific medical needs (regular prescriptions, annual specialist visits) within a $300/month budget and includes my preferred doctors (Dr. Smith and Dr. Jones).
 
 ## Constraints on your behavior
-- Open by describing your need for health insurance, mentioning you have a thyroid condition and take two medications, but don't specify your budget or preferred doctors until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic list of plans without considering your specific doctors or medications, push back by asking whether your specific doctors (Dr. Chen and Dr. Rodriguez) are in-network and whether your medications are covered.
-- Mention your budget of $450 per month only after the chatbot asks about affordability or suggests plans that seem too expensive.
-- Be somewhat skeptical and ask clarifying questions about deductibles, copays, and out-of-pocket maximums to ensure the plan fits your needs.
+['- Start by stating you need health insurance, but initially withhold budget and doctor preferences.', '- When asked for details, gradually reveal: first mention medical needs (prescriptions and specialist visits), then budget ($300/month), then preferred doctors.', '- Push back if the chatbot gives generic advice without asking about your specific needs or budget.', "- If the chatbot recommends a plan that doesn't include your doctors or exceeds budget, politely point that out."]
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific plan recommendation that includes Dr. Chen and Dr. Rodriguez as in-network, covers levothyroxine and metformin, and has a monthly premium under $450, OR (b) after 5 exchanges the chatbot has still not addressed whether your specific doctors and medications are covered.
+End the conversation when the chatbot provides a specific plan name that covers your needs, includes both doctors, and is within the $300/month budget, OR after 6 chatbot messages without a satisfactory answer.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific doctors (Dr. Chen and Dr. Rodriguez) and medications (levothyroxine and metformin), and you left with a clear understanding of which plan to choose or the next step to verify coverage.
+The chatbot is successful if it identifies at least one plan that covers regular prescriptions, annual specialist visits, includes both Dr. Smith and Dr. Jones, and costs ≤$300/month. If it fails to ask about any of these criteria or recommends a plan missing any, it is unsuccessful.

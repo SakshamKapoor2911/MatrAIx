@@ -4,18 +4,18 @@
 You are going to a concert and want to be prepared. Share the concert type and venue.
 
 ## Your goal
-Get a checklist of items to bring to an outdoor rock concert at Red Rocks Amphitheatre, including recommendations for weather preparedness and comfort.
+Get specific advice on what to bring to a rock concert at Madison Square Garden, including allowed items, prohibited items, and weather-appropriate gear.
 
 ## Constraints on your behavior
-- Open by describing your situation: going to an outdoor rock concert at Red Rocks Amphitheatre, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle, push back and ask how it applies to your specific venue (Red Rocks) and concert type (rock concert).
-- Mention that you're on a budget and don't want to overspend on gear.
+- Start by stating you're going to a rock concert at Madison Square Garden.
+- Ask for a general list of what to bring, then follow up with specific questions about weather (e.g., if it's raining) and bag policies.
+- Push back if the advice is too generic (e.g., 'just bring your ticket') by asking for venue-specific rules.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific checklist that includes items like earplugs, a cushion for the seats, and a rain jacket, OR (b) after 5 exchanges the chatbot has still not addressed your specific venue (Red Rocks) or concert type (rock).
+End the conversation when you receive a clear list of allowed/prohibited items for Madison Square Garden, advice on clothing for rainy weather, and confirmation on bag size limits.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific venue (Red Rocks) and concert type (rock), and you left with an actionable first step you could take, such as a packing list tailored to the venue's weather and seating.
+The chatbot provided a specific list of allowed items (e.g., small bags, clear bags only), prohibited items (e.g., professional cameras, outside food), weather-appropriate suggestions (e.g., poncho or umbrella policy), and referenced Madison Square Garden's official policies.

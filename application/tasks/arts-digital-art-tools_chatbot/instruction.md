@@ -4,18 +4,16 @@
 You're a traditional watercolor artist who wants to try digital painting on an iPad, but you're overwhelmed by the options for apps and styluses.
 
 ## Your goal
-Get a clear recommendation for a specific digital painting app and stylus combo that bridges watercolor techniques to digital, plus a simple first exercise to try.
+Find a specific digital painting app and a compatible stylus for an iPad that are beginner-friendly for a traditional watercolor artist, with a budget of $200 total.
 
 ## Constraints on your behavior
-- Open by describing your love for traditional watercolor and your desire to try digital on iPad, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'Try Procreate, Adobe Fresco, etc.'), push back and ask how it applies to your specific need for watercolor-like effects (e.g., wet blending, paper texture).
-- Mention that your budget is limited (under $150 total for app and stylus) and you want a stylus that feels like a real brush.
+['- Start by expressing confusion about the many options available.', '- Mention that you are a traditional watercolor artist and need tools that mimic watercolor effects.', '- Withhold budget information until asked or after receiving generic advice.', '- Push back if recommendations are too expensive or complex.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you have a specific app + stylus recommendation that addresses watercolor blending and paper texture, AND a simple first exercise (e.g., paint a digital wash or leaf), OR (b) after 5 exchanges the chatbot has still not addressed your watercolor-specific needs or budget constraint.
+End the conversation when you receive a specific app recommendation (e.g., Procreate, Adobe Fresco) and a stylus recommendation (e.g., Apple Pencil, Logitech Crayon) that together cost under $200, or after 5 turns of chatbot failure to provide actionable advice.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific need for watercolor-like digital effects (e.g., wet blending, texture) and your budget, and you left with an actionable first step you could take (e.g., download a specific app, buy a specific stylus, and try a specific exercise).
+The chatbot recommended at least one app (e.g., Procreate, Adobe Fresco) and one stylus (e.g., Apple Pencil, Logitech Crayon) with combined price under $200, and explained why they are suitable for a watercolor artist.

@@ -4,18 +4,19 @@
 You're considering renting out your two-bedroom condo in Miami on Airbnb for extra income. You want to understand local regulations and whether it's profitable.
 
 ## Your goal
-Determine if renting out my two-bedroom condo in Miami on Airbnb is legally allowed and profitable, and get a clear next step to move forward.
+Determine if renting out my two-bedroom condo in Miami on Airbnb is legally allowed under local regulations and whether it would be profitable after accounting for all costs and fees.
 
 ## Constraints on your behavior
-- Open by describing your condo (2-bed, Miami) and that you're considering Airbnb, but don't reveal your specific question about regulations or profitability until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'check local laws'), push back and ask how it applies to your specific condo in Miami (e.g., 'But I heard Miami has strict rules—can I even get a license for my building?').
-- Mention that you're concerned about HOA restrictions and the cost of furnishing the place (budget under $5,000 for startup) if the chatbot asks about obstacles.
+- Start by asking about general regulations for short-term rentals in Miami.
+- If the chatbot asks for specific property details, initially only reveal that it's a two-bedroom condo in a residential building.
+- Push back if the chatbot gives generic advice without addressing Miami-specific rules or HOA restrictions.
+- Mention budget concerns: you want to know if the potential income justifies the effort and costs, including cleaning fees, Airbnb fees, and potential taxes.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific link or reference to Miami's short-term rental regulations (e.g., city ordinance or county rules) and a profitability estimate based on your condo's location, OR (b) after 5 exchanges the chatbot has still not addressed your specific concerns about Miami regulations and profitability.
+End the conversation when you have a clear answer on whether short-term rentals are allowed in Miami for condos (including any HOA restrictions) and a rough estimate of profitability (e.g., average monthly income vs. expenses).
 
 ## Success judgment
-The chatbot helped if its advice referenced specific Miami regulations (e.g., 'Miami requires a business tax receipt and registration with the city') and gave you an actionable first step (e.g., 'Check with your HOA and apply for a registration license').
+The chatbot successfully helped if it provided specific information about Miami's short-term rental regulations (e.g., registration requirements, zoning laws, HOA rules) and gave a realistic profitability estimate for a two-bedroom condo in Miami, considering typical nightly rates, occupancy rates, cleaning fees, Airbnb fees, and taxes.

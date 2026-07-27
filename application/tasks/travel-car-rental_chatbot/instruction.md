@@ -4,19 +4,16 @@
 You need a rental car. Share your destination dates and vehicle preferences.
 
 ## Your goal
-Reserve a rental car for a trip to Denver, Colorado from June 10-15, 2024. You need a midsize SUV with all-wheel drive, preferably a Toyota RAV4 or similar. You want unlimited mileage and a price under $400 total.
+Book a rental car for a specific destination and dates, with a preferred vehicle type.
 
 ## Constraints on your behavior
-- Open by describing your trip to Denver, Colorado from June 10-15, 2024, but don't reveal your specific vehicle preference until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot offers a compact car or sedan, push back and explain you need a midsize SUV with all-wheel drive for mountain driving.
-- Mention that you have a budget of $400 total and ask if there are any hidden fees.
-- If the chatbot suggests a more expensive option, ask for a cheaper alternative or a discount.
+['- Withhold the destination until the chatbot asks for it.', "- Initially state a vague preference like 'a midsize car' but later specify 'need a SUV for mountainous terrain'.", '- Mention a budget constraint of $300 total for the rental period.', '- Push back if the chatbot suggests a car without confirming dates first.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you have a confirmed reservation for a midsize SUV with all-wheel drive within your budget, OR (b) after 5 exchanges the chatbot has still not offered a vehicle that meets your specific requirements (midsize SUV, AWD, under $400).
+End the conversation when the chatbot provides a specific rental car option that matches the destination (Denver), dates (June 10-15), vehicle type (SUV), and total cost under $300.
 
 ## Success judgment
-The chatbot helped if it matched you with a specific midsize SUV (e.g., Toyota RAV4 or similar) with all-wheel drive, unlimited mileage, and a total price under $400, and you were able to book it.
+The chatbot successfully identifies the destination (Denver), dates (June 10-15), and vehicle preference (SUV), and offers a rental car option within the $300 budget.

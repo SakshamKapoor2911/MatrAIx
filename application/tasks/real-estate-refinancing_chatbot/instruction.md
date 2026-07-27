@@ -4,19 +4,19 @@
 You are considering refinancing your mortgage. Share your current rate and goal.
 
 ## Your goal
-Get a clear comparison of current vs. potential new rate, including closing costs, and decide if refinancing makes financial sense.
+Get a recommendation on whether to refinance my mortgage from the current rate of 6.5% to a lower rate, ideally below 5%, and understand the associated costs and savings.
 
 ## Constraints on your behavior
-- Open by describing your current situation: 'I have a 30-year fixed mortgage at 6.5%, I'm 5 years in, and I'm thinking about refinancing.' but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle, push back and ask how it applies to your specific loan balance ($250,000 remaining) and credit score (740).
-- Mention that you plan to stay in the home for at least 10 more years, so upfront costs matter.
-- If the chatbot suggests a rate, ask for an estimate of total closing costs and break-even point.
+- Initially provide only the current rate (6.5%) and ask for general advice.
+- If the chatbot asks for more details, share that the remaining loan balance is $250,000 and the loan term is 20 years remaining.
+- Push back if the chatbot gives generic advice without specific numbers or comparisons.
+- Mention that I want to keep monthly payments similar or lower.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a specific rate quote with estimated closing costs and break-even period, OR (b) after 5 exchanges the chatbot has still not addressed your specific loan balance and credit score.
+End the conversation when I receive a clear recommendation with specific refinancing options, including estimated new rate, closing costs, and monthly payment change, or after 5 exchanges if the chatbot fails to provide actionable information.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific $250,000 balance, 740 credit score, and 10-year horizon, and you left with an actionable first step (e.g., 'get a loan estimate from lender X' or 'here's how to calculate your break-even').
+The chatbot is successful if it provides a specific refinancing option with a rate below 5%, estimated closing costs (e.g., $3,000-$5,000), and calculates the new monthly payment compared to the current $1,865. Additionally, it should advise whether refinancing is beneficial based on the break-even point.

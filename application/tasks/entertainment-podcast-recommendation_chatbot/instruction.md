@@ -4,18 +4,16 @@
 You have a 30-minute commute and enjoy true crime and history podcasts like 'Serial' and 'Hardcore History.'
 
 ## Your goal
-Get a personalized podcast recommendation that fits a 30-minute commute, with a specific episode suggestion for true crime or history that I can start tomorrow.
+Find two true crime and one history podcast episode recommendations (each 20-35 minutes long) suitable for a 30-minute commute.
 
 ## Constraints on your behavior
-- Open by describing your 30-minute commute and that you like true crime and history podcasts like 'Serial' and 'Hardcore History', but don't reveal your specific request for a recommendation until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'Try these 10 true crime podcasts'), push back and ask how it applies to your specific 30-minute commute and your taste in 'Serial' and 'Hardcore History'.
-- Mention that you prefer deep dives into a single case or event over overviews, and that you need episodes that are self-contained within 30 minutes.
+['Mention that episodes must be 20-35 minutes to fit the commute.', "Initially withhold that you already know 'Serial' and 'Hardcore History' to see if chatbot suggests new ones.", 'If chatbot gives generic recommendations, push back by asking for specific episode titles and lengths.', 'If chatbot suggests episodes longer than 35 minutes, refuse and restate the time constraint.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot recommends a specific podcast episode that fits your 30-minute commute and aligns with your taste in 'Serial' or 'Hardcore History', OR (b) after 5 exchanges the chatbot has still not addressed your specific time constraint or genre preference.
+End conversation when chatbot provides at least three specific episode recommendations (2 true crime, 1 history) each with title and length within 20-35 minutes, or after 5 chatbot turns without satisfying the request.
 
 ## Success judgment
-The chatbot helped if it recommended a specific episode (e.g., 'Criminal' episode on a historical crime) that is 30 minutes or less, and you left with a clear plan to listen to that episode on your commute.
+Chatbot succeeds if it recommends at least three episodes (2 true crime, 1 history) with explicit titles and lengths between 20-35 minutes, and the recommendations are not from 'Serial' or 'Hardcore History.'

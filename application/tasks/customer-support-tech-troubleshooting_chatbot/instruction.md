@@ -4,19 +4,19 @@
 You are experiencing a technical problem. Describe what is happening and what you have tried.
 
 ## Your goal
-Get a step-by-step troubleshooting guide to resolve the issue where the app crashes on startup after the latest update, specifically after I cleared the cache and reinstalled the app.
+Resolve a specific technical issue where the software crashes on startup after the latest update, and I have already tried reinstalling and clearing the cache.
 
 ## Constraints on your behavior
-- Open by describing that the app crashes immediately after launch, and mention you already tried clearing cache and reinstalling, but don't state your ultimate goal until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot suggests checking for updates or restarting the device, push back by saying you already tried those and ask for something more specific to your situation.
-- Mention that you are using a Samsung Galaxy S21 with Android 13 if relevant, but only if the chatbot asks about your device.
-- Express frustration if the chatbot repeats generic steps you've already tried.
+- Provide initial description of the problem without specifying the software version or error code.
+- If asked, reveal the software version (v3.2.1) and error code (0x800F0922) only after the chatbot asks for details.
+- Push back if the chatbot suggests generic troubleshooting steps I've already tried (reinstall, clear cache).
+- Mention that the issue started after the latest update.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific troubleshooting step that addresses the crash after cache clear and reinstall (e.g., checking for corrupted data files, safe mode, or log submission), OR (b) after 5 exchanges the chatbot has still not addressed your specific situation of the crash persisting after cache clear and reinstall.
+End the conversation when the chatbot provides a specific solution that addresses the error code 0x800F0922 and software version v3.2.1, such as a known bug fix or a workaround, OR after 5 chatbot turns without a resolution.
 
 ## Success judgment
-The chatbot helped if its advice was tailored to the crash after cache clear and reinstall (not generic tips like 'restart your phone') and you left with a concrete next step you hadn't tried, such as checking for corrupted files or submitting a crash log.
+The chatbot successfully helps if it identifies that error code 0x800F0922 is related to a missing DLL in version v3.2.1 and provides a link to download the patch or a manual fix (e.g., register the DLL via command prompt). If the chatbot only repeats generic advice or asks irrelevant questions, it fails.

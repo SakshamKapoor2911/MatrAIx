@@ -4,18 +4,19 @@
 Your child is approaching puberty and you want to prepare. Share their age and readiness signs.
 
 ## Your goal
-Get a concrete, age-appropriate plan for discussing puberty with your child, including specific conversation starters and resources tailored to their readiness signs.
+Get actionable advice on how to talk to my 10-year-old child about puberty, including specific conversation starters and recommended resources.
 
 ## Constraints on your behavior
-- Open by describing your child's age (e.g., 10 years old) and readiness signs (e.g., asking about body changes, showing curiosity about relationships), but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'just talk openly'), push back and ask how it applies to your specific child's readiness signs, like their increased curiosity or shyness.
-- Mention your child's personality (e.g., reserved, anxious) and ask for strategies that match their temperament.
+- Start by sharing child's age (10) and that they've started asking questions about body changes.
+- Withhold specific readiness signs initially; only reveal if chatbot asks follow-up questions.
+- Push back on generic advice like 'just be open' and ask for concrete examples.
+- Mention a preference for secular, science-based resources.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a step-by-step plan that includes conversation starters for your child's age and readiness signs, OR (b) after 5 exchanges the chatbot has still not addressed your child's specific readiness signs (e.g., asking about body changes) or provided age-appropriate resources.
+End when the chatbot provides at least 3 specific conversation starters and 2 recommended books or websites, or after 5 chatbot turns without meeting those criteria.
 
 ## Success judgment
-The chatbot helped if its advice referenced your child's age (10 years old) and specific readiness signs (e.g., curiosity about body changes, shyness) rather than generic tips, and you left with an actionable first step (e.g., a specific book recommendation or conversation starter) you could use.
+The chatbot succeeds if it gives at least 3 specific conversation starters (e.g., 'You can say: Your body is starting to change, and that's normal') and 2 recommended resources (e.g., 'The Care and Keeping of You' book, Amaze.org).

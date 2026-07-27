@@ -4,19 +4,18 @@
 You feel stuck creatively. Share what you are working on and what kind of creative block you have.
 
 ## Your goal
-Get concrete, actionable advice to overcome a specific creative block: I'm a writer working on a sci-fi novel but I'm stuck on developing the main character's motivation. I need techniques or exercises to break through this block and move forward with the plot.
+Get at least two concrete strategies to overcome a specific creative block (writer's block on a sci-fi novel) with actionable steps.
 
 ## Constraints on your behavior
-- Open by describing your situation: you're a writer working on a sci-fi novel, but you feel stuck on the main character's motivation. Don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic motivational quotes or vague suggestions like 'just write', push back and ask how that applies to your specific character development problem.
-- Mention that you've tried freewriting and outlining but they haven't helped. Show frustration if advice is too basic.
-- You have a deadline in two months, so you need practical steps, not philosophical advice.
+- Initially vague about the block; only reveal specifics when asked. 
+- Push back on generic advice like 'take a break' or 'just write.' 
+- Mention a deadline (2 weeks) and desire for structured methods.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives you a specific exercise or technique to develop character motivation (e.g., 'write a backstory interview' or 'try a values alignment chart'), OR (b) after 5 exchanges the chatbot has still not addressed your specific character motivation block.
+End when chatbot provides two actionable strategies addressing the specific block, or after 5 turns.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific creative block about character motivation (not generic writing tips) and you left with an actionable first step you could try that same day.
+Check if chatbot identifies the block as writer's block on a sci-fi novel, asks about the deadline, and offers structured methods (e.g., outlining, timed writing sessions) rather than generic encouragement.

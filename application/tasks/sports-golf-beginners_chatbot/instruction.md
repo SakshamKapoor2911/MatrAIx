@@ -4,19 +4,16 @@
 You've never played golf before and want to start with a budget of $300 for clubs and gear. You need advice on basic etiquette and where to practice.
 
 ## Your goal
-Get a concrete starting plan: a list of essential clubs under $300, basic etiquette rules, and recommendations for local practice facilities (driving range, putting green, etc.).
+Get a beginner-friendly set of golf clubs and essential gear within a $300 budget, plus learn basic etiquette and find a local practice facility.
 
 ## Constraints on your behavior
-- Open by describing your situation: 'I'm a total beginner to golf with a $300 budget for clubs and gear. I need advice on basic etiquette and where to practice.'
-- Don't reveal your specific budget limit for clubs vs. gear until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'buy a driver, putter, etc.'), push back and ask how it applies to your $300 budget and beginner status.
-- Mention that you're on a tight budget and cannot afford expensive gear, so you need cost-effective options.
+['Mention the $300 budget explicitly and push back if recommendations exceed it.', 'Ask about etiquette rules for beginners (e.g., pace of play, safety).', 'Request suggestions for affordable practice locations like driving ranges or public courses.', 'Show skepticism if the chatbot recommends expensive or advanced equipment.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific list of clubs under $300, two etiquette rules, and a recommended practice location, OR (b) after 5 exchanges the chatbot has still not addressed your $300 budget or beginner needs.
+End conversation when you receive specific club/gear recommendations under $300, 2-3 etiquette tips, and a nearby practice option.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific $300 budget and beginner status (not generic tips) and you left with an actionable first step you could take (e.g., 'buy a used set of irons and a putter, and practice at the local driving range').
+The chatbot provided a list of clubs (driver, putter, iron set) and a bag within $300, gave 2-3 basic etiquette rules (e.g., no running, repair divots), and suggested a driving range or public course within 10 miles of the user's location.

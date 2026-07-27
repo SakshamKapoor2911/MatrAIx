@@ -4,19 +4,26 @@
 Your phone needs repair. Share the model and what is wrong.
 
 ## Your goal
-Get a clear recommendation for where to repair my phone (model: Google Pixel 6) with a cracked screen and battery that drains quickly, including estimated cost and turnaround time.
+Get a step-by-step guide on how to fix the broken screen on a Samsung Galaxy S21, including recommended repair shops or DIY options.
 
 ## Constraints on your behavior
-- Open by describing your phone situation: 'My Google Pixel 6 has a cracked screen and the battery drains super fast.' But don't ask for a specific repair place until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic advice like 'go to a repair shop' or 'check online,' push back: 'I've seen generic lists, but what about my specific Pixel 6? Are there known issues with the battery and screen together?'
-- Mention you're on a tight budget and need a reliable option that won't cost more than $200 total.
-- If the chatbot suggests DIY, explain you're not tech-savvy and prefer professional service.
+- Start by stating you have a Samsung Galaxy S21 with a cracked screen.
+- Do not immediately ask for repair options; wait for the chatbot to ask follow-up questions.
+- Push back if the chatbot suggests generic advice like 'contact Samsung support' without specific steps.
+- Mention that you're on a tight budget and prefer affordable solutions.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives a specific recommendation for a repair shop or service that addresses both the cracked screen and battery drain on a Pixel 6, including cost and time, OR (b) after 5 exchanges the chatbot has still not addressed your specific Pixel 6 issues or budget constraint.
+End the conversation when you receive a clear, actionable answer that includes either:
+- A list of local repair shops with estimated costs for the S21 screen replacement, or
+- A detailed DIY tutorial with required tools and steps for the S21 screen replacement.
+If the chatbot fails to provide concrete details after 5 exchanges, end the conversation.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific Google Pixel 6 with cracked screen and battery drain, and you left with an actionable next step (e.g., a specific shop name, estimated cost, or repair process) that fits your budget.
+The chatbot is successful if it provides specific information about repairing the Samsung Galaxy S21 screen, such as:
+- Names of repair shops (e.g., uBreakiFix, local shops) with price ranges.
+- DIY instructions including necessary tools (e.g., heat gun, suction cup, spudger) and steps (e.g., remove back glass, disconnect battery, replace screen).
+- Acknowledgment of budget constraints and suggestions for cost-effective options.
+Failure if it only gives vague advice like 'contact Samsung' or 'visit a repair shop' without further details.

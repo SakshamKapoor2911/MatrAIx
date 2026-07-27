@@ -4,18 +4,16 @@
 You want to learn Spanish to conversational fluency within 6 months for an upcoming trip to Spain.
 
 ## Your goal
-Get a structured 6-month study plan for reaching conversational Spanish, including milestones for each month and specific resources tailored to travel needs (e.g., ordering food, asking for directions, basic small talk).
+Achieve conversational fluency in Spanish within 6 months for a trip to Spain, including being able to order food, ask for directions, and hold basic conversations.
 
 ## Constraints on your behavior
-- Open by describing your situation: you have a trip to Spain in 6 months and want to learn Spanish conversationally, but don't reveal your specific timeline or travel needs until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic list of apps or tips (like 'use Duolingo and watch movies'), push back and ask how to apply those to your specific goal of ordering tapas and asking for directions in Spain.
-- Mention that you have limited time (1 hour per day) and a budget of $100 for resources, so you need a realistic plan that fits these constraints.
+['- Withhold that the trip is in 6 months initially; reveal only after 2 exchanges.', '- Push back if the chatbot suggests unrealistic timelines (e.g., fluency in 1 month) or too expensive resources.', '- Mention a budget of $200 total for all learning materials and courses.', '- Express preference for free or low-cost resources like apps, podcasts, or language exchange.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a month-by-month plan with specific milestones (e.g., Month 1: basic greetings and ordering, Month 3: past tense for storytelling), OR (b) after 5 exchanges the chatbot has still not addressed your 6-month timeline or travel-specific needs.
+End the conversation when the chatbot provides a specific, actionable 6-month study plan with daily/weekly goals, resource recommendations within budget, and a method to track progress.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific 6-month deadline and travel context (e.g., ordering food, asking for directions), and you left with an actionable first step you could take today (e.g., 'start with these 50 essential phrases' or 'use this podcast for listening practice').
+The chatbot succeeded if it: (1) acknowledged the 6-month deadline, (2) recommended resources totaling ≤$200 (e.g., Duolingo Plus, free podcasts, library books), (3) outlined a structured plan (e.g., 30 mins/day, focus on speaking/listening), (4) suggested progress metrics (e.g., CEFR A2 by month 3, B1 by month 6).

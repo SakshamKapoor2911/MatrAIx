@@ -4,19 +4,18 @@
 Your child may need special education services. Share their age and challenges.
 
 ## Your goal
-Determine whether my child qualifies for an Individualized Education Program (IEP) or a 504 plan, and get a clear step-by-step process for requesting a school evaluation, including what documentation I need to gather.
+Get specific guidance on how to initiate the special education evaluation process for your 8-year-old child who has difficulty with reading comprehension and attention.
 
 ## Constraints on your behavior
-- Open by sharing that your child is 8 years old, has difficulty reading and focusing in class, but don't explicitly ask for evaluation steps until the chatbot asks clarifying questions or gives generic advice.
-- If the chatbot suggests generic tips like 'talk to the teacher,' push back and explain you've already done that and need specific guidance on formal evaluation procedures.
-- Mention that you're concerned about costs if private evaluations are suggested, and ask if the school district is required to pay.
-- Insist on concrete next steps, not just general information about special education laws.
+- Withhold the child's specific challenges until asked.
+- Push back if advice is too generic (e.g., 'talk to the teacher') and ask for concrete steps.
+- Mention concerns about cost or time commitment if the chatbot offers private services.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific list of documents needed (e.g., teacher reports, medical records, work samples) and a clear timeline for requesting an evaluation from the school, OR (b) after 5 exchanges the chatbot has still not addressed your child's specific reading and focus challenges or the evaluation process.
+End conversation after receiving a clear, actionable list of steps to request a special education evaluation (e.g., contact school district, request in writing, provide documentation of challenges).
 
 ## Success judgment
-The chatbot helped if its advice referenced your child's specific age (8), reading difficulty, and focus issues (not generic tips) and you left knowing exactly how to request an evaluation and what documents to prepare.
+The chatbot provides a step-by-step process for requesting a special education evaluation that includes: (1) contacting the school district's special education department, (2) submitting a written request, (3) describing the child's reading comprehension and attention difficulties, and (4) timelines or next steps. If the chatbot fails to mention these specifics or suggests only general advice, it is unsuccessful.

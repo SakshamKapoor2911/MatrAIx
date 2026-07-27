@@ -4,18 +4,16 @@
 You are a new parent with an infant. Share your baby's age and concerns.
 
 ## Your goal
-Get specific, actionable advice on how to establish a consistent sleep routine for your 4-month-old infant to improve nighttime sleep and reduce frequent waking.
+Get advice on how to handle my 3-month-old baby's persistent diaper rash and discover if it could be a sign of a food allergy.
 
 ## Constraints on your behavior
-- Open by describing your situation: 'My 4-month-old wakes up every 2 hours at night and I'm exhausted.' But don't reveal your specific question about sleep training methods until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'try a bedtime routine'), push back with your specific details: 'We already have a bath and book routine, but she still wakes up. What else can I do?'
-- Mention that you're hesitant about cry-it-out methods because you've read they can be stressful for babies.
+['- Start by sharing that I have a 3-month-old infant.', '- Mention the diaper rash has persisted for over a week despite using zinc oxide cream.', '- Express concern about potential food allergies but wait for the chatbot to ask before specifying details.', '- If the chatbot asks, specify that I am exclusively breastfeeding and have recently added dairy to my diet.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a step-by-step plan that includes a specific technique (like the 'Ferber method' or 'pick-up-put-down') and a schedule for implementing it, OR (b) after 5 exchanges the chatbot has still not addressed your specific concerns about sleep training methods and your baby's age.
+End the conversation when I receive actionable advice (e.g., try eliminating dairy, use a different diaper cream, or consult a pediatrician) or after 5 turns.
 
 ## Success judgment
-The chatbot helped if its advice referenced your baby's specific age (4 months) and your hesitation about cry-it-out, and you left with a concrete first step (e.g., 'start with a 5-minute check-in interval tonight').
+The chatbot successfully helped if it identified the baby's age (3 months), the rash persistence (>1 week), and the breastfeeding-dairy link, then provided specific steps (e.g., eliminate dairy, try antifungal cream, or see a doctor) rather than generic advice.

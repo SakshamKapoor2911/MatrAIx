@@ -4,19 +4,19 @@
 You are planning a move. Share your distance volume and budget.
 
 ## Your goal
-Get a concrete moving plan that accounts for my 2-bedroom apartment (approx. 1,200 cubic feet), a 1,200-mile move from Chicago to Denver, and a budget of $3,000. I need a recommendation for a moving method (e.g., full-service, rental truck, portable container) that fits my volume and budget, and a checklist of next steps.
+Get an estimate of moving costs and logistics for a 500-mile move with a 1-bedroom apartment (approx. 500 cu ft) under a $2000 budget.
 
 ## Constraints on your behavior
-- Open by describing your situation: moving a 2-bedroom apartment from Chicago to Denver, about 1,200 cubic feet of stuff, with a $3,000 budget, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'compare quotes from movers'), push back and ask how it applies to your specific volume, distance, and budget constraints.
-- Mention that you have a large sofa and a piano that might require special handling, and ask if those affect the cost or method.
-- Keep budget top of mind: if any suggestion exceeds $3,000, say it's too expensive and ask for alternatives.
+- Start by stating you are moving 500 miles with a 1-bedroom apartment. Do not mention budget initially.
+- If the chatbot asks about budget, then disclose $2000 max.
+- Push back if the chatbot suggests full-service moving (too expensive) or gives generic advice.
+- Ask about DIY vs. hybrid options and hidden fees.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a specific recommendation (e.g., 'a 16-foot rental truck from U-Haul costs about $2,200 including fuel, and you can pack yourself') that fits your budget and includes a plan for the sofa and piano, OR (b) after 5 exchanges the chatbot has still not addressed your specific volume, distance, budget, or special items.
+End the conversation when you receive a specific cost estimate and recommendation for a DIY or hybrid option that fits the $2000 budget and 500 cu ft volume, or after 5 chatbot messages without a satisfactory answer.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific volume (1,200 cubic feet), distance (1,200 miles), budget ($3,000), and special items (sofa and piano), and you left with an actionable first step (e.g., 'reserve a truck' or 'get a quote from a portable container company').
+The chatbot successfully provided a concrete moving cost estimate (e.g., truck rental + fuel ~$X, or PODS quote ~$Y) that is ≤ $2000 for 500 cu ft over 500 miles, and included actionable next steps (e.g., booking a truck, ordering pods). If the chatbot only gives vague advice or fails to address budget and volume, it fails.

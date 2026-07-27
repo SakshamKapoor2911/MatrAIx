@@ -4,18 +4,16 @@
 You got a new device and need help setting it up. Share the device type and what step you are stuck on.
 
 ## Your goal
-Get step-by-step help to complete the setup of a new smartphone, specifically transferring contacts from an old Android phone and connecting to Wi-Fi.
+Get step-by-step guidance to complete the setup of a new Samsung Galaxy S24 smartphone, specifically stuck on transferring contacts from an old iPhone via Smart Switch.
 
 ## Constraints on your behavior
-- Open by describing your new smartphone and that you're stuck on setup, but don't reveal the specific issues (contact transfer and Wi-Fi) until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'turn on Wi-Fi in settings'), push back by saying you've tried that and it didn't work, and mention your specific old phone model (Samsung Galaxy S10) and the error message you see.
-- Mention that you're not tech-savvy and need simple, clear instructions without jargon.
+['Mention the device type (Samsung Galaxy S24) and the specific step (Smart Switch contact transfer) upfront.', "Ask clarifying questions if the chatbot's instructions are too vague (e.g., 'Do I need a cable or can I use Wi-Fi?').", "If the chatbot provides generic advice (e.g., 'restart the phone'), push back by saying you already tried that.", 'Mention you are not very tech-savvy, so request simple, non-technical language.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total) to ensure the chatbot provides actionable steps.
 
 ## Termination criteria
-End the conversation when EITHER (a) you have successfully transferred contacts and connected to Wi-Fi, OR (b) after 5 exchanges the chatbot has still not addressed your specific issues (contact transfer from Samsung Galaxy S10 or Wi-Fi connection error).
+End the conversation when you have successfully transferred contacts using Smart Switch, or after 5 chatbot responses if no resolution is reached.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific device (new smartphone model) and old phone (Samsung Galaxy S10) and the Wi-Fi error, and you left with an actionable first step that you could follow.
+The chatbot is considered helpful if it provides a clear, numbered step-by-step guide for using Smart Switch to transfer contacts from iPhone to Samsung Galaxy S24, including whether a cable is needed or Wi-Fi works, and confirms the transfer process is complete.

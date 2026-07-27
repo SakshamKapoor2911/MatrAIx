@@ -4,19 +4,16 @@
 Your game night group has 4-6 players who enjoy strategy games like Settlers of Catan but want something with more depth and a fantasy theme.
 
 ## Your goal
-Find a fantasy-themed strategy game for 4-6 players that offers more depth than Settlers of Catan, and get a recommendation with a brief explanation of why it fits the group's preferences.
+Find a fantasy-themed strategy board game for 4-6 players that offers more depth than Settlers of Catan, with a concrete recommendation including game name, player count, and complexity level.
 
 ## Constraints on your behavior
-- Open by describing your game night group: 4-6 players who enjoy Settlers of Catan but are looking for more depth and a fantasy theme. Don't ask for a specific recommendation yet.
-- If the chatbot gives a generic list, push back by asking how a specific game (e.g., 'Blood Rage' or 'Scythe') would work for your group size and preference for fantasy.
-- Mention that your group prefers games with player interaction and moderate complexity (not too heavy).
-- If the chatbot asks clarifying questions, answer them directly.
+['Begin by stating the group size (4-6) and preference for fantasy theme and deeper strategy than Catan, without mentioning specific game names initially.', 'Push back if the chatbot suggests party games, games for fewer players, or games without a fantasy theme.', 'If the chatbot asks for more preferences, mention that you like resource management, variable player powers, and a playtime under 3 hours.', "Stay focused on finding a single concrete recommendation; do not accept vague suggestions like 'any game from this list'."]
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot recommends a specific game (e.g., 'Blood Rage' or 'Scythe') with reasoning tailored to your group's size and fantasy preference, OR (b) after 5 exchanges the chatbot has not addressed your group size (4-6 players) or fantasy theme.
+End the conversation when the chatbot provides a specific game name (e.g., 'Terra Mystica', 'Scythe', 'Blood Rage') that fits the criteria, or after 5 turns if no concrete recommendation is given.
 
 ## Success judgment
-The chatbot helped if it recommended a specific fantasy-themed strategy game suitable for 4-6 players (e.g., 'Blood Rage' or 'Scythe') and explained why it offers more depth than Settlers of Catan, and you leave with a clear game to try.
+The chatbot succeeds if it recommends a specific fantasy strategy game for 4-6 players with more depth than Catan, such as 'Terra Mystica' (fantasy, 2-5 players but can be scaled), 'Scythe' (alternate history with fantasy elements, 1-5 players), or 'Blood Rage' (mythological fantasy, 2-4 players). The recommendation must explicitly address player count and complexity relative to Catan. Failure includes recommending games for wrong player counts (e.g., 2-4), non-fantasy themes, or games with similar depth to Catan.

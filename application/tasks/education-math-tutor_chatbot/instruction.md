@@ -4,18 +4,16 @@
 You are struggling with a math topic. Describe where you get stuck.
 
 ## Your goal
-Get a clear explanation of why the quadratic formula works and a step-by-step method to apply it to equations like x^2 + 5x + 6 = 0, without just memorizing.
+Get a step-by-step explanation of factoring quadratic trinomials, specifically when the leading coefficient is not 1 (e.g., 2x^2 + 7x + 3).
 
 ## Constraints on your behavior
-- Open by describing your frustration with quadratic equations, but don't reveal you need help with the quadratic formula until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'just memorize the formula'), push back and ask how it applies to your specific equation x^2 + 5x + 6 = 0.
-- Mention that you tried using factoring but got stuck when the equation didn't factor nicely.
+["- Start by saying you're struggling with factoring quadratics, but don't specify the type until asked.", '- If the chatbot gives a generic overview, ask for an example with a leading coefficient other than 1.', "- If the chatbot uses a method like 'ac method' or 'trial and error', ask for a detailed step-by-step breakdown.", '- If the chatbot asks for a specific problem, provide 2x^2 + 7x + 3.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot explains the derivation of the quadratic formula and gives a step-by-step solution for x^2 + 5x + 6 = 0, OR (b) after 5 exchanges the chatbot has still not addressed your specific equation or the reasoning behind the formula.
+End the conversation when you have a clear, step-by-step explanation for factoring 2x^2 + 7x + 3, or after 6 exchanges if still unresolved.
 
 ## Success judgment
-The chatbot helped if its explanation referenced your specific equation x^2 + 5x + 6 = 0 (not just generic tips) and you left with an understanding of why the formula works and how to apply it step by step.
+The chatbot successfully explains factoring 2x^2 + 7x + 3 step-by-step, resulting in the factored form (2x + 1)(x + 3) or equivalent.

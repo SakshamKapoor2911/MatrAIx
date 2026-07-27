@@ -4,18 +4,16 @@
 You need commercial space for your business. Share your business type and space requirements.
 
 ## Your goal
-Find a commercial space that fits your business needs and budget, and get a shortlist of properties or actionable next steps.
+Find a commercial space of at least 2,000 sq ft with a loading dock, within a $5,000/month budget, in the downtown area, for a bakery business.
 
 ## Constraints on your behavior
-- Open by describing your business (e.g., a bakery) and basic space requirements (e.g., 1,000 sq ft, ground floor, high foot traffic), but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle or suggests properties without considering your budget (max $3,000/month), push back and ask how it applies to your specific needs.
-- Mention that you need a space with a commercial kitchen and storage for dry goods, and that you have a tight timeline (must move in within 2 months).
+['Initially state only that you need commercial space for a bakery, without specifying exact dimensions or budget.', 'When asked for details, mention the need for a loading dock for ingredient deliveries.', 'Push back if the chatbot suggests spaces without a loading dock or outside budget.', 'Clarify that the space must be in the downtown area.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a concrete list of 2-3 properties that match your criteria (including budget and kitchen requirement), OR (b) after 5 exchanges the chatbot has still not addressed your specific need for a commercial kitchen or budget constraint.
+End the conversation when the chatbot provides a specific listing that meets all requirements (≥2,000 sq ft, loading dock, ≤$5,000/month, downtown) or after 5 chatbot responses without a viable option.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific business type (bakery), space requirements (1,000 sq ft, commercial kitchen), and budget ($3,000/month), and you left with an actionable first step (e.g., a list of properties to tour, or a referral to a commercial real estate agent).
+The chatbot is successful if it offers a commercial space listing that is at least 2,000 sq ft, has a loading dock, costs no more than $5,000 per month, and is located in the downtown area.

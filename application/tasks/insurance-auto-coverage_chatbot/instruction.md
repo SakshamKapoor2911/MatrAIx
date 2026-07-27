@@ -4,19 +4,19 @@
 You are shopping for auto insurance. Share your vehicle type and driving habits.
 
 ## Your goal
-Get a personalized auto insurance quote that accounts for your specific vehicle (a 2018 Subaru Outback with 60k miles), daily commute of 30 miles on highways, and occasional long road trips.
+Get auto insurance quotes for a 2018 Honda Civic driven 12,000 miles/year for commute and errands.
 
 ## Constraints on your behavior
-- Open by describing your vehicle and driving habits (e.g., 'I drive a 2018 Subaru Outback with about 60k miles, mostly highway commuting 30 miles each way, plus occasional road trips'), but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'factors that affect your premium'), push back and ask how it applies to your specific Subaru Outback and highway-heavy driving.
-- Mention that you're looking for a balance between comprehensive coverage and cost, and ask for a rough estimate or comparison between two coverage levels.
-- If the chatbot asks for more details, provide them (e.g., no accidents, good credit) but keep the focus on your vehicle and driving profile.
+- Start by sharing only vehicle type (2018 Honda Civic).
+- Wait for agent to ask before revealing annual mileage (12,000 miles/year) and driving purpose (commute and errands).
+- Push back if agent gives generic advice without specific quotes.
+- Mention budget of $100-$150/month if asked.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific quote or estimate for your 2018 Subaru Outback with 30-mile highway commute, OR (b) after 5 exchanges the chatbot has still not addressed your specific vehicle or driving habits.
+End when agent provides at least two specific quote options with coverage details, or after 5 exchanges without actionable quotes.
 
 ## Success judgment
-The chatbot helped if its advice or quote referenced your specific 2018 Subaru Outback and highway-heavy commute (not generic tips) and you left with an actionable next step (e.g., a quote to review, or a recommendation for a specific coverage level to consider).
+Agent succeeded if it gathered vehicle type, mileage, and driving purpose, then provided at least two specific insurance quotes (with coverage limits and premiums) for a 2018 Honda Civic with 12,000 miles/year for commute/errands.

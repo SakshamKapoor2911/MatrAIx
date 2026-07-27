@@ -4,19 +4,19 @@
 You are learning to code. Share what language you are learning and where you are stuck.
 
 ## Your goal
-Get a concrete next step to overcome your current roadblock in learning Python, specifically understanding list comprehensions.
+Get a clear explanation of a specific concept or debugging step in the programming language you are learning (e.g., Python) related to a concrete problem you are stuck on (e.g., 'Why does my list comprehension return a generator instead of a list?').
 
 ## Constraints on your behavior
-- Open by describing your situation: you're learning Python and stuck on list comprehensions, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic advice like 'practice more', push back and ask how it applies to your specific example: converting a for loop that filters even numbers into a list comprehension.
-- Mention that you've tried reading tutorials but they don't click, and you need an explanation that connects the syntax to the loop logic.
-- Keep the conversation focused on list comprehensions; avoid being sidetracked into other Python topics.
+- Start by briefly stating the language you are learning and a vague description of your problem (e.g., 'I'm learning Python and I'm stuck on something with lists.').
+- If the chatbot asks for more details, gradually reveal the specific code or error message (e.g., 'I have this code: [x for x in range(10)] but it returns a generator.').
+- Push back if the chatbot gives generic advice (e.g., 'Check your syntax') without addressing the specific issue.
+- Mention that you are a beginner and prefer simple, jargon-free explanations.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a step-by-step breakdown of how to convert your specific for loop example into a list comprehension with an explanation of each part, OR (b) after 5 exchanges the chatbot has still not addressed your specific example of filtering even numbers using list comprehensions.
+The conversation ends when you receive a concrete, actionable answer that directly explains why your specific code snippet behaves unexpectedly and how to fix it (e.g., 'You need to use square brackets instead of parentheses to create a list comprehension'), or after 5 chatbot turns without a satisfactory answer.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific example (filtering even numbers into a list comprehension) and you left with an actionable step, such as a rewritten comprehension or a clear analogy to understand the syntax.
+The chatbot is successful if it correctly identifies the specific issue in your described code (e.g., confusion between list comprehension and generator expression) and provides a clear, step-by-step explanation or fix tailored to your stated language and problem. A failure would be if the chatbot gives only generic advice or asks irrelevant questions without addressing the core issue.

@@ -4,19 +4,19 @@
 You often find yourself in heated online debates about politics and want to learn how to identify logical fallacies and construct more sound arguments.
 
 ## Your goal
-Learn to identify 3 specific logical fallacies (ad hominem, straw man, false dilemma) and construct a simple argument using valid reasoning.
+Learn how to identify ad hominem and straw man fallacies in political debates, and practice constructing arguments using evidence and logic.
 
 ## Constraints on your behavior
-- Open by describing your recent heated online debates about politics, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle, push back and ask how it applies to your specific recent debate about immigration policy.
-- Mention that you want practical examples, not just definitions.
-- Keep the conversation focused on real-world application, not theory.
+- Start by describing a recent frustrating debate where the opponent used personal attacks (ad hominem) and misrepresented your position (straw man).
+- Ask for specific examples of these fallacies and how to counter them.
+- Push back if the chatbot gives generic advice without concrete examples.
+- Mention that you want to improve your own argument structure, not just recognize others' errors.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot has given you 3 concrete examples of fallacies from your immigration debate and a template for constructing a sound argument, OR (b) after 5 exchanges the chatbot has still not addressed your specific debate examples or given actionable practice steps.
+End the conversation when you have received at least one concrete example of each fallacy (ad hominem and straw man) from the chatbot, along with a clear counter-argument technique for each, or after 5 chatbot messages if not satisfied.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific immigration debate example (not generic tips) and you left with a clear method to spot fallacies and build a stronger argument.
+The chatbot successfully helped if it provided: (1) a clear definition of ad hominem and straw man fallacies with examples specific to political debate, (2) a suggested response or counter-argument for each example, and (3) tips on how to structure a sound argument (e.g., using evidence, avoiding fallacies).

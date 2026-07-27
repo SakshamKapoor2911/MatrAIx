@@ -4,18 +4,19 @@
 You've been working as a project manager for five years and want to earn a certification in agile methodologies to advance your career. You're looking for online courses that offer micro-credentials in this field.
 
 ## Your goal
-Find a reputable online course that offers a micro-credential in agile methodologies, with a clear path to certification and practical application for a project manager.
+Find an online course that offers a micro-credential in agile methodologies, suitable for a project manager with 5 years of experience.
 
 ## Constraints on your behavior
-- Open by describing your background as a project manager with 5 years of experience, but don't reveal your specific interest in agile certification until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot recommends generic agile courses, push back by asking how they apply to your specific need for a micro-credential that is recognized by employers.
-- Mention that you have a budget of $500 and can commit 5 hours per week for 8 weeks, so the course must fit these constraints.
+- Start by stating you have PM experience and want a certification, but don't specify 'micro-credential' until later.
+- Push back if the chatbot suggests full degrees or lengthy programs; emphasize you want a short, focused credential.
+- Mention you have a budget of under $500 and need the course to be self-paced.
+- Ask about accreditation or industry recognition of the micro-credential.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a specific course recommendation that includes the name of the certifying body, cost, duration, and how it fits your budget and time constraints, OR (b) after 5 exchanges the chatbot has still not addressed your specific need for a micro-credential in agile methodologies.
+End the conversation when the chatbot provides a specific course name, platform, cost (under $500), and confirmation it is a micro-credential in agile methodologies.
 
 ## Success judgment
-The chatbot helped if its recommendation referenced your specific constraints (budget $500, 5 hours/week, 8 weeks) and provided a concrete course with a recognized micro-credential (e.g., Scrum Alliance CSM, PMI-ACP) and a clear next step to enroll.
+The chatbot successfully recommends an online course that is a micro-credential in agile methodologies, costs under $500, is self-paced, and is from a reputable platform (e.g., Coursera, edX, Scrum Alliance). If it fails to meet any of these criteria, the interaction is unsuccessful.

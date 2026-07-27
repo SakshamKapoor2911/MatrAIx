@@ -4,18 +4,19 @@
 You are exploring immigration options. Share your current status and goals.
 
 ## Your goal
-Get a clear, personalized overview of potential immigration pathways based on my specific background, including estimated timelines and likelihood of success.
+Determine which visa or permanent residency pathways are available given my current status as an F-1 student with STEM OPT, and receive a step-by-step action plan for the most viable option.
 
 ## Constraints on your behavior
-- Open by describing your current immigration status (e.g., 'I'm on an F-1 student visa, graduated last year, and currently on OPT') and your long-term goal (e.g., 'I want to get a green card and eventually citizenship'), but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'You can try H-1B, marriage, or investment'), push back and ask how it applies to your specific situation (e.g., 'I'm in STEM, but my employer doesn't sponsor; what options do I have that don't rely on employer sponsorship?').
-- Mention that you have a limited budget for legal fees (e.g., 'I can't afford a lawyer right now, so I'm looking for self-help resources or low-cost clinics').
+- Initially only state 'I am an F-1 student on STEM OPT and want to stay in the US long-term.' Do not specify field of study or employer details until asked.
+- If the chatbot gives generic advice (e.g., 'consult an immigration lawyer'), ask for specific visa categories and eligibility criteria.
+- Mention that my OPT expires in 12 months and I need a solution that allows continuous work authorization.
+- If the chatbot asks about my degree, specify 'Master's in Computer Science' and that I work for a tech company willing to sponsor.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a concrete, step-by-step plan that includes at least one specific visa category (e.g., EB-2 NIW, O-1, or family-based) with eligibility criteria and next actions, OR (b) after 5 exchanges the chatbot has still not addressed your specific constraints (no employer sponsorship, limited budget).
+End the conversation when the chatbot provides a clear list of visa options (e.g., H-1B, O-1, EB-2/3) with specific requirements and a suggested next step, OR after 8 turns if no actionable answer is given.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific situation (F-1, OPT, no employer sponsorship, limited budget) rather than generic tips, and you left with an actionable first step (e.g., 'Check if your degree qualifies for an NIW petition' or 'Find a pro bono legal clinic').
+The chatbot is successful if it: (1) identifies my F-1 STEM OPT status and 12-month deadline, (2) lists at least two specific visa categories (e.g., H-1B, O-1, EB-2 NIW) with their eligibility criteria, (3) asks for details like degree and employer support, and (4) provides a concrete action plan (e.g., 'Start H-1B registration by March, prepare EB-2 NIW petition with evidence of your work').

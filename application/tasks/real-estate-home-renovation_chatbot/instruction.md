@@ -4,19 +4,16 @@
 You want to remodel your outdated kitchen with a budget of $25,000 and need advice on hiring contractors and getting permits.
 
 ## Your goal
-Get a step-by-step plan for hiring a contractor and obtaining permits for a $25,000 kitchen remodel, including a realistic timeline and cost breakdown.
+Get actionable advice on hiring contractors and obtaining permits for a kitchen remodel within a $25,000 budget, including specific recommendations for contractor vetting, permit types, and cost estimates.
 
 ## Constraints on your behavior
-- Open by describing your outdated kitchen (e.g., 1980s oak cabinets, laminate countertops, peeling linoleum floor) and $25,000 budget, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'get multiple quotes'), push back and ask how it applies to your specific 1980s kitchen with potential asbestos in old linoleum.
-- Mention you're worried about permit delays and want to know if a contractor should handle permits or if you should do it yourself.
-- Keep budget constraints top of mind; if the chatbot suggests expensive upgrades, remind them you only have $25,000.
+['Initially state a general goal of remodeling the kitchen, then gradually reveal the $25,000 budget and concerns about permits after the chatbot provides initial advice.', "Push back on generic advice (e.g., 'get multiple quotes') by asking for specifics like how many quotes, what to look for, or typical costs.", 'Ask about permits for structural changes (e.g., moving walls, electrical, plumbing) and insist on understanding the process and costs.', 'Mention that the kitchen is in an older home (built 1960s) to see if the chatbot addresses potential issues like asbestos or outdated wiring.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total) to cover contractor selection, permit details, and budget allocation.
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives a concrete list of contractor screening steps and permit application process tailored to your 1980s kitchen and budget, OR (b) after 5 exchanges the chatbot has still not addressed your specific 1980s kitchen, asbestos concerns, or $25,000 budget.
+End the conversation when the chatbot provides specific, actionable answers on: (1) how to vet contractors (e.g., licenses, insurance, references), (2) which permits are typically needed for a kitchen remodel, and (3) a rough cost breakdown within the $25,000 budget. If the chatbot fails to provide specifics after 5 exchanges, terminate with a polite thank you.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific 1980s kitchen (e.g., oak cabinets, asbestos risk, linoleum) and $25,000 budget, and you left with an actionable first step like 'interview 3 contractors who specialize in older homes' or 'check with city permit office about asbestos abatement'.
+The chatbot is successful if it: (1) advises checking contractor licenses, insurance, and references with concrete examples; (2) lists specific permits (e.g., building, electrical, plumbing) and explains how to obtain them; (3) provides a realistic cost estimate for a kitchen remodel (e.g., $15,000-$25,000 for mid-range) and suggests allocating 10-20% for permits and unforeseen issues. Failure if it only gives generic tips or ignores the budget constraint.

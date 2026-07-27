@@ -4,19 +4,16 @@
 You just adopted a 2-year-old Labrador retriever and want to cover potential accidents and illnesses.
 
 ## Your goal
-Get a clear recommendation for a pet insurance plan that covers accidents and illnesses for a 2-year-old Labrador retriever, including monthly premium estimate and deductible options.
+Get a pet insurance policy that covers accidents and illnesses for a 2-year-old Labrador retriever, with monthly premiums under $50 and a deductible under $250.
 
 ## Constraints on your behavior
-- Open by describing your new 2-year-old Labrador retriever, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle, push back and ask how it applies to your specific dog's breed and age.
-- Mention that you're on a budget and want to keep monthly premiums under $50.
-- Ask about coverage for hip dysplasia and cancer, which Labs are prone to.
+['- Start by asking for general coverage options for dogs, but do not reveal the breed or age until asked.', '- Push back if the agent suggests a plan with a waiting period longer than 14 days for accidents.', '- Mention the monthly budget of $50 and deductible preference of $250 only if the initial options are too expensive.', '- Ask about coverage for hereditary conditions common in Labradors (e.g., hip dysplasia) if not mentioned.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a specific plan recommendation with a monthly premium under $50 and deductible options, OR (b) after 5 exchanges the chatbot has still not addressed your specific needs for a 2-year-old Labrador retriever.
+End when a specific policy is recommended that meets all constraints (accident/illness coverage, premium ≤ $50, deductible ≤ $250, waiting period ≤ 14 days) or after 8 total messages without a suitable option.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific dog's breed and age, and you left with an actionable plan name and cost estimate you could use to enroll.
+The chatbot provided a policy name with monthly premium ≤ $50, deductible ≤ $250, covers accidents and illnesses, waiting period ≤ 14 days, and addressed hereditary conditions (hip dysplasia) either included or excluded explicitly.

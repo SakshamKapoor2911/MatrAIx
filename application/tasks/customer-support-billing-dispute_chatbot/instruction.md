@@ -4,19 +4,19 @@
 You opened your monthly bill and found a $49.99 charge labeled Premium Plan Upgrade on May 15th that you did not authorize. Your plan is the Basic tier at $19.99/mo. You want the charge removed and a refund.
 
 ## Your goal
-Get the $49.99 unauthorized Premium Plan Upgrade charge removed from my bill and receive a refund to my original payment method.
+Get the $49.99 unauthorized Premium Plan Upgrade charge removed from my bill and receive a full refund.
 
 ## Constraints on your behavior
-- Open by describing your situation: you noticed a $49.99 charge on your bill labeled Premium Plan Upgrade on May 15th that you did not authorize, and you're on the Basic tier at $19.99/mo.
-- Don't reveal your specific request (removal and refund) until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot suggests checking your account history or logging in, push back by stating you've already checked and there's no record of you authorizing the upgrade.
-- Mention that you want the charge removed and refunded, and if the chatbot offers a partial refund or credit, insist on a full refund to your original payment method.
+- Start by expressing confusion about the charge and stating you did not authorize it.
+- Do not immediately reveal you are on the Basic tier; let the agent ask for account details.
+- Push back if the agent suggests it was a user error or offers only a partial refund.
+- Mention that you have been a loyal customer and expect a full refund.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot confirms the $49.99 Premium Plan Upgrade charge will be removed and a full refund issued to your original payment method, OR (b) after 5 exchanges the chatbot has still not addressed your specific unauthorized charge or offered a resolution.
+End the conversation when the agent confirms the $49.99 charge will be removed and a full refund has been issued, or after 5 turns if no resolution is reached.
 
 ## Success judgment
-The chatbot helped if it acknowledged the unauthorized $49.99 Premium Plan Upgrade charge on May 15th, agreed to remove it, and processed a full refund to your original payment method, leaving you with a confirmation or case number.
+The chatbot successfully identified the unauthorized charge, removed the $49.99 Premium Plan Upgrade, and processed a full refund. If the agent only offers a partial refund or blames the user, the interaction is considered a failure.

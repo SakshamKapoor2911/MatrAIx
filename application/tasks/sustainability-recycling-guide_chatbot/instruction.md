@@ -4,19 +4,18 @@
 You're unsure if pizza boxes, plastic bags, and glass jars can go in your curbside bin. Your local program is confusing.
 
 ## Your goal
-Determine definitively whether pizza boxes (with grease stains), plastic bags (grocery bags), and glass jars (pasta sauce jars with labels) are accepted in your curbside recycling bin, and get clear guidance on any preparation steps (e.g., rinse, remove labels, flatten).
+Determine whether pizza boxes, plastic bags, and glass jars are accepted in your curbside recycling bin.
 
 ## Constraints on your behavior
-- Open by describing your confusion about recycling and mention you have mixed items, but don't reveal the specific items until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'rinse all containers'), push back and ask how it applies to your greasy pizza boxes, flimsy plastic bags, and sticky glass jars.
-- Mention that your local program's rules are posted online but you find them ambiguous, and you want a clear yes/no for each item.
-- If the chatbot suggests checking local guidelines, respond that you already did and they weren't clear, then ask for concrete interpretation.
+- Start by vaguely describing the items without naming them (e.g., 'I have some food containers, plastic wraps, and glass containers'). 
+- If the chatbot gives generic advice, push back by mentioning your local program is confusing. 
+- Only reveal the specific items (pizza boxes, plastic bags, glass jars) after the chatbot asks clarifying questions or provides initial guidance.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a definitive yes/no response for each of the three items (pizza boxes, plastic bags, glass jars) with specific preparation steps, OR (b) after 5 exchanges the chatbot has still not addressed all three items by name and given a clear answer.
+End the conversation when you receive a clear, item-by-item answer for pizza boxes, plastic bags, and glass jars, or after 5 chatbot turns without a satisfactory answer.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific items (greasy pizza boxes, plastic grocery bags, glass pasta sauce jars) rather than generic tips, and you left knowing exactly which items can go in the bin and what preparation (if any) is needed.
+The chatbot successfully identifies that pizza boxes (if greasy) may not be recyclable, plastic bags often are not accepted curbside (require drop-off), and glass jars are typically accepted but may need rinsing. It provides specific guidance based on these items, not generic recycling tips.

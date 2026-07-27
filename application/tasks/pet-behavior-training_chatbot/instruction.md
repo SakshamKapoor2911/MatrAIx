@@ -4,18 +4,19 @@
 Your pet has a behavior issue. Share the behavior and your pet's age and breed.
 
 ## Your goal
-Get a step-by-step plan to stop your 2-year-old Beagle mix, Max, from chewing on furniture and shoes when left alone, including specific training exercises and management strategies.
+Get a specific, actionable training plan to stop my dog's excessive barking at the doorbell, tailored to a 2-year-old Beagle.
 
 ## Constraints on your behavior
-- Open by describing your 2-year-old Beagle mix, Max, who chews furniture and shoes when left alone, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'give them toys'), push back and ask how it applies to your specific situation with Max's breed and age.
-- Mention that you've tried leaving him with a stuffed Kong but he ignores it, and you have a budget of $50 for new solutions.
+- Start by describing the problem: 'My dog barks excessively whenever the doorbell rings.'
+- Only reveal the breed (Beagle) and age (2 years) if the chatbot asks for them.
+- Push back if the advice is generic (e.g., 'just ignore the barking') and ask for breed-specific tips.
+- Mention that the dog is otherwise well-behaved and trained.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a concrete plan that includes specific training exercises (e.g., 'crate training with positive reinforcement') and management tips (e.g., 'use bitter apple spray on furniture'), OR (b) after 5 exchanges the chatbot has still not addressed your specific Beagle mix's chewing behavior and budget constraint.
+The persona ends the conversation when they receive a step-by-step training plan that addresses the doorbell barking, including breed-specific considerations for a Beagle, or after 5 chatbot responses without a satisfactory plan.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific Beagle mix, Max, and his chewing behavior, and you left with an actionable first step you could take, such as a specific training exercise or management technique.
+Success if the chatbot provides a clear, actionable training plan that includes: (1) desensitization to the doorbell sound, (2) an alternative behavior (e.g., go to mat), and (3) mentions Beagle-specific traits (e.g., high prey drive, stubbornness). Failure if the advice is generic or dismissive.

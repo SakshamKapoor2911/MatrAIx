@@ -4,19 +4,16 @@
 You need help understanding tax filing. Share your filing status and income sources.
 
 ## Your goal
-Get a clear, step-by-step understanding of how to file taxes this year given your filing status (single) and income sources (W-2 job and freelance gig work). You want to know which forms you need, whether you can file for free, and how to handle deductions for your freelance expenses.
+Get step-by-step guidance on how to file taxes as a single filer with W-2 income and freelance earnings.
 
 ## Constraints on your behavior
-- Open by describing your situation: you're single, have a regular W-2 job, and also do some freelance work on the side. But don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'just use tax software'), push back and ask how it applies to your specific freelance income and potential deductions.
-- Mention you're on a tight budget and want to avoid paying for tax preparation if possible.
-- If the chatbot suggests a specific tool or service, ask if it's truly free for your situation (W-2 + freelance).
+['- Initially state only that you are single and have W-2 income; withhold freelance details until asked.', '- Push back if the chatbot gives generic advice without asking about income sources.', '- Mention that you earned $5,000 in freelance income last year when prompted.', '- Express confusion about deductions for freelance expenses.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives you a concrete list of forms (e.g., Form 1040, Schedule C, Schedule SE) and explains how to file for free with your freelance income, OR (b) after 5 exchanges the chatbot has still not addressed your specific freelance income and budget constraints.
+End when you receive a clear list of steps to file including how to report W-2 and freelance income, and an explanation of deductions for freelance expenses.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific freelance income (not just generic tips) and you left knowing exactly which forms to use and whether you qualify for free filing.
+The chatbot helped if it identified both W-2 and freelance income, provided specific forms (e.g., W-2, Schedule C), and explained deductible expenses like home office or supplies.

@@ -4,19 +4,16 @@
 You need to adjust a recipe for a different number of servings. Share the original quantities.
 
 ## Your goal
-Get a correctly scaled recipe for 4 servings instead of 6, with precise adjusted quantities for each ingredient.
+Get the recipe for chocolate chip cookies adjusted from 24 servings to 12 servings, with original quantities of 2 cups flour, 1 cup butter, 1 cup sugar, 2 eggs.
 
 ## Constraints on your behavior
-- Open by describing your original recipe for 6 servings, but don't reveal the desired new serving size until the chatbot asks a follow-up or gives generic scaling advice.
-- Mention that the recipe includes specific ingredients like 2 cups of flour, 1 cup of sugar, 3 eggs, and 1 tsp of baking powder.
-- If the chatbot gives a generic tip like 'divide by 1.5', push back and ask for exact amounts for each ingredient.
-- Mention that you need the adjusted recipe for a dinner party and prefer whole numbers for eggs.
+['Start by stating the original recipe and the desired serving size without giving the new quantities.', 'If the chatbot asks for specific ingredients, provide them one at a time.', 'Do not accept generic scaling advice; insist on exact adjusted measurements.', 'If the chatbot provides a scaled recipe, verify the math (e.g., halving each ingredient).']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a full list of adjusted quantities for all ingredients (flour, sugar, eggs, baking powder) scaled to 4 servings, OR (b) after 5 exchanges the chatbot has still not addressed your specific original quantities or serving size change.
+End the conversation when the chatbot provides the exact adjusted quantities for all four ingredients (flour, butter, sugar, eggs) that are correctly halved, or after 6 messages if the chatbot fails to give a complete answer.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific ingredients (2 cups flour, 1 cup sugar, 3 eggs, 1 tsp baking powder) and you received exact adjusted amounts for 4 servings, including handling of the egg (e.g., 2 eggs).
+The chatbot succeeded if it outputs: flour: 1 cup, butter: 1/2 cup, sugar: 1/2 cup, eggs: 1 egg (or equivalent). Failure if it only gives a scaling factor without specific numbers, or if any ingredient is missing or miscalculated.

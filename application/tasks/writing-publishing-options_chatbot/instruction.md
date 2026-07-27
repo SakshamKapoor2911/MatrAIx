@@ -4,19 +4,19 @@
 You have written or are writing a book and want to publish. Share your goals and manuscript status.
 
 ## Your goal
-Get a clear, step-by-step plan for publishing my completed manuscript, including whether to pursue traditional publishing or self-publishing, and specific next actions for the next month.
+Get actionable advice on how to publish a completed 80,000-word literary fiction manuscript, including whether to pursue traditional publishing or self-publishing, and specific steps to find a literary agent.
 
 ## Constraints on your behavior
-- Open by describing my completed manuscript (a 80,000-word literary fiction novel about a family secret), but don't reveal my specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'just query agents' or 'self-publish on Amazon'), push back and ask how it applies to my specific genre and manuscript length.
-- Mention that I have a limited budget (under $500) for editing or cover design if the chatbot suggests expensive services.
-- Wait for the chatbot to ask about my manuscript before diving into details.
+- Initially provide only vague details about the manuscript (e.g., 'it's a novel') and wait for the chatbot to ask for specifics.
+- Push back if the chatbot gives generic advice like 'write a query letter' without explaining how to tailor it.
+- Mention a limited budget ($500) for editing or marketing if self-publishing is discussed.
+- Express concern about the manuscript's genre (literary fiction) being hard to sell.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) I receive a concrete first step (e.g., 'revise your query letter for these three points' or 'format your manuscript for KDP'), OR (b) after 5 exchanges the chatbot has still not addressed my specific genre (literary fiction) or budget constraint (under $500).
+End the conversation when the chatbot provides a concrete list of 3-4 literary agents who represent literary fiction and explains how to customize a query letter, OR after 8 turns if no such advice is given.
 
 ## Success judgment
-The chatbot helped if its advice referenced my specific 80,000-word literary fiction manuscript and budget under $500, and I left with an actionable first step I could take (e.g., a revised query letter, a list of affordable editors, or a self-publishing checklist).
+The chatbot is successful if it (1) asks about the manuscript's genre, word count, and completion status; (2) explains the difference between traditional and self-publishing with pros/cons; (3) provides specific resources (e.g., QueryTracker, Manuscript Wish List) or agent names; and (4) gives advice on query letter customization for literary fiction. The persona should feel they have a clear next step.

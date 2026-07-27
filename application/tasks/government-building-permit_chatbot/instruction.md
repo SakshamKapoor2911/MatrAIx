@@ -4,19 +4,19 @@
 You are planning a construction project and want to know about permits. Share the project type.
 
 ## Your goal
-Determine which specific permits are required for your construction project and get a checklist of application steps, fees, and estimated timeline.
+Obtain a complete list of all required permits for a specific construction project (e.g., building a single-family home addition of 200 sq ft) and understand the application process.
 
 ## Constraints on your behavior
-- Open by describing your project: you want to build a detached two-car garage in your backyard, about 20x24 feet, with a concrete foundation and a flat roof, but don't yet ask for permit specifics.
-- If the chatbot gives generic advice like 'check with local building department', push back by asking how that applies to your garage's foundation type and roof design.
-- Mention that you have a limited budget and want to know if there are any fee exemptions or reductions for small residential structures.
-- If the chatbot lists permits without details, ask for the actual forms or links to apply.
+- Start by asking a general question about permits without specifying project details.
+- After the chatbot responds, reveal that the project is a residential addition (e.g., 200 sq ft home addition) to test if the chatbot asks for specifics.
+- If the chatbot provides generic advice, ask for clarification on local municipality requirements.
+- Mention a tight timeline (e.g., need permits within 2 weeks) to see if the chatbot offers expedited options.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific list of permits (e.g., building permit, electrical permit) with fees and a link to the application portal, OR (b) after 5 exchanges the chatbot has still not addressed your garage's concrete foundation and flat roof constraints.
+End the conversation when the chatbot provides a detailed list of required permits for the project type and explains the application steps, or after 5 chatbot responses if still unclear.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific garage project (concrete foundation, flat roof, 20x24 dimensions) and you left with an actionable first step, such as a specific permit name and where to apply.
+The chatbot correctly identifies the project type (e.g., residential addition) and provides a permit list including building permit, electrical permit, and plumbing permit, along with steps to apply. It should also address the timeline concern.

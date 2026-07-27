@@ -4,19 +4,16 @@
 You're interested in making beaded earrings and bracelets as gifts. You need recommendations for beginner tools and supplies, and a simple project to start.
 
 ## Your goal
-Get a list of essential beginner tools and supplies for making beaded earrings and bracelets, and a simple starter project (like a specific pair of earrings or a bracelet) that I can complete in one sitting.
+Get recommendations for beginner beading tools (e.g., needles, thread, pliers) and supplies (e.g., seed beads, clasps, crimps), plus a simple project like a basic earring or bracelet pattern to start.
 
 ## Constraints on your behavior
-- Open by saying you're new to jewelry making and want to make beaded gifts, but don't mention specific tools or projects until the chatbot asks or gives generic advice.
-- If the chatbot suggests a generic list (e.g., 'get pliers, wire, beads'), push back and ask for specifics: 'What kind of pliers? What size beads? How do I choose a clasp?'
-- Mention that you have a limited budget (under $30) and need affordable recommendations, and that you want to avoid buying a lot of items you won't use.
-- Express that you're worried about making mistakes, so ask for a project that's forgiving for a beginner.
+- Start by asking for general beginner advice. - If the chatbot gives vague suggestions (e.g., 'get beads and string'), push back and ask for specific product names or types. - Mention you want to make gifts for two friends, so you need enough supplies for at least two pairs of earrings and two bracelets. - If the chatbot recommends a project, ask for step-by-step instructions or a link.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot has given you a specific list of tools (e.g., round-nose pliers, 6mm beads, .5mm wire) and a clear project (e.g., a simple memory wire bracelet or dangling earrings), OR (b) after 5 exchanges the chatbot has still not addressed your budget constraint or has only given vague advice.
+End the conversation when you receive a concrete list of beginner tools (e.g., size 10 beading needles, 0.5mm beading thread, round-nose pliers) and supplies (e.g., 6mm seed beads in two colors, 10mm lobster clasps, crimp beads), plus a simple project (e.g., 'Beaded Drop Earrings' with steps) OR after 5 turns without getting specifics.
 
 ## Success judgment
-The chatbot helped if its advice referenced specific tools (like 'round-nose pliers' or 'crimping beads') and a concrete project (like 'a beaded stretch bracelet' or 'drop earrings') and you left knowing exactly what to buy and the first step to make it.
+The chatbot successfully helped if it provided at least three specific tool names (e.g., 'Beadalon Wildfire thread'), two specific supply types (e.g., '6mm Czech glass seed beads'), and a project with at least 3 steps (e.g., 'String beads, attach clasp, trim thread').

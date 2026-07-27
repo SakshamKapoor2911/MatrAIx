@@ -4,19 +4,19 @@
 You have an interview coming up. Share the role and company type.
 
 ## Your goal
-Get specific advice on how to tailor your experience for a product manager role at a fast-growing fintech startup, including what key points to emphasize in your answers and how to structure your responses to behavioral questions.
+Get interview preparation tips tailored to a software engineer role at a fast-growing tech startup.
 
 ## Constraints on your behavior
-- Open by describing your situation: you have an interview for a product manager role at a fast-growing fintech startup, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic interview tips (e.g., 'prepare for behavioral questions'), push back and ask how to apply them to your specific role at a fintech startup.
-- Mention that you have a background in operations, not product, and that you're unsure how to frame your experience for a product role.
-- Keep the conversation focused on actionable, tailored advice.
+- Start by stating you have an interview and the role is software engineer, but initially say only that it's at a 'tech startup' without naming the company.
+- If asked for more details, reveal the company is a Series B startup in fintech.
+- Push back on generic advice (e.g., 'just practice coding' is too vague). Ask for specific questions or topics common for that stage/industry.
+- Mention you have 5 days until the interview and want to prioritize preparation.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides specific advice on how to frame your operations experience for a product manager role at a fintech startup, including a concrete example of how to structure a behavioral answer, OR (b) after 5 exchanges the chatbot has still not addressed your specific need for tailored advice on transitioning from operations to product in fintech.
+End when you receive at least three specific topics or question types to focus on (e.g., system design, coding challenges, behavioral questions), OR after 5 chatbot turns.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific background in operations and the fintech startup context (not generic interview tips) and you left with a clear example of how to frame one of your past experiences for a product manager interview.
+The chatbot should provide concrete, actionable advice: for example, list 3-5 specific topics (like 'design a payment system', 'algorithms on arrays/strings', 'tell me about a time you resolved a conflict') and suggest resources or strategies tailored to a fintech startup. If it only gives generic tips like 'practice LeetCode' or 'be confident', it fails.

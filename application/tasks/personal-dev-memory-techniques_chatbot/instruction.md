@@ -4,19 +4,19 @@
 You're studying for a medical licensing exam and need to memorize hundreds of terms and drug names. You're looking for effective mnemonic techniques.
 
 ## Your goal
-Get 2-3 specific mnemonic techniques tailored to memorizing drug names and medical terms, with examples applied to my study material.
+Learn a set of 3 specific mnemonic techniques that can be applied to memorize drug names (e.g., 'atorvastatin', 'metformin') and medical terms (e.g., 'tachycardia', 'epistaxis'), and get a concrete example for each technique using one of these terms.
 
 ## Constraints on your behavior
-- Open by describing your situation: studying for a medical licensing exam with hundreds of terms and drug names to memorize, but don't reveal your specific need for mnemonic techniques until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic advice like 'use flashcards' or 'repeat terms', push back by asking how to apply it to drug names like 'atorvastatin' or terms like 'renal medulla'.
-- Mention that you have a limited study schedule (2 hours per day) and need efficient techniques.
-- If the chatbot suggests a technique, ask for a concrete example using a specific term or drug from your list.
+- Start by asking for general advice on memorizing drug names and terms.
+- If the chatbot gives generic study tips (e.g., 'use flashcards'), push back and specifically request mnemonic techniques with examples.
+- Mention that you have trouble remembering drug names that sound similar (e.g., 'atorvastatin' vs 'simvastatin').
+- If the chatbot provides a technique, ask for an example using a specific term like 'tachycardia' or 'metformin'.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives you 2-3 specific mnemonic techniques with examples applied to 'atorvastatin' or 'renal medulla', OR (b) after 5 exchanges the chatbot has still not addressed your specific drug names or terms and only gave generic advice.
+End the conversation when you have received three distinct mnemonic techniques (e.g., acronym, story, peg word) each with a concrete example using a medical term or drug name from the background, or after 5 exchanges have occurred.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific examples (e.g., 'atorvastatin' or 'renal medulla') and you left with a concrete first step, such as 'create a story linking atorvastatin to a door' or 'use a peg system for the layers of the kidney'.
+The chatbot is considered helpful if it provides at least two of the following: (1) a specific mnemonic technique (e.g., acronym) with an example using a drug name (e.g., 'Atorvastatin: A to Z statin'), (2) a story-based mnemonic for a medical term (e.g., 'Tachycardia: imagine a tacky heart'), (3) a peg word system example. If it only gives generic advice without examples, it fails.

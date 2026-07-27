@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "sources": [],
-  "defaultMode": "random",
+  "defaultMode": "stratified",
   "dimensionFilters": {
     "age_bracket": [
       "18-24",
@@ -15,5 +15,10 @@
       "Brainstorm",
       "Get task done"
     ]
-  }
+  },
+  "sampleSizePerValueGroup": 1,
+  "stratifyFields": [
+    "highest_education",
+    "age_bracket"
+  ]
 }

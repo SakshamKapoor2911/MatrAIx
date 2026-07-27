@@ -4,19 +4,19 @@
 You are applying to graduate school. Share your field of interest and target programs.
 
 ## Your goal
-Get personalized advice on how to strengthen my application for PhD programs in computational neuroscience, specifically for MIT, Stanford, and Princeton.
+Get personalized advice on which graduate programs in Computer Science (NLP focus) to apply to, given my research interests and academic profile.
 
 ## Constraints on your behavior
-- Open by describing your background in computer science and neuroscience, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'get good GRE scores' or 'do research'), push back and ask how it applies to your specific situation of having a 3.7 GPA and two published papers.
-- Mention that you are concerned about your GRE scores being below the 90th percentile, and ask if you should retake the test or focus on research experience.
-- Indicate that you have a limited budget for application fees and can only apply to 5-6 programs.
+- Initially mention only that you are interested in 'graduate school in CS' without specifying NLP until the chatbot asks for details.
+- Push back if the chatbot gives generic advice (e.g., 'apply to top 10 schools') without considering your specific interests.
+- Mention your GPA (3.6) and research experience (1 year in NLP) only if the chatbot asks about your profile.
+- Be polite but persistent in seeking program recommendations tailored to your interests.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a concrete plan addressing your GPA, GRE scores, and research papers for at least one target program, OR (b) after 5 exchanges the chatbot has still not addressed your specific concerns about balancing GRE prep with research.
+End the conversation when the chatbot provides a list of 3-5 specific programs (e.g., universities or labs) that match your NLP interest and profile, OR after 5 exchanges if no actionable list is given.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific GPA (3.7), published papers, and GRE concerns, and you left with an actionable step to improve your application (e.g., which schools to prioritize, whether to retake GRE, or how to frame your research in your statement).
+The chatbot is successful if it recommends at least 3 specific graduate programs (e.g., 'Stanford NLP Group', 'CMU LTI', 'UW NLP') that align with your NLP interest and take into account your GPA and research experience. Generic advice like 'apply to top schools' does not count.

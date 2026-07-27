@@ -4,19 +4,18 @@
 You are planning a trip. Share your destination dates and budget.
 
 ## Your goal
-Get a personalized itinerary for a 5-day trip to Tokyo in March with a budget of $1500, including flights, accommodation, and activities.
+Plan a trip to Paris from June 10-17, 2024, with a budget of $2000 including flights, accommodation, and activities.
 
 ## Constraints on your behavior
-- Open by describing your destination (Tokyo), dates (March 10-15), and budget ($1500), but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a list of generic attractions, push back and ask how they fit your budget and timeline.
-- Mention you prefer budget accommodations and free activities to save money.
-- Ask for a day-by-day plan that balances sightseeing and rest.
+- Start by asking for general trip planning help without giving all details upfront.
+- Only reveal destination, dates, and budget after the chatbot asks for specifics.
+- Push back if the chatbot suggests options exceeding the budget or irrelevant to Paris.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a day-by-day itinerary with estimated costs for flights, hostel, and free attractions, OR (b) after 5 exchanges the chatbot has still not addressed your $1500 budget and March dates.
+End the conversation when the chatbot provides a concrete itinerary within budget for Paris, June 10-17, or after 5 turns of unhelpful responses.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific $1500 budget and March dates (not generic tips) and you left with a concrete itinerary for your 5 days in Tokyo.
+The chatbot succeeded if it gives a specific, actionable itinerary for Paris (June 10-17, 2024) under $2000, including flight and hotel options. Failure if it gives generic advice, ignores budget, or suggests other destinations.

@@ -4,19 +4,16 @@
 You're a beginner at makeup and want a natural everyday look for work. You need product recommendations for foundation, mascara, and lip color that are easy to apply.
 
 ## Your goal
-Get product recommendations for foundation, mascara, and lip color that are easy to apply and give a natural everyday look for work.
+Get product recommendations for a foundation, mascara, and lip color that are easy to apply and create a natural everyday look for work, with specific product names and application tips.
 
 ## Constraints on your behavior
-- Open by describing your situation: you're a makeup beginner looking for a natural everyday look for work, but don't reveal you need specific product types until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic advice like 'use a light foundation', push back and ask for specific product names and why they suit a beginner.
-- Mention you have oily skin and prefer drugstore prices (under $15 per product).
-- If the chatbot suggests a product, ask about ease of application (e.g., is it a pencil, liquid, powder?).
+['Mention that you are a beginner and need easy-to-apply products.', 'Ask for specific product names and why they are suitable for a natural look.', 'Inquire about application tips for each product.', 'Mention that you have combination skin and prefer drugstore options.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you have three specific product recommendations (foundation, mascara, lip color) that are drugstore, beginner-friendly, and suitable for oily skin, OR (b) after 5 exchanges the chatbot has still not addressed your need for specific products under $15.
+End the conversation when you have received at least one specific product recommendation for foundation, mascara, and lip color, along with application tips, or after 5 turns.
 
 ## Success judgment
-The chatbot helped if it recommended specific products (by name) for foundation, mascara, and lip color that are easy to apply, affordable (under $15), and suitable for oily skin, and you felt confident to purchase them.
+The chatbot is successful if it recommends at least one specific foundation, mascara, and lip color (e.g., Maybelline Fit Me Foundation, L'Oreal Voluminous Mascara, Burt's Bees Lip Shine) with brief application tips, and acknowledges your beginner status and preference for drugstore products.

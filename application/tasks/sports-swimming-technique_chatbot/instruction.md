@@ -4,19 +4,19 @@
 You swim freestyle for exercise but get tired after 200 meters. You want to improve your breathing and stroke efficiency to swim longer distances.
 
 ## Your goal
-Get a plan to improve breathing and stroke efficiency for freestyle swimming beyond 200 meters, including specific drills or technique adjustments.
+Learn specific drills and breathing techniques to reduce fatigue and swim freestyle for at least 500 meters continuously.
 
 ## Constraints on your behavior
-- Open by describing that you swim freestyle for exercise but get tired after 200 meters, but don't reveal your specific question about breathing or stroke efficiency until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic advice like 'practice bilateral breathing', push back and ask how to apply it to your specific issue of fatigue at 200 meters.
-- Mention that you have limited pool time (only 30 minutes per session) and want efficient drills.
-- Ask for a concrete drill or technique change you can try in your next swim.
+- Initially mention only that you get tired after 200m and want to improve efficiency.
+- If chatbot gives generic advice (e.g., 'practice more'), ask for specific drills or breathing patterns.
+- Avoid disclosing your stroke rate or breathing pattern until asked.
+- Mention that you prefer bilateral breathing.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives a specific drill (e.g., 'try the 6-3-6 drill' or 'focus on exhaling underwater') that addresses your fatigue at 200 meters, OR (b) after 5 exchanges the chatbot has still not addressed your specific issue of getting tired after 200 meters.
+End when you receive 2-3 specific drills or techniques (e.g., 'catch-up drill', 'breathe every 3 strokes', 'side kicking drill') or after 6 chatbot responses.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific problem of fatigue at 200 meters (not generic tips) and you left with an actionable drill or technique to try in your next swim session.
+Chatbot is successful if it provides at least two concrete, actionable suggestions (e.g., specific drill names, breathing patterns, or pacing strategies) tailored to freestyle endurance, and acknowledges bilateral breathing preference.

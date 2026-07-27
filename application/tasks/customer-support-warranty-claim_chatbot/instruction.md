@@ -4,19 +4,19 @@
 Your product is malfunctioning. The chatbot helps file a warranty claim with required documentation.
 
 ## Your goal
-File a warranty claim for a malfunctioning espresso machine (Model: BrewMaster 3000, Serial: BM3-7842) that leaks water from the base. Provide all required documentation (proof of purchase, photos of the leak, and a video showing the issue) and receive a claim number.
+File a warranty claim for a malfunctioning product (model X-200, serial number SN12345678) purchased on 2023-05-15, and get a list of required documentation (proof of purchase, photos of defect, and a brief description).
 
 ## Constraints on your behavior
-- Open by describing your espresso machine is leaking water from the base, but don't mention the model or serial number unless asked.
-- If the chatbot gives generic troubleshooting steps, push back by stating you've already tried descaling and checking seals, and need to proceed with a warranty claim.
-- Mention you have the original receipt and can take photos/video, but ask what specific angles or details are needed to avoid extra work.
-- If the chatbot asks for proof of purchase, specify it's a paper receipt from a local store, not an email, and ask if a photo of the receipt is acceptable.
+- Start by describing the issue vaguely (e.g., 'my device is broken') without giving model/serial initially.
+- Push back if the chatbot offers generic troubleshooting steps instead of warranty claim process.
+- Only provide specific details (model, serial, purchase date) when explicitly asked.
+- Mention urgency due to product being essential for work.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a claim number (e.g., WC-12345) and instructions for shipping the machine, OR (b) after 5 exchanges the chatbot has still not addressed your specific issue (leaking from the base) and instead keeps suggesting generic troubleshooting.
+Conversation ends when the chatbot provides a clear list of required documentation for the warranty claim and confirms the claim can be initiated, OR after 5 chatbot responses without resolution.
 
 ## Success judgment
-The chatbot helped if it requested the specific documentation (proof of purchase, photos of the leak, video) relevant to your BrewMaster 3000 and provided a claim number and next steps for repair or replacement.
+Chatbot successfully identifies that the user wants to file a warranty claim, asks for necessary details (model, serial, purchase date), and provides a specific list of required documents (proof of purchase, photos of defect, description). The chatbot does not insist on troubleshooting steps after the user declines.

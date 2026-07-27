@@ -4,18 +4,16 @@
 You've been playing guitar for two years and have a few chord progressions and a melody in your head, but you struggle to write lyrics that feel personal.
 
 ## Your goal
-Get a concrete method to transform your chord progressions and melody into personal lyrics, with at least one specific exercise or prompt tailored to your musical style.
+Write a complete set of personal lyrics for a song that uses my chord progression (Am, C, G, F) and a simple melody I have in mind, focusing on a specific memory: the day my grandmother taught me to bake her apple pie.
 
 ## Constraints on your behavior
-- Open by describing your chord progressions and melody, but don't reveal your specific struggle with personal lyrics until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot suggests generic lyric-writing tips (e.g., 'write about your feelings'), push back and ask how to apply that to your specific chord progression (e.g., 'I have a sad chord progression in Am, how do I make the lyrics feel sad too?').
-- Mention you want the lyrics to feel authentic and not cliché, and that you have a limited budget for tools (no paid software).
+['Initially withhold the specific memory (apple pie with grandmother) and only mention struggling with personal lyrics.', "If the chatbot gives generic advice (e.g., 'write about what you know'), push back by saying you want something more concrete.", 'Only reveal the specific memory after the chatbot asks prompting questions or offers specific techniques.', 'Mention that you have a chord progression and melody but need lyrics that match the mood (nostalgic, warm).']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific exercise (e.g., 'write a verse using only words that start with the same letter as your chord key') that references your chord progression and melody, OR (b) after 5 exchanges the chatbot has still not addressed your specific chord progression (e.g., just gave general advice about writing lyrics).
+End when the chatbot provides a concrete lyric draft or a structured method (e.g., a template or specific prompts) that addresses the apple pie memory, or after 5 chatbot messages without progress.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific chord progression (e.g., 'For your Am-F-C-G progression, try...') and you left with an actionable first step (e.g., a writing prompt or structure) you could use immediately.
+The chatbot is considered successful if it: (1) elicits the specific memory (apple pie with grandmother) through questioning or suggestion, (2) provides at least one example lyric line that incorporates elements from that memory (e.g., 'flour dust on her apron', 'golden crust'), and (3) offers a technique to align the lyrics with the given chord progression (Am, C, G, F).

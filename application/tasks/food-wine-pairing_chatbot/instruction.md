@@ -4,19 +4,16 @@
 You are planning a meal and want wine pairing ideas. Share the dish and your budget.
 
 ## Your goal
-Get specific wine pairing recommendations for a lemon-herb roasted chicken with garlic potatoes, within a $15-$25 per bottle budget.
+Get specific wine pairing recommendations for a chicken in white wine sauce dish, with a budget of $25 or less per bottle.
 
 ## Constraints on your behavior
-- Open by describing your lemon-herb roasted chicken with garlic potatoes, but don't reveal your budget or ask for specific wine names until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic list (like 'try a white wine'), push back and ask how it applies to your specific dish and its flavors.
-- Mention your budget of $15-$25 per bottle only after the chatbot starts giving recommendations or if it asks about preferences.
-- Be polite but firm; if the chatbot suggests wines outside your budget, remind it of your price range.
+['- Initially only state the dish and ask for a pairing; wait for the chatbot to ask about budget before revealing it.', "- If the chatbot gives generic advice (e.g., 'white wine goes with chicken'), push back by saying you have a specific sauce and need a precise grape or region.", '- If the chatbot recommends a wine over $25, politely decline and remind of the budget.', '- Express preference for dry wines, not sweet.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives you at least two specific wine recommendations (by name or grape) that fit your budget and dish, OR (b) after 5 exchanges the chatbot has still not addressed your specific dish or budget constraints.
+End the conversation when you receive a specific wine recommendation (grape, region, or brand) under $25 that pairs with chicken in white wine sauce, or after 5 chatbot messages without a satisfactory answer.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific lemon-herb roasted chicken and garlic potatoes (not generic tips) and you left with at least one actionable wine recommendation within your $15-$25 budget.
+The chatbot succeeds if it recommends at least one specific wine (e.g., Chardonnay from Chablis, unoaked) that is under $25 and explicitly mentions it pairs with the white wine sauce, not just generic chicken. Failure if it only gives vague advice or recommends a wine over $25.

@@ -4,19 +4,19 @@
 Your printer is not working. Describe what is happening and what troubleshooting you have done.
 
 ## Your goal
-Get a step-by-step solution to fix your printer that stops mid-print with a paper jam error but no visible jam, and learn how to clean the rollers without causing damage.
+Get a step-by-step solution to fix a printer that won't print, after I've already tried basic troubleshooting like checking power and cables.
 
 ## Constraints on your behavior
-- Open by describing your printer model (HP OfficeJet 3830) and the exact error: 'Paper jam in rear access door' but you've checked and cleared all paper paths and there's no jam visible.
-- Don't reveal your specific question about roller cleaning until the chatbot asks a follow-up or gives generic advice like 'clear the jam'.
-- If the chatbot gives a generic listicle (e.g., 'restart, check paper, update drivers'), push back and ask how to apply it to your specific issue where the jam error appears even without paper.
-- Mention you've already tried power cycling, checking paper alignment, and updating drivers, but the error persists.
+- Describe the issue vaguely at first (e.g., 'My printer isn't working') and only provide specific details (model, error code, what I've tried) when asked.
+- Push back on generic advice like 'restart the printer' if I've already done that.
+- Mention that the printer is connected via USB and is showing an 'offline' status.
+- Indicate that I'm not very tech-savvy, so avoid jargon.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific sequence of steps to clean the rollers using isopropyl alcohol and a lint-free cloth, including how to access the rollers on the HP OfficeJet 3830, OR (b) after 5 exchanges the chatbot has still not addressed your specific roller cleaning issue or has only repeated generic troubleshooting.
+End the conversation when I receive a concrete, actionable solution that addresses the specific error (e.g., 'Set printer online in settings' or 'Reinstall driver') and I have confirmed understanding, OR after 6 chatbot messages without a clear solution.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific printer model (HP OfficeJet 3830) and the recurring paper jam error with no visible jam, and you left with an actionable first step (e.g., cleaning the rollers with a specific method) that you could take immediately.
+The chatbot correctly identifies that the printer is offline, suggests checking the 'Use Printer Offline' setting in Windows, and provides steps to set it online. It should also offer to check the driver if the issue persists, but the key is resolving the offline status.

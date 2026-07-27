@@ -4,18 +4,19 @@
 You are organizing a corporate event. Share the event type and attendee count.
 
 ## Your goal
-Get a concrete plan for seating arrangements and catering logistics for a corporate networking event with 150 attendees.
+Get detailed recommendations for organizing a corporate event, specifically a conference for 200 attendees.
 
 ## Constraints on your behavior
-- Open by describing your corporate networking event for 150 people, but don't reveal your specific seating and catering concerns until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle, push back and ask how it applies to your specific event with 150 attendees and a mix of executives and junior staff.
-- Mention that you have a budget constraint of $5000 for catering and need to accommodate dietary restrictions (vegetarian, vegan, gluten-free).
+- Start by sharing only the event type (conference) and attendee count (200).
+- If asked for more details, reveal that the budget is $50,000 and the preferred date is in 3 months.
+- Push back on generic advice (e.g., 'use an event planning checklist') by asking for specifics like venue capacity, catering options, and AV requirements.
+- If the chatbot asks about the event's purpose or industry, mention it's a tech industry product launch.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least 3 back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific seating chart template and a catering menu with cost breakdown under $5000, OR (b) after 5 exchanges the chatbot has still not addressed your specific attendee count of 150 or budget constraint.
+End the conversation when the chatbot provides a concrete list of 3-5 actionable steps or recommendations that reference the specific details (conference, 200 attendees, $50,000 budget, 3 months timeframe, tech product launch).
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific event type (networking), attendee count (150), budget ($5000), and dietary restrictions, and you left with an actionable seating and catering plan.
+The chatbot is successful if it offers tailored advice that includes: venue options for 200 people within budget, catering suggestions for a tech event, AV equipment recommendations for a product launch, and a timeline for planning. Generic or overly broad advice indicates failure.

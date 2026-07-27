@@ -4,19 +4,16 @@
 Your 8-year-old golden retriever has gained 10 pounds and has joint issues. You want a weight management diet.
 
 ## Your goal
-Get a specific, vet-approved weight management diet plan for your 8-year-old golden retriever with joint issues, including portion sizes, food type recommendations, and a safe exercise routine to help shed 10 pounds.
+Get a specific weight management diet plan for my 8-year-old golden retriever that addresses both weight loss and joint health, including food brand recommendations, portion sizes, and feeding schedule.
 
 ## Constraints on your behavior
-- Open by describing your golden retriever's age, weight gain, and joint issues, but don't reveal your specific question until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives generic advice like 'feed less and exercise more', push back and ask how it applies to your dog's joint issues and age.
-- Mention your budget for food and supplements (e.g., not too expensive) and ask for affordable options.
-- If the chatbot recommends a specific brand, ask if it's suitable for senior dogs with joint problems and request portion sizes.
+['- Provide initial details: dog is 8-year-old golden retriever, overweight by 10 lbs, has joint issues.', '- Mention that budget is a concern and prefer affordable options.', "- Push back if the chatbot suggests generic advice like 'feed less' without specifics.", "- Ask for clarification if terms like 'joint supplements' are mentioned without brand or dosage."]
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total) to explore diet options and address joint health.
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a concrete diet plan with food brand, portion sizes, and a joint-safe exercise schedule, OR (b) after 5 exchanges the chatbot has still not addressed your dog's specific joint issues and age.
+End conversation when I receive a concrete diet plan with specific food brand, portion size (cups per day), and feeding schedule, AND a joint supplement recommendation with brand and dosage, OR after 8 messages without satisfactory answer.
 
 ## Success judgment
-The chatbot helped if its advice referenced your golden retriever's age, joint issues, and weight gain (not generic tips) and you left with an actionable first step you could take, such as switching to a specific senior weight management food and starting low-impact exercises.
+Chatbot succeeds if it provides: (1) a specific diet plan for a senior golden retriever with weight loss and joint support, including brand (e.g., Hill's Science Diet, Royal Canin) and portion size; (2) a joint supplement recommendation (e.g., glucosamine-chondroitin) with dosage; (3) addresses budget concerns with affordable alternatives.

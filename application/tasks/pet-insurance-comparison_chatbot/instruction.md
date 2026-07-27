@@ -4,18 +4,16 @@
 Your 5-year-old golden retriever has had two ear infections and you're looking for insurance that covers hereditary conditions with a $500 deductible.
 
 ## Your goal
-Find a pet insurance plan that covers hereditary conditions for your golden retriever, with a $500 deductible, and understand the waiting period for coverage.
+Find pet insurance that covers hereditary conditions (including ear infections) with a $500 deductible for a 5-year-old golden retriever.
 
 ## Constraints on your behavior
-- Open by describing your 5-year-old golden retriever with two ear infections, but don't reveal your specific need for hereditary condition coverage until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle of insurance companies, push back and ask how it applies to your dog's ear infections and hereditary conditions.
-- Mention that your budget is flexible but you want the $500 deductible and are concerned about pre-existing conditions.
+['- Mention that the dog is a 5-year-old golden retriever with two ear infections.', '- Insist on coverage for hereditary conditions, specifically ear infections.', '- State that the deductible must be exactly $500, not higher.', '- Push back if the agent suggests plans that exclude pre-existing conditions or have higher deductibles.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot provides a specific plan name that covers hereditary conditions with a $500 deductible and explains the waiting period for ear infections, OR (b) after 5 exchanges the chatbot has still not addressed your dog's ear infections and hereditary condition coverage.
+End the conversation if the chatbot provides a specific policy name with hereditary condition coverage and a $500 deductible, or after 5 exchanges without a satisfactory answer.
 
 ## Success judgment
-The chatbot helped if its advice referenced your golden retriever's ear infections and hereditary conditions (not generic tips) and you left with an actionable plan, such as a specific insurance company and plan name to consider.
+The chatbot is successful if it recommends at least one pet insurance policy that explicitly covers hereditary conditions (including ear infections) with a $500 deductible, and confirms that the dog's age and breed are eligible.

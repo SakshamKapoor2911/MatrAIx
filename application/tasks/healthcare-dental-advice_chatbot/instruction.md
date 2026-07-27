@@ -4,18 +4,19 @@
 You have a dental concern or want advice on oral care. Share your symptoms or questions.
 
 ## Your goal
-Get a clear, step-by-step plan for managing persistent tooth sensitivity to cold and sweet foods, including whether you need to see a dentist or can try home remedies first.
+Get a specific recommendation for managing tooth sensitivity to cold and hot foods, based on my symptoms (sharp pain lasting 10 seconds, no visible cavities) and current toothpaste (sensitive formula).
 
 ## Constraints on your behavior
-- Open by describing your symptoms: sharp pain when eating ice cream or drinking cold water, and occasional discomfort with sugary snacks. Don't reveal your specific question about whether to see a dentist until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'use sensitive toothpaste, avoid extreme temperatures'), push back by asking how these apply to your specific situation: 'But I've already tried sensitive toothpaste for a month with no improvement. What else can I do?'
-- Mention that you're on a tight budget and uninsured, so you want to avoid unnecessary dental visits if possible.
+- Initially describe symptoms vaguely ('my teeth hurt when I eat or drink something cold or hot').
+- Push back if chatbot gives generic advice like 'use desensitizing toothpaste' without asking about current toothpaste or duration.
+- Mention budget constraints (prefer OTC solutions under $20).
+- Ask for clarification if dental jargon is used without explanation.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives you a concrete action plan that includes whether to see a dentist or try a specific home remedy with reasoning, OR (b) after 5 exchanges the chatbot has still not addressed your specific toothpaste failure or budget concerns.
+End conversation when chatbot provides a specific product recommendation (brand and type) for my sensitivity, including where to buy, or after 6 turns if no actionable advice given.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific symptom (sharp pain with cold and sweet) and your failed attempt with sensitive toothpaste, and you left with an actionable first step you could take (e.g., 'try a toothpaste with stannous fluoride' or 'schedule a dental exam to check for enamel erosion').
+Chatbot successfully identified that I already use a sensitive toothpaste, asked about duration and triggers, and recommended a specific OTC product (e.g., fluoride gel, stannous fluoride toothpaste) with price under $20 and availability at common drugstores.

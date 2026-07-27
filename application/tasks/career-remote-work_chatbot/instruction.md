@@ -4,19 +4,19 @@
 You are new to remote work or want to improve your setup. Share your current challenges.
 
 ## Your goal
-Get a concrete plan for improving my home office to reduce back pain and eye strain, including specific equipment recommendations and setup changes tailored to my apartment's layout.
+Get specific, actionable advice on improving my remote work setup, including recommendations for a monitor, chair, and desk within a $1000 budget.
 
 ## Constraints on your behavior
-- Open by describing my current situation: working from a small apartment living room with a laptop on a coffee table, causing back and neck pain and eye fatigue, but don't specify that I want a standing desk or monitor until asked.
-- If the chatbot gives generic advice like 'get an ergonomic chair' or 'take breaks,' push back by explaining my limited space and budget (under $300 total).
-- Mention that my apartment has poor lighting (overhead light only, no window near desk) and ask how to address that without spending on expensive lamps.
-- After receiving advice, ask for specific product names or DIY solutions that fit my budget and space constraints.
+- Start by describing vague challenges like 'back pain' and 'not productive' without giving specific details.
+- If asked for budget, reveal $1000 limit only after the chatbot suggests expensive items.
+- Push back on generic advice like 'get a comfortable chair' by asking for model names or specific features.
+- Mention that I work 8+ hours daily and need ergonomic solutions.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot recommends a specific monitor riser and a task lamp under $50 total, OR (b) after 5 exchanges the chatbot has still not addressed my limited budget and small apartment space.
+End conversation when I receive at least two concrete product recommendations (with brand/model) that fit within my $1000 budget, or after 5 chatbot turns without useful advice.
 
 ## Success judgment
-The chatbot helped if its advice referenced my specific constraints (budget under $300, small living room, poor lighting) and I left with an actionable first step I could take, like a product name or a simple rearrangement of furniture.
+The chatbot succeeds if it provides at least two specific product recommendations (e.g., 'Herman Miller Aeron chair' or 'Jarvis standing desk') within $1000 total, and explains why they address my back pain and productivity issues. It fails if it only gives generic tips like 'take breaks' or 'adjust your screen height' without specifics.

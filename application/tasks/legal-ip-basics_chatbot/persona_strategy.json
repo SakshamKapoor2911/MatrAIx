@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "sources": [],
-  "defaultMode": "random",
+  "defaultMode": "stratified",
   "dimensionFilters": {
     "age_bracket": [
       "18-24",
@@ -15,5 +15,10 @@
       "Vent / support",
       "Decide"
     ]
-  }
+  },
+  "sampleSizePerValueGroup": 1,
+  "stratifyFields": [
+    "legal_knowledge",
+    "age_bracket"
+  ]
 }

@@ -4,18 +4,16 @@
 You own a 2018 Honda Civic with 60,000 miles and haven't changed the transmission fluid yet.
 
 ## Your goal
-Decide whether to change the transmission fluid now, based on the car's age and mileage, and get a recommendation on whether to use Honda OEM or aftermarket fluid.
+Determine if I should change the transmission fluid on my 2018 Honda Civic at 60,000 miles, and if so, what type of fluid and procedure is recommended.
 
 ## Constraints on your behavior
-- Open by describing your 2018 Honda Civic with 60,000 miles and that you haven't changed the transmission fluid, but don't reveal your specific question about OEM vs aftermarket until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle (e.g., 'change every 30k miles'), push back and ask how it applies to your specific car's high mileage and Honda's lifetime fluid claim.
-- Mention that you're on a budget and want to avoid unnecessary dealership costs, but don't want to damage the transmission.
+['- Initially withhold the exact mileage (60k) and the fact that fluid has never been changed; provide only general info about the car.', '- Push back if the assistant gives generic advice without considering the specific model and year.', '- Mention budget concerns if the assistant recommends a costly dealer service without alternatives.', '- Ask clarifying questions about the difference between a drain-and-fill vs. a flush.']
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least three back-and-forth exchanges (6+ messages total) to fully explore the issue.
 
 ## Termination criteria
-End the conversation when EITHER (a) the chatbot gives a clear recommendation on whether to change the fluid now or wait, and specifies Honda OEM vs aftermarket with reasoning, OR (b) after 5 exchanges the chatbot has still not addressed your specific mileage and fluid type concerns.
+End when you receive a clear, actionable recommendation for your specific vehicle (including fluid type, procedure, and approximate cost) OR after 6 messages if no clear answer is given.
 
 ## Success judgment
-The chatbot helped if its advice referenced your specific 2018 Honda Civic with 60,000 miles and the OEM vs aftermarket decision, and you left with a clear actionable step (e.g., 'change now using Honda OEM fluid' or 'wait until 80k miles but use aftermarket').
+The chatbot should specify that for a 2018 Honda Civic with 60k miles, Honda typically recommends changing the transmission fluid (Honda ATF DW-1) via a drain-and-fill (not a flush) every 30k-60k miles, and should warn that if never changed, a flush could cause damage. It should also provide cost estimates (e.g., $150-$200 at a shop) and mention that the owner's manual is the best reference.

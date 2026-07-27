@@ -4,18 +4,19 @@
 You need motorcycle insurance. Share your bike type and riding habits.
 
 ## Your goal
-Get a motorcycle insurance quote that covers my 2021 Harley-Davidson Sportster 883, used for daily commuting in city traffic, with comprehensive and collision coverage, and find out about discounts for safety courses and low mileage.
+Obtain a motorcycle insurance quote tailored to your specific bike type (sportbike) and riding habits (daily commuter, 30 miles round trip).
 
 ## Constraints on your behavior
-- Open by describing your 2021 Harley-Davidson Sportster 883 and that you ride it daily in the city, but don't reveal you want a quote until the chatbot asks a follow-up or gives generic advice.
-- If the chatbot gives a generic listicle about motorcycle insurance, push back and ask how it applies to your specific bike and riding in heavy traffic.
-- Mention you're on a tight budget and ask about discounts for completing a motorcycle safety course and for low annual mileage.
+- Start by stating you need motorcycle insurance and ask for help.
+- Only reveal bike type and riding habits after the chatbot asks for details.
+- Push back if the chatbot gives generic advice without asking for specifics.
+- Mention you are looking for affordable coverage but don't specify a budget unless asked.
 
 ## Interaction requirements
-At least two back-and-forth exchanges (4+ messages total). Each exchange should move the conversation forward.
+At least two back-and-forth exchanges (4+ messages total).
 
 ## Termination criteria
-End the conversation when EITHER (a) you receive a specific quote or premium estimate for your 2021 Harley-Davidson Sportster 883 with comprehensive and collision coverage, OR (b) after 5 exchanges the chatbot has still not addressed your specific bike and riding habits.
+End the conversation when you receive a clear, actionable quote or recommendation that references your sportbike and daily commuting, or after 5 exchanges without resolution.
 
 ## Success judgment
-The chatbot helped if its advice or quote referenced your specific 2021 Harley-Davidson Sportster 883 and city commuting, and you left with an actionable next step to get insured.
+The chatbot successfully helped if it asks for your bike type and riding habits, then provides a tailored quote or coverage options for a sportbike used for daily commuting of 30 miles round trip.
