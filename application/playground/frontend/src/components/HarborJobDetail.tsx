@@ -2683,6 +2683,11 @@ function readAgentModel(config: Record<string, unknown> | null): string | null {
   return typeof firstAgent?.model_name === "string" ? firstAgent.model_name : null;
 }
 
+function readTaskCountFromConfig(config: Record<string, unknown> | null): number {
+  const tasks = Array.isArray(config?.tasks) ? config.tasks : [];
+  return tasks.length;
+}
+
 function readTaskPathFromConfig(config: Record<string, unknown> | null): string | null {
   const tasks = Array.isArray(config?.tasks) ? config.tasks : [];
   const first =
@@ -2841,14 +2846,21 @@ function buildBatchReportPdfMeta(
         ? Math.max(1, Math.floor(Number(parallelismRaw)))
         : null;
 
-  const taskPath = (job?.taskPath ?? readTaskPathFromConfig(config) ?? "").trim() || null;
-  const taskTitle =
-    (job?.taskTitle ?? "").trim() ||
-    humanizePathLeaf(taskPath) ||
-    null;
-  const applicationType =
-    (job?.applicationType ?? job?.metaType ?? "").trim() ||
-    (taskPath && /\/survey[_-]/i.test(taskPath) ? "survey" : null);
+  const taskCount = readTaskCountFromConfig(config);
+  const isMultiTask = taskCount > 1;
+
+  const taskPath = isMultiTask
+    ? null
+    : (job?.taskPath ?? readTaskPathFromConfig(config) ?? "").trim() || null;
+  const taskTitle = isMultiTask
+    ? `Synthetic Chatbot Batch (${taskCount} tasks)`
+    : (job?.taskTitle ?? "").trim() ||
+      humanizePathLeaf(taskPath) ||
+      null;
+  const applicationType = isMultiTask
+    ? "chatbot"
+    : (job?.applicationType ?? job?.metaType ?? "").trim() ||
+      (taskPath && /\/survey[_-]/i.test(taskPath) ? "survey" : null);
   const personas = buildPersonaRoster(job?.trials);
 
   return {
@@ -2864,10 +2876,14 @@ function buildBatchReportPdfMeta(
     applicationType,
     taskPath,
     taskTitle,
-    taskDescription: (job?.description ?? "").trim() || null,
-    taskDomain: (job?.domain ?? "").trim() || null,
-    taskDifficulty: (job?.difficulty ?? "").trim() || null,
-    taskTags: Array.isArray(job?.tags) ? job.tags.map(String) : undefined,
+    taskDescription: isMultiTask
+      ? `Aggregated results across ${taskCount} chatbot tasks spanning ${(job?.domain ?? "").trim() || "multiple"} domains.`
+      : (job?.description ?? "").trim() || null,
+    taskDomain: isMultiTask ? "multi-domain" : (job?.domain ?? "").trim() || null,
+    taskDifficulty: isMultiTask ? null : (job?.difficulty ?? "").trim() || null,
+    taskTags: isMultiTask
+      ? ["synthetic", "chatbot", "multi-task"]
+      : Array.isArray(job?.tags) ? job.tags.map(String) : undefined,
     taskName: (job?.taskName ?? "").trim() || null,
     personaPool: readPersonaPool(config),
     personaStrategy: normalizePersonaStrategy(job?.personaStrategy),
@@ -3429,7 +3445,7 @@ function AggregationDashboard({
           requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
         });
       }
-      await new Promise((resolve) => window.setTimeout(resolve, 150));
+      await new Promise((resolve) => window.setTimeout(resolve, 2500));
       const captureRoot = rootRef.current;
       if (!captureRoot) {
         throw new Error("Batch report is not ready to capture.");
