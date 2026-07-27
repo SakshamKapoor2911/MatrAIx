@@ -6,29 +6,16 @@
       "distributions": [
         {
           "id": "task_outcome.status_by_segment",
-          "facetKey": "outcome_status",
+          "facetKey": "status",
           "title": "Outcome status"
-        },
-        {
-          "id": "task_outcome.basis_by_segment",
-          "facetKey": "resolution_basis",
-          "title": "Resolution basis"
         }
       ],
       "summaryDirectives": [
         {
           "id": "task_outcome.reason_by_status",
           "title": "Outcome reason by status",
-          "targetFacetKey": "outcome_reason",
-          "groupByFacetKey": "outcome_status",
-          "groupByMode": "categorical",
-          "summaryKind": "llm_bucket_summary"
-        },
-        {
-          "id": "task_outcome.reason_by_basis",
-          "title": "Outcome reason by resolution basis",
-          "targetFacetKey": "outcome_reason",
-          "groupByFacetKey": "resolution_basis",
+          "targetFacetKey": "exception",
+          "groupByFacetKey": "status",
           "groupByMode": "categorical",
           "summaryKind": "llm_bucket_summary"
         }
@@ -37,8 +24,8 @@
         {
           "id": "task_outcome.reason_signal_scan",
           "title": "Outcome signal scan",
-          "targetFacetKey": "outcome_reason",
-          "groupByFacetKey": "outcome_status",
+          "targetFacetKey": "exception",
+          "groupByFacetKey": "status",
           "groupByMode": "categorical",
           "judgeKind": "llm_signal_judge",
           "prompt": "Read the outcome reason and classify which reusable chatbot signals are explicitly present.",
@@ -57,6 +44,11 @@
           "id": "conversation_summary.turns_by_segment",
           "facetKey": "turn_count",
           "title": "Turn count"
+        },
+        {
+          "id": "conversation_summary.path_by_segment",
+          "facetKey": "path",
+          "title": "Conversation path"
         }
       ],
       "summaryDirectives": [
@@ -64,7 +56,7 @@
           "id": "conversation_summary.notes_by_path",
           "title": "Process notes by conversation path",
           "targetFacetKey": "process_notes",
-          "groupByFacetKey": "conversation_path",
+          "groupByFacetKey": "path",
           "groupByMode": "categorical",
           "summaryKind": "llm_bucket_summary"
         }
@@ -75,39 +67,34 @@
       "distributions": [
         {
           "id": "user_feedback.rating_by_segment",
-          "facetKey": "overall_experience_rating",
-          "title": "Overall experience rating"
+          "facetKey": "overall_rating",
+          "title": "Overall rating"
         },
         {
           "id": "user_feedback.need_by_segment",
-          "facetKey": "need_constraint_satisfaction",
+          "facetKey": "constraint_satisfaction",
           "title": "Need or constraint satisfaction"
         },
         {
           "id": "user_feedback.preference_by_segment",
-          "facetKey": "personal_preference_satisfaction",
+          "facetKey": "preference_satisfaction",
           "title": "Personal preference satisfaction"
-        },
-        {
-          "id": "user_feedback.clarity_by_segment",
-          "facetKey": "clarification_questions_useful",
-          "title": "Clarification usefulness"
         }
       ],
       "summaryDirectives": [
         {
-          "id": "user_feedback.reason_by_clarification_value",
-          "title": "Feedback reason by clarification usefulness",
-          "targetFacetKey": "feedback_reason",
-          "groupByFacetKey": "clarification_questions_useful",
+          "id": "user_feedback.reason_by_rating",
+          "title": "Feedback reason by overall rating",
+          "targetFacetKey": "rating_reason",
+          "groupByFacetKey": "overall_rating",
           "groupByMode": "categorical",
           "summaryKind": "llm_bucket_summary"
         },
         {
           "id": "user_feedback.reason_by_need_satisfaction",
           "title": "Feedback reason by need satisfaction",
-          "targetFacetKey": "feedback_reason",
-          "groupByFacetKey": "need_constraint_satisfaction",
+          "targetFacetKey": "constraint_rationale",
+          "groupByFacetKey": "constraint_satisfaction",
           "groupByMode": "categorical",
           "summaryKind": "llm_bucket_summary"
         }
@@ -116,8 +103,8 @@
         {
           "id": "user_feedback.reason_signal_scan",
           "title": "Feedback signal scan",
-          "targetFacetKey": "feedback_reason",
-          "groupByFacetKey": "need_constraint_satisfaction",
+          "targetFacetKey": "rating_reason",
+          "groupByFacetKey": "overall_rating",
           "groupByMode": "categorical",
           "judgeKind": "llm_signal_judge",
           "prompt": "Read the user's feedback reason and classify which reusable persona-facing signals are explicitly present.",
