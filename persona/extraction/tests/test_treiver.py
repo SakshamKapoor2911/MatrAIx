@@ -13,7 +13,7 @@ from types import SimpleNamespace
 
 from persona.extraction import Treiver
 from persona.extraction.llm_judge import LLMJudge
-from persona.extraction.regex_matcher import RegexMatcher
+
 from persona.extraction.schema import default_schema
 
 
