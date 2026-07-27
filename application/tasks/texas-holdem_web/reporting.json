@@ -5,6 +5,28 @@
       "match": {
         "contextType": "task_outcome"
       },
+      "distributions": [
+        {
+          "id": "task_outcome.status_by_segment",
+          "facetKey": "outcome_status",
+          "title": "Outcome status"
+        },
+        {
+          "id": "task_outcome.completion_by_segment",
+          "facetKey": "goal_completion_bucket",
+          "title": "Goal completion"
+        },
+        {
+          "id": "task_outcome.optimality_by_segment",
+          "facetKey": "ev_optimality_score",
+          "title": "EV optimality score"
+        },
+        {
+          "id": "task_outcome.consistency_by_segment",
+          "facetKey": "persona_consistency_score",
+          "title": "Persona consistency score"
+        }
+      ],
       "summaryDirectives": [
         {
           "id": "task_outcome.explanation_by_status",
@@ -20,6 +42,23 @@
       "match": {
         "contextType": "decision"
       },
+      "distributions": [
+        {
+          "id": "decision.strategy_by_segment",
+          "facetKey": "task_strategy_basis",
+          "title": "Strategy basis"
+        },
+        {
+          "id": "decision.risk_by_segment",
+          "facetKey": "risk_posture",
+          "title": "Risk posture"
+        },
+        {
+          "id": "decision.basis_by_segment",
+          "facetKey": "basis_primary",
+          "title": "Primary basis"
+        }
+      ],
       "summaryDirectives": [
         {
           "id": "decision.reason_by_strategy",
@@ -92,8 +131,42 @@
     },
     {
       "match": {
+        "contextType": "decision_process"
+      },
+      "distributions": [
+        {
+          "id": "decision_process.exploration_by_segment",
+          "facetKey": "exploration_style",
+          "title": "Exploration style"
+        }
+      ]
+    },
+    {
+      "match": {
         "contextType": "user_feedback"
       },
+      "distributions": [
+        {
+          "id": "user_feedback.rating_by_segment",
+          "facetKey": "overall_experience_rating",
+          "title": "Overall experience rating"
+        },
+        {
+          "id": "user_feedback.need_by_segment",
+          "facetKey": "need_constraint_satisfaction",
+          "title": "Need or constraint satisfaction"
+        },
+        {
+          "id": "user_feedback.preference_by_segment",
+          "facetKey": "personal_preference_satisfaction",
+          "title": "Personal preference satisfaction"
+        },
+        {
+          "id": "user_feedback.effort_by_segment",
+          "facetKey": "effort_rating",
+          "title": "Effort rating"
+        }
+      ],
       "summaryDirectives": [
         {
           "id": "user_feedback.reason_by_need_satisfaction",
