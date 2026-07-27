@@ -18,6 +18,8 @@ fi
 if uvx \
   --with pytest==8.4.1 \
   --with pytest-json-ctrf==0.3.5 \
+  --with pyyaml \
+  --with treys \
   pytest --ctrf "${VERIFIER_DIR}/ctrf.json" "${TESTS_DIR}/test_state.py" -rA; then
   echo 1 > "${VERIFIER_DIR}/reward.txt"
 else

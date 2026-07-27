@@ -29,14 +29,25 @@ class DirectEngineEvaluator:
         seed: Optional[int] = None,
         raise_size: int = g.RAISE_SIZE,
     ):
+        from .policies import PersonaValueNormalizer
+
         self.dims = persona_dimensions
+        self.norm_dims = PersonaValueNormalizer.normalize_all(persona_dimensions)
         self.seed = seed
         self.raise_size = raise_size
-        self.policy = build_policy(persona_dimensions)
-        self.rng = random.Random(seed) if seed is not None else random.Random()
+        self.policy = build_policy(self.norm_dims)
+        self.persona_seed = self._derive_persona_seed(persona_dimensions, seed)
+        self.rng = random.Random(self.persona_seed)
+
+    @staticmethod
+    def _derive_persona_seed(dims: Dict[str, str], base_seed: Optional[int]) -> int:
+        if base_seed is None:
+            return random.randint(0, 2**31)
+        persona_hash = hash(tuple(sorted(dims.items())))
+        return (persona_hash ^ base_seed) & 0x7FFFFFFF
 
     def run(self) -> Dict[str, Any]:
-        state = g.new_game(seed=self.seed)
+        state = g.new_game(seed=self.persona_seed)
 
         # Max safety iterations to avoid potential infinite loops
         max_turns = 100
@@ -46,13 +57,13 @@ class DirectEngineEvaluator:
             turns += 1
 
             if state.player_to_act:
-                action = self.policy.decide(state, self.dims, self.rng)
+                action = self.policy.decide(state, self.norm_dims, self.rng)
                 g.apply_action(state, action, self.raise_size)
 
         return self._state_to_result(state)
 
     def _state_to_result(self, state: g.GameState) -> Dict[str, Any]:
-        derived = self.policy.derive_output_fields(self.dims)
+        derived = self.policy.derive_output_fields(self.norm_dims)
 
         risk_posture = derived.get("risk_posture", "balanced")
         exploration_style = derived.get("exploration_style", "deep_research")
@@ -79,6 +90,8 @@ class DirectEngineEvaluator:
             "pot_size": state.pot,
             "decision_outcome": "selected" if state.chip_delta >= 0 else "rejected",
             "basis_primary": "quality" if state.chip_delta >= 0 else "price",
+            "risk_tolerance": self.dims.get("risk_tolerance", "unknown"),
+            "decision_style": self.dims.get("decision_style", "unknown"),
             "risk_posture": risk_posture,
             "exploration_style": exploration_style,
             "task_strategy_basis": task_strategy_basis,
