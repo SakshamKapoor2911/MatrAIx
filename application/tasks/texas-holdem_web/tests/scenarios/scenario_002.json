@@ -1,0 +1,44 @@
+{
+  "seed": 2,
+  "hole_cards": ["Kc", "Qd"],
+  "bot_cards": ["Ah", "Js"],
+  "community_order": ["Ks", "Td", "2c", "7h", "3s"],
+  "bot_policy": "deterministic-treys-v1",
+  "optimal_action_tree": {
+    "preflop": {
+      "optimal_action": "call",
+      "rationale": "KQo is marginal vs AJo. Call to see flop cheaply. Bot will check behind.",
+      "bot_response_to_raise": "call",
+      "bot_response_to_call": "check",
+      "bot_response_to_check": "raise_bot"
+    },
+    "flop": {
+      "optimal_action": "call",
+      "rationale": "Top pair K with Q kicker. Bot has ace-high with underpair. Call to keep pot controlled. Bot will check behind.",
+      "bot_response_to_call": "check",
+      "bot_response_to_check": "check",
+      "bot_response_to_raise": "fold"
+    },
+    "turn": {
+      "optimal_action": "check",
+      "rationale": "Board unchanged. Bot checks behind. See river cheap.",
+      "bot_response_to_check": "check",
+      "bot_response_to_raise": "fold"
+    },
+    "river": {
+      "optimal_action": "call",
+      "rationale": "Bot may bet small. Call with top pair. Bot could have ace-high.",
+      "bot_response_to_call": "check"
+    }
+  },
+  "chip_delta_by_action_sequence": {
+    "preflop:call,flop:call,turn:check,river:call": 60,
+    "preflop:raise,flop:raise,turn:raise,river:raise": 120,
+    "preflop:fold": -10
+  },
+  "outcome_by_sequence": {
+    "preflop:call,flop:call,turn:check,river:call": "Showdown: player wins with pair of Kings.",
+    "preflop:raise,flop:raise,turn:raise,river:raise": "Showdown: player wins with pair of Kings, bot calls all streets.",
+    "preflop:fold": "Player folds preflop, loses small blind."
+  }
+}

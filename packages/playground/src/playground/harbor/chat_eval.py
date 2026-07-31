@@ -548,6 +548,7 @@ async def run_harbor_chat_eval_for_persona(
     *,
     model_name: str | None = None,
     on_event: Optional[Callable[[Dict[str, Any]], None]] = None,
+    instruction: str | None = None,
 ) -> tuple[PlaygroundResult, str]:
     """End-to-end Harbor chat eval for one loaded Harbor persona object."""
     from playground.harbor.playground import _repo_root
@@ -565,6 +566,8 @@ async def run_harbor_chat_eval_for_persona(
         model_name=model_name,
     )
     eval_persona = _eval_persona(persona)
+    if instruction:
+        eval_persona.goal = instruction
     sut_description = (
         (bundle.context_markdown if bundle is not None else "")
         or (bundle.instruction_markdown if bundle is not None else "")

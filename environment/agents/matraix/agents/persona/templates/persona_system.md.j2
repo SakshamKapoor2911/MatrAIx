@@ -5,6 +5,11 @@
 # Simulated person: {{ persona_id }}{% if version %} (schema {{ version }}){% endif %}
 
 {% endif -%}
+{% if instruction -%}
+## Your task for this conversation (you MUST pursue this goal)
+{{ instruction }}
+
+{% endif -%}
 {% if dimensions -%}
 {{ render_persona_narrative(dimension_profile_narrative) }}
 {%- elif demographics or psychology or communication or preferences or behavior -%}

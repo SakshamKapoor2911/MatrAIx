@@ -1572,6 +1572,15 @@ def _build_persona_distribution(
         else:
             record["categorical"] = _aggregate_categorical(bucket_entries)
         buckets.append(record)
+    # Skip degenerate distributions with only 1 distinct column value
+    distinct_values: set[str] = set()
+    for bucket in buckets:
+        counts = bucket.get("categorical", bucket.get("numerical", {})).get("counts", [])
+        for c in counts:
+            if c.get("count", 0) > 0:
+                distinct_values.add(str(c.get("value", "")))
+    if len(distinct_values) < 2:
+        return None
     distribution: dict[str, Any] = {
         "id": directive_id
         or "{}.persona_dist.{}.{}".format(context_key, leaf, dimension),
@@ -2908,6 +2917,17 @@ def _resolve_explained_axis(
     """
     target_leaf = str(text_facet.get("explainsFacetKey") or "").strip()
     if not target_leaf:
+        # Fallback: use the first categorical primary with >1 distinct values
+        for candidate in facets:
+            if candidate is text_facet:
+                continue
+            if candidate.get("kind") == "categorical" and str(candidate.get("role") or "") == "primary":
+                sizes = _categorical_axis_sizes(candidate, field_values)
+                nonempty = [size for size in sizes if size > 0]
+                if len(nonempty) >= 2:
+                    total = sum(sizes)
+                    if total > 0 and max(sizes) / total < 0.80:
+                        return _axis_record(candidate, "categorical", None)
         return None
     target = next(
         (
@@ -3172,6 +3192,8 @@ def _categorical_key(value: Any) -> str:
 
 _MAX_FREE_TEXT_THEMES = 6
 # Generic English function words only — domain terms are handled by TF-IDF IDF.
+
+_MAX_TEXT_CLUSTER_INPUT = 500
 _TFIDF_STOPWORDS = frozenset(
     {
         "a",
@@ -3382,6 +3404,20 @@ def _cluster_text_values(values: list[str]) -> list[dict[str, Any]]:
 
     seeds = list(seed_buckets.values())
     n = len(seeds)
+    if n > _MAX_TEXT_CLUSTER_INPUT:
+        import random
+        random.seed(42)
+        sorted_seeds = sorted(seeds, key=lambda s: -(s["count"]))
+        kept = sorted_seeds[:_MAX_TEXT_CLUSTER_INPUT]
+        dropped_count = sum(s["count"] for s in sorted_seeds[_MAX_TEXT_CLUSTER_INPUT:])
+        if kept:
+            kept_total = sum(s["count"] for s in kept)
+            scale = (kept_total + dropped_count) / kept_total if kept_total > 0 else 1.0
+            for s in kept:
+                s["count"] = int(s["count"] * scale)
+        seeds = kept
+        n = len(seeds)
+
     if n == 1:
         label_counts: Counter[str] = seeds[0]["label_counts"]
         ordered = sorted(label_counts.items(), key=lambda item: (-item[1], len(item[0]), item[0]))

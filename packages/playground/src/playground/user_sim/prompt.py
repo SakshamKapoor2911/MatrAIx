@@ -44,6 +44,8 @@ def _persona_context(persona: Persona) -> str:
 
 
 def render_persona_block(persona: Persona, *, persona_yaml_path: Optional[str] = None) -> str:
+    if persona.goal and persona.goal.strip():
+        return _persona_context(persona)
     if persona_yaml_path:
         try:
             from matraix.agents.persona.loader import load_persona

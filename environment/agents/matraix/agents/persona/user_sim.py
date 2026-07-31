@@ -51,7 +51,6 @@ class PersonaUserSim(PersonaMixin, BaseAgent):
         environment: BaseEnvironment,
         context: AgentContext,
     ) -> None:
-        del instruction, context
         await self._prepare_persona_trial(environment)
         event_writer = TrialEventWriter.for_trial_dir(self.logs_dir.parent)
 
@@ -63,5 +62,6 @@ class PersonaUserSim(PersonaMixin, BaseAgent):
             self._persona,
             model_name=self.model_name,
             on_event=on_event,
+            instruction=instruction,
         )
         del result, session_id
